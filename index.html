@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JSON Schema Playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 20px;
+      background: #f7f7f7;
+    }
+    h1 {
+      margin-bottom: 8px;
+    }
+    p {
+      color: #555;
+    }
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      margin-bottom: 16px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    button {
+      padding: 10px 18px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .output {
+      min-height: 220px;
+      background: #111;
+      color: #0f0;
+    }
+    .row {
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>JSON Schema Playground</h1>
+  <p>Edit the prompt and JSON schema, then generate a response.</p>
+
+  <div class="row">
+    <h3>OpenAI API Key</h3>
+    <textarea id="apiKey" placeholder="sk-..."></textarea>
+  </div>
+
+  <div class="row">
+    <h3>Prompt</h3>
+    <textarea id="prompt"></textarea>
+  </div>
+
+  <div class="row">
+    <h3>JSON Schema</h3>
+    <textarea id="schema"></textarea>
+  </div>
+
+  <button onclick="run()">Run</button>
+
+  <div class="row">
+    <h3>Output (Raw JSON)</h3>
+    <textarea id="output" class="output" readonly></textarea>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
