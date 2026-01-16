@@ -887,11 +887,6 @@ finalSchemaTextarea.value = JSON.stringify(schema, null, 2);
   }
 }
 
-function toggleOutput() {
-  const output = document.getElementById("output");
-  output.classList.toggle("fullscreen");
-}
-
 function copySchema() {
   const textarea = document.getElementById("finalSchema");
 
