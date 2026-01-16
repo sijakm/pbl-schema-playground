@@ -1,3 +1,35 @@
+let timerInterval = null;
+let startTime = null;
+
+function startTimer() {
+  startTime = Date.now();
+  const status = document.getElementById("status");
+
+  timerInterval = setInterval(() => {
+    const elapsedMs = Date.now() - startTime;
+    const totalSeconds = Math.floor(elapsedMs / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    status.textContent = `Running… ${minutes}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  }, 500);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+
+  const elapsedMs = Date.now() - startTime;
+  const totalSeconds = Math.floor(elapsedMs / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  document.getElementById("status").textContent =
+    `Completed in ${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
 const defaultPrompt = `
 Create a complete Project-Based Learning (PBL) unit plan and project-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
 
@@ -755,7 +787,8 @@ function renderDescriptionEditor() {
     label.style.fontWeight = "bold";
 
     const textarea = document.createElement("textarea");
-    textarea.rows = 3;
+    textarea.rows = 2;
+    textarea.style.resize = "vertical";
     textarea.style.width = "100%";
     textarea.value = item.value;
     textarea.dataset.path = JSON.stringify(item.path);
@@ -795,9 +828,11 @@ async function run() {
   const output = document.getElementById("output");
 
   output.value = "Running...";
+  startTimer();
 
   if (!apiKey) {
     output.value = "API key is required.";
+    stopTimer();
     return;
   }
 
@@ -827,12 +862,14 @@ async function run() {
 
     if (!content) {
       output.value = "No content returned.\n\n" + JSON.stringify(data, null, 2);
+      stopTimer();
       return;
     }
 
     try {
       const parsed = JSON.parse(content);
       output.value = JSON.stringify(parsed, null, 2);
+      stopTimer();
     } catch {
       output.value = content;
     }
@@ -841,6 +878,12 @@ async function run() {
     output.value = err.message;
   }
 }
+
+function toggleOutput() {
+  const output = document.getElementById("output");
+  output.classList.toggle("fullscreen");
+}
+
 
 /************************************
  * 7) INIT
