@@ -813,6 +813,8 @@ function setValueAtPath(obj, path, value) {
 /************************************
  * 6) RUN OPENAI REQUEST
  ************************************/
+let lastEditedSchema = null;
+
 async function run() {
   const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
 
@@ -822,6 +824,12 @@ async function run() {
       const path = JSON.parse(textarea.dataset.path);
       setValueAtPath(schema, path, textarea.value.trim());
     });
+
+  lastEditedSchema = schema;
+
+// Prikaži finalnu schema-u u UI
+const finalSchemaTextarea = document.getElementById("finalSchema");
+finalSchemaTextarea.value = JSON.stringify(schema, null, 2);
 
   const apiKey = document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
@@ -882,6 +890,26 @@ async function run() {
 function toggleOutput() {
   const output = document.getElementById("output");
   output.classList.toggle("fullscreen");
+}
+
+function copySchema() {
+  const textarea = document.getElementById("finalSchema");
+
+  if (!textarea.value) {
+    alert("Schema is empty.");
+    return;
+  }
+
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+
+  navigator.clipboard.writeText(textarea.value)
+    .then(() => {
+      alert("Schema copied to clipboard ✅");
+    })
+    .catch(() => {
+      alert("Failed to copy schema.");
+    });
 }
 
 
