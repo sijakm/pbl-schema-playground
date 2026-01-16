@@ -746,7 +746,20 @@ async function run() {
     });
 
     const data = await response.json();
-    output.value = JSON.stringify(data, null, 2);
+
+const content = data?.choices?.[0]?.message?.content;
+
+if (!content) {
+  output.value = "No content returned.\n\n" + JSON.stringify(data, null, 2);
+  return;
+}
+
+try {
+  const parsed = JSON.parse(content);
+  output.value = JSON.stringify(parsed, null, 2);
+} catch {
+  output.value = content;
+}
   } catch (err) {
     output.value = err.message;
   }
