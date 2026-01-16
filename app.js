@@ -25,7 +25,7 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
 Output rule: Return ONLY JSON that validates against the response schema.
 `;
 
-const defaultSchema = `
+const masterSchema = `
 {
   "title": "PBLUnitPlanResponse",
   "type": "object",
@@ -698,29 +698,106 @@ const defaultSchema = `
 }
 `;
 
-window.onload = () => {
-  document.getElementById("prompt").value = defaultPrompt.trim();
-  document.getElementById("schema").value = defaultSchema.trim();
-};
+const parsedMasterSchema = JSON.parse(masterSchema);
 
+/************************************
+ * 3) DESCRIPTION COLLECTION
+ ************************************/
+function collectDescriptions(schema, path = [], result = []) {
+  if (!schema || typeof schema !== "object") return result;
+
+  if (typeof schema.description === "string") {
+    result.push({
+      path: [...path, "description"],
+      value: schema.description
+    });
+  }
+
+  if (schema.properties) {
+    for (const key in schema.properties) {
+      collectDescriptions(
+        schema.properties[key],
+        [...path, "properties", key],
+        result
+      );
+    }
+  }
+
+  if (schema.items) {
+    collectDescriptions(
+      schema.items,
+      [...path, "items"],
+      result
+    );
+  }
+
+  return result;
+}
+
+/************************************
+ * 4) RENDER UI FOR DESCRIPTIONS
+ ************************************/
+function renderDescriptionEditor() {
+  const container = document.getElementById("descriptions");
+  container.innerHTML = "";
+
+  const descriptions = collectDescriptions(parsedMasterSchema);
+
+  descriptions.forEach(item => {
+    const wrapper = document.createElement("div");
+    wrapper.style.marginBottom = "16px";
+
+    const label = document.createElement("label");
+    label.innerText = item.path
+      .filter(p => !["properties", "items", "description"].includes(p))
+      .join(" → ");
+    label.style.display = "block";
+    label.style.fontWeight = "bold";
+
+    const textarea = document.createElement("textarea");
+    textarea.rows = 3;
+    textarea.style.width = "100%";
+    textarea.value = item.value;
+    textarea.dataset.path = JSON.stringify(item.path);
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(textarea);
+    container.appendChild(wrapper);
+  });
+}
+
+/************************************
+ * 5) PATH SETTER
+ ************************************/
+function setValueAtPath(obj, path, value) {
+  let current = obj;
+  for (let i = 0; i < path.length - 1; i++) {
+    current = current[path[i]];
+  }
+  current[path[path.length - 1]] = value;
+}
+
+/************************************
+ * 6) RUN OPENAI REQUEST
+ ************************************/
 async function run() {
+  const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
+
+  document
+    .querySelectorAll("#descriptions textarea")
+    .forEach(textarea => {
+      const path = JSON.parse(textarea.dataset.path);
+      setValueAtPath(schema, path, textarea.value.trim());
+    });
+
   const apiKey = document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
-  const schemaText = document.getElementById("schema").value;
   const output = document.getElementById("output");
 
   output.value = "Running...";
 
   if (!apiKey) {
     output.value = "API key is required.";
-    return;
-  }
-
-  let schema;
-  try {
-    schema = JSON.parse(schemaText);
-  } catch {
-    output.value = "Invalid JSON schema.";
     return;
   }
 
@@ -746,21 +823,29 @@ async function run() {
     });
 
     const data = await response.json();
+    const content = data?.choices?.[0]?.message?.content;
 
-const content = data?.choices?.[0]?.message?.content;
+    if (!content) {
+      output.value = "No content returned.\n\n" + JSON.stringify(data, null, 2);
+      return;
+    }
 
-if (!content) {
-  output.value = "No content returned.\n\n" + JSON.stringify(data, null, 2);
-  return;
-}
+    try {
+      const parsed = JSON.parse(content);
+      output.value = JSON.stringify(parsed, null, 2);
+    } catch {
+      output.value = content;
+    }
 
-try {
-  const parsed = JSON.parse(content);
-  output.value = JSON.stringify(parsed, null, 2);
-} catch {
-  output.value = content;
-}
   } catch (err) {
     output.value = err.message;
   }
 }
+
+/************************************
+ * 7) INIT
+ ************************************/
+window.onload = () => {
+  document.getElementById("prompt").value = defaultPrompt;
+  renderDescriptionEditor();
+};
