@@ -15,6 +15,7 @@
     }
     p {
       color: #555;
+      margin-top: 4px;
     }
     textarea {
       width: 100%;
@@ -42,25 +43,32 @@
 <body>
 
   <h1>JSON Schema Playground</h1>
-  <p>Edit the prompt and JSON schema, then generate a response.</p>
+  <p>Edit the prompt and schema instructions, then generate a response.</p>
 
   <div class="row">
     <h3>OpenAI API Key</h3>
-    <textarea id="apiKey" placeholder="sk-..."></textarea>
+    <input
+      id="apiKey"
+      type="password"
+      placeholder="sk-..."
+      style="width:100%; padding:10px; font-size:13px;"
+    />
   </div>
 
   <div class="row">
     <h3>Prompt</h3>
+    <p>You can safely edit the prompt. The output must still match the schema.</p>
     <textarea id="prompt"></textarea>
   </div>
 
   <div class="row">
-    <h3>JSON Schema</h3>
-    <h3>Editable descriptions (safe mode)</h3>
-<p>Edit text only. Structure is locked.</p>
+    <h3>Schema Instructions (Safe Mode)</h3>
+    <p>
+      Edit <strong>descriptions only</strong>.  
+      The JSON structure, required fields, and validation rules are locked.
+    </p>
 
-<div id="descriptions"></div>
-
+    <div id="descriptions"></div>
   </div>
 
   <button onclick="run()">Run</button>
