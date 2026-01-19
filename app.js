@@ -57,7 +57,6 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
 Output rule: Return ONLY JSON that validates against the response schema.
 `;
 
-const parsedMasterSchema = JSON.parse(masterSchema);
 
 /************************************
  * 3) DESCRIPTION COLLECTION
@@ -238,7 +237,24 @@ function copySchema() {
 /************************************
  * 7) INIT
  ************************************/
+let parsedMasterSchema = null;
+
 window.onload = () => {
+  if (!window.masterSchema) {
+    console.error("❌ masterSchema is not loaded");
+    alert("Schema failed to load. Check schema.js");
+    return;
+  }
+
+  try {
+    parsedMasterSchema = JSON.parse(window.masterSchema);
+  } catch (e) {
+    console.error("❌ Invalid JSON in masterSchema", e);
+    alert("Schema JSON is invalid. Check console.");
+    return;
+  }
+
   document.getElementById("prompt").value = defaultPrompt;
   renderDescriptionEditor();
 };
+
