@@ -1,4 +1,5 @@
-const masterSchema = `{
+const masterSchema = `
+{
   "title": "PBLUnitPlanResponse",
   "type": "object",
   "additionalProperties": false,
