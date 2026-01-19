@@ -46,6 +46,7 @@ window.masterSchema = `
             "ZipCode": { "type": "string", "description": "Zip code used to localize examples, sites, stakeholders, and audiences." },
             "Location": {
               "type": "object",
+              "description": "General geographic context used to localize examples, stakeholders, audiences, and place-based learning. This should reflect a real-world setting without including exact addresses or sensitive location details.",
               "additionalProperties": false,
               "required": ["City", "Region", "Country"],
               "properties": {
