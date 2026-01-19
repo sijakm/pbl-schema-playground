@@ -48,7 +48,7 @@ const masterSchema = `{
               "additionalProperties": false,
               "required": ["City", "Region", "Country"],
               "properties": {
-                "City": { "type": "string" },
+                "City": { "type": "string", "description": "Name of the city or town used for local context and place-based examples."},
                 "Region": { "type": "string" },
                 "Country": { "type": "string" }
               }
