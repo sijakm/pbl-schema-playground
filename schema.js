@@ -462,7 +462,7 @@ window.masterSchema = `
           ],
           "properties": {
             "Phase1_Title": { "type": "string", "description": "MUST be exactly: 'Phase 1 – Launch'." },
-            "Phase1_FocusStatement": { "type": "string" },
+            "Phase1_FocusStatement": { "type": "string", "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities." },
             "Phase1_CollaborativeActivities": {
               "type": "array",
               "minItems": 3,
@@ -582,7 +582,7 @@ window.masterSchema = `
             "Phase1_ReflectionPrompt": { "type": "string" },
 
             "Phase2_Title": { "type": "string", "description": "MUST be exactly: 'Phase 2 - Exploration, Investigation, and Development; Refinement'." },
-            "Phase2_FocusStatement": { "type": "string" },
+            "Phase2_FocusStatement": { "type": "string", "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities." },
             "Phase2_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
             "Phase2_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
             "Phase2_Differentiation_LanguageLearners": { "type": "string" },
@@ -600,7 +600,7 @@ window.masterSchema = `
             "Phase2_ReflectionPrompt": { "type": "string" },
 
             "Phase3_Title": { "type": "string", "description": "MUST be exactly: 'Phase 3 - Development; Refinement, Culmination, and Reflection'." },
-            "Phase3_FocusStatement": { "type": "string" },
+            "Phase3_FocusStatement": { "type": "string", "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities." },
             "Phase3_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
             "Phase3_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
             "Phase3_Differentiation_LanguageLearners": { "type": "string" },
