@@ -1,4 +1,4 @@
-var masterSchema = `{
+window.masterSchema = `{
   "title": "PBLUnitPlanResponse",
   "type": "object",
   "additionalProperties": false,
