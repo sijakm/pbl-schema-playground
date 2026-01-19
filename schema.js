@@ -1,5 +1,4 @@
-var masterSchema = `
-{
+var masterSchema = `{
   "title": "PBLUnitPlanResponse",
   "type": "object",
   "additionalProperties": false,
