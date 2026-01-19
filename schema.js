@@ -323,7 +323,7 @@ window.masterSchema = `
             "GroupSuggestions"
           ],
           "properties": {
-            "LearningPlanOverview": { "type": "string" },
+            "LearningPlanOverview": { "type": "string", "description": "High-level overview of how the learning unfolds across the project. Summarize the flow of learning, key phases, and how students build understanding over time (not a day-by-day schedule)." },
             "ProjectPhases": {
               "type": "array",
               "minItems": 3,
@@ -347,7 +347,7 @@ window.masterSchema = `
                 }
               }
             },
-            "ProjectGoals": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+            "ProjectGoals": { "type": "array", "minItems": 3, "description": "List of 3 or more clear project goals that describe what the project is intended to accomplish for students and the community. Focus on purpose, learning impact, and outcomes (not tasks or activities).", "items": { "type": "string" } },
             "CollaborativeStructuresAndArtifacts": {
               "type": "object",
               "additionalProperties": false,
