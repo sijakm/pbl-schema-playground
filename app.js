@@ -104,22 +104,12 @@ const masterSchema = `
             "ZipCode": { "type": "string", "description": "Zip code used to localize examples, sites, stakeholders, and audiences." },
             "Location": {
               "type": "object",
-              "description": "General geographic location used to contextualize examples, stakeholders, and resources. Do not include exact addresses.",
               "additionalProperties": false,
               "required": ["City", "Region", "Country"],
               "properties": {
-                "City": {
-                  "type": "string",
-                  "description": "Name of the city or town used for local context and place-based examples."
-                },
-                "Region": {
-                  "type": "string",
-                  "description": "State, province, or regional area that provides broader geographic context."
-                },
-                "Country": {
-                  "type": "string",
-                  "description": "Country in which the project takes place."
-                }
+                "City": { "type": "string" },
+                "Region": { "type": "string" },
+                "Country": { "type": "string" }
               }
             }
           }
@@ -390,10 +380,7 @@ const masterSchema = `
             "GroupSuggestions"
           ],
           "properties": {
-            "LearningPlanOverview": {
-              "type": "string",
-              "description": "High-level overview of how the learning unfolds across the project. Summarize the flow of learning, key phases, and how students build understanding over time (not a day-by-day schedule)."
-            },
+            "LearningPlanOverview": { "type": "string" },
             "ProjectPhases": {
               "type": "array",
               "minItems": 3,
@@ -417,14 +404,7 @@ const masterSchema = `
                 }
               }
             },
-            "ProjectGoals": {
-              "type": "array",
-              "minItems": 3,
-              "description": "List of 3 or more clear project goals that describe what the project is intended to accomplish for students and the community. Focus on purpose, learning impact, and outcomes (not tasks or activities).",
-              "items": {
-                "type": "string"
-              }
-            },
+            "ProjectGoals": { "type": "array", "minItems": 3, "items": { "type": "string" } },
             "CollaborativeStructuresAndArtifacts": {
               "type": "object",
               "additionalProperties": false,
@@ -539,10 +519,7 @@ const masterSchema = `
           ],
           "properties": {
             "Phase1_Title": { "type": "string", "description": "MUST be exactly: 'Phase 1 – Launch'." },
-            "Phase1_FocusStatement": {
-              "type": "string",
-              "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities."
-            },
+            "Phase1_FocusStatement": { "type": "string" },
             "Phase1_CollaborativeActivities": {
               "type": "array",
               "minItems": 3,
@@ -595,7 +572,6 @@ const masterSchema = `
             "Phase1_TranscendentThinkingPrompts": {
               "type": "array",
               "minItems": 1,
-              "description": "Open-ended, student-facing questions that guide inquiry and discussion during this phase. Questions should promote reasoning, sensemaking, and explanation (not recall).",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -610,7 +586,6 @@ const masterSchema = `
               "type": "array",
               "minItems": 3,
               "maxItems": 3,
-              "description": "Brief formative checks used during the phase to monitor understanding and inform instructional decisions.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -626,7 +601,6 @@ const masterSchema = `
               "type": "array",
               "minItems": 3,
               "maxItems": 3,
-              "description": "Retrieval prompts that intentionally revisit prior learning to strengthen memory and connections over time.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -644,7 +618,6 @@ const masterSchema = `
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Structured practice tasks that allow students to apply learning from this phase. Tasks should align to the phase focus and expected depth of knowledge.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -666,10 +639,7 @@ const masterSchema = `
             "Phase1_ReflectionPrompt": { "type": "string" },
 
             "Phase2_Title": { "type": "string", "description": "MUST be exactly: 'Phase 2 - Exploration, Investigation, and Development; Refinement'." },
-            "Phase2_FocusStatement": {
-              "type": "string",
-              "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities."
-            },
+            "Phase2_FocusStatement": { "type": "string" },
             "Phase2_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
             "Phase2_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
             "Phase2_Differentiation_LanguageLearners": { "type": "string" },
@@ -678,19 +648,16 @@ const masterSchema = `
             "Phase2_Accommodations_General": { "type": "string" },
             "Phase2_Accommodations_IndividualSupport": { "type": "array", "minItems": 0, "items": { "type": "object", "additionalProperties": false, "required": ["StudentName", "PlanProvided", "PlanImplementation"], "properties": { "StudentName": { "type": "string" }, "PlanProvided": { "type": "string" }, "PlanImplementation": { "type": "string" } } } },
             "Phase2_AnticipatedMisconceptions": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["Misconception", "CorrectionLanguage"], "properties": { "Misconception": { "type": "string" }, "CorrectionLanguage": { "type": "string" } } } },
-            "Phase2_TranscendentThinkingPrompts": { "type": "array", "minItems": 1, "description": "Open-ended, student-facing questions that guide inquiry and discussion during this phase. Questions should promote reasoning, sensemaking, and explanation (not recall).", "items": { "type": "object", "additionalProperties": false, "required": ["Prompt", "ExpectedStudentResponses"], "properties": { "Prompt": { "type": "string" }, "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase2_QuickChecks": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Brief formative checks used during the phase to monitor understanding and inform instructional decisions.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"], "properties": { "Timing": { "type": "string" }, "Prompt": { "type": "string" }, "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase2_SpacedRetrieval": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Retrieval prompts that intentionally revisit prior learning to strengthen memory and connections over time.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"], "properties": { "Timing": { "type": "string" }, "DrawsFrom": { "type": "string" }, "Question": { "type": "string" }, "DOK": { "type": "integer", "minimum": 2, "maximum": 4 }, "ExpectedResponseOrSuccessCriteria": { "type": "string" } } } },
-            "Phase2_StudentPractice_Tasks": { "type": "array", "minItems": 2, "maxItems": 3, "description": "Structured practice tasks that allow students to apply learning from this phase. Tasks should align to the phase focus and expected depth of knowledge.", "items": { "type": "object", "additionalProperties": false, "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"], "properties": { "TaskTitle": { "type": "string" }, "DOK": { "type": "string" }, "TeacherNote": { "type": "string" }, "StudentDirections": { "type": "string" }, "ExpectedAnswerOrSuccessCriteria": { "type": "string" } } } },
+            "Phase2_TranscendentThinkingPrompts": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["Prompt", "ExpectedStudentResponses"], "properties": { "Prompt": { "type": "string" }, "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
+            "Phase2_QuickChecks": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"], "properties": { "Timing": { "type": "string" }, "Prompt": { "type": "string" }, "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
+            "Phase2_SpacedRetrieval": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"], "properties": { "Timing": { "type": "string" }, "DrawsFrom": { "type": "string" }, "Question": { "type": "string" }, "DOK": { "type": "integer", "minimum": 2, "maximum": 4 }, "ExpectedResponseOrSuccessCriteria": { "type": "string" } } } },
+            "Phase2_StudentPractice_Tasks": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "object", "additionalProperties": false, "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"], "properties": { "TaskTitle": { "type": "string" }, "DOK": { "type": "string" }, "TeacherNote": { "type": "string" }, "StudentDirections": { "type": "string" }, "ExpectedAnswerOrSuccessCriteria": { "type": "string" } } } },
             "Phase2_StudentPractice_InterleavingIfMath": { "type": "string" },
             "Phase2_StudentPractice_Reflection": { "type": "string" },
             "Phase2_ReflectionPrompt": { "type": "string" },
 
             "Phase3_Title": { "type": "string", "description": "MUST be exactly: 'Phase 3 - Development; Refinement, Culmination, and Reflection'." },
-            "Phase3_FocusStatement": {
-              "type": "string",
-              "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities."
-            },
+            "Phase3_FocusStatement": { "type": "string" },
             "Phase3_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
             "Phase3_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
             "Phase3_Differentiation_LanguageLearners": { "type": "string" },
@@ -699,10 +666,10 @@ const masterSchema = `
             "Phase3_Accommodations_General": { "type": "string" },
             "Phase3_Accommodations_IndividualSupport": { "type": "array", "minItems": 0, "items": { "type": "object", "additionalProperties": false, "required": ["StudentName", "PlanProvided", "PlanImplementation"], "properties": { "StudentName": { "type": "string" }, "PlanProvided": { "type": "string" }, "PlanImplementation": { "type": "string" } } } },
             "Phase3_AnticipatedMisconceptions": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["Misconception", "CorrectionLanguage"], "properties": { "Misconception": { "type": "string" }, "CorrectionLanguage": { "type": "string" } } } },
-            "Phase3_TranscendentThinkingPrompts": { "type": "array", "minItems": 1, "description": "Open-ended, student-facing questions that guide inquiry and discussion during this phase. Questions should promote reasoning, sensemaking, and explanation (not recall).", "items": { "type": "object", "additionalProperties": false, "required": ["Prompt", "ExpectedStudentResponses"], "properties": { "Prompt": { "type": "string" }, "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase3_QuickChecks": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Brief formative checks used during the phase to monitor understanding and inform instructional decisions.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"], "properties": { "Timing": { "type": "string" }, "Prompt": { "type": "string" }, "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase3_SpacedRetrieval": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Retrieval prompts that intentionally revisit prior learning to strengthen memory and connections over time.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"], "properties": { "Timing": { "type": "string" }, "DrawsFrom": { "type": "string" }, "Question": { "type": "string" }, "DOK": { "type": "integer", "minimum": 2, "maximum": 4 }, "ExpectedResponseOrSuccessCriteria": { "type": "string" } } } },
-            "Phase3_StudentPractice_Tasks": { "type": "array", "minItems": 2, "maxItems": 3, "description": "Structured practice tasks that allow students to apply learning from this phase. Tasks should align to the phase focus and expected depth of knowledge.", "items": { "type": "object", "additionalProperties": false, "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"], "properties": { "TaskTitle": { "type": "string" }, "DOK": { "type": "string" }, "TeacherNote": { "type": "string" }, "StudentDirections": { "type": "string" }, "ExpectedAnswerOrSuccessCriteria": { "type": "string" } } } },
+            "Phase3_TranscendentThinkingPrompts": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["Prompt", "ExpectedStudentResponses"], "properties": { "Prompt": { "type": "string" }, "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
+            "Phase3_QuickChecks": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"], "properties": { "Timing": { "type": "string" }, "Prompt": { "type": "string" }, "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
+            "Phase3_SpacedRetrieval": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"], "properties": { "Timing": { "type": "string" }, "DrawsFrom": { "type": "string" }, "Question": { "type": "string" }, "DOK": { "type": "integer", "minimum": 2, "maximum": 4 }, "ExpectedResponseOrSuccessCriteria": { "type": "string" } } } },
+            "Phase3_StudentPractice_Tasks": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "object", "additionalProperties": false, "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"], "properties": { "TaskTitle": { "type": "string" }, "DOK": { "type": "string" }, "TeacherNote": { "type": "string" }, "StudentDirections": { "type": "string" }, "ExpectedAnswerOrSuccessCriteria": { "type": "string" } } } },
             "Phase3_StudentPractice_InterleavingIfMath": { "type": "string" },
             "Phase3_StudentPractice_Reflection": { "type": "string" },
             "Phase3_ReflectionPrompt": { "type": "string" }
