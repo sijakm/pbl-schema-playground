@@ -44,7 +44,6 @@ const masterSchema = `{
             "ZipCode": { "type": "string", "description": "Zip code used to localize examples, sites, stakeholders, and audiences." },
             "Location": {
               "type": "object",
-              "description": "General geographic location used to contextualize examples, stakeholders, and resources. Do not include exact addresses.",
               "additionalProperties": false,
               "required": ["City", "Region", "Country"],
               "properties": {
