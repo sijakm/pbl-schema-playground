@@ -1,3 +1,4 @@
+console.log("schema.js loading");
 window.masterSchema = `{
   "title": "PBLUnitPlanResponse",
   "type": "object",
