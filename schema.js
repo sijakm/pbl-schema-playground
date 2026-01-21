@@ -267,7 +267,7 @@ window.masterSchema = `
                 "properties": {
                   "CriteriaForSuccess": { "type": "string" },
                   "SuccessCriteria": { "type": "string" },
-                  "PointOfDemonstration": { "type": "string" }
+                  "PointOfDemonstration": { "type": "string", "description": "When and how students demonstrate evidence of learning for this criterion (e.g., during discussion, prototype testing, checkpoint review, or final presentation). Focus on the moment of learning visibility." }
                 }
               }
             },
@@ -293,6 +293,7 @@ window.masterSchema = `
 
         "AuthenticAudience": {
           "type": "object",
+          "description": "Defines the real-world audience connected to the project. This audience should be credible, relevant to the problem, and capable of providing meaningful feedback or purpose for student work.",
           "additionalProperties": false,
           "required": [
             "PrimaryAudienceDescription",
@@ -301,10 +302,10 @@ window.masterSchema = `
             "StudentParticipationInAudienceSelection"
           ],
           "properties": {
-            "PrimaryAudienceDescription": { "type": "string" },
-            "WhyThisAudienceIsQualified": { "type": "string" },
-            "HowThisAudienceElevatesTheProject": { "type": "string" },
-            "StudentParticipationInAudienceSelection": { "type": "string" }
+            "PrimaryAudienceDescription": { "type": "string", "description": "Clear description of who the primary audience is (individuals, organizations, or groups) and their relationship to the project’s context or problem." },
+            "WhyThisAudienceIsQualified": { "type": "string", "description": "Explanation of why this audience has relevant expertise, lived experience, or authority related to the project topic." },
+            "HowThisAudienceElevatesTheProject": { "type": "string", "description": "How the presence of this audience increases authenticity, rigor, motivation, or real-world impact for students." },
+            "StudentParticipationInAudienceSelection": { "type": "string", "description": "Description of how students are involved in identifying, refining, or understanding the authentic audience." }
           }
         },
 
@@ -351,6 +352,7 @@ window.masterSchema = `
             "CollaborativeStructuresAndArtifacts": {
               "type": "object",
               "additionalProperties": false,
+              "description": "Structures and routines that support collaboration, shared sensemaking, and documentation of learning throughout the project.",
               "required": [
                 "HowGroupsShareAndCompareIdeas",
                 "HowThinkingIsDocumented",
@@ -358,10 +360,22 @@ window.masterSchema = `
                 "HowTeachersMonitorAndFacilitateDiscourse"
               ],
               "properties": {
-                "HowGroupsShareAndCompareIdeas": { "type": "string" },
-                "HowThinkingIsDocumented": { "type": "string" },
-                "WhereArtifactsAreCollected": { "type": "string" },
-                "HowTeachersMonitorAndFacilitateDiscourse": { "type": "string" }
+                "HowGroupsShareAndCompareIdeas": {
+                  "type": "string",
+                  "description": "Protocols or routines students use to share, compare, and refine ideas within and across groups."
+                },
+                "HowThinkingIsDocumented": {
+                  "type": "string",
+                  "description": "Ways students make their thinking visible over time (e.g., notebooks, models, drafts, diagrams, digital tools)."
+                },
+                "WhereArtifactsAreCollected": {
+                  "type": "string",
+                  "description": "Physical or digital spaces where student work and learning artifacts are stored and revisited."
+                },
+                "HowTeachersMonitorAndFacilitateDiscourse": {
+                  "type": "string",
+                  "description": "Teacher strategies for observing collaboration, prompting deeper thinking, and guiding productive discussion."
+                }
               }
             },
             "MilestonesAndIndicators": {
