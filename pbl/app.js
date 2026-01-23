@@ -313,15 +313,18 @@ if (invalidFields.length > 0) {
   body: JSON.stringify({
     model: model,
     stream: true,
+    reasoning: { effort: "minimal" },
     input: [
       { role: "user", content: prompt }
     ],
     text: {
       format: {
         type: "json_schema",
-        name: "PBLUnitPlanResponse",
-        schema: schema,
-        strict: true
+        json_schema: {
+          name: "PBLUnitPlanResponse",
+          schema: schema,
+          strict: true
+        }
       }
     }
   })
