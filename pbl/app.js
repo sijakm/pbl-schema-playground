@@ -316,10 +316,14 @@ async function run() {
         if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
 
+          const shouldAutoScroll = isUserNearBottom(output);
+
           output.value += evt.delta;
           finalText += evt.delta;
 
-          output.scrollTop = output.scrollHeight;
+          if (shouldAutoScroll) {
+            output.scrollTop = output.scrollHeight;
+          }
           continue;
         }
 
@@ -408,7 +412,9 @@ function sanitizeSchemaText(raw) {
 }
 
 
-
+function isUserNearBottom(el, threshold = 40) {
+  return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+}
 
 /************************************
  * INIT
