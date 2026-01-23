@@ -235,8 +235,8 @@ async function run() {
   let lastDeltaAt = Date.now();
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
-    if (diff > 20000) {
-      output.value += `\n\n[⚠️ No streamed output for ${(diff/1000).toFixed(0)}s — request may be stuck or the model is thinking]\n`;
+    if (diff > 30000) {
+      output.value += `\n\n[⚠️ No streamed output for ${(diff/1000).toFixed(0)}s — The model is still thinking 🤔]\n`;
       output.scrollTop = output.scrollHeight;
       lastDeltaAt = Date.now(); // avoid spamming
     }
