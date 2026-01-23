@@ -367,13 +367,15 @@ async function run() {
 }
 
 function sanitizeSchemaText(raw) {
-  let text = raw.replace(/\r\n/g, "\n");
-
-  // smart punctuation
-  text = text
+  let text = raw
+    .replace(/\r\n/g, "\n")
+    .replace(/\u00A0/g, " ")
+    .replace(/[\u2028\u2029]/g, "\n")
     .replace(/[\u201C\u201D]/g, '"')
     .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u2013\u2014]/g, "-");
+    .replace(/[\u2013\u2014]/g, "-")
+    .replace(/[→⇒↔]/g, "->")
+    .replace(/…/g, "...");
 
   let result = "";
   let inString = false;
@@ -382,21 +384,17 @@ function sanitizeSchemaText(raw) {
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
 
-    // toggle string state
     if (char === '"' && prev !== "\\") {
       inString = !inString;
       result += char;
     }
-    // newline inside string → \n
-    else if (char === "\n" && inString) {
+    else if (inString && char === "\n") {
       result += "\\n";
     }
-    // tab inside string → \t
-    else if (char === "\t" && inString) {
+    else if (inString && char === "\t") {
       result += "\\t";
     }
-    // UNESCAPED quote INSIDE string → \"
-    else if (char === '"' && inString && prev !== "\\") {
+    else if (inString && char === '"' && prev !== "\\") {
       result += '\\"';
     }
     else {
@@ -408,6 +406,7 @@ function sanitizeSchemaText(raw) {
 
   return result;
 }
+
 
 
 
