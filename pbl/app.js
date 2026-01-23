@@ -320,16 +320,13 @@ if (invalidFields.length > 0) {
     text: {
       format: {
         type: "json_schema",
-        json_schema: {
-          name: "PBLUnitPlanResponse",
-          schema: schema,
-          strict: true
-        }
+        name: "PBLUnitPlanResponse",
+        schema: schema,
+        strict: true
       }
     }
   })
 });
-
 
     if (!response.ok) {
       const errText = await response.text().catch(() => "");
