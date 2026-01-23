@@ -248,6 +248,7 @@ function cancelRun() {
 async function run() {
   // Clone schema and apply description edits
   const invalidFields = [];
+  const model = document.getElementById("modelSelect").value;
 
 document.querySelectorAll("#descriptions textarea").forEach(t => {
   if (findInvalidChars(t.value).length > 0) {
@@ -310,7 +311,7 @@ if (invalidFields.length > 0) {
   },
   signal,
   body: JSON.stringify({
-    model: "gpt-5-mini",
+    model: model,
     stream: true,
     input: [
       { role: "user", content: prompt }
