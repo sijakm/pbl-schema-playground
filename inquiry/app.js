@@ -85,6 +85,19 @@ function findInvalidChars(text) {
   return issues;
 }
 
+function copySchema() {
+  const textarea = document.getElementById("finalSchema");
+  if (!textarea.value) {
+    alert("Schema is empty.");
+    return;
+  }
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+  navigator.clipboard.writeText(textarea.value)
+    .then(() => alert("Schema copied to clipboard ✅"))
+    .catch(() => alert("Failed to copy schema."));
+}
+
 /************************************
  * DESCRIPTION COLLECTION
  ************************************/
