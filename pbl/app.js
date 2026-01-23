@@ -313,7 +313,7 @@ if (invalidFields.length > 0) {
   body: JSON.stringify({
     model: model,
     stream: true,
-    reasoning: { effort: "none" },
+    reasoning: { effort: "low" },
     input: [
       { role: "user", content: prompt }
     ],
