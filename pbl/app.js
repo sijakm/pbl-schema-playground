@@ -94,6 +94,23 @@ function collectDescriptions(schema, path = [], result = []) {
 /************************************
  * RENDER UI FOR DESCRIPTIONS
  ************************************/
+
+function findInvalidChars(text) {
+  const issues = [];
+
+  if (/[\u201C\u201D]/.test(text)) issues.push("Smart double quotes");
+  if (/[\u2018\u2019]/.test(text)) issues.push("Smart single quotes");
+  if (/[\u2013\u2014]/.test(text)) issues.push("Long dash (– or —)");
+  if (/…/.test(text)) issues.push("Ellipsis (…)");
+
+  if (/[\u2028\u2029]/.test(text)) issues.push("Invalid line separator");
+  if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters");
+  if (/\n/.test(text)) issues.push("Line breaks are not allowed");
+  if (/\t/.test(text)) issues.push("Tabs are not allowed");
+
+  return issues;
+}
+
 function renderDescriptionEditor() {
   const container = document.getElementById("descriptions");
   container.innerHTML = "";
@@ -104,13 +121,16 @@ function renderDescriptionEditor() {
     const wrapper = document.createElement("div");
     wrapper.style.marginBottom = "16px";
 
+    // Label
     const label = document.createElement("label");
     label.innerText = item.path
       .filter(p => !["properties", "items", "description"].includes(p))
       .join(" → ");
     label.style.display = "block";
     label.style.fontWeight = "bold";
+    label.style.marginBottom = "4px";
 
+    // Textarea
     const textarea = document.createElement("textarea");
     textarea.rows = 2;
     textarea.style.resize = "vertical";
@@ -118,11 +138,36 @@ function renderDescriptionEditor() {
     textarea.value = item.value;
     textarea.dataset.path = JSON.stringify(item.path);
 
+    // Warning message
+    const warning = document.createElement("div");
+    warning.style.color = "#b00020";
+    warning.style.fontSize = "12px";
+    warning.style.marginTop = "4px";
+    warning.style.display = "none";
+
+    // Validation on input
+    textarea.addEventListener("input", () => {
+      const problems = findInvalidChars(textarea.value);
+
+      if (problems.length > 0) {
+        textarea.style.border = "2px solid #b00020";
+        warning.style.display = "block";
+        warning.textContent =
+          "Invalid characters detected: " + problems.join(", ");
+      } else {
+        textarea.style.border = "";
+        warning.style.display = "none";
+        warning.textContent = "";
+      }
+    });
+
     wrapper.appendChild(label);
     wrapper.appendChild(textarea);
+    wrapper.appendChild(warning);
     container.appendChild(wrapper);
   });
 }
+
 
 /************************************
  * PATH SETTER
@@ -202,6 +247,19 @@ function cancelRun() {
 
 async function run() {
   // Clone schema and apply description edits
+  const invalidFields = [];
+
+document.querySelectorAll("#descriptions textarea").forEach(t => {
+  if (findInvalidChars(t.value).length > 0) {
+    invalidFields.push(t);
+  }
+});
+
+if (invalidFields.length > 0) {
+  alert("Some fields contain invalid characters. Please fix highlighted fields.");
+  return;
+}
+  
   const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
   document.querySelectorAll("#descriptions textarea").forEach(textarea => {
     const path = JSON.parse(textarea.dataset.path);
