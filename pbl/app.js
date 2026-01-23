@@ -245,29 +245,29 @@ async function run() {
   try {
     // ✅ Responses API streaming (recommended) :contentReference[oaicite:2]{index=2}
     const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
-      signal,
-      body: JSON.stringify({
-        model: "gpt-5-mini",
-        stream: true,
-        input: [
-          { role: "user", content: prompt }
-        ],
-        // Structured Outputs via json_schema :contentReference[oaicite:3]{index=3}
-        response_format: {
-          type: "json_schema",
-          json_schema: {
-            name: "PBLUnitPlanResponse",
-            schema: schema,
-            strict: true
-          }
-        }
-      })
-    });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${apiKey}`
+  },
+  signal,
+  body: JSON.stringify({
+    model: "gpt-5-mini",
+    stream: true,
+    input: [
+      { role: "user", content: prompt }
+    ],
+    text: {
+      format: {
+        type: "json_schema",
+        name: "PBLUnitPlanResponse",
+        schema: schema,
+        strict: true
+      }
+    }
+  })
+});
+
 
     if (!response.ok) {
       const errText = await response.text().catch(() => "");
