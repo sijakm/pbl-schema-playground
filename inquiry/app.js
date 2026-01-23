@@ -33,6 +33,44 @@ function stopTimer(label = "Completed") {
     `${label} (${minutes}:${seconds.toString().padStart(2, "0")})`;
 }
 
+const defaultPrompt = `
+Create a complete Inquiry-Based Unit Plan and inquiry-driven lessons using ONLY the information provided below.  
+Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
+
+Inquiry planning requirements (must be reflected in the unit):
+• Inquiry coherence: The unit must follow an inquiry arc (questioning → investigation → sensemaking → reflection). Students should generate questions, gather evidence, analyze findings, and construct explanations rather than receive direct instruction.
+• Cognitive science alignment: Design learning to support attention, working memory, retrieval practice, transfer, and long-term retention. Include spaced retrieval across lessons, interleaving of skills, and opportunities for reflection and application.
+• Student-centered facilitation: Teacher actions should position the teacher as a facilitator and coach. Knowledge must emerge through student investigation, discussion, modeling, and evidence-based reasoning.
+• Cultural relevance & inclusion: Incorporate multiple perspectives and real-world relevance that connects to students’ lives and communities. Avoid stereotypes and ensure inclusive representation.
+
+Use these unit inputs exactly:
+Unit Subject: Earth & Space Science (Gravity & Orbits)
+Unit Name: “Gravity at Work: Modeling Motion in Our Solar System”
+Unit Description / Teacher Request: Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.
+Grade Level: The student is in the 1st grade of middle school, which consists of 4 grades total.
+Duration of class period (minutes): 45
+Number of Lessons: 1
+Resources / Media to use: Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple browser-based orbit simulations, chart paper, student science notebooks.
+Unit Content / Attached Unit Text: No attached unit text provided.
+Standards (use verbatim if present): MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.
+Students with learning plans (use verbatim; if none, treat as empty):
+Student Name: Maria Valdez
+Plan: Provide a partially pre-labeled orbit map and sentence frames for explanations.
+Student Name: Jacob Garrow
+Plan: Allow speech-to-text for reasoning and labeling.
+Student Name: Ava Lund
+Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.
+
+Design requirements (follow exactly):
+1. Ensure every required field in the response schema is fully populated.
+2. Include inquiry phases, formative assessment, student practice, reflection, and spaced retrieval exactly as defined by the schema.
+3. Differentiate instruction without lowering rigor; place access supports only in accommodations/modifications.
+4. If student learning plans are provided, include exactly those students in the Individualized Supports section (no more, no less). If none are provided, return an empty array.
+
+Output rule:
+Return ONLY JSON that validates against the response schema.
+`;
+
 /************************************
  * INVALID CHAR VALIDATION
  ************************************/
