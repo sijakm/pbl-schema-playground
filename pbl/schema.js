@@ -4,7 +4,9 @@ window.masterSchema = `
   "title": "PBLUnitPlanResponse",
   "type": "object",
   "additionalProperties": false,
-  "required": ["UnitPlan"],
+  "required": [
+    "UnitPlan"
+  ],
   "properties": {
     "UnitPlan": {
       "type": "object",
@@ -38,36 +40,63 @@ window.masterSchema = `
             "ZipCode"
           ],
           "properties": {
-            "UnitSubject": { "type": "string", "description": "Subject/discipline as provided. No emojis." },
-            "UnitName": { "type": "string", "description": "Unit name/title as provided. No emojis." },
-            "GradeLevel": { "type": "string", "description": "Grade level label as provided." },
-            "ClassDurationMinutes": { "type": "integer", "minimum": 10, "description": "Length of one class period in minutes." },
-            "ProjectDurationDays": { "type": "integer", "minimum": 1, "description": "How many days the project lasts. Must influence pacing, milestones, retrieval, and student practice." },
-            "ZipCode": { "type": "string", "description": "Zip code used to localize examples, sites, stakeholders, and audiences." },
+            "UnitSubject": {
+              "type": "string",
+              "description": "Subject/discipline as provided. No emojis."
+            },
+            "UnitName": {
+              "type": "string",
+              "description": "Unit name/title as provided. No emojis."
+            },
+            "GradeLevel": {
+              "type": "string",
+              "description": "Grade level label as provided."
+            },
+            "ClassDurationMinutes": {
+              "type": "integer",
+              "minimum": 10,
+              "description": "Length of one class period in minutes."
+            },
+            "ProjectDurationDays": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "How many days the project lasts. Must influence pacing, milestones, retrieval, and student practice."
+            },
+            "ZipCode": {
+              "type": "string",
+              "description": "Zip code used to localize examples, sites, stakeholders, and audiences."
+            },
             "Location": {
               "type": "object",
               "description": "General geographic context used to localize examples, stakeholders, audiences, and place-based learning. This should reflect a real-world setting without including exact addresses or sensitive location details.",
               "additionalProperties": false,
-              "required": ["City", "Region", "Country"],
+              "required": [
+                "City",
+                "Region",
+                "Country"
+              ],
               "properties": {
-                "City": { "type": "string" },
-                "Region": { "type": "string" },
-                "Country": { "type": "string" }
+                "City": {
+                  "type": "string"
+                },
+                "Region": {
+                  "type": "string"
+                },
+                "Country": {
+                  "type": "string"
+                }
               }
             }
           }
         },
-
         "UnitDescription": {
           "type": "string",
-          "description": "ONE cohesive paragraph (4–5 complete sentences): hook, mastery outcomes, skills/transfer, real-world relevance, purpose/impact; must reference the local community naturally."
+          "description": "ONE cohesive paragraph (4-5 complete sentences): hook, mastery outcomes, skills/transfer, real-world relevance, purpose/impact; must reference the local community naturally."
         },
-
         "AssessPriorKnowledge": {
           "type": "string",
-          "description": "If this is the FIRST entry-point for the unit: include DOK 1–3 diagnostic prompts + modality + 2 alternate options. Otherwise return empty string."
+          "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
         },
-
         "UnitOverview": {
           "type": "object",
           "additionalProperties": false,
@@ -82,7 +111,7 @@ window.masterSchema = `
           "properties": {
             "TaskStatement": {
               "type": "string",
-              "description": "Student-facing launch message (400–600 words) written like a credible local organization/person. Urgent, meaningful, authentic. No standards/rubrics/pacing."
+              "description": "Student-facing launch message (400-600 words) written like a credible local organization/person. Urgent, meaningful, authentic. No standards/rubrics/pacing."
             },
             "DrivingQuestion": {
               "type": "string",
@@ -90,7 +119,7 @@ window.masterSchema = `
             },
             "Mission": {
               "type": "string",
-              "description": "Paragraph starting with 'Your task is to…' describing what students will create/do and why it matters to the community/audience."
+              "description": "Paragraph starting with 'Your task is to...' describing what students will create/do and why it matters to the community/audience."
             },
             "ProjectContextAndStakeholders": {
               "type": "string",
@@ -99,7 +128,9 @@ window.masterSchema = `
             "FinalDeliverableRequirements": {
               "type": "array",
               "minItems": 4,
-              "items": { "type": "string" },
+              "items": {
+                "type": "string"
+              },
               "description": "Written for students, describe the final deliverable they will create and the authentic audience it serves, beginning with a brief summary, then require four components: (1) Concept & Purpose Plan explaining the idea through a visual or written representation and why it matters to the community or context; (2) Evidence-Based Justification requiring analysis of at least two relevant factors and explanation of choices using evidence from research, data, experimentation, or observation; (3) Model or Representation describing the type of model created, what it represents, how it explains underlying mechanisms or reasoning, and required distinctions; and (4) The Verdict, a concluding, evidence-backed argument explaining why the solution is effective, feasible, or meaningful, summarizing reasoning, evidence, and models, and communicating value to the authentic audience, with a final statement emphasizing application of disciplinary knowledge, use of evidence, modeling of complex ideas, and real-world implications."
             },
             "ClosingCallToAction": {
@@ -108,65 +139,91 @@ window.masterSchema = `
             }
           }
         },
-
         "DesiredOutcomes": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["StandardsAligned", "BigIdeasAndEssentialQuestions", "LearningObjectives"],
+          "required": [
+            "StandardsAligned",
+            "BigIdeasAndEssentialQuestions",
+            "LearningObjectives"
+          ],
           "properties": {
             "StandardsAligned": {
               "type": "array",
               "minItems": 1,
-              "items": { "type": "string" },
+              "items": {
+                "type": "string"
+              },
               "description": "Standards listed verbatim when provided, format 'CODE: description'."
             },
             "BigIdeasAndEssentialQuestions": {
               "type": "array",
               "minItems": 3,
               "maxItems": 4,
-              "description": "3–4 entries. Each entry has one BigIdea sentence and one EssentialQuestion.",
+              "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["BigIdea", "EssentialQuestion"],
+                "required": [
+                  "BigIdea",
+                  "EssentialQuestion"
+                ],
                 "properties": {
-                  "BigIdea": { "type": "string" },
-                  "EssentialQuestion": { "type": "string" }
+                  "BigIdea": {
+                    "type": "string"
+                  },
+                  "EssentialQuestion": {
+                    "type": "string"
+                  }
                 }
               }
             },
             "LearningObjectives": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["StudentsWillUnderstandThat", "StudentsWillKnowThat", "StudentsWillBeAbleTo"],
+              "required": [
+                "StudentsWillUnderstandThat",
+                "StudentsWillKnowThat",
+                "StudentsWillBeAbleTo"
+              ],
               "properties": {
                 "StudentsWillUnderstandThat": {
                   "type": "array",
                   "minItems": 2,
-                  "items": { "type": "string" },
+                  "items": {
+                    "type": "string"
+                  },
                   "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, explain how or why something works rather than just what it is, are written as full declarative sentences beginning with a verb, and are each labeled with an appropriate Depth of Knowledge level, emphasizing ideas students can transfer to new situations, future units, and real-world decision making."
                 },
                 "StudentsWillKnowThat": {
                   "type": "array",
                   "minItems": 2,
-                  "items": { "type": "string" },
+                  "items": {
+                    "type": "string"
+                  },
                   "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, include an appropriate DOK label typically at level 1 or 2, and complete the stem Students will know that while beginning with a verb."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
                   "minItems": 2,
-                  "items": { "type": "string" },
+                  "items": {
+                    "type": "string"
+                  },
                   "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do, such as analyze, compare, design, model, solve, justify, create, interpret, investigate, or communicate; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; include an appropriate DOK level between 2 and 4; and complete the stem Students will be able to while beginning with a verb."
                 }
               }
             }
           }
         },
-
         "FramingTheLearning": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["DrivingQuestion", "Problem", "Project", "Place"],
+          "required": [
+            "DrivingQuestion",
+            "Problem",
+            "Project",
+            "Place"
+          ],
           "properties": {
             "DrivingQuestion": {
               "type": "string",
@@ -174,31 +231,48 @@ window.masterSchema = `
             },
             "Problem": {
               "type": "string",
-              "description": "The problem description must present a real, observable challenge in a community, system, or environment; explain why the problem matters and the consequences if it is not addressed; ensure the problem requires analysis, reasoning, and evidence rather than simple recall; identify underlying contributing factors such as scientific, historical, mathematical, civic, artistic, technological, or social elements; show how misunderstanding, missing information, or overlooked variables contribute to the issue; clearly outline the intellectual and practical tasks students must complete using disciplinary knowledge, evidence analysis, modeling, explanation, design, or evaluation of solutions; demonstrate how solving the problem requires mastery of the unit’s core concepts, skills, and reasoning practices; align explicitly with a clear, open-ended driving question that can be answered through project work; specify required student response components such as a model or design, evidence-based analysis, visual or representational thinking, and a reasoned conclusion; and explain how the solution serves a real, relevant authentic audience positioned to use or evaluate the work."
+              "description": "The problem description must present a real, observable challenge in a community, system, or environment; explain why the problem matters and the consequences if it is not addressed; ensure the problem requires analysis, reasoning, and evidence rather than simple recall; identify underlying contributing factors such as scientific, historical, mathematical, civic, artistic, technological, or social elements; show how misunderstanding, missing information, or overlooked variables contribute to the issue; clearly outline the intellectual and practical tasks students must complete using disciplinary knowledge, evidence analysis, modeling, explanation, design, or evaluation of solutions; demonstrate how solving the problem requires mastery of the unit's core concepts, skills, and reasoning practices; align explicitly with a clear, open-ended driving question that can be answered through project work; specify required student response components such as a model or design, evidence-based analysis, visual or representational thinking, and a reasoned conclusion; and explain how the solution serves a real, relevant authentic audience positioned to use or evaluate the work."
             },
             "Project": {
               "type": "string",
-              "description": "Narrative of how learning builds across the multi-day project (inquiry → apply → refine → present). Not a day-by-day schedule."
+              "description": "Narrative of how learning builds across the multi-day project (inquiry -> apply -> refine -> present). Not a day-by-day schedule."
             },
             "Place": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["PlaceOverview", "Sites", "PlaceMattersReminder"],
+              "required": [
+                "PlaceOverview",
+                "Sites",
+                "PlaceMattersReminder"
+              ],
               "properties": {
-                "PlaceOverview": { "type": "string", "description": "How local context shapes problem, question, product." },
+                "PlaceOverview": {
+                  "type": "string",
+                  "description": "How local context shapes problem, question, product."
+                },
                 "Sites": {
                   "type": "array",
                   "minItems": 3,
                   "maxItems": 4,
-                  "description": "Must include 3 to 5 Place-Based Sites of Engagement, each structured with three labeled components: The Site, describing a meaningful physical, community, virtual, or discipline-specific location relevant to the unit’s context; Engagement, explaining authentic inquiry activities students complete at or with the site such as observation, data collection, interviews, analysis, virtual exploration, or guided field tasks tied to the real-world problem; and Relevance, explaining why the site matters by connecting it to the problem, showing how it provides evidence or expertise, clarifying how it supports solution design or modeling, and highlighting local or community-specific significance; sites must represent varied contexts, include at least one involving community expertise, include at least one involving direct observation or physical context even if virtual, remain subject-neutral, and clearly show how the local community is part of the learning ecosystem.",
+                  "description": "Must include 3 to 5 Place-Based Sites of Engagement, each structured with three labeled components: The Site, describing a meaningful physical, community, virtual, or discipline-specific location relevant to the unit's context; Engagement, explaining authentic inquiry activities students complete at or with the site such as observation, data collection, interviews, analysis, virtual exploration, or guided field tasks tied to the real-world problem; and Relevance, explaining why the site matters by connecting it to the problem, showing how it provides evidence or expertise, clarifying how it supports solution design or modeling, and highlighting local or community-specific significance; sites must represent varied contexts, include at least one involving community expertise, include at least one involving direct observation or physical context even if virtual, remain subject-neutral, and clearly show how the local community is part of the learning ecosystem.",
                   "items": {
                     "type": "object",
                     "additionalProperties": false,
-                    "required": ["TheSite", "Engagement", "Relevance"],
+                    "required": [
+                      "TheSite",
+                      "Engagement",
+                      "Relevance"
+                    ],
                     "properties": {
-                      "TheSite": { "type": "string" },
-                      "Engagement": { "type": "string" },
-                      "Relevance": { "type": "string" }
+                      "TheSite": {
+                        "type": "string"
+                      },
+                      "Engagement": {
+                        "type": "string"
+                      },
+                      "Relevance": {
+                        "type": "string"
+                      }
                     }
                   }
                 },
@@ -210,13 +284,18 @@ window.masterSchema = `
             }
           }
         },
-
         "KeyVocabulary": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["VocabularyRationale", "Tiers"],
+          "required": [
+            "VocabularyRationale",
+            "Tiers"
+          ],
           "properties": {
-            "VocabularyRationale": { "type": "string", "description": "Provide a short, universal statement explaining that the unit’s vocabulary is intentionally selected to support core understanding, connect learning to real-world application, and reinforce accurate academic communication, and that terms are organized into tiers to prioritize essentials, support differentiation, and strengthen students’ effective use of disciplinary language." },
+            "VocabularyRationale": {
+              "type": "string",
+              "description": "Provide a short, universal statement explaining that the unit's vocabulary is intentionally selected to support core understanding, connect learning to real-world application, and reinforce accurate academic communication, and that terms are organized into tiers to prioritize essentials, support differentiation, and strengthen students' effective use of disciplinary language."
+            },
             "Tiers": {
               "type": "array",
               "minItems": 4,
@@ -225,24 +304,41 @@ window.masterSchema = `
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["TierTitle", "TierWhyItMatters", "Terms"],
+                "required": [
+                  "TierTitle",
+                  "TierWhyItMatters",
+                  "Terms"
+                ],
                 "properties": {
                   "TierTitle": {
                     "type": "string",
                     "description": "MUST be exactly one of these: 'Tier 1: Essential / Core Vocabulary', 'Tier 2: Application, Modeling, or Process Vocabulary', 'Tier 3: Real-World or Project-Specific Vocabulary', 'Tier 4: Enrichment & Extension Vocabulary'."
                   },
-                  "TierWhyItMatters": { "type": "string" },
+                  "TierWhyItMatters": {
+                    "type": "string"
+                  },
                   "Terms": {
                     "type": "array",
                     "minItems": 3,
                     "items": {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": ["Term", "Definition", "StandardsConnection"],
+                      "required": [
+                        "Term",
+                        "Definition",
+                        "StandardsConnection"
+                      ],
                       "properties": {
-                        "Term": { "type": "string" },
-                        "Definition": { "type": "string" },
-                        "StandardsConnection": { "type": "string", "description": "Format: 'Standards Connection: ...'." }
+                        "Term": {
+                          "type": "string"
+                        },
+                        "Definition": {
+                          "type": "string"
+                        },
+                        "StandardsConnection": {
+                          "type": "string",
+                          "description": "Format: 'Standards Connection: ...'."
+                        }
                       }
                     }
                   }
@@ -251,11 +347,13 @@ window.masterSchema = `
             }
           }
         },
-
         "AssessmentPlan": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["FormativeAssessmentTable", "AnalyticRubric"],
+          "required": [
+            "FormativeAssessmentTable",
+            "AnalyticRubric"
+          ],
           "properties": {
             "FormativeAssessmentTable": {
               "type": "array",
@@ -263,11 +361,22 @@ window.masterSchema = `
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["CriteriaForSuccess", "SuccessCriteria", "PointOfDemonstration"],
+                "required": [
+                  "CriteriaForSuccess",
+                  "SuccessCriteria",
+                  "PointOfDemonstration"
+                ],
                 "properties": {
-                  "CriteriaForSuccess": { "type": "string" },
-                  "SuccessCriteria": { "type": "string" },
-                  "PointOfDemonstration": { "type": "string", "description": "Formative Assessment Rubric MUST use the exact column headers Criteria for Success (Student Learning Objective), Success Criteria, and Point of Demonstration. Analytic Rubric MUST use the exact column headers Criteria, Novice, Apprentice, Practitioner, and Expert. This schema does not contain content and only provides instructions for how the model must structure the output. Create an Assessment Rubrics section containing two required rubric formats and keep the exact column headers word for word with no substitutions. For the Formative Assessment Rubric, produce a table with exactly three columns labeled Criteria for Success (Student Learning Objective), Success Criteria, and Point of Demonstration, and populate each row with a specific measurable learning objective, its aligned success criteria, and where the evidence will appear such as a task, checkpoint, or performance moment. The number of rows must match the number of learning objectives in the unit, language must be clear and student friendly, and alignment between objective, criteria, and evidence point must be maintained. Keep the column headers exactly as written. The structure example is provided for format only and not for content." }
+                  "CriteriaForSuccess": {
+                    "type": "string"
+                  },
+                  "SuccessCriteria": {
+                    "type": "string"
+                  },
+                  "PointOfDemonstration": {
+                    "type": "string",
+                    "description": "Formative Assessment Rubric MUST use the exact column headers Criteria for Success (Student Learning Objective), Success Criteria, and Point of Demonstration. Analytic Rubric MUST use the exact column headers Criteria, Novice, Apprentice, Practitioner, and Expert. This schema does not contain content and only provides instructions for how the model must structure the output. Create an Assessment Rubrics section containing two required rubric formats and keep the exact column headers word for word with no substitutions. For the Formative Assessment Rubric, produce a table with exactly three columns labeled Criteria for Success (Student Learning Objective), Success Criteria, and Point of Demonstration, and populate each row with a specific measurable learning objective, its aligned success criteria, and where the evidence will appear such as a task, checkpoint, or performance moment. The number of rows must match the number of learning objectives in the unit, language must be clear and student friendly, and alignment between objective, criteria, and evidence point must be maintained. Keep the column headers exactly as written. The structure example is provided for format only and not for content."
+                  }
                 }
               }
             },
@@ -278,19 +387,34 @@ window.masterSchema = `
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["Criterion", "Novice", "Apprentice", "Practitioner", "Expert"],
+                "required": [
+                  "Criterion",
+                  "Novice",
+                  "Apprentice",
+                  "Practitioner",
+                  "Expert"
+                ],
                 "properties": {
-                  "Criterion": { "type": "string" },
-                  "Novice": { "type": "string" },
-                  "Apprentice": { "type": "string" },
-                  "Practitioner": { "type": "string" },
-                  "Expert": { "type": "string" }
+                  "Criterion": {
+                    "type": "string"
+                  },
+                  "Novice": {
+                    "type": "string"
+                  },
+                  "Apprentice": {
+                    "type": "string"
+                  },
+                  "Practitioner": {
+                    "type": "string"
+                  },
+                  "Expert": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
         },
-
         "AuthenticAudience": {
           "type": "object",
           "description": "The rubric must be produced as a table with exactly the following column headers in this order: Criteria, Novice, Apprentice, Practitioner, and Expert. Each row represents one evaluated skill, competency, or dimension of the final project. The Novice to Expert progression must reflect increasing sophistication and must not use deficit-based language such as fails, lacks, or missing. The Expert column must build on the Practitioner level with deeper insight, precision, or complexity. Keep the column headers exactly as written. The number of rows should match the number of major competencies required by the project. The required output structure example is provided for format only and not for content.",
@@ -302,13 +426,24 @@ window.masterSchema = `
             "StudentParticipationInAudienceSelection"
           ],
           "properties": {
-            "PrimaryAudienceDescription": { "type": "string", "description": "Clear description of who the primary audience is (individuals, organizations, or groups) and their relationship to the project’s context or problem." },
-            "WhyThisAudienceIsQualified": { "type": "string", "description": "Explanation of why this audience has relevant expertise, lived experience, or authority related to the project topic." },
-            "HowThisAudienceElevatesTheProject": { "type": "string", "description": "How the presence of this audience increases authenticity, rigor, motivation, or real-world impact for students." },
-            "StudentParticipationInAudienceSelection": { "type": "string", "description": "Description of how students are involved in identifying, refining, or understanding the authentic audience." }
+            "PrimaryAudienceDescription": {
+              "type": "string",
+              "description": "Clear description of who the primary audience is (individuals, organizations, or groups) and their relationship to the project's context or problem."
+            },
+            "WhyThisAudienceIsQualified": {
+              "type": "string",
+              "description": "Explanation of why this audience has relevant expertise, lived experience, or authority related to the project topic."
+            },
+            "HowThisAudienceElevatesTheProject": {
+              "type": "string",
+              "description": "How the presence of this audience increases authenticity, rigor, motivation, or real-world impact for students."
+            },
+            "StudentParticipationInAudienceSelection": {
+              "type": "string",
+              "description": "Description of how students are involved in identifying, refining, or understanding the authentic audience."
+            }
           }
         },
-
         "LearningPlan": {
           "type": "object",
           "additionalProperties": false,
@@ -324,7 +459,10 @@ window.masterSchema = `
             "GroupSuggestions"
           ],
           "properties": {
-            "LearningPlanOverview": { "type": "string", "description": "The output must include a clear statement of the total number of instructional days based on the value provided by the teacher, a short description of how the project unfolds across phases rather than fixed dates, and a 2–4 sentence summary explaining how learning progresses across the unit. The model must not assume specific day ranges such as Days 1–3 and must instead divide learning into three flexible phases labeled Early Phase, Middle Phase, and Final Phase. The Early Phase must describe building foundational knowledge, introducing core concepts, tools, or skills, conducting exploratory investigations or guided practice, and preparing students for deeper inquiry. The Middle Phase must describe applying core concepts to the central problem, conducting analyses or research, developing drafts, prototypes, models, or design ideas, and gathering and interpreting evidence for the final deliverable. The Final Phase must describe refining the final product, synthesizing learning into clear explanations, preparing visuals, models, arguments, or presentations, and presenting to the authentic audience. The model must not assign a fixed number of days to any phase and must allow any duration provided by the teacher." },
+            "LearningPlanOverview": {
+              "type": "string",
+              "description": "The output must include a clear statement of the total number of instructional days based on the value provided by the teacher, a short description of how the project unfolds across phases rather than fixed dates, and a 2-4 sentence summary explaining how learning progresses across the unit. The model must not assume specific day ranges such as Days 1-3 and must instead divide learning into three flexible phases labeled Early Phase, Middle Phase, and Final Phase. The Early Phase must describe building foundational knowledge, introducing core concepts, tools, or skills, conducting exploratory investigations or guided practice, and preparing students for deeper inquiry. The Middle Phase must describe applying core concepts to the central problem, conducting analyses or research, developing drafts, prototypes, models, or design ideas, and gathering and interpreting evidence for the final deliverable. The Final Phase must describe refining the final product, synthesizing learning into clear explanations, preparing visuals, models, arguments, or presentations, and presenting to the authentic audience. The model must not assign a fixed number of days to any phase and must allow any duration provided by the teacher."
+            },
             "ProjectPhases": {
               "type": "array",
               "minItems": 3,
@@ -340,19 +478,40 @@ window.masterSchema = `
                   "KeyLearningExperiences"
                 ],
                 "properties": {
-                  "PhaseTitle": { "type": "string" },
-                  "PhaseDescription": { "type": "string" },
-                  "ConceptsOrSkills": { "type": "string" },
-                  "CollaborationAndVisibleThinking": { "type": "string" },
-                  "KeyLearningExperiences": { "type": "array", "minItems": 3, "items": { "type": "string" } }
+                  "PhaseTitle": {
+                    "type": "string"
+                  },
+                  "PhaseDescription": {
+                    "type": "string"
+                  },
+                  "ConceptsOrSkills": {
+                    "type": "string"
+                  },
+                  "CollaborationAndVisibleThinking": {
+                    "type": "string"
+                  },
+                  "KeyLearningExperiences": {
+                    "type": "array",
+                    "minItems": 3,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             },
-            "ProjectGoals": { "type": "array", "minItems": 3, "description": "The output must contain exactly three project goals, each expressed as a conceptual category followed by detailed bullets or short paragraphs. Goal 1, Apply Disciplinary Content to a Real-World Problem, requires students to use discipline-specific knowledge to analyze or solve an authentic challenge, list 4–6 core concepts or principles they will apply, and show how these ideas connect to real-world conditions or constraints. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, requires describing the authentic challenge students must address, listing what students will create, model, compare, analyze, evaluate, or justify, and including processes such as modeling, predicting, comparing, evaluating, and decision-making. Goal 3, Communicate Findings to a Real Audience, requires students to prepare a polished, professional-quality final product, tailor communication to the needs of a real stakeholder group, and reference authentic audiences such as local experts, community organizations, industry professionals, school leadership, families, or community members.", "items": { "type": "string" } },
+            "ProjectGoals": {
+              "type": "array",
+              "minItems": 3,
+              "description": "The output must contain exactly three project goals, each expressed as a conceptual category followed by detailed bullets or short paragraphs. Goal 1, Apply Disciplinary Content to a Real-World Problem, requires students to use discipline-specific knowledge to analyze or solve an authentic challenge, list 4-6 core concepts or principles they will apply, and show how these ideas connect to real-world conditions or constraints. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, requires describing the authentic challenge students must address, listing what students will create, model, compare, analyze, evaluate, or justify, and including processes such as modeling, predicting, comparing, evaluating, and decision-making. Goal 3, Communicate Findings to a Real Audience, requires students to prepare a polished, professional-quality final product, tailor communication to the needs of a real stakeholder group, and reference authentic audiences such as local experts, community organizations, industry professionals, school leadership, families, or community members.",
+              "items": {
+                "type": "string"
+              }
+            },
             "CollaborativeStructuresAndArtifacts": {
               "type": "object",
               "additionalProperties": false,
-              "description": "The output must provide a list describing what the final deliverable will contain, including 5–7 items such as a discipline-accurate analysis tied to core concepts, a model, diagram, or representation of key ideas, an evaluation or assessment based on authentic constraints, a visual or structural representation of the proposed solution or findings, a written or oral justification supported by evidence, and a formal presentation to an authentic audience. These items should mirror the structure of the original example while using subject-neutral language.",
+              "description": "The output must provide a list describing what the final deliverable will contain, including 5-7 items such as a discipline-accurate analysis tied to core concepts, a model, diagram, or representation of key ideas, an evaluation or assessment based on authentic constraints, a visual or structural representation of the proposed solution or findings, a written or oral justification supported by evidence, and a formal presentation to an authentic audience. These items should mirror the structure of the original example while using subject-neutral language.",
               "required": [
                 "HowGroupsShareAndCompareIdeas",
                 "HowThinkingIsDocumented",
@@ -384,18 +543,45 @@ window.masterSchema = `
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["MilestoneName", "Checkpoint", "ObservableIndicators", "HowIndicatorsAdjustWork"],
+                "required": [
+                  "MilestoneName",
+                  "Checkpoint",
+                  "ObservableIndicators",
+                  "HowIndicatorsAdjustWork"
+                ],
                 "properties": {
-                  "MilestoneName": { "type": "string" },
-                  "Checkpoint": { "type": "string" },
-                  "ObservableIndicators": { "type": "array", "minItems": 2, "items": { "type": "string" } },
-                  "HowIndicatorsAdjustWork": { "type": "string" }
+                  "MilestoneName": {
+                    "type": "string"
+                  },
+                  "Checkpoint": {
+                    "type": "string"
+                  },
+                  "ObservableIndicators": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "HowIndicatorsAdjustWork": {
+                    "type": "string"
+                  }
                 }
               }
             },
-            "VerticalAlignment": { "type": "string" },
-            "CommunicationToAuthenticAudienceExpectations": { "type": "string" },
-            "FinalDeliverableSummary": { "type": "array", "minItems": 4, "items": { "type": "string" } },
+            "VerticalAlignment": {
+              "type": "string"
+            },
+            "CommunicationToAuthenticAudienceExpectations": {
+              "type": "string"
+            },
+            "FinalDeliverableSummary": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "string"
+              }
+            },
             "GroupSuggestions": {
               "type": "object",
               "additionalProperties": false,
@@ -406,19 +592,34 @@ window.masterSchema = `
                 "GroupingStrategyRecommendations"
               ],
               "properties": {
-                "GroupSize": { "type": "string" },
-                "RotatingRolesAndDuties": { "type": "array", "minItems": 4, "items": { "type": "string" } },
-                "TeacherGroupingStrategyPrompt": { "type": "string" },
-                "GroupingStrategyRecommendations": { "type": "array", "minItems": 4, "items": { "type": "string" } }
+                "GroupSize": {
+                  "type": "string"
+                },
+                "RotatingRolesAndDuties": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "TeacherGroupingStrategyPrompt": {
+                  "type": "string"
+                },
+                "GroupingStrategyRecommendations": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
         },
-
         "TeacherGuidancePhasesFlat": {
           "type": "object",
           "additionalProperties": false,
-          "description": "Flat structure for exactly 3 phases. IMPORTANT: The PhaseTitle strings MUST be exactly: (1) 'Phase 1 – Launch' (2) 'Phase 2 - Exploration, Investigation, and Development; Refinement' (3) 'Phase 3 - Development; Refinement, Culmination, and Reflection'. If any differs, regenerate.",
+          "description": "Flat structure for exactly 3 phases. IMPORTANT: The PhaseTitle strings MUST be exactly: (1) 'Phase 1 - Launch' (2) 'Phase 2 - Exploration, Investigation, and Development; Refinement' (3) 'Phase 3 - Development; Refinement, Culmination, and Reflection'. If any differs, regenerate.",
           "required": [
             "Phase1_Title",
             "Phase1_FocusStatement",
@@ -437,7 +638,6 @@ window.masterSchema = `
             "Phase1_StudentPractice_InterleavingIfMath",
             "Phase1_StudentPractice_Reflection",
             "Phase1_ReflectionPrompt",
-
             "Phase2_Title",
             "Phase2_FocusStatement",
             "Phase2_CollaborativeActivities",
@@ -455,7 +655,6 @@ window.masterSchema = `
             "Phase2_StudentPractice_InterleavingIfMath",
             "Phase2_StudentPractice_Reflection",
             "Phase2_ReflectionPrompt",
-
             "Phase3_Title",
             "Phase3_FocusStatement",
             "Phase3_CollaborativeActivities",
@@ -475,8 +674,14 @@ window.masterSchema = `
             "Phase3_ReflectionPrompt"
           ],
           "properties": {
-            "Phase1_Title": { "type": "string", "description": "MUST be exactly: 'Phase 1 – Launch'." },
-            "Phase1_FocusStatement": { "type": "string", "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit’s Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question." },
+            "Phase1_Title": {
+              "type": "string",
+              "description": "MUST be exactly: 'Phase 1 - Launch'."
+            },
+            "Phase1_FocusStatement": {
+              "type": "string",
+              "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit's Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question."
+            },
             "Phase1_CollaborativeActivities": {
               "type": "array",
               "minItems": 3,
@@ -484,32 +689,73 @@ window.masterSchema = `
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"],
+                "required": [
+                  "ActivityTitle",
+                  "StudentExperience",
+                  "ArtifactsOfLearning",
+                  "TeacherRoleMoves"
+                ],
                 "properties": {
-                  "ActivityTitle": { "type": "string" },
-                  "StudentExperience": { "type": "string" },
-                  "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } },
-                  "TeacherRoleMoves": { "type": "string" }
+                  "ActivityTitle": {
+                    "type": "string"
+                  },
+                  "StudentExperience": {
+                    "type": "string"
+                  },
+                  "ArtifactsOfLearning": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "TeacherRoleMoves": {
+                    "type": "string"
+                  }
                 }
               }
             },
-            "Phase1_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
-            "Phase1_Differentiation_LanguageLearners": { "type": "string" },
-            "Phase1_Differentiation_Scaffolding": { "type": "string" },
-            "Phase1_Differentiation_GoDeeper": { "type": "string" },
-            "Phase1_Accommodations_General": { "type": "string" },
+            "Phase1_GuidingQuestions": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "string"
+              }
+            },
+            "Phase1_Differentiation_LanguageLearners": {
+              "type": "string"
+            },
+            "Phase1_Differentiation_Scaffolding": {
+              "type": "string"
+            },
+            "Phase1_Differentiation_GoDeeper": {
+              "type": "string"
+            },
+            "Phase1_Accommodations_General": {
+              "type": "string"
+            },
             "Phase1_Accommodations_IndividualSupport": {
               "type": "array",
               "minItems": 0,
-              "description": "Exactly the provided students (if any). If none provided, return empty array.",
+              "description": "List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["StudentName", "PlanProvided", "PlanImplementation"],
+                "required": [
+                  "StudentName",
+                  "PlanProvided",
+                  "PlanImplementation"
+                ],
                 "properties": {
-                  "StudentName": { "type": "string" },
-                  "PlanProvided": { "type": "string" },
-                  "PlanImplementation": { "type": "string" }
+                  "StudentName": {
+                    "type": "string"
+                  },
+                  "PlanProvided": {
+                    "type": "string"
+                  },
+                  "PlanImplementation": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -519,24 +765,42 @@ window.masterSchema = `
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["Misconception", "CorrectionLanguage"],
+                "required": [
+                  "Misconception",
+                  "CorrectionLanguage"
+                ],
                 "properties": {
-                  "Misconception": { "type": "string" },
-                  "CorrectionLanguage": { "type": "string" }
+                  "Misconception": {
+                    "type": "string"
+                  },
+                  "CorrectionLanguage": {
+                    "type": "string"
+                  }
                 }
               }
             },
             "Phase1_TranscendentThinkingPrompts": {
               "type": "array",
               "minItems": 1,
-              "description": "Prompts designed to extend student thinking beyond the immediate task, encouraging transfer, abstraction, or connection to broader ideas.",
+              "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["Prompt", "ExpectedStudentResponses"],
+                "required": [
+                  "Prompt",
+                  "ExpectedStudentResponses"
+                ],
                 "properties": {
-                  "Prompt": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } }
+                  "Prompt": {
+                    "type": "string"
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             },
@@ -544,15 +808,30 @@ window.masterSchema = `
               "type": "array",
               "minItems": 3,
               "maxItems": 3,
-              "description": "Brief formative checks used during the phase to monitor understanding and inform instructional decisions.",
+              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"],
+                "required": [
+                  "Timing",
+                  "Prompt",
+                  "SuccessCriteriaOrExpectedResponses"
+                ],
                 "properties": {
-                  "Timing": { "type": "string", "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'." },
-                  "Prompt": { "type": "string" },
-                  "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } }
+                  "Timing": {
+                    "type": "string",
+                    "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
+                  },
+                  "Prompt": {
+                    "type": "string"
+                  },
+                  "SuccessCriteriaOrExpectedResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             },
@@ -560,17 +839,36 @@ window.masterSchema = `
               "type": "array",
               "minItems": 3,
               "maxItems": 3,
-              "description": "Retrieval prompts that intentionally revisit prior learning to strengthen memory and connections over time.",
+              "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                "required": [
+                  "Timing",
+                  "DrawsFrom",
+                  "Question",
+                  "DOK",
+                  "ExpectedResponseOrSuccessCriteria"
+                ],
                 "properties": {
-                  "Timing": { "type": "string", "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'." },
-                  "DrawsFrom": { "type": "string" },
-                  "Question": { "type": "string" },
-                  "DOK": { "type": "integer", "minimum": 2, "maximum": 4 },
-                  "ExpectedResponseOrSuccessCriteria": { "type": "string" }
+                  "Timing": {
+                    "type": "string",
+                    "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
+                  },
+                  "DrawsFrom": {
+                    "type": "string"
+                  },
+                  "Question": {
+                    "type": "string"
+                  },
+                  "DOK": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 4
+                  },
+                  "ExpectedResponseOrSuccessCriteria": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -578,17 +876,33 @@ window.masterSchema = `
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Structured practice tasks that allow students to apply learning from this phase. Tasks should align to the phase focus and expected depth of knowledge.",
+              "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"],
+                "required": [
+                  "TaskTitle",
+                  "DOK",
+                  "TeacherNote",
+                  "StudentDirections",
+                  "ExpectedAnswerOrSuccessCriteria"
+                ],
                 "properties": {
-                  "TaskTitle": { "type": "string" },
-                  "DOK": { "type": "string" },
-                  "TeacherNote": { "type": "string" },
-                  "StudentDirections": { "type": "string" },
-                  "ExpectedAnswerOrSuccessCriteria": { "type": "string" }
+                  "TaskTitle": {
+                    "type": "string"
+                  },
+                  "DOK": {
+                    "type": "string"
+                  },
+                  "TeacherNote": {
+                    "type": "string"
+                  },
+                  "StudentDirections": {
+                    "type": "string"
+                  },
+                  "ExpectedAnswerOrSuccessCriteria": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -596,73 +910,545 @@ window.masterSchema = `
               "type": "string",
               "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
             },
-            "Phase1_StudentPractice_Reflection": { "type": "string" },
-            "Phase1_ReflectionPrompt": { "type": "string" },
-
-            "Phase2_Title": { "type": "string", "description": "MUST be exactly: 'Phase 2 - Exploration, Investigation, and Development; Refinement'." },
-            "Phase2_FocusStatement": { "type": "string", "description": "Write a 1–3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit’s Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user." },
-            "Phase2_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
-            "Phase2_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
-            "Phase2_Differentiation_LanguageLearners": { "type": "string" },
-            "Phase2_Differentiation_Scaffolding": { "type": "string" },
-            "Phase2_Differentiation_GoDeeper": { "type": "string" },
-            "Phase2_Accommodations_General": { "type": "string" },
-            "Phase2_Accommodations_IndividualSupport": { "type": "array", "minItems": 0, "items": { "type": "object", "additionalProperties": false, "required": ["StudentName", "PlanProvided", "PlanImplementation"], "properties": { "StudentName": { "type": "string" }, "PlanProvided": { "type": "string" }, "PlanImplementation": { "type": "string" } } } },
-            "Phase2_AnticipatedMisconceptions": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["Misconception", "CorrectionLanguage"], "properties": { "Misconception": { "type": "string" }, "CorrectionLanguage": { "type": "string" } } } },
-            "Phase2_TranscendentThinkingPrompts": { "type": "array", "minItems": 1, "description": "Prompts designed to extend student thinking beyond the immediate task, encouraging transfer, abstraction, or connection to broader ideas.", "items": { "type": "object", "additionalProperties": false, "required": ["Prompt", "ExpectedStudentResponses"], "properties": { "Prompt": { "type": "string" }, "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase2_QuickChecks": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Brief formative checks used during the phase to monitor understanding and inform instructional decisions.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"], "properties": { "Timing": { "type": "string" }, "Prompt": { "type": "string" }, "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase2_SpacedRetrieval": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Retrieval prompts that intentionally revisit prior learning to strengthen memory and connections over time.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"], "properties": { "Timing": { "type": "string" }, "DrawsFrom": { "type": "string" }, "Question": { "type": "string" }, "DOK": { "type": "integer", "minimum": 2, "maximum": 4 }, "ExpectedResponseOrSuccessCriteria": { "type": "string" } } } },
-            "Phase2_StudentPractice_Tasks": { "type": "array", "minItems": 2, "maxItems": 3, "description": "Structured practice tasks that allow students to apply learning from this phase. Tasks should align to the phase focus and expected depth of knowledge.", "items": { "type": "object", "additionalProperties": false, "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"], "properties": { "TaskTitle": { "type": "string" }, "DOK": { "type": "string" }, "TeacherNote": { "type": "string" }, "StudentDirections": { "type": "string" }, "ExpectedAnswerOrSuccessCriteria": { "type": "string" } } } },
-            "Phase2_StudentPractice_InterleavingIfMath": { "type": "string" },
-            "Phase2_StudentPractice_Reflection": { "type": "string" },
-            "Phase2_ReflectionPrompt": { "type": "string" },
-
-            "Phase3_Title": { "type": "string", "description": "MUST be exactly: 'Phase 3 - Development; Refinement, Culmination, and Reflection'." },
-            "Phase3_FocusStatement": { "type": "string", "description": "Generate a 2–4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project’s authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning." },
-            "Phase3_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
-            "Phase3_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
-            "Phase3_Differentiation_LanguageLearners": { "type": "string" },
-            "Phase3_Differentiation_Scaffolding": { "type": "string" },
-            "Phase3_Differentiation_GoDeeper": { "type": "string" },
-            "Phase3_Accommodations_General": { "type": "string" },
-            "Phase3_Accommodations_IndividualSupport": { "type": "array", "minItems": 0, "items": { "type": "object", "additionalProperties": false, "required": ["StudentName", "PlanProvided", "PlanImplementation"], "properties": { "StudentName": { "type": "string" }, "PlanProvided": { "type": "string" }, "PlanImplementation": { "type": "string" } } } },
-            "Phase3_AnticipatedMisconceptions": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["Misconception", "CorrectionLanguage"], "properties": { "Misconception": { "type": "string" }, "CorrectionLanguage": { "type": "string" } } } },
-            "Phase3_TranscendentThinkingPrompts": { "type": "array", "minItems": 1, "description": "Prompts designed to extend student thinking beyond the immediate task, encouraging transfer, abstraction, or connection to broader ideas.", "items": { "type": "object", "additionalProperties": false, "required": ["Prompt", "ExpectedStudentResponses"], "properties": { "Prompt": { "type": "string" }, "ExpectedStudentResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase3_QuickChecks": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Brief formative checks used during the phase to monitor understanding and inform instructional decisions.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "Prompt", "SuccessCriteriaOrExpectedResponses"], "properties": { "Timing": { "type": "string" }, "Prompt": { "type": "string" }, "SuccessCriteriaOrExpectedResponses": { "type": "array", "minItems": 2, "items": { "type": "string" } } } } },
-            "Phase3_SpacedRetrieval": { "type": "array", "minItems": 3, "maxItems": 3, "description": "Retrieval prompts that intentionally revisit prior learning to strengthen memory and connections over time.", "items": { "type": "object", "additionalProperties": false, "required": ["Timing", "DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"], "properties": { "Timing": { "type": "string" }, "DrawsFrom": { "type": "string" }, "Question": { "type": "string" }, "DOK": { "type": "integer", "minimum": 2, "maximum": 4 }, "ExpectedResponseOrSuccessCriteria": { "type": "string" } } } },
-            "Phase3_StudentPractice_Tasks": { "type": "array", "minItems": 2, "maxItems": 3, "description": "Structured practice tasks that allow students to apply learning from this phase. Tasks should align to the phase focus and expected depth of knowledge.", "items": { "type": "object", "additionalProperties": false, "required": ["TaskTitle", "DOK", "TeacherNote", "StudentDirections", "ExpectedAnswerOrSuccessCriteria"], "properties": { "TaskTitle": { "type": "string" }, "DOK": { "type": "string" }, "TeacherNote": { "type": "string" }, "StudentDirections": { "type": "string" }, "ExpectedAnswerOrSuccessCriteria": { "type": "string" } } } },
-            "Phase3_StudentPractice_InterleavingIfMath": { "type": "string" },
-            "Phase3_StudentPractice_Reflection": { "type": "string" },
-            "Phase3_ReflectionPrompt": { "type": "string" }
+            "Phase1_StudentPractice_Reflection": {
+              "type": "string"
+            },
+            "Phase1_ReflectionPrompt": {
+              "type": "string"
+            },
+            "Phase2_Title": {
+              "type": "string",
+              "description": "MUST be exactly: 'Phase 2 - Exploration, Investigation, and Development; Refinement'."
+            },
+            "Phase2_FocusStatement": {
+              "type": "string",
+              "description": "Write a 1-3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit's Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user."
+            },
+            "Phase2_CollaborativeActivities": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "ActivityTitle",
+                  "StudentExperience",
+                  "ArtifactsOfLearning",
+                  "TeacherRoleMoves"
+                ],
+                "properties": {
+                  "ActivityTitle": {
+                    "type": "string"
+                  },
+                  "StudentExperience": {
+                    "type": "string"
+                  },
+                  "ArtifactsOfLearning": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "TeacherRoleMoves": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase2_GuidingQuestions": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "string"
+              }
+            },
+            "Phase2_Differentiation_LanguageLearners": {
+              "type": "string"
+            },
+            "Phase2_Differentiation_Scaffolding": {
+              "type": "string"
+            },
+            "Phase2_Differentiation_GoDeeper": {
+              "type": "string"
+            },
+            "Phase2_Accommodations_General": {
+              "type": "string"
+            },
+            "Phase2_Accommodations_IndividualSupport": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "StudentName",
+                  "PlanProvided",
+                  "PlanImplementation"
+                ],
+                "properties": {
+                  "StudentName": {
+                    "type": "string"
+                  },
+                  "PlanProvided": {
+                    "type": "string"
+                  },
+                  "PlanImplementation": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase2_AnticipatedMisconceptions": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Misconception",
+                  "CorrectionLanguage"
+                ],
+                "properties": {
+                  "Misconception": {
+                    "type": "string"
+                  },
+                  "CorrectionLanguage": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase2_TranscendentThinkingPrompts": {
+              "type": "array",
+              "minItems": 1,
+              "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Prompt",
+                  "ExpectedStudentResponses"
+                ],
+                "properties": {
+                  "Prompt": {
+                    "type": "string"
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "Phase2_QuickChecks": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Timing",
+                  "Prompt",
+                  "SuccessCriteriaOrExpectedResponses"
+                ],
+                "properties": {
+                  "Timing": {
+                    "type": "string"
+                  },
+                  "Prompt": {
+                    "type": "string"
+                  },
+                  "SuccessCriteriaOrExpectedResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "Phase2_SpacedRetrieval": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text.",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Timing",
+                  "DrawsFrom",
+                  "Question",
+                  "DOK",
+                  "ExpectedResponseOrSuccessCriteria"
+                ],
+                "properties": {
+                  "Timing": {
+                    "type": "string"
+                  },
+                  "DrawsFrom": {
+                    "type": "string"
+                  },
+                  "Question": {
+                    "type": "string"
+                  },
+                  "DOK": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 4
+                  },
+                  "ExpectedResponseOrSuccessCriteria": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase2_StudentPractice_Tasks": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "TaskTitle",
+                  "DOK",
+                  "TeacherNote",
+                  "StudentDirections",
+                  "ExpectedAnswerOrSuccessCriteria"
+                ],
+                "properties": {
+                  "TaskTitle": {
+                    "type": "string"
+                  },
+                  "DOK": {
+                    "type": "string"
+                  },
+                  "TeacherNote": {
+                    "type": "string"
+                  },
+                  "StudentDirections": {
+                    "type": "string"
+                  },
+                  "ExpectedAnswerOrSuccessCriteria": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase2_StudentPractice_InterleavingIfMath": {
+              "type": "string"
+            },
+            "Phase2_StudentPractice_Reflection": {
+              "type": "string"
+            },
+            "Phase2_ReflectionPrompt": {
+              "type": "string"
+            },
+            "Phase3_Title": {
+              "type": "string",
+              "description": "MUST be exactly: 'Phase 3 - Development; Refinement, Culmination, and Reflection'."
+            },
+            "Phase3_FocusStatement": {
+              "type": "string",
+              "description": "Generate a 2-4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project's authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning."
+            },
+            "Phase3_CollaborativeActivities": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "ActivityTitle",
+                  "StudentExperience",
+                  "ArtifactsOfLearning",
+                  "TeacherRoleMoves"
+                ],
+                "properties": {
+                  "ActivityTitle": {
+                    "type": "string"
+                  },
+                  "StudentExperience": {
+                    "type": "string"
+                  },
+                  "ArtifactsOfLearning": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "TeacherRoleMoves": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase3_GuidingQuestions": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "string"
+              }
+            },
+            "Phase3_Differentiation_LanguageLearners": {
+              "type": "string"
+            },
+            "Phase3_Differentiation_Scaffolding": {
+              "type": "string"
+            },
+            "Phase3_Differentiation_GoDeeper": {
+              "type": "string"
+            },
+            "Phase3_Accommodations_General": {
+              "type": "string"
+            },
+            "Phase3_Accommodations_IndividualSupport": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "StudentName",
+                  "PlanProvided",
+                  "PlanImplementation"
+                ],
+                "properties": {
+                  "StudentName": {
+                    "type": "string"
+                  },
+                  "PlanProvided": {
+                    "type": "string"
+                  },
+                  "PlanImplementation": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase3_AnticipatedMisconceptions": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Misconception",
+                  "CorrectionLanguage"
+                ],
+                "properties": {
+                  "Misconception": {
+                    "type": "string"
+                  },
+                  "CorrectionLanguage": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase3_TranscendentThinkingPrompts": {
+              "type": "array",
+              "minItems": 1,
+              "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Prompt",
+                  "ExpectedStudentResponses"
+                ],
+                "properties": {
+                  "Prompt": {
+                    "type": "string"
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "Phase3_QuickChecks": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Timing",
+                  "Prompt",
+                  "SuccessCriteriaOrExpectedResponses"
+                ],
+                "properties": {
+                  "Timing": {
+                    "type": "string"
+                  },
+                  "Prompt": {
+                    "type": "string"
+                  },
+                  "SuccessCriteriaOrExpectedResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "Phase3_SpacedRetrieval": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text.",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Timing",
+                  "DrawsFrom",
+                  "Question",
+                  "DOK",
+                  "ExpectedResponseOrSuccessCriteria"
+                ],
+                "properties": {
+                  "Timing": {
+                    "type": "string"
+                  },
+                  "DrawsFrom": {
+                    "type": "string"
+                  },
+                  "Question": {
+                    "type": "string"
+                  },
+                  "DOK": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 4
+                  },
+                  "ExpectedResponseOrSuccessCriteria": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase3_StudentPractice_Tasks": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "TaskTitle",
+                  "DOK",
+                  "TeacherNote",
+                  "StudentDirections",
+                  "ExpectedAnswerOrSuccessCriteria"
+                ],
+                "properties": {
+                  "TaskTitle": {
+                    "type": "string"
+                  },
+                  "DOK": {
+                    "type": "string"
+                  },
+                  "TeacherNote": {
+                    "type": "string"
+                  },
+                  "StudentDirections": {
+                    "type": "string"
+                  },
+                  "ExpectedAnswerOrSuccessCriteria": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Phase3_StudentPractice_InterleavingIfMath": {
+              "type": "string"
+            },
+            "Phase3_StudentPractice_Reflection": {
+              "type": "string"
+            },
+            "Phase3_ReflectionPrompt": {
+              "type": "string"
+            }
           }
         },
-
         "UnitPreparationAndConsiderations": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["MaterialsEquipmentAndKeyResources", "TechnologyIntegration"],
+          "required": [
+            "MaterialsEquipmentAndKeyResources",
+            "TechnologyIntegration"
+          ],
           "properties": {
             "MaterialsEquipmentAndKeyResources": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["ClassroomMaterialsAndEquipment", "LocalCommunityBasedResources", "DigitalToolsAndOnlineResources"],
+              "required": [
+                "ClassroomMaterialsAndEquipment",
+                "LocalCommunityBasedResources",
+                "DigitalToolsAndOnlineResources"
+              ],
               "properties": {
-                "ClassroomMaterialsAndEquipment": { "type": "array", "minItems": 6, "items": { "type": "string" } },
+                "ClassroomMaterialsAndEquipment": {
+                  "type": "array",
+                  "minItems": 6,
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "LocalCommunityBasedResources": {
                   "type": "array",
                   "minItems": 3,
                   "items": {
                     "type": "object",
                     "additionalProperties": false,
-                    "required": ["Location", "HowStudentsEngage", "WhyRelevant"],
+                    "required": [
+                      "Location",
+                      "HowStudentsEngage",
+                      "WhyRelevant"
+                    ],
                     "properties": {
-                      "Location": { "type": "string" },
-                      "HowStudentsEngage": { "type": "string" },
-                      "WhyRelevant": { "type": "string" }
+                      "Location": {
+                        "type": "string"
+                      },
+                      "HowStudentsEngage": {
+                        "type": "string"
+                      },
+                      "WhyRelevant": {
+                        "type": "string"
+                      }
                     }
                   }
                 },
-                "DigitalToolsAndOnlineResources": { "type": "array", "minItems": 4, "items": { "type": "string" } }
+                "DigitalToolsAndOnlineResources": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "type": "string"
+                  }
+                }
               }
             },
             "TechnologyIntegration": {
@@ -676,11 +1462,121 @@ window.masterSchema = `
                 "EquityAndAccessibilityConsiderations"
               ],
               "properties": {
-                "TechnologyForResearchAndInformation": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["ToolName", "HowStudentsUseIt", "ConnectionToProject", "ISTEStandard"], "properties": { "ToolName": { "type": "string" }, "HowStudentsUseIt": { "type": "string" }, "ConnectionToProject": { "type": "string" }, "ISTEStandard": { "type": "string" } } } },
-                "TechnologyForModelingAndVisualRepresentation": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["ToolName", "HowStudentsUseIt", "ConnectionToProject", "ISTEStandard"], "properties": { "ToolName": { "type": "string" }, "HowStudentsUseIt": { "type": "string" }, "ConnectionToProject": { "type": "string" }, "ISTEStandard": { "type": "string" } } } },
-                "TechnologyForCollaborationAndDiscourse": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["ToolName", "HowStudentsUseIt", "ConnectionToProject", "ISTEStandard"], "properties": { "ToolName": { "type": "string" }, "HowStudentsUseIt": { "type": "string" }, "ConnectionToProject": { "type": "string" }, "ISTEStandard": { "type": "string" } } } },
-                "TechnologyForCreatingAndPresentingFinalProduct": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["ToolName", "HowStudentsUseIt", "ConnectionToProject", "ISTEStandard"], "properties": { "ToolName": { "type": "string" }, "HowStudentsUseIt": { "type": "string" }, "ConnectionToProject": { "type": "string" }, "ISTEStandard": { "type": "string" } } } },
-                "EquityAndAccessibilityConsiderations": { "type": "string" }
+                "TechnologyForResearchAndInformation": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "ToolName",
+                      "HowStudentsUseIt",
+                      "ConnectionToProject",
+                      "ISTEStandard"
+                    ],
+                    "properties": {
+                      "ToolName": {
+                        "type": "string"
+                      },
+                      "HowStudentsUseIt": {
+                        "type": "string"
+                      },
+                      "ConnectionToProject": {
+                        "type": "string"
+                      },
+                      "ISTEStandard": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "TechnologyForModelingAndVisualRepresentation": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "ToolName",
+                      "HowStudentsUseIt",
+                      "ConnectionToProject",
+                      "ISTEStandard"
+                    ],
+                    "properties": {
+                      "ToolName": {
+                        "type": "string"
+                      },
+                      "HowStudentsUseIt": {
+                        "type": "string"
+                      },
+                      "ConnectionToProject": {
+                        "type": "string"
+                      },
+                      "ISTEStandard": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "TechnologyForCollaborationAndDiscourse": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "ToolName",
+                      "HowStudentsUseIt",
+                      "ConnectionToProject",
+                      "ISTEStandard"
+                    ],
+                    "properties": {
+                      "ToolName": {
+                        "type": "string"
+                      },
+                      "HowStudentsUseIt": {
+                        "type": "string"
+                      },
+                      "ConnectionToProject": {
+                        "type": "string"
+                      },
+                      "ISTEStandard": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "TechnologyForCreatingAndPresentingFinalProduct": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "ToolName",
+                      "HowStudentsUseIt",
+                      "ConnectionToProject",
+                      "ISTEStandard"
+                    ],
+                    "properties": {
+                      "ToolName": {
+                        "type": "string"
+                      },
+                      "HowStudentsUseIt": {
+                        "type": "string"
+                      },
+                      "ConnectionToProject": {
+                        "type": "string"
+                      },
+                      "ISTEStandard": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "EquityAndAccessibilityConsiderations": {
+                  "type": "string"
+                }
               }
             }
           }
