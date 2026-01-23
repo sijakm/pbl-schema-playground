@@ -367,17 +367,14 @@ async function run() {
 }
 
 function sanitizeSchemaText(raw) {
-  // 1. normalizuj line endings
   let text = raw.replace(/\r\n/g, "\n");
 
-  // 2. smart quotes → normalne
+  // smart punctuation
   text = text
     .replace(/[\u201C\u201D]/g, '"')
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u2013\u2014]/g, "-");
 
-  // 3. SADA NAJBITNIJE:
-  //    escape-uj newline karaktere UNUTAR JSON stringova
   let result = "";
   let inString = false;
   let prev = "";
@@ -385,22 +382,33 @@ function sanitizeSchemaText(raw) {
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
 
+    // toggle string state
     if (char === '"' && prev !== "\\") {
       inString = !inString;
       result += char;
-    } else if (char === "\n" && inString) {
+    }
+    // newline inside string → \n
+    else if (char === "\n" && inString) {
       result += "\\n";
-    } else if (char === "\t" && inString) {
+    }
+    // tab inside string → \t
+    else if (char === "\t" && inString) {
       result += "\\t";
-    } else {
+    }
+    // UNESCAPED quote INSIDE string → \"
+    else if (char === '"' && inString && prev !== "\\") {
+      result += '\\"';
+    }
+    else {
       result += char;
     }
 
     prev = char;
   }
-  console.log(result);
+
   return result;
 }
+
 
 
 /************************************
