@@ -58,6 +58,14 @@
     />
   </div>
 
+  <h3>OpenAI Model</h3>
+<select id="modelSelect" style="width:100%; padding:10px;">
+  <option value="gpt-5-mini" selected>gpt-5-mini</option>
+  <option value="gpt-5.1">gpt-5.1</option>
+  <option value="gpt-5.2">gpt-5.2</option>
+</select>
+
+
   <div class="row">
     <h3>Prompt</h3>
     <p>You can safely edit the prompt. The output must still match the schema.</p>
@@ -73,8 +81,9 @@
 
     <div id="descriptions"></div>
   </div>
-
+  
   <button onclick="run()">Run</button>
+  <button onclick="currentAbort?.abort()">Cancel</button>
   <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
 
   <div class="row">
