@@ -193,14 +193,14 @@ let parsedMasterSchema = null;
 let currentAbort = null;
 
 async function run() {
-  const invalid = [];
-  document.querySelectorAll("#descriptions textarea").forEach(t => {
-    if (findInvalidChars(t.value).length) invalid.push(t);
-  });
-  if (invalid.length) {
-    alert("Fix invalid characters first.");
-    return;
-  }
+  // const invalid = [];
+  // document.querySelectorAll("#descriptions textarea").forEach(t => {
+  //   if (findInvalidChars(t.value).length) invalid.push(t);
+  // });
+  // if (invalid.length) {
+  //   alert("Fix invalid characters first.");
+  //   return;
+  // }
 
   const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
   document.querySelectorAll("#descriptions textarea").forEach(t => {
