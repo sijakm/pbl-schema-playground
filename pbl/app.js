@@ -366,21 +366,39 @@ async function run() {
   }
 }
 
+function sanitizeSchemaText(raw) {
+  return raw
+    // normalizuj nove redove
+    .replace(/\r\n/g, "\n")
+
+    // smart quotes → normalne
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2018\u2019]/g, "'")
+
+    // en/em dash → hyphen
+    .replace(/[\u2013\u2014]/g, "-")
+
+    // ukloni nevidljive kontrolne karaktere
+    .replace(/[\u0000-\u001F\u007F]/g, (c) => {
+      return c === "\n" || c === "\t" ? c : "";
+    });
+}
+
 /************************************
  * INIT
  ************************************/
 window.onload = () => {
   if (!window.masterSchema) {
-    console.error("❌ masterSchema is not loaded");
-    alert("Schema failed to load. Check schema.js");
+    alert("Schema failed to load.");
     return;
   }
 
   try {
-    parsedMasterSchema = JSON.parse(window.masterSchema);
+    const cleaned = sanitizeSchemaText(window.masterSchema);
+    parsedMasterSchema = JSON.parse(cleaned);
   } catch (e) {
-    console.error("❌ Invalid JSON in masterSchema", e);
-    alert("Schema JSON is invalid. Check console.");
+    console.error("❌ Invalid schema after sanitization", e);
+    alert("Schema could not be loaded.");
     return;
   }
 
