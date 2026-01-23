@@ -245,6 +245,7 @@ async function run() {
     body: JSON.stringify({
       model,
       stream: true,
+      reasoning: { effort: "low" },
       input: [{ role: "user", content: prompt }],
       text: {
         format: {
