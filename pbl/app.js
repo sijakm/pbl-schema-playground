@@ -398,7 +398,7 @@ function sanitizeSchemaText(raw) {
 
     prev = char;
   }
-
+  console.log(result);
   return result;
 }
 
