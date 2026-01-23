@@ -367,22 +367,41 @@ async function run() {
 }
 
 function sanitizeSchemaText(raw) {
-  return raw
-    // normalizuj nove redove
-    .replace(/\r\n/g, "\n")
+  // 1. normalizuj line endings
+  let text = raw.replace(/\r\n/g, "\n");
 
-    // smart quotes → normalne
+  // 2. smart quotes → normalne
+  text = text
     .replace(/[\u201C\u201D]/g, '"')
     .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u2013\u2014]/g, "-");
 
-    // en/em dash → hyphen
-    .replace(/[\u2013\u2014]/g, "-")
+  // 3. SADA NAJBITNIJE:
+  //    escape-uj newline karaktere UNUTAR JSON stringova
+  let result = "";
+  let inString = false;
+  let prev = "";
 
-    // ukloni nevidljive kontrolne karaktere
-    .replace(/[\u0000-\u001F\u007F]/g, (c) => {
-      return c === "\n" || c === "\t" ? c : "";
-    });
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+
+    if (char === '"' && prev !== "\\") {
+      inString = !inString;
+      result += char;
+    } else if (char === "\n" && inString) {
+      result += "\\n";
+    } else if (char === "\t" && inString) {
+      result += "\\t";
+    } else {
+      result += char;
+    }
+
+    prev = char;
+  }
+
+  return result;
 }
+
 
 /************************************
  * INIT
@@ -397,8 +416,8 @@ window.onload = () => {
     const cleaned = sanitizeSchemaText(window.masterSchema);
     parsedMasterSchema = JSON.parse(cleaned);
   } catch (e) {
-    console.error("❌ Invalid schema after sanitization", e);
-    alert("Schema could not be loaded.");
+    console.error("❌ Schema still invalid after sanitization", e);
+    alert("Schema could not be loaded even after auto-fix.");
     return;
   }
 
