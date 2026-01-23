@@ -100,7 +100,7 @@ window.masterSchema = `
               "type": "array",
               "minItems": 4,
               "items": { "type": "string" },
-              "description": "Bulleted list of what the final product must include (format + evidence + components). No rubric language."
+              "description": "Written for students, describe the final deliverable they will create and the authentic audience it serves, beginning with a brief summary, then require four components: (1) Concept & Purpose Plan explaining the idea through a visual or written representation and why it matters to the community or context; (2) Evidence-Based Justification requiring analysis of at least two relevant factors and explanation of choices using evidence from research, data, experimentation, or observation; (3) Model or Representation describing the type of model created, what it represents, how it explains underlying mechanisms or reasoning, and required distinctions; and (4) The Verdict, a concluding, evidence-backed argument explaining why the solution is effective, feasible, or meaningful, summarizing reasoning, evidence, and models, and communicating value to the authentic audience, with a final statement emphasizing application of disciplinary knowledge, use of evidence, modeling of complex ideas, and real-world implications."
             },
             "ClosingCallToAction": {
               "type": "string",
@@ -144,19 +144,19 @@ window.masterSchema = `
                   "type": "array",
                   "minItems": 2,
                   "items": { "type": "string" },
-                  "description": "Each objective ends with '(DOK X)'."
+                  "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, explain how or why something works rather than just what it is, are written as full declarative sentences beginning with a verb, and are each labeled with an appropriate Depth of Knowledge level, emphasizing ideas students can transfer to new situations, future units, and real-world decision making."
                 },
                 "StudentsWillKnowThat": {
                   "type": "array",
                   "minItems": 2,
                   "items": { "type": "string" },
-                  "description": "Each objective ends with '(DOK X)'."
+                  "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, include an appropriate DOK label typically at level 1 or 2, and complete the stem Students will know that while beginning with a verb."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
                   "minItems": 2,
                   "items": { "type": "string" },
-                  "description": "Each objective ends with '(DOK X)'."
+                  "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do, such as analyze, compare, design, model, solve, justify, create, interpret, investigate, or communicate; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; include an appropriate DOK level between 2 and 4; and complete the stem Students will be able to while beginning with a verb."
                 }
               }
             }
@@ -174,7 +174,7 @@ window.masterSchema = `
             },
             "Problem": {
               "type": "string",
-              "description": "2–3 student-facing paragraphs defining ONE focused, solvable real-world problem; why it matters now locally; consequences; likely causes."
+              "description": "The problem description must present a real, observable challenge in a community, system, or environment; explain why the problem matters and the consequences if it is not addressed; ensure the problem requires analysis, reasoning, and evidence rather than simple recall; identify underlying contributing factors such as scientific, historical, mathematical, civic, artistic, technological, or social elements; show how misunderstanding, missing information, or overlooked variables contribute to the issue; clearly outline the intellectual and practical tasks students must complete using disciplinary knowledge, evidence analysis, modeling, explanation, design, or evaluation of solutions; demonstrate how solving the problem requires mastery of the unit’s core concepts, skills, and reasoning practices; align explicitly with a clear, open-ended driving question that can be answered through project work; specify required student response components such as a model or design, evidence-based analysis, visual or representational thinking, and a reasoned conclusion; and explain how the solution serves a real, relevant authentic audience positioned to use or evaluate the work."
             },
             "Project": {
               "type": "string",
@@ -190,7 +190,7 @@ window.masterSchema = `
                   "type": "array",
                   "minItems": 3,
                   "maxItems": 4,
-                  "description": "3–4 place-specific sites (no exact addresses).",
+                  "description": "Must include 3 to 5 Place-Based Sites of Engagement, each structured with three labeled components: The Site, describing a meaningful physical, community, virtual, or discipline-specific location relevant to the unit’s context; Engagement, explaining authentic inquiry activities students complete at or with the site such as observation, data collection, interviews, analysis, virtual exploration, or guided field tasks tied to the real-world problem; and Relevance, explaining why the site matters by connecting it to the problem, showing how it provides evidence or expertise, clarifying how it supports solution design or modeling, and highlighting local or community-specific significance; sites must represent varied contexts, include at least one involving community expertise, include at least one involving direct observation or physical context even if virtual, remain subject-neutral, and clearly show how the local community is part of the learning ecosystem.",
                   "items": {
                     "type": "object",
                     "additionalProperties": false,
@@ -216,12 +216,12 @@ window.masterSchema = `
           "additionalProperties": false,
           "required": ["VocabularyRationale", "Tiers"],
           "properties": {
-            "VocabularyRationale": { "type": "string", "description": "Why vocab matters + how tiering supports differentiation." },
+            "VocabularyRationale": { "type": "string", "description": "Provide a short, universal statement explaining that the unit’s vocabulary is intentionally selected to support core understanding, connect learning to real-world application, and reinforce accurate academic communication, and that terms are organized into tiers to prioritize essentials, support differentiation, and strengthen students’ effective use of disciplinary language." },
             "Tiers": {
               "type": "array",
               "minItems": 4,
               "maxItems": 4,
-              "description": "Exactly 4 tiers; titles must be exactly the 4 specified tier titles written in TierTitle.",
+              "description": "Create a Tiered Academic Vocabulary section with four labeled tiers, where each tier title includes the tier name and aligned standards, begins with a brief purpose statement, and lists unit-appropriate vocabulary terms with student-friendly definitions and an optional Standards Connection note; required tiers are Tier 1 Core Concepts Vocabulary for foundational understanding, Tier 2 Applied Knowledge Vocabulary for applying and analyzing concepts, Tier 3 Analytical and Process Vocabulary for describing processes, models, and reasoning, and a Differentiation Enrichment or Extension Tier for advanced or nuanced terms; standards in tier titles must match unit standards, all labels must appear exactly as specified, and vocabulary must prioritize clarity, accurate academic usage, and accessibility for students.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -267,14 +267,14 @@ window.masterSchema = `
                 "properties": {
                   "CriteriaForSuccess": { "type": "string" },
                   "SuccessCriteria": { "type": "string" },
-                  "PointOfDemonstration": { "type": "string", "description": "When and how students demonstrate evidence of learning for this criterion (e.g., during discussion, prototype testing, checkpoint review, or final presentation). Focus on the moment of learning visibility." }
+                  "PointOfDemonstration": { "type": "string", "description": "Formative Assessment Rubric MUST use the exact column headers Criteria for Success (Student Learning Objective), Success Criteria, and Point of Demonstration. Analytic Rubric MUST use the exact column headers Criteria, Novice, Apprentice, Practitioner, and Expert. This schema does not contain content and only provides instructions for how the model must structure the output. Create an Assessment Rubrics section containing two required rubric formats and keep the exact column headers word for word with no substitutions. For the Formative Assessment Rubric, produce a table with exactly three columns labeled Criteria for Success (Student Learning Objective), Success Criteria, and Point of Demonstration, and populate each row with a specific measurable learning objective, its aligned success criteria, and where the evidence will appear such as a task, checkpoint, or performance moment. The number of rows must match the number of learning objectives in the unit, language must be clear and student friendly, and alignment between objective, criteria, and evidence point must be maintained. Keep the column headers exactly as written. The structure example is provided for format only and not for content." }
                 }
               }
             },
             "AnalyticRubric": {
               "type": "array",
               "minItems": 4,
-              "description": "4-level analytic rubric: Novice/Apprentice/Practitioner/Expert.",
+              "description": "The rubric must be produced as a table with exactly the following column headers in this order: Criteria, Novice, Apprentice, Practitioner, and Expert. Each row represents one evaluated skill, competency, or dimension of the final project. The Novice to Expert progression must reflect increasing sophistication and must not use deficit-based language such as fails, lacks, or missing. The Expert column must build on the Practitioner level with deeper insight, precision, or complexity. Keep the column headers exactly as written. The number of rows should match the number of major competencies required by the project. The required output structure example is provided for format only and not for content.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -293,7 +293,7 @@ window.masterSchema = `
 
         "AuthenticAudience": {
           "type": "object",
-          "description": "Defines the real-world audience connected to the project. This audience should be credible, relevant to the problem, and capable of providing meaningful feedback or purpose for student work.",
+          "description": "The rubric must be produced as a table with exactly the following column headers in this order: Criteria, Novice, Apprentice, Practitioner, and Expert. Each row represents one evaluated skill, competency, or dimension of the final project. The Novice to Expert progression must reflect increasing sophistication and must not use deficit-based language such as fails, lacks, or missing. The Expert column must build on the Practitioner level with deeper insight, precision, or complexity. Keep the column headers exactly as written. The number of rows should match the number of major competencies required by the project. The required output structure example is provided for format only and not for content.",
           "additionalProperties": false,
           "required": [
             "PrimaryAudienceDescription",
@@ -324,7 +324,7 @@ window.masterSchema = `
             "GroupSuggestions"
           ],
           "properties": {
-            "LearningPlanOverview": { "type": "string", "description": "High-level overview of how the learning unfolds across the project. Summarize the flow of learning, key phases, and how students build understanding over time (not a day-by-day schedule)." },
+            "LearningPlanOverview": { "type": "string", "description": "The output must include a clear statement of the total number of instructional days based on the value provided by the teacher, a short description of how the project unfolds across phases rather than fixed dates, and a 2–4 sentence summary explaining how learning progresses across the unit. The model must not assume specific day ranges such as Days 1–3 and must instead divide learning into three flexible phases labeled Early Phase, Middle Phase, and Final Phase. The Early Phase must describe building foundational knowledge, introducing core concepts, tools, or skills, conducting exploratory investigations or guided practice, and preparing students for deeper inquiry. The Middle Phase must describe applying core concepts to the central problem, conducting analyses or research, developing drafts, prototypes, models, or design ideas, and gathering and interpreting evidence for the final deliverable. The Final Phase must describe refining the final product, synthesizing learning into clear explanations, preparing visuals, models, arguments, or presentations, and presenting to the authentic audience. The model must not assign a fixed number of days to any phase and must allow any duration provided by the teacher." },
             "ProjectPhases": {
               "type": "array",
               "minItems": 3,
@@ -348,11 +348,11 @@ window.masterSchema = `
                 }
               }
             },
-            "ProjectGoals": { "type": "array", "minItems": 3, "description": "List of 3 or more clear project goals that describe what the project is intended to accomplish for students and the community. Focus on purpose, learning impact, and outcomes (not tasks or activities).", "items": { "type": "string" } },
+            "ProjectGoals": { "type": "array", "minItems": 3, "description": "The output must contain exactly three project goals, each expressed as a conceptual category followed by detailed bullets or short paragraphs. Goal 1, Apply Disciplinary Content to a Real-World Problem, requires students to use discipline-specific knowledge to analyze or solve an authentic challenge, list 4–6 core concepts or principles they will apply, and show how these ideas connect to real-world conditions or constraints. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, requires describing the authentic challenge students must address, listing what students will create, model, compare, analyze, evaluate, or justify, and including processes such as modeling, predicting, comparing, evaluating, and decision-making. Goal 3, Communicate Findings to a Real Audience, requires students to prepare a polished, professional-quality final product, tailor communication to the needs of a real stakeholder group, and reference authentic audiences such as local experts, community organizations, industry professionals, school leadership, families, or community members.", "items": { "type": "string" } },
             "CollaborativeStructuresAndArtifacts": {
               "type": "object",
               "additionalProperties": false,
-              "description": "Structures and routines that support collaboration, shared sensemaking, and documentation of learning throughout the project.",
+              "description": "The output must provide a list describing what the final deliverable will contain, including 5–7 items such as a discipline-accurate analysis tied to core concepts, a model, diagram, or representation of key ideas, an evaluation or assessment based on authentic constraints, a visual or structural representation of the proposed solution or findings, a written or oral justification supported by evidence, and a formal presentation to an authentic audience. These items should mirror the structure of the original example while using subject-neutral language.",
               "required": [
                 "HowGroupsShareAndCompareIdeas",
                 "HowThinkingIsDocumented",
@@ -476,7 +476,7 @@ window.masterSchema = `
           ],
           "properties": {
             "Phase1_Title": { "type": "string", "description": "MUST be exactly: 'Phase 1 – Launch'." },
-            "Phase1_FocusStatement": { "type": "string", "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities." },
+            "Phase1_FocusStatement": { "type": "string", "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit’s Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question." },
             "Phase1_CollaborativeActivities": {
               "type": "array",
               "minItems": 3,
@@ -600,7 +600,7 @@ window.masterSchema = `
             "Phase1_ReflectionPrompt": { "type": "string" },
 
             "Phase2_Title": { "type": "string", "description": "MUST be exactly: 'Phase 2 - Exploration, Investigation, and Development; Refinement'." },
-            "Phase2_FocusStatement": { "type": "string", "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities." },
+            "Phase2_FocusStatement": { "type": "string", "description": "Write a 1–3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit’s Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user." },
             "Phase2_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
             "Phase2_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
             "Phase2_Differentiation_LanguageLearners": { "type": "string" },
@@ -618,7 +618,7 @@ window.masterSchema = `
             "Phase2_ReflectionPrompt": { "type": "string" },
 
             "Phase3_Title": { "type": "string", "description": "MUST be exactly: 'Phase 3 - Development; Refinement, Culmination, and Reflection'." },
-            "Phase3_FocusStatement": { "type": "string", "description": "Concise statement describing the main instructional focus of this phase. Clarifies what students are working toward and what type of thinking or learning is emphasized. Do not list activities." },
+            "Phase3_FocusStatement": { "type": "string", "description": "Generate a 2–4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project’s authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning." },
             "Phase3_CollaborativeActivities": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "object", "additionalProperties": false, "required": ["ActivityTitle", "StudentExperience", "ArtifactsOfLearning", "TeacherRoleMoves"], "properties": { "ActivityTitle": { "type": "string" }, "StudentExperience": { "type": "string" }, "ArtifactsOfLearning": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "TeacherRoleMoves": { "type": "string" } } } },
             "Phase3_GuidingQuestions": { "type": "array", "minItems": 4, "items": { "type": "string" } },
             "Phase3_Differentiation_LanguageLearners": { "type": "string" },
