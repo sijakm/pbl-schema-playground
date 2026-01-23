@@ -1,3 +1,6 @@
+/************************************
+ * TIMER UI
+ ************************************/
 let timerInterval = null;
 let startTime = null;
 
@@ -17,7 +20,7 @@ function startTimer() {
   }, 500);
 }
 
-function stopTimer() {
+function stopTimer(finalMessage) {
   clearInterval(timerInterval);
   timerInterval = null;
 
@@ -26,10 +29,15 @@ function stopTimer() {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
 
-  document.getElementById("status").textContent =
-    `Completed in ${minutes}:${seconds.toString().padStart(2, "0")}`;
+  const status = document.getElementById("status");
+  status.textContent =
+    (finalMessage ? `${finalMessage} ` : "") +
+    `(${minutes}:${seconds.toString().padStart(2, "0")})`;
 }
 
+/************************************
+ * DEFAULT PROMPT
+ ************************************/
 const defaultPrompt = `
 Create a complete Project-Based Learning (PBL) unit plan and project-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
 
@@ -57,9 +65,8 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
 Output rule: Return ONLY JSON that validates against the response schema.
 `;
 
-
 /************************************
- * 3) DESCRIPTION COLLECTION
+ * DESCRIPTION COLLECTION
  ************************************/
 function collectDescriptions(schema, path = [], result = []) {
   if (!schema || typeof schema !== "object") return result;
@@ -73,27 +80,19 @@ function collectDescriptions(schema, path = [], result = []) {
 
   if (schema.properties) {
     for (const key in schema.properties) {
-      collectDescriptions(
-        schema.properties[key],
-        [...path, "properties", key],
-        result
-      );
+      collectDescriptions(schema.properties[key], [...path, "properties", key], result);
     }
   }
 
   if (schema.items) {
-    collectDescriptions(
-      schema.items,
-      [...path, "items"],
-      result
-    );
+    collectDescriptions(schema.items, [...path, "items"], result);
   }
 
   return result;
 }
 
 /************************************
- * 4) RENDER UI FOR DESCRIPTIONS
+ * RENDER UI FOR DESCRIPTIONS
  ************************************/
 function renderDescriptionEditor() {
   const container = document.getElementById("descriptions");
@@ -126,7 +125,7 @@ function renderDescriptionEditor() {
 }
 
 /************************************
- * 5) PATH SETTER
+ * PATH SETTER
  ************************************/
 function setValueAtPath(obj, path, value) {
   let current = obj;
@@ -137,49 +136,128 @@ function setValueAtPath(obj, path, value) {
 }
 
 /************************************
- * 6) RUN OPENAI REQUEST
+ * COPY SCHEMA
+ ************************************/
+function copySchema() {
+  const textarea = document.getElementById("finalSchema");
+  if (!textarea.value) {
+    alert("Schema is empty.");
+    return;
+  }
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+  navigator.clipboard.writeText(textarea.value)
+    .then(() => alert("Schema copied to clipboard ✅"))
+    .catch(() => alert("Failed to copy schema."));
+}
+
+/************************************
+ * STREAMING HELPERS (SSE parsing)
+ ************************************/
+function parseSseLines(buffer) {
+  // SSE payload is lines like:
+  // data: {...}\n
+  // data: {...}\n
+  // \n
+  // We'll return {events, rest}
+  const events = [];
+  const parts = buffer.split("\n");
+  // Keep last partial line as remainder
+  let rest = parts.pop() ?? "";
+
+  for (const line of parts) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    if (!trimmed.startsWith("data:")) continue;
+
+    const data = trimmed.slice(5).trim();
+    if (!data) continue;
+
+    events.push(data);
+  }
+
+  return { events, rest };
+}
+
+/************************************
+ * RUN (STREAM ONLY into #output)
  ************************************/
 let lastEditedSchema = null;
+let parsedMasterSchema = null;
+
+let currentAbortController = null;
+
+function setUiRunning(isRunning) {
+  const runBtn = document.getElementById("runBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  runBtn.disabled = isRunning;
+  cancelBtn.disabled = !isRunning;
+}
+
+function cancelRun() {
+  if (currentAbortController) {
+    currentAbortController.abort();
+  }
+}
 
 async function run() {
+  // Clone schema and apply description edits
   const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
-
-  document
-    .querySelectorAll("#descriptions textarea")
-    .forEach(textarea => {
-      const path = JSON.parse(textarea.dataset.path);
-      setValueAtPath(schema, path, textarea.value.trim());
-    });
-
+  document.querySelectorAll("#descriptions textarea").forEach(textarea => {
+    const path = JSON.parse(textarea.dataset.path);
+    setValueAtPath(schema, path, textarea.value.trim());
+  });
   lastEditedSchema = schema;
 
-// Prikaži finalnu schema-u u UI
-const finalSchemaTextarea = document.getElementById("finalSchema");
-finalSchemaTextarea.value = JSON.stringify(schema, null, 2);
+  // Show final schema in UI
+  document.getElementById("finalSchema").value = JSON.stringify(schema, null, 2);
 
   const apiKey = document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
 
-  output.value = "Running...";
+  output.value = "";
   startTimer();
+  setUiRunning(true);
 
   if (!apiKey) {
     output.value = "API key is required.";
-    stopTimer();
+    stopTimer("Stopped");
+    setUiRunning(false);
     return;
   }
 
+  // Abort support
+  currentAbortController = new AbortController();
+  const { signal } = currentAbortController;
+
+  // Simple “stuck detector”: if no deltas for 20s, print a marker.
+  let lastDeltaAt = Date.now();
+  const stuckInterval = setInterval(() => {
+    const diff = Date.now() - lastDeltaAt;
+    if (diff > 20000) {
+      output.value += `\n\n[⚠️ No streamed output for ${(diff/1000).toFixed(0)}s — request may be stuck or the model is thinking]\n`;
+      output.scrollTop = output.scrollHeight;
+      lastDeltaAt = Date.now(); // avoid spamming
+    }
+  }, 4000);
+
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    // ✅ Responses API streaming (recommended) :contentReference[oaicite:2]{index=2}
+    const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`
       },
+      signal,
       body: JSON.stringify({
         model: "gpt-5-mini",
-        messages: [{ role: "user", content: prompt }],
+        stream: true,
+        input: [
+          { role: "user", content: prompt }
+        ],
+        // Structured Outputs via json_schema :contentReference[oaicite:3]{index=3}
         response_format: {
           type: "json_schema",
           json_schema: {
@@ -191,54 +269,106 @@ finalSchemaTextarea.value = JSON.stringify(schema, null, 2);
       })
     });
 
-    const data = await response.json();
-    const content = data?.choices?.[0]?.message?.content;
-
-    if (!content) {
-      output.value = "No content returned.\n\n" + JSON.stringify(data, null, 2);
-      stopTimer();
+    if (!response.ok) {
+      const errText = await response.text().catch(() => "");
+      output.value =
+        `HTTP ${response.status} ${response.statusText}\n\n` +
+        (errText || "(no body)");
+      stopTimer("Error");
       return;
     }
 
-    try {
-      const parsed = JSON.parse(content);
-      output.value = JSON.stringify(parsed, null, 2);
-      stopTimer();
-    } catch {
-      output.value = content;
+    if (!response.body) {
+      output.value = "No response body (stream not available in this environment).";
+      stopTimer("Error");
+      return;
     }
 
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    let buffer = "";
+    let finalText = "";
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      const { events, rest } = parseSseLines(buffer);
+      buffer = rest;
+
+      for (const raw of events) {
+        // Some servers emit [DONE]; Responses API mostly emits typed events, but handle both.
+        if (raw === "[DONE]") {
+          break;
+        }
+
+        let evt;
+        try {
+          evt = JSON.parse(raw);
+        } catch {
+          continue;
+        }
+
+        // Primary: text deltas :contentReference[oaicite:4]{index=4}
+        if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+          lastDeltaAt = Date.now();
+
+          output.value += evt.delta;
+          finalText += evt.delta;
+
+          output.scrollTop = output.scrollHeight;
+          continue;
+        }
+
+        // Optional: show refusals inline (so you see why it stopped)
+        if (evt.type === "response.refusal.delta" && typeof evt.delta === "string") {
+          lastDeltaAt = Date.now();
+          output.value += evt.delta;
+          output.scrollTop = output.scrollHeight;
+          continue;
+        }
+
+        // Optional: show terminal errors as text
+        if (evt.type === "error") {
+          lastDeltaAt = Date.now();
+          output.value += `\n\n[ERROR]\n${JSON.stringify(evt, null, 2)}\n`;
+          output.scrollTop = output.scrollHeight;
+          continue;
+        }
+      }
+    }
+
+    // Try parse + pretty-print at end (keeps “stream-only” feel, but fixes readability)
+    // If parsing fails, you still have the raw partial output which is exactly what you want for debugging.
+    try {
+      const parsed = JSON.parse(finalText);
+      output.value = JSON.stringify(parsed, null, 2);
+    } catch {
+      output.value += "\n\n[⚠️ Could not parse JSON at end — leaving raw streamed output as-is.]\n";
+    }
+
+    stopTimer("Completed");
   } catch (err) {
-    output.value = err.message;
+    if (err?.name === "AbortError") {
+      output.value += "\n\n[Cancelled]\n";
+      stopTimer("Cancelled");
+    } else {
+      output.value += `\n\n[Fetch error]\n${err?.message || String(err)}\n`;
+      stopTimer("Error");
+    }
+  } finally {
+    clearInterval(stuckInterval);
+    currentAbortController = null;
+    setUiRunning(false);
   }
 }
-
-function copySchema() {
-  const textarea = document.getElementById("finalSchema");
-
-  if (!textarea.value) {
-    alert("Schema is empty.");
-    return;
-  }
-
-  textarea.select();
-  textarea.setSelectionRange(0, textarea.value.length);
-
-  navigator.clipboard.writeText(textarea.value)
-    .then(() => {
-      alert("Schema copied to clipboard ✅");
-    })
-    .catch(() => {
-      alert("Failed to copy schema.");
-    });
-}
-
 
 /************************************
- * 7) INIT
+ * INIT
  ************************************/
-let parsedMasterSchema = null;
-
 window.onload = () => {
   if (!window.masterSchema) {
     console.error("❌ masterSchema is not loaded");
