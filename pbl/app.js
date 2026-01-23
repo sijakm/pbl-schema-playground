@@ -184,27 +184,16 @@ function setValueAtPath(obj, path, value) {
  * COPY SCHEMA
  ************************************/
 function copySchema() {
-  if (!lastEditedSchema) {
+  const textarea = document.getElementById("finalSchema");
+  if (!textarea.value) {
     alert("Schema is empty.");
     return;
   }
-
-  try {
-    // Canonical JSON: one-liner, stable, no formatting noise
-    const canonicalJson = JSON.stringify(lastEditedSchema);
-
-    navigator.clipboard.writeText(canonicalJson)
-      .then(() => {
-        alert("Schema copied (canonical JSON) ✅");
-      })
-      .catch(() => {
-        alert("Failed to copy schema.");
-      });
-
-  } catch (err) {
-    console.error("❌ Failed to serialize schema", err);
-    alert("Schema could not be copied due to an internal error.");
-  }
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+  navigator.clipboard.writeText(textarea.value)
+    .then(() => alert("Schema copied to clipboard ✅"))
+    .catch(() => alert("Failed to copy schema."));
 }
 
 
