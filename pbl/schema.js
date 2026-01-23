@@ -201,7 +201,7 @@ window.masterSchema = `
                   "items": {
                     "type": "string"
                   },
-                  "description": "Each objective ends with '(DOK X)'.(Facts / Core content knowledge)\nCleo must generate 3–5 discipline-specific facts, terms, or foundational pieces of knowledge that:\n\nrepresent the essential information students must remember,\n\nare concrete and factual (not conceptual),\n\nsupport the unit’s standards and performance tasks,\n\nuse clear academic vocabulary appropriate to the subject,\n\ninclude a DOK label (typically DOK 1–2).\n\nThese statements must complete the stem:\n“Students will know that…” and start with a verb"
+                  "description": "Each objective ends with '(DOK X)'. (Facts / Core content knowledge)\nCleo must generate 3–5 discipline-specific facts, terms, or foundational pieces of knowledge that:\n\nrepresent the essential information students must remember,\n\nare concrete and factual (not conceptual),\n\nsupport the unit’s standards and performance tasks,\n\nuse clear academic vocabulary appropriate to the subject,\n\ninclude a DOK label (typically DOK 1–2).\n\nThese statements must complete the stem Students will know that and start with a verb."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
@@ -209,7 +209,7 @@ window.masterSchema = `
                   "items": {
                     "type": "string"
                   },
-                  "description": "Each objective ends with '(DOK X)'. (Skills / Practices aligned to the discipline)\nCleo must generate 4–7 skills-based statements that describe what students will do, such as:\n\nanalyze, compare, design, model, solve, justify, create, interpret, investigate, or communicate,\n\nalign with discipline-specific practices (e.g., science & engineering practices, mathematical practices, literacy practices, artistic processes),\n\nconnect directly to the project deliverable or performance task,\n\nare measurable and observable,\n\neach labeled with the appropriate DOK level (DOK 2–4).\n\nThese statements must complete the stem:\n“Students will be able to…” and start with a verb."
+                  "description": "Each objective ends with '(DOK X)'. (Skills / Practices aligned to the discipline)\nCleo must generate 4–7 skills-based statements that describe what students will do, such as:\n\nanalyze, compare, design, model, solve, justify, create, interpret, investigate, or communicate,\n\nalign with discipline-specific practices,\n\nconnect directly to the project deliverable or performance task,\n\nare measurable and observable,\n\neach labeled with the appropriate DOK level (DOK 2–4).\n\nThese statements must complete the stem Students will be able to and start with a verb."
                 }
               }
             }
