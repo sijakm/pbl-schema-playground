@@ -1585,5 +1585,4 @@ window.masterSchema = `
     }
   }
 }
-
 `;
