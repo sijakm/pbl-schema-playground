@@ -34,38 +34,50 @@ function stopTimer(label = "Completed") {
 }
 
 const defaultPrompt = `
-Create a complete Inquiry-Based Unit Plan and inquiry-driven lessons using ONLY the information provided below.  
-Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
+Create unit plan and inquiry lessons using info below:
 
-Inquiry planning requirements (must be reflected in the unit):
-• Inquiry coherence: The unit must follow an inquiry arc (questioning → investigation → sensemaking → reflection). Students should generate questions, gather evidence, analyze findings, and construct explanations rather than receive direct instruction.
-• Cognitive science alignment: Design learning to support attention, working memory, retrieval practice, transfer, and long-term retention. Include spaced retrieval across lessons, interleaving of skills, and opportunities for reflection and application.
-• Student-centered facilitation: Teacher actions should position the teacher as a facilitator and coach. Knowledge must emerge through student investigation, discussion, modeling, and evidence-based reasoning.
-• Cultural relevance & inclusion: Incorporate multiple perspectives and real-world relevance that connects to students’ lives and communities. Avoid stereotypes and ensure inclusive representation.
-
-Use these unit inputs exactly:
 Unit Subject: Earth & Space Science (Gravity & Orbits)
-Unit Name: “Gravity at Work: Modeling Motion in Our Solar System”
-Unit Description / Teacher Request: Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.
+Unit Name: Gravity at Work: Modeling Motion in Our Solar System
+Unit Description/Instruction: Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.
+Number of Lessons Plans to create: 1
 Grade Level: The student is in the 1st grade of middle school, which consists of 4 grades total.
-Duration of class period (minutes): 45
-Number of Lessons: 1
-Resources / Media to use: Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple browser-based orbit simulations, chart paper, student science notebooks.
-Unit Content / Attached Unit Text: No attached unit text provided.
-Standards (use verbatim if present): MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.
+Duration of class period in minutes: 45
+Resources/Media to use: Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple browser-based orbit simulations, chart paper, student science notebooks.
+Unit Content: No attached unit text provided.
+
+Standards (use verbatim if present):
+MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.
+
 Students with learning plans (use verbatim; if none, treat as empty):
 Student Name: Maria Valdez
 Plan: Provide a partially pre-labeled orbit map and sentence frames for explanations.
+
 Student Name: Jacob Garrow
 Plan: Allow speech-to-text for reasoning and labeling.
+
 Student Name: Ava Lund
 Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.
 
-Design requirements (follow exactly):
-1. Ensure every required field in the response schema is fully populated.
-2. Include inquiry phases, formative assessment, student practice, reflection, and spaced retrieval exactly as defined by the schema.
-3. Differentiate instruction without lowering rigor; place access supports only in accommodations/modifications.
-4. If student learning plans are provided, include exactly those students in the Individualized Supports section (no more, no less). If none are provided, return an empty array.
+You are tasked with designing a detailed inquiry-style unit and lesson plans using cognitive science principles. 
+
+Global Output Rules (apply to everything)
+
+1. Follow the exact section order and headings shown below.
+2. Do not add extra sections or rename headings.
+3. Use clear teacher-facing prose and student-facing directions where specified.
+4. Include specific examples, scripts, and expected answers (not placeholders like "e.g.").
+5. Before introducing any new concept or content, include an Attention Reset activity designed to re-engage students, increase cognitive focus, and prepare working memory for new learning.
+   * movement-based, sensory, or novelty-driven
+   * take 20–45 seconds
+   * require minimal materials
+   * directly connect to the lesson’s core idea and smoothly transition students into the upcoming content.
+   * Language to use: Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (same language here for every attention reset & interactivity)
+6. Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to apply a skill.
+7. Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving.
+8. Cultural Relevance & Inclusion:
+   a. Incorporate multiple perspectives and reflect on the impacts for all involved.
+   b. Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons.
+   c. Avoid stereotypes.
 
 Output rule:
 Return ONLY JSON that validates against the response schema.
