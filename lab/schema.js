@@ -2,7 +2,6 @@ window.masterSchema = `
 {
  "title": "LabUnitPlanResponse",
  "type": "object",
- "description": "Generate a complete lab-based unit plan and lesson plans using the provided unit inputs (subject, unit name, grade level, class duration, resources/media, and any attached unit content). The output MUST strictly follow this JSON schema: do not omit required fields, do not add extra fields, and do not change field names. All narrative text must be teacher-ready, specific, and free of placeholders like 'e.g.' or 'TBD'. Apply cognitive science principles throughout: include an Attention Reset & Interactive Activity before introducing any new concept or phase, embed spaced retrieval across the unit with expanding intervals, mix/interleave skills and strategies where practice occurs, and consistently build transfer to real-world contexts. Ensure cultural relevance and inclusion by incorporating multiple perspectives, connecting to varied communities, and avoiding stereotypes.",
  "properties": {
   "UnitTitle": {
    "type": "string",
@@ -10,882 +9,312 @@ window.masterSchema = `
   },
   "UnitDescription": {
    "type": "string",
-   "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that could be spoken directly to students. It must include a curiosity hook, learning goals, thinking skills, real-world relevance, and why the learning matters long-term."
+   "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
   },
   "EssentialQuestions": {
    "type": "array",
+   "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
    "minItems": 3,
    "maxItems": 3,
-   "description": "Three broad, universal, open-ended questions focused on big ideas like change, evidence, systems, or reasoning. Questions must be transferable across disciplines and not reference subject-specific content.",
    "items": {
     "type": "string"
    }
   },
   "StudentLearningObjectives": {
    "type": "array",
-   "description": "Clear, measurable unit-level learning objectives written in student-friendly language. Each objective must begin with a measurable verb and end with a DOK level in parentheses.",
    "items": {
-    "type": "string"
+    "type": "string",
+    "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses"
    }
   },
   "StandardsAligned": {
    "type": "array",
-   "description": "All unique NGSS standards used anywhere in this unit or its lessons. Only include standards that appear in lesson content.",
+   "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content.",
    "items": {
     "type": "string"
    }
   },
   "Lessons": {
    "type": "array",
+   "description": "All lessons in this unit in chronological order.",
    "minItems": 1,
-   "maxItems": 30,
-   "description": "Chronological list of all lab lessons in the unit. Each lesson is a complete investigation following the cycle: Question, Research, Hypothesize, Experiment, Analyze, Share, plus review, formative assessment, and student practice.",
    "items": {
     "type": "object",
-    "description": "One complete lab lesson plan. This object is fully defined inline in later sections of the schema.",
-    "properties": {},
+    "properties": {
+     "LessonNumber": {
+      "type": "integer",
+      "description": "Sequential lesson number within the unit (1–based index). Lesson 1 MUST be the first, Lesson 2 the second, and so on."
+     },
+     "LessonTitle": {
+      "type": "string",
+      "description": "Short descriptive title for the lesson that clearly reflects the focus concept (e.g., 'Exploring Our Solar System'). Do NOT include emojis here; emojis are handled by the renderer."
+     },
+     "EssentialQuestions": {
+      "type": "array",
+      "description": "Just paste all the essential questions that are generated in unit level in same order.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "KeyVocabulary": {
+      "type": "array",
+      "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "StudentLearningObjectives": {
+      "type": "array",
+      "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+       "type": "string"
+      }
+     },
+     "StandardsAligned": {
+      "type": "string",
+      "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'"
+     },
+     "AssessPriorKnowledge": {
+      "type": "string",
+      "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
+     },
+     "Question": {
+      "type": "object",
+      "properties": {
+       "Purpose": {
+        "type": "string"
+       },
+       "Materials": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "InstructionsForTeachers": {
+        "type": "string"
+       },
+       "ExpectedStudentResponses": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "FinalInvestigationQuestion": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "Purpose",
+       "Materials",
+       "InstructionsForTeachers",
+       "ExpectedStudentResponses",
+       "FinalInvestigationQuestion"
+      ],
+      "additionalProperties": false
+     },
+     "Research": {
+      "type": "object",
+      "properties": {
+       "Purpose": {
+        "type": "string"
+       },
+       "Materials": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "InstructionsForTeachers": {
+        "type": "string"
+       },
+       "AnticipatedMisconceptions": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "Misconception": {
+           "type": "string"
+          },
+          "TeacherResponse": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "Misconception",
+          "TeacherResponse"
+         ],
+         "additionalProperties": false
+        }
+       }
+      },
+      "required": [
+       "Purpose",
+       "Materials",
+       "InstructionsForTeachers",
+       "AnticipatedMisconceptions"
+      ],
+      "additionalProperties": false
+     },
+     "Hypothesize": {
+      "type": "object",
+      "properties": {
+       "Purpose": {
+        "type": "string"
+       },
+       "Materials": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "InstructionsForTeachers": {
+        "type": "string"
+       },
+       "ExpectedStudentResponses": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       }
+      },
+      "required": [
+       "Purpose",
+       "Materials",
+       "InstructionsForTeachers",
+       "ExpectedStudentResponses"
+      ],
+      "additionalProperties": false
+     },
+     "Experiment": {
+      "type": "object",
+      "properties": {
+       "Purpose": {
+        "type": "string"
+       },
+       "Materials": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "InstructionsForTeachers": {
+        "type": "string"
+       },
+       "Differentiation": {
+        "type": "string"
+       },
+       "AccommodationsAndModifications": {
+        "type": "string"
+       },
+       "QuickCheck": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "Purpose",
+       "Materials",
+       "InstructionsForTeachers",
+       "Differentiation",
+       "AccommodationsAndModifications",
+       "QuickCheck"
+      ],
+      "additionalProperties": false
+     },
+     "Analyze": {
+      "type": "object",
+      "properties": {
+       "Purpose": {
+        "type": "string"
+       },
+       "Materials": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "InstructionsForTeachers": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "Purpose",
+       "Materials",
+       "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+     },
+     "Share": {
+      "type": "object",
+      "properties": {
+       "Purpose": {
+        "type": "string"
+       },
+       "Materials": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "InstructionsForTeachers": {
+        "type": "string"
+       },
+       "TranscendentThinking": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "Purpose",
+       "Materials",
+       "InstructionsForTeachers",
+       "TranscendentThinking"
+      ],
+      "additionalProperties": false
+     },
+     "ReviewAndSpacedRetrieval": {
+      "type": "string",
+      "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text."
+     },
+     "FormativeAssessment": {
+      "type": "string",
+      "description": "Full 'Formative Assessment' section as plain text. Must follow this structure: A teacher-facing introduction paragraph briefly stating purpose and how to implement. 4 required question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', etc. covering DOK levels 1-4. For each prompt: - Question that tests understanding at stated DOK level - Header 'Expected Student Responses' (without checkmarks/emojis) - 1-2 complete sentence responses showing mastery End with short paragraph naming specific formative assessment strategy to use (e.g.,'Exit Ticket','Think-Pair-Share'). Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit instead of flying off into space?' Expected Student Responses 'Because their forward motion and the Sun's gravity work together to create a stable orbit.' [Continue with Prompts 2-4 following same structure]"
+     },
+     "StudentPractice": {
+      "type": "string",
+      "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] ✅Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] ✅Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] ✅Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'"
+     }
+    },
+    "required": [
+     "LessonNumber",
+     "LessonTitle",
+     "EssentialQuestions",
+     "KeyVocabulary",
+     "StudentLearningObjectives",
+     "StandardsAligned",
+     "AssessPriorKnowledge",
+     "Question",
+     "Research",
+     "Hypothesize",
+     "Experiment",
+     "Analyze",
+     "Share",
+     "ReviewAndSpacedRetrieval",
+     "FormativeAssessment",
+     "StudentPractice"
+    ],
     "additionalProperties": false
    }
   }
  },
  "required": [
-  "LessonNumber",
-  "LessonTitle",
+  "UnitTitle",
+  "UnitDescription",
   "EssentialQuestions",
-  "KeyVocabulary",
   "StudentLearningObjectives",
   "StandardsAligned",
-  "AssessPriorKnowledge",
-  "LessonMaterials",
-  "PlannedTotalMinutes",
-  "Question",
-  "Research",
-  "Hypothesize",
-  "Experiment",
-  "Analyze",
-  "Share",
-  "ReviewAndSpacedRetrieval",
-  "FormativeAssessment",
-  "StudentPractice"
+  "Lessons"
  ],
- "additionalProperties": false,
- "LessonNumber": {
-  "type": "integer",
-  "description": "Sequential lesson number within the unit (1-based index). Lesson numbers must increase by 1 for each lesson."
- },
- "LessonTitle": {
-  "type": "string",
-  "description": "Short, descriptive title that clearly reflects the focus of the lesson."
- },
- "EssentialQuestions": {
-  "type": "array",
-  "description": "The same three unit-level essential questions, pasted in the same order for reference during the lesson.",
-  "items": {
-   "type": "string"
-  }
- },
- "KeyVocabulary": {
-  "type": "array",
-  "description": "Key vocabulary terms used in this lesson. Each entry must include the term and a short, student-friendly definition separated by a hyphen.",
-  "items": {
-   "type": "string"
-  }
- },
- "StudentLearningObjectives": {
-  "type": "array",
-  "minItems": 2,
-  "maxItems": 3,
-  "description": "Lesson-specific learning objectives. Each objective must begin with a measurable verb and end with a DOK level in parentheses.",
-  "items": {
-   "type": "string"
-  }
- },
- "StandardsAligned": {
-  "type": "string",
-  "description": "NGSS standard(s) addressed in this lesson, including both the standard code and full description."
- },
- "AssessPriorKnowledge": {
-  "type": "string",
-  "description": "Assess Prior Knowledge section. ONLY Lesson 1 includes a fully written section. All other lessons must return an empty string."
- },
- "LessonMaterials": {
-  "type": "array",
-  "description": "Complete list of all unique materials needed for this lesson across all phases. Do not duplicate items.",
-  "items": {
-   "type": "string"
-  }
- },
- "PlannedTotalMinutes": {
-  "type": "integer",
-  "minimum": 1,
-  "description": "Total planned instructional minutes for the lesson, excluding attention reset seconds."
- },
- "Question": {
-  "type": "object",
-  "description": "Lab phase: Question. Students observe a phenomenon and generate the guiding investigation question.",
-  "properties": {
-   "AttentionResetAndInteractiveActivity": {
-    "type": "object",
-    "properties": {
-     "DurationSeconds": {
-      "type": "integer",
-      "minimum": 20,
-      "maximum": 45
-     },
-     "Materials": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     },
-     "TeacherDirections": {
-      "type": "string"
-     },
-     "ConnectionToUpcomingContent": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "DurationSeconds",
-     "Materials",
-     "TeacherDirections",
-     "ConnectionToUpcomingContent"
-    ],
-    "additionalProperties": false
-   },
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 1
-   },
-   "Purpose": {
-    "type": "string"
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "TeacherScript": {
-    "type": "string"
-   },
-   "ExpectedStudentWonderings": {
-    "type": "array",
-    "minItems": 3,
-    "maxItems": 8,
-    "items": {
-     "type": "string"
-    }
-   },
-   "FinalInvestigationQuestion": {
-    "type": "string"
-   }
-  },
-  "required": [
-   "AttentionResetAndInteractiveActivity",
-   "TimeMinutes",
-   "Purpose",
-   "Materials",
-   "TeacherScript",
-   "ExpectedStudentWonderings",
-   "FinalInvestigationQuestion"
-  ],
-  "additionalProperties": false
- },
- "Research": {
-  "type": "object",
-  "description": "Lab phase: Research. Students gather background knowledge and evidence.",
-  "properties": {
-   "AttentionResetAndInteractiveActivity": {
-    "type": "object",
-    "properties": {
-     "DurationSeconds": {
-      "type": "integer",
-      "minimum": 20,
-      "maximum": 45
-     },
-     "Materials": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     },
-     "TeacherDirections": {
-      "type": "string"
-     },
-     "ConnectionToUpcomingContent": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "DurationSeconds",
-     "Materials",
-     "TeacherDirections",
-     "ConnectionToUpcomingContent"
-    ],
-    "additionalProperties": false
-   },
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 1
-   },
-   "Purpose": {
-    "type": "string"
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "TeacherScript": {
-    "type": "string"
-   },
-   "AnticipatedMisconceptions": {
-    "type": "array",
-    "minItems": 2,
-    "items": {
-     "type": "object",
-     "properties": {
-      "Misconception": {
-       "type": "string"
-      },
-      "TeacherResponseScript": {
-       "type": "string"
-      }
-     },
-     "required": [
-      "Misconception",
-      "TeacherResponseScript"
-     ],
-     "additionalProperties": false
-    }
-   }
-  },
-  "required": [
-   "AttentionResetAndInteractiveActivity",
-   "TimeMinutes",
-   "Purpose",
-   "Materials",
-   "TeacherScript",
-   "AnticipatedMisconceptions"
-  ],
-  "additionalProperties": false
- },
- "Hypothesize": {
-  "type": "object",
-  "description": "Lab phase: Hypothesize. Students generate a testable prediction.",
-  "properties": {
-   "AttentionResetAndInteractiveActivity": {
-    "type": "object",
-    "properties": {
-     "DurationSeconds": {
-      "type": "integer",
-      "minimum": 20,
-      "maximum": 45
-     },
-     "Materials": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     },
-     "TeacherDirections": {
-      "type": "string"
-     },
-     "ConnectionToUpcomingContent": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "DurationSeconds",
-     "Materials",
-     "TeacherDirections",
-     "ConnectionToUpcomingContent"
-    ],
-    "additionalProperties": false
-   },
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 1
-   },
-   "Purpose": {
-    "type": "string"
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "SentenceStarters": {
-    "type": "array",
-    "minItems": 3,
-    "maxItems": 5,
-    "items": {
-     "type": "string"
-    }
-   },
-   "TeacherSteps": {
-    "type": "string"
-   },
-   "ExpectedStudentHypotheses": {
-    "type": "array",
-    "minItems": 3,
-    "maxItems": 6,
-    "items": {
-     "type": "string"
-    }
-   }
-  },
-  "required": [
-   "AttentionResetAndInteractiveActivity",
-   "TimeMinutes",
-   "Purpose",
-   "Materials",
-   "SentenceStarters",
-   "TeacherSteps",
-   "ExpectedStudentHypotheses"
-  ],
-  "additionalProperties": false
- },
- "Experiment": {
-  "type": "object",
-  "description": "Lab phase: Experiment. Students conduct the investigation and collect data.",
-  "properties": {
-   "AttentionResetAndInteractiveActivity": {
-    "type": "object",
-    "properties": {
-     "DurationSeconds": {
-      "type": "integer",
-      "minimum": 20,
-      "maximum": 45
-     },
-     "Materials": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     },
-     "TeacherDirections": {
-      "type": "string"
-     },
-     "ConnectionToUpcomingContent": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "DurationSeconds",
-     "Materials",
-     "TeacherDirections",
-     "ConnectionToUpcomingContent"
-    ],
-    "additionalProperties": false
-   },
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 5
-   },
-   "Purpose": {
-    "type": "string"
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "GroupRoles": {
-    "type": "array",
-    "items": {
-     "type": "object",
-     "properties": {
-      "RoleName": {
-       "type": "string"
-      },
-      "Responsibilities": {
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
-      }
-     },
-     "required": [
-      "RoleName",
-      "Responsibilities"
-     ],
-     "additionalProperties": false
-    }
-   },
-   "DataTableColumns": {
-    "type": "array",
-    "minItems": 3,
-    "items": {
-     "type": "string"
-    }
-   },
-   "ProcedureSteps": {
-    "type": "array",
-    "minItems": 5,
-    "items": {
-     "type": "object",
-     "properties": {
-      "StepNumber": {
-       "type": "integer",
-       "minimum": 1
-      },
-      "TeacherScript": {
-       "type": "string"
-      },
-      "StudentAction": {
-       "type": "string"
-      },
-      "WhatToObserveOrMeasure": {
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
-      }
-     },
-     "required": [
-      "StepNumber",
-      "TeacherScript",
-      "StudentAction",
-      "WhatToObserveOrMeasure"
-     ],
-     "additionalProperties": false
-    }
-   }
-  },
-  "required": [
-   "AttentionResetAndInteractiveActivity",
-   "TimeMinutes",
-   "Purpose",
-   "Materials",
-   "GroupRoles",
-   "DataTableColumns",
-   "ProcedureSteps"
-  ],
-  "additionalProperties": false
- },
- "Analyze": {
-  "type": "object",
-  "description": "Lab phase: Analyze. Students interpret data and draw conclusions.",
-  "properties": {
-   "AttentionResetAndInteractiveActivity": {
-    "type": "object",
-    "properties": {
-     "DurationSeconds": {
-      "type": "integer",
-      "minimum": 20,
-      "maximum": 45
-     },
-     "Materials": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     },
-     "TeacherDirections": {
-      "type": "string"
-     },
-     "ConnectionToUpcomingContent": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "DurationSeconds",
-     "Materials",
-     "TeacherDirections",
-     "ConnectionToUpcomingContent"
-    ],
-    "additionalProperties": false
-   },
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 3
-   },
-   "Purpose": {
-    "type": "string"
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "TeacherModelExample": {
-    "type": "string"
-   },
-   "StudentAnalysisTask": {
-    "type": "string"
-   },
-   "SentenceStarters": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "ExamplesOfHighQualityStudentAnalysis": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   }
-  },
-  "required": [
-   "AttentionResetAndInteractiveActivity",
-   "TimeMinutes",
-   "Purpose",
-   "Materials",
-   "TeacherModelExample",
-   "StudentAnalysisTask",
-   "SentenceStarters",
-   "ExamplesOfHighQualityStudentAnalysis"
-  ],
-  "additionalProperties": false
- },
- "Share": {
-  "type": "object",
-  "description": "Lab phase: Share. Students communicate findings.",
-  "properties": {
-   "AttentionResetAndInteractiveActivity": {
-    "type": "object",
-    "properties": {
-     "DurationSeconds": {
-      "type": "integer",
-      "minimum": 20,
-      "maximum": 45
-     },
-     "Materials": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     },
-     "TeacherDirections": {
-      "type": "string"
-     },
-     "ConnectionToUpcomingContent": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "DurationSeconds",
-     "Materials",
-     "TeacherDirections",
-     "ConnectionToUpcomingContent"
-    ],
-    "additionalProperties": false
-   },
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 3
-   },
-   "Purpose": {
-    "type": "string"
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "TeacherDirections": {
-    "type": "string"
-   },
-   "ShareOutStructure": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   }
-  },
-  "required": [
-   "AttentionResetAndInteractiveActivity",
-   "TimeMinutes",
-   "Purpose",
-   "Materials",
-   "TeacherDirections",
-   "ShareOutStructure"
-  ],
-  "additionalProperties": false
- },
- "ReviewAndSpacedRetrieval": {
-  "type": "object",
-  "description": "End-of-lesson review that consolidates learning and includes spaced retrieval.",
-  "properties": {
-   "TimeMinutes": {
-    "type": "integer",
-    "minimum": 3
-   },
-   "Materials": {
-    "type": "array",
-    "items": {
-     "type": "string"
-    }
-   },
-   "TeacherNotes": {
-    "type": "string"
-   },
-   "ActiveRecall": {
-    "type": "object",
-    "properties": {
-     "TeacherPrompt": {
-      "type": "string"
-     },
-     "ExpectedStudentResponses": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     }
-    },
-    "required": [
-     "TeacherPrompt",
-     "ExpectedStudentResponses"
-    ],
-    "additionalProperties": false
-   },
-   "CorrectCommonMisconceptions": {
-    "type": "array",
-    "minItems": 1,
-    "items": {
-     "type": "object",
-     "properties": {
-      "Misconception": {
-       "type": "string"
-      },
-      "TeacherResponseScript": {
-       "type": "string"
-      }
-     },
-     "required": [
-      "Misconception",
-      "TeacherResponseScript"
-     ],
-     "additionalProperties": false
-    }
-   },
-   "EssentialQuestionConnection": {
-    "type": "object",
-    "properties": {
-     "TeacherPrompt": {
-      "type": "string"
-     },
-     "ExpectedStudentResponses": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     }
-    },
-    "required": [
-     "TeacherPrompt",
-     "ExpectedStudentResponses"
-    ],
-    "additionalProperties": false
-   },
-   "TranscendentThinking": {
-    "type": "object",
-    "properties": {
-     "TeacherPrompt": {
-      "type": "string"
-     },
-     "ExpectedStudentResponses": {
-      "type": "array",
-      "items": {
-       "type": "string"
-      }
-     }
-    },
-    "required": [
-     "TeacherPrompt",
-     "ExpectedStudentResponses"
-    ],
-    "additionalProperties": false
-   },
-   "SpacedRetrievalTasks": {
-    "type": "array",
-    "minItems": 1,
-    "items": {
-     "type": "object",
-     "properties": {
-      "ScheduledLessonNumber": {
-       "type": "integer",
-       "minimum": 1
-      },
-      "ConceptTag": {
-       "type": "string"
-      },
-      "DrawsFromLessons": {
-       "type": "array",
-       "items": {
-        "type": "integer",
-        "minimum": 1
-       }
-      },
-      "DOKLevel": {
-       "type": "integer",
-       "enum": [
-        2,
-        3,
-        4
-       ]
-      },
-      "ActiveRecallFormat": {
-       "type": "string"
-      },
-      "Prompt": {
-       "type": "string"
-      },
-      "ExpectedStudentResponse": {
-       "type": "string"
-      },
-      "SuccessCriteria": {
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
-      }
-     },
-     "required": [
-      "ScheduledLessonNumber",
-      "ConceptTag",
-      "DrawsFromLessons",
-      "DOKLevel",
-      "ActiveRecallFormat",
-      "Prompt",
-      "ExpectedStudentResponse",
-      "SuccessCriteria"
-     ],
-     "additionalProperties": false
-    }
-   }
-  },
-  "required": [
-   "TimeMinutes",
-   "Materials",
-   "TeacherNotes",
-   "ActiveRecall",
-   "CorrectCommonMisconceptions",
-   "EssentialQuestionConnection",
-   "TranscendentThinking",
-   "SpacedRetrievalTasks"
-  ],
-  "additionalProperties": false
- },
- "FormativeAssessment": {
-  "type": "object",
-  "properties": {
-   "TeacherImplementationNotes": {
-    "type": "string"
-   },
-   "Prompts": {
-    "type": "array",
-    "minItems": 4,
-    "maxItems": 4,
-    "items": {
-     "type": "object",
-     "properties": {
-      "DOKLevel": {
-       "type": "integer",
-       "enum": [
-        1,
-        2,
-        3,
-        4
-       ]
-      },
-      "Prompt": {
-       "type": "string"
-      },
-      "ExpectedStudentResponses": {
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
-      }
-     },
-     "required": [
-      "DOKLevel",
-      "Prompt",
-      "ExpectedStudentResponses"
-     ],
-     "additionalProperties": false
-    }
-   },
-   "RecommendedStrategy": {
-    "type": "string"
-   }
-  },
-  "required": [
-   "TeacherImplementationNotes",
-   "Prompts",
-   "RecommendedStrategy"
-  ],
-  "additionalProperties": false
- },
- "StudentPractice": {
-  "type": "object",
-  "properties": {
-   "TeacherNotes": {
-    "type": "string"
-   },
-   "Tasks": {
-    "type": "array",
-    "minItems": 2,
-    "items": {
-     "type": "object",
-     "properties": {
-      "DOKLevel": {
-       "type": "integer",
-       "enum": [
-        2,
-        3,
-        4
-       ]
-      },
-      "StudentDirections": {
-       "type": "string"
-      },
-      "RealWorldConnection": {
-       "type": "string"
-      },
-      "TeacherNotes": {
-       "type": "string"
-      },
-      "ExpectedAnswersOrSuccessCriteria": {
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
-      },
-      "InterleavingConnection": {
-       "type": "string"
-      }
-     },
-     "required": [
-      "DOKLevel",
-      "StudentDirections",
-      "RealWorldConnection",
-      "TeacherNotes",
-      "ExpectedAnswersOrSuccessCriteria",
-      "InterleavingConnection"
-     ],
-     "additionalProperties": false
-    }
-   },
-   "ReflectionPrompt": {
-    "type": "string"
-   }
-  },
-  "required": [
-   "TeacherNotes",
-   "Tasks",
-   "ReflectionPrompt"
-  ],
-  "additionalProperties": false
- }
+ "additionalProperties": false
 }
 `;
