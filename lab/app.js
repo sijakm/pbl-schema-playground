@@ -333,7 +333,7 @@ if (invalidFields.length > 0) {
     text: {
       format: {
         type: "json_schema",
-        name: "PBLUnitPlanResponse",
+        name: "LabUnitPlanResponse",
         schema: schema,
         strict: true
       }
