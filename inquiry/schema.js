@@ -48,9 +48,11 @@ window.masterSchema = `
     },
     "OrientationPhase": {
       "type": "object",
+      "description": "",
       "properties": {
         "Purpose": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Materials": {
           "type": "array",
@@ -72,9 +74,11 @@ window.masterSchema = `
     },
     "Conceptualization Phase": {
       "type": "object",
+      "description": "",
       "properties": {
         "Purpose": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Materials": {
           "type": "array",
@@ -96,9 +100,11 @@ window.masterSchema = `
     },
     "Investigation Phase": {
       "type": "object",
+      "description": "",
       "properties": {
         "Purpose": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Materials": {
           "type": "array",
@@ -173,9 +179,11 @@ window.masterSchema = `
     },
     "ConclusionPhase": {
       "type": "object",
+      "description": "",
       "properties": {
         "Purpose": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Materials": {
           "type": "array",
@@ -197,9 +205,11 @@ window.masterSchema = `
     },
     "DiscussionPhase": {
       "type": "object",
+      "description": "",
       "properties": {
         "Purpose": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Materials": {
           "type": "array",
@@ -223,6 +233,7 @@ window.masterSchema = `
     },
     "ReviewAndSpacedRetrieval": {
       "type": "object",
+      "description": "",
       "properties": {
         "Materials": {
           "type": "array",
@@ -233,15 +244,19 @@ window.masterSchema = `
         },
         "InstructionsForTeachers": {
           "type": "object",
+          "description": "",
           "properties": {
             "ActiveRecall": {
               "type": "object",
+              "description": "",
               "properties": {
                 "Question": {
-                  "type": "string"
+                  "type": "string",
+                  "description": ""
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
+                  "description": "",
                   "items": {
                     "type": "string"
                   }
@@ -254,12 +269,15 @@ window.masterSchema = `
             },
             "SpacedRetrieval": {
               "type": "object",
+              "description": "",
               "properties": {
                 "TeacherSay": {
-                  "type": "string"
+                  "type": "string",
+                  "description": ""
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
+                  "description": "",
                   "items": {
                     "type": "string"
                   }
