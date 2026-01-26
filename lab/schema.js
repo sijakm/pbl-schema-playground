@@ -82,9 +82,11 @@ window.masterSchema = `
      },
      "Question": {
       "type": "object",
+      "description": "",
       "properties": {
        "Purpose": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Materials": {
         "type": "array",
