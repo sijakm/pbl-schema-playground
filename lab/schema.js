@@ -38,6 +38,7 @@ window.masterSchema = `
    "type": "array",
    "description": "All lessons in this unit in chronological order.",
    "minItems": 1,
+   "maxItems": 25,
    "items": {
     "type": "object",
     "properties": {
