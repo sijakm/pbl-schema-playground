@@ -1,1 +1,1117 @@
-
+window.masterSchema = `
+{
+    "title": "LabUnitPlanResponse",
+    "type": "object",
+    "description": "Generate a complete lab-based unit plan and lesson plans using the provided unit inputs (subject, unit name, grade level, class duration, resources/media, and any attached unit content). The output MUST strictly follow this JSON schema: do not omit required fields, do not add extra fields, and do not change field names. All narrative text must be teacher-ready, specific, and free of placeholders like 'e.g.' or 'TBD'. Apply cognitive science principles throughout: include an Attention Reset & Interactive Activity before introducing any new concept or phase, embed spaced retrieval across the unit with expanding intervals, mix/interleave skills and strategies where practice occurs, and consistently build transfer to real-world contexts. Ensure cultural relevance and inclusion by incorporating multiple perspectives, connecting to varied communities, and avoiding stereotypes.",
+    "properties": {
+        "UnitTitle": {
+            "type": "string",
+            "description": "Unit title as a single line of plain text, use exactly the Unit Name given in the prompt."
+        },
+        "UnitDescription": {
+            "type": "string",
+            "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+        },
+        "EssentialQuestions": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "StudentLearningObjectives": {
+            "type": "array",
+            "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+            "items": {
+                "type": "string"
+            }
+        },
+        "StandardsAligned": {
+            "type": "array",
+            "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "Lessons": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "description": "All lab lessons in this unit in chronological order. The number of lessons MUST match the 'Number of Lessons Plans to create' parameter in the prompt. Each lesson is a full lab lesson built around the investigation cycle: Question, Research, Hypothesize, Experiment, Analyze, Share, plus end-of-lesson review/spaced retrieval, formative assessment, and student practice.",
+            "items": {
+                "$ref": "#/definitions/LessonPlan"
+            }
+        }
+    },
+    "required": [
+        "UnitTitle",
+        "UnitDescription",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned",
+        "Lessons"
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "AttentionResetActivity": {
+            "type": "object",
+            "description": "A 20–45 second movement-based, sensory, or novelty-driven micro-activity used BEFORE introducing a new concept/content chunk to reset attention and prime working memory. Must connect directly to the upcoming content and smoothly transition into it.",
+            "properties": {
+                "DurationSeconds": {
+                    "type": "integer",
+                    "minimum": 20,
+                    "maximum": 45,
+                    "description": "Exact duration in seconds for this attention reset. Must be between 20 and 45 seconds inclusive."
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Minimal materials needed (ideally none). List only what is truly required (e.g., 'none', 'sticky notes', 'timer').",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherDirections": {
+                    "type": "string",
+                    "description": "Teacher-ready script in plain text with step-by-step directions. MUST begin with this EXACT sentence (verbatim): 'Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.' After that first sentence, include: (1) 2–4 short steps that specify what students do (movement/sensory/novelty) and how the teacher facilitates, (2) at least one teacher scripted line using 'Say:' that cues the action, (3) a clear transition line using 'Say:' that bridges directly into the next lesson phase (e.g., 'Now that our brains are locked in, let's ...'). Keep it realistic for a classroom, minimal materials, and directly connected to the upcoming content."
+                },
+                "ConnectionToUpcomingContent": {
+                    "type": "string",
+                    "description": "One sentence that explicitly names the upcoming phase's core idea and explains how the attention reset previews it (teacher-facing, no jargon)."
+                }
+            },
+            "required": [
+                "DurationSeconds",
+                "Materials",
+                "TeacherDirections",
+                "ConnectionToUpcomingContent"
+            ],
+            "additionalProperties": false
+        },
+        "Misconception": {
+            "type": "object",
+            "description": "A common student misconception or likely misunderstanding plus an explicit teacher response script that corrects it without shaming students.",
+            "properties": {
+                "Misconception": {
+                    "type": "string",
+                    "description": "A brief description of a likely misconception stated in student-friendly language (what students might think or say)."
+                },
+                "TeacherResponseScript": {
+                    "type": "string",
+                    "description": "Exact teacher language using 'Say:' statements that acknowledges the misconception and guides students to the accurate idea. Include a quick check question and a short expected answer."
+                }
+            },
+            "required": [
+                "Misconception",
+                "TeacherResponseScript"
+            ],
+            "additionalProperties": false
+        },
+        "QuickCheck": {
+            "type": "object",
+            "description": "A fast whole-class check for understanding that every student answers. Must be short, aligned to the phase objective, and include expected answers.",
+            "properties": {
+                "Strategy": {
+                    "type": "string",
+                    "description": "The quick-check strategy to use. Choose one from: 'Thumbs Up/Down (Eyes Closed)', 'Exit Ticket', 'Polling', 'Visual Response', or 'Whiteboard Response'. Use exactly one of those labels."
+                },
+                "TeacherPrompt": {
+                    "type": "string",
+                    "description": "The exact teacher prompt using a 'Say:' statement. Keep it to 1–2 sentences and make it answerable by all students in under 60 seconds."
+                },
+                "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 5,
+                    "description": "2–5 sample expected student responses that demonstrate correct understanding. Use plain text; no placeholders.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "Strategy",
+                "TeacherPrompt",
+                "ExpectedStudentResponses"
+            ],
+            "additionalProperties": false
+        },
+        "Differentiation": {
+            "type": "object",
+            "description": "Instructional differentiation for the Experiment phase using three tiers. These are teaching strategies that maintain the same learning objectives and do not lower rigor.",
+            "properties": {
+                "LanguageLearners": {
+                    "type": "string",
+                    "description": "Differentiation tier for Language Learners. Provide 2–4 realistic, teacher-facing strategies that promote language development and conceptual understanding during the experiment (e.g., visuals, sentence frames, structured talk, gestures). Do not merely simplify materials; explain how to teach."
+                },
+                "AdditionalScaffolding": {
+                    "type": "string",
+                    "description": "Differentiation tier for Students in Need of Additional Scaffolding. Provide 2–4 teacher-facing strategies (e.g., checklists, partial examples, guided prompts, chunking, modeling) that support active engagement without lowering rigor."
+                },
+                "GoDeeper": {
+                    "type": "string",
+                    "description": "Differentiation tier for Go Deeper. Provide 1–3 extension ideas that increase complexity/depth (analysis, reasoning, modeling, quantifying) aligned to the same objectives. Include at least one expected student response or product description."
+                }
+            },
+            "required": [
+                "LanguageLearners",
+                "AdditionalScaffolding",
+                "GoDeeper"
+            ],
+            "additionalProperties": false
+        },
+        "AccommodationsAndModifications": {
+            "type": "object",
+            "description": "General accommodations for the class plus individual student support plans. The model must use ONLY the student names and plans provided in the prompt.",
+            "properties": {
+                "General": {
+                    "type": "string",
+                    "description": "General classroom supports and modifications that apply to most or all students during this activity."
+                },
+                "IndividualSupport": {
+                    "type": "array",
+                    "description": "List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "StudentName": {
+                                "type": "string",
+                                "description": "Full name of the student exactly as provided in the prompt."
+                            },
+                            "Plan": {
+                                "type": "string",
+                                "description": "Short description of the individualized accommodation or modification for this student."
+                            }
+                        },
+                        "required": [
+                            "StudentName",
+                            "Plan"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": [
+                "General",
+                "IndividualSupport"
+            ],
+            "additionalProperties": false
+        },
+        "GroupRole": {
+            "type": "object",
+            "description": "A clearly defined student role for lab group work.",
+            "properties": {
+                "RoleName": {
+                    "type": "string",
+                    "description": "Short role name (e.g., 'Materials Manager', 'Recorder', 'Timekeeper', 'Lead Investigator')."
+                },
+                "Responsibilities": {
+                    "type": "array",
+                    "description": "2–4 specific responsibilities for this role written in student-friendly language.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "RoleName",
+                "Responsibilities"
+            ],
+            "additionalProperties": false
+        },
+        "ProcedureStep": {
+            "type": "object",
+            "description": "One step in the experimental procedure written so a teacher can read it aloud and students can follow it.",
+            "properties": {
+                "StepNumber": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Step order number starting at 1 and increasing by 1 for each subsequent step."
+                },
+                "TeacherScript": {
+                    "type": "string",
+                    "description": "Exact teacher language for this step using 'Say:' statements. Include at least one concrete action cue (e.g., 'Say: Place your ____ so that ____')."
+                },
+                "StudentAction": {
+                    "type": "string",
+                    "description": "What students do during this step in clear, student-facing language (one short paragraph or 1–3 sentences)."
+                },
+                "WhatToObserveOrMeasure": {
+                    "type": "array",
+                    "description": "What students should observe, measure, or record during this step (e.g., 'temperature change', 'color change', 'counts', 'time').",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "StepNumber",
+                "TeacherScript",
+                "StudentAction",
+                "WhatToObserveOrMeasure"
+            ],
+            "additionalProperties": false
+        },
+        "VariableManipulation": {
+            "type": "object",
+            "description": "How the experiment manipulates variables to test the hypothesis, including what changes, what is measured, and what stays the same.",
+            "properties": {
+                "IndependentVariable": {
+                    "type": "string",
+                    "description": "The variable students intentionally change."
+                },
+                "DependentVariable": {
+                    "type": "string",
+                    "description": "The variable students observe or measure in response to the change."
+                },
+                "ControlledVariables": {
+                    "type": "array",
+                    "description": "Key factors that should stay the same to keep the test fair (list 3–6).",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "HowToManipulate": {
+                    "type": "string",
+                    "description": "Teacher-facing explanation of exactly how students will change the independent variable (specific amounts/conditions) and when."
+                },
+                "TeacherScriptForManipulation": {
+                    "type": "string",
+                    "description": "At least 2 teacher prompts using 'Say:' that guide students through the variable change and remind them to record evidence."
+                }
+            },
+            "required": [
+                "IndependentVariable",
+                "DependentVariable",
+                "ControlledVariables",
+                "HowToManipulate",
+                "TeacherScriptForManipulation"
+            ],
+            "additionalProperties": false
+        },
+        "SpacedRetrievalTask": {
+            "type": "object",
+            "description": "A single spaced retrieval task scheduled somewhere in the unit. Tasks must require students to PRODUCE an answer (active recall), not recognize it.",
+            "properties": {
+                "ScheduledLessonNumber": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "The lesson number in which this retrieval task is assigned (1-based)."
+                },
+                "ConceptTag": {
+                    "type": "string",
+                    "description": "A short tag naming the concept/skill being retrieved (e.g., 'Variables and fair tests', 'Conservation of mass', 'Earth rotation'). Used to track expanding intervals across the unit."
+                },
+                "DrawsFromLessons": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "List the lesson numbers this task draws from. Must include at least one prior lesson number whenever possible (and may include the current lesson number to connect current learning).",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    }
+                },
+                "DOKLevel": {
+                    "type": "integer",
+                    "description": "Depth of Knowledge level for this retrieval task. Must be 2, 3, or 4.",
+                    "enum": [
+                        2,
+                        3,
+                        4
+                    ]
+                },
+                "ActiveRecallFormat": {
+                    "type": "string",
+                    "description": "The active recall format students use (e.g., short response, verbal recap, quick write, concept map reconstruction, diagram labeling from memory). Must require generating an answer."
+                },
+                "Prompt": {
+                    "type": "string",
+                    "description": "The exact retrieval question/prompt in student-friendly language. Must connect today's learning to at least one prior lesson and be answerable from memory with reasoning, not by guessing."
+                },
+                "ExpectedStudentResponse": {
+                    "type": "string",
+                    "description": "A strong sample student response (1–3 sentences) that would meet the expectation for this prompt."
+                },
+                "SuccessCriteria": {
+                    "type": "array",
+                    "description": "2–5 bullet-style criteria describing what a successful response includes (e.g., key ideas, vocabulary, evidence, reasoning).",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "ScheduledLessonNumber",
+                "ConceptTag",
+                "DrawsFromLessons",
+                "DOKLevel",
+                "ActiveRecallFormat",
+                "Prompt",
+                "ExpectedStudentResponse",
+                "SuccessCriteria"
+            ],
+            "additionalProperties": false
+        },
+        "TranscendentThinking": {
+            "type": "object",
+            "description": "A single transcendent thinking prompt that connects learning to purpose, meaning, or big ideas beyond the classroom.",
+            "properties": {
+                "TeacherPrompt": {
+                    "type": "string",
+                    "description": "Exact teacher language using 'Say:' that asks a purpose/meaning/big-idea question connected to the lesson and to real-world impacts. Must be evidence-based and avoid stereotypes."
+                },
+                "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 6,
+                    "description": "2–6 sample student responses that show thoughtful connections and accurate use of the lesson concepts.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "TeacherPrompt",
+                "ExpectedStudentResponses"
+            ],
+            "additionalProperties": false
+        },
+        "PromptResponseBlock": {
+            "type": "object",
+            "description": "A teacher prompt plus sample expected student responses.",
+            "properties": {
+                "TeacherPrompt": {
+                    "type": "string",
+                    "description": "Exact teacher language using 'Say:' or 'Ask:' that launches the prompt."
+                },
+                "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 6,
+                    "description": "2–6 sample student responses that demonstrate the intended understanding.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "TeacherPrompt",
+                "ExpectedStudentResponses"
+            ],
+            "additionalProperties": false
+        },
+        "ReviewAndSpacedRetrieval": {
+            "type": "object",
+            "description": "End-of-lesson review that consolidates learning, surfaces misconceptions, and provides the spaced retrieval task(s) for this lesson.",
+            "properties": {
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 3,
+                    "description": "Time estimate in whole minutes for the Review & Spaced Retrieval portion of the lesson."
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Materials needed for this review (often none). List only what is required.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherNotes": {
+                    "type": "string",
+                    "description": "Teacher-facing paragraph explaining why this specific review strategy was chosen and how it supports retention (active recall, spacing, correcting misconceptions). Also note how the reflection supports purpose/meaning and transfer."
+                },
+                "ActiveRecall": {
+                    "$ref": "#/definitions/PromptResponseBlock",
+                    "description": "An active recall prompt for students (partner/group recap, quick write, diagram from memory, etc.) plus expected responses."
+                },
+                "CorrectCommonMisconceptions": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Misconceptions that may still appear after the lesson plus teacher scripts that correct them.",
+                    "items": {
+                        "$ref": "#/definitions/Misconception"
+                    }
+                },
+                "EssentialQuestionConnection": {
+                    "$ref": "#/definitions/PromptResponseBlock",
+                    "description": "Teacher prompt that explicitly connects today's learning to one of the unit Essential Questions, plus expected student responses."
+                },
+                "TranscendentThinking": {
+                    "$ref": "#/definitions/TranscendentThinking",
+                    "description": "A brief transcendent thinking reflection prompt for the end of class, plus expected student responses."
+                },
+                "SpacedRetrievalTasks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "The spaced retrieval task(s) assigned at the end of THIS lesson. For each task in this array, ScheduledLessonNumber MUST equal this lesson's LessonNumber. Requirements: (1) Include at least ONE retrieval task in every lesson of the unit. (2) Each lesson's retrieval must connect to current lesson content AND at least one prior lesson or prior unit concept. (3) Expanding intervals: for key concepts/skills, revisit them after increasing gaps when the unit length allows (same lesson/immediate, next lesson, 3 lessons later, 5 lessons later, 7 lessons later, 9 lessons later, 11 lessons later, 13 lessons later, and end-of-unit). (4) Each task must be active recall (students produce an answer) using varied formats (quick write, verbal recap, concept map reconstruction, diagram labeling from memory, etc.). (5) Clearly label which lessons the task draws from using the DrawsFromLessons field and include DOK level 2–4 plus a strong ExpectedStudentResponse and SuccessCriteria.",
+                    "items": {
+                        "$ref": "#/definitions/SpacedRetrievalTask"
+                    }
+                }
+            },
+            "required": [
+                "TimeMinutes",
+                "Materials",
+                "TeacherNotes",
+                "ActiveRecall",
+                "CorrectCommonMisconceptions",
+                "EssentialQuestionConnection",
+                "TranscendentThinking",
+                "SpacedRetrievalTasks"
+            ],
+            "additionalProperties": false
+        },
+        "LabQuestionPhase": {
+            "type": "object",
+            "description": "Lab phase: Question. Students observe a phenomenon, notice something puzzling, and generate the guiding investigation question.",
+            "properties": {
+                "AttentionResetAndInteractiveActivity": {
+                    "$ref": "#/definitions/AttentionResetActivity",
+                    "description": "Attention reset that happens immediately BEFORE the Question phase begins."
+                },
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Time estimate in whole minutes for the Question phase (not including the attention reset seconds)."
+                },
+                "Purpose": {
+                    "type": "string",
+                    "description": "Purpose statement for this phase. Must be EXACTLY: 'Purpose: Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.'"
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Complete list of teacher + student materials used during the Question phase. Include any visuals, videos, chart paper, markers, notebooks, etc.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherScript": {
+                    "type": "string",
+                    "description": "Detailed, step-by-step teacher script in plain text that begins with observing a phenomenon and ends with students generating the guiding investigation question. MUST include teacher-scripted lines using 'Say:'. MUST include at least one turn-and-talk, one whole-class question prompt, and one whole-group share. MUST instruct the teacher to record student ideas on a chart titled 'What Do We Wonder?'. MUST follow this internal format in order and include these exact labels as headings inside the script (each on its own line): 'Say:' (introduce the phenomenon), 'Ask:' (students identify patterns or puzzling aspects), 'Prompt:' (students generate questions), 'Record:' (teacher writes ideas on the 'What Do We Wonder?' chart), 'Conclude:' (teacher names the final investigation question). The final line of the script MUST be exactly in this structure: Say: \"Today we’ll investigate this big question: '_____?'\" and the blank must be filled with the FinalInvestigationQuestion content."
+                },
+                "ExpectedStudentWonderings": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 8,
+                    "description": "3–8 likely student-generated questions or wonderings based on the phenomenon (plain text). These should sound like real students and align to the grade level.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "FinalInvestigationQuestion": {
+                    "type": "string",
+                    "description": "The final guiding investigation question the teacher names at the end of the Question phase. Must be a single clear question sentence, student-friendly, and directly investigable in this lesson."
+                }
+            },
+            "required": [
+                "AttentionResetAndInteractiveActivity",
+                "TimeMinutes",
+                "Purpose",
+                "Materials",
+                "TeacherScript",
+                "ExpectedStudentWonderings",
+                "FinalInvestigationQuestion"
+            ],
+            "additionalProperties": false
+        },
+        "LabResearchPhase": {
+            "type": "object",
+            "description": "Lab phase: Research. Students build background knowledge, vocabulary, and evidence needed to make an informed hypothesis and design a valid test.",
+            "properties": {
+                "AttentionResetAndInteractiveActivity": {
+                    "$ref": "#/definitions/AttentionResetActivity",
+                    "description": "Attention reset that happens immediately BEFORE new Research content is introduced."
+                },
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Time estimate in whole minutes for the Research phase (not including the attention reset seconds)."
+                },
+                "Purpose": {
+                    "type": "string",
+                    "description": "Purpose statement for this phase. Must be EXACTLY: 'Purpose: Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation.'"
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Complete list of teacher + student materials used during the Research phase (models, demonstration items, readings, charts/graphs, devices, data tables, vocabulary cards, etc.).",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherScript": {
+                    "type": "string",
+                    "description": "Teacher-ready Research instructions in plain text with explicit steps and 'Say:' lines. MUST include all of the following in a coherent flow: (1) Begin by reminding students of the guiding investigation question from the Question phase. (2) Include this exact line verbatim: Say: \"As we go through this information, write down key ideas, vocabulary, and anything that seems important for answering our question.\" (3) Demonstrate or model a key concept with a hands-on teacher-led model and clear narration (include at least one line like: Say: \"This model represents...\"), and naturally point out vocabulary as it appears. (4) Connect the demonstration to real data or evidence by either displaying a chart/graph/table/timeline/short reading OR having students research information briefly in pairs/groups. (5) Include the exact prompt: Ask: \"What do you notice?\" and provide 2–3 likely student responses immediately after. (6) Provide a simple, accurate scientific explanation using 'Say:' statements. (7) Embed at least one Turn-and-Talk or Quick Think prompt that helps students process and connect evidence to the investigation question. (8) Maintain cultural relevance and inclusion by connecting the content to varied communities/real-world contexts and avoiding stereotypes."
+                },
+                "AnticipatedMisconceptions": {
+                    "type": "array",
+                    "minItems": 2,
+                    "description": "At least 2 likely misconceptions for this lesson's topic, each with a teacher response script that corrects it.",
+                    "items": {
+                        "$ref": "#/definitions/Misconception"
+                    }
+                }
+            },
+            "required": [
+                "AttentionResetAndInteractiveActivity",
+                "TimeMinutes",
+                "Purpose",
+                "Materials",
+                "TeacherScript",
+                "AnticipatedMisconceptions"
+            ],
+            "additionalProperties": false
+        },
+        "LabHypothesizePhase": {
+            "type": "object",
+            "description": "Lab phase: Hypothesize. Students construct a testable prediction based on research and reasoning.",
+            "properties": {
+                "AttentionResetAndInteractiveActivity": {
+                    "$ref": "#/definitions/AttentionResetActivity",
+                    "description": "Attention reset that happens immediately BEFORE students draft hypotheses."
+                },
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Time estimate in whole minutes for the Hypothesize phase (not including the attention reset seconds)."
+                },
+                "Purpose": {
+                    "type": "string",
+                    "description": "Purpose statement for this phase. Must be EXACTLY: 'Purpose: Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen.'"
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Complete list of teacher + student materials used during the Hypothesize phase (sentence frames, notebooks, anchor chart paper, etc.).",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "SentenceStarters": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 5,
+                    "description": "3–5 hypothesis sentence frames aligned to the lesson topic but adaptable (e.g., 'If ___ happens, then ___.' 'If we change ___, then I predict ___.'). Use plain text; no placeholders other than blanks/underscores.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherSteps": {
+                    "type": "string",
+                    "description": "Clear, explicit, teacher-ready steps written as bullet-style lines (use hyphens) that begin with verbs and include teacher-scripted language using 'Say:'. MUST include: (1) Introduce the purpose of hypothesizing with a 'Say:' line (e.g., 'Scientists don’t guess randomly—they make predictions called hypotheses based on what they know.'), (2) Provide and review the SentenceStarters, (3) Model turning a fact from the Research phase into a prediction (include a 'Say:' line like: 'We learned ___. Based on that, I predict ___.' ); (4) Direct students to write their own hypothesis (include a 'Say:' line telling where to write it), (5) Have 2–4 students share aloud and direct the teacher to record examples on an anchor chart titled 'Our Hypotheses.', (6) End with a brief check that hypotheses are testable and match the investigation question."
+                },
+                "ExpectedStudentHypotheses": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 6,
+                    "description": "3–6 likely hypotheses students would generate for this lesson. Each should be testable and aligned to the experiment design.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "AttentionResetAndInteractiveActivity",
+                "TimeMinutes",
+                "Purpose",
+                "Materials",
+                "SentenceStarters",
+                "TeacherSteps",
+                "ExpectedStudentHypotheses"
+            ],
+            "additionalProperties": false
+        },
+        "LabExperimentPhase": {
+            "type": "object",
+            "description": "Lab phase: Experiment. Students carry out a structured investigation to test their hypothesis and gather evidence.",
+            "properties": {
+                "AttentionResetAndInteractiveActivity": {
+                    "$ref": "#/definitions/AttentionResetActivity",
+                    "description": "Attention reset that happens immediately BEFORE launching the hands-on experiment to increase focus and safety."
+                },
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "description": "Time estimate in whole minutes for the Experiment phase (not including the attention reset seconds)."
+                },
+                "Purpose": {
+                    "type": "string",
+                    "description": "Purpose statement for this phase. Must be EXACTLY: 'Purpose: Carry out a structured investigation—hands-on, simulated, or analytical—to test their hypothesis and gather evidence through observation or measurement.'"
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Complete list of teacher + student materials used during the Experiment phase. Include lab tools, models, safety items, data tables, timers, and any prepared materials.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "GroupRoles": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 6,
+                    "description": "Student group roles for teams of 3–4 (or similar). Each role must have clear responsibilities so all students participate.",
+                    "items": {
+                        "$ref": "#/definitions/GroupRole"
+                    }
+                },
+                "DataTableColumns": {
+                    "type": "array",
+                    "minItems": 3,
+                    "description": "Column headers for the data table students will use to record evidence. Make them specific to the experiment and measurable/observable.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ProcedureSteps": {
+                    "type": "array",
+                    "minItems": 5,
+                    "description": "Step-by-step experimental actions in order. Must include at least three steps with explicit teacher-scripted prompts like: 'Say: Place your ____ so that ____.' 'Say: Now change ____ and observe what happens.' 'Say: Record what you notice about ____.'",
+                    "items": {
+                        "$ref": "#/definitions/ProcedureStep"
+                    }
+                },
+                "VariableManipulation": {
+                    "$ref": "#/definitions/VariableManipulation",
+                    "description": "The required variable manipulation plan for this experiment."
+                },
+                "TeacherCirculationPrompts": {
+                    "type": "array",
+                    "minItems": 5,
+                    "maxItems": 10,
+                    "description": "5–10 open-ended prompts the teacher asks while circulating to push observation, reasoning, and evidence collection (e.g., 'What pattern do you see forming?').",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "Differentiation": {
+                    "$ref": "#/definitions/Differentiation",
+                    "description": "Three-tier differentiation strategies for the Experiment phase (Language Learners, Additional Scaffolding, Go Deeper)."
+                },
+                "AccommodationsAndModifications": {
+                    "$ref": "#/definitions/AccommodationsAndModifications",
+                    "description": "General supports for all learners plus individualized supports for students with learning plans, using only the names/plans provided in the prompt."
+                },
+                "QuickChecksForUnderstanding": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "At least one whole-class quick check during the experiment to ensure all students are tracking the key concept and procedure.",
+                    "items": {
+                        "$ref": "#/definitions/QuickCheck"
+                    }
+                }
+            },
+            "required": [
+                "AttentionResetAndInteractiveActivity",
+                "TimeMinutes",
+                "Purpose",
+                "Materials",
+                "GroupRoles",
+                "DataTableColumns",
+                "ProcedureSteps",
+                "VariableManipulation",
+                "TeacherCirculationPrompts",
+                "Differentiation",
+                "AccommodationsAndModifications",
+                "QuickChecksForUnderstanding"
+            ],
+            "additionalProperties": false
+        },
+        "LabAnalyzePhase": {
+            "type": "object",
+            "description": "Lab phase: Analyze. Students interpret their data, identify patterns, evaluate the hypothesis, and write evidence-based conclusions.",
+            "properties": {
+                "AttentionResetAndInteractiveActivity": {
+                    "$ref": "#/definitions/AttentionResetActivity",
+                    "description": "Attention reset that happens immediately BEFORE analysis begins to refocus students from hands-on work to reasoning and writing."
+                },
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 3,
+                    "description": "Time estimate in whole minutes for the Analyze phase (not including the attention reset seconds)."
+                },
+                "Purpose": {
+                    "type": "string",
+                    "description": "Purpose statement for this phase. Must be EXACTLY: 'Purpose: Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions.'"
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Complete list of materials used during Analyze (student data tables, analysis prompts, charts, sentence starters, etc.).",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherModelExample": {
+                    "type": "string",
+                    "description": "Teacher demonstration of how to analyze data and draw a conclusion using a DIFFERENT simple lab/example than the one students just did (to avoid giving away answers). Must include what happened, the pattern noticed, and why it happened, using at least 3 'Say:' lines."
+                },
+                "StudentAnalysisTask": {
+                    "type": "string",
+                    "description": "The exact student-facing analysis/conclusion task prompt. Must require students to use evidence from their data table and to state whether their hypothesis was supported, not supported, or partially supported."
+                },
+                "SentenceStarters": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 10,
+                    "description": "Sentence starters that help students write analysis and conclusions (e.g., 'Our data showed that...', 'This pattern suggests...', 'This supports our hypothesis because...').",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "RehearsalStrategy": {
+                    "type": "string",
+                    "description": "A brief teacher-facing description of how students will rehearse their thinking before writing (e.g., turn-and-talk, oral rehearsal using sentence starters, quick sketch then explain). Include at least one 'Say:' line the teacher uses to launch the rehearsal."
+                },
+                "TeacherCirculationPrompts": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 10,
+                    "description": "4–10 prompts the teacher uses while circulating to push evidence-based reasoning (e.g., 'Which data point best supports that claim?').",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ExamplesOfHighQualityStudentAnalysis": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 8,
+                    "description": "3–8 examples of strong, age-appropriate analysis statements students might write for THIS lab. These should use evidence language (data, pattern, because) and accurate content.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "AttentionResetAndInteractiveActivity",
+                "TimeMinutes",
+                "Purpose",
+                "Materials",
+                "TeacherModelExample",
+                "StudentAnalysisTask",
+                "SentenceStarters",
+                "RehearsalStrategy",
+                "TeacherCirculationPrompts",
+                "ExamplesOfHighQualityStudentAnalysis"
+            ],
+            "additionalProperties": false
+        },
+        "LabSharePhase": {
+            "type": "object",
+            "description": "Lab phase: Share. Students communicate findings using evidence and connect results to meaning beyond the lab.",
+            "properties": {
+                "AttentionResetAndInteractiveActivity": {
+                    "$ref": "#/definitions/AttentionResetActivity",
+                    "description": "Attention reset that happens immediately BEFORE students present/share to re-energize and reduce presentation anxiety."
+                },
+                "TimeMinutes": {
+                    "type": "integer",
+                    "minimum": 3,
+                    "description": "Time estimate in whole minutes for the Share phase (not including the attention reset seconds)."
+                },
+                "Purpose": {
+                    "type": "string",
+                    "description": "Purpose statement for this phase. Must be EXACTLY: 'Purpose: Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding.'"
+                },
+                "Materials": {
+                    "type": "array",
+                    "description": "Complete list of materials used for sharing (posters/whiteboards, presentation template, student models, markers, etc.).",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherDirections": {
+                    "type": "string",
+                    "description": "Explicit, step-by-step teacher directions in plain text using bullet points that begin with verbs and include 'Say:' lines. MUST: (1) explain why sharing findings matters beyond school walls, (2) create a clear share-out activity structure, (3) provide guidance on how groups plan the presentation together, and (4) include prompts the teacher can ask during student presentations."
+                },
+                "ShareOutStructure": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 8,
+                    "description": "The required structure students must follow when presenting. Each item should be a short label with 1-sentence explanation (e.g., 'Our Question - State the investigation question we tested.').",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TeacherPromptsDuringPresentations": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 10,
+                    "description": "4–10 teacher questions/prompts used during presentations to push clarity, evidence, and reasoning (e.g., 'What evidence supports that conclusion?').",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TranscendentThinking": {
+                    "$ref": "#/definitions/TranscendentThinking",
+                    "description": "One transcendent thinking prompt connected to the lesson and real-world meaning, with expected student responses."
+                }
+            },
+            "required": [
+                "AttentionResetAndInteractiveActivity",
+                "TimeMinutes",
+                "Purpose",
+                "Materials",
+                "TeacherDirections",
+                "ShareOutStructure",
+                "TeacherPromptsDuringPresentations",
+                "TranscendentThinking"
+            ],
+            "additionalProperties": false
+        },
+        "FormativePrompt": {
+            "type": "object",
+            "description": "One formative assessment prompt at a specific Depth of Knowledge (DOK) level with expected student responses.",
+            "properties": {
+                "DOKLevel": {
+                    "type": "integer",
+                    "description": "Depth of Knowledge level for this prompt. Must be 1, 2, 3, or 4.",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ]
+                },
+                "Prompt": {
+                    "type": "string",
+                    "description": "The exact question/prompt to ask students at this DOK level. Must align to the lesson objectives and content."
+                },
+                "ExpectedStudentResponses": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "description": "1–3 complete-sentence sample responses that demonstrate mastery for this prompt (no emojis or placeholders).",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "DOKLevel",
+                "Prompt",
+                "ExpectedStudentResponses"
+            ],
+            "additionalProperties": false
+        },
+        "FormativeAssessment": {
+            "type": "object",
+            "description": "A quick formative assessment set for the lesson that checks understanding at increasing cognitive depth (DOK 1–4).",
+            "properties": {
+                "TeacherImplementationNotes": {
+                    "type": "string",
+                    "description": "A brief teacher-facing paragraph stating the purpose of the formative assessment and how to implement it during or at the end of the lesson (1–4 sentences)."
+                },
+                "Prompts": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "description": "Exactly 4 prompts labeled by DOK level, in order: DOK 1, DOK 2, DOK 3, DOK 4. Each prompt must include expected student responses.",
+                    "items": {
+                        "$ref": "#/definitions/FormativePrompt"
+                    }
+                },
+                "RecommendedStrategy": {
+                    "type": "string",
+                    "description": "Name the best formative assessment collection strategy to use for these prompts (choose one): 'Exit Ticket', 'Think-Pair-Share', 'Whiteboard Responses', 'Quick Poll', or 'Thumbs Up/Down (Eyes Closed)'."
+                }
+            },
+            "required": [
+                "TeacherImplementationNotes",
+                "Prompts",
+                "RecommendedStrategy"
+            ],
+            "additionalProperties": false
+        },
+        "HomeworkTask": {
+            "type": "object",
+            "description": "One out-of-class practice task that reinforces lesson objectives through spaced retrieval, transfer, and real-world application.",
+            "properties": {
+                "DOKLevel": {
+                    "type": "integer",
+                    "description": "Depth of Knowledge level for this task. Must be 2, 3, or 4.",
+                    "enum": [
+                        2,
+                        3,
+                        4
+                    ]
+                },
+                "StudentDirections": {
+                    "type": "string",
+                    "description": "Student-friendly directions describing exactly what to do and what to produce (writing, diagram, data, explanation). Must be clear and purposeful."
+                },
+                "RealWorldConnection": {
+                    "type": "string",
+                    "description": "One sentence explaining the real-world or home/community connection for this task (how it shows up outside school). Avoid stereotypes and include culturally responsive framing when relevant."
+                },
+                "TeacherNotes": {
+                    "type": "string",
+                    "description": "Teacher-facing note explaining how this task reinforces the day's lesson and supports retention/transfer (1–3 sentences)."
+                },
+                "ExpectedAnswersOrSuccessCriteria": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 6,
+                    "description": "3–6 bullet-style expected answers or success criteria that demonstrate mastery. Use plain text; no placeholders.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "InterleavingConnection": {
+                    "type": "string",
+                    "description": "If this is the interleaving task, explain which prior lesson/unit concept is mixed with today's content and why. If not an interleaving task, return an empty string."
+                }
+            },
+            "required": [
+                "DOKLevel",
+                "StudentDirections",
+                "RealWorldConnection",
+                "TeacherNotes",
+                "ExpectedAnswersOrSuccessCriteria",
+                "InterleavingConnection"
+            ],
+            "additionalProperties": false
+        },
+        "StudentPractice": {
+            "type": "object",
+            "description": "Homework / out-of-class practice that extends learning through spaced retrieval, interleaving (when applicable), and transfer to real-world contexts.",
+            "properties": {
+                "TeacherNotes": {
+                    "type": "string",
+                    "description": "One teacher-facing paragraph explaining how the homework tasks reinforce today’s learning, build retention through spaced retrieval, and promote transfer to real-world contexts."
+                },
+                "Tasks": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 4,
+                    "description": "2–4 homework tasks. Requirements: (1) At least one task must involve observing, explaining, or applying the lesson concept outside school (home/community/media). (2) Tasks must align to the lesson's DOK levels (2–4). (3) Include at least one task that uses interleaving by mixing today's concept/skill with a prior lesson or prior unit skill; mark it by filling in the InterleavingConnection field for that task. (4) Provide expected answers/success criteria for every task.",
+                    "items": {
+                        "$ref": "#/definitions/HomeworkTask"
+                    }
+                },
+                "ReflectionPrompt": {
+                    "type": "string",
+                    "description": "End with ONE reflection prompt that supports self-regulation or transcendent thinking (purpose/meaning). Write it as a student-facing question (1–2 sentences)."
+                }
+            },
+            "required": [
+                "TeacherNotes",
+                "Tasks",
+                "ReflectionPrompt"
+            ],
+            "additionalProperties": false
+        },
+        "LessonPlan": {
+            "type": "object",
+            "description": "One complete lab lesson plan. Must be teacher-ready, culturally responsive, and aligned to the lesson objectives. Provide specific scripts with 'Say:' statements and include expected student responses where required. The lesson must follow the lab investigation cycle (Question → Research → Hypothesize → Experiment → Analyze → Share) and include an end-of-lesson Review & Spaced Retrieval, formative assessment, and student practice/homework. Provide time estimates for each phase.",
+            "properties": {
+                "LessonNumber": {
+                    "type": "integer",
+                    "description": "Sequential lesson number within the unit (1–based index). Lesson 1 MUST be the first, Lesson 2 the second, and so on."
+                },
+                "LessonTitle": {
+                    "type": "string",
+                    "description": "Short descriptive title for the lesson that clearly reflects the focus concept (e.g., 'Exploring Our Solar System'). Do NOT include emojis here; emojis are handled by the renderer."
+                },
+                "EssentialQuestions": {
+                    "type": "array",
+                    "description": "Just paste all the essential questions that are generated in unit level in same order.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "KeyVocabulary": {
+                    "type": "array",
+                    "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "StudentLearningObjectives": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 3,
+                    "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "StandardsAligned": {
+                    "type": "string",
+                    "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses of the sun and moon, and seasons.'"
+                },
+                "AssessPriorKnowledge": {
+                    "type": "string",
+                    "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
+                },
+                "LessonMaterials": {
+                    "type": "array",
+                    "description": "A combined list of all UNIQUE materials needed for the entire lesson across all phases (Question, Research, Hypothesize, Experiment, Analyze, Share, Review). Do not duplicate items. Include both teacher and student materials.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "PlannedTotalMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Total planned instructional minutes for the lesson (sum of phase TimeMinutes fields; attention resets are separate seconds). Should be close to the class period duration provided in the prompt."
+                },
+                "Question": {
+                    "$ref": "#/definitions/LabQuestionPhase",
+                    "description": "Question phase for this lesson."
+                },
+                "Research": {
+                    "$ref": "#/definitions/LabResearchPhase",
+                    "description": "Research phase for this lesson."
+                },
+                "Hypothesize": {
+                    "$ref": "#/definitions/LabHypothesizePhase",
+                    "description": "Hypothesize phase for this lesson."
+                },
+                "Experiment": {
+                    "$ref": "#/definitions/LabExperimentPhase",
+                    "description": "Experiment phase for this lesson."
+                },
+                "Analyze": {
+                    "$ref": "#/definitions/LabAnalyzePhase",
+                    "description": "Analyze phase for this lesson."
+                },
+                "Share": {
+                    "$ref": "#/definitions/LabSharePhase",
+                    "description": "Share phase for this lesson."
+                },
+                "ReviewAndSpacedRetrieval": {
+                    "$ref": "#/definitions/ReviewAndSpacedRetrieval",
+                    "description": "End-of-lesson Review & Spaced Retrieval section. Must include active recall, misconception correction, an Essential Question connection, a transcendent reflection, and the spaced retrieval task(s) for this lesson following the spacing requirements described in the schema."
+                },
+                "FormativeAssessment": {
+                    "$ref": "#/definitions/FormativeAssessment",
+                    "description": "Formative assessment prompts for this lesson."
+                },
+                "StudentPractice": {
+                    "$ref": "#/definitions/StudentPractice",
+                    "description": "Out-of-class student practice/homework for this lesson that supports retention, transfer, and (when relevant) interleaving."
+                }
+            },
+            "required": [
+                "LessonNumber",
+                "LessonTitle",
+                "EssentialQuestions",
+                "KeyVocabulary",
+                "StudentLearningObjectives",
+                "StandardsAligned",
+                "AssessPriorKnowledge",
+                "LessonMaterials",
+                "PlannedTotalMinutes",
+                "Question",
+                "Research",
+                "Hypothesize",
+                "Experiment",
+                "Analyze",
+                "Share",
+                "ReviewAndSpacedRetrieval",
+                "FormativeAssessment",
+                "StudentPractice"
+            ],
+            "additionalProperties": false
+        }
+    }
+}
+`;
