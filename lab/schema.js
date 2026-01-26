@@ -90,21 +90,25 @@ window.masterSchema = `
        },
        "Materials": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
        },
        "InstructionsForTeachers": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "ExpectedStudentResponses": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
        },
        "FinalInvestigationQuestion": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        }
       },
       "required": [
@@ -118,12 +122,15 @@ window.masterSchema = `
      },
      "Research": {
       "type": "object",
+      "description": "",
       "properties": {
        "Purpose": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Materials": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
@@ -133,14 +140,18 @@ window.masterSchema = `
        },
        "AnticipatedMisconceptions": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "object",
+         "description": "",
          "properties": {
           "Misconception": {
-           "type": "string"
+           "type": "string",
+           "description": ""
           },
           "TeacherResponse": {
-           "type": "string"
+           "type": "string",
+           "description": "",
           }
          },
          "required": [
