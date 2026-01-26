@@ -151,7 +151,7 @@ window.masterSchema = `
           },
           "TeacherResponse": {
            "type": "string",
-           "description": "",
+           "description": ""
           }
          },
          "required": [
