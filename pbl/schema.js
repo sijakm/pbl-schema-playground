@@ -769,6 +769,7 @@ window.masterSchema = `
       },
       "Phase1_AnticipatedMisconceptions": {
        "type": "array",
+       "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
        "minItems": 2,
        "items": {
         "type": "object",
@@ -779,10 +780,12 @@ window.masterSchema = `
         ],
         "properties": {
          "Misconception": {
-          "type": "string"
+          "type": "string",
+          "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
          },
          "CorrectionLanguage": {
-          "type": "string"
+          "type": "string",
+          "description": "Specific teacher language or instructional moves—such as probing questions, prompts, or examples—that help students examine their thinking and move toward accurate understanding without directly giving the answer."
          }
         }
        }
@@ -1016,6 +1019,7 @@ window.masterSchema = `
       },
       "Phase2_AnticipatedMisconceptions": {
        "type": "array",
+       "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
        "minItems": 2,
        "items": {
         "type": "object",
@@ -1026,10 +1030,12 @@ window.masterSchema = `
         ],
         "properties": {
          "Misconception": {
-          "type": "string"
+          "type": "string",
+          "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
          },
          "CorrectionLanguage": {
-          "type": "string"
+          "type": "string",
+          "description": "Specific teacher language or instructional moves—such as probing questions, prompts, or examples—that help students examine their thinking and move toward accurate understanding without directly giving the answer."
          }
         }
        }
@@ -1260,6 +1266,7 @@ window.masterSchema = `
       },
       "Phase3_AnticipatedMisconceptions": {
        "type": "array",
+       "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
        "minItems": 2,
        "items": {
         "type": "object",
@@ -1270,10 +1277,12 @@ window.masterSchema = `
         ],
         "properties": {
          "Misconception": {
-          "type": "string"
+          "type": "string",
+          "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
          },
          "CorrectionLanguage": {
-          "type": "string"
+          "type": "string",
+          "description": "Specific teacher language or instructional moves—such as probing questions, prompts, or examples—that help students examine their thinking and move toward accurate understanding without directly giving the answer."
          }
         }
        }
