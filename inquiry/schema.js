@@ -68,7 +68,6 @@ window.masterSchema = `
       "required": [
         "Purpose",
         "Materials",
-        "InstructionsForTeacher",
         "InstructionsForTeachers"
       ],
       "additionalProperties": false
