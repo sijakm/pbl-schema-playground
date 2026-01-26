@@ -48,7 +48,6 @@ window.masterSchema = `
     },
     "OrientationPhase": {
       "type": "object",
-      "description": "",
       "properties": {
         "Purpose": {
           "type": "string",
@@ -69,8 +68,10 @@ window.masterSchema = `
       "required": [
         "Purpose",
         "Materials",
-        "InstructionsForTeacher"
-      ]
+        "InstructionsForTeacher",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
     },
     "Conceptualization Phase": {
       "type": "object",
@@ -96,7 +97,8 @@ window.masterSchema = `
         "Purpose",
         "Materials",
         "InstructionsForTeachers"
-      ]
+      ],
+      "additionalProperties": false
     },
     "Investigation Phase": {
       "type": "object",
@@ -175,7 +177,8 @@ window.masterSchema = `
         "Differentiation",
         "AccommodationsAndModifications",
         "QuickCheck"
-      ]
+      ],
+      "additionalProperties": false
     },
     "ConclusionPhase": {
       "type": "object",
@@ -201,11 +204,11 @@ window.masterSchema = `
         "Purpose",
         "Materials",
         "InstructionsForTeachers"
-      ]
+      ],
+      "additionalProperties": false
     },
     "DiscussionPhase": {
       "type": "object",
-      "description": "",
       "properties": {
         "Purpose": {
           "type": "string",
@@ -228,8 +231,12 @@ window.masterSchema = `
         }
       },
       "required": [
-        "Purpose"
-      ]
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers",
+        "TranscendentThinking"
+      ],
+      "additionalProperties": false
     },
     "ReviewAndSpacedRetrieval": {
       "type": "object",
@@ -265,7 +272,8 @@ window.masterSchema = `
               "required": [
                 "Question",
                 "ExpectedStudentResponses"
-              ]
+              ],
+              "additionalProperties": false
             },
             "SpacedRetrieval": {
               "type": "object",
@@ -286,19 +294,22 @@ window.masterSchema = `
               "required": [
                 "TeacherSay",
                 "ExpectedStudentResponses"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "required": [
             "ActiveRecall",
             "SpacedRetrieval"
-          ]
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
         "Materials",
         "InstructionsForTeachers"
-      ]
+      ],
+      "additionalProperties": false
     },
     "FormativeAssessment": {
       "type": "string",
@@ -325,6 +336,7 @@ window.masterSchema = `
     "ReviewAndSpacedRetrieval",
     "FormativeAssessment",
     "StudentPractice"
-  ]
+  ],
+  "additionalProperties": false
 }
 `;
