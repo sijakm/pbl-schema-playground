@@ -172,21 +172,26 @@ window.masterSchema = `
      },
      "Hypothesize": {
       "type": "object",
+      "description": "",
       "properties": {
        "Purpose": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Materials": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
        },
        "InstructionsForTeachers": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "ExpectedStudentResponses": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
@@ -202,27 +207,34 @@ window.masterSchema = `
      },
      "Experiment": {
       "type": "object",
+      "description": "",
       "properties": {
        "Purpose": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Materials": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
        },
        "InstructionsForTeachers": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Differentiation": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "AccommodationsAndModifications": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "QuickCheck": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        }
       },
       "required": [
@@ -237,18 +249,23 @@ window.masterSchema = `
      },
      "Analyze": {
       "type": "object",
+      "description": "",
       "properties": {
        "Purpose": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Materials": {
         "type": "array",
+        "description": "",
         "items": {
-         "type": "string"
+         "type": "string",
+         "description": ""
         }
        },
        "InstructionsForTeachers": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        }
       },
       "required": [
@@ -260,21 +277,26 @@ window.masterSchema = `
      },
      "Share": {
       "type": "object",
+      "description": "",
       "properties": {
        "Purpose": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "Materials": {
         "type": "array",
+        "description": "",
         "items": {
          "type": "string"
         }
        },
        "InstructionsForTeachers": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        },
        "TranscendentThinking": {
-        "type": "string"
+        "type": "string",
+        "description": ""
        }
       },
       "required": [
