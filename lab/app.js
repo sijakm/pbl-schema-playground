@@ -496,8 +496,8 @@ window.onload = () => {
   }
 
   try {
-    const cleaned = sanitizeSchemaText(window.masterSchema);
-    parsedMasterSchema = JSON.parse(cleaned);
+    //const cleaned = sanitizeSchemaText(window.masterSchema);
+    parsedMasterSchema = JSON.parse(window.masterSchema);
   } catch (e) {
     console.error("❌ Schema still invalid after sanitization", e);
     alert("Schema could not be loaded even after auto-fix.");
