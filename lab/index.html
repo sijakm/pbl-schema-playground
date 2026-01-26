@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JSON Schema Playground (Streaming)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 20px;
+      background: #f7f7f7;
+    }
+    h1 { margin-bottom: 8px; }
+    p { color: #555; margin-top: 4px; }
 
+    textarea {
+      width: 100%;
+      height: 70px;
+      margin-bottom: 16px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 13px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    .output {
+      min-height: 220px;
+      background: #111;
+      color: #0f0;
+    }
+
+    .row { margin-bottom: 24px; }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e9e9e9;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>JSON Schema Playground <span class="pill">Streaming</span></h1>
+  <p>Edit the prompt and schema descriptions, then stream the response into the output.</p>
+
+  <div class="row">
+    <h3>OpenAI API Key</h3>
+    <input
+      id="apiKey"
+      type="password"
+      placeholder="sk-..."
+      style="width:100%; padding:10px; font-size:13px;"
+    />
+    <p style="font-size:12px; color:#777; margin-top:8px;">
+      ⚠️ For production, do NOT put API keys in client-side code. Use a backend proxy.
+    </p>
+  </div>
+
+  <div class="row">
+  <h3>OpenAI Model</h3>
+  <select
+    id="modelSelect"
+    style="width:100%; padding:10px; font-size:13px;"
+  >
+    <option value="gpt-5-mini" selected>gpt-5-mini (default)</option>
+    <option value="gpt-5.2">gpt-5.2</option>
+    <option value="gpt-5.1">gpt-5.1</option>
+  </select>
+  <p style="font-size:12px; color:#777; margin-top:6px;">
+    Smaller models prioritize speed, while larger models typically deliver higher-quality responses.
+  </p>
+</div>
+
+  <div class="row">
+    <h3>Prompt</h3>
+    <p>You can safely edit the prompt.</p>
+    <textarea id="prompt"></textarea>
+  </div>
+
+  <div class="row">
+    <h3>Schema Instructions (Safe Mode)</h3>
+    <p>
+      Edit <strong>descriptions only</strong>.
+      The JSON structure, required fields, and validation rules are locked.
+    </p>
+    <div id="descriptions"></div>
+  </div>
+
+  <div class="row">
+    <button id="runBtn" onclick="run()">Run (Stream)</button>
+    <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
+    <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
+  </div>
+
+  <div class="row">
+    <h3>Output (Streaming)</h3>
+    <textarea
+      id="output"
+      class="output"
+      readonly
+      style="height:400px;"
+    ></textarea>
+  </div>
+
+  <div class="row">
+    <h3>Final JSON Schema (after edits)</h3>
+    <button onclick="copySchema()" style="margin-bottom:8px;">
+      Copy schema
+    </button>
+    <textarea id="finalSchema" readonly style="height:240px;"></textarea>
+  </div>
+
+  <script src="schema.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
