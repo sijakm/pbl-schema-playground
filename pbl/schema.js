@@ -453,9 +453,6 @@ window.masterSchema = `
       "LearningPlanOverview",
       "ProjectPhases",
       "ProjectGoals",
-      "CollaborativeStructuresAndArtifacts",
-      "MilestonesAndIndicators",
-      "VerticalAlignment",
       "CommunicationToAuthenticAudienceExpectations",
       "FinalDeliverableSummary",
       "GroupSuggestions"
@@ -509,70 +506,6 @@ window.masterSchema = `
        "items": {
         "type": "string"
        }
-      },
-      "CollaborativeStructuresAndArtifacts": {
-       "type": "object",
-       "additionalProperties": false,
-       "description": "The output must provide a list describing what the final deliverable will contain, including 5-7 items such as a discipline-accurate analysis tied to core concepts, a model, diagram, or representation of key ideas, an evaluation or assessment based on authentic constraints, a visual or structural representation of the proposed solution or findings, a written or oral justification supported by evidence, and a formal presentation to an authentic audience. These items should mirror the structure of the original example while using subject-neutral language.",
-       "required": [
-        "HowGroupsShareAndCompareIdeas",
-        "HowThinkingIsDocumented",
-        "WhereArtifactsAreCollected",
-        "HowTeachersMonitorAndFacilitateDiscourse"
-       ],
-       "properties": {
-        "HowGroupsShareAndCompareIdeas": {
-         "type": "string",
-         "description": "Protocols or routines students use to share, compare, and refine ideas within and across groups."
-        },
-        "HowThinkingIsDocumented": {
-         "type": "string",
-         "description": "Ways students make their thinking visible over time (e.g., notebooks, models, drafts, diagrams, digital tools)."
-        },
-        "WhereArtifactsAreCollected": {
-         "type": "string",
-         "description": "Physical or digital spaces where student work and learning artifacts are stored and revisited."
-        },
-        "HowTeachersMonitorAndFacilitateDiscourse": {
-         "type": "string",
-         "description": "Teacher strategies for observing collaboration, prompting deeper thinking, and guiding productive discussion."
-        }
-       }
-      },
-      "MilestonesAndIndicators": {
-       "type": "array",
-       "minItems": 3,
-       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-         "MilestoneName",
-         "Checkpoint",
-         "ObservableIndicators",
-         "HowIndicatorsAdjustWork"
-        ],
-        "properties": {
-         "MilestoneName": {
-          "type": "string"
-         },
-         "Checkpoint": {
-          "type": "string"
-         },
-         "ObservableIndicators": {
-          "type": "array",
-          "minItems": 2,
-          "items": {
-           "type": "string"
-          }
-         },
-         "HowIndicatorsAdjustWork": {
-          "type": "string"
-         }
-        }
-       }
-      },
-      "VerticalAlignment": {
-       "type": "string"
       },
       "CommunicationToAuthenticAudienceExpectations": {
        "type": "string"
