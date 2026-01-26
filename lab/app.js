@@ -39,7 +39,7 @@ function stopTimer(finalMessage) {
  * DEFAULT PROMPT
  ************************************/
 const defaultPrompt = `
-Create a complete Project-Based Learning (PBL) unit plan and project-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
+Create a complete LAB unit plan and lab-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
 
 MVP planning requirements (must be reflected in the unit):
 • Zip code localization: If a zip code is provided, include examples, stakeholders, audiences, and place-based resources that plausibly fit the community and surrounding area. Do not invent exact addresses/phone numbers; refer to realistic local institution types and roles.
@@ -63,6 +63,18 @@ Jacob Garrow: Allow speech-to-text for reasoning and labeling.
 Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.
 
 Output rule: Return ONLY JSON that validates against the response schema.
+Follow the exact section order and headings shown below. 
+Do not add extra sections or rename headings. 
+Use clear teacher-facing prose and student-facing directions where specified. 
+Include specific examples, scripts, and expected answers (not placeholders like “e.g.”).  
+Before introducing any new concept or content, include an Attention Reset activity designed to re-engage students, increase cognitive focus, and prepare working memory for new learning. 
+Language to use: Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (same language here for every attention reset & Interactivity) 
+Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to a apply a skill.  
+Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving. 
+Cultural Relevance & Inclusion: 
+Incorporate multiple perspectives and reflect on the impacts for all involved. \ 
+Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons 
+Avoid stereotypes. 
 `;
 
 /************************************
