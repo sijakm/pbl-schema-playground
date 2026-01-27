@@ -112,14 +112,10 @@ function findInvalidChars(text) {
 
   if (/[\u201C\u201D]/.test(text)) issues.push("Smart double quotes");
   if (/[\u2018\u2019]/.test(text)) issues.push("Smart single quotes");
-  if (/[\u2013\u2014]/.test(text)) issues.push("Long dash (– or —)");
-  if (/…/.test(text)) issues.push("Ellipsis (…)");
-
-  if (/[\u2028\u2029]/.test(text)) issues.push("Invalid line separator");
-  if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters");
-  if (/\n/.test(text)) issues.push("Line breaks are not allowed");
-  if (/\t/.test(text)) issues.push("Tabs are not allowed");
-
+  if (/[\u2013\u2014]/.test(text)) issues.push("Long dash");
+  if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters (emoji, special characters)");
+  // if (/\n/.test(text)) issues.push("Line breaks");
+  // if (/\t/.test(text)) issues.push("Tabs");
   return issues;
 }
 
