@@ -92,8 +92,8 @@ function findInvalidChars(text) {
   if (/[\u2018\u2019]/.test(text)) issues.push("Smart single quotes");
   if (/[\u2013\u2014]/.test(text)) issues.push("Long dash");
   if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters (emoji, special characters)");
-  if (/\n/.test(text)) issues.push("Line breaks");
-  if (/\t/.test(text)) issues.push("Tabs");
+  // if (/\n/.test(text)) issues.push("Line breaks");
+  // if (/\t/.test(text)) issues.push("Tabs");
   return issues;
 }
 
@@ -229,8 +229,8 @@ async function run() {
   "Curly quotes ( “ ” or ‘ ’ ) → use straight quotes ( \" ' )\n\n" +
   "Long dashes ( – or — ) → use a regular hyphen ( - )\n\n" +
   "Emojis or special symbols\n\n" +
-  "Line breaks (new lines)\n\n" +
-  "Tabs or extra spacing\n\n" +
+  // "Line breaks (new lines)\n\n" +
+  // "Tabs or extra spacing\n\n" +
   "These characters can cause errors when your content is processed.\n" +
   "Once everything is in plain text, you’re good to go."
 );
