@@ -266,7 +266,17 @@ document.querySelectorAll("#descriptions textarea").forEach(t => {
 });
 
 if (invalidFields.length > 0) {
-  alert("Some fields contain invalid characters. Please fix highlighted fields.");
+  alert(
+  "Your text contains characters that aren’t supported yet.\n\n" +
+  "Please remove or replace the following before continuing:\n\n" +
+  "Curly quotes ( “ ” or ‘ ’ ) → use straight quotes ( \" ' )\n\n" +
+  "Long dashes ( – or — ) → use a regular hyphen ( - )\n\n" +
+  "Emojis or special symbols\n\n" +
+  // "Line breaks (new lines)\n\n" +
+  // "Tabs or extra spacing\n\n" +
+  "These characters can cause errors when your content is processed.\n" +
+  "Once everything is in plain text, you’re good to go."
+);
   return;
 }
   
