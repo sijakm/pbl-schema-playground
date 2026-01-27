@@ -91,7 +91,7 @@ function findInvalidChars(text) {
   if (/[\u201C\u201D]/.test(text)) issues.push("Smart double quotes");
   if (/[\u2018\u2019]/.test(text)) issues.push("Smart single quotes");
   if (/[\u2013\u2014]/.test(text)) issues.push("Long dash");
-  if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters");
+  if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters (emoji, special characters)");
   if (/\n/.test(text)) issues.push("Line breaks");
   if (/\t/.test(text)) issues.push("Tabs");
   return issues;
@@ -218,14 +218,14 @@ let parsedMasterSchema = null;
 let currentAbort = null;
 
 async function run() {
-  // const invalid = [];
-  // document.querySelectorAll("#descriptions textarea").forEach(t => {
-  //   if (findInvalidChars(t.value).length) invalid.push(t);
-  // });
-  // if (invalid.length) {
-  //   alert("Fix invalid characters first.");
-  //   return;
-  // }
+  const invalid = [];
+  document.querySelectorAll("#descriptions textarea").forEach(t => {
+    if (findInvalidChars(t.value).length) invalid.push(t);
+  });
+  if (invalid.length) {
+    alert("Fix invalid characters first.");
+    return;
+  }
 
   const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
   document.querySelectorAll("#descriptions textarea").forEach(t => {
