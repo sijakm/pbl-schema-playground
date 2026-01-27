@@ -98,10 +98,11 @@
   </div>
 
   <div class="row">
-    <button id="runBtn" onclick="run()">Run (Stream)</button>
-    <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
-    <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
-  </div>
+  <button id="runBtn" onclick="run()">Run (Stream)</button>
+  <button id="renderBtn" onclick="renderHtml()" disabled>Render HTML (Stream)</button>
+  <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
+  <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
+</div>
 
   <div class="row">
     <h3>Output (Streaming)</h3>
@@ -112,6 +113,28 @@
       style="height:400px;"
     ></textarea>
   </div>
+
+  <div class="row">
+  <h3>HTML Output (Streaming)</h3>
+  <textarea
+    id="htmlOutput"
+    class="output"
+    readonly
+    style="height:320px;"
+  ></textarea>
+</div>
+
+<div class="row">
+  <h3>HTML Preview</h3>
+  <iframe
+    id="htmlPreview"
+    style="width:100%; height:420px; border:1px solid #ccc; background:#fff;"
+    sandbox=""
+  ></iframe>
+  <p style="font-size:12px; color:#777; margin-top:8px;">
+    Preview uses <strong>iframe srcdoc</strong> with sandbox for safety.
+  </p>
+</div>
 
   <div class="row">
     <h3>Final JSON Schema (after edits)</h3>
