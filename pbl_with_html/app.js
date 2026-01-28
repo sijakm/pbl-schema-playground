@@ -792,7 +792,7 @@ async function renderHtml() {
   }, 4000);
 
   try {
-    const prompt = buildUnitHtmlRendererPrompt(lastJsonText);
+    const prompt = window.buildUnitHtmlRendererPrompt(lastJsonText);
 
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
