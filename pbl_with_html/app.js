@@ -273,6 +273,8 @@ ${JSON.stringify(jsonPayload)}
 }
 
 async function streamHtmlFragment({ name, prompt, model, apiKey, onProgress }) {
+  let consecutiveWhitespaceCount = 0;
+  const MAX_WHITESPACE_DELTAS = 100;
   const ac = new AbortController();
   activeAbortControllers.push(ac);
 
@@ -319,15 +321,28 @@ async function streamHtmlFragment({ name, prompt, model, apiKey, onProgress }) {
       try { evt = JSON.parse(raw); } catch { continue; }
 
       if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-        fragment += evt.delta;
+  if (evt.delta.trim().length === 0) {
+    consecutiveWhitespaceCount++;
+  } else {
+    consecutiveWhitespaceCount = 0;
+  }
 
-        // throttled progress
-        const now = Date.now();
-        if (now - lastReportAt > 900) {
-          lastReportAt = now;
-          onProgress?.(name, fragment.length);
-        }
-      }
+  if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+    console.error(`❌ Fragment ${name} stalled (whitespace flood)`);
+
+    ac.abort();
+    throw new Error(`Fragment ${name} stalled due to whitespace output`);
+  }
+
+  fragment += evt.delta;
+
+  const now = Date.now();
+  if (now - lastReportAt > 900) {
+    lastReportAt = now;
+    onProgress?.(name, fragment.length);
+  }
+}
+
 
       if (evt.type === "error") {
         throw new Error(JSON.stringify(evt, null, 2));
@@ -550,6 +565,8 @@ if (invalidFields.length > 0) {
 
   // Simple “stuck detector”: if no deltas for 20s, print a marker.
   let lastDeltaAt = Date.now();
+  let consecutiveWhitespaceCount = 0;
+  const MAX_WHITESPACE_DELTAS = 100;
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
     if (diff > 30000) {
@@ -632,17 +649,35 @@ if (invalidFields.length > 0) {
         // Primary: text deltas :contentReference[oaicite:4]{index=4}
         if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
-
+        
+          // 🔒 WHITESPACE STALL DETECTOR
+          if (evt.delta.trim().length === 0) {
+            consecutiveWhitespaceCount++;
+          } else {
+            consecutiveWhitespaceCount = 0;
+          }
+        
+          if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+            alert(
+              "⚠️ Model output stalled.\n\n" +
+              "Too many empty / whitespace tokens were received.\n" +
+              "The request was stopped. Please run again."
+            );
+        
+            currentAbortController?.abort();
+            break;
+          }
+        
           const shouldAutoScroll = isUserNearBottom(output);
-
+        
           output.value += evt.delta;
           finalText += evt.delta;
-
+        
           if (shouldAutoScroll) {
             output.scrollTop = output.scrollHeight;
           }
           continue;
-        }
+}
 
         // Optional: show refusals inline (so you see why it stopped)
         if (evt.type === "response.refusal.delta" && typeof evt.delta === "string") {
@@ -735,6 +770,8 @@ async function renderHtml() {
 
   // Stuck detector (same pattern)
   let lastDeltaAt = Date.now();
+  let consecutiveWhitespaceCount = 0;
+  const MAX_WHITESPACE_DELTAS = 100;
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
     if (diff > 30000) {
@@ -805,20 +842,36 @@ async function renderHtml() {
         }
 
         if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-          lastDeltaAt = Date.now();
+  lastDeltaAt = Date.now();
 
-          // Stream progress into the existing output window
-          const shouldAutoScroll = isUserNearBottom(output);
-          output.value += evt.delta;
-          if (shouldAutoScroll) output.scrollTop = output.scrollHeight;
+  if (evt.delta.trim().length === 0) {
+    consecutiveWhitespaceCount++;
+  } else {
+    consecutiveWhitespaceCount = 0;
+  }
 
-          // Stream final HTML into dedicated textarea
-          htmlOutput.value += evt.delta;
-          lastRenderedHtml += evt.delta;
-          htmlOutput.scrollTop = htmlOutput.scrollHeight;
+  if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+    alert(
+      "⚠️ HTML rendering stalled.\n\n" +
+      "Too many empty tokens received.\n" +
+      "Please restart rendering."
+    );
 
-          continue;
-        }
+    currentAbortController?.abort();
+    break;
+  }
+
+  const shouldAutoScroll = isUserNearBottom(output);
+  output.value += evt.delta;
+  if (shouldAutoScroll) output.scrollTop = output.scrollHeight;
+
+  htmlOutput.value += evt.delta;
+  lastRenderedHtml += evt.delta;
+  htmlOutput.scrollTop = htmlOutput.scrollHeight;
+
+  continue;
+}
+
 
         if (evt.type === "response.refusal.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
