@@ -47,11 +47,6 @@ function stopTimer(finalMessage) {
 }
 
 /************************************
- * DEFAULT PROMPT
- ************************************/
-
-
-/************************************
  * DESCRIPTION COLLECTION
  ************************************/
 function collectDescriptions(schema, path = [], result = []) {
@@ -700,46 +695,6 @@ if (invalidFields.length > 0) {
   }
 }
 
-function sanitizeSchemaText(raw) {
-  let text = raw
-    .replace(/\r\n/g, "\n")
-    .replace(/\u00A0/g, " ")
-    .replace(/[\u2028\u2029]/g, "\n")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u2013\u2014]/g, "-")
-    .replace(/[→⇒↔]/g, "->");
-  let result = "";
-  let inString = false;
-  let prev = "";
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-
-    if (char === '"' && prev !== "\\") {
-      inString = !inString;
-      result += char;
-    }
-    else if (inString && char === "\n") {
-      result += "\\n";
-    }
-    else if (inString && char === "\t") {
-      result += "\\t";
-    }
-    else if (inString && char === '"' && prev !== "\\") {
-      result += '\\"';
-    }
-    else {
-      result += char;
-    }
-
-    prev = char;
-  }
-
-  return result;
-}
-
-
 function isUserNearBottom(el, threshold = 40) {
   return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
 }
@@ -905,6 +860,23 @@ async function renderHtml() {
   }
 }
 
+window.loadJsonAndEnableRender = function (jsonText) {
+  try {
+    const parsed = typeof jsonText === "string"
+      ? JSON.parse(jsonText)
+      : jsonText;
+
+    lastJsonObject = parsed;
+    lastJsonText = JSON.stringify(parsed, null, 2);
+
+    setRenderEnabled(true);
+
+    console.log("✅ JSON loaded. You can now click Render HTML.");
+  } catch (e) {
+    console.error("❌ Invalid JSON:", e);
+  }
+};
+
 /************************************
  * INIT
  ************************************/
@@ -915,7 +887,6 @@ window.onload = () => {
   }
 
   try {
-    //const cleaned = sanitizeSchemaText(window.masterSchema);
     parsedMasterSchema = JSON.parse(window.masterSchema);
   } catch (e) {
     console.error("❌ Schema still invalid after sanitization", e);
