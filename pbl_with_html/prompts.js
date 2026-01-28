@@ -1,6 +1,6 @@
-export const prompt1 = `...`;
-export const prompt2 = `...`;
-export const prompt3 = `...`;
-export const prompt4 = `...`;
-export const prompt5 = `...`;
-export const prompt6 = `...`;
+window.prompt1 = `...`;
+window.prompt2 = `...`;
+window.prompt3 = `...`;
+window.prompt4 = `...`;
+window.prompt5 = `...`;
+window.prompt6 = `...`;
