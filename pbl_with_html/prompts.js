@@ -81,19 +81,37 @@ window.buildEmptySectionPrompt = function ({ htmlHeading }) {
 };
 
 window.buildUnitDescription = function (jsonText) {
+  // 1️⃣ Parsiramo CELO JSON telo (lokalno, ne ide u prompt)
   const parsed = JSON.parse(jsonText);
-  const { UnitName, Description } = parsed.UnitPlan.UnitDescription;
-  console.log(UnitName, Description);
+
+  // 2️⃣ Izdvajamo SAMO ono što nam treba
+  const payload = {
+    UnitName: parsed.UnitPlan.UnitMeta.UnitName,
+    UnitDescription: parsed.UnitPlan.UnitDescription.Description
+  };
+
+  // (opciono) mini debug
+  console.log("🧩 UnitDescription payload sent to LLM:", payload);
+
+  // 3️⃣ Vraćamo KRATAK prompt sa MINIMALNIM payloadom
   return `
-You will receive a JSON object with the following structure:
-{
-  "UnitName": "...",
-  "Description": "..."
-}
+You are a professional HTML formatter.
+
+You will receive:
+- UnitName (string)
+- UnitDescription (string)
+
+Return ONLY HTML.
+Do NOT add explanations.
+Do NOT invent content.
 
 Render HTML using this EXACT template:
-<h2><strong>Unit Description: ${UnitName}</strong></h2>
-<p>${Description}</p>
+
+<h2><strong>Unit Description: {UnitName}</strong></h2>
+<p>{UnitDescription}</p>
+
+DATA:
+${JSON.stringify(payload)}
 `.trim();
 };
 
