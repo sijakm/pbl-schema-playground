@@ -227,51 +227,6 @@ function setUiRunning(isRunning) {
   }
 }
 
-function buildSectionPrompt({ sectionTitle, htmlHeading, jsonPayload, isFirstSection }) {
-  const greenHeading = `<h3><span style="color: rgb(115, 191, 39);">${htmlHeading}</span></h3>`;
-
-  return `
-You will receive ONE JSON object (already validated). Render ONLY the requested section into clean HTML.
-
-GLOBAL RULES
-- Output ONLY valid HTML (no markdown, no backticks, no prose).
-- Allowed tags: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-- No other tags.
-- Well-indented HTML.
-- In any <ol> or <ul>, ONLY <li> as direct children. No nested lists.
-- Do NOT invent content; use only JSON fields.
-- If a string field is empty (""), OMIT that subsection and its label.
-- If an array is empty, omit its heading and the corresponding <ul>/<ol>.
-- If text clearly forms a list, use <ul>/<ol>, otherwise <p>.
-- Expected/model responses must be rendered as:
-  <p>✅ Expected Student Responses</p>
-  then <ul><li>...</li></ul> (or <ol> if ordered).
-
-COLOR RULE
-- Use GREEN only for MAIN SECTION HEADINGS, exactly like:
-${greenHeading}
-
-OUTPUT SCOPE (HARD RULE)
-- Render ONLY this section: ${sectionTitle}
-- Do NOT render other sections.
-- Do NOT wrap with <html> or <body>. Output a fragment only.
-
-SECTION HEADING (HARD RULE)
-- Start the fragment with:
-${greenHeading}
-
-${isFirstSection ? `
-UNIT HEADER (ONLY IN THIS FIRST SECTION)
-- Before the section heading, render:
-  <h2>{UnitPlan.UnitMeta.UnitName}</h2>
-  then a <ul> of UnitMeta fields as <li> lines (UnitSubject, GradeLevel, ClassDurationMinutes, ProjectDurationDays, Location, ZipCode).
-` : ""}
-
-SECTION JSON:
-${JSON.stringify(jsonPayload)}
-`.trim();
-}
-
 async function streamHtmlFragment({ name, prompt, model, apiKey, onProgress }) {
   let consecutiveWhitespaceCount = 0;
   const MAX_WHITESPACE_DELTAS = 100;
@@ -457,7 +412,7 @@ async function renderHtmlParallel() {
   try {
     // build prompts
     const tasks = chunks.map(c => {
-      const prompt = buildSectionPrompt({
+      const prompt = window.buildSectionPrompt({
         sectionTitle: c.sectionTitle,
         htmlHeading: c.htmlHeading,
         jsonPayload: c.payload,
