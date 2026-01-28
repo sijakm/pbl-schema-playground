@@ -488,11 +488,18 @@ async function renderHtml() {
 
   // ---- shared state ----
   const prompts = [
-    { key: "p1", name: "Prompt 1", build: window.buildPrompt1 },
-    { key: "p2", name: "Prompt 2", build: window.buildPrompt2 },
-    { key: "p3", name: "Prompt 3", build: window.buildPrompt3 },
-    { key: "p4", name: "Prompt 4", build: window.buildPrompt4 }
-  ];
+  { key: "p1",  name: "Unit Description",                     build: window.buildUnitDescription },
+  { key: "p2",  name: "Assess Prior Knowledge",               build: window.buildAssessPriorKnowledge },
+  { key: "p3",  name: "Unit Overview",                        build: window.buildUnitOverview },
+  { key: "p4",  name: "Desired Outcomes",                     build: window.buildDesiredOutcomes },
+  { key: "p5",  name: "Framing the Learning",                 build: window.buildFramingTheLearning },
+  { key: "p6",  name: "Assessment Plan",                      build: window.buildAssessmentPlan },
+  { key: "p7",  name: "Learning Plan",                        build: window.buildLearningPlan },
+  { key: "p8",  name: "Teacher Guidance – Phase 1",            build: window.buildTeacherGuidancePhase1 },
+  { key: "p9",  name: "Teacher Guidance – Phase 2",            build: window.buildTeacherGuidancePhase2 },
+  { key: "p10", name: "Teacher Guidance – Phase 3",            build: window.buildTeacherGuidancePhase3 },
+  { key: "p11", name: "Unit Preparation & Considerations",     build: window.buildUnitPreparationAndConsiderations }
+];
 
   const htmlByPrompt = new Map();
   const progressMap = new Map();
