@@ -70,6 +70,7 @@ ${JSON.stringify(jsonPayload)}
 `.trim();
 }
 
+
 //NOVI PROMPTOVI!!!
 
 window.buildEmptySectionPrompt = function ({ htmlHeading }) {
