@@ -739,100 +739,116 @@ async function renderHtml() {
   }, 4000);
     try {
   const prompts = [
-    { name: "Prompt 1", build: window.buildPrompt1 },
-    { name: "Prompt 2", build: window.buildPrompt2 },
-    { name: "Prompt 3", build: window.buildPrompt3 },
-    { name: "Prompt 4", build: window.buildPrompt4 }
+    { key: "p1", name: "Prompt 1", build: window.buildPrompt1 },
+    { key: "p2", name: "Prompt 2", build: window.buildPrompt2 },
+    { key: "p3", name: "Prompt 3", build: window.buildPrompt3 },
+    { key: "p4", name: "Prompt 4", build: window.buildPrompt4 }
   ];
 
-  for (const p of prompts) {
-    output.value += `\n\n=== ${p.name} ===\n`;
-    output.scrollTop = output.scrollHeight;
+  // buffer po promptu
+  const htmlByPrompt = new Map();
+  const progressMap = new Map();
 
-    let consecutiveWhitespaceCount = 0;
-    const MAX_WHITESPACE_DELTAS = 1000;
+  const tasks = prompts.map(p => {
+    return (async () => {
+      const ac = new AbortController();
+      activeAbortControllers.push(ac);
 
-    const promptText = p.build(lastJsonText);
+      let localHtml = "";
+      let consecutiveWhitespaceCount = 0;
+      const MAX_WHITESPACE_DELTAS = 1000;
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
-      signal,
-      body: JSON.stringify({
-        model,
-        stream: true,
-        reasoning: { effort: "low" },
-        input: [{ role: "user", content: promptText }]
-      })
-    });
+      output.value += `\n[start] ${p.name}\n`;
+      output.scrollTop = output.scrollHeight;
 
-    if (!response.ok || !response.body) {
-      throw new Error(`${p.name} failed to start`);
-    }
+      const response = await fetch("https://api.openai.com/v1/responses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        signal: ac.signal,
+        body: JSON.stringify({
+          model,
+          stream: true,
+          reasoning: { effort: "low" },
+          input: [{ role: "user", content: p.build(lastJsonText) }]
+        })
+      });
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let buffer = "";
+      if (!response.ok || !response.body) {
+        throw new Error(`${p.name} failed`);
+      }
 
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
 
-      buffer += decoder.decode(value, { stream: true });
-      const { events, rest } = parseSseLines(buffer);
-      buffer = rest;
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
 
-      for (const raw of events) {
-        if (raw === "[DONE]") break;
+        buffer += decoder.decode(value, { stream: true });
+        const { events, rest } = parseSseLines(buffer);
+        buffer = rest;
 
-        let evt;
-        try { evt = JSON.parse(raw); } catch { continue; }
+        for (const raw of events) {
+          if (raw === "[DONE]") break;
 
-        if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-          lastDeltaAt = Date.now();
+          let evt;
+          try { evt = JSON.parse(raw); } catch { continue; }
 
-          if (evt.delta.trim().length === 0) {
-            consecutiveWhitespaceCount++;
-          } else {
-            consecutiveWhitespaceCount = 0;
+          if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+            lastDeltaAt = Date.now();
+
+            if (evt.delta.trim().length === 0) {
+              consecutiveWhitespaceCount++;
+            } else {
+              consecutiveWhitespaceCount = 0;
+            }
+
+            if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+              ac.abort();
+              throw new Error(`${p.name} stalled`);
+            }
+
+            localHtml += evt.delta;
+            progressMap.set(p.key, localHtml.length);
+
+            // shared progress line
+            const progressLine = prompts
+              .map(x => {
+                const v = progressMap.get(x.key);
+                return `${x.name}:${v ? Math.round(v / 1000) + "k" : "-"}`;
+              })
+              .join("  ");
+
+            output.value += `\n[progress] ${progressLine}`;
+            output.scrollTop = output.scrollHeight;
           }
-
-          if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
-            alert(`⚠️ ${p.name} stalled (too much whitespace)`);
-            currentAbortController?.abort();
-            return;
-          }
-
-          lastRenderedHtml += evt.delta;
-          htmlOutput.value += evt.delta;
-          htmlOutput.scrollTop = htmlOutput.scrollHeight;
-
-          const shouldAutoScroll = isUserNearBottom(output);
-          output.value += evt.delta;
-          if (shouldAutoScroll) output.scrollTop = output.scrollHeight;
         }
       }
-    }
-  }
 
-  if (htmlPreview) {
-    htmlPreview.srcdoc = lastRenderedHtml;
-  }
+      htmlByPrompt.set(p.key, localHtml);
+    })();
+  });
+
+  // 🚀 RUN ALL 4 IN PARALLEL
+  await Promise.all(tasks);
+
+  // 🧩 MERGE IN ORDER
+  lastRenderedHtml =
+    (htmlByPrompt.get("p1") || "") +
+    (htmlByPrompt.get("p2") || "") +
+    (htmlByPrompt.get("p3") || "") +
+    (htmlByPrompt.get("p4") || "");
+
+  htmlOutput.value = lastRenderedHtml;
+  if (htmlPreview) htmlPreview.srcdoc = lastRenderedHtml;
 
   output.value += "\n\n=== HTML Render Completed ===\n";
   stopTimer("Completed");
-}  catch (err) {
-    if (err?.name === "AbortError") {
-      output.value += "\n\n[HTML Render Cancelled]\n";
-      stopTimer("Cancelled");
-    } else {
-      output.value += `\n\n[HTML Render Fetch error]\n${err?.message || String(err)}\n`;
-      stopTimer("Error");
-    }
-  } finally {
+}
     clearInterval(stuckInterval);
     currentAbortController = null;
     setUiRunning(false);
