@@ -32,7 +32,7 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
 Output rule: Return ONLY JSON that validates against the response schema.
 `;
 
-window.buildUnitHtmlRendererPrompt(jsonText) {
+window.buildUnitHtmlRendererPrompt = function(jsonText) {
   return `
 You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly.
 
