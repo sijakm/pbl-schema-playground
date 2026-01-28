@@ -311,7 +311,7 @@ async function streamHtmlFragment({ name, prompt, model, apiKey, onProgress }) {
   return fragment;
 }
 
-async function renderHtmlParallel() {
+async function Parallel() {
   const output = document.getElementById("output");
   const htmlOutput = document.getElementById("htmlOutput");
   const htmlPreview = document.getElementById("htmlPreview");
@@ -707,37 +707,25 @@ async function renderHtml() {
     return;
   }
 
-  // Reset HTML panes
+  // reset UI
   htmlOutput.value = "";
   lastRenderedHtml = "";
   if (htmlPreview) htmlPreview.srcdoc = "";
 
-  // Log to existing output window (progress tracker)
-  output.value += "\n\n=== Rendering HTML (stream) ===\n";
+  output.value += "\n\n=== Rendering HTML (PARALLEL ×4) ===\n";
+  output.value += "\n[progress] Prompt 1:-  Prompt 2:-  Prompt 3:-  Prompt 4:-";
   output.scrollTop = output.scrollHeight;
 
   startTimer();
   setUiRunning(true);
 
-  // Abort support
   currentAbortController = new AbortController();
-  const { signal } = currentAbortController;
 
-  // Stuck detector (same pattern)
-  let lastDeltaAt = Date.now();
-  let consecutiveWhitespaceCount = 0;
-  const MAX_WHITESPACE_DELTAS = 1000;
-  const stuckInterval = setInterval(() => {
-    const diff = Date.now() - lastDeltaAt;
-    if (diff > 30000) {
-      output.value += `\n\n[⚠️ No streamed output for ${(diff / 1000).toFixed(
-        0
-      )}s — The model is still thinking 🤔]\n`;
-      output.scrollTop = output.scrollHeight;
-      lastDeltaAt = Date.now();
-    }
-  }, 4000);
-    try {
+  // ---- progress throttling ----
+  let lastProgressRenderAt = 0;
+  const PROGRESS_RENDER_INTERVAL = 500; // ms
+
+  // ---- shared state ----
   const prompts = [
     { key: "p1", name: "Prompt 1", build: window.buildPrompt1 },
     { key: "p2", name: "Prompt 2", build: window.buildPrompt2 },
@@ -745,21 +733,17 @@ async function renderHtml() {
     { key: "p4", name: "Prompt 4", build: window.buildPrompt4 }
   ];
 
-  // buffer po promptu
   const htmlByPrompt = new Map();
   const progressMap = new Map();
 
-  const tasks = prompts.map(p => {
-    return (async () => {
+  try {
+    const tasks = prompts.map(p => (async () => {
       const ac = new AbortController();
       activeAbortControllers.push(ac);
 
       let localHtml = "";
       let consecutiveWhitespaceCount = 0;
       const MAX_WHITESPACE_DELTAS = 1000;
-
-      output.value += `\n[start] ${p.name}\n`;
-      output.scrollTop = output.scrollHeight;
 
       const response = await fetch("https://api.openai.com/v1/responses", {
         method: "POST",
@@ -777,7 +761,7 @@ async function renderHtml() {
       });
 
       if (!response.ok || !response.body) {
-        throw new Error(`${p.name} failed`);
+        throw new Error(`${p.name} failed to start`);
       }
 
       const reader = response.body.getReader();
@@ -799,8 +783,6 @@ async function renderHtml() {
           try { evt = JSON.parse(raw); } catch { continue; }
 
           if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-            lastDeltaAt = Date.now();
-
             if (evt.delta.trim().length === 0) {
               consecutiveWhitespaceCount++;
             } else {
@@ -809,51 +791,69 @@ async function renderHtml() {
 
             if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
               ac.abort();
-              throw new Error(`${p.name} stalled`);
+              throw new Error(`${p.name} stalled (whitespace flood)`);
             }
 
             localHtml += evt.delta;
             progressMap.set(p.key, localHtml.length);
 
-            // shared progress line
-            const progressLine = prompts
-              .map(x => {
-                const v = progressMap.get(x.key);
-                return `${x.name}:${v ? Math.round(v / 1000) + "k" : "-"}`;
-              })
-              .join("  ");
+            // 🔒 THROTTLED progress render
+            const now = Date.now();
+            if (now - lastProgressRenderAt > PROGRESS_RENDER_INTERVAL) {
+              lastProgressRenderAt = now;
 
-            output.value += `\n[progress] ${progressLine}`;
-            output.scrollTop = output.scrollHeight;
+              const progressLine = prompts
+                .map(x => {
+                  const v = progressMap.get(x.key);
+                  return `${x.name}:${v ? Math.round(v / 1000) + "k" : "-"}`;
+                })
+                .join("  ");
+
+              output.value = output.value.replace(/\n\[progress][^\n]*$/, "");
+              output.value += `\n[progress] ${progressLine}`;
+              output.scrollTop = output.scrollHeight;
+            }
           }
         }
       }
 
       htmlByPrompt.set(p.key, localHtml);
-    })();
-  });
+    })());
 
-  // 🚀 RUN ALL 4 IN PARALLEL
-  await Promise.all(tasks);
+    // 🚀 RUN ALL PROMPTS IN PARALLEL
+    await Promise.all(tasks);
 
-  // 🧩 MERGE IN ORDER
-  lastRenderedHtml =
-    (htmlByPrompt.get("p1") || "") +
-    (htmlByPrompt.get("p2") || "") +
-    (htmlByPrompt.get("p3") || "") +
-    (htmlByPrompt.get("p4") || "");
+    // 🧩 MERGE IN FIXED ORDER
+    lastRenderedHtml =
+      (htmlByPrompt.get("p1") || "") +
+      (htmlByPrompt.get("p2") || "") +
+      (htmlByPrompt.get("p3") || "") +
+      (htmlByPrompt.get("p4") || "");
 
-  htmlOutput.value = lastRenderedHtml;
-  if (htmlPreview) htmlPreview.srcdoc = lastRenderedHtml;
+    htmlOutput.value = lastRenderedHtml;
+    if (htmlPreview) htmlPreview.srcdoc = lastRenderedHtml;
 
-  output.value += "\n\n=== HTML Render Completed ===\n";
-  stopTimer("Completed");
-} finally {
-    clearInterval(stuckInterval);
+    output.value += "\n\n=== HTML Render Completed ===\n";
+    stopTimer("Completed");
+
+  } catch (err) {
+    if (err?.name === "AbortError") {
+      output.value += "\n\n[HTML Render Cancelled]\n";
+      stopTimer("Cancelled");
+    } else {
+      output.value += `\n\n[HTML Render Error]\n${err?.message || String(err)}\n`;
+      stopTimer("Error");
+    }
+  } finally {
+    activeAbortControllers.forEach(ac => {
+      try { ac.abort(); } catch {}
+    });
+    activeAbortControllers = [];
     currentAbortController = null;
     setUiRunning(false);
   }
 }
+
 
 window.loadJsonAndEnableRender = function (jsonText) {
   try {
