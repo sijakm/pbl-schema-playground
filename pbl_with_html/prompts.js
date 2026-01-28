@@ -31,3 +31,60 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
 
 Output rule: Return ONLY JSON that validates against the response schema.
 `;
+
+window.buildUnitHtmlRendererPrompt(jsonText) {
+  return `
+You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly.
+
+INPUT FORMAT
+I will send you the JSON object like this:
+
+UNIT PLAN JSON:
+{{unitResponse}}
+
+Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. Do NOT explain or comment on it; just parse it and render it.
+
+GLOBAL RULES
+- Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
+- Allowed tags: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
+- Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h4>, etc.).
+- HTML must be well-indented and easy to read.
+- In any <ol> or <ul>, ONLY use <li> elements as direct children. Never place <p>, <span>, <ul>, <ol>, or any other tag as a child of a list.
+- Do NOT invent new instructional content; use only what exists in the JSON fields.
+- Preserve the logical order implied by the schema: render sections in the exact schema order.
+- If a string field is empty (""), OMIT that subsection and its label.
+- If an array is empty, omit its heading and the corresponding <ul> or <ol>.
+- Whenever the text clearly forms a list of prompts/questions/statements/responses, use <ul><li>…</li></ul> or <ol><li>…</li></ol>. Otherwise, use <p>.
+- Whenever you render expected/model student responses in ANY section, use this pattern:
+  - First: <p>✅ Expected Student Responses</p>
+  - Then: <ul><li>…</li></ul> (or <ol> if ordered)
+  - Do NOT nest lists inside <li>.
+
+COLOR RULE (HARD RULE)
+- Use GREEN only for MAIN SECTION HEADINGS.
+- Apply this exact style for those headings only:
+  <h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
+
+RENDERING INSTRUCTION (MONOLITHIC)
+- Begin with:
+  <h2>{UnitPlan.UnitMeta.UnitName}</h2>
+  then Unit meta as <ul> of <li> lines.
+- Then render, in this exact order:
+  1) Unit Description
+  2) 💡 Assess Prior Knowledge (ALWAYS render heading; if empty show "(No content provided.)")
+  3) Unit Overview
+  4) Desired Outcomes
+  5) Framing the Learning (including Place + Key Vocabulary tiers)
+  6) Assessment Plan
+  7) Learning Plan
+  8) Unit Preparation & Considerations
+  9) Teacher Guidance Phase 1
+  10) Teacher Guidance Phase 2
+  11) Teacher Guidance Phase 3
+
+Within each section, use the field order from the JSON.
+
+UNIT PLAN JSON:
+${jsonText}
+`.trim();
+};
