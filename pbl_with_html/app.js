@@ -737,9 +737,22 @@ async function renderHtml() {
       lastDeltaAt = Date.now();
     }
   }, 4000);
+    try {
+  const prompts = [
+    { name: "Prompt 1", build: window.buildPrompt1 },
+    { name: "Prompt 2", build: window.buildPrompt2 },
+    { name: "Prompt 3", build: window.buildPrompt3 },
+    { name: "Prompt 4", build: window.buildPrompt4 }
+  ];
 
-  try {
-    const prompt = window.buildUnitHtmlRendererPrompt(lastJsonText);
+  for (const p of prompts) {
+    output.value += `\n\n=== ${p.name} ===\n`;
+    output.scrollTop = output.scrollHeight;
+
+    let consecutiveWhitespaceCount = 0;
+    const MAX_WHITESPACE_DELTAS = 1000;
+
+    const promptText = p.build(lastJsonText);
 
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
@@ -752,29 +765,16 @@ async function renderHtml() {
         model,
         stream: true,
         reasoning: { effort: "low" },
-        input: [{ role: "user", content: prompt }]
+        input: [{ role: "user", content: promptText }]
       })
     });
 
-    if (!response.ok) {
-      const errText = await response.text().catch(() => "");
-      output.value +=
-        `\n\n[HTML Render Error] HTTP ${response.status} ${response.statusText}\n\n` +
-        (errText || "(no body)") +
-        "\n";
-      stopTimer("Error");
-      return;
-    }
-
-    if (!response.body) {
-      output.value += "\n\n[HTML Render Error] No response body (stream not available).\n";
-      stopTimer("Error");
-      return;
+    if (!response.ok || !response.body) {
+      throw new Error(`${p.name} failed to start`);
     }
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
-
     let buffer = "";
 
     while (true) {
@@ -782,7 +782,6 @@ async function renderHtml() {
       if (done) break;
 
       buffer += decoder.decode(value, { stream: true });
-
       const { events, rest } = parseSseLines(buffer);
       buffer = rest;
 
@@ -790,70 +789,42 @@ async function renderHtml() {
         if (raw === "[DONE]") break;
 
         let evt;
-        try {
-          evt = JSON.parse(raw);
-        } catch {
-          continue;
-        }
+        try { evt = JSON.parse(raw); } catch { continue; }
 
         if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-  lastDeltaAt = Date.now();
-
-  if (evt.delta.trim().length === 0) {
-    consecutiveWhitespaceCount++;
-  } else {
-    consecutiveWhitespaceCount = 0;
-  }
-
-  if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
-    alert(
-      "⚠️ HTML rendering stalled.\n\n" +
-      "Too many empty tokens received.\n" +
-      "Please restart rendering."
-    );
-
-    currentAbortController?.abort();
-    break;
-  }
-
-  const shouldAutoScroll = isUserNearBottom(output);
-  output.value += evt.delta;
-  if (shouldAutoScroll) output.scrollTop = output.scrollHeight;
-
-  htmlOutput.value += evt.delta;
-  lastRenderedHtml += evt.delta;
-  htmlOutput.scrollTop = htmlOutput.scrollHeight;
-
-  continue;
-}
-
-
-        if (evt.type === "response.refusal.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
+
+          if (evt.delta.trim().length === 0) {
+            consecutiveWhitespaceCount++;
+          } else {
+            consecutiveWhitespaceCount = 0;
+          }
+
+          if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+            alert(`⚠️ ${p.name} stalled (too much whitespace)`);
+            currentAbortController?.abort();
+            return;
+          }
+
+          lastRenderedHtml += evt.delta;
+          htmlOutput.value += evt.delta;
+          htmlOutput.scrollTop = htmlOutput.scrollHeight;
+
+          const shouldAutoScroll = isUserNearBottom(output);
           output.value += evt.delta;
-          output.scrollTop = output.scrollHeight;
-          continue;
-        }
-
-        if (evt.type === "error") {
-          lastDeltaAt = Date.now();
-          output.value += `\n\n[ERROR]\n${JSON.stringify(evt, null, 2)}\n`;
-          output.scrollTop = output.scrollHeight;
-          continue;
+          if (shouldAutoScroll) output.scrollTop = output.scrollHeight;
         }
       }
     }
+  }
 
-    // Set preview
-    if (htmlPreview) {
-      htmlPreview.srcdoc = lastRenderedHtml;
-    }
+  if (htmlPreview) {
+    htmlPreview.srcdoc = lastRenderedHtml;
+  }
 
-    output.value += "\n\n=== HTML Render Completed ===\n";
-    output.scrollTop = output.scrollHeight;
-
-    stopTimer("Completed");
-  } catch (err) {
+  output.value += "\n\n=== HTML Render Completed ===\n";
+  stopTimer("Completed");
+}  catch (err) {
     if (err?.name === "AbortError") {
       output.value += "\n\n[HTML Render Cancelled]\n";
       stopTimer("Cancelled");
