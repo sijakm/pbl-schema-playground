@@ -25,63 +25,6 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
 Output rule: Return ONLY JSON that validates against the response schema.
 `;
 
-window.buildUnitHtmlRendererPrompt = function(jsonText) {
-  return `
-You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly.
-
-INPUT FORMAT
-I will send you the JSON object like this:
-
-UNIT PLAN JSON:
-{{unitResponse}}
-
-Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. Do NOT explain or comment on it; just parse it and render it.
-
-GLOBAL RULES
-- Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
-- Allowed tags: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-- Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h4>, etc.).
-- HTML must be well-indented and easy to read.
-- In any <ol> or <ul>, ONLY use <li> elements as direct children. Never place <p>, <span>, <ul>, <ol>, or any other tag as a child of a list.
-- Do NOT invent new instructional content; use only what exists in the JSON fields.
-- Preserve the logical order implied by the schema: render sections in the exact schema order.
-- If a string field is empty (""), OMIT that subsection and its label.
-- If an array is empty, omit its heading and the corresponding <ul> or <ol>.
-- Whenever the text clearly forms a list of prompts/questions/statements/responses, use <ul><li>…</li></ul> or <ol><li>…</li></ol>. Otherwise, use <p>.
-- Whenever you render expected/model student responses in ANY section, use this pattern:
-  - First: <p>✅ Expected Student Responses</p>
-  - Then: <ul><li>…</li></ul> (or <ol> if ordered)
-  - Do NOT nest lists inside <li>.
-
-COLOR RULE (HARD RULE)
-- Use GREEN only for MAIN SECTION HEADINGS.
-- Apply this exact style for those headings only:
-  <h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
-
-RENDERING INSTRUCTION (MONOLITHIC)
-- Begin with:
-  <h2>{UnitPlan.UnitMeta.UnitName}</h2>
-  then Unit meta as <ul> of <li> lines.
-- Then render, in this exact order:
-  1) Unit Description
-  2) 💡 Assess Prior Knowledge (ALWAYS render heading; if empty show "(No content provided.)")
-  3) Unit Overview
-  4) Desired Outcomes
-  5) Framing the Learning (including Place + Key Vocabulary tiers)
-  6) Assessment Plan
-  7) Learning Plan
-  8) Unit Preparation & Considerations
-  9) Teacher Guidance Phase 1
-  10) Teacher Guidance Phase 2
-  11) Teacher Guidance Phase 3
-
-Within each section, use the field order from the JSON.
-
-UNIT PLAN JSON:
-${jsonText}
-`.trim();
-};
-
 window.buildSectionPrompt = function({ sectionTitle, htmlHeading, jsonPayload, isFirstSection }) {
   const greenHeading = `<h3><span style="color: rgb(115, 191, 39);">${htmlHeading}</span></h3>`;
 
@@ -127,138 +70,82 @@ ${JSON.stringify(jsonPayload)}
 `.trim();
 }
 
-window.buildPrompt1 = function (jsonText) {
+//NOVI PROMPTOVI!!!
+
+window.buildEmptySectionPrompt = function ({ htmlHeading }) {
   return `
-You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema (already validated).
-
-Your task is to render the FIRST PART of the Unit Plan into clean, readable HTML.
-
-GLOBAL RULES
-- Output ONLY valid HTML (no markdown, no prose).
-- Allowed tags: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-- Do NOT use any other tags.
-- HTML must be well-indented.
-- In <ul> or <ol>, ONLY <li> as direct children.
-- Do NOT invent content.
-- Use the exact order defined below.
-- If a string field is empty (""), OMIT that subsection.
-- If an array is empty, OMIT its list — EXCEPT where noted.
-- Use <ul>/<ol> when text clearly forms lists; otherwise use <p>.
-
-EXPECTED STUDENT RESPONSES RULE
-Whenever expected/model student responses appear:
-<p>✅ Expected Student Responses</p>
-<ul><li>…</li></ul>
-
-COLOR RULE (HARD)
-Use GREEN only for MAIN SECTION HEADINGS:
-<h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
-
-BEGIN DOCUMENT
-- Start with:
-<h2>{UnitPlan.UnitMeta.UnitName}</h2>
-- Then render UnitMeta as a <ul> of <li> items.
-
-RENDER SECTIONS IN THIS EXACT ORDER
-
-1) Unit Description
-
-2) 💡 Assess Prior Knowledge
-- ALWAYS render this heading.
-- If content is empty, render:
+<h3><span style="color: rgb(115, 191, 39);">${htmlHeading}</span></h3>
 <p>(No content provided.)</p>
-
-3) Unit Overview
-
-4) Desired Outcomes
-
-5) Framing the Learning
-- Include Place
-- Include ALL Key Vocabulary tiers (Tier 1, 2, 3)
-- Omit any empty vocabulary tiers individually
-
-6) Assessment Plan
-
-7) Learning Plan
-
-UNIT PLAN JSON:
-${jsonText}
 `.trim();
 };
 
-
-window.buildPrompt2 = function (jsonText) {
-  return `
-You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema.
-
-Render ONLY the following section into HTML:
-
-9) Teacher Guidance Phase 1
-
-RULES
-- Output ONLY valid HTML.
-- Same allowed tags and list rules as before.
-- Use GREEN heading style for the section title.
-- Do NOT render any other sections.
-- If all content is empty, render only the heading and:
-<p>(No content provided.)</p>
-
-SECTION HEADING
-<h3><span style="color: rgb(115, 191, 39);">Teacher Guidance – Phase 1</span></h3>
-
-UNIT PLAN JSON:
-${jsonText}
-`.trim();
+window.buildUnitDescription = function (jsonText) {
+  return window.buildSectionPrompt({
+    sectionTitle: "UnitDescription",
+    htmlHeading: "Unit Description",
+    jsonPayload: JSON.parse(jsonText).UnitDescription,
+    isFirstSection: true
+  });
 };
 
-window.buildPrompt3 = function (jsonText) {
-  return `
-You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema.
-
-Render ONLY the following section into HTML:
-
-10) Teacher Guidance Phase 2
-
-RULES
-- Output ONLY valid HTML.
-- Same allowed tags and list rules as before.
-- Use GREEN heading style.
-- Do NOT render any other sections.
-- If all content is empty, render only the heading and:
-<p>(No content provided.)</p>
-
-SECTION HEADING
-<h3><span style="color: rgb(115, 191, 39);">Teacher Guidance – Phase 2</span></h3>
-
-UNIT PLAN JSON:
-${jsonText}
-`.trim();
+window.buildAssessPriorKnowledge = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "💡 Assess Prior Knowledge"
+  });
 };
 
-window.buildPrompt4 = function (jsonText) {
-  return `
-You will receive ONE JSON object that strictly follows the PBLUnitPlanResponse schema.
-
-Render the FINAL PART of the Unit Plan into HTML.
-
-RULES
-- Output ONLY valid HTML.
-- Same tag and list rules.
-- Use GREEN heading style for BOTH sections.
-- Do NOT render any other sections.
-
-RENDER IN THIS EXACT ORDER
-
-11) Teacher Guidance Phase 3
-- If empty, render heading +:
-<p>(No content provided.)</p>
-
-8) Unit Preparation & Considerations
-- Render AFTER Phase 3.
-- Omit empty subsections individually.
-
-UNIT PLAN JSON:
-${jsonText}
-`.trim();
+window.buildUnitOverview = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Unit Overview"
+  });
 };
+
+window.buildDesiredOutcomes = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Desired Outcomes"
+  });
+};
+
+window.buildFramingTheLearning = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Framing the Learning"
+  });
+};
+
+window.buildAssessmentPlan = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Assessment Plan"
+  });
+};
+
+window.buildLearningPlan = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Learning Plan"
+  });
+};
+
+window.buildUnitPreparationAndConsiderations = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Unit Preparation & Considerations"
+  });
+};
+
+window.buildTeacherGuidancePhase1 = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Teacher Guidance – Phase 1"
+  });
+};
+
+window.buildTeacherGuidancePhase2 = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Teacher Guidance – Phase 2"
+  });
+};
+
+window.buildTeacherGuidancePhase3 = function () {
+  return window.buildEmptySectionPrompt({
+    htmlHeading: "Teacher Guidance – Phase 3"
+  });
+};
+
 
