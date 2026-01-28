@@ -848,7 +848,7 @@ async function renderHtml() {
 
   output.value += "\n\n=== HTML Render Completed ===\n";
   stopTimer("Completed");
-}
+} finally {
     clearInterval(stuckInterval);
     currentAbortController = null;
     setUiRunning(false);
