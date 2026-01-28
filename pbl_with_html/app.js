@@ -229,7 +229,7 @@ function setUiRunning(isRunning) {
 
 async function streamHtmlFragment({ name, prompt, model, apiKey, onProgress }) {
   let consecutiveWhitespaceCount = 0;
-  const MAX_WHITESPACE_DELTAS = 100;
+  const MAX_WHITESPACE_DELTAS = 1000;
   const ac = new AbortController();
   activeAbortControllers.push(ac);
 
@@ -521,7 +521,7 @@ if (invalidFields.length > 0) {
   // Simple “stuck detector”: if no deltas for 20s, print a marker.
   let lastDeltaAt = Date.now();
   let consecutiveWhitespaceCount = 0;
-  const MAX_WHITESPACE_DELTAS = 100;
+  const MAX_WHITESPACE_DELTAS = 1000;
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
     if (diff > 30000) {
@@ -726,7 +726,7 @@ async function renderHtml() {
   // Stuck detector (same pattern)
   let lastDeltaAt = Date.now();
   let consecutiveWhitespaceCount = 0;
-  const MAX_WHITESPACE_DELTAS = 100;
+  const MAX_WHITESPACE_DELTAS = 1000;
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
     if (diff > 30000) {
