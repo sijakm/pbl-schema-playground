@@ -979,7 +979,7 @@ window.onload = () => {
     return;
   }
 
-  document.getElementById("prompt").value = defaultPrompt;
+  document.getElementById("prompt").value = window.defaultPrompt;
   renderDescriptionEditor();
   setRenderEnabled(false);
 };
