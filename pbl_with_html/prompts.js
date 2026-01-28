@@ -81,12 +81,20 @@ window.buildEmptySectionPrompt = function ({ htmlHeading }) {
 };
 
 window.buildUnitDescription = function (jsonText) {
-  return window.buildSectionPrompt({
-    sectionTitle: "UnitDescription",
-    htmlHeading: "Unit Description",
-    jsonPayload: JSON.parse(jsonText).UnitDescription,
-    isFirstSection: true
-  });
+  const parsed = JSON.parse(jsonText);
+  const { UnitName, Description } = parsed.UnitPlan.UnitDescription;
+  console.log(UnitName, Description);
+  return `
+You will receive a JSON object with the following structure:
+{
+  "UnitName": "...",
+  "Description": "..."
+}
+
+Render HTML using this EXACT template:
+<h2><strong>Unit Description: ${UnitName}</strong></h2>
+<p>${Description}</p>
+`.trim();
 };
 
 window.buildAssessPriorKnowledge = function () {
