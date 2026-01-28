@@ -1,10 +1,3 @@
-window.prompt1 = `...`;
-window.prompt2 = `...`;
-window.prompt3 = `...`;
-window.prompt4 = `...`;
-window.prompt5 = `...`;
-window.prompt6 = `...`;
-
 window.defaultPrompt = `
 Create a complete Project-Based Learning (PBL) unit plan and project-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
 
