@@ -298,12 +298,12 @@ if (invalidFields.length > 0) {
   startTimer();
   setUiRunning(true);
 
-  if (!apiKey) {
-    output.value = "API key is required.";
-    stopTimer("Stopped");
-    setUiRunning(false);
-    return;
-  }
+  // if (!apiKey) {
+  //   output.value = "API key is required.";
+  //   stopTimer("Stopped");
+  //   setUiRunning(false);
+  //   return;
+  // }
 
   // Abort support
   currentAbortController = new AbortController();
@@ -322,12 +322,11 @@ if (invalidFields.length > 0) {
 
   try {
     // ✅ Responses API streaming (recommended) :contentReference[oaicite:2]{index=2}
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
   method: "POST",
   headers: {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${apiKey}`
-  },
+    "Content-Type": "application/json"
+  },  
   signal,
   body: JSON.stringify({
     model: model,
