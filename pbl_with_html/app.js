@@ -296,7 +296,7 @@ if (invalidFields.length > 0) {
 
   try {
     // ✅ Responses API streaming (recommended) :contentReference[oaicite:2]{index=2}
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -513,7 +513,7 @@ async function renderHtml() {
       let consecutiveWhitespaceCount = 0;
       const MAX_WHITESPACE_DELTAS = 1000;
 
-      const response = await fetch("https://api.openai.com/v1/responses", {
+      const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
