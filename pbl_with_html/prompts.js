@@ -75,25 +75,21 @@ ${JSON.stringify(jsonPayload)}
 
 window.buildEmptySectionPrompt = function ({ htmlHeading }) {
   return `
+Return ONLY valid HTML.
+Return a placeholder for an empty section using this EXACT template:
 <h3><span style="color: rgb(115, 191, 39);">${htmlHeading}</span></h3>
-<p>(No content provided.)</p>
+<p>Work in progress... 🚧</p>
 `.trim();
 };
 
 window.buildUnitDescription = function (jsonText) {
-  // 1️⃣ Parsiramo CELO JSON telo (lokalno, ne ide u prompt)
   const parsed = JSON.parse(jsonText);
 
-  // 2️⃣ Izdvajamo SAMO ono što nam treba
   const payload = {
     UnitName: parsed.UnitPlan.UnitMeta.UnitName,
     UnitDescription: parsed.UnitPlan.UnitDescription.Description
   };
 
-  // (opciono) mini debug
-  console.log("🧩 UnitDescription payload sent to LLM:", payload);
-
-  // 3️⃣ Vraćamo KRATAK prompt sa MINIMALNIM payloadom
   return `
 You are a professional HTML formatter.
 
@@ -115,22 +111,202 @@ ${JSON.stringify(payload)}
 `.trim();
 };
 
-window.buildAssessPriorKnowledge = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "💡 Assess Prior Knowledge"
-  });
+window.buildAssessPriorKnowledge = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+
+  const payload = {
+    AssessPriorKnowledge: parsed.UnitPlan.AssessPriorKnowledge
+  };
+
+  return `
+You are a professional instructional HTML formatter writing for classroom teachers.
+
+You will receive ONE plain-text field describing an Assess Prior Knowledge activity.
+You MAY reorganize and rephrase the provided content to make it teacher-friendly.
+You MUST NOT invent new activities or ideas beyond what is present.
+
+Return ONLY valid HTML.
+Do NOT add explanations or comments.
+
+ALLOWED TAGS ONLY:
+<p>, <h3>, <strong>, <em>, <span>, <ol>, <ul>, <li>
+
+HARD STRUCTURE (MUST FOLLOW):
+
+1) Start with this exact heading:
+<h3><span>💡 Assess Prior Knowledge</span></h3>
+
+2) Immediately after the heading, ALWAYS render this Purpose text exactly as written:
+<p><strong>Purpose:</strong> Activating student's prior knowledge helps teachers uncover existing ideas, partial understandings, and misconceptions. This information supports instructional decisions and provides a foundation for sensemaking and model development throughout the unit.</p>
+
+3) Render a teacher-facing "Say:" section.
+- Even if the input text does NOT explicitly contain "Say:"
+- Synthesize or rephrase existing content into 1-2 clear teacher talk paragraphs
+- Begin with:
+<p><strong>Say:</strong></p>
+- Follow with one or more <p> elements
+
+4) Any student tasks, prompts, statements, or instructions:
+- Render as <ol> or <ul>
+- Each item MUST be a single <li>
+- NO <p> or other tags inside <li>
+
+5) When expected or model student responses appear:
+- Render this EXACT label:
+<p>✅ Expected Student Responses</p>
+- Then render all expected responses as a <ul> with <li> only
+- NO nested lists
+- NO <p> inside <li>
+
+6) If alternate options or variations appear:
+- Render:
+<p><strong>Alternate Options:</strong></p>
+- Then a <ul> with brief <li> items
+
+DO NOT:
+- Use any tags not listed
+- Nest lists
+- Skip the Purpose section
+- Invent new instructional content, but use all provided ideas
+
+INPUT TEXT:
+${payload.AssessPriorKnowledge}
+`.trim();
 };
 
-window.buildUnitOverview = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Unit Overview"
-  });
+
+window.buildUnitOverview = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const overview = parsed.UnitPlan.UnitOverview;
+
+  return `
+You are a professional instructional HTML formatter writing a student-facing project launch document.
+
+You will receive structured content for a Unit Overview.
+You MAY reorganize and lightly rephrase for clarity and flow.
+You MUST NOT invent new content.
+
+Return ONLY valid HTML.
+Do NOT include explanations.
+
+ALLOWED TAGS ONLY:
+<p>, <h3>, <strong>, <span>, <ul>, <li>
+
+HARD STRUCTURE (MUST FOLLOW):
+
+1) Section heading:
+<h3><span>Unit Overview</span></h3>
+
+2) Purpose (render EXACTLY as written):
+<p><strong>Purpose:</strong> To introduce students to an engaging, real-world design challenge that sparks curiosity, grounds learning in authentic applications, presents the driving question, and clearly defines the mission and final deliverable that will guide inquiry throughout the unit.</p>
+
+3) Task Statement
+- Render as student-facing narrative paragraphs
+- Preserve tone and authenticity
+
+4) Driving Question
+- Render as its own emphasized paragraph
+
+5) Mission
+- Must begin with: "Your task is to..."
+
+6) Project Context & Stakeholders
+- Narrative paragraph
+
+7) Final Deliverable Requirements
+- Render as <ul> with <li> only
+
+8) Closing Call to Action
+- Final motivating paragraph
+
+DO NOT:
+- Add teaching notes
+- Add standards or rubrics
+- Nest lists
+- Use disallowed tags
+
+CONTENT:
+Task Statement:
+${overview.TaskStatement}
+
+Driving Question:
+${overview.DrivingQuestion}
+
+Mission:
+${overview.Mission}
+
+Project Context & Stakeholders:
+${overview.ProjectContextAndStakeholders}
+
+Final Deliverable Requirements:
+${overview.FinalDeliverableRequirements.join("\n")}
+
+Closing Call to Action:
+${overview.ClosingCallToAction}
+`.trim();
 };
 
-window.buildDesiredOutcomes = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Desired Outcomes"
-  });
+
+window.buildDesiredOutcomes = function (jsonText) {
+  return `
+You will receive ONE JSON object representing DesiredOutcomes.
+
+Your task is to render HTML for the "Desired Outcomes" section using the EXACT structure described below.
+
+Rules:
+- Output ONLY valid HTML.
+- Do NOT add explanations or commentary.
+- Do NOT invent or modify content.
+- Use ONLY the information provided in the JSON.
+- Use ONLY these tags:
+  <p>, <h3>, <strong>, <span>, <ul>, <ol>, <li>
+- In <ul> or <ol>, ONLY <li> elements may be direct children.
+- Do NOT nest <p>, <span>, <ul>, or <ol> inside <li>.
+
+HTML STRUCTURE TO RENDER (IN THIS EXACT ORDER):
+
+1) Section heading:
+<h3><span style="color: rgb(115, 191, 39);">Desired Outcomes</span></h3>
+
+2) Standards Aligned
+<p><strong>📎 Standards Aligned</strong></p>
+<ul>
+  <li>Each standard from StandardsAligned</li>
+</ul>
+
+3) Big Ideas & Essential Questions
+<p><strong>Big Ideas & Essential Questions</strong></p>
+
+For EACH item in BigIdeasAndEssentialQuestions, render:
+<p><strong>Big Idea:</strong> {BigIdea}</p>
+<p><strong>Essential Question:</strong> {EssentialQuestion}</p>
+
+4) Learning Objectives
+<p><strong>Learning Objectives</strong></p>
+
+Render the following THREE sections IN THIS ORDER:
+
+A) Students will understand that…
+<p><strong>Students will understand that…</strong></p>
+<ul>
+  <li>Each item from StudentsWillUnderstandThat</li>
+</ul>
+
+B) Students will know that…
+<p><strong>Students will know that…</strong></p>
+<ul>
+  <li>Each item from StudentsWillKnowThat</li>
+</ul>
+
+C) Students will be able to…
+<p><strong>Students will be able to…</strong></p>
+<ul>
+  <li>Each item from StudentsWillBeAbleTo</li>
+</ul>
+
+JSON INPUT:
+${jsonText}
+`.trim();
 };
 
 window.buildFramingTheLearning = function () {
@@ -174,5 +350,3 @@ window.buildTeacherGuidancePhase3 = function () {
     htmlHeading: "Teacher Guidance – Phase 3"
   });
 };
-
-
