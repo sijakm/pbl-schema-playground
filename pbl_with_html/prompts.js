@@ -279,7 +279,9 @@ HTML STRUCTURE TO RENDER (IN THIS EXACT ORDER):
 
 For EACH item in BigIdeasAndEssentialQuestions, render:
 <p><strong>Big Idea:</strong> {BigIdea}</p>
-<p><strong>Essential Question:</strong> {EssentialQuestion}</p>
+<ul>
+  <li>Essential Question:</strong> {EssentialQuestion}</li>
+</ul>
 
 4) Learning Objectives
 <p><strong>Learning Objectives</strong></p>
@@ -350,3 +352,5 @@ window.buildTeacherGuidancePhase3 = function () {
     htmlHeading: "Teacher Guidance – Phase 3"
   });
 };
+
+
