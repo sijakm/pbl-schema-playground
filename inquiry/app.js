@@ -250,17 +250,16 @@ async function run() {
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
 
-  if (!apiKey) return alert("API key required");
+  // if (!apiKey) return alert("API key required");
 
   output.value = "";
   startTimer();
 
   currentAbort = new AbortController();
 
-  const res = await fetch("https://api.openai.com/v1/responses", {
+  const res = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json"
     },
     signal: currentAbort.signal,
