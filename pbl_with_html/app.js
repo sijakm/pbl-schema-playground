@@ -270,12 +270,12 @@ if (invalidFields.length > 0) {
   startTimer();
   setUiRunning(true);
 
-  if (!apiKey) {
-    output.value = "API key is required.";
-    stopTimer("Stopped");
-    setUiRunning(false);
-    return;
-  }
+  // if (!apiKey) {
+  //   output.value = "API key is required.";
+  //   stopTimer("Stopped");
+  //   setUiRunning(false);
+  //   return;
+  // }
 
   // Abort support
   currentAbortController = new AbortController();
@@ -460,10 +460,10 @@ async function renderHtml() {
   const apiKey = document.getElementById("apiKey").value.trim();
   const model = document.getElementById("modelSelect").value;
 
-  if (!apiKey) {
-    alert("API key is required.");
-    return;
-  }
+  // if (!apiKey) {
+  //   alert("API key is required.");
+  //   return;
+  // }
 
   if (!lastJsonText || !lastJsonObject) {
     alert("No valid JSON found yet. Run the unit generation first.");
