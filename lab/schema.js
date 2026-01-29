@@ -29,7 +29,7 @@ window.masterSchema = `
     },
     "StandardsAligned": {
       "type": "array",
-      "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Do not add NGSS prefix",
+      "description": "List all unique standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content.",
       "items": {
         "type": "string"
       }
