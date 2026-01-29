@@ -596,7 +596,14 @@ async function renderHtml() {
       (htmlByPrompt.get("p1") || "") +
       (htmlByPrompt.get("p2") || "") +
       (htmlByPrompt.get("p3") || "") +
-      (htmlByPrompt.get("p4") || "");
+      (htmlByPrompt.get("p4") || "") +
+      (htmlByPrompt.get("p5") || "") +
+      (htmlByPrompt.get("p6") || "") +
+      (htmlByPrompt.get("p7") || "") +
+      (htmlByPrompt.get("p8") || "") +
+      (htmlByPrompt.get("p9") || "") +
+      (htmlByPrompt.get("p10") || "") +
+      (htmlByPrompt.get("p11") || "");
 
     htmlOutput.value = lastRenderedHtml;
     if (htmlPreview) htmlPreview.srcdoc = lastRenderedHtml;

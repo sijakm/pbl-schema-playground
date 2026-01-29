@@ -311,17 +311,230 @@ ${jsonText}
 `.trim();
 };
 
-window.buildFramingTheLearning = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Framing the Learning"
-  });
+window.buildFramingTheLearning = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const framing = parsed.UnitPlan.FramingTheLearning;
+
+  return `
+You are a professional HTML formatter for a teacher-facing curriculum document.
+
+You will receive ONE JSON object representing "FramingTheLearning".
+
+Return ONLY valid HTML.
+Do NOT add explanations.
+Do NOT invent content.
+Do NOT output anything except HTML.
+
+Allowed tags:
+<p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>
+
+LIST RULE (CRITICAL):
+- In <ul> or <ol>, ONLY <li> may be direct children.
+- NEVER place <p>, <span>, <ul>, <ol>, or any other tag inside a <li>.
+
+COLOR RULE:
+All MAIN SECTION HEADINGS must be rendered exactly like this:
+<h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
+
+--------------------------------------------------
+RENDER ORDER & STRUCTURE (HARD RULE)
+--------------------------------------------------
+
+1️⃣ DRIVING QUESTION (GREEN HEADING)
+
+<h3><span style="color: rgb(115, 191, 39);">Driving Question</span></h3>
+
+Then render this EXACT paragraph word-for-word:
+<p>
+<strong>Purpose:</strong> To provide a clear, tightly aligned focal point that anchors the unit’s core problem, directs student inquiry toward the specific knowledge and skills they must develop, and ensures that all project work—including investigation, modeling, and application—coherently contributes to answering a meaningful, real-world question.
+</p>
+
+Then render:
+<p><strong>Question:</strong> ${framing.DrivingQuestion}</p>
+
+--------------------------------------------------
+
+2️⃣ PROBLEM (GREEN HEADING)
+
+<h3><span style="color: rgb(115, 191, 39);">Problem</span></h3>
+
+Then render this EXACT purpose paragraph:
+<p>
+<strong>Purpose:</strong> To clearly articulate a focused, high-impact real-world problem that anchors the unit, guides students toward meaningful solution development, and enables teachers to identify authentic audiences and contexts that transform the project from theoretical study into purposeful, actionable work with tangible relevance.
+</p>
+
+Then render ALL content from:
+${framing.Problem}
+
+You MAY:
+- Split into paragraphs
+- Use <strong> for emphasis
+- Use <ul><li> only if structure clearly implies a list
+
+You MUST NOT omit any ideas.
+
+--------------------------------------------------
+
+3️⃣ PROJECT (GREEN HEADING)
+
+<h3><span style="color: rgb(115, 191, 39);">Project</span></h3>
+
+Then render this EXACT purpose paragraph:
+<p>
+<strong>Purpose:</strong> To outline how students will actively engage with a clearly defined, locally relevant problem through a structured yet flexible project pathway that balances student choice with shared focus, ensures consistent opportunities for making thinking visible, and provides the necessary scaffolds for students to develop, refine, and implement their own evidence-based solutions.
+</p>
+
+Then render ALL content from:
+${framing.Project}
+
+--------------------------------------------------
+
+4️⃣ PLACE (GREEN HEADING)
+
+<h3><span style="color: rgb(115, 191, 39);">Place</span></h3>
+
+Then render this EXACT purpose paragraph:
+<p>
+<strong>Purpose:</strong> To identify the specific community contexts, physical locations, and authentic audiences that will deepen student relevance, strengthen the real-world problem at the center of the unit, and inform targeted learning experiences—such as fieldwork, local partnerships, and public presentations—so that the project remains grounded in the actual place where students live, learn, and design solutions.
+</p>
+
+Then render:
+<p>${framing.Place.PlaceOverview}</p>
+
+Then for EACH site in Place.Sites, render in order:
+
+<p><strong>The Site:</strong> {TheSite}</p>
+<p><strong>Engagement:</strong> {Engagement}</p>
+<p><strong>Relevance:</strong> {Relevance}</p>
+
+Finally render:
+<p><em>${framing.Place.PlaceMattersReminder}</em></p>
+
+--------------------------------------------------
+
+5️⃣ KEY VOCABULARY (GREEN HEADING)
+
+<h3><span style="color: rgb(115, 191, 39);">Key Vocabulary</span></h3>
+
+<p>${framing.KeyVocabulary.VocabularyRationale}</p>
+
+For EACH Tier (in order), render:
+
+<p><strong>{TierTitle}</strong></p>
+<p><em>{TierWhyItMatters}</em></p>
+
+<ul>
+  <li><strong>TERM</strong>: Definition (StandardsConnection)</li>
+</ul>
+
+Each term MUST be its own <li>.
+Do NOT nest lists.
+
+--------------------------------------------------
+
+INPUT JSON:
+${JSON.stringify(framing)}
+`.trim();
 };
 
-window.buildAssessmentPlan = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Assessment Plan"
-  });
+
+window.buildAssessmentPlan = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const assessment = parsed.UnitPlan.AssessmentPlan;
+
+  return `
+You are a professional HTML formatter for a teacher-facing curriculum document.
+
+You will receive ONE JSON object representing "AssessmentPlan".
+
+Return ONLY valid HTML.
+Do NOT add explanations.
+Do NOT invent content.
+Do NOT output anything except HTML.
+
+Allowed tags:
+<p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>
+
+LIST RULE (CRITICAL):
+- In <ul> or <ol>, ONLY <li> may be direct children.
+- NEVER place <p>, <span>, <ul>, <ol>, or any other tag inside a <li>.
+
+COLOR RULE:
+All GREEN HEADINGS must be rendered exactly like this:
+<h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
+
+--------------------------------------------------
+RENDER STRUCTURE (HARD RULE)
+--------------------------------------------------
+
+<h3><span style="color: rgb(115, 191, 39);">Assessment Plan</span></h3>
+
+--------------------------------------------------
+FORMATIVE ASSESSMENT / CRITERIA FOR SUCCESS
+--------------------------------------------------
+
+<h3><span style="color: rgb(115, 191, 39);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
+
+Render EACH Formative Assessment item as a vertical block using the exact structure below.
+Repeat the structure fully for each item in the order received.
+
+REQUIRED STRUCTURE (DO NOT DEVIATE):
+
+<p><strong>Criteria for Success (Student Learning Objective): {CriteriaForSuccess}</strong></p>
+
+<p><strong>Success Criteria: </strong>{SuccessCriteria}</p>
+
+<p><strong>Point of Demonstration: </strong>{PointOfDemonstration}</p>
+
+<p>--------------------------------------------------</p>
+DO NOT combine multiple items.
+DO NOT use lists.
+DO NOT omit any row.
+
+--------------------------------------------------
+ANALYTIC RUBRIC
+--------------------------------------------------
+
+<p><strong>Analytic Rubric (Assessment of Final Product)</strong></p>
+
+For EACH row in AnalyticRubric, render as a grouped block:
+
+<p><strong>Criterion:</strong> {Criterion}</p>
+<ul>
+  <li><strong>Novice:</strong> {Novice}</li>
+  <li><strong>Apprentice:</strong> {Apprentice}</li>
+  <li><strong>Practitioner:</strong> {Practitioner}</li>
+  <li><strong>Expert:</strong> {Expert}</li>
+</ul>
+
+--------------------------------------------------
+AUTHENTIC AUDIENCE
+--------------------------------------------------
+
+<h3><span style="color: rgb(115, 191, 39);">Authentic Audience</span></h3>
+
+<p>
+<strong>Purpose:</strong> To identify and engage an authentic audience beyond the classroom that deepens the relevance and real-world impact of student work, while empowering students to participate in selecting stakeholders, experts, or community members whose involvement enhances ownership, motivation, and the quality of final deliverables.
+</p>
+
+<p><strong>Primary Audience</strong></p>
+<p>${assessment.AuthenticAudience.PrimaryAudienceDescription}</p>
+
+<p><strong>Why This Audience Is Qualified</strong></p>
+<p>${assessment.AuthenticAudience.WhyThisAudienceIsQualified}</p>
+
+<p><strong>How This Audience Elevates the Project</strong></p>
+<p>${assessment.AuthenticAudience.HowThisAudienceElevatesTheProject}</p>
+
+<p><strong>Student Participation in Audience Selection</strong></p>
+<p>${assessment.AuthenticAudience.StudentParticipationInAudienceSelection}</p>
+
+--------------------------------------------------
+INPUT JSON:
+${JSON.stringify(assessment)}
+`.trim();
 };
+
 
 window.buildLearningPlan = function () {
   return window.buildEmptySectionPrompt({
