@@ -536,34 +536,344 @@ ${JSON.stringify(assessment)}
 };
 
 
-window.buildLearningPlan = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Learning Plan"
-  });
+window.buildLearningPlan = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const learningPlan = parsed.UnitPlan.LearningPlan;
+  return `
+You are a professional educational HTML formatter.
+
+You will receive ONE JSON object representing the LearningPlan section of a unit plan.
+Your task is to render clean, teacher-usable HTML that clearly explains how the project unfolds.
+
+CRITICAL RULES
+- Output ONLY valid HTML.
+- Allowed tags: <p>, <h2>, <h3>, <strong>, <ul>, <li>, <span>.
+- Do NOT use tables, divs, sections, headers, or any other tags.
+- Do NOT invent content.
+- Do NOT omit any information.
+- Light paraphrasing is allowed ONLY to improve clarity and organization.
+- Lists may ONLY be used where the JSON already represents lists.
+- Never place <p>, <ul>, or <span> inside <li>.
+
+SECTION STRUCTURE (REQUIRED ORDER)
+
+1. Green heading: Learning Plan Overview
+- Render LearningPlanOverview as a paragraph.
+
+2. Green heading: Project Phases
+- For EACH phase:
+  - Phase title (bold)
+  - Phase description (paragraph)
+  - Concepts or skills emphasized (bold label + paragraph)
+  - Collaboration & visible thinking (bold label + paragraph)
+  - Key learning experiences as a bullet list
+
+3. Green heading: Project Goals
+- Render each ProjectGoal as its own bold-labeled paragraph block.
+
+4. Green heading: Collaboration & Group Structures
+- Group Size (bold label + paragraph)
+- Rotating Roles & Duties (bullet list)
+- Teacher Grouping Strategy Prompt (paragraph, EXACT text)
+- Grouping Strategy Recommendations (bullet list, EXACT text)
+
+5. Green heading: Milestones & Indicators of Progress
+- Provide a comprehensive paragraph explaining checkpoints, indicators of progress, and feedback cycles.
+- Use ALL relevant information from project phases and goals.
+
+6. Green heading: Communicating to an Authentic Audience
+- Render CommunicationToAuthenticAudienceExpectations as a paragraph.
+
+7. Green heading: Final Deliverable Summary
+- Render FinalDeliverableSummary as a bullet list.
+
+GREEN HEADING FORMAT (HARD RULE)
+<h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
+
+LEARNING PLAN JSON:
+${JSON.stringify(learningPlan)}
+`.trim();
 };
 
-window.buildUnitPreparationAndConsiderations = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Unit Preparation & Considerations"
-  });
+
+window.buildUnitPreparationAndConsiderations = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const preparation = parsed.UnitPlan.UnitPreparationAndConsiderations;
+  return `
+You are a professional instructional HTML formatter.
+
+You will receive ONE JSON object representing UnitPreparationAndConsiderations.
+Your task is to render clean, teacher-facing HTML that matches a polished curriculum document.
+
+CRITICAL RULES
+- Output ONLY valid HTML.
+- Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
+- Do NOT invent content.
+- Do NOT omit any content.
+- Do NOT nest <p>, <ul>, or <span> inside <li>.
+- Lists may ONLY be used when the JSON field is an array.
+- Preserve the logical order exactly as specified.
+
+REQUIRED STRUCTURE
+
+<h3><span style="color: rgb(115, 191, 39);">Unit Preparation &amp; Considerations</span></h3>
+
+<p><strong><span style="color: rgb(115, 191, 39);">Materials, Equipment &amp; Key Resources</span></strong></p>
+
+1. Classroom Materials & Equipment
+- Render ClassroomMaterialsAndEquipment as a bullet list.
+
+2. Local & Community-Based Resources
+- For each resource:
+  - Location (bold)
+  - How Students Engage
+  - Why Relevant
+
+3. Digital Tools & Online Resources
+- Render DigitalToolsAndOnlineResources as a bullet list.
+
+<p><strong><span style="color: rgb(115, 191, 39);">Technology Integration</span></strong></p>
+
+4. Technology to Deepen Inquiry & Disciplinary Thinking
+5. Technology for Modeling & Visual Representation
+6. Technology for Collaboration & Discourse
+7. Technology for Creating & Presenting the Final Product
+
+For each technology tool:
+- Tool Name (bold)
+- How Students Use It
+- Connection to Project
+- ISTE Standard
+
+8. Equity & Accessibility Considerations
+- Render as paragraph text only.
+
+UNIT PREPARATION JSON:
+${JSON.stringify(preparation)}
+`.trim();
 };
 
-window.buildTeacherGuidancePhase1 = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Teacher Guidance – Phase 1"
-  });
+
+window.buildTeacherGuidancePhase1 = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const phase1 = parsed.UnitPlan.TeacherGuidancePhase1;
+  return `
+You are a professional instructional HTML formatter.
+
+You will receive ONE JSON object representing TeacherGuidancePhase1.
+Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+
+CRITICAL RULES
+- Output ONLY valid HTML.
+- Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
+- Do NOT invent content.
+- Do NOT omit any content.
+- Do NOT nest <p>, <ul>, or <span> inside <li>.
+- Lists may ONLY be used when the JSON field is an array.
+- Preserve the logical order exactly as specified.
+
+SECTION ORDER (REQUIRED)
+
+<h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
+
+1. Focus
+- Label with bold "Focus"
+- Render Phase1_FocusStatement as a paragraph
+
+2. Collaborative Activities
+- For each activity:
+  - Activity title (bold)
+  - Student Experience
+  - Artifacts of Learning (bullet list)
+  - Teacher Role
+
+3. Guiding Questions
+- Bullet list
+
+4. Differentiation
+- Language Learners
+- Students in Need of Additional Scaffolding
+- Go Deeper
+
+5. Accommodations & Modifications
+- General Supports
+- Individualized Supports (student names in red)
+
+6. Anticipated Misconceptions
+- Misconception + Teacher Response pairs
+
+7. Transcendent Thinking Prompts
+- Prompt
+- Expected Student Responses (bullet list)
+
+8. Quick Checks
+- Timing
+- Prompt
+- Expected Student Responses (bullet list)
+
+9. Spaced Retrieval
+- Render each entry as structured paragraphs
+
+10. Student Practice
+- Task title + DOK
+- Teacher Notes
+- Student Directions
+- Expected Student Responses
+
+11. Reflection
+- Render Phase1_ReflectionPrompt
+
+TEACHER GUIDANCE PHASE 1 JSON:
+${JSON.stringify(phase1)}
+`.trim();
 };
 
-window.buildTeacherGuidancePhase2 = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Teacher Guidance – Phase 2"
-  });
+window.buildTeacherGuidancePhase2 = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const phase2 = parsed.UnitPlan.TeacherGuidancePhase2;
+  return `
+You are a professional instructional HTML formatter.
+
+You will receive ONE JSON object representing TeacherGuidancePhase1.
+Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+
+CRITICAL RULES
+- Output ONLY valid HTML.
+- Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
+- Do NOT invent content.
+- Do NOT omit any content.
+- Do NOT nest <p>, <ul>, or <span> inside <li>.
+- Lists may ONLY be used when the JSON field is an array.
+- Preserve the logical order exactly as specified.
+
+SECTION ORDER (REQUIRED)
+
+<h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
+
+1. Focus
+- Label with bold "Focus"
+- Render Phase1_FocusStatement as a paragraph
+
+2. Collaborative Activities
+- For each activity:
+  - Activity title (bold)
+  - Student Experience
+  - Artifacts of Learning (bullet list)
+  - Teacher Role
+
+3. Guiding Questions
+- Bullet list
+
+4. Differentiation
+- Language Learners
+- Students in Need of Additional Scaffolding
+- Go Deeper
+
+5. Accommodations & Modifications
+- General Supports
+- Individualized Supports (student names in red)
+
+6. Anticipated Misconceptions
+- Misconception + Teacher Response pairs
+
+7. Transcendent Thinking Prompts
+- Prompt
+- Expected Student Responses (bullet list)
+
+8. Quick Checks
+- Timing
+- Prompt
+- Expected Student Responses (bullet list)
+
+9. Spaced Retrieval
+- Render each entry as structured paragraphs
+
+10. Student Practice
+- Task title + DOK
+- Teacher Notes
+- Student Directions
+- Expected Student Responses
+
+11. Reflection
+- Render Phase1_ReflectionPrompt
+
+TEACHER GUIDANCE PHASE 1 JSON:
+${JSON.stringify(phase2)}
+`.trim();
 };
 
-window.buildTeacherGuidancePhase3 = function () {
-  return window.buildEmptySectionPrompt({
-    htmlHeading: "Teacher Guidance – Phase 3"
-  });
+window.buildTeacherGuidancePhase3 = function (jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const phase3 = parsed.UnitPlan.TeacherGuidancePhase3;
+  return `
+You are a professional instructional HTML formatter.
+
+You will receive ONE JSON object representing TeacherGuidancePhase1.
+Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+
+CRITICAL RULES
+- Output ONLY valid HTML.
+- Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
+- Do NOT invent content.
+- Do NOT omit any content.
+- Do NOT nest <p>, <ul>, or <span> inside <li>.
+- Lists may ONLY be used when the JSON field is an array.
+- Preserve the logical order exactly as specified.
+
+SECTION ORDER (REQUIRED)
+
+<h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
+
+1. Focus
+- Label with bold "Focus"
+- Render Phase1_FocusStatement as a paragraph
+
+2. Collaborative Activities
+- For each activity:
+  - Activity title (bold)
+  - Student Experience
+  - Artifacts of Learning (bullet list)
+  - Teacher Role
+
+3. Guiding Questions
+- Bullet list
+
+4. Differentiation
+- Language Learners
+- Students in Need of Additional Scaffolding
+- Go Deeper
+
+5. Accommodations & Modifications
+- General Supports
+- Individualized Supports (student names in red)
+
+6. Anticipated Misconceptions
+- Misconception + Teacher Response pairs
+
+7. Transcendent Thinking Prompts
+- Prompt
+- Expected Student Responses (bullet list)
+
+8. Quick Checks
+- Timing
+- Prompt
+- Expected Student Responses (bullet list)
+
+9. Spaced Retrieval
+- Render each entry as structured paragraphs
+
+10. Student Practice
+- Task title + DOK
+- Teacher Notes
+- Student Directions
+- Expected Student Responses
+
+11. Reflection
+- Render Phase1_ReflectionPrompt
+
+TEACHER GUIDANCE PHASE 1 JSON:
+${JSON.stringify(phase3)}
+`.trim();
 };
 
 
