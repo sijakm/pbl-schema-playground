@@ -51,7 +51,7 @@ window.masterSchema = `
       "properties": {
         "Purpose": {
           "type": "string",
-          "description": ""
+          "description": "Word for Word: 'Purpose: Students are introduced to a real mystery that sparks curiosity and motivates investigation. They recognize the problem and activate prior knowledge to prepare for deeper inquiry.'"
         },
         "Materials": {
           "type": "array",
@@ -62,7 +62,7 @@ window.masterSchema = `
         },
         "InstructionsForTeachers": {
           "type": "string",
-          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: The model must include the following four sections with headers and definition. These are in (). (Engage- Introduce the phenomenon in a way that sparks curiosity without explaining it.) Provide a teacher script that draws attention to the phenomenon. Include observation-based questions without revealing explanations. Facilitation moves must encourage noticing, wondering, and curiosity. (Connect- Help students link their observations to the broader mystery that will anchor the investigation.) Include prompts that help students turn observations into questions. Facilitation moves cluster student ideas and highlight emerging patterns. Must guide teachers to build the anchor problem without giving content. (Activate- Shift students into collaborative sensemaking.) Include partner or small group discussion prompts. Students share initial hypotheses without evaluation. Teacher circulates asking open, evidence-seeking questions. (Probe- Encourage refinement of thinking by pushing students to examine assumptions.) Include probing questions that disrupt simplistic reasoning. Teacher challenges students to justify ideas or test predictions. Example moves- What makes you say that? What would happen if that assumption were wrong?"
         }
       },
       "required": [
@@ -72,13 +72,13 @@ window.masterSchema = `
       ],
       "additionalProperties": false
     },
-    "Conceptualization Phase": {
+    "ConceptualizationPhase": {
       "type": "object",
       "description": "",
       "properties": {
         "Purpose": {
           "type": "string",
-          "description": ""
+          "description": "Word for word 'Purpose: Students generate meaningful research questions, select a central question to investigate, and create an action plan that will guide their inquiry process.'"
         },
         "Materials": {
           "type": "array",
@@ -89,7 +89,7 @@ window.masterSchema = `
         },
         "InstructionsForTeachers": {
           "type": "string",
-          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+          "description": "The model must include these three required section headers with definitions. These are in (). (Guide Question Generation - Introduce the inquiry by prompting curiosity, not delivering content.) Students brainstorm questions based on the phenomenon. Teacher records all questions publicly without judging them. (Identify Research Question - Help students collaboratively decide which question is most useful for investigation.) Students sort questions, compare them, and select the one with the highest investigative potential. Teacher prompts must help refine questions into testable forms. (Create an Action Plan - Support students in designing their own investigation rather than giving them the plan.) The output must guide students to define: what they will observe, what they will test or compare, and what evidence they need to collect. Teacher facilitation moves must support planning without providing the investigation steps directly."
         }
       },
       "required": [
@@ -105,7 +105,7 @@ window.masterSchema = `
       "properties": {
         "Purpose": {
           "type": "string",
-          "description": ""
+          "description": "Write word for word: Purpose: Students actively explore the phenomenon through observation, model analysis, and evidence collection, building a data set they will later use to form conclusions"
         },
         "Materials": {
           "type": "array",
@@ -116,11 +116,11 @@ window.masterSchema = `
         },
         "InstructionsForTeachers": {
           "type": "string",
-          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+          "description": "The model must include the following sections with headers and definition. These are in ().(Launch the Investigation - Introduce the investigation task without explaining content so students uncover ideas through exploration and evidence-gathering.) The model must show that the teacher sets up materials and expectations and that students run tests, trials, or observations without being told the scientific explanation. (Collaboration Expectations - Guide students to work interdependently with shared responsibility.) The model must produce a paragraph that instructs teachers on how to establish collaboration expectations during group investigations, ensuring all tasks require shared responsibility and equal participation. Do not create 'roles'. The paragraph must explicitly direct the model to include a list of required student actions presented as general investigation behaviors, not subject-specific outcomes. These required actions must include: identifying inaccuracies or mismatches in a the project; recording observations and evidence in a structured data table; comparing their work to a reference example and justifying claims with evidence; using sentence starters to explain reasoning (such as 'I think _ because _'); and using participation structures (such as talking chips) to ensure every student contributes. The schema must emphasize that teachers support collaboration by reinforcing norms, monitoring engagement, and prompting evidence-based discussion without supplying  explanations.(Circulation Prompts - Use these only while circulating, each prompt supports thinking, not answers.) Prompts must be categorized into Conceptual (example: 'What evidence tells you this is happening?'), Reasoning (example: 'How does this trial change your thinking?'), and Collaboration (example: 'Who has not contributed yet? How can you include them?'). The model must clearly state that the teacher must not give away scientific explanations."
         },
         "AnticipatedMisconceptions": {
           "type": "string",
-          "description": "Common misconceptions and exact correction language for addressing each one"
+          "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding."
         },
         "Differentiation": {
           "type": "string",
@@ -185,7 +185,7 @@ window.masterSchema = `
       "properties": {
         "Purpose": {
           "type": "string",
-          "description": ""
+          "description": "Write word for word: Purpose: Students analyze their collected data and use evidence to answer the research question, forming a clear explanation based on their findings."
         },
         "Materials": {
           "type": "array",
@@ -196,7 +196,7 @@ window.masterSchema = `
         },
         "InstructionsForTeachers": {
           "type": "string",
-          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+          "description": "The Instructions for Teachers must follow this structure: teachers prompt students to revisit the research question, review collected data, identify patterns, refine ideas through group discussion, and justify explanations with evidence. Teachers must guide but never provide scientific explanations. The model must include scripted teacher prompts such as Review your notes and data, What patterns do you notice, What evidence supports this idea, and Use your data to support your claim. The Instructions must require students to write an explanation independently and then share with a partner or group. Expected Student Responses must demonstrate evidence-based reasoning in a general way, without domain-specific examples. The entire output must remain content-neutral."
         }
       },
       "required": [
@@ -211,7 +211,7 @@ window.masterSchema = `
       "properties": {
         "Purpose": {
           "type": "string",
-          "description": ""
+          "description": "Write word for word: Purpose: Help students shift from what they figured out to why it matters."
         },
         "Materials": {
           "type": "array",
@@ -222,7 +222,7 @@ window.masterSchema = `
         },
         "InstructionsForTeachers": {
           "type": "string",
-          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+          "description": "The model must generate a paragraph that instructs teachers on how to facilitate a discussion phase in which students move beyond simply reporting findings and begin exploring the broader significance, applications, and implications of their learning. The paragraph must direct teachers to prompt students to connect their investigation results to real-world situations, future scenarios, or larger conceptual ideas. It should require the model to include guidance for partner or group discussion, teacher-led questioning that encourages students to extend and apply their reasoning, and facilitation moves that support students in generating their own examples rather than relying on teacher-provided ones. The schema must also require the model to output a set of expected student responses illustrating how learners might apply their understanding to authentic or future-oriented contexts."
         },
         "TranscendentThinking": {
           "type": "string",
@@ -239,7 +239,7 @@ window.masterSchema = `
     },
     "ReviewAndSpacedRetrieval": {
       "type": "object",
-      "description": "",
+      "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text.",
       "properties": {
         "Materials": {
           "type": "array",
@@ -276,7 +276,7 @@ window.masterSchema = `
             },
             "SpacedRetrieval": {
               "type": "object",
-              "description": "",
+              "description": "Must include a clear reference to specific prior lesson next to the Spaced Retrieval title and note it like this: '(Draws from Unit 3, Lesson 2.)'  Must use active recall question connecting past and current concepts. Must not require students using notes or resources to answer.",
               "properties": {
                 "TeacherSay": {
                   "type": "string",

@@ -4,6 +4,11 @@
 let timerInterval = null;
 let startTime = null;
 
+let lastJsonText = "";
+let lastJsonObject = null;
+let lastRenderedHtml = "";
+let activeAbortControllers = [];
+
 function startTimer() {
   startTime = Date.now();
   const status = document.getElementById("status");
@@ -33,55 +38,25 @@ function stopTimer(label = "Completed") {
     `${label} (${minutes}:${seconds.toString().padStart(2, "0")})`;
 }
 
-const defaultPrompt = `
-Create unit plan and inquiry lessons using info below:
+window.loadJsonAndEnableRender = function (json) {
+  try {
+    const parsed = typeof json === "string"
+      ? JSON.parse(json)
+      : json;
 
-Unit Subject: Earth & Space Science (Gravity & Orbits)
-Unit Name: Gravity at Work: Modeling Motion in Our Solar System
-Unit Description/Instruction: Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.
-Number of Lessons Plans to create: 1
-Grade Level: The student is in the 1st grade of middle school, which consists of 4 grades total.
-Duration of class period in minutes: 45
-Resources/Media to use: Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple browser-based orbit simulations, chart paper, student science notebooks.
-Unit Content: No attached unit text provided.
+    lastJsonObject = parsed;
+    lastJsonText = JSON.stringify(parsed, null, 2);
 
-Standards (use verbatim if present):
-MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.
+    console.log("✅ JSON loaded. Ready for HTML rendering.");
+    console.log("➡️ You can now click: Render HTML");
 
-Students with learning plans (use verbatim; if none, treat as empty):
-Student Name: Maria Valdez
-Plan: Provide a partially pre-labeled orbit map and sentence frames for explanations.
+    const btn = document.getElementById("renderBtn");
+    if (btn) btn.disabled = false;
 
-Student Name: Jacob Garrow
-Plan: Allow speech-to-text for reasoning and labeling.
-
-Student Name: Ava Lund
-Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.
-
-You are tasked with designing a detailed inquiry-style unit and lesson plans using cognitive science principles. 
-
-Global Output Rules (apply to everything)
-
-1. Follow the exact section order and headings shown below.
-2. Do not add extra sections or rename headings.
-3. Use clear teacher-facing prose and student-facing directions where specified.
-4. Include specific examples, scripts, and expected answers (not placeholders like "e.g.").
-5. Before introducing any new concept or content, include an Attention Reset activity designed to re-engage students, increase cognitive focus, and prepare working memory for new learning.
-   * movement-based, sensory, or novelty-driven
-   * take 20–45 seconds
-   * require minimal materials
-   * directly connect to the lesson’s core idea and smoothly transition students into the upcoming content.
-   * Language to use: Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (same language here for every attention reset & interactivity)
-6. Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to apply a skill.
-7. Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving.
-8. Cultural Relevance & Inclusion:
-   a. Incorporate multiple perspectives and reflect on the impacts for all involved.
-   b. Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons.
-   c. Avoid stereotypes.
-
-Output rule:
-Return ONLY JSON that validates against the response schema.
-`;
+  } catch (e) {
+    console.error("❌ Invalid JSON:", e.message);
+  }
+};
 
 /************************************
  * INVALID CHAR VALIDATION
@@ -215,7 +190,7 @@ function parseSseLines(buffer) {
  * RUN (Responses API, streaming)
  ************************************/
 let parsedMasterSchema = null;
-let currentAbort = null;
+let currentAbortController = null;
 
 async function run() {
   const invalid = [];
@@ -255,14 +230,14 @@ async function run() {
   output.value = "";
   startTimer();
 
-  currentAbort = new AbortController();
+  currentAbortController = new AbortController();
 
   const res = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    signal: currentAbort.signal,
+    signal: currentAbortController.signal,
     body: JSON.stringify({
       model,
       stream: true,
@@ -302,7 +277,17 @@ async function run() {
   }
 
   try {
-    output.value = JSON.stringify(JSON.parse(final), null, 2);
+    const parsed = JSON.parse(final);
+    const pretty = JSON.stringify(parsed, null, 2);
+  
+    output.value = pretty;
+  
+    lastJsonObject = parsed;
+    lastJsonText = pretty;
+  
+    const btn = document.getElementById("renderBtn");
+    if (btn) btn.disabled = false;
+  
   } catch {
     output.value += "\n\n[Invalid JSON output]";
   }
@@ -310,11 +295,195 @@ async function run() {
   stopTimer();
 }
 
+function setUiRunning(isRunning) {
+  const runBtn = document.querySelector("button[onclick='run()']");
+  const renderBtn = document.getElementById("renderBtn");
+
+  if (runBtn) runBtn.disabled = isRunning;
+  if (renderBtn) renderBtn.disabled = isRunning || !lastJsonObject;
+}
+
+async function renderHtml() {
+  const output = document.getElementById("output");
+  const htmlOutput = document.getElementById("htmlOutput");
+  const htmlPreview = document.getElementById("htmlPreview");
+
+  const apiKey = document.getElementById("apiKey").value.trim();
+  const model = document.getElementById("modelSelect").value;
+
+  // if (!apiKey) {
+  //   alert("API key is required.");
+  //   return;
+  // }
+
+  if (!lastJsonText || !lastJsonObject) {
+    alert("No valid JSON found yet. Run the unit generation first.");
+    return;
+  }
+
+  // reset UI
+  htmlOutput.value = "";
+  lastRenderedHtml = "";
+  if (htmlPreview) htmlPreview.srcdoc = "";
+
+  output.value += "\n\n=== Rendering HTML (PARALLEL ×4) ===\n";
+  output.value += "\n[progress] Prompt 1:-  Prompt 2:-  Prompt 3:-  Prompt 4:-";
+  output.scrollTop = output.scrollHeight;
+
+  startTimer();
+  setUiRunning(true);
+
+  // ---- progress throttling ----
+  let lastProgressRenderAt = 0;
+  const PROGRESS_RENDER_INTERVAL = 500; // ms
+
+  // ---- shared state ----
+  const prompts = [
+  { key: "p1",  name: "Unit Description",                     build: window.unitDescriptionPrompt },
+  { key: "p2",  name: "Orientation Phase",               build: window.buildOrientationPhasePrompt },
+  { key: "p3",  name: "Conceptualization Phase",                        build: window.buildConceptualizationPhase },
+  { key: "p4",  name: "Investigation Phase",                     build: window.buildInvestigationPhasePrompt },
+  { key: "p5",  name: "Conclusion Phase",                 build: window.buildConclusionPhasePrompt },
+  { key: "p6",  name: "Discussion Phase",                      build: window.buildDiscussionPhasePrompt },
+  { key: "p7",  name: "Review and Spaced Retrieval",                        build: window.buildReviewAndSpacedRetrievalPrompt },
+  { key: "p8",  name: "Formative Assessment",            build: window.buildFormativeAssessmentPrompt },
+  { key: "p9",  name: "Student Practice",            build: window.buildStudentPracticePrompt },
+];
+
+  const htmlByPrompt = new Map();
+  const progressMap = new Map();
+
+  try {
+    const tasks = prompts.map(p => (async () => {
+      const ac = new AbortController();
+      activeAbortControllers.push(ac);
+
+      let localHtml = "";
+      let consecutiveWhitespaceCount = 0;
+      const MAX_WHITESPACE_DELTAS = 1000;
+
+      const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        signal: ac.signal,
+        body: JSON.stringify({
+          model,
+          stream: true,
+          reasoning: { effort: "low" },
+          input: [{ role: "user", content: p.build(lastJsonText) }]
+        })
+      });
+
+      if (!response.ok || !response.body) {
+        throw new Error(`${p.name} failed to start`);
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const { events, rest } = parseSseLines(buffer);
+        buffer = rest;
+
+        for (const raw of events) {
+          if (raw === "[DONE]") break;
+
+          let evt;
+          try { evt = JSON.parse(raw); } catch { continue; }
+
+          if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+            if (evt.delta.trim().length === 0) {
+              consecutiveWhitespaceCount++;
+            } else {
+              consecutiveWhitespaceCount = 0;
+            }
+
+            if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+              ac.abort();
+              throw new Error(`${p.name} stalled (whitespace flood)`);
+            }
+
+            localHtml += evt.delta;
+            progressMap.set(p.key, localHtml.length);
+
+            // 🔒 THROTTLED progress render
+            const now = Date.now();
+            if (now - lastProgressRenderAt > PROGRESS_RENDER_INTERVAL) {
+              lastProgressRenderAt = now;
+
+              const progressLine = prompts
+                .map(x => {
+                  const v = progressMap.get(x.key);
+                  return `${x.name}:${v ? Math.round(v / 1000) + "k" : "-"}`;
+                })
+                .join("  ");
+
+              output.value = output.value.replace(/\n\[progress][^\n]*$/, "");
+              output.value += `\n[progress] ${progressLine}`;
+              output.scrollTop = output.scrollHeight;
+            }
+          }
+        }
+      }
+
+      htmlByPrompt.set(p.key, localHtml);
+    })());
+
+    // 🚀 RUN ALL PROMPTS IN PARALLEL
+    await Promise.all(tasks);
+
+    // 🧩 MERGE IN FIXED ORDER
+    lastRenderedHtml =
+      (htmlByPrompt.get("p1") || "") +
+      (htmlByPrompt.get("p2") || "") +
+      (htmlByPrompt.get("p3") || "") +
+      (htmlByPrompt.get("p4") || "") +
+      (htmlByPrompt.get("p5") || "") +
+      (htmlByPrompt.get("p6") || "") +
+      (htmlByPrompt.get("p7") || "") +
+      (htmlByPrompt.get("p8") || "") +
+      (htmlByPrompt.get("p9") || "");
+      // (htmlByPrompt.get("p10") || "") +
+      // (htmlByPrompt.get("p11") || "");
+
+    htmlOutput.value = lastRenderedHtml;
+    if (htmlPreview) htmlPreview.srcdoc = lastRenderedHtml;
+
+    output.value += "\n\n=== HTML Render Completed ===\n";
+    stopTimer("Completed");
+
+  } catch (err) {
+    if (err?.name === "AbortError") {
+      output.value += "\n\n[HTML Render Cancelled]\n";
+      stopTimer("Cancelled");
+    } else {
+      output.value += `\n\n[HTML Render Error]\n${err?.message || String(err)}\n`;
+      stopTimer("Error");
+    }
+  } finally {
+    activeAbortControllers.forEach(ac => {
+      try { ac.abort(); } catch {}
+    });
+    activeAbortControllers = [];
+    currentAbortController = null;
+    setUiRunning(false);
+  }
+}
+
+
 /************************************
  * INIT
  ************************************/
 window.onload = () => {
   parsedMasterSchema = JSON.parse(window.masterSchema);
-  document.getElementById("prompt").value = defaultPrompt;
+  document.getElementById("prompt").value = window.defaultPrompt;
   renderDescriptionEditor();
 };

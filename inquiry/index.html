@@ -83,6 +83,9 @@
   </div>
   
   <button onclick="run()">Run</button>
+  <button id="renderBtn" onclick="renderHtml()" disabled>
+    Render HTML
+  </button>
   <button onclick="currentAbort?.abort()">Cancel</button>
   <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
 
@@ -95,6 +98,25 @@
   readonly
   style="height:400px;"
 ></textarea>
+</div>
+
+<div class="row">
+  <h3>HTML Output</h3>
+  <textarea
+    id="htmlOutput"
+    class="output"
+    readonly
+    style="height:320px;"
+  ></textarea>
+</div>
+
+<div class="row">
+  <h3>HTML Preview</h3>
+  <iframe
+    id="htmlPreview"
+    style="width:100%; height:420px; border:1px solid #ccc; background:#fff;"
+    sandbox=""
+  ></iframe>
 </div>
 
   <div class="row">
@@ -110,6 +132,7 @@
     style="height:240px;"
   ></textarea>
 </div>
+  <script src="prompts.js"></script>
   <script src="schema.js"></script>
   <script src="app.js"></script>
 </body>
