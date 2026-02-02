@@ -328,7 +328,7 @@ window.masterSchema = `
     "StandardsAligned",
     "AssessPriorKnowledge",
     "OrientationPhase",
-    "Conceptualization Phase",
+    "ConceptualizationPhase",
     "Investigation Phase",
     "ConclusionPhase",
     "DiscussionPhase",

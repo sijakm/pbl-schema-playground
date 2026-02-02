@@ -235,18 +235,19 @@ async function run() {
   const res = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
     },
     signal: currentAbortController.signal,
     body: JSON.stringify({
-      model,
+      model: model,
       stream: true,
       reasoning: { effort: "low" },
       input: [{ role: "user", content: prompt }],
       text: {
         format: {
           type: "json_schema",
-          name: "UnitPlan",
+          name: "InquiryUnitPlanResponse",
           schema,
           strict: true
         }
