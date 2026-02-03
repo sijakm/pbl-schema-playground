@@ -83,25 +83,25 @@ window.unitDescriptionPrompt = function (jsonText) {
   --------------------------------
   SECTION 2: ESSENTIAL QUESTIONS
   --------------------------------
-  <h3><span>Essential Questions</span></h3>
+  <h3><span>💭Essential Questions</span></h3>
   Render as an unordered list.
   
   --------------------------------
   SECTION 3: STUDENT LEARNING OBJECTIVES
   --------------------------------
-  <h3><span>Student Learning Objectives</span></h3>
+  <h3><span>🎯Student Learning Objectives</span></h3>
   Render as an unordered list.
   
   --------------------------------
   SECTION 4: STANDARDS ALIGNED
   --------------------------------
-  <h3><span>Standards Aligned</span></h3>
+  <h3><span>📏Standards Aligned</span></h3>
   Render as an unordered list.
   
   --------------------------------
   SECTION 5: KEY VOCABULARY
   --------------------------------
-  <h3><span>Key Vocabulary</span></h3>
+  <h3><span>🔤Key Vocabulary</span></h3>
   Render as an ordered list.
   
   --------------------------------
@@ -113,7 +113,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   <h3><span>💡 Assess Prior Knowledge</span></h3>
   
-  <p><strong>Purpose:</strong> Activating student's prior knowledge helps teachers uncover existing ideas, partial understandings, and misconceptions. This information supports instructional decisions and provides a foundation for sensemaking and model development throughout the unit.</p>
+  <p><strong>Teacher Note:</strong> Activating student's prior knowledge helps teachers uncover existing ideas, partial understandings, and misconceptions. This information supports instructional decisions and provides a foundation for sensemaking and model development throughout the unit.</p>
   
   Then render:
   
@@ -173,16 +173,16 @@ window.unitDescriptionPrompt = function (jsonText) {
   SECTION: ORIENTATION PHASE – DEFINE THE PROBLEM
   --------------------------------
   
-  <h3><span>Orientation Phase – Define the Problem</span></h3>
+  <h3><span style="color: rgb(115, 191, 39);">Orientation Phase – Define the Problem</span></h3>
   
   <p><strong>Purpose:</strong> Students are introduced to a real mystery that sparks curiosity and motivates investigation. They recognize the problem and activate prior knowledge to prepare for deeper inquiry.</p>
   
-  <p><strong>Materials:</strong></p>
+  <p><strong>📚Materials:</strong></p>
   <ul>
   ${payload.Materials.map(m => `<li>${m}</li>`).join("")}
   </ul>
   
-  <p><strong>Instructions for Teachers</strong></p>
+  <p><strong>📋Instructions for Teachers</strong></p>
   
   <p><strong>Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</strong></p>
   <ul>
@@ -266,12 +266,12 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   <p><strong>Purpose:</strong> Students generate meaningful research questions, select a central question to investigate, and create an action plan that will guide their inquiry process.</p>
   
-  <p><strong>Materials:</strong></p>
+  <p><strong>📚Materials:</strong></p>
   <ul>
   ${payload.Materials.map(m => `<li>${m}</li>`).join("")}
   </ul>
   
-  <p><strong>Instructions for Teachers</strong></p>
+  <p><strong>📋Instructions for Teachers</strong></p>
   
   <p><strong>Guide Question Generation – Introduce the inquiry by prompting curiosity, not delivering content.</strong></p>
   <ul>
@@ -347,12 +347,12 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   <p><strong>Purpose:</strong> Students actively explore the phenomenon through observation, model analysis, and evidence collection, building a data set they will later use to form conclusions.</p>
   
-  <p><strong>Materials:</strong></p>
+  <p><strong>📚Materials:</strong></p>
   <ul>
   ${payload.Materials.map(m => `<li>${m}</li>`).join("")}
   </ul>
   
-  <p><strong>Instructions for Teachers</strong></p>
+  <p><strong>📋Instructions for Teachers</strong></p>
   
   <p><strong>Launch the Investigation – Introduce the task without explaining content.</strong></p>
   <ul>
@@ -386,12 +386,12 @@ window.unitDescriptionPrompt = function (jsonText) {
   <li>${payload.AnticipatedMisconceptions}</li>
   </ul>
   
-  <p><strong>Differentiation</strong></p>
+  <p><strong>🪜Differentiation</strong></p>
   <ul>
   <li>${payload.Differentiation}</li>
   </ul>
   
-  <p><strong>Accommodations & Modifications</strong></p>
+  <p><strong>🤝Accommodations & Modifications</strong></p>
   
   <p><strong>General Supports:</strong></p>
   <ul>
@@ -453,12 +453,12 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   <p><strong>Purpose:</strong> Students analyze their collected data and use evidence to answer the research question, forming a clear explanation based on their findings.</p>
   
-  <p><strong>Materials:</strong></p>
+  <p><strong>📚Materials:</strong></p>
   <ul>
   ${payload.Materials.map(m => `<li>${m}</li>`).join("")}
   </ul>
   
-  <p><strong>Instructions for Teachers</strong></p>
+  <p><strong>📋Instructions for Teachers</strong></p>
   
   <ul>
   <li>Say: Invite students to revisit the research question and consider how their collected evidence helps answer it.</li>
@@ -521,12 +521,12 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   <p><strong>Purpose:</strong> Help students shift from what they figured out to why it matters.</p>
   
-  <p><strong>Materials:</strong></p>
+  <p><strong>📚Materials:</strong></p>
   <ul>
   ${payload.Materials.map(m => `<li>${m}</li>`).join("")}
   </ul>
   
-  <p><strong>Instructions for Teachers</strong></p>
+  <p><strong>📋Instructions for Teachers</strong></p>
   <ul>
   <li>Say: Prompt students to move beyond restating findings and begin explaining why their new understanding matters.</li>
   <li>Facilitate partner or small-group discussion focused on applying learning to broader situations or future contexts.</li>
@@ -536,7 +536,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   <li>Circulate to listen, ask follow-up questions, and prompt students to justify ideas using evidence from the investigation.</li>
   </ul>
   
-  <p><strong>Expected Student Responses</strong></p>
+  <p><strong>✅Expected Student Responses</strong></p>
   <ul>
   <li>Students describe how their understanding could apply beyond the immediate investigation.</li>
   <li>Students connect findings to real-world decisions, future scenarios, or broader ideas.</li>
@@ -544,7 +544,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   <li>Students propose implications or consequences based on their new understanding.</li>
   </ul>
   
-  <p><strong>Transcendent Thinking</strong></p>
+  <p><strong>🌍Transcendent Thinking</strong></p>
   <ul>
   <li>Say: Invite students to reflect on how this understanding connects to larger purposes, future challenges, or meaningful real-world applications.</li>
   <li>Prompt students to write or share one sentence explaining why this learning matters beyond the classroom.</li>
@@ -569,61 +569,75 @@ window.unitDescriptionPrompt = function (jsonText) {
     console.log("Review & Spaced Retrieval Payload:", payload);
   
     return `
-  You are a professional instructional writer creating teacher-facing classroom materials.
+  You are a professional instructional HTML formatter. Your goal is to transform JSON data into a clean, teacher-facing classroom guide.
   
-  CRITICAL RULES
-  - Output ONLY plain text.
-  - Do NOT use HTML.
-  - Do NOT add explanations or commentary.
-  - Do NOT invent content beyond the provided structure.
-  - Use clear section labels and teacher-facing language.
-  - ALL teacher prompts MUST begin with "Say:".
-  - ALL Expected Student Responses must be clearly labeled and include 2–3 examples.
+  ### HTML & STYLE CONSTRAINTS:
+  - Output ONLY valid HTML using these tags: <p>, <h3>, <strong>, <em>, <span>, <ul>, <li>.
+  - Every <li> must be inside a <ul>. Never put <p> inside <li>.
+  - Use emojies as markers for sections as shown in the template.
   
-  --------------------------------
-  SECTION: REVIEW & SPACED RETRIEVAL (5 MIN)
-  --------------------------------
-  
-  Materials:
-  ${payload.Materials.length ? payload.Materials.map(m => `- ${m}`).join("\n") : "- None"}
-  
-  Teacher Notes:
-  This brief review strengthens long-term retention through active recall and spaced retrieval. By revisiting key ideas without notes, students strengthen memory pathways and reinforce connections between today’s learning and prior concepts. The inclusion of transcendent reflection supports deeper understanding by helping students recognize why the learning matters beyond the immediate lesson and how it connects to larger ideas over time.
-  
-  Instructions for Teachers
-  
-  1. Active Recall
-  Say: Before we wrap up, turn to a partner and answer this question together: ${payload.InstructionsForTeachers.ActiveRecall.Question}
-  
-  Expected Student Responses:
-  ${payload.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses.map(r => `- ${r}`).join("\n")}
-  
-  2. Correct Common Misconceptions
-  Say: If you hear students say ideas such as “things move only because something pushes them” or “objects stop moving when forces stop,” respond by reminding them that objects can already be in motion and that forces can change direction without stopping motion. Emphasize that correcting ideas helps strengthen understanding.
-  
-  3. Essential Question Connection
-  Say: Think back to our unit’s essential question. How does today’s investigation help you better understand that question?
-  
-  Expected Student Responses:
-  - Students explain how the investigation helped clarify a larger pattern or relationship.
-  - Students connect today’s learning to a broader system or recurring idea.
-  - Students describe how evidence helped them understand the essential question more clearly.
-  
-  4. Transcendent Thinking
-  Say: Take 30 seconds to think silently, then share: Why does this learning matter outside of science class? How might this understanding shape future decisions or discoveries?
-  
-  Expected Student Responses:
-  - It helps people make safer or smarter real-world decisions.
-  - It supports future exploration or innovation.
-  - It helps explain how the world or universe works.
-  
-  5. Spaced Retrieval (Draws from Unit 3, Lesson 2)
-  Say: ${payload.InstructionsForTeachers.SpacedRetrieval.TeacherSay}
-  
-  Expected Student Responses:
-  ${payload.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses.map(r => `- ${r}`).join("\n")}
-  
-  --------------------------------
+  ### CONTENT PROCESSING RULES:
+  - **Single Say Rule:** Ensure every teacher prompt starts with exactly one <strong>Say:</strong>. If the JSON already contains "Say:", remove it before wrapping.
+  - **Metadata Migration:** For Spaced Retrieval, find the "(Draws from...)" info in the JSON. Move it to the <strong> title and delete it from the "Say:" body.
+  - **Intelligence:** Do not just copy-paste. If the JSON text is messy, rephrase it to be professional and clear for a teacher.
+
+  --------------------------------------------------
+  HTML SKELETON TO FILL:
+  --------------------------------------------------
+
+  <h3><span style="color: rgb(115, 191, 39);">Review & Spaced Retrieval (5 min)</span></h3>
+
+  <p>📚 <strong>Materials</strong></p>
+  <ul>
+    [INSTRUCTION: List items from payload.Materials. If none, <li>None</li>]
+  </ul>
+
+  <p><strong>Teacher Notes:</strong> [INSTRUCTION: Provide a brief pedagogical context about active recall and long-term retention based on the lesson's goal.]</p>
+
+  <h3>📋 Instructions for Teachers</h3>
+
+  <p><strong>Active Recall</strong></p>
+  <ul>
+    <li><strong>Say:</strong> [INSTRUCTION: Extract and clean the question from payload.InstructionsForTeachers.ActiveRecall.Question]</li>
+  </ul>
+  <p>✅ <strong>Expected Student Responses</strong></p>
+  <ul>
+    [INSTRUCTION: Format payload.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses as <li> items]
+  </ul>
+
+  <p><strong>Correct Common Misconceptions</strong></p>
+  <ul>
+    <li>[INSTRUCTION: Provide a concise script for correcting common student errors related to today's topic.]</li>
+  </ul>
+
+  <p><strong>💭 Essential Question Connection</strong></p>
+  <ul>
+    <li><strong>Say:</strong> [INSTRUCTION: Create a prompt connecting today's evidence to the unit's Big Question.]</li>
+  </ul>
+  <p>✅ <strong>Expected Student Responses</strong></p>
+  <ul>
+    <li>Students explain how evidence clarified a larger pattern.</li>
+  </ul>
+
+  <p><strong>🌍 Transcendent Thinking</strong></p>
+  <ul>
+    <li><strong>Say:</strong> [INSTRUCTION: Create a prompt asking why this matters in the real world or future.]</li>
+  </ul>
+  <p>✅ <strong>Expected Student Responses</strong></p>
+  <ul>
+    <li>Students connect learning to real-world decisions or global systems.</li>
+  </ul>
+
+  <p><strong>⏳ Spaced Retrieval</strong></p>
+  <ul>
+    <li><strong>Say:</strong> [INSTRUCTION: Clean the payload.InstructionsForTeachers.SpacedRetrieval.TeacherSay by removing metadata and "Say:" prefixes. Output only the core instruction.]</li>
+  </ul>
+  <p>✅ <strong>Expected Student Responses</strong></p>
+  <ul>
+    [INSTRUCTION: Format payload.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses as <li> items]
+  </ul>
+
+  --------------------------------------------------
   INPUT JSON:
   ${JSON.stringify(payload)}
   `.trim();
@@ -656,20 +670,12 @@ window.unitDescriptionPrompt = function (jsonText) {
   SECTION: FORMATIVE ASSESSMENT
   --------------------------------
   
-  <h3><span>Formative Assessment</span></h3>
-  
-  <p>
-  <strong>Purpose:</strong> This formative assessment checks student understanding across increasing levels of cognitive demand and provides teachers with real-time insight into student reasoning to inform next instructional steps.
-  </p>
-  
-  <p>
-  Teachers may use the prompts below during discussion, small-group work, or as a brief written check to monitor understanding and adjust instruction.
-  </p>
+  <h3><span>✅Formative Assessment</span></h3>
   
   <p><strong>Prompt 1 (DOK 1):</strong></p>
   <p>{Extract and render the first DOK 1 question from the input text.}</p>
   
-  <p><strong>Expected Student Responses</strong></p>
+  <p><strong>✅Expected Student Responses</strong></p>
   <ul>
   <li>{Extract 1–2 expected responses for Prompt 1}</li>
   </ul>
@@ -677,7 +683,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   <p><strong>Prompt 2 (DOK 2):</strong></p>
   <p>{Extract and render the DOK 2 question from the input text.}</p>
   
-  <p><strong>Expected Student Responses</strong></p>
+  <p><strong>✅Expected Student Responses</strong></p>
   <ul>
   <li>{Extract 1–2 expected responses for Prompt 2}</li>
   </ul>
@@ -685,7 +691,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   <p><strong>Prompt 3 (DOK 3):</strong></p>
   <p>{Extract and render the DOK 3 question from the input text.}</p>
   
-  <p><strong>Expected Student Responses</strong></p>
+  <p><strong>✅Expected Student Responses</strong></p>
   <ul>
   <li>{Extract 1–2 expected responses for Prompt 3}</li>
   </ul>
@@ -693,14 +699,10 @@ window.unitDescriptionPrompt = function (jsonText) {
   <p><strong>Prompt 4 (DOK 4):</strong></p>
   <p>{Extract and render the DOK 4 question from the input text.}</p>
   
-  <p><strong>Expected Student Responses</strong></p>
+  <p><strong>✅Expected Student Responses</strong></p>
   <ul>
   <li>{Extract 1–2 expected responses for Prompt 4}</li>
   </ul>
-  
-  <p>
-  This formative assessment may be implemented as a brief exit ticket, think-pair-share discussion, or oral check-in to support instructional decision-making.
-  </p>
   
   --------------------------------
   INPUT JSON:
@@ -739,7 +741,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   RENDER STRUCTURE (MUST FOLLOW EXACTLY):
   
   1) Section heading:
-  <h3><span>Student Practice</span></h3>
+  <h3><span>🖊Student Practice</span></h3>
   
   2) Render the content using this REQUIRED structure:
   
@@ -754,7 +756,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   3) Expected Student Responses blocks MUST:
   - Be preceded by:
-  <p><strong>Expected Student Responses</strong></p>
+  <p><strong>✅Expected Student Responses</strong></p>
   - Contain ONLY a <ul> with <li> items
   - Include 3–4 bullets per task
   
