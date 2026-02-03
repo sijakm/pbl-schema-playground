@@ -557,6 +557,9 @@ SECTION STRUCTURE (REQUIRED ORDER)
 GREEN HEADING FORMAT (HARD RULE)
 <h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
 
+BOLD HEADING FORMAT (HARD RULE)
+<p><strong>TITLE</strong></p>
+
 LEARNING PLAN JSON:
 ${JSON.stringify(learningPlan)}
 `.trim();
@@ -613,7 +616,7 @@ For each technology tool:
 - ISTE Standard
 
 8. Equity & Accessibility Considerations
-- Render as paragraph text only.
+- Render as bullet list.
 
 UNIT PREPARATION JSON:
 ${JSON.stringify(preparation)}
@@ -643,26 +646,29 @@ SECTION ORDER (REQUIRED)
 
 <h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
 
-1. Focus
-- Label with bold "Focus"
+1. Focus Statement
+- Label with bold "Focus Statement"
 - Render Phase1_FocusStatement as a paragraph
 
 2. Collaborative Activities
 - For each activity:
+  - Teacher Role
   - Activity title (bold)
   - Student Experience
   - Artifacts of Learning (bullet list)
-  - Teacher Role
+
 
 3. Guiding Questions
 - Bullet list
 
 4. Differentiation
+<p><strong>🪜Differentiation</strong></p>
 - Language Learners
 - Students in Need of Additional Scaffolding
 - Go Deeper
 
 5. Accommodations & Modifications
+<p><strong>🤝Accommodations & Modifications</strong></p>
 - General Supports
 - Individualized Supports (student names in red)
 
@@ -670,25 +676,69 @@ SECTION ORDER (REQUIRED)
 - Misconception + Teacher Response pairs
 
 7. Transcendent Thinking Prompts
+<p><strong>🌍Transcendent Thinking</strong></p>
 - Prompt
-- Expected Student Responses (bullet list)
+- Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
 - Timing
 - Prompt
-- Expected Student Responses (bullet list)
+- Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
 9. Spaced Retrieval
-- Render each entry as structured paragraphs
+<p><strong>⏳Spaced Retrieval</strong></p>
+
+For EACH entry in Phase1_SpacedRetrieval:
+
+The field ExpectedResponseOrSuccessCriteria is a LONG plain-text block.
+You MUST parse and reorganize it into the following HTML structure.
+
+REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
+
+<p><strong>Timing:</strong> {Timing}</p>
+<p><strong>Draws From:</strong> {DrawsFrom}</p>
+<p><strong>Question:</strong> {Question}</p>
+<p><strong>DOK:</strong> {DOK}</p>
+
+From the ExpectedResponseOrSuccessCriteria text:
+- Extract ONLY the student-facing responses
+- Ignore teacher notes, materials, or instructions
+
+<p>✅Expected Student Responses:</p>
+<ul>
+  <li>Each response as its own bullet</li>
+</ul>
+
+STRICT RULES:
+- Do NOT output the full text blob
+- Do NOT place multiple sections into one <p>
+- Expected Student Responses MUST be a <ul>
+- If responses are written in sentences, split them logically into bullets
 
 10. Student Practice
-- Task title + DOK
-- Teacher Notes
-- Student Directions
-- Expected Student Responses
+<p><strong>🖊Student Practice</strong></p>
+
+For EACH entry in Phase1_StudentPractice_Tasks:
+
+<p><strong>Task:</strong> {TaskTitle} ({DOK})</p>
+<p><strong>Teacher Notes:</strong> {TeacherNote}</p>
+<p><strong>Student Directions:</strong> {StudentDirections}</p>
+
+From ExpectedAnswerOrSuccessCriteria:
+- Extract ONLY student outcomes or example responses
+- Do NOT include task directions or reflection text
+
+<p>✅Expected Student Responses:</p>
+<ul>
+  <li>Each response as its own bullet</li>
+</ul>
+
+RULES:
+- Never combine multiple tasks into one paragraph
+- Do NOT echo raw strings
 
 11. Reflection
-- Render Phase1_ReflectionPrompt
+<p><strong>🔎Reflection: </strong>StudentPractice_Reflection</p>
 
 TEACHER GUIDANCE PHASE 1 JSON:
 ${JSON.stringify(phase1)}
@@ -699,72 +749,118 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
   const parsed = JSON.parse(jsonText);
   const phase2 = parsed.UnitPlan.TeacherGuidancePhase2;
   return `
-You are a professional instructional HTML formatter.
+  You are a professional instructional HTML formatter.
 
-You will receive ONE JSON object representing TeacherGuidancePhase1.
-Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+  You will receive ONE JSON object representing TeacherGuidancePhase2.
+  Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+  
+  CRITICAL RULES
+  - Output ONLY valid HTML.
+  - Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
+  - Do NOT invent content.
+  - Do NOT omit any content.
+  - Do NOT nest <p>, <ul>, or <span> inside <li>.
+  - Lists may ONLY be used when the JSON field is an array.
+  - Preserve the logical order exactly as specified.
+  
+  SECTION ORDER (REQUIRED)
+  
+  <h3><span style="color: rgb(115, 191, 39);">Phase 2 - Exploration, Investigation, and Development; Refinement </span></h3>
 
-CRITICAL RULES
-- Output ONLY valid HTML.
-- Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
-- Do NOT invent content.
-- Do NOT omit any content.
-- Do NOT nest <p>, <ul>, or <span> inside <li>.
-- Lists may ONLY be used when the JSON field is an array.
-- Preserve the logical order exactly as specified.
+  1. Focus Statement
+  - Label with bold "Focus Statement"
+  - Render Phase1_FocusStatement as a paragraph
 
-SECTION ORDER (REQUIRED)
-
-<h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
-
-1. Focus
-- Label with bold "Focus"
-- Render Phase1_FocusStatement as a paragraph
-
-2. Collaborative Activities
-- For each activity:
-  - Activity title (bold)
-  - Student Experience
-  - Artifacts of Learning (bullet list)
-  - Teacher Role
+  2. Collaborative Activities
+  - For each activity:
+    - Teacher Role
+    - Activity title (bold)
+    - Student Experience
+    - Artifacts of Learning (bullet list)
 
 3. Guiding Questions
 - Bullet list
 
 4. Differentiation
+<p><strong>🪜Differentiation</strong></p>
 - Language Learners
 - Students in Need of Additional Scaffolding
 - Go Deeper
 
 5. Accommodations & Modifications
+<p><strong>🤝Accommodations & Modifications</strong></p>
 - General Supports
 - Individualized Supports (student names in red)
 
-6. Anticipated Misconceptions
+6. Anticipated Misconceptions & Teacher Moves
 - Misconception + Teacher Response pairs
 
 7. Transcendent Thinking Prompts
+<p><strong>🌍Transcendent Thinking</strong></p>
 - Prompt
-- Expected Student Responses (bullet list)
+- Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
 - Timing
 - Prompt
-- Expected Student Responses (bullet list)
+- Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
 9. Spaced Retrieval
-- Render each entry as structured paragraphs
+<p><strong>⏳Spaced Retrieval</strong></p>
+
+For EACH entry in Phase2_SpacedRetrieval:
+
+The field ExpectedResponseOrSuccessCriteria is a LONG plain-text block.
+You MUST parse and reorganize it into the following HTML structure.
+
+REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
+
+<p><strong>Timing:</strong> {Timing}</p>
+<p><strong>Draws From:</strong> {DrawsFrom}</p>
+<p><strong>Question:</strong> {Question}</p>
+<p><strong>DOK:</strong> {DOK}</p>
+
+From the ExpectedResponseOrSuccessCriteria text:
+- Extract ONLY the student-facing responses
+- Ignore teacher notes, materials, or instructions
+
+<p>✅Expected Student Responses:</p>
+<ul>
+  <li>Each response as its own bullet</li>
+</ul>
+
+STRICT RULES:
+- Do NOT output the full text blob
+- Do NOT place multiple sections into one <p>
+- Expected Student Responses MUST be a <ul>
+- If responses are written in sentences, split them logically into bullets
 
 10. Student Practice
-- Task title + DOK
-- Teacher Notes
-- Student Directions
-- Expected Student Responses
+<p><strong>🖊Student Practice</strong></p>
+
+For EACH entry in Phase2_StudentPractice_Tasks:
+
+<p><strong>Task:</strong> {TaskTitle} ({DOK})</p>
+<p><strong>Teacher Notes:</strong> {TeacherNote}</p>
+<p><strong>Student Directions:</strong> {StudentDirections}</p>
+
+From ExpectedAnswerOrSuccessCriteria:
+- Extract ONLY student outcomes or example responses
+- Do NOT include task directions or reflection text
+
+<p>✅Expected Student Responses:</p>
+<ul>
+  <li>Each response as its own bullet</li>
+</ul>
+
+RULES:
+- Never combine multiple tasks into one paragraph
+- Do NOT echo raw strings
 
 11. Reflection
-- Render Phase1_ReflectionPrompt
+<p><strong>🔎Reflection: </strong>StudentPractice_Reflection</p>
 
-TEACHER GUIDANCE PHASE 1 JSON:
+TEACHER GUIDANCE PHASE 2 JSON:
 ${JSON.stringify(phase2)}
 `.trim();
 };
@@ -773,72 +869,118 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
   const parsed = JSON.parse(jsonText);
   const phase3 = parsed.UnitPlan.TeacherGuidancePhase3;
   return `
-You are a professional instructional HTML formatter.
+  You are a professional instructional HTML formatter.
 
-You will receive ONE JSON object representing TeacherGuidancePhase1.
-Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+  You will receive ONE JSON object representing TeacherGuidancePhase3.
+  Your task is to render clean, teacher-facing HTML that matches the expected instructional layout.
+  
+  CRITICAL RULES
+  - Output ONLY valid HTML.
+  - Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
+  - Do NOT invent content.
+  - Do NOT omit any content.
+  - Do NOT nest <p>, <ul>, or <span> inside <li>.
+  - Lists may ONLY be used when the JSON field is an array.
+  - Preserve the logical order exactly as specified.
+  
+  SECTION ORDER (REQUIRED)
+  
+  <h3><span style="color: rgb(115, 191, 39);">Development; Refinement, Culmination, and Reflection  </span></h3>
 
-CRITICAL RULES
-- Output ONLY valid HTML.
-- Allowed tags: <p>, <h3>, <strong>, <ul>, <li>, <span>.
-- Do NOT invent content.
-- Do NOT omit any content.
-- Do NOT nest <p>, <ul>, or <span> inside <li>.
-- Lists may ONLY be used when the JSON field is an array.
-- Preserve the logical order exactly as specified.
+  1. Focus Statement
+  - Label with bold "Focus Statement"
+  - Render Phase3_FocusStatement as a paragraph
 
-SECTION ORDER (REQUIRED)
-
-<h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
-
-1. Focus
-- Label with bold "Focus"
-- Render Phase1_FocusStatement as a paragraph
-
-2. Collaborative Activities
-- For each activity:
-  - Activity title (bold)
-  - Student Experience
-  - Artifacts of Learning (bullet list)
-  - Teacher Role
+  2. Collaborative Activities
+  - For each activity:
+    - Teacher Role
+    - Activity title (bold)
+    - Student Experience
+    - Artifacts of Learning (bullet list)
 
 3. Guiding Questions
 - Bullet list
 
 4. Differentiation
+<p><strong>🪜Differentiation</strong></p>
 - Language Learners
 - Students in Need of Additional Scaffolding
 - Go Deeper
 
 5. Accommodations & Modifications
+<p><strong>🤝Accommodations & Modifications</strong></p>
 - General Supports
 - Individualized Supports (student names in red)
 
-6. Anticipated Misconceptions
+6. Anticipated Misconceptions & Teacher Moves
 - Misconception + Teacher Response pairs
 
 7. Transcendent Thinking Prompts
+<p><strong>🌍Transcendent Thinking</strong></p>
 - Prompt
-- Expected Student Responses (bullet list)
+- Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
 - Timing
 - Prompt
-- Expected Student Responses (bullet list)
+- Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
 9. Spaced Retrieval
-- Render each entry as structured paragraphs
+<p><strong>⏳Spaced Retrieval</strong></p>
+
+For EACH entry in Phase3_SpacedRetrieval:
+
+The field ExpectedResponseOrSuccessCriteria is a LONG plain-text block.
+You MUST parse and reorganize it into the following HTML structure.
+
+REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
+
+<p><strong>Timing:</strong> {Timing}</p>
+<p><strong>Draws From:</strong> {DrawsFrom}</p>
+<p><strong>Question:</strong> {Question}</p>
+<p><strong>DOK:</strong> {DOK}</p>
+
+From the ExpectedResponseOrSuccessCriteria text:
+- Extract ONLY the student-facing responses
+- Ignore teacher notes, materials, or instructions
+
+<p>✅Expected Student Responses:</p>
+<ul>
+  <li>Each response as its own bullet</li>
+</ul>
+
+STRICT RULES:
+- Do NOT output the full text blob
+- Do NOT place multiple sections into one <p>
+- Expected Student Responses MUST be a <ul>
+- If responses are written in sentences, split them logically into bullets
 
 10. Student Practice
-- Task title + DOK
-- Teacher Notes
-- Student Directions
-- Expected Student Responses
+<p><strong>🖊Student Practice</strong></p>
+
+For EACH entry in Phase3_StudentPractice_Tasks:
+
+<p><strong>Task:</strong> {TaskTitle} ({DOK})</p>
+<p><strong>Teacher Notes:</strong> {TeacherNote}</p>
+<p><strong>Student Directions:</strong> {StudentDirections}</p>
+
+From ExpectedAnswerOrSuccessCriteria:
+- Extract ONLY student outcomes or example responses
+- Do NOT include task directions or reflection text
+
+<p>✅Expected Student Responses:</p>
+<ul>
+  <li>Each response as its own bullet</li>
+</ul>
+
+RULES:
+- Never combine multiple tasks into one paragraph
+- Do NOT echo raw strings
 
 11. Reflection
-- Render Phase1_ReflectionPrompt
+<p><strong>🔎Reflection: </strong>StudentPractice_Reflection</p>
 
-TEACHER GUIDANCE PHASE 1 JSON:
+TEACHER GUIDANCE PHASE 3 JSON:
 ${JSON.stringify(phase3)}
 `.trim();
 };
