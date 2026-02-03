@@ -31,15 +31,9 @@ Global Output Rules (apply to everything)
 2. Do not add extra sections or rename headings.
 3. Use clear teacher-facing prose and student-facing directions where specified.
 4. Include specific examples, scripts, and expected answers (not placeholders like "e.g.").
-5. Before introducing any new concept or content, include an Attention Reset activity designed to re-engage students, increase cognitive focus, and prepare working memory for new learning.
-   * movement-based, sensory, or novelty-driven
-   * take 20–45 seconds
-   * require minimal materials
-   * directly connect to the lesson’s core idea and smoothly transition students into the upcoming content.
-   * Language to use: Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (same language here for every attention reset & interactivity)
-6. Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to apply a skill.
-7. Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving.
-8. Cultural Relevance & Inclusion:
+5. Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to apply a skill.
+6. Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving.
+7. Cultural Relevance & Inclusion:
    a. Incorporate multiple perspectives and reflect on the impacts for all involved.
    b. Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons.
    c. Avoid stereotypes.
