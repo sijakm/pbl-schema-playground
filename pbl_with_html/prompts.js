@@ -133,7 +133,7 @@ ${payload.AssessPriorKnowledge}
 window.buildUnitOverview = function (jsonText) {
   const parsed = JSON.parse(jsonText);
   const overview = parsed.UnitPlan.UnitOverview;
-
+  console.log("Unit Overview JSON:", overview);
   return `
 You are a professional instructional HTML formatter writing a student-facing project launch document.
 
@@ -150,7 +150,7 @@ ALLOWED TAGS ONLY:
 HARD STRUCTURE (MUST FOLLOW):
 
 1) Section heading:
-<h3><span>Unit Overview</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">Unit Overview</span></h3>
 
 2) Purpose (render EXACTLY as written):
 <p><strong>Purpose:</strong> To introduce students to an engaging, real-world design challenge that sparks curiosity, grounds learning in authentic applications, presents the driving question, and clearly defines the mission and final deliverable that will guide inquiry throughout the unit.</p>
@@ -160,6 +160,7 @@ HARD STRUCTURE (MUST FOLLOW):
 - Preserve tone and authenticity
 
 4) Driving Question
+<h3><span style="color: rgb(115, 191, 39);">Driving Question</span></h3>
 - Render as its own emphasized paragraph
 
 5) Mission
@@ -169,6 +170,7 @@ HARD STRUCTURE (MUST FOLLOW):
 - Narrative paragraph
 
 7) Final Deliverable Requirements
+<h3><span style="color: rgb(115, 191, 39);">The Deliverable</span></h3>
 - Render as <ul> with <li> only
 
 8) Closing Call to Action
@@ -205,6 +207,7 @@ ${overview.ClosingCallToAction}
 window.buildDesiredOutcomes = function (jsonText) {
   const parsed = JSON.parse(jsonText);
   const outcomes = parsed.UnitPlan.DesiredOutcomes;
+  console.log("Desired Outcomes JSON:", outcomes);
   return `
 You will receive ONE JSON object representing DesiredOutcomes.
 
@@ -226,13 +229,13 @@ HTML STRUCTURE TO RENDER (IN THIS EXACT ORDER):
 <h3><span style="color: rgb(115, 191, 39);">Desired Outcomes</span></h3>
 
 2) Standards Aligned
-<p><strong>📎 Standards Aligned</strong></p>
+<h3><span style="color: rgb(115, 191, 39);">📏Standards Aligned</span></h3>
 <ul>
   <li>Each standard from StandardsAligned</li>
 </ul>
 
 3) Big Ideas & Essential Questions
-<p><strong>Big Ideas & Essential Questions</strong></p>
+<h3><span style="color: rgb(115, 191, 39);">💭Big Ideas & Essential Questions</span></h3>
 
 For EACH item in BigIdeasAndEssentialQuestions, render:
 <p><strong>Big Idea:</strong> {BigIdea}</p>
@@ -241,30 +244,30 @@ For EACH item in BigIdeasAndEssentialQuestions, render:
 </ul>
 
 4) Learning Objectives
-<p><strong>Learning Objectives</strong></p>
+<h3><span style="color: rgb(115, 191, 39);">🎯Learning Objectives</span></h3>
 
 Render the following THREE sections IN THIS ORDER:
 
 A) Students will understand that…
-<p><strong>Students will understand that…</strong></p>
+<p><strong>🎯Students will understand that…</strong></p>
 <ul>
   <li>Each item from StudentsWillUnderstandThat</li>
 </ul>
 
 B) Students will know that…
-<p><strong>Students will know that…</strong></p>
+<p><strong>🎯Students will know that…</strong></p>
 <ul>
   <li>Each item from StudentsWillKnowThat</li>
 </ul>
 
 C) Students will be able to…
-<p><strong>Students will be able to…</strong></p>
+<p><strong>🎯Students will be able to…</strong></p>
 <ul>
   <li>Each item from StudentsWillBeAbleTo</li>
 </ul>
 
 JSON INPUT:
-${outcomes}
+${JSON.stringify(outcomes)}
 `.trim();
 };
 
@@ -297,8 +300,9 @@ All MAIN SECTION HEADINGS must be rendered exactly like this:
 RENDER ORDER & STRUCTURE (HARD RULE)
 --------------------------------------------------
 
-1️⃣ DRIVING QUESTION (GREEN HEADING)
-
+1 DRIVING QUESTION (GREEN HEADING)
+<h3><span style="color: rgb(115, 191, 39);">Framing the Learning</span></h3>
+<p></p>
 <h3><span style="color: rgb(115, 191, 39);">Driving Question</span></h3>
 
 Then render this EXACT paragraph word-for-word:
@@ -311,7 +315,7 @@ Then render:
 
 --------------------------------------------------
 
-2️⃣ PROBLEM (GREEN HEADING)
+2 PROBLEM (GREEN HEADING)
 
 <h3><span style="color: rgb(115, 191, 39);">Problem</span></h3>
 
@@ -332,7 +336,7 @@ You MUST NOT omit any ideas.
 
 --------------------------------------------------
 
-3️⃣ PROJECT (GREEN HEADING)
+3 PROJECT (GREEN HEADING)
 
 <h3><span style="color: rgb(115, 191, 39);">Project</span></h3>
 
@@ -346,7 +350,7 @@ ${framing.Project}
 
 --------------------------------------------------
 
-4️⃣ PLACE (GREEN HEADING)
+4 PLACE (GREEN HEADING)
 
 <h3><span style="color: rgb(115, 191, 39);">Place</span></h3>
 
@@ -363,13 +367,14 @@ Then for EACH site in Place.Sites, render in order:
 <p><strong>The Site:</strong> {TheSite}</p>
 <p><strong>Engagement:</strong> {Engagement}</p>
 <p><strong>Relevance:</strong> {Relevance}</p>
+<p>--------------------------------------------------</p>
 
 Finally render:
 <p><em>${framing.Place.PlaceMattersReminder}</em></p>
 
 --------------------------------------------------
 
-5️⃣ KEY VOCABULARY (GREEN HEADING)
+5 KEY VOCABULARY (GREEN HEADING)
 
 <h3><span style="color: rgb(115, 191, 39);">Key Vocabulary</span></h3>
 
@@ -425,12 +430,16 @@ RENDER STRUCTURE (HARD RULE)
 --------------------------------------------------
 
 <h3><span style="color: rgb(115, 191, 39);">Assessment Plan</span></h3>
+Then render this EXACT purpose paragraph:
+<p>
+<strong>Purpose:</strong> To ensure that all assessments and success criteria are intentionally and transparently aligned with the unit’s learning objectives, providing accurate measures of student understanding while creating opportunities for students to coconstruct criteria with the teacher—thereby increasing clarity, ownership, and self-regulation as they work toward high-quality, standards-based outcomes.
+</p>
 
 --------------------------------------------------
 FORMATIVE ASSESSMENT / CRITERIA FOR SUCCESS
 --------------------------------------------------
 
-<h3><span style="color: rgb(115, 191, 39);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">Formative Assessment Rubric</span></h3>
 
 Render EACH Formative Assessment item as a vertical block using the exact structure below.
 Repeat the structure fully for each item in the order received.
@@ -452,7 +461,7 @@ DO NOT omit any row.
 ANALYTIC RUBRIC
 --------------------------------------------------
 
-<p><strong>Analytic Rubric (Assessment of Final Product)</strong></p>
+<p><strong>Analytic Rubric</strong></p>
 
 For EACH row in AnalyticRubric, render as a grouped block:
 
@@ -514,10 +523,11 @@ CRITICAL RULES
 
 SECTION STRUCTURE (REQUIRED ORDER)
 
-1. Green heading: Learning Plan Overview
+1. Green heading: Learning Plan
+- Green heading: Learning Plan Overview
 - Render LearningPlanOverview as a paragraph.
 
-2. Green heading: Project Phases
+2. Bold heading: Project Phases
 - For EACH phase:
   - Phase title (bold)
   - Phase description (paragraph)
@@ -525,23 +535,23 @@ SECTION STRUCTURE (REQUIRED ORDER)
   - Collaboration & visible thinking (bold label + paragraph)
   - Key learning experiences as a bullet list
 
-3. Green heading: Project Goals
+3. Bold heading: Project Goals
 - Render each ProjectGoal as its own bold-labeled paragraph block.
 
-4. Green heading: Collaboration & Group Structures
+4. Green heading: Group Suggestions
 - Group Size (bold label + paragraph)
 - Rotating Roles & Duties (bullet list)
 - Teacher Grouping Strategy Prompt (paragraph, EXACT text)
 - Grouping Strategy Recommendations (bullet list, EXACT text)
 
-5. Green heading: Milestones & Indicators of Progress
+5. Bold heading: Milestones & Indicators of Progress
 - Provide a comprehensive paragraph explaining checkpoints, indicators of progress, and feedback cycles.
 - Use ALL relevant information from project phases and goals.
 
-6. Green heading: Communicating to an Authentic Audience
+6. Bold heading: Communicating to an Authentic Audience
 - Render CommunicationToAuthenticAudienceExpectations as a paragraph.
 
-7. Green heading: Final Deliverable Summary
+7. Bold heading: Final Deliverable Summary
 - Render FinalDeliverableSummary as a bullet list.
 
 GREEN HEADING FORMAT (HARD RULE)

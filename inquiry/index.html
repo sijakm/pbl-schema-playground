@@ -2,138 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>JSON Schema Playground</title>
+  <title>Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 20px;
-      background: #f7f7f7;
-    }
-    h1 {
-      margin-bottom: 8px;
-    }
-    p {
-      color: #555;
-      margin-top: 4px;
-    }
-    textarea {
-  width: 100%;
-  height: 70px;        
-  margin-bottom: 16px;
-  padding: 10px;
-  font-family: monospace;
-  font-size: 13px;
-
-  resize: vertical;     
-  box-sizing: border-box;
-}
-    button {
-      padding: 10px 18px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .output {
-      min-height: 220px;
-      background: #111;
-      color: #0f0;
-    }
-    .row {
-      margin-bottom: 24px;
-    }
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; margin: 20px; background: #f7f7f7; }
+    h1 { margin-bottom: 8px; }
+    p { color: #555; margin-top: 4px; }
+    textarea { width: 100%; height: 70px; margin-bottom: 16px; padding: 10px; font-family: monospace; font-size: 13px; resize: vertical; box-sizing: border-box; }
+    button { padding: 10px 18px; font-size: 14px; cursor: pointer; margin-right: 8px; }
+    .output { min-height: 220px; background: #111; color: #0f0; }
+    .row { margin-bottom: 24px; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; background:#e9e9e9; font-size:12px; margin-left:8px; }
   </style>
 </head>
 <body>
 
-  <h1>JSON Schema Playground</h1>
-  <p>Edit the prompt and schema instructions, then generate a response.</p>
+  <h1><span id="pageTitle">Playground</span> <span id="pagePill" class="pill"></span></h1>
+  <p id="pageSubtitle"></p>
 
   <div class="row">
     <h3>OpenAI API Key</h3>
-    <input
-      id="apiKey"
-      type="password"
-      placeholder="sk-..."
-      style="width:100%; padding:10px; font-size:13px;"
-    />
+    <input id="apiKey" type="password" placeholder="sk-..." style="width:100%; padding:10px; font-size:13px;" />
+    <p style="font-size:12px; color:#777; margin-top:8px;">
+      ⚠️ For production, do NOT put API keys in client-side code. Use a backend proxy.
+    </p>
   </div>
 
-  <h3>OpenAI Model</h3>
-<select id="modelSelect" style="width:100%; padding:10px;">
-  <option value="gpt-5-mini" selected>gpt-5-mini</option>
-  <option value="gpt-5.1">gpt-5.1</option>
-  <option value="gpt-5.2">gpt-5.2</option>
-</select>
-
+  <div class="row">
+    <h3>OpenAI Model</h3>
+    <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
+      <option value="gpt-5-mini" selected>gpt-5-mini (default)</option>
+      <option value="gpt-5.2">gpt-5.2</option>
+      <option value="gpt-5.1">gpt-5.1</option>
+    </select>
+  </div>
 
   <div class="row">
     <h3>Prompt</h3>
-    <p>You can safely edit the prompt. The output must still match the schema.</p>
     <textarea id="prompt"></textarea>
   </div>
 
   <div class="row">
     <h3>Schema Instructions (Safe Mode)</h3>
-    <p>
-      Edit <strong>descriptions only</strong>.  
-      The JSON structure, required fields, and validation rules are locked.
-    </p>
-
+    <p>Edit <strong>descriptions only</strong>. The JSON structure and validation rules are locked.</p>
     <div id="descriptions"></div>
   </div>
-  
-  <button onclick="run()">Run</button>
-  <button id="renderBtn" onclick="renderHtml()" disabled>
-    Render HTML
-  </button>
-  <button onclick="currentAbort?.abort()">Cancel</button>
-  <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
 
   <div class="row">
-  <h3>Output (Raw JSON)</h3>
-
-  <textarea
-  id="output"
-  class="output"
-  readonly
-  style="height:400px;"
-></textarea>
-</div>
-
-<div class="row">
-  <h3>HTML Output</h3>
-  <textarea
-    id="htmlOutput"
-    class="output"
-    readonly
-    style="height:320px;"
-  ></textarea>
-</div>
-
-<div class="row">
-  <h3>HTML Preview</h3>
-  <iframe
-    id="htmlPreview"
-    style="width:100%; height:420px; border:1px solid #ccc; background:#fff;"
-    sandbox=""
-  ></iframe>
-</div>
+    <button id="runBtn" type="button">Run (Stream)</button>
+    <button id="renderBtn" type="button" disabled>Render HTML (Parallel)</button>
+    <button id="cancelBtn" type="button" disabled>Cancel</button>
+    <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
+  </div>
 
   <div class="row">
-  <h3>Final JSON Schema (after edits)</h3>
+    <h3>Output (Streaming)</h3>
+    <textarea id="output" class="output" readonly style="height:400px;"></textarea>
+  </div>
 
-  <button onclick="copySchema()" style="margin-bottom:8px;">
-    Copy schema
-  </button>
+  <div class="row">
+    <h3>HTML Output</h3>
+    <textarea id="htmlOutput" class="output" readonly style="height:320px;"></textarea>
+  </div>
 
-  <textarea
-    id="finalSchema"
-    readonly
-    style="height:240px;"
-  ></textarea>
-</div>
-  <script src="prompts.js"></script>
+  <div class="row">
+    <h3>HTML Preview</h3>
+    <iframe id="htmlPreview" style="width:100%; height:420px; border:1px solid #ccc; background:#fff;" sandbox=""></iframe>
+    <p style="font-size:12px; color:#777; margin-top:8px;">Preview uses <strong>iframe srcdoc</strong> with sandbox for safety.</p>
+  </div>
+
+  <div class="row">
+    <h3>Final JSON Schema (after edits)</h3>
+    <button id="copySchemaBtn" type="button" style="margin-bottom:8px;">Copy schema</button>
+    <textarea id="finalSchema" readonly style="height:240px;"></textarea>
+  </div>
+
+  <!-- IMPORTANT: order matters -->
   <script src="schema.js"></script>
-  <script src="app.js"></script>
+  <script src="prompts.js"></script>
+  <script src="config.js"></script>
+  <script src="../shared/playground.js"></script>
+  <script>
+    initPlayground(window.PLAYGROUND_CONFIG);
+  </script>
 </body>
 </html>
