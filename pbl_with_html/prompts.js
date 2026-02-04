@@ -150,6 +150,7 @@ ALLOWED TAGS ONLY:
 HARD STRUCTURE (MUST FOLLOW):
 
 1) Section heading:
+<h3><span style="color: rgb(115, 191, 39);">Unit Task</span></h3>
 <h3><span style="color: rgb(115, 191, 39);">Unit Overview</span></h3>
 
 2) Purpose (render EXACTLY as written):
@@ -159,19 +160,19 @@ HARD STRUCTURE (MUST FOLLOW):
 - Render as student-facing narrative paragraphs
 - Preserve tone and authenticity
 
-4) Driving Question
+4) Mission
+- Must begin with: "Your task is to..."
+
+5) Project Context & Stakeholders
+- Narrative paragraph
+
+6) Driving Question
 <h3><span style="color: rgb(115, 191, 39);">Driving Question</span></h3>
 - Render as its own emphasized paragraph
 
-5) Mission
-- Must begin with: "Your task is to..."
-
-6) Project Context & Stakeholders
-- Narrative paragraph
-
 7) Final Deliverable Requirements
 <h3><span style="color: rgb(115, 191, 39);">The Deliverable</span></h3>
-- Render as <ul> with <li> only
+- Render as <ul> with <li> only. Bold the main deliverable titles(Summary, Concept & Purpose Plan, Evidence-Based Justification, Model or Representation and The Verdict).
 
 8) Closing Call to Action
 - Final motivating paragraph
@@ -227,6 +228,7 @@ HTML STRUCTURE TO RENDER (IN THIS EXACT ORDER):
 
 1) Section heading:
 <h3><span style="color: rgb(115, 191, 39);">Desired Outcomes</span></h3>
+<p></p>
 
 2) Standards Aligned
 <h3><span style="color: rgb(115, 191, 39);">📏Standards Aligned</span></h3>
@@ -236,6 +238,7 @@ HTML STRUCTURE TO RENDER (IN THIS EXACT ORDER):
 
 3) Big Ideas & Essential Questions
 <h3><span style="color: rgb(115, 191, 39);">💭Big Ideas & Essential Questions</span></h3>
+<p><strong>Purpose: </strong>To establish the broad, enduring concepts that anchor the unit’s learning outcomes, guide the development of essential questions and assessments, and provide students with overarching frameworks that connect all tasks, skills, and activities into meaningful, transferable understanding.</p>
 
 For EACH item in BigIdeasAndEssentialQuestions, render:
 <p><strong>Big Idea:</strong> {BigIdea}</p>
@@ -364,10 +367,11 @@ Then render:
 
 Then for EACH site in Place.Sites, render in order:
 
-<p><strong>The Site:</strong> {TheSite}</p>
-<p><strong>Engagement:</strong> {Engagement}</p>
-<p><strong>Relevance:</strong> {Relevance}</p>
-<p>--------------------------------------------------</p>
+<p><strong>The Site: {TheSite}</strong></p>
+<ul>
+<li><strong>Engagement:</strong> {Engagement}</li>
+<li><strong>Relevance:</strong> {Relevance}</li>
+</ul>
 
 Finally render:
 <p><em>${framing.Place.PlaceMattersReminder}</em></p>
@@ -376,7 +380,7 @@ Finally render:
 
 5 KEY VOCABULARY (GREEN HEADING)
 
-<h3><span style="color: rgb(115, 191, 39);">Key Vocabulary</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">🔤Key Vocabulary</span></h3>
 
 <p>${framing.KeyVocabulary.VocabularyRationale}</p>
 
@@ -429,6 +433,7 @@ All GREEN HEADINGS must be rendered exactly like this:
 RENDER STRUCTURE (HARD RULE)
 --------------------------------------------------
 
+<h3><span style="color: rgb(115, 191, 39);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
 <h3><span style="color: rgb(115, 191, 39);">Assessment Plan</span></h3>
 Then render this EXACT purpose paragraph:
 <p>
@@ -446,7 +451,7 @@ Repeat the structure fully for each item in the order received.
 
 REQUIRED STRUCTURE (DO NOT DEVIATE):
 
-<p><strong>Criteria for Success (Student Learning Objective): {CriteriaForSuccess}</strong></p>
+<p><strong>Criteria for Success:</strong> {CriteriaForSuccess}</p>
 
 <p><strong>Success Criteria: </strong>{SuccessCriteria}</p>
 
@@ -527,8 +532,7 @@ SECTION STRUCTURE (REQUIRED ORDER)
 - Green heading: Learning Plan Overview
 - Render LearningPlanOverview as a paragraph.
 
-2. Bold heading: Project Phases
-- For EACH phase:
+2.- For EACH phase:
   - Phase title (bold)
   - Phase description (paragraph)
   - Concepts or skills emphasized (bold label + paragraph)
@@ -538,21 +542,14 @@ SECTION STRUCTURE (REQUIRED ORDER)
 3. Bold heading: Project Goals
 - Render each ProjectGoal as its own bold-labeled paragraph block.
 
-4. Green heading: Group Suggestions
+4. Bold heading: Final Deliverable Summary
+- Render FinalDeliverableSummary as a bullet list.
+
+5. Green heading: Group Suggestions
 - Group Size (bold label + paragraph)
 - Rotating Roles & Duties (bullet list)
-- Teacher Grouping Strategy Prompt (paragraph, EXACT text)
-- Grouping Strategy Recommendations (bullet list, EXACT text)
-
-5. Bold heading: Milestones & Indicators of Progress
-- Provide a comprehensive paragraph explaining checkpoints, indicators of progress, and feedback cycles.
-- Use ALL relevant information from project phases and goals.
-
-6. Bold heading: Communicating to an Authentic Audience
-- Render CommunicationToAuthenticAudienceExpectations as a paragraph.
-
-7. Bold heading: Final Deliverable Summary
-- Render FinalDeliverableSummary as a bullet list.
+- Teacher Grouping Strategy Prompt (Render bold title "Guiding Questions for Teacher Planning" + "Teachers may consider:"  Then bullet the three ways from {TeacherGroupingStrategyPrompt}.)
+- Grouping Strategy Recommendations (Render bold title "Grouping Strategy Recommendations" + "Teachers may consider:"  Then bullet the all recommendations from {GroupingStrategyRecommendations}. without duplicating Teacher may consider text in each bullet.)
 
 GREEN HEADING FORMAT (HARD RULE)
 <h3><span style="color: rgb(115, 191, 39);">TITLE</span></h3>
@@ -651,9 +648,9 @@ SECTION ORDER (REQUIRED)
 - Render Phase1_FocusStatement as a paragraph
 
 2. Collaborative Activities
-- For each activity:
-  - Teacher Role
+- Each activity must include:
   - Activity title (bold)
+  - Teacher Role
   - Student Experience
   - Artifacts of Learning (bullet list)
 
@@ -663,17 +660,21 @@ SECTION ORDER (REQUIRED)
 
 4. Differentiation
 <p><strong>🪜Differentiation</strong></p>
-- Language Learners
-- Students in Need of Additional Scaffolding
-- Go Deeper
+<ul>
+<li><strong>Language Learners: </strong>{Differentiation_LanguageLearners}</li>
+<li>Students in Need of Additional Scaffolding: </strong>{Differentiation_Scaffolding}</li>
+<li>Go Deeper: </strong>{Differentiation_GoDeeper}</li>
+</ul>
 
 5. Accommodations & Modifications
 <p><strong>🤝Accommodations & Modifications</strong></p>
 - General Supports
-- Individualized Supports (student names in red)
+<ul>
+- Individualized Supports (student names in red), each as its own <li>. Without Plan Provided or Plan Implementation titles, just the content of the plan.
+</ul>
 
 6. Anticipated Misconceptions
-- Misconception + Teacher Response pairs
+- Misconception{i} + Teacher Response pairs as ordered list
 
 7. Transcendent Thinking Prompts
 <p><strong>🌍Transcendent Thinking</strong></p>
@@ -772,9 +773,9 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
   - Render Phase1_FocusStatement as a paragraph
 
   2. Collaborative Activities
-  - For each activity:
-    - Teacher Role
+  - Each activity must include:
     - Activity title (bold)
+    - Teacher Role
     - Student Experience
     - Artifacts of Learning (bullet list)
 
@@ -783,17 +784,21 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
 
 4. Differentiation
 <p><strong>🪜Differentiation</strong></p>
-- Language Learners
-- Students in Need of Additional Scaffolding
-- Go Deeper
+<ul>
+<li><strong>Language Learners: </strong>{Differentiation_LanguageLearners}</li>
+<li>Students in Need of Additional Scaffolding: </strong>{Differentiation_Scaffolding}</li>
+<li>Go Deeper: </strong>{Differentiation_GoDeeper}</li>
+</ul>
 
 5. Accommodations & Modifications
 <p><strong>🤝Accommodations & Modifications</strong></p>
 - General Supports
-- Individualized Supports (student names in red)
+<ul>
+- Individualized Supports (student names in red), each as its own <li>. Without Plan Provided or Plan Implementation titles, just the content of the plan.
+</ul>
 
-6. Anticipated Misconceptions & Teacher Moves
-- Misconception + Teacher Response pairs
+6. Anticipated Misconceptions
+- Misconception{i} + Teacher Response pairs as ordered list
 
 7. Transcendent Thinking Prompts
 <p><strong>🌍Transcendent Thinking</strong></p>
@@ -892,9 +897,9 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
   - Render Phase3_FocusStatement as a paragraph
 
   2. Collaborative Activities
-  - For each activity:
-    - Teacher Role
+  - Each activity must include:
     - Activity title (bold)
+    - Teacher Role
     - Student Experience
     - Artifacts of Learning (bullet list)
 
@@ -903,17 +908,22 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
 
 4. Differentiation
 <p><strong>🪜Differentiation</strong></p>
-- Language Learners
-- Students in Need of Additional Scaffolding
-- Go Deeper
+<ul>
+<li><strong>Language Learners: </strong>{Differentiation_LanguageLearners}</li>
+<li>Students in Need of Additional Scaffolding: </strong>{Differentiation_Scaffolding}</li>
+<li>Go Deeper: </strong>{Differentiation_GoDeeper}</li>
+</ul>
 
 5. Accommodations & Modifications
 <p><strong>🤝Accommodations & Modifications</strong></p>
 - General Supports
-- Individualized Supports (student names in red)
+<ul>
+- Individualized Supports (student names in red), each as its own <li>. Without Plan Provided or Plan Implementation titles, just the content of the plan.
+</ul>
 
-6. Anticipated Misconceptions & Teacher Moves
-- Misconception + Teacher Response pairs
+6. Anticipated Misconceptions
+- Misconception{i} + Teacher Response pairs as ordered list
+
 
 7. Transcendent Thinking Prompts
 <p><strong>🌍Transcendent Thinking</strong></p>
