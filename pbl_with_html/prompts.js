@@ -433,7 +433,7 @@ All GREEN HEADINGS must be rendered exactly like this:
 RENDER STRUCTURE (HARD RULE)
 --------------------------------------------------
 
-<h3><span style="color: rgb(115, 191, 39);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
+<h3><span style="color: rgb(145,56,230);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
 <h3><span style="color: rgb(115, 191, 39);">Assessment Plan</span></h3>
 Then render this EXACT purpose paragraph:
 <p>
@@ -444,7 +444,7 @@ Then render this EXACT purpose paragraph:
 FORMATIVE ASSESSMENT / CRITERIA FOR SUCCESS
 --------------------------------------------------
 
-<h3><span style="color: rgb(115, 191, 39);">Formative Assessment Rubric</span></h3>
+<h3><span style="color: rgb(145,56,230);">Formative Assessment Rubric</span></h3>
 
 Render EACH Formative Assessment item as a vertical block using the exact structure below.
 Repeat the structure fully for each item in the order received.
@@ -466,7 +466,7 @@ DO NOT omit any row.
 ANALYTIC RUBRIC
 --------------------------------------------------
 
-<p><strong>Analytic Rubric</strong></p>
+<h3><span style="color: rgb(145,56,230);">Analytic Rubric</span></h3>
 
 For EACH row in AnalyticRubric, render as a grouped block:
 
@@ -533,13 +533,13 @@ SECTION STRUCTURE (REQUIRED ORDER)
 - Render LearningPlanOverview as a paragraph.
 
 2.- For EACH phase:
-  - Phase title (bold)
+  - Phase title as <h3><span style="color: rgb(145,56,230);">PHASE TITLE</span></h3>
   - Phase description (paragraph)
   - Concepts or skills emphasized (bold label + paragraph)
   - Collaboration & visible thinking (bold label + paragraph)
   - Key learning experiences as a bullet list
 
-3. Bold heading: Project Goals
+3. Bold heading: Project Goals as <h3><span style="color: rgb(145,56,230);">Project Goals</span></h3>
 - Render each ProjectGoal as its own bold-labeled paragraph block.
 
 4. Bold heading: Final Deliverable Summary
@@ -649,13 +649,14 @@ SECTION ORDER (REQUIRED)
 
 2. Collaborative Activities
 - Each activity must include:
-  - Activity title (bold)
+  - Activity title <h3><span style="color: rgb(145,56,230);">ACTIVITY TITLE</span></h3>
   - Teacher Role
   - Student Experience
   - Artifacts of Learning (bullet list)
 
 
 3. Guiding Questions
+- Title in purple (rgb(145,56,230))
 - Bullet list
 
 4. Differentiation
@@ -674,6 +675,7 @@ SECTION ORDER (REQUIRED)
 </ul>
 
 6. Anticipated Misconceptions
+<p><strong>❗Anticipated Misconceptions</strong></p>
 - Misconception{i} + Teacher Response pairs as ordered list
 
 7. Transcendent Thinking Prompts
@@ -682,7 +684,9 @@ SECTION ORDER (REQUIRED)
 - Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
-- Timing
+<p><strong>✔Quick Checks</strong></p>
+- Timing title in rgb(145,56,230)
+- Timings order beginning -> mid-phase -> end of phase
 - Prompt
 - Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
@@ -693,13 +697,13 @@ For EACH entry in Phase1_SpacedRetrieval:
 
 The field ExpectedResponseOrSuccessCriteria is a LONG plain-text block.
 You MUST parse and reorganize it into the following HTML structure.
+Order timing beginning -> mid-phase -> end of phase.
 
 REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
 
-<p><strong>Timing:</strong> {Timing}</p>
+<p><span style="color: rgb(145,56,230);"><strong>Timing:</strong> {Timing}</span></p> 
 <p><strong>Draws From:</strong> {DrawsFrom}</p>
-<p><strong>Question:</strong> {Question}</p>
-<p><strong>DOK:</strong> {DOK}</p>
+<p><strong>Question:</strong> {Question} DOK: {DOK}</p>
 
 From the ExpectedResponseOrSuccessCriteria text:
 - Extract ONLY the student-facing responses
@@ -774,12 +778,13 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
 
   2. Collaborative Activities
   - Each activity must include:
-    - Activity title (bold)
+  - Activity title <h3><span style="color: rgb(145,56,230);">ACTIVITY TITLE</span></h3>
     - Teacher Role
     - Student Experience
     - Artifacts of Learning (bullet list)
 
 3. Guiding Questions
+- Title in purple (rgb(145,56,230))
 - Bullet list
 
 4. Differentiation
@@ -798,6 +803,7 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
 </ul>
 
 6. Anticipated Misconceptions
+<p><strong>❗Anticipated Misconceptions</strong></p>
 - Misconception{i} + Teacher Response pairs as ordered list
 
 7. Transcendent Thinking Prompts
@@ -806,7 +812,9 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
 - Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
-- Timing
+<p><strong>✔Quick Checks</strong></p>
+- Timing title in rgb(145,56,230)
+- Timings order beginning -> mid-phase -> end of phase
 - Prompt
 - Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
@@ -817,13 +825,13 @@ For EACH entry in Phase2_SpacedRetrieval:
 
 The field ExpectedResponseOrSuccessCriteria is a LONG plain-text block.
 You MUST parse and reorganize it into the following HTML structure.
+Order timing beginning -> mid-phase -> end of phase.
 
 REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
 
-<p><strong>Timing:</strong> {Timing}</p>
+<p><span style="color: rgb(145,56,230);"><strong>Timing:</strong> {Timing}</span></p> 
 <p><strong>Draws From:</strong> {DrawsFrom}</p>
-<p><strong>Question:</strong> {Question}</p>
-<p><strong>DOK:</strong> {DOK}</p>
+<p><strong>Question:</strong> {Question} DOK: {DOK}</p>
 
 From the ExpectedResponseOrSuccessCriteria text:
 - Extract ONLY the student-facing responses
@@ -898,12 +906,13 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
 
   2. Collaborative Activities
   - Each activity must include:
-    - Activity title (bold)
+  - Activity title <h3><span style="color: rgb(145,56,230);">ACTIVITY TITLE</span></h3>
     - Teacher Role
     - Student Experience
     - Artifacts of Learning (bullet list)
 
 3. Guiding Questions
+- Title in purple (rgb(145,56,230))
 - Bullet list
 
 4. Differentiation
@@ -922,6 +931,7 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
 </ul>
 
 6. Anticipated Misconceptions
+<p><strong>❗Anticipated Misconceptions</strong></p>
 - Misconception{i} + Teacher Response pairs as ordered list
 
 
@@ -931,7 +941,9 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
 - Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
-- Timing
+<p><strong>✔Quick Checks</strong></p>
+- Timing title in rgb(145,56,230)
+- Timings order beginning -> mid-phase -> end of phase
 - Prompt
 - Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
@@ -942,13 +954,13 @@ For EACH entry in Phase3_SpacedRetrieval:
 
 The field ExpectedResponseOrSuccessCriteria is a LONG plain-text block.
 You MUST parse and reorganize it into the following HTML structure.
+Order timing beginning -> mid-phase -> end of phase.
 
 REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
 
-<p><strong>Timing:</strong> {Timing}</p>
+<p><span style="color: rgb(145,56,230);"><strong>Timing:</strong> {Timing}</span></p> 
 <p><strong>Draws From:</strong> {DrawsFrom}</p>
-<p><strong>Question:</strong> {Question}</p>
-<p><strong>DOK:</strong> {DOK}</p>
+<p><strong>Question:</strong> {Question} DOK: {DOK}</p>
 
 From the ExpectedResponseOrSuccessCriteria text:
 - Extract ONLY the student-facing responses
