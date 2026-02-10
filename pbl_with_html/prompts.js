@@ -89,10 +89,10 @@ ALLOWED TAGS ONLY:
 HARD STRUCTURE (MUST FOLLOW):
 
 1) Start with this exact heading:
-<h3><span>💡 Assess Prior Knowledge</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">💡 Assess Prior Knowledge</span></h3>
 
 2) Immediately after the heading, ALWAYS render this Purpose text exactly as written:
-<p><strong>Purpose:</strong> Activating student's prior knowledge helps teachers uncover existing ideas, partial understandings, and misconceptions. This information supports instructional decisions and provides a foundation for sensemaking and model development throughout the unit.</p>
+<p><strong>Purpose:</strong> Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. When students recall what they already believe or remember about materials, particles, or chemical changes, they activate existing neural pathways. This “elaborative encoding” makes it easier for the brain to connect new chemistry concepts to what is already known, strengthening long-term retention. This activity helps you uncover accurate ideas, partial ideas, and misconceptions that will become powerful anchors for learning throughout the project.</p>
 
 3) Render a teacher-facing "Say:" section.
 - Even if the input text does NOT explicitly contain "Say:"
@@ -151,7 +151,6 @@ HARD STRUCTURE (MUST FOLLOW):
 
 1) Section heading:
 <h3><span style="color: rgb(115, 191, 39);">Unit Task</span></h3>
-<h3><span style="color: rgb(115, 191, 39);">Unit Overview</span></h3>
 
 2) Purpose (render EXACTLY as written):
 <p><strong>Purpose:</strong> To introduce students to an engaging, real-world design challenge that sparks curiosity, grounds learning in authentic applications, presents the driving question, and clearly defines the mission and final deliverable that will guide inquiry throughout the unit.</p>
@@ -226,17 +225,14 @@ Rules:
 
 HTML STRUCTURE TO RENDER (IN THIS EXACT ORDER):
 
-1) Section heading:
-<h3><span style="color: rgb(115, 191, 39);">Desired Outcomes</span></h3>
-<p></p>
 
-2) Standards Aligned
+1) Standards Aligned heading:
 <h3><span style="color: rgb(115, 191, 39);">📏Standards Aligned</span></h3>
 <ul>
   <li>Each standard from StandardsAligned</li>
 </ul>
 
-3) Big Ideas & Essential Questions
+2) Big Ideas & Essential Questions
 <h3><span style="color: rgb(115, 191, 39);">💭Big Ideas & Essential Questions</span></h3>
 <p><strong>Purpose: </strong>To establish the broad, enduring concepts that anchor the unit’s learning outcomes, guide the development of essential questions and assessments, and provide students with overarching frameworks that connect all tasks, skills, and activities into meaningful, transferable understanding.</p>
 
@@ -246,7 +242,7 @@ For EACH item in BigIdeasAndEssentialQuestions, render:
   <li>Essential Question:</strong> {EssentialQuestion}</li>
 </ul>
 
-4) Learning Objectives
+3) Learning Objectives
 <h3><span style="color: rgb(115, 191, 39);">🎯Learning Objectives</span></h3>
 
 Render the following THREE sections IN THIS ORDER:
@@ -304,8 +300,6 @@ RENDER ORDER & STRUCTURE (HARD RULE)
 --------------------------------------------------
 
 1 DRIVING QUESTION (GREEN HEADING)
-<h3><span style="color: rgb(115, 191, 39);">Framing the Learning</span></h3>
-<p></p>
 <h3><span style="color: rgb(115, 191, 39);">Driving Question</span></h3>
 
 Then render this EXACT paragraph word-for-word:
@@ -433,8 +427,7 @@ All GREEN HEADINGS must be rendered exactly like this:
 RENDER STRUCTURE (HARD RULE)
 --------------------------------------------------
 
-<h3><span style="color: rgb(145,56,230);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
-<h3><span style="color: rgb(115, 191, 39);">Assessment Plan</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">Aligned Assessment/Evidence & Criteria for Success</span></h3>
 Then render this EXACT purpose paragraph:
 <p>
 <strong>Purpose:</strong> To ensure that all assessments and success criteria are intentionally and transparently aligned with the unit’s learning objectives, providing accurate measures of student understanding while creating opportunities for students to coconstruct criteria with the teacher—thereby increasing clarity, ownership, and self-regulation as they work toward high-quality, standards-based outcomes.
@@ -528,8 +521,7 @@ CRITICAL RULES
 
 SECTION STRUCTURE (REQUIRED ORDER)
 
-1. Green heading: Learning Plan
-- Green heading: Learning Plan Overview
+1. Green heading: Learning Plan Overview
 - Render LearningPlanOverview as a paragraph.
 
 2.- For EACH phase:
@@ -582,8 +574,6 @@ CRITICAL RULES
 - Preserve the logical order exactly as specified.
 
 REQUIRED STRUCTURE
-
-<h3><span style="color: rgb(115, 191, 39);">Unit Preparation &amp; Considerations</span></h3>
 
 <p><strong><span style="color: rgb(115, 191, 39);">Materials, Equipment &amp; Key Resources</span></strong></p>
 
@@ -643,11 +633,11 @@ SECTION ORDER (REQUIRED)
 
 <h3><span style="color: rgb(115, 191, 39);">Phase 1 – Launch</span></h3>
 
-1. Focus Statement
+1. Focus Statement (bold label)
 - Label with bold "Focus Statement"
 - Render Phase1_FocusStatement as a paragraph
 
-2. Collaborative Activities
+2. Collaborative Activities (bold label)
 - Each activity must include:
   - Activity title <h3><span style="color: rgb(145,56,230);">ACTIVITY TITLE</span></h3>
   - Teacher Role
@@ -660,7 +650,7 @@ SECTION ORDER (REQUIRED)
 - Bullet list
 
 4. Differentiation
-<p><strong>🪜Differentiation</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🪜Differentiation</strong></p>
 <ul>
 <li><strong>Language Learners: </strong>{Differentiation_LanguageLearners}</li>
 <li>Students in Need of Additional Scaffolding: </strong>{Differentiation_Scaffolding}</li>
@@ -668,30 +658,30 @@ SECTION ORDER (REQUIRED)
 </ul>
 
 5. Accommodations & Modifications
-<p><strong>🤝Accommodations & Modifications</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🤝Accommodations & Modifications</strong></p>
 - General Supports
 <ul>
 - Individualized Supports (student names in red), each as its own <li>. Without Plan Provided or Plan Implementation titles, just the content of the plan.
 </ul>
 
 6. Anticipated Misconceptions
-<p><strong>❗Anticipated Misconceptions</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">❗Anticipated Misconceptions</strong></p>
 - Misconception{i} + Teacher Response pairs as ordered list
 
 7. Transcendent Thinking Prompts
-<p><strong>🌍Transcendent Thinking</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🌍Transcendent Thinking</strong></p>
 - Prompt
 - Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
-<p><strong>✔Quick Checks</strong></p>
-- Timing title in rgb(145,56,230)
+<p><strong style="color: rgb(145, 56, 230);">✔Quick Checks</strong></p>
+- Timing title without color
 - Timings order beginning -> mid-phase -> end of phase
 - Prompt
 - Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
 9. Spaced Retrieval
-<p><strong>⏳Spaced Retrieval</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">⏳Spaced Retrieval</strong></p>
 
 For EACH entry in Phase1_SpacedRetrieval:
 
@@ -701,7 +691,7 @@ Order timing beginning -> mid-phase -> end of phase.
 
 REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
 
-<p><span style="color: rgb(145,56,230);"><strong>Timing:</strong> {Timing}</span></p> 
+<p><strong>Timing:</strong> {Timing}</p>
 <p><strong>Draws From:</strong> {DrawsFrom}</p>
 <p><strong>Question:</strong> {Question} DOK: {DOK}</p>
 
@@ -721,7 +711,7 @@ STRICT RULES:
 - If responses are written in sentences, split them logically into bullets
 
 10. Student Practice
-<p><strong>🖊Student Practice</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🖊Student Practice</strong></p>
 
 For EACH entry in Phase1_StudentPractice_Tasks:
 
@@ -772,11 +762,11 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
   
   <h3><span style="color: rgb(115, 191, 39);">Phase 2 - Exploration, Investigation, and Development; Refinement </span></h3>
 
-  1. Focus Statement
+  1. Focus Statement (bold label)
   - Label with bold "Focus Statement"
   - Render Phase1_FocusStatement as a paragraph
 
-  2. Collaborative Activities
+  2. Collaborative Activities (bold label)
   - Each activity must include:
   - Activity title <h3><span style="color: rgb(145,56,230);">ACTIVITY TITLE</span></h3>
     - Teacher Role
@@ -788,7 +778,7 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
 - Bullet list
 
 4. Differentiation
-<p><strong>🪜Differentiation</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🪜Differentiation</strong></p>
 <ul>
 <li><strong>Language Learners: </strong>{Differentiation_LanguageLearners}</li>
 <li>Students in Need of Additional Scaffolding: </strong>{Differentiation_Scaffolding}</li>
@@ -796,30 +786,30 @@ window.buildTeacherGuidancePhase2 = function (jsonText) {
 </ul>
 
 5. Accommodations & Modifications
-<p><strong>🤝Accommodations & Modifications</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🤝Accommodations & Modifications</strong></p>
 - General Supports
 <ul>
 - Individualized Supports (student names in red), each as its own <li>. Without Plan Provided or Plan Implementation titles, just the content of the plan.
 </ul>
 
 6. Anticipated Misconceptions
-<p><strong>❗Anticipated Misconceptions</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">❗Anticipated Misconceptions</strong></p>
 - Misconception{i} + Teacher Response pairs as ordered list
 
 7. Transcendent Thinking Prompts
-<p><strong>🌍Transcendent Thinking</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🌍Transcendent Thinking</strong></p>
 - Prompt
 - Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
-<p><strong>✔Quick Checks</strong></p>
-- Timing title in rgb(145,56,230)
+<p><strong style="color: rgb(145, 56, 230);">✔Quick Checks</strong></p>
+- Timing title without color
 - Timings order beginning -> mid-phase -> end of phase
 - Prompt
 - Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
 9. Spaced Retrieval
-<p><strong>⏳Spaced Retrieval</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">⏳Spaced Retrieval</strong></p>
 
 For EACH entry in Phase2_SpacedRetrieval:
 
@@ -829,7 +819,7 @@ Order timing beginning -> mid-phase -> end of phase.
 
 REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
 
-<p><span style="color: rgb(145,56,230);"><strong>Timing:</strong> {Timing}</span></p> 
+<p><strong>Timing:</strong> {Timing}</p>
 <p><strong>Draws From:</strong> {DrawsFrom}</p>
 <p><strong>Question:</strong> {Question} DOK: {DOK}</p>
 
@@ -849,7 +839,7 @@ STRICT RULES:
 - If responses are written in sentences, split them logically into bullets
 
 10. Student Practice
-<p><strong>🖊Student Practice</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🖊Student Practice</strong></p>
 
 For EACH entry in Phase2_StudentPractice_Tasks:
 
@@ -898,13 +888,13 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
   
   SECTION ORDER (REQUIRED)
   
-  <h3><span style="color: rgb(115, 191, 39);">Development; Refinement, Culmination, and Reflection  </span></h3>
+  <h3><span style="color: rgb(115, 191, 39);">Phase 3 - Development; Refinement, Culmination, and Reflection  </span></h3>
 
-  1. Focus Statement
+  1. Focus Statement (bold label)
   - Label with bold "Focus Statement"
   - Render Phase3_FocusStatement as a paragraph
 
-  2. Collaborative Activities
+  2. Collaborative Activities (bold label)
   - Each activity must include:
   - Activity title <h3><span style="color: rgb(145,56,230);">ACTIVITY TITLE</span></h3>
     - Teacher Role
@@ -916,7 +906,7 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
 - Bullet list
 
 4. Differentiation
-<p><strong>🪜Differentiation</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🪜Differentiation</strong></p>
 <ul>
 <li><strong>Language Learners: </strong>{Differentiation_LanguageLearners}</li>
 <li>Students in Need of Additional Scaffolding: </strong>{Differentiation_Scaffolding}</li>
@@ -924,31 +914,31 @@ window.buildTeacherGuidancePhase3 = function (jsonText) {
 </ul>
 
 5. Accommodations & Modifications
-<p><strong>🤝Accommodations & Modifications</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🤝Accommodations & Modifications</strong></p>
 - General Supports
 <ul>
 - Individualized Supports (student names in red), each as its own <li>. Without Plan Provided or Plan Implementation titles, just the content of the plan.
 </ul>
 
 6. Anticipated Misconceptions
-<p><strong>❗Anticipated Misconceptions</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">❗Anticipated Misconceptions</strong></p>
 - Misconception{i} + Teacher Response pairs as ordered list
 
 
 7. Transcendent Thinking Prompts
-<p><strong>🌍Transcendent Thinking</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🌍Transcendent Thinking</strong></p>
 - Prompt
 - Expected Student Responses (bullet list) with title <p>✅Expected Student Responses:</p>
 
 8. Quick Checks
-<p><strong>✔Quick Checks</strong></p>
-- Timing title in rgb(145,56,230)
+<p><strong style="color: rgb(145, 56, 230);">✔Quick Checks</strong></p>
+- Timing title without color
 - Timings order beginning -> mid-phase -> end of phase
 - Prompt
 - Expected Student Responses or SuccessCriteria (bullet list) <p>✅Expected Student Responses:</p> or <p>✅Success Criteria:</p>
 
 9. Spaced Retrieval
-<p><strong>⏳Spaced Retrieval</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">⏳Spaced Retrieval</strong></p>
 
 For EACH entry in Phase3_SpacedRetrieval:
 
@@ -958,7 +948,7 @@ Order timing beginning -> mid-phase -> end of phase.
 
 REQUIRED OUTPUT STRUCTURE (IN THIS ORDER):
 
-<p><span style="color: rgb(145,56,230);"><strong>Timing:</strong> {Timing}</span></p> 
+<p><strong>Timing:</strong> {Timing}</p>
 <p><strong>Draws From:</strong> {DrawsFrom}</p>
 <p><strong>Question:</strong> {Question} DOK: {DOK}</p>
 
@@ -978,7 +968,7 @@ STRICT RULES:
 - If responses are written in sentences, split them logically into bullets
 
 10. Student Practice
-<p><strong>🖊Student Practice</strong></p>
+<p><strong style="color: rgb(145, 56, 230);">🖊Student Practice</strong></p>
 
 For EACH entry in Phase3_StudentPractice_Tasks:
 
