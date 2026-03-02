@@ -113,7 +113,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   
   <h3><span>💡 Assess Prior Knowledge</span></h3>
   
-  <p><strong>Teacher Note:</strong> Activating student's prior knowledge helps teachers uncover existing ideas, partial understandings, and misconceptions. This information supports instructional decisions and provides a foundation for sensemaking and model development throughout the unit.</p>
+  <p><strong>Teacher Note:</strong> Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.</p>
   
   Then render:
   
@@ -381,14 +381,14 @@ window.unitDescriptionPrompt = function (jsonText) {
   <li>Collaboration Prompt: Who has not contributed yet, and how will you include them?</li>
   </ul>
   
-  <p><strong>Anticipated Misconceptions</strong></p>
+  <p><strong>❗Anticipated Misconceptions</strong></p>
   <ul>
-  <li>${payload.AnticipatedMisconceptions}</li>
+  <li>${payload.AnticipatedMisconceptions} for each misconception</li>
   </ul>
   
   <p><strong>🪜Differentiation</strong></p>
   <ul>
-  <li>${payload.Differentiation}</li>
+  <li>${payload.Differentiation} 3 bullets: Language learners, Additional Scaffolding, & Go Deeper</li>
   </ul>
   
   <p><strong>🤝Accommodations & Modifications</strong></p>
@@ -405,7 +405,7 @@ window.unitDescriptionPrompt = function (jsonText) {
   ).join("")}
   </ul>
   
-  <p><strong>Quick Check</strong></p>
+  <p><strong>✔Quick Checks</strong></p>
   <ul>
   <li>${payload.QuickCheck}</li>
   </ul>

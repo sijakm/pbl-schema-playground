@@ -669,6 +669,159 @@
           setUiRunning(false);
         }
       }
+
+      // --- Chained Run (Split into 2 phases) ---
+      async function runChained() {
+        if (typeof window.masterSchema1 === 'undefined' || typeof window.masterSchema2 === 'undefined') {
+          alert("Schemas masterSchema1 or masterSchema2 are not defined in schema.js!");
+          return;
+        }
+
+        const output = els.output();
+        const promptEl = els.prompt();
+        const apiKeyEl = els.apiKey();
+        const modelEl = els.modelSelect();
+
+        if (!output || !promptEl || !modelEl) return;
+
+        const apiKey = apiKeyEl ? apiKeyEl.value.trim() : "";
+        const model = modelEl.value;
+        const basePrompt = promptEl.value;
+
+        // Reset UI
+        output.value = "";
+        lastJsonObject = null;
+        setRenderEnabled(false);
+        startTimer();
+        setUiRunning(true);
+
+        currentAbortController = new AbortController();
+
+        try {
+          // --- FAZA 1: Generisanje baze plana ---
+          output.value = "=== PHASE 1: GENERATING CORE PLAN ===\n\n";
+          
+          const schema1 = typeof window.masterSchema1 === "string" 
+            ? JSON.parse(window.masterSchema1) : window.masterSchema1;
+
+          const firstPartJson = await executeStep(basePrompt, schema1, model, apiKey);
+          
+          // --- FAZA 2: Generisanje Teacher Guidance ---
+          output.value += "\n\n=== PHASE 1 COMPLETE. STARTING PHASE 2 ===\n\n";
+
+          const schema2 = typeof window.masterSchema2 === "string" 
+            ? JSON.parse(window.masterSchema2) : window.masterSchema2;
+
+          // Drugi prompt koji model uvodi u nastavak rada
+          const secondPrompt = `
+### ORIGINAL REQUIREMENTS & CONTEXT:
+${basePrompt}
+
+### PHASE 1 GENERATED CONTENT:
+Below is the JSON already generated for the first half of this unit plan:
+${JSON.stringify(firstPartJson, null, 2)}
+
+### INSTRUCTIONS FOR PHASE 2:
+You are an expert curriculum designer. Your task is to complete the REMAINING sections of the PBL unit plan (Teacher Guidance Phases 1-3 and Unit Preparation) based on the original requirements and the content already established in Phase 1.
+
+CRITICAL: 
+1. Ensure the "Teacher Guidance" sections specifically address the differentiation needs for Maria Valdez, Jacob Garrow, and Ava Lund as requested in the original prompt.
+2. Maintain perfect consistency with the Grade Level, Subject, and Zip Code (Greenville, WI) provided.
+3. Your response MUST be valid JSON and only contain the keys defined in the provided response schema for Phase 2.
+`.trim();
+
+          const secondPartJson = await executeStep(secondPrompt, schema2, model, apiKey);
+
+          // --- FINALIZACIJA: Spajanje rezultata ---
+          // Pretpostavljamo da oba JSON-a imaju root ključ "UnitPlan"
+          const finalResult = {
+            UnitPlan: {
+              ...firstPartJson.UnitPlan,
+              ...secondPartJson.UnitPlan
+            }
+          };
+
+          const pretty = JSON.stringify(finalResult, null, 2);
+          output.value = pretty;
+          lastJsonObject = finalResult;
+          lastJsonText = pretty;
+          
+          setRenderEnabled(true);
+          stopTimer("Completed All Phases");
+
+        } catch (err) {
+          if (err?.name === "AbortError") {
+            output.value += "\n\n[Cancelled by User]\n";
+            stopTimer("Cancelled");
+          } else {
+            output.value += `\n\n[Chain Error]\n${err?.message || String(err)}\n`;
+            stopTimer("Error");
+          }
+        } finally {
+          setUiRunning(false);
+          currentAbortController = null;
+        }
+      }
+      console.log("Playground initialized with chained run capability. You can call runChained() to execute the two-phase process.");
+
+      // Pomoćna funkcija za izvršavanje pojedinačnog koraka (skraćena verzija tvog run-a)
+      async function executeStep(prompt, schema, model, apiKey) {
+        const output = els.output();
+        let stepText = "";
+        
+        const response = await fetch(cfg.endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {})
+          },
+          signal: currentAbortController.signal,
+          body: JSON.stringify({
+            model,
+            stream: true,
+            reasoning: { effort: "none" },
+            temperature: 0.1,
+            input: [{ role: "user", content: prompt }],
+            text: {
+              format: {
+                type: "json_schema",
+                verbosity: "high",
+                name: cfg.schemaResponseName,
+                schema,
+                strict: true
+              }
+            }
+          })
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let buffer = "";
+
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const parsed = parseSseLines(buffer);
+          buffer = parsed.rest;
+
+          for (const raw of parsed.events) {
+            if (raw === "[DONE]") break;
+            let evt;
+            try { evt = JSON.parse(raw); } catch { continue; }
+
+            if (evt.type === "response.output_text.delta") {
+              stepText += evt.delta;
+              output.value += evt.delta;
+              output.scrollTop = output.scrollHeight;
+            }
+          }
+        }
+        return JSON.parse(stepText);
+      }
   
       function loadJsonAndEnableRender(jsonTextOrObj) {
         try {
@@ -706,6 +859,7 @@
   
       // expose for console / optional inline handlers
       window.run = run;
+      window.runChained = runChained;
       window.renderHtml = renderHtml;
       window.cancelRun = cancelRun;
       window.copySchema = copySchema;

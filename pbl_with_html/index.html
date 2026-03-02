@@ -49,7 +49,7 @@
   </div>
 
   <div class="row">
-    <button id="runBtn" type="button">Run (Stream)</button>
+    <button id="runBtn" type="button" onclick="runChained()">Run Chained Flow</button>
     <button id="renderBtn" type="button" disabled>Render HTML (Parallel)</button>
     <button id="cancelBtn" type="button" disabled>Cancel</button>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
@@ -75,7 +75,7 @@
     <h3>Final JSON Schema (after edits)</h3>
     <button id="copySchemaBtn" type="button" style="margin-bottom:8px;">Copy schema</button>
     <textarea id="finalSchema" readonly style="height:240px;"></textarea>
-  </div>
+</div>
 
   <!-- IMPORTANT: order matters -->
   <script src="schema.js"></script>
