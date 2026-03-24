@@ -312,7 +312,8 @@
   async function runChain() {
     if (isRunning) return;
 
-    const apiKey = els.apiKey()?.value?.trim() || "";
+    const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+    const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
     const model = els.model()?.value || "gpt-5.4-mini";
 

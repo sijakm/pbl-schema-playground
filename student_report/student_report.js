@@ -171,8 +171,12 @@
       });
       logLine("[Cleo] Requesting feedback...");
       
+      const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+      const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey")?.value?.trim() || "";
+
       const responseText = await callResponsesApiStream({
         endpoint: DEFAULT_ENDPOINT,
+        apiKey,
         model,
         prompt,
         schemaObj: STUDENT_REPORT_SCHEMA

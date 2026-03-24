@@ -290,7 +290,8 @@ if (invalidFields.length > 0) {
   // Show final schema in UI
   document.getElementById("finalSchema").value = JSON.stringify(schema, null, 2);
 
-  const apiKey = "";
+  const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+  const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
 
