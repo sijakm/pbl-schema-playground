@@ -4,6 +4,16 @@
 let timerInterval = null;
 let startTime = null;
 
+let lastJsonText = "";
+let lastJsonObject = null;
+let lastRenderedHtml = "";
+let activeAbortControllers = [];
+
+function setRenderEnabled(enabled) {
+  const renderBtn = document.getElementById("renderBtn");
+  if (renderBtn) renderBtn.disabled = !enabled;
+}
+
 function startTimer() {
   startTime = Date.now();
   const status = document.getElementById("status");
@@ -34,36 +44,6 @@ function stopTimer(finalMessage) {
     (finalMessage ? `${finalMessage} ` : "") +
     `(${minutes}:${seconds.toString().padStart(2, "0")})`;
 }
-
-/************************************
- * DEFAULT PROMPT
- ************************************/
-const defaultPrompt = `
-Create a complete Project-Based Learning (PBL) unit plan and project-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
-
-MVP planning requirements (must be reflected in the unit):
-• Zip code localization: If a zip code is provided, include examples, stakeholders, audiences, and place-based resources that plausibly fit the community and surrounding area. Do not invent exact addresses/phone numbers; refer to realistic local institution types and roles.
-• Project Duration: The project lasts 10 days, so the plan and lesson progression must be written across multiple days (not a single class period).
-
-Use these unit inputs exactly:
-Unit Subject: Earth & Space Science (Gravity & Orbits)
-Unit Name: “Gravity at Work: Modeling Motion in Our Solar System”
-Unit Description/Instruction (teacher request): Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.
-Grade Level: The student is in the 1st grade of middle school, which consists of 4 grades total.
-Duration of class period (minutes): 45
-Project Duration (days): 10
-Location: Greenville, Wisconsin, United States
-Zip code: 54942
-Resources/Media to use: Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple orbit simulations (browser-based), chart paper, student science notebooks.
-Standards: MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.
-
-Students with plans:
-Maria Valdez: Provide a partially pre-labeled orbit map and sentence frames for explanations.
-Jacob Garrow: Allow speech-to-text for reasoning and labeling.
-Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.
-
-Output rule: Return ONLY JSON that validates against the response schema.
-`;
 
 /************************************
  * DESCRIPTION COLLECTION
@@ -111,90 +91,6 @@ function findInvalidChars(text) {
   return issues;
 }
 
-function renderDescriptionEditor() {
-  const container = document.getElementById("descriptions");
-  container.innerHTML = "";
-
-  const descriptions = collectDescriptions(parsedMasterSchema);
-
-  descriptions.forEach(item => {
-    const wrapper = document.createElement("div");
-    wrapper.style.marginBottom = "16px";
-
-    // Label
-    const label = document.createElement("label");
-    label.innerText = item.path
-      .filter(p => !["properties", "items", "description"].includes(p))
-      .join(" → ");
-    label.style.display = "block";
-    label.style.fontWeight = "bold";
-    label.style.marginBottom = "4px";
-
-    // Textarea
-    const textarea = document.createElement("textarea");
-    textarea.rows = 2;
-    textarea.style.resize = "vertical";
-    textarea.style.width = "100%";
-    textarea.value = item.value;
-    textarea.dataset.path = JSON.stringify(item.path);
-
-    // Warning message
-    const warning = document.createElement("div");
-    warning.style.color = "#b00020";
-    warning.style.fontSize = "12px";
-    warning.style.marginTop = "4px";
-    warning.style.display = "none";
-
-    // Validation on input
-    textarea.addEventListener("input", () => {
-      const problems = findInvalidChars(textarea.value);
-
-      if (problems.length > 0) {
-        textarea.style.border = "2px solid #b00020";
-        warning.style.display = "block";
-        warning.textContent =
-          "Invalid characters detected: " + problems.join(", ");
-      } else {
-        textarea.style.border = "";
-        warning.style.display = "none";
-        warning.textContent = "";
-      }
-    });
-
-    wrapper.appendChild(label);
-    wrapper.appendChild(textarea);
-    wrapper.appendChild(warning);
-    container.appendChild(wrapper);
-  });
-}
-
-
-/************************************
- * PATH SETTER
- ************************************/
-function setValueAtPath(obj, path, value) {
-  let current = obj;
-  for (let i = 0; i < path.length - 1; i++) {
-    current = current[path[i]];
-  }
-  current[path[path.length - 1]] = value;
-}
-
-/************************************
- * COPY SCHEMA
- ************************************/
-function copySchema() {
-  const textarea = document.getElementById("finalSchema");
-  if (!textarea.value) {
-    alert("Schema is empty.");
-    return;
-  }
-  textarea.select();
-  textarea.setSelectionRange(0, textarea.value.length);
-  navigator.clipboard.writeText(textarea.value)
-    .then(() => alert("Schema copied to clipboard ✅"))
-    .catch(() => alert("Failed to copy schema."));
-}
 
 
 /************************************
@@ -229,48 +125,64 @@ function parseSseLines(buffer) {
  * RUN (STREAM ONLY into #output)
  ************************************/
 let lastEditedSchema = null;
-let parsedMasterSchema = null;
+let currentAppSchema = null; 
+
+function ensureSchema() {
+  if (currentAppSchema) return currentAppSchema;
+
+  const rawSchema = window.masterSchema || window.pblResponseSchema || (typeof pblResponseSchema !== 'undefined' ? pblResponseSchema : null);
+  
+  if (!rawSchema) {
+    console.warn("⚠️ No schema found in window.masterSchema or pblResponseSchema");
+    return null;
+  }
+
+  try {
+    currentAppSchema = typeof rawSchema === "string" ? JSON.parse(rawSchema) : rawSchema;
+    console.log("✅ Schema initialized:", currentAppSchema);
+    return currentAppSchema;
+  } catch (e) {
+    console.error("❌ Schema parsing failed", e);
+    return null;
+  }
+}
 
 let currentAbortController = null;
 
 function setUiRunning(isRunning) {
   const runBtn = document.getElementById("runBtn");
+  const renderBtn = document.getElementById("renderBtn");
   const cancelBtn = document.getElementById("cancelBtn");
+
   runBtn.disabled = isRunning;
   cancelBtn.disabled = !isRunning;
+
+  if (renderBtn) {
+    renderBtn.disabled = isRunning || !lastJsonObject;
+  }
 }
 
 function cancelRun() {
-  if (currentAbortController) {
-    currentAbortController.abort();
+  if (currentAbortController) currentAbortController.abort();
+
+  for (const ac of activeAbortControllers) {
+    try { ac.abort(); } catch {}
   }
+  activeAbortControllers = [];
 }
 
 async function run() {
-  // Clone schema and apply description edits
-  const invalidFields = [];
-  const model = document.getElementById("modelSelect").value;
-
-document.querySelectorAll("#descriptions textarea").forEach(t => {
-  if (findInvalidChars(t.value).length > 0) {
-    invalidFields.push(t);
-  }
-});
-
-if (invalidFields.length > 0) {
-  alert("Some fields contain invalid characters. Please fix highlighted fields.");
-  return;
-}
+  generatePrompt();
   
-  const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
-  document.querySelectorAll("#descriptions textarea").forEach(textarea => {
-    const path = JSON.parse(textarea.dataset.path);
-    setValueAtPath(schema, path, textarea.value.trim());
-  });
+  const schema = ensureSchema();
+  if (!schema) {
+    alert("Critical Error: JSON Schema is missing or invalid. Please check the console.");
+    return;
+  }
+  
+  const model = document.getElementById("modelSelect").value;
+  console.log("🚀 Running with model:", model, "and schema:", schema);
   lastEditedSchema = schema;
-
-  // Show final schema in UI
-  document.getElementById("finalSchema").value = JSON.stringify(schema, null, 2);
 
   const apiKey = document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
@@ -280,19 +192,14 @@ if (invalidFields.length > 0) {
   startTimer();
   setUiRunning(true);
 
-  if (!apiKey) {
-    output.value = "API key is required.";
-    stopTimer("Stopped");
-    setUiRunning(false);
-    return;
-  }
-
   // Abort support
   currentAbortController = new AbortController();
   const { signal } = currentAbortController;
 
   // Simple “stuck detector”: if no deltas for 20s, print a marker.
   let lastDeltaAt = Date.now();
+  let consecutiveWhitespaceCount = 0;
+  const MAX_WHITESPACE_DELTAS = 1000;
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
     if (diff > 30000) {
@@ -303,12 +210,13 @@ if (invalidFields.length > 0) {
   }, 4000);
 
   try {
-    // ✅ Responses API streaming (recommended) :contentReference[oaicite:2]{index=2}
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    console.log("🚀 Main Prompt:", prompt);
+    // ✅ Use playground endpoint as requested
+    const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "Authorization": `Bearer ${apiKey}`
+    ...(apiKey ? { "Authorization": `Bearer ${apiKey}` } : {})
   },
   signal,
   body: JSON.stringify({
@@ -349,6 +257,11 @@ if (invalidFields.length > 0) {
 
     let buffer = "";
     let finalText = "";
+    
+    // Throttle UI updates
+    let lastUiUpdateAt = 0;
+    const UI_UPDATE_INTERVAL = 100; // 100ms
+    let pendingDeltas = "";
 
     while (true) {
       const { value, done } = await reader.read();
@@ -360,7 +273,6 @@ if (invalidFields.length > 0) {
       buffer = rest;
 
       for (const raw of events) {
-        // Some servers emit [DONE]; Responses API mostly emits typed events, but handle both.
         if (raw === "[DONE]") {
           break;
         }
@@ -372,22 +284,43 @@ if (invalidFields.length > 0) {
           continue;
         }
 
-        // Primary: text deltas :contentReference[oaicite:4]{index=4}
         if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
-
-          const shouldAutoScroll = isUserNearBottom(output);
-
-          output.value += evt.delta;
+        
+          // 🔒 WHITESPACE STALL DETECTOR
+          if (evt.delta.trim().length === 0) {
+            consecutiveWhitespaceCount++;
+          } else {
+            consecutiveWhitespaceCount = 0;
+          }
+        
+          if (consecutiveWhitespaceCount >= MAX_WHITESPACE_DELTAS) {
+            alert(
+              "⚠️ Model output stalled.\n\n" +
+              "Too many empty / whitespace tokens were received.\n" +
+              "The request was stopped. Please run again."
+            );
+        
+            currentAbortController?.abort();
+            break;
+          }
+        
+          pendingDeltas += evt.delta;
           finalText += evt.delta;
-
-          if (shouldAutoScroll) {
-            output.scrollTop = output.scrollHeight;
+          
+          const now = Date.now();
+          if (now - lastUiUpdateAt > UI_UPDATE_INTERVAL) {
+            lastUiUpdateAt = now;
+            const shouldAutoScroll = isUserNearBottom(output);
+            output.value += pendingDeltas;
+            pendingDeltas = "";
+            if (shouldAutoScroll) {
+              output.scrollTop = output.scrollHeight;
+            }
           }
           continue;
         }
 
-        // Optional: show refusals inline (so you see why it stopped)
         if (evt.type === "response.refusal.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
           output.value += evt.delta;
@@ -395,7 +328,6 @@ if (invalidFields.length > 0) {
           continue;
         }
 
-        // Optional: show terminal errors as text
         if (evt.type === "error") {
           lastDeltaAt = Date.now();
           output.value += `\n\n[ERROR]\n${JSON.stringify(evt, null, 2)}\n`;
@@ -404,14 +336,31 @@ if (invalidFields.length > 0) {
         }
       }
     }
+    
+    // One final update if there are leftover pending deltas
+    if (pendingDeltas) {
+      const shouldAutoScroll = isUserNearBottom(output);
+      output.value += pendingDeltas;
+      if (shouldAutoScroll) {
+        output.scrollTop = output.scrollHeight;
+      }
+    }
 
-    // Try parse + pretty-print at end (keeps “stream-only” feel, but fixes readability)
-    // If parsing fails, you still have the raw partial output which is exactly what you want for debugging.
     try {
       const parsed = JSON.parse(finalText);
-      output.value = JSON.stringify(parsed, null, 2);
+      const pretty = JSON.stringify(parsed, null, 2);
+
+      console.log("📥 Main Response JSON:", parsed);
+      output.value = pretty;
+
+      lastJsonObject = parsed;
+      lastJsonText = pretty;
+      setRenderEnabled(true);
     } catch {
       output.value += "\n\n[⚠️ Could not parse JSON at end — leaving raw streamed output as-is.]\n";
+      lastJsonObject = null;
+      lastJsonText = "";
+      setRenderEnabled(false);
     }
 
     stopTimer("Completed");
@@ -430,43 +379,122 @@ if (invalidFields.length > 0) {
   }
 }
 
-function sanitizeSchemaText(raw) {
-  let text = raw
-    .replace(/\r\n/g, "\n")
-    .replace(/\u00A0/g, " ")
-    .replace(/[\u2028\u2029]/g, "\n")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u2013\u2014]/g, "-")
-    .replace(/[→⇒↔]/g, "->");
-  let result = "";
-  let inString = false;
-  let prev = "";
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-
-    if (char === '"' && prev !== "\\") {
-      inString = !inString;
-      result += char;
-    }
-    else if (inString && char === "\n") {
-      result += "\\n";
-    }
-    else if (inString && char === "\t") {
-      result += "\\t";
-    }
-    else if (inString && char === '"' && prev !== "\\") {
-      result += '\\"';
-    }
-    else {
-      result += char;
-    }
-
-    prev = char;
+async function renderHtml() {
+  if (!lastJsonText) {
+    alert("No JSON to render. Please run the unit plan generation first.");
+    return;
   }
 
-  return result;
+  const htmlOutput = document.getElementById("htmlOutput");
+  const output = document.getElementById("output");
+  
+  setRenderEnabled(false);
+  htmlOutput.innerHTML = "<p>Rendering all 11 sections in parallel... Please wait.</p>";
+  
+  const prompts = [
+    { key: "p1",  name: "Unit Description",                     prompt: window.unitDescriptionHtmlPrompt || unitDescriptionHtmlPrompt },
+    { key: "p2",  name: "Assess Prior Knowledge",               prompt: window.assessPriorKnowledgeHtmlPrompt || assessPriorKnowledgeHtmlPrompt },
+    { key: "p3",  name: "Unit Overview",                        prompt: window.unitOverviewHtmlPrompt || unitOverviewHtmlPrompt },
+    { key: "p4",  name: "Desired Outcomes",                     prompt: window.desiredOutcomesHtmlPrompt || desiredOutcomesHtmlPrompt },
+    { key: "p5",  name: "Framing the Project",                  prompt: window.framingTheProjectHtmlPrompt || framingTheProjectHtmlPrompt },
+    { key: "p6",  name: "Assessment Plan",                      prompt: window.assesmentPlanHtmlPrompt || assesmentPlanHtmlPrompt },
+    { key: "p7",  name: "Learning Plan",                        prompt: window.learningPlanHtmlPrompt || learningPlanHtmlPrompt },
+    { key: "p8",  name: "Teacher Guidance: Phase 1",            prompt: window.teacherGuidancePhase1HtmlPrompt || teacherGuidancePhase1HtmlPrompt },
+    { key: "p9",  name: "Teacher Guidance: Phase 2",            prompt: window.teacherGuidancePhase2HtmlPrompt || teacherGuidancePhase2HtmlPrompt },
+    { key: "p10", name: "Teacher Guidance: Phase 3",            prompt: window.teacherGuidancePhase3HtmlPrompt || teacherGuidancePhase3HtmlPrompt },
+    { key: "p11", name: "Unit Preparation & Considerations",     prompt: window.unitPreparationAndConsiderationsHtmlPrompt || unitPreparationAndConsiderationsHtmlPrompt }
+  ];
+
+  const responseLanguage = document.getElementById("input_ResponseLanguage")?.value || "English";
+  const apiKey = document.getElementById("apiKey").value.trim();
+  const model = document.getElementById("modelSelect").value;
+  
+  const results = {};
+  
+  output.value += "\n\n=== Starting Parallel HTML Rendering (11 tasks) ===\n";
+
+  const tasks = prompts.map(async (p) => {
+    if (!p.prompt) {
+      console.error(`❌ Missing prompt for: ${p.name}`);
+      results[p.key] = `<p style="color:red">Error: Prompt missing for ${p.name}</p>`;
+      return;
+    }
+
+    const promptContent = fillTemplate(p.prompt, {
+      ResponseLanguage: responseLanguage,
+      JsonResponse: lastJsonText
+    });
+
+    console.log(`🚀 Section Prompt [${p.name}]:`, promptContent);
+
+    try {
+      const res = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(apiKey ? { "Authorization": `Bearer ${apiKey}` } : {})
+        },
+        body: JSON.stringify({
+          model: model,
+          stream: true,
+          reasoning: { effort: "low" },
+          input: [{ role: "user", content: promptContent }]
+        })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      let sectionHtml = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const { events, rest } = parseSseLines(buffer);
+        buffer = rest;
+
+        for (const raw of events) {
+          if (raw === "[DONE]") break;
+          try {
+            const evt = JSON.parse(raw);
+            if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+              sectionHtml += evt.delta;
+            }
+          } catch (e) { continue; }
+        }
+      }
+
+      console.log(`📥 Section HTML extracted [${p.name}]:`, sectionHtml.length, "chars");
+      results[p.key] = sectionHtml;
+    } catch (err) {
+      console.error(`❌ Error in ${p.name}:`, err);
+      results[p.key] = `<p style="color:red">Error rendering ${p.name}: ${err.message}</p>`;
+    }
+  });
+
+  await Promise.all(tasks);
+
+  // Final Assembly in specific order
+  let combinedHtml = "";
+  prompts.forEach(p => {
+    if (results[p.key]) {
+      combinedHtml += results[p.key] + "\n";
+    }
+  });
+
+  htmlOutput.value = combinedHtml;
+
+  const htmlPreview = document.getElementById("htmlPreview");
+  if (htmlPreview) {
+    htmlPreview.srcdoc = combinedHtml;
+  }
+
+  output.value += "=== HTML Render Completed ===\n";
+  setRenderEnabled(true);
 }
 
 
@@ -475,23 +503,108 @@ function isUserNearBottom(el, threshold = 40) {
 }
 
 /************************************
+ * DEBUG / MANUAL LOAD
+ ************************************/
+function loadJsonAndEnableRender(jsonTextOrObj) {
+  try {
+    let input = jsonTextOrObj;
+    
+    // If it's a string, try to clean it (remove markdown code blocks if any)
+    if (typeof input === "string") {
+      input = input.trim();
+      // Remove starting ```json if present
+      if (input.startsWith("```json")) {
+        input = input.replace(/^```json/, "");
+      } else if (input.startsWith("```")) {
+        input = input.replace(/^```/, "");
+      }
+      
+      // Remove ending ``` if present
+      if (input.endsWith("```")) {
+        input = input.replace(/```$/, "");
+      }
+      
+      input = input.trim();
+    }
+
+    const parsed =
+      typeof input === "string"
+        ? JSON.parse(input)
+        : input;
+
+    lastJsonObject = parsed;
+    lastJsonText = JSON.stringify(parsed, null, 2);
+    setRenderEnabled(true);
+
+    // Also populate the output box so the user sees something changed
+    const outputEl = document.getElementById("output");
+    if (outputEl) {
+      outputEl.value = lastJsonText;
+    }
+
+    console.log("✅ JSON loaded. You can now click Render HTML.");
+  } catch (e) {
+    console.error("❌ Invalid JSON:", e);
+    alert("Invalid JSON: " + e.message);
+  }
+}
+
+window.loadJsonAndEnableRender = loadJsonAndEnableRender;
+window.run = run;
+window.renderHtml = renderHtml;
+window.cancelRun = cancelRun;
+window.copySchema = copySchema;
+
+/************************************
+ * TEMPLATE ENGINE
+ ************************************/
+function fillTemplate(template, data) {
+  if (!template) return "";
+  // Supports {{$Var}}, {{{$Var}}}, [[$Var]], and nested keys like {{{framing.Problem}}}
+  return template.replace(/(\{\{\{?|\[\[)([$a-zA-Z0-9_.]+)(\}\}\}?|\]\])/g, (match, open, key, close) => {
+    // Basic support for nested paths through simple property access if needed
+    if (key.includes(".")) {
+      const parts = key.split(".");
+      let val = data;
+      for (const part of parts) {
+        if (val && typeof val === "object") val = val[part];
+        else { val = undefined; break; }
+      }
+      return val !== undefined ? val : match;
+    }
+    return data[key] !== undefined ? data[key] : match;
+  });
+}
+
+function generatePrompt() {
+  const data = {
+    "$Subject": document.getElementById("input_Subject").value,
+    "$Name": document.getElementById("input_Name").value,
+    "$UserPrompt": document.getElementById("input_UserPrompt").value,
+    "$GradeLevel": document.getElementById("input_GradeLevel").value,
+    "$NumberOfDays": document.getElementById("input_NumberOfDays").value,
+    "$Location": document.getElementById("input_Location").value,
+    "$MediaContext": document.getElementById("input_MediaContext").value,
+    "$AttachedUnit": document.getElementById("input_AttachedUnit").value,
+    "$LearningPlans": document.getElementById("input_LearningPlans").value,
+    "$Standards": document.getElementById("input_Standards").value,
+    "$ResponseLanguage": document.getElementById("input_ResponseLanguage").value
+  };
+
+  const finalPrompt = fillTemplate(window.defaultPrompt || defaultPrompt, data);
+  document.getElementById("prompt").value = finalPrompt;
+}
+
+/************************************
  * INIT
  ************************************/
 window.onload = () => {
-  if (!window.masterSchema) {
-    alert("Schema failed to load.");
-    return;
+  const schema = ensureSchema();
+  if (!schema) {
+    alert("Schema failed to load. Check console for details.");
   }
-
-  try {
-    //const cleaned = sanitizeSchemaText(window.masterSchema);
-    parsedMasterSchema = JSON.parse(window.masterSchema);
-  } catch (e) {
-    console.error("❌ Schema still invalid after sanitization", e);
-    alert("Schema could not be loaded even after auto-fix.");
-    return;
-  }
-
-  document.getElementById("prompt").value = defaultPrompt;
-  renderDescriptionEditor();
+  generatePrompt();
+  setRenderEnabled(false);
 };
+
+window.generatePrompt = generatePrompt;

@@ -1,43 +1,4 @@
-// ---- Prompt templates (as provided) ----
-const STEP0_PROMPT_TEMPLATE = `Create ONLY the INQUIRY unit outline (Step 0) using the info below. Do NOT create a full unit plan and do NOT write full lesson plans.
-
-You MUST output valid JSON that matches the provided JSON schema exactly: UnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. Plain text inside string fields.
-
-Unit Subject: {{$Subject}}
-Unit Name: {{$Name}}
-Unit Description/Instruction: {{$UserPrompt}}
-Grade Level: {{$GradeLevel}}
-Duration of class period in minutes: {{$ClassDuration}}
-Requested Number of Lessons: {{$NumberOfLessons}}
-Standards to Align (use verbatim if present; do NOT add new standards): {{$Standards}}
-Students with individualized support (context only): {{$LearningPlans}}
-Resources/Media to use: {{$MediaContext}}
-Unit Content: {{$AttachedUnit}}
-Attached Lesson Content (if any): {{$AttachedLesson}}
-
-INQUIRY OUTLINE REQUIREMENTS:
-- This is inquiry-first. Lessons MUST progress through this arc:
-  (1) phenomenon/experience + noticing/wondering,
-  (2) selecting questions + planning investigations,
-  (3) evidence collection + pattern-finding,
-  (4) model-building + revision using evidence,
-  (5) explanation/argument + communication + transfer.
-- Maintain NGSS sensemaking: students build and revise models using observations and simple data; emphasize evidence, reasoning, and communication.
-- Keep alignment ONLY to the provided standards. Do NOT add any new standards or frameworks.
-- Cultural relevance & inclusion: include brief community-relevant contexts or perspectives without stereotypes.
-- Interleaving & transfer: revisit skills across lessons (observing, modeling, arguing from evidence, communicating).
-- Lessons MUST be non-overlapping with clear boundaries.
-
-LESSONS ARRAY CONSTRAINTS:
-- The Lessons array MUST contain exactly {{$NumberOfLessons}} lessons.
-- lessonNumber is 1-based and strictly increasing by 1.
-- Ensure logical sequencing from foundational inquiry moves to more complex modeling and explanation.
-- Pacing must fit {{$ClassDuration}} minute class periods at grade {{$GradeLevel}}.
-
-OUTPUT RULE:
-Return ONLY JSON that validates against the UnitPlanResponse schema.`;
-
-const PER_LESSON_PROMPT_TEMPLATE = `Create ONE inquiry lesson plan (NOT a unit plan, NOT multiple lessons) using the info below. You MUST output valid JSON that matches the provided JSON schema exactly: InquiryUnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. No markdown. Plain text inside string fields.
+var perLessonPrompt = `Create ONE inquiry lesson plan (NOT a unit plan, NOT multiple lessons) using the info below. You MUST output valid JSON that matches the provided JSON schema exactly: InquiryUnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. No markdown. Plain text inside string fields.
 
 Unit Subject: {{$Subject}}
 Unit Name: {{$Name}}
@@ -73,7 +34,7 @@ INQUIRY LESSON FLOW REQUIREMENTS:
 - Teacher moves must guide thinking without giving scientific explanations directly.
 
 FIELD-SPECIFIC RULES (map to schema):
-- AssessPriorKnowledge: ONLY if {{$LessonNumber}} == 1, write 150–250 words and follow the required structure in the schema description; otherwise return "".
+- AssessPriorKnowledge: ONLY if {{$LessonNumber}} == 0, write 150–250 words and follow the required structure in the schema description; otherwise return "".
 - Investigation Phase.AccommodationsAndModifications:
   - General: include general supports.
   - IndividualSupport: array must include exactly the provided students and their plans (same names/plans; no extra students; no missing students).
@@ -81,7 +42,46 @@ FIELD-SPECIFIC RULES (map to schema):
 OUTPUT RULE:
 Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`;
 
-const HTML_LESSON_PROMPT_TEMPLATE = `You are a professional instructional HTML formatter writing for classroom teachers.
+var step0Prompt = `Create ONLY the INQUIRY unit outline (Step 0) using the info below. Do NOT create a full unit plan and do NOT write full lesson plans.
+
+You MUST output valid JSON that matches the provided JSON schema exactly: UnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. Plain text inside string fields.
+
+Unit Subject: {{$Subject}}
+Unit Name: {{$Name}}
+Unit Description/Instruction: {{$UserPrompt}}
+Grade Level: {{$GradeLevel}}
+Duration of class period in minutes: {{$ClassDuration}}
+Requested Number of Lessons: {{$NumberOfLessons}}
+Standards to Align (use verbatim if present; do NOT add new standards): {{$Standards}}
+Students with individualized support (context only): {{$LearningPlans}}
+Resources/Media to use: {{$MediaContext}}
+Unit Content: {{$AttachedUnit}}
+Attached Lesson Content (if any): {{$AttachedLesson}}
+
+INQUIRY OUTLINE REQUIREMENTS:
+- This is inquiry-first. Lessons MUST progress through this arc:
+  (1) phenomenon/experience + noticing/wondering,
+  (2) selecting questions + planning investigations,
+  (3) evidence collection + pattern-finding,
+  (4) model-building + revision using evidence,
+  (5) explanation/argument + communication + transfer.
+- Maintain NGSS sensemaking: students build and revise models using observations and simple data; emphasize evidence, reasoning, and communication.
+- Keep alignment ONLY to the provided standards. Do NOT add any new standards or frameworks.
+- Cultural relevance & inclusion: include brief community-relevant contexts or perspectives without stereotypes.
+- Interleaving & transfer: revisit skills across lessons (observing, modeling, arguing from evidence, communicating).
+- Lessons MUST be non-overlapping with clear boundaries.
+
+LESSONS ARRAY CONSTRAINTS:
+- The Lessons array MUST contain exactly {{$NumberOfLessons}} lessons.
+- lessonNumber is 0-based and strictly increasing by 1 (0..{{$NumberOfLessons}}-1).
+- Ensure logical sequencing from foundational inquiry moves to more complex modeling and explanation.
+- Pacing must fit {{$ClassDuration}} minute class periods at grade {{$GradeLevel}}.
+
+OUTPUT RULE:
+Return ONLY JSON that validates against the UnitPlanResponse schema.`;
+
+
+var htmlPrompt = `You are a professional instructional HTML formatter writing for classroom teachers.
 
 CRITICAL RULES
 - Output ONLY valid HTML.
@@ -507,153 +507,9 @@ Reflection MUST be:
 FINAL OUTPUT RULE:
 Return ONLY the combined HTML for all sections in order. No extra wrapper text.`;
 
-const UNIT_COMMON_HTML_PROMPT_TEMPLATE = `You are a professional instructional HTML formatter writing for classroom teachers.
 
-You will receive a structured JSON payload representing high-level unit information.
-
-CRITICAL RULES
-- Output ONLY valid HTML.
-- Do NOT add explanations or commentary.
-- Do NOT invent content.
-- Do NOT repeat sections.
-- Allowed tags ONLY: <p>, <h2>, <h3>, <strong>, <em>, <span>, <ol>, <ul>, <li>
-- Lists may ONLY contain <li> as direct children.
-- NO nested lists.
-- NO <p> inside <li>.
-
---------------------------------
-SECTION 1: UNIT DESCRIPTION
---------------------------------
-Render using EXACT template:
-
-<h2><strong>Unit Description: {UnitTitle}</strong></h2>
-<p>{UnitDescription}</p>
-
---------------------------------
-SECTION 2: ESSENTIAL QUESTIONS
---------------------------------
-<h3><span>💭Essential Questions</span></h3>
-Render as an unordered list.
-
---------------------------------
-SECTION 3: STUDENT LEARNING OBJECTIVES
---------------------------------
-<h3><span>🎯Student Learning Objectives</span></h3>
-Render as an unordered list.
-
---------------------------------
-SECTION 4: STANDARDS ALIGNED
---------------------------------
-<h3><span>📏Standards Aligned</span></h3>
-Render as an unordered list.
-
---------------------------------
-SECTION 5: KEY VOCABULARY
---------------------------------
-<h3><span>🔤Key Vocabulary</span></h3>
-Render as an ordered list.
-
---------------------------------
-INPUT JSON:
-{{$UnitCommonJson}}
-`;
-
-// ---- Schemas (JSON Schema objects) ----
-const STEP0_SCHEMA = {
-  "title": "UnitPlanResponse",
-  "type": "object",
-  "properties": {
-    "UnitDescription": {
-      "type": "object",
-      "properties": {
-        "Description": {
-          "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
-        },
-        "EssentialQuestions": {
-          "type": "array",
-          "minItems": 3,
-          "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "StudentLearningObjectives": {
-          "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
-          "items": {
-            "type": "string"
-          }
-        },
-        "StandardsAligned": {
-          "type": "array",
-          "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "KeyVocabulary": {
-          "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "Description",
-        "EssentialQuestions",
-        "StudentLearningObjectives",
-        "StandardsAligned",
-        "KeyVocabulary"
-      ],
-      "additionalProperties": false
-    },
-    "Lessons": {
-      "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "lessonNumber": {
-            "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
-          },
-          "lessonTitle": {
-            "type": "string",
-            "description": "Short lesson title as plain text."
-          },
-          "lessonOutline": {
-            "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
-          }
-        },
-        "required": [
-          "lessonNumber",
-          "lessonTitle",
-          "lessonOutline"
-        ],
-        "additionalProperties": false
-      }
-    }
-  },
-  "required": [
-    "UnitDescription",
-    "Lessons"
-  ],
-  "additionalProperties": false,
-  "x-removablePaths": {
-    "EssentialQuestions": [
-      "UnitDescription.EssentialQuestions"
-    ],
-    "StandardsAligned": [
-      "UnitDescription.StandardsAligned"
-    ]
-  }
-};
-
-const PER_LESSON_SCHEMA = {
+var perLessonJsonSchema = `
+{
   "title": "InquiryUnitPlanResponse",
   "type": "object",
   "properties": {
@@ -677,7 +533,7 @@ const PER_LESSON_SCHEMA = {
         },
         "InstructionsForTeachers": {
           "type": "string",
-          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: The model must include the following four sections with headers and definition. These are in (). (Engage- Introduce the phenomenon in a way that sparks curiosity without explaining it.) Provide a teacher script that draws attention to the phenomenon. Include observation-based questions without revealing explanations. Facilitation moves must encourage noticing, wondering, and curiosity. (Connect- Help students with their observations to the broader mystery that will anchor the investigation.) Include prompts that help students turn observations into questions. Facilitation moves cluster student ideas and highlight emerging patterns. Must guide teachers to build the anchor problem without giving content. (Activate- Shift students into collaborative sensemaking.) Include partner or small group discussion prompts. Students share initial hypotheses without evaluation. Teacher circulates asking open, evidence-seeking questions. (Probe- Encourage refinement of thinking by pushing students to examine assumptions.) Include probing questions that disrupt simplistic reasoning. Teacher challenges students to justify ideas or test predictions. Example moves- What makes you say that? What would happen if that assumption were wrong?"
+          "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: The model must include the following four sections with headers and definition. These are in (). (Engage- Introduce the phenomenon in a way that sparks curiosity without explaining it.) Provide a teacher script that draws attention to the phenomenon. Include observation-based questions without revealing explanations. Facilitation moves must encourage noticing, wondering, and curiosity. (Connect- Help students link their observations to the broader mystery that will anchor the investigation.) Include prompts that help students turn observations into questions. Facilitation moves cluster student ideas and highlight emerging patterns. Must guide teachers to build the anchor problem without giving content. (Activate- Shift students into collaborative sensemaking.) Include partner or small group discussion prompts. Students share initial hypotheses without evaluation. Teacher circulates asking open, evidence-seeking questions. (Probe- Encourage refinement of thinking by pushing students to examine assumptions.) Include probing questions that disrupt simplistic reasoning. Teacher challenges students to justify ideas or test predictions. Example moves- What makes you say that? What would happen if that assumption were wrong?"
         }
       },
       "required": [
@@ -946,4 +802,152 @@ const PER_LESSON_SCHEMA = {
     "StudentPractice"
   ],
   "additionalProperties": false
-};
+}
+`;
+
+var unitPlanCommonHtmlPrompt = `
+You are a professional instructional HTML formatter writing for classroom teachers.
+  
+  You will receive a structured JSON payload representing high-level unit information.
+  
+  CRITICAL RULES
+  - Output ONLY valid HTML.
+  - Do NOT add explanations or commentary.
+  - Do NOT invent content.
+  - Do NOT repeat sections.
+  - Allowed tags ONLY:
+  <p>, <h2>, <h3>, <strong>, <em>, <span>, <ol>, <ul>, <li>
+  - Lists may ONLY contain <li> as direct children.
+  - NO nested lists.
+  - NO <p> inside <li>.
+  
+  --------------------------------
+  SECTION 1: UNIT DESCRIPTION
+  --------------------------------
+  Render using EXACT template:
+  
+  <h2><strong>Unit Description: {UnitTitle}</strong></h2>
+  <p>{UnitDescription}</p>
+  
+  --------------------------------
+  SECTION 2: ESSENTIAL QUESTIONS
+  --------------------------------
+  <h3><span>💭Essential Questions</span></h3>
+  Render as an unordered list.
+  
+  --------------------------------
+  SECTION 3: STUDENT LEARNING OBJECTIVES
+  --------------------------------
+  <h3><span>🎯Student Learning Objectives</span></h3>
+  Render as an unordered list.
+  
+  --------------------------------
+  SECTION 4: STANDARDS ALIGNED
+  --------------------------------
+  <h3><span>📏Standards Aligned</span></h3>
+  Render as an unordered list.
+  
+  --------------------------------
+  SECTION 5: KEY VOCABULARY
+  --------------------------------
+  <h3><span>🔤Key Vocabulary</span></h3>
+  Render as an ordered list.
+  `;
+
+
+  var step0JsonSchema = `
+  {
+    "title": "UnitPlanResponse",
+    "type": "object",
+    "properties": {
+      "UnitDescription": {
+        "type": "object",
+        "properties": {
+          "Description": {
+            "type": "string",
+            "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          },
+          "EssentialQuestions": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "StudentLearningObjectives": {
+            "type": "array",
+            "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+            "items": {
+              "type": "string"
+            }
+          },
+          "StandardsAligned": {
+            "type": "array",
+            "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "KeyVocabulary": {
+            "type": "array",
+            "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "Description",
+          "EssentialQuestions",
+          "StudentLearningObjectives",
+          "StandardsAligned",
+          "KeyVocabulary"
+        ],
+        "additionalProperties": false
+      },
+      "Lessons": {
+        "type": "array",
+        "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "lessonNumber": {
+              "type": "integer",
+              "description": "Ordering number of a lesson. 0 Based."
+            },
+            "lessonTitle": {
+              "type": "string",
+              "description": "Short lesson title as plain text."
+            },
+            "lessonOutline": {
+              "type": "string",
+              "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            }
+          },
+          "required": [
+            "lessonNumber",
+            "lessonTitle",
+            "lessonOutline"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "UnitDescription",
+      "Lessons"
+    ],
+    "additionalProperties": false,
+    "x-removablePaths": {
+      "EssentialQuestions": [
+        "UnitDescription.EssentialQuestions"
+      ],
+      "StandardsAligned": [
+        "UnitDescription.StandardsAligned"
+      ]
+    }
+  }`;
+
+  

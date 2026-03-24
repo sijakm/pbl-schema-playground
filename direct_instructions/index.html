@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Inquiry Unit Chain Playground</title>
+  <title>Direct Instructions Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -95,9 +95,8 @@
 
 <body>
 
-  <h1><span id="pageTitle">Inquiry Unit Chain Playground</span> <span id="pagePill" class="pill">Chain</span></h1>
-  <p id="pageSubtitle">Runs: Step 0 outline JSON → common unit HTML → per-lesson JSON → per-lesson HTML → final joined
-    HTML.</p>
+  <h1><span id="pageTitle">Direct Instructions Playground</span> <span id="pagePill" class="pill">Direct</span></h1>
+  <p id="pageSubtitle">Runs: Step 0 outline JSON → common unit HTML → per-lesson JSON → per-lesson HTML → final joined HTML.</p>
 
   <div class="row card">
     <h3>OpenAI / Proxy</h3>
@@ -127,16 +126,16 @@
     <div class="grid">
       <div>
         <label for="subject">Unit Subject</label>
-        <input id="subject" type="text" value="Earth & Space Science (Gravity & Orbits)"
+        <input id="subject" type="text" value="Physical Science (Molecules & Structures)"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="name">Unit Name</label>
-        <input id="name" type="text" value="Gravity at Work: Modeling Motion in Our Solar System"
+        <input id="name" type="text" value="Building Blocks: Modeling Atomic Composition"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="gradeLevel">Grade Level</label>
         <input id="gradeLevel" type="text"
-          value="The student is in the 1st grade of middle school, which consists of 4 grades total."
+          value="Middle School (6th-8th Grade)"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="classDuration">Class Duration (minutes)</label>
@@ -151,27 +150,27 @@
       <div>
         <label for="standards">Standards</label>
         <textarea id="standards" placeholder="Paste standards here..."
-          style="height:84px;">MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.</textarea>
+          style="height:84px;">MS-PS1-1 Develop models to describe the atomic composition of simple molecules and extended structures.</textarea>
 
         <label for="userPrompt">Unit Description/Instruction (User Prompt)</label>
         <textarea id="userPrompt" placeholder="Paste unit instruction here..."
-          style="height:120px;">Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.</textarea>
+          style="height:120px;">Students will develop and use models to describe the atomic composition of simple molecules and extended structures. They will differentiate between molecules and extended structures (like crystals) and understand how the arrangement of atoms affects properties. Emphasize physical modeling and structural reasoning.</textarea>
 
         <label for="learningPlans">Students with individualized support (context)</label>
         <textarea id="learningPlans" placeholder="Paste student names + plans..." style="height:84px;">Student Name: Maria Valdez
-Plan: Provide a partially pre-labeled orbit map and sentence frames for explanations.
+Plan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.
 
 Student Name: Jacob Garrow
-Plan: Allow speech-to-text for reasoning and labeling.
+Plan: Allow speech-to-text for explaining structural differences.
 
 Student Name: Ava Lund
-Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.</textarea>
+Plan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.</textarea>
       </div>
     </div>
 
     <label for="mediaContext">Resources/Media to use</label>
     <textarea id="mediaContext" placeholder="Links, materials, media..."
-      style="height:70px;">Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple browser-based orbit simulations, chart paper, student science notebooks.</textarea>
+      style="height:70px;">Molecular model kits (balls and sticks), periodic table charts, images of crystal structures (e.g., salt, diamond), interactive online molecular builders (like PhET), student science journals.</textarea>
 
     <label for="attachedUnit">Unit Content (AttachedUnit)</label>
     <textarea id="attachedUnit" placeholder="Paste attached unit content..."
@@ -180,8 +179,7 @@ Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Pla
     <label for="attachedLesson">Attached Lesson Content (optional)</label>
     <textarea id="attachedLesson" placeholder="Paste attached lesson content..." style="height:70px;"></textarea>
 
-    <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ
-      connection)</label>
+    <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ connection)</label>
     <textarea id="unitEssentialQuestions" placeholder='Example: ["How... ?","How... ?","Why... ?"]'
       style="height:60px;"></textarea>
   </div>
@@ -225,7 +223,7 @@ Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Pla
   </div>
 
   <script src="prompts.js"></script>
-  <script src="inquiry_app.js"></script>
+  <script src="direct_instructions.js"></script>
 </body>
 
 </html>
