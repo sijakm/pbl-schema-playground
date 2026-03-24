@@ -76,6 +76,17 @@
   </div>
 
   <div class="row">
+    <h3>Application Language</h3>
+    <select id="languageSelect" onchange="changeLanguage()" style="width:100%; padding:10px; font-size:13px; font-weight: bold; background: #fff; border: 2px solid #333;">
+      <option value="en" selected>English / Engleski</option>
+      <option value="sr">Serbian / Srpski</option>
+    </select>
+    <p style="font-size:12px; color:#777; margin-top:6px;">
+      Switch between English and Serbian schemas, prompts, and demo data.
+    </p>
+  </div>
+
+  <div class="row">
     <h3>OpenAI Model</h3>
     <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
       <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
@@ -184,9 +195,45 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
   </div>
 
 
-  <script src="schema.js"></script>
+  <script src="demo_data.js"></script>
   <script src="prompts.js"></script>
+  <script src="prompts_sr.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    function changeLanguage() {
+      const lang = document.getElementById("languageSelect").value;
+      console.log("Language changed to:", lang);
+      
+      // Update the global configuration used by app.js
+      window.currentPblPrompts = (lang === "sr") ? window.pblPrompts_sr : window.pblPrompts_en;
+      window.resetAppSchema();
+      
+      // Update demo data in text fields
+      const data = window.pblDemoData[lang];
+      if (data) {
+        document.getElementById("input_Subject").value = data.Subject;
+        document.getElementById("input_Name").value = data.Name;
+        document.getElementById("input_UserPrompt").value = data.UserPrompt;
+        document.getElementById("input_GradeLevel").value = data.GradeLevel;
+        document.getElementById("input_NumberOfDays").value = data.NumberOfDays;
+        document.getElementById("input_Location").value = data.Location;
+        document.getElementById("input_ResponseLanguage").value = data.ResponseLanguage;
+        document.getElementById("input_MediaContext").value = data.MediaContext;
+        document.getElementById("input_AttachedUnit").value = data.AttachedUnit;
+        document.getElementById("input_Standards").value = data.Standards;
+        document.getElementById("input_LearningPlans").value = data.LearningPlans;
+      }
+
+      // Regenerate the prompt
+      window.generatePrompt();
+    }
+
+    // Initialize with English on load
+    window.addEventListener('load', () => {
+      window.currentPblPrompts = window.pblPrompts_en;
+    });
+  </script>
 </body>
 
 </html>

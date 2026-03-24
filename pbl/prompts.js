@@ -1,4 +1,5 @@
-var defaultPrompt = `
+window.pblPrompts_en = (function() {
+const defaultPrompt = `
 Create unit plan and project-based lessons using info below:  
 Unit Subject:
 {{$Subject}}
@@ -26,7 +27,7 @@ Cultural Relevance & Inclusion: Incorporate multiple perspectives and reflect on
 IMPORTANT: the response must be in {{$ResponseLanguage}}
 `;
 
-var unitDescriptionHtmlPrompt = `
+const unitDescriptionHtmlPrompt = `
 You are a professional HTML formatter.
 You will receive:
 - UnitDescription (string)
@@ -45,7 +46,7 @@ DATA:
 {{{JsonResponse}}}
 `;
 
-var assessPriorKnowledgeHtmlPrompt = `
+const assessPriorKnowledgeHtmlPrompt = `
 You are a professional instructional HTML formatter writing for classroom teachers.
 You will receive ONE plain-text field describing an Assess Prior Knowledge activity.
 You MAY reorganize and rephrase the provided content to make it teacher-friendly.
@@ -102,7 +103,7 @@ INPUT TEXT:
 {{{JsonResponse}}}
 `;
 
-var unitOverviewHtmlPrompt = `
+const unitOverviewHtmlPrompt = `
 You are a professional instructional HTML formatter writing a student-facing project launch document.
 You will receive structured content for a Unit Overview.
 You MAY reorganize and lightly rephrase for clarity and flow.
@@ -157,7 +158,7 @@ Task Statement:
 {{{JsonResponse}}}
 `;
 
-var desiredOutcomesHtmlPrompt = `
+const desiredOutcomesHtmlPrompt = `
 You will receive ONE JSON object representing DesiredOutcomes.
 Your task is to render HTML for the "Desired Outcomes" section using the EXACT structure described below.
 
@@ -219,7 +220,7 @@ JSON INPUT:
 {{{JsonResponse}}}
 `;
 
-var framingTheProjectHtmlPrompt = `
+const framingTheProjectHtmlPrompt = `
 You are a professional HTML formatter for a teacher-facing curriculum document.
 You will receive ONE JSON object representing "FramingTheLearning".
 
@@ -343,7 +344,7 @@ INPUT JSON:
 {{{JsonResponse}}}
 `;
 
-var assesmentPlanHtmlPrompt = `
+const assesmentPlanHtmlPrompt = `
 You are a professional HTML formatter for a teacher-facing curriculum document.
 You will receive ONE JSON object representing "AssessmentPlan".
 
@@ -439,7 +440,7 @@ INPUT JSON:
 {{{JsonResponse}}}
 `;
 
-var learningPlanHtmlPrompt = `
+const learningPlanHtmlPrompt = `
 You are a professional educational HTML formatter.
 You will receive ONE JSON object representing the LearningPlan section of a unit plan.
 Your task is to render clean, teacher-usable HTML that clearly explains how the project unfolds.
@@ -505,7 +506,7 @@ LEARNING PLAN JSON:
 {{{JsonResponse}}}
 `;
 
-var teacherGuidancePhase1HtmlPrompt = `
+const teacherGuidancePhase1HtmlPrompt = `
 You are a professional instructional HTML formatter.
 
 You will receive ONE JSON object representing TeacherGuidancePhase1.
@@ -642,7 +643,7 @@ TEACHER GUIDANCE PHASE 1 JSON:
 {{{JsonResponse}}}
 `;
 
-var teacherGuidancePhase2HtmlPrompt = `
+const teacherGuidancePhase2HtmlPrompt = `
 You are a professional instructional HTML formatter.
 
 You will receive ONE JSON object representing TeacherGuidancePhase2.
@@ -778,7 +779,7 @@ TEACHER GUIDANCE PHASE 2 JSON:
 {{{JsonResponse}}}
 `;
 
-var teacherGuidancePhase3HtmlPrompt = `
+const teacherGuidancePhase3HtmlPrompt = `
 You are a professional instructional HTML formatter.
 
 You will receive ONE JSON object representing TeacherGuidancePhase3.
@@ -914,7 +915,7 @@ TEACHER GUIDANCE PHASE 3 JSON:
 {{{JsonResponse}}}
 `;
 
-var unitPreparationAndConsiderationsHtmlPrompt = `
+const unitPreparationAndConsiderationsHtmlPrompt = `
 You are a professional instructional HTML formatter.
 You will receive ONE JSON object representing UnitPreparationAndConsiderations.
 Your task is to render clean, teacher-facing HTML that matches a polished curriculum document.
@@ -967,7 +968,7 @@ UNIT PREPARATION JSON:
 {{{JsonResponse}}}
 `;
 
-var pblResponseSchema = {
+const pblResponseSchema = {
     "title": "PBLUnitPlanResponse",
     "type": "object",
     "additionalProperties": false,
@@ -2539,3 +2540,36 @@ var pblResponseSchema = {
         ]
     }
 }
+
+window.pblPrompts_en = {
+  defaultPrompt,
+  unitDescriptionHtmlPrompt,
+  assessPriorKnowledgeHtmlPrompt,
+  unitOverviewHtmlPrompt,
+  desiredOutcomesHtmlPrompt,
+  framingTheProjectHtmlPrompt,
+  assesmentPlanHtmlPrompt,
+  learningPlanHtmlPrompt,
+  teacherGuidancePhase1HtmlPrompt,
+  teacherGuidancePhase2HtmlPrompt,
+  teacherGuidancePhase3HtmlPrompt,
+  unitPreparationAndConsiderationsHtmlPrompt,
+  pblResponseSchema,
+};
+
+  return {
+    defaultPrompt,
+    unitDescriptionHtmlPrompt,
+    assessPriorKnowledgeHtmlPrompt,
+    unitOverviewHtmlPrompt,
+    desiredOutcomesHtmlPrompt,
+    framingTheProjectHtmlPrompt,
+    assesmentPlanHtmlPrompt,
+    learningPlanHtmlPrompt,
+    teacherGuidancePhase1HtmlPrompt,
+    teacherGuidancePhase2HtmlPrompt,
+    teacherGuidancePhase3HtmlPrompt,
+    unitPreparationAndConsiderationsHtmlPrompt,
+    pblResponseSchema,
+  };
+})();

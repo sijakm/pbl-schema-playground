@@ -130,10 +130,11 @@ let currentAppSchema = null;
 function ensureSchema() {
   if (currentAppSchema) return currentAppSchema;
 
-  const rawSchema = window.masterSchema || window.pblResponseSchema || (typeof pblResponseSchema !== 'undefined' ? pblResponseSchema : null);
+  const prompts = window.currentPblPrompts || window.pblPrompts_en;
+  const rawSchema = prompts?.pblResponseSchema || window.pblResponseSchema;
   
   if (!rawSchema) {
-    console.warn("⚠️ No schema found in window.masterSchema or pblResponseSchema");
+    console.warn("⚠️ No schema found in currentPblPrompts or pblResponseSchema");
     return null;
   }
 
@@ -148,6 +149,11 @@ function ensureSchema() {
 }
 
 let currentAbortController = null;
+
+function resetAppSchema() {
+  currentAppSchema = null;
+}
+window.resetAppSchema = resetAppSchema;
 
 function setUiRunning(isRunning) {
   const runBtn = document.getElementById("runBtn");
@@ -392,18 +398,19 @@ async function renderHtml() {
   setRenderEnabled(false);
   htmlOutput.innerHTML = "<p>Rendering all 11 sections in parallel... Please wait.</p>";
   
+  const promptsSet = window.currentPblPrompts || window.pblPrompts_en;
   const prompts = [
-    { key: "p1",  name: "Unit Description",                     prompt: window.unitDescriptionHtmlPrompt || unitDescriptionHtmlPrompt },
-    { key: "p2",  name: "Assess Prior Knowledge",               prompt: window.assessPriorKnowledgeHtmlPrompt || assessPriorKnowledgeHtmlPrompt },
-    { key: "p3",  name: "Unit Overview",                        prompt: window.unitOverviewHtmlPrompt || unitOverviewHtmlPrompt },
-    { key: "p4",  name: "Desired Outcomes",                     prompt: window.desiredOutcomesHtmlPrompt || desiredOutcomesHtmlPrompt },
-    { key: "p5",  name: "Framing the Project",                  prompt: window.framingTheProjectHtmlPrompt || framingTheProjectHtmlPrompt },
-    { key: "p6",  name: "Assessment Plan",                      prompt: window.assesmentPlanHtmlPrompt || assesmentPlanHtmlPrompt },
-    { key: "p7",  name: "Learning Plan",                        prompt: window.learningPlanHtmlPrompt || learningPlanHtmlPrompt },
-    { key: "p8",  name: "Teacher Guidance: Phase 1",            prompt: window.teacherGuidancePhase1HtmlPrompt || teacherGuidancePhase1HtmlPrompt },
-    { key: "p9",  name: "Teacher Guidance: Phase 2",            prompt: window.teacherGuidancePhase2HtmlPrompt || teacherGuidancePhase2HtmlPrompt },
-    { key: "p10", name: "Teacher Guidance: Phase 3",            prompt: window.teacherGuidancePhase3HtmlPrompt || teacherGuidancePhase3HtmlPrompt },
-    { key: "p11", name: "Unit Preparation & Considerations",     prompt: window.unitPreparationAndConsiderationsHtmlPrompt || unitPreparationAndConsiderationsHtmlPrompt }
+    { key: "p1",  name: "Unit Description",                     prompt: promptsSet.unitDescriptionHtmlPrompt },
+    { key: "p2",  name: "Assess Prior Knowledge",               prompt: promptsSet.assessPriorKnowledgeHtmlPrompt },
+    { key: "p3",  name: "Unit Overview",                        prompt: promptsSet.unitOverviewHtmlPrompt },
+    { key: "p4",  name: "Desired Outcomes",                     prompt: promptsSet.desiredOutcomesHtmlPrompt },
+    { key: "p5",  name: "Framing the Project",                  prompt: promptsSet.framingTheProjectHtmlPrompt },
+    { key: "p6",  name: "Assessment Plan",                      prompt: promptsSet.assesmentPlanHtmlPrompt },
+    { key: "p7",  name: "Learning Plan",                        prompt: promptsSet.learningPlanHtmlPrompt },
+    { key: "p8",  name: "Teacher Guidance: Phase 1",            prompt: promptsSet.teacherGuidancePhase1HtmlPrompt },
+    { key: "p9",  name: "Teacher Guidance: Phase 2",            prompt: promptsSet.teacherGuidancePhase2HtmlPrompt },
+    { key: "p10", name: "Teacher Guidance: Phase 3",            prompt: promptsSet.teacherGuidancePhase3HtmlPrompt },
+    { key: "p11", name: "Unit Preparation & Considerations",     prompt: promptsSet.unitPreparationAndConsiderationsHtmlPrompt }
   ];
 
   const responseLanguage = document.getElementById("input_ResponseLanguage")?.value || "English";
@@ -593,7 +600,8 @@ function generatePrompt() {
     "$ResponseLanguage": document.getElementById("input_ResponseLanguage").value
   };
 
-  const finalPrompt = fillTemplate(window.defaultPrompt || defaultPrompt, data);
+  const prompts = window.currentPblPrompts || window.pblPrompts_en;
+  const finalPrompt = fillTemplate(prompts?.defaultPrompt || window.defaultPrompt, data);
   document.getElementById("prompt").value = finalPrompt;
 }
 
