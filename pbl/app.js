@@ -184,7 +184,7 @@ async function run() {
   console.log("🚀 Running with model:", model, "and schema:", schema);
   lastEditedSchema = schema;
 
-  const apiKey = document.getElementById("apiKey").value.trim();
+  const apiKey = "";
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
 
@@ -406,7 +406,7 @@ async function renderHtml() {
   ];
 
   const responseLanguage = document.getElementById("input_ResponseLanguage")?.value || "English";
-  const apiKey = document.getElementById("apiKey").value.trim();
+  const apiKey = "";
   const model = document.getElementById("modelSelect").value;
   
   const results = {};

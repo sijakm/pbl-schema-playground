@@ -290,7 +290,7 @@ if (invalidFields.length > 0) {
   // Show final schema in UI
   document.getElementById("finalSchema").value = JSON.stringify(schema, null, 2);
 
-  const apiKey = document.getElementById("apiKey").value.trim();
+  const apiKey = "";
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
 

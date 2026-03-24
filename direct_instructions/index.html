@@ -100,9 +100,7 @@
 
   <div class="row card">
     <h3>OpenAI / Proxy</h3>
-    <label for="apiKey">OpenAI API Key (optional if proxy doesn’t require it)</label>
-    <input id="apiKey" type="password" placeholder="sk-..." style="width:100%; padding:10px; font-size:13px;" />
-    <p class="muted">⚠️ For production, do NOT put API keys in client-side code. Use a backend proxy.</p>
+
 
     <label for="endpoint" style="display:none;">Endpoint (proxy)</label>
     <input id="endpoint" type="text" value="https://fancy-sun-80f1.sijakmilan.workers.dev"
@@ -111,9 +109,9 @@
     <label for="modelSelect">OpenAI Model</label>
     <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
       <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
-      <option value="gpt-5-mini">gpt-5-mini</option>
-      <option value="gpt-5.4">gpt-5.4</option>
       <option value="gpt-5.4-nano">gpt-5.4-nano</option>
+      <option value="gpt-5.4">gpt-5.4</option>
+      <option value="gpt-5-mini">gpt-5-mini</option>
       <option value="gpt-5.2">gpt-5.2</option>
     </select>
   </div>
