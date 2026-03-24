@@ -172,6 +172,7 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
     <button id="runBtn" onclick="run()">Run (Stream)</button>
     <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
     <button id="renderBtn" onclick="renderHtml()" disabled>Render HTML</button>
+    <button id="downloadBtn" onclick="downloadPrompts()">Download Prompts</button>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
   </div>
 
@@ -198,6 +199,7 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
   <script src="demo_data.js"></script>
   <script src="prompts.js"></script>
   <script src="prompts_sr.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="app.js"></script>
 
   <script>

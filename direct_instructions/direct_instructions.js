@@ -27,6 +27,7 @@
 
     runChainBtn: () => $("runChainBtn"),
     cancelBtn: () => $("cancelBtn"),
+    downloadPromptsBtn: () => $("downloadPromptsBtn"),
     status: () => $("status"),
 
     log: () => $("log"),
@@ -527,11 +528,66 @@
     if (currentAbortController) currentAbortController.abort();
   }
 
+  async function downloadPrompts() {
+    try {
+      if (typeof JSZip === "undefined") {
+        alert("JSZip library not loaded. Check your internet connection or CDN link.");
+        return;
+      }
+
+      const zipEN = new JSZip();
+      const zipSR = new JSZip();
+
+      // window.promptsEN and window.promptsSR are defined in prompts.js / prompts_sr.js
+      const pEN = window.promptsEN || {};
+      const pSR = window.promptsSR || {};
+
+      const addFiles = (zip, obj) => {
+        for (const [key, value] of Object.entries(obj)) {
+          if (typeof value === "object" && value !== null) {
+            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
+          } else if (typeof value === "string") {
+            zip.file(`${key}.txt`, value);
+          }
+        }
+      };
+
+      addFiles(zipEN, pEN);
+      addFiles(zipSR, pSR);
+
+      const contentEN = await zipEN.generateAsync({ type: "blob" });
+      const contentSR = await zipSR.generateAsync({ type: "blob" });
+
+      const saveZip = (blob, filename) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      };
+
+      saveZip(contentEN, "prompts_en_direct.zip");
+      setTimeout(() => {
+        saveZip(contentSR, "prompts_sr_direct.zip");
+      }, 500);
+
+      logLine("[OK] Prompts downloaded successfully.");
+    } catch (err) {
+      logLine("[error] Failed to download prompts: " + err.message);
+      console.error(err);
+    }
+  }
+
   function onReady() {
     const runBtn = els.runChainBtn();
     const cancelBtn = els.cancelBtn();
+    const downloadBtn = els.downloadPromptsBtn();
     if (runBtn) runBtn.addEventListener("click", runChain);
     if (cancelBtn) cancelBtn.addEventListener("click", cancel);
+    if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);

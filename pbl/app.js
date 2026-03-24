@@ -606,6 +606,74 @@ function generatePrompt() {
 }
 
 /************************************
+ * EXPORT PROMPTS TO ZIP
+ ************************************/
+async function downloadPrompts() {
+  if (typeof JSZip === "undefined") {
+    alert("JSZip is not loaded yet. Please wait or check your internet connection.");
+    return;
+  }
+
+  const status = document.getElementById("status");
+  const oldText = status.textContent;
+  status.textContent = "Generating ZIP files...";
+
+  try {
+    const configs = [
+      { filename: "prompts_en.zip", data: window.pblPrompts_en },
+      { filename: "prompts_sr.zip", data: window.pblPrompts_sr }
+    ];
+
+    for (const config of configs) {
+      const zip = new JSZip();
+      const data = config.data;
+
+      if (!data) {
+        console.warn(`No data found for ${config.filename}`);
+        continue;
+      }
+
+      for (const key in data) {
+        let content = data[key];
+        let fileExt = "txt";
+
+        if (typeof content === "object" && content !== null) {
+          content = JSON.stringify(content, null, 2);
+          fileExt = "json";
+        } else if (key.toLowerCase().includes("schema")) {
+          // If it's a string but named schema, give it .json extension
+          fileExt = "json";
+        }
+
+        zip.file(`${key}.${fileExt}`, content);
+      }
+
+      const blob = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = config.filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 100);
+    }
+    status.textContent = "ZIP files downloaded successfully.";
+  } catch (err) {
+    console.error("ZIP Generation Error:", err);
+    status.textContent = "Error generating ZIP files.";
+  } finally {
+    setTimeout(() => {
+      if (status.textContent.includes("downloaded") || status.textContent.includes("Error")) {
+          // Keep the message for a bit then restore or clear
+      }
+    }, 3000);
+  }
+}
+
+window.downloadPrompts = downloadPrompts;
+
+/************************************
  * INIT
  ************************************/
 window.onload = () => {
