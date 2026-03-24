@@ -307,8 +307,8 @@ SAMOSTALNI RAD (INDEPENDENT PRACTICE)
     - Isključivo koristite odobrene etikete, kao po globalnom pravilu.
     - NE SRASTITE unutar liste u formi isplaniranom Procena Pravila za prezentaciju predstave <ol>; jer je ovo alternativni format pa se mora koristiti kako kaže primer strukture.
 
-PREGLED I PROSTORNO IZVLAČENJE (REVIEW & SPACED RETRIEVAL) (5 min)
-    - <h3><span style="color: rgb(115, 191, 39);">Pregled i prostorno izvlačenje (5 min)</span></h3>
+PREGLED I PRISEĆANJE UZ VREMENSKE RAZMAKE (REVIEW & SPACED RETRIEVAL) (5 min)
+    - <h3><span style="color: rgb(115, 191, 39);">Pregled i prisećanje uz vremenske razmake (5 min)</span></h3>
     - Renderuj ReviewAndSpacedRetrieval podatke sledeći stroga pravila mapiranja:
         - Zaglavlje 📚 Materijali: Sledi lista predmeta.
         - Oznaka Napomene za nastavnika: Prepisati iz teksta format <p><strong>Napomene za nastavnika:</strong> [tekst napomena]</p>.
@@ -318,7 +318,7 @@ PREGLED I PROSTORNO IZVLAČENJE (REVIEW & SPACED RETRIEVAL) (5 min)
         - Podnaslov Ispravka čestih zabluda: Bold. Kreni kroz <ul> i prikaži svaku "Ako učenik kaže... odgovori:..." kao njen tipski <li>.
         - Podnaslov 💭Veza sa ključnim pitanjem: Bold.
         - Podnaslov 🌍Transcendentno razmišljanje: Bold.
-        - Podnaslov ⌛Prostorno izvlačenje: Bold.
+        - Podnaslov ⏳Prisećanje uz vremenske razmake: Bold.
         - Zadrži strukturu na vizuelno predstavljenom primerku obezbeđenu sliku na odsečak za (brojne sekvencije zadataka, napomenu, mete).
 
 FORMATIVNA PROCENA (FORMATIVE ASSESSMENT) (Renderovana kao deo pregleda)
@@ -646,7 +646,7 @@ GLOBALNA PRAVILA
                     },
                     "ReviewAndSpacedRetrieval": {
                         "type": "string",
-                        "description": "Kompletan odeljak 'Pregled i prostorno izvlačenje' kao običan tekst. Ova 5-minutna aktivnost mora da sadrži sledeće elemente u ovom tačnom redosledu: 1. Lista materijala (Materials List) (često ništa nije opcionalno) 2. Pasus sa napomenama za nastavnika (Teacher Notes) koji objašnjava: - Kako ova strategija pregleda poboljšava memorisanje - Vezu sa prethodnim konceptima učenja - Kako transcendentna refleksija produbljuje razumevanje. 3. Instrukcije za nastavnike koje sadrže: - Aktivno prisećanje pomoću deljenja sa partnerom/grupom - Očekivane odgovore učenika (2-3 primera). 4. Blok za Ispravku čestih zabluda (Correct Common Misconceptions) sa: - Izjavama koje predstavljaju primer zablude - Skriptama nastavnika za ispravku. 5. Veza sa ključnim pitanjem (Essential Question Connection) što uključuje: - Nastavnikovo pitanje vezano za ključno pitanje celine - Očekivane odgovore učenika (2-3 primera). 6. Odeljak za transcendentno razmišljanje sa: - Primenom u stvarnom svetu - Vreme za razmišljanje - Očekivanim odgovorima učenika (2-3). 7. Komponenta prostornog izvlačenja (Spaced Retrieval) koja sadrži: - Jasnu referencu na određenu prošlu lekciju - Pitanje koje povezuje prošle i trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore. Svi odeljci moraju koristiti 'Kaži:' za instrukcije nastavnika i jasno obeležene 'Očekivani odgovori učenika' ('Expected Student Responses')."
+                        "description": "Kompletan odeljak 'Pregled i prisećanje uz vremenske razmake' kao običan tekst. Ova 5-minutna aktivnost mora da sadrži sledeće elemente u ovom tačnom redosledu: 1. Lista materijala (Materials List) (često ništa nije opcionalno) 2. Pasus sa napomenama za nastavnika (Teacher Notes) koji objašnjava: - Kako ova strategija pregleda poboljšava memorisanje - Vezu sa prethodnim konceptima učenja - Kako prisećanje uz vremenske razmake produbljuje razumevanje. 3. Instrukcije za nastavnike koje sadrže: - Aktivno prisećanje pomoću deljenja sa partnerom/grupom - Očekivane odgovore učenika (2-3 primera). 4. Blok za Ispravku čestih zabluda (Correct Common Misconceptions) sa: - Izjavama koje predstavljaju primer zablude - Skriptama nastavnika za ispravku. 5. Veza sa ključnim pitanjem (Essential Question Connection) što uključuje: - Nastavnikovo pitanje vezano za ključno pitanje celine - Očekivane odgovore učenika (2-3 primera). 6. Odeljak za transcendentno razmišljanje sa: - Primenom u stvarnom svetu - Vreme za razmišljanje - Očekivanim odgovorima učenika (2-3). 7. Komponenta prisećanja uz vremenske razmake (Spaced Retrieval) koja sadrži: - Jasnu referencu na određenu prošlu lekciju - Pitanje koje povezuje prošle i trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore. Svi odeljci moraju koristiti 'Kaži:' za instrukcije nastavnika i jasno obeležene 'Očekivani odgovori učenika' ('Expected Student Responses')."
                     },
                     "FormativeAssessment": {
                         "type": "string",

@@ -584,8 +584,8 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
 - Pitanje / Podsticaj
 - Očekivani odgovori učenika (Expected Student Responses) ili Kriterijumi uspeha (SuccessCriteria) u vidu tabele (bullet list) pod imenom <p>✅ Očekivani odgovori učenika:</p> ili <p>✅ Kriterijumi za uspeh:</p>
 
-9. Raspoređeno ponavljanje (Spaced Retrieval)
-<p><strong style="color: rgb(145, 56, 230);">⏳ Raspoređeno ponavljanje</strong></p>
+9. Prisećanje uz vremenske razmake (Spaced Retrieval)
+<p><strong style="color: rgb(145, 56, 230);">⏳ Prisećanje uz vremenske razmake</strong></p>
 
 Za SVAKI unos (EACH entry) u polju Phase1_SpacedRetrieval:
 
@@ -720,8 +720,8 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
 - Pitanje / Podsticaj
 - Očekivani odgovori učenika (Expected Student Responses) ili Kriterijumi uspeha (SuccessCriteria) u vidu tabele (bullet list) pod imenom <p>✅ Očekivani odgovori učenika:</p> ili <p>✅ Kriterijumi za uspeh:</p>
 
-9. Raspoređeno ponavljanje (Spaced Retrieval)
-<p><strong style="color: rgb(145, 56, 230);">⏳ Raspoređeno ponavljanje</strong></p>
+9. Prisećanje uz vremenske razmake (Spaced Retrieval)
+<p><strong style="color: rgb(145, 56, 230);">⏳ Prisećanje uz vremenske razmake</strong></p>
 
 Za SVAKI unos (EACH entry) u polju Phase2_SpacedRetrieval:
 
@@ -856,8 +856,8 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
 - Pitanje / Podsticaj
 - Očekivani odgovori učenika (Expected Student Responses) ili Kriterijumi uspeha (SuccessCriteria) u vidu tabele (bullet list) pod imenom <p>✅ Očekivani odgovori učenika:</p> ili <p>✅ Kriterijumi za uspeh:</p>
 
-9. Raspoređeno ponavljanje (Spaced Retrieval)
-<p><strong style="color: rgb(145, 56, 230);">⏳ Raspoređeno ponavljanje</strong></p>
+9. Prisećanje uz vremenske razmake (Spaced Retrieval)
+<p><strong style="color: rgb(145, 56, 230);">⏳ Prisećanje uz vremenske razmake</strong></p>
 
 Za SVAKI unos (EACH entry) u polju Phase3_SpacedRetrieval:
 
@@ -1666,7 +1666,7 @@ const pblResponseSchema = {
                             "type": "array",
                             "minItems": 3,
                             "maxItems": 3,
-                            "description": "Model mora kreirati komponentu 'Raspoređeno ponavljanje' koja zahteva od učenika da se prisete ključnog koncepta iz specifične prethodne jedinice ili lekcije bez referenciranja bilo kakvih prošlih aktivnosti, radnih listova, modela, oznaka ili koraka specifičnih za zadatak. Skript za nastavnika mora početi sa 'Kaži:' i može referencirati samo temu prethodnog učenja, a ne ono što su učenici naučili o njoj. Pitanje za prisećanje mora podstaći učenike da ponovo izjave ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako se varijable odnose ili kako se proces odvija) u potpunosti iz pamćenja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora završiti sa 'Očekivani odgovori učenika' prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici – a ne podsticaj – dali zapamćene ideje.",
+                            "description": "Model mora kreirati komponentu 'Prisećanje uz vremenske razmake' koja zahteva od učenika da se prisete ključnog koncepta iz specifične prethodne jedinice ili lekcije bez referenciranja bilo kakvih prošlih aktivnosti, radnih listova, modela, oznaka ili koraka specifičnih za zadatak. Skript za nastavnika mora početi sa 'Kaži:' i može referencirati samo temu prethodnog učenja, a ne ono što su učenici naučili o njoj. Pitanje za prisećanje mora podstaći učenike da ponovo izjave ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako se varijable odnose ili kako se proces odvija) u potpunosti iz pamćenja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora završiti sa 'Očekivani odgovori učenika' prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici – a ne podsticaj – dali zapamćene ideje.",
                             "items": {
                                 "type": "object",
                                 "additionalProperties": false,
@@ -1963,7 +1963,7 @@ const pblResponseSchema = {
                             "type": "array",
                             "minItems": 3,
                             "maxItems": 3,
-                            "description": "Model mora kreirati komponentu 'Raspoređeno ponavljanje' koja zahteva od učenika da se prisete ključnog koncepta iz specifične prethodne jedinice ili lekcije bez referenciranja bilo kakvih prošlih aktivnosti, radnih listova, modela, oznaka ili koraka specifičnih za zadatak. Skript za nastavnika mora početi sa 'Kaži:' i može referencirati samo temu prethodnog učenja, a ne ono što su učenici naučili o njoj. Pitanje za prisećanje mora podstaći učenike da ponovo izjave ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako se varijable odnose ili kako se proces odvija) u potpunosti iz pamćenja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora završiti sa 'Očekivani odgovori učenika' prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici – a ne podsticaj – dali zapamćene ideje.",
+                            "description": "Model mora kreirati komponentu 'Prisećanje uz vremenske razmake' koja zahteva od učenika da se prisete ključnog koncepta iz specifične prethodne jedinice ili lekcije bez referenciranja bilo kakvih prošlih aktivnosti, radnih listova, modela, oznaka ili koraka specifičnih za zadatak. Skript za nastavnika mora početi sa 'Kaži:' i može referencirati samo temu prethodnog učenja, a ne ono što su učenici naučili o njoj. Pitanje za prisećanje mora podstaći učenike da ponovo izjave ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako se varijable odnose ili kako se proces odvija) u potpunosti iz pamćenja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora završiti sa 'Očekivani odgovori učenika' prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici – a ne podsticaj – dali zapamćene ideje.",
                             "items": {
                                 "type": "object",
                                 "additionalProperties": false,
@@ -2259,7 +2259,7 @@ const pblResponseSchema = {
                             "type": "array",
                             "minItems": 3,
                             "maxItems": 3,
-                            "description": "Model mora kreirati komponentu 'Raspoređeno ponavljanje' koja zahteva od učenika da se prisete ključnog koncepta iz specifične prethodne jedinice ili lekcije bez referenciranja bilo kakvih prošlih aktivnosti, radnih listova, modela, oznaka ili koraka specifičnih za zadatak. Skript za nastavnika mora početi sa 'Kaži:' i može referencirati samo temu prethodnog učenja, a ne ono što su učenici naučili o njoj. Pitanje za prisećanje mora podstaći učenike da ponovo izjave ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako se varijable odnose ili kako se proces odvija) u potpunosti iz pamćenja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora završiti sa 'Očekivani odgovori učenika' prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici – a ne podsticaj – dali zapamćene ideje.",
+                            "description": "Model mora kreirati komponentu 'Prisećanje uz vremenske razmake' koja zahteva od učenika da se prisete ključnog koncepta iz specifične prethodne jedinice ili lekcije bez referenciranja bilo kakvih prošlih aktivnosti, radnih listova, modela, oznaka ili koraka specifičnih za zadatak. Skript za nastavnika mora početi sa 'Kaži:' i može referencirati samo temu prethodnog učenja, a ne ono što su učenici naučili o njoj. Pitanje za prisećanje mora podstaći učenike da ponovo izjave ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako se varijable odnose ili kako se proces odvija) u potpunosti iz pamćenja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora završiti sa 'Očekivani odgovori učenika' prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici – a ne podsticaj – dali zapamćene ideje.",
                             "items": {
                                 "type": "object",
                                 "additionalProperties": false,

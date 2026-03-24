@@ -360,7 +360,7 @@ REFLEKSIJA O DINAMICI GRUPE (REFLECTION ON GROUP DYNAMICS)
    - Renderuj svako sa specifičnom ikonicom i oznakom:
      <p><strong>💭 Povezivanje sa ključnim pitanjem</strong></p>
      <p><strong>🌍 Transcendentno razmišljanje</strong></p>
-     <p><strong>⏳ Prostorno izvlačenje</strong></p>
+     <p><strong>⏳ Prisećanje uz vremenske razmake</strong></p>
    - Zatim renderuj njihov sadržaj kao <p>.
 
 FORMATIVNA PROCENA
@@ -674,7 +674,7 @@ PER_LESSON_SCHEMA: {
         },
         "ReviewAndSpacedRetrieval": {
           "type": "string",
-          "description": "Kompletan odeljak „Pregled i prostorno izvlačenje“ kao običan tekst (400-600 reči). MORA uključivati ove komponente po redu: (1) Lista materijala, (2) Napomene za nastavnika: Jedan pasus koji objašnjava „zašto“ i „kako“ (teorija/nauka), a ne uputstva za nastavnika. Koristi ovaj početak: 'Napomena za nastavnika: Ova strategija podstiče zadržavanje informacija kroz aktivno prisećanje i povezuje današnje ideje o [tema] sa prethodnim konceptima [koncept]. Transcendentna refleksija pomaže učenicima da prepoznaju kako [tema] utiče na [velika ideja]...', (3) Aktivno prisećanje: 2-3 numerisane stavke koje traže od učenika da se prisete NOVOG učenja iz DANAŠNJE lekcije (NE dopunjavanje praznina, BEZ izlaznih listića, BEZ refleksije o poboljšanju), (4) Ispravljanje uobičajenih zabluda: Postavljeno odmah ispod Aktivnog prisećanja i usklađeno sa postavljenim pitanjima, (5) Povezivanje sa ključnim pitanjem: Uputstvo nastavnika koje povezuje sa pitanjem jedinice + očekivani odgovori, (6) Transcendentno razmišljanje: Pitanje o primeni u stvarnom svetu + očekivani odgovori, (7) Prostorno izvlačenje: Prisećanje iz specifične prethodne lekcije/jedinice (navodeći broj lekcije). Za sva uputstva, uključi „Očekivani odgovor učenika:“ sa 2-3 konkretna primera."
+          "description": "Kompletan odeljak „Pregled i prisećanje uz vremenske razmake“ kao običan tekst (400-600 reči). MORA uključivati ove komponente po redu: (1) Lista materijala, (2) Napomene za nastavnika: Jedan pasus koji objašnjava „zašto“ i „kako“ (teorija/nauka), a ne uputstva za nastavnika. Koristi ovaj početak: 'Napomena za nastavnika: Ova strategija podstiče zadržavanje informacija kroz aktivno prisećanje i povezuje današnje ideje o [tema] sa prethodnim konceptima [koncept]. Prisećanje uz vremenske razmake pomaže učenicima da prepoznaju kako [tema] utiče na [velika ideja]...', (3) Aktivno prisećanje: 2-3 numerisane stavke koje traže od učenika da se prisete NOVOG učenja iz DANAŠNJE lekcije (NE dopunjavanje praznina, BEZ izlaznih listića, BEZ refleksije o poboljšanju), (4) Ispravljanje uobičajenih zabluda: Postavljeno odmah ispod Aktivnog prisećanja i usklađeno sa postavljenim pitanjima, (5) Povezivanje sa ključnim pitanjem: Uputstvo nastavnika koje povezuje sa pitanjem jedinice + očekivani odgovori, (6) Transcendentno razmišljanje: Pitanje o primeni u stvarnom svetu + očekivani odgovori, (7) Prisećanje uz vremenske razmake: Prisećanje iz specifične prethodne lekcije/jedinice (navodeći broj lekcije). Za sva uputstva, uključi „Očekivani odgovor učenika:“ sa 2-3 konkretna primera."
         },
         "FormativeAssessment": {
           "type": "string",
