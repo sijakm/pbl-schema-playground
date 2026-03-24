@@ -17,6 +17,7 @@
     gradeLevel: () => $("gradeLevel"),
     classDuration: () => $("classDuration"),
     numberOfLessons: () => $("numberOfLessons"),
+    languageSelect: () => $("languageSelect"),
     standards: () => $("standards"),
     userPrompt: () => $("userPrompt"),
     learningPlans: () => $("learningPlans"),
@@ -211,7 +212,8 @@
       LearningPlans: els.learningPlans()?.value?.trim() || "",
       MediaContext: els.mediaContext()?.value?.trim() || "",
       AttachedUnit: els.attachedUnit()?.value?.trim() || "",
-      AttachedLesson: els.attachedLesson()?.value?.trim() || ""
+      AttachedLesson: els.attachedLesson()?.value?.trim() || "",
+      language: els.languageSelect()?.value || "English"
     };
   }
 
@@ -352,7 +354,10 @@
       // ---- Step 0: outline ----
       const t0 = nowMs();
       logLine("[1/5] Step 0: generating unit outline JSON…");
-      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
+      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, { 
+        ...vars,
+        language: vars.language || "English"
+      });
       console.log("[DEBUG] Step 0 Prompt (Unit Outline):", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
@@ -381,7 +386,8 @@
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
       const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson),
-        JsonResponse: JSON.stringify(unitCommonJson) // direct_instructions.js use JsonResponse
+        JsonResponse: JSON.stringify(unitCommonJson), // direct_instructions.js use JsonResponse
+        language: vars.language || "English"
       });
       console.log("[DEBUG] Unit Common HTML Prompt:", unitHtmlPrompt);
 
@@ -409,6 +415,7 @@
             const perLessonVars = {
               ...vars,
               UnitEssentialQuestions: (step0Obj?.UnitDescription?.EssentialQuestions || []).join("\n"),
+              language: vars.language || "English",
               // Since the prompt file cannot be changed, we include both unit and lesson-specific 
               // context in the ParentUnitData field which is present in the original template.
               ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
@@ -449,7 +456,8 @@
               LessonInquiryJson: JSON.stringify(lessonObj), // for compatibility
               JsonResponse: JSON.stringify(lessonObj),      // expected by direct_instructions prompts
               LessonNumber: i + 1,
-              LessonTitle: step0Obj?.Lessons?.[i]?.lessonTitle || ""
+              LessonTitle: step0Obj?.Lessons?.[i]?.lessonTitle || "",
+              language: vars.language || "English"
             });
             console.log(`[DEBUG] Lesson ${i + 1} HTML Prompt:`, lessonHtmlPrompt);
 

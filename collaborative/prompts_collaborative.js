@@ -522,7 +522,7 @@ const STEP0_SCHEMA = {
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 0 Based."
+            "description": "Ordering number of a lesson. 1 Based."
           },
           "lessonTitle": {
             "type": "string",

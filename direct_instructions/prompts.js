@@ -1,5 +1,6 @@
 const STEP0_PROMPT_TEMPLATE = `
 Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
+All generated text content MUST be in {{{language}}}.
                     
 Based on Unit Subject, NGSS Standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), and the requested Number of Lessons, generate a JSON response that includes a cohesive UnitDescription and a non-overlapping list of lesson “containers”.
 
@@ -58,6 +59,7 @@ Output MUST be valid JSON matching the schema. Use compact formatting (no extra 
 
 const PER_LESSON_PROMPT_TEMPLATE = `
 Create ONE lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
+All generated text content MUST be in {{{language}}}.
 You MUST output valid JSON that matches the provided JSON schema exactly (LessonPlanResponse with a single "LessonPlan" object). Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
 Unit Subject: 
 {{$Subject}}
@@ -115,7 +117,11 @@ UNIT PLAN JSON:
 
 Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. Do NOT explain or comment on it; just parse it and render it.
 
+Render all HTML in {{{language}}}.
+
 GLOBAL RULES
+    - Render ALL HTML content in {{{language}}}. You MUST translate all hardcoded section titles (e.g., "Essential Questions", "Key Vocabulary") into {{{language}}}.
+    - You MUST translate all paragraph labels, list headers, and bolded keywords (like "Materials", "Instructions for Teachers", "Expected Student Responses", "Quick Check", "Anticipated Misconceptions", "Formative Assessment", "Success Criteria", "Reflection", "General support:", "Individual support:") into {{{language}}}.
     - Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
     - Allowed tags: <p>, <h1>, <h2>, <h3>, 
     - (wrapped inside <p>), <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
@@ -129,26 +135,26 @@ GLOBAL RULES
     - If an array is empty, omit its heading and the corresponding <ul> or <ol>.
     - Whenever the text clearly forms a list of prompts/questions/statements/responses, use <ul><li>…</li></ul> or <ol><li>…</li></ol>. Otherwise, use <p>.
     - Whenever you render model/expected student responses in ANY section, use this pattern:
-        - First: <p>✅ Expected Student Responses</p> (no bullets on this line)
+        - First: <p>✅ (Translate "Expected Student Responses" to {{{language}}})</p> (no bullets on this line)
         - Then a <ul> or <ol> list containing the responses (one response per <li>).
     - Whenever you render a Quick Check:
-        - Use this exact header: <p><strong>✔Quick Check</strong></p>
+        - Use this exact header: <p><strong>✔(Translate "Quick Check" to {{{language}}})</strong></p>
         - Render the question or task immediately following the header as a paragraph that tasks EVERY student to show their understanding (not just one student in a verbal check).
         - Use the global ✅Expected Student Responses pattern for the answers.
 
 For this lesson:
     - Lesson Essential Questions (if any):
-    - <h3>💭 Essential Questions</h3>
+    - <h3>💭 Essential Questions (Translate to {{{language}}})</h3>
     - <ul> with each item in Lesson.EssentialQuestions as <li>.
     - Key Vocabulary (if any):
-    - <h3>🔤 Key Vocabulary</h3>
+    - <h3>🔤 Key Vocabulary (Translate to {{{language}}})</h3>
     - <ol> where each item from KeyVocabulary is one <li>, keeping the “Term – Definition” structure:
     - <strong>Term</strong> – Definition
     - Student Learning Objectives (if any):
-    - <h3>🎯 Student Learning Objectives</h3>
+    - <h3>🎯 Student Learning Objectives (Translate to {{{language}}})</h3>
     - <ul> with each item from Lesson.StudentLearningObjectives as <li>.
     - Standards for the lesson:
-    - <h3>📏 Standards Aligned</h3>
+    - <h3>📏 Standards Aligned (Translate to {{{language}}})</h3>
     - <ul> containing Lesson.StandardsAligned as <li>.
     Hard rule — Standards Aligned must always render:
     If Lesson.StandardsAligned contains at least one non-empty item, you MUST render the “📏 Standards Aligned” block exactly once for that lesson. Do not omit it for any reason.
@@ -159,17 +165,17 @@ ASSESS PRIOR KNOWLEDGE
     - Place it immediately after that lesson’s <h3>🎯 Student Learning Objectives</h3> block.
 
     Rendering:
-        - <h3>💡 Assess Prior Knowledge</h3>
-        - Render the following paragraph: <p><strong>Teacher note: </strong>Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention. </p>
+        - <h3>💡 Assess Prior Knowledge (Translate to {{{language}}})</h3>
+        - Render the following paragraph: <p><strong>(Translate "Teacher note" to {{{language}}}): </strong>(Translate the entire activating prior knowledge paragraph below to {{{language}}}) Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention. </p>
         - Overview:
             - Render any opening teacher-script paragraph(s) that introduce the activity as one or more <p> blocks before any lists.
         - Instructions:
-            - Render teacher instructions as a bulleted list (<ul>) where each instruction becomes one plain-text <li> (do NOT include HTML inside <li>).
+            - Render teacher instructions (Translate "Instructions" to {{{language}}}) as a bulleted list (<ul>) where each instruction becomes one plain-text <li> (do NOT include HTML inside <li>).
             - Do NOT nest lists inside any <li>; all lists must be top-level and contain only <li>.
         - Template/Structure:
-            - Render the Template/Structure text as a single paragraph <p> containing the teacher script (e.g., Say: ... Do: ...), preserving exact wording and punctuation.
+            - Render the Template/Structure text as a single paragraph <p> containing the teacher script (e.g., (Translate "Say" to {{{language}}}): ... (Translate "Do" to {{{language}}}): ...), preserving exact wording and punctuation.
             - Immediately after that <p>, if expected student responses are provided, render:
-            <p>✅ Expected Student Responses</p>
+            <p>✅ (Translate "Expected Student Responses" to {{{language}}})</p>
             followed by an <ul> where each response is one plain-text <li>.
             - Do NOT place these response lists inside any other <li> or list.
         - Closing lines:
@@ -188,21 +194,18 @@ Do not invent content; only restructure what exists inside Lesson.AssessPriorKno
 DIRECT PRESENTATION
     - Render the Direct Presentation section (if present for that lesson) as:
 
-    - <h3><span style="color: rgb(115, 191, 39);">Direct Presentation (10 min)</span></h3>
+    - <h3><span style="color: rgb(115, 191, 39);">Direct Presentation (10 min) (Translate to {{{language}}})</span></h3>
     - Materials (if any):
-    - <p><strong>📚 Materials</strong></p>
+    - <p><strong>📚 (Translate "Materials" to {{{language}}})</strong></p>
     - <ul> with <li> items from DirectPresentation.Materials.
     - Instructions for Teachers:
-    - <p><strong>📋 Instructions for Teachers</strong></p>
-    - Render teacher-facing script as a sequence of <p> blocks. Each teacher cue or sentence that begins with labels like "Say:", "Do:", "Ask:", "Write:", "Draw/Show:", "Listen for:" should be its own numbered <p> when it is explanatory or stage-setting (for example: Say: "…", Do: Show …).
-    - When short student-cue lists follow a teacher prompt (e.g., "Listen for:" examples), render those as a separate top-level <ul> immediately after the related <p>. Each <li> in that <ul> must be plain text (for example: <li>Listen for: - "I would see tiny balls." - "I would see lots of different shapes."</li>).
-    - If you instead choose to render the sequence of MAIN steps as a list, use a top-level <ul> where each MAIN step is one <li>. Each such <li> MUST contain only plain text (no HTML tags inside the <li>). Preserve teacher cues as plain text inside those <li>.
-    - Do NOT nest <ul>, <ol>, <p>, <span>, or any other HTML inside a <li>. To represent sub-points, prompts, questions, model responses, or ordered substeps, FLATTEN them as additional consecutive top-level <li> entries immediately after the parent step, using a clear prefix tying them to the parent step. Examples of required prefixes:
-        - "Related to previous step: …"
-        - "From step 2: …"
-        - "Step 3.a — …"
+    - <p><strong>📋 (Translate "Instructions for Teachers" to {{{language}}})</strong></p>
+    - Render teacher-facing script as a sequence of <p> blocks. Each teacher cue or sentence that begins with labels like "Say:", "Do:", "Ask:", "Write:", "Draw/Show:", "Listen for:" should be its own numbered <p> when it is explanatory or stage-setting. TRANSLATE all labels (Say, Do, Ask, etc.) to {{{language}}}.
+    - When short student-cue lists follow a teacher prompt (e.g., "Listen for:" examples), render those as a separate top-level <ul> immediately after the related <p>. Each <li> in that <ul> must be plain text (for example: <li>(Translate "Listen for" to {{{language}}}): - ...</li>).
+    - If you instead choose to render the sequence of MAIN steps as a list, use a top-level <ul> where each MAIN step is one <li>. Each such <li> MUST contain only plain text (no HTML tags inside the <li>). Preserve teacher cues (Translate Say, Do, Ask etc to {{{language}}}) as plain text inside those <li>.
+    - Do NOT nest <ul>, <ol>, <p>, <span>, or any other HTML inside a <li>. To represent sub-points, prompts, questions, model responses, or ordered substeps, FLATTEN them as additional consecutive top-level <li> entries immediately after the parent step, using a clear prefix tying them to the parent step. 
     - Expected student responses that would normally be nested MUST be flattened into individual top-level <li> elements. Each such <li> must begin with the plain-text label:
-        ✅ Expected Student Response — Response text
+        ✅ (Translate "Expected Student Response" to {{{language}}}) — Response text
            - Keep one response per <li>.
 
         7) Strict formatting and safety:
@@ -229,22 +232,22 @@ DIRECT PRESENTATION
 GUIDED PRACTICE
     - Render Guided Practice (if present) as:
 
-    - <h3><span style="color: rgb(115, 191, 39);">Guided Practice</span></h3>
+    - <h3><span style="color: rgb(115, 191, 39);">Guided Practice (Translate to {{{language}}})</span></h3>
     - Materials (if any):
-    - <p><strong>📚 Materials</strong></p>
+    - <p><strong>📚 (Translate "Materials" to {{{language}}})</strong></p>
     - <ul> with <li> items from GuidedPractice.Materials.</ul>
 
     - Instructions for Teachers:
-    - <p><strong>📋 Instructions for Teachers</strong></p>
+    - <p><strong>📋 (Translate "Instructions for Teachers" to {{{language}}})</strong></p>
     - Render teacher-facing script as a sequence of <p> blocks.
     - Each numbered step from the JSON (1., 2., 3...) should start its own <p>.
     - If a step includes sub-prompts (like the Step 6 circulation prompts):
-        - Render each prompt as its own <p> block (e.g., "Prompt 1: '...'").
-        - Render "✅ Expected Student Responses" as its own <p>.
+        - Render each prompt as its own <p> block (e.g., "(Translate 'Prompt' to {{{language}}}) 1: '...'").
+        - Render "✅ (Translate 'Expected Student Responses' to {{{language}}})" as its own <p>.
         - Render the accompanying sample answers as a <ul> bullet list with each response in its own <li>.
     - For the Quick Check at the end:
-        - Render <p><strong>Quick Check</strong> "{TaskText}"</p>
-        - Render <p>✅ Expected Student Responses</p>
+        - Render <p><strong>(Translate "Quick Check" to {{{language}}})</strong> "{TaskText}"</p>
+        - Render <p>✅ (Translate "Expected Student Responses" to {{{language}}})</p>
         - Render responses as a <ul><li> list.
     - Additional presentation rules (apply to the option above):
       - For Group/Partner Work, Roles, Rotations, and Setup lines: render each clear sentence as its own <p>, preserving role names and timing exactly as provided.
@@ -259,11 +262,11 @@ GUIDED PRACTICE
         - Under each label use a top-level <ul><li>…</li></ul> with plain-text <li> items (do not nest lists inside list items).
 
     -  Accommodations & Modifications (if any):
-    -  <p><strong>🤝 Accommodations &amp; Modifications</strong></p>
-    -  Start with a line for the general supports as its own paragraph, e.g. <p><strong>General support:</strong></p>
+    -  <p><strong>🤝 (Translate "Accommodations & Modifications" to {{{language}}})</strong></p>
+    -  Start with a line for the general supports as its own paragraph, e.g. <p><strong>(Translate "General support" to {{{language}}}):</strong></p>
     -  Then render each general support item as a list item inside a top-level <ul>. Each <li> must be plain text.
     -  After the general supports, render the individual supports:
-        - Use a paragraph label: <p><strong>Individual support:</strong></p>
+        - Use a paragraph label: <p><strong>(Translate "Individual support" to {{{language}}}):</strong></p>
         - For each student in the IndividualSupport array:
             - Render the student name as a <p> with red text: <p><span style="color: rgb(204, 0, 0);">Student Name</span></p>.
             - Then render a <ul> containing exactly two <li> elements:
@@ -277,57 +280,53 @@ GUIDED PRACTICE
     - Represent any nested structure by flattening into additional top-level <li> entries with clear prefixes (as in Assess Prior Knowledge).
     - Use paragraph labels (<p><strong>…</strong></p>) and top-level lists (<ul>, <ol>) outside of those plain-text <li> elements for headings, materials, differentiation, and accommodations.
 
-INDEPENDENT PRACTICE
-    - Render Independent Practice (if present) as:
-
-    <h3><span style="color: rgb(115, 191, 39);">Independent Practice</span></h3>
-    - Materials (if any):
-    - <p><strong>📚 Materials</strong></p>
+INDEPENDENT    - Materials (if any):
+    - <p><strong>📚 (Translate "Materials" to {{{language}}})</strong></p>
     - <ul> with <li> items from IndependentPractice.Materials.</ul>
-    - <p><strong>Purpose:</strong></p>
+    - <p><strong>(Translate "Purpose" to {{{language}}}):</strong></p>
     - Use <p> for purpose text.
-
+ 
     - Instructions for Teachers:
     - Render each teacher task as a single paragraph heading in this exact pattern:
-      <p><strong>Task N (DOK X):</strong> Teacher Notes: [teacher notes text]. Say: "…"</p>
+      <p><strong>(Translate "Task" to {{{language}}}) N (DOK X):</strong> (Translate "Teacher Notes" to {{{language}}}): [teacher notes text]. (Translate "Say" to {{{language}}}): "…"</p>
       - Replace N with the task number in ascending order and X with the DOK level provided.
-      - Include any teacher-script labels (Say:, Do:, Ask:, Write:, Draw/Show:, Listen for:) verbatim inside the paragraph.
+      - Include any teacher-script labels (Say:, Do:, Ask:, Write:, Draw/Show:, Listen for:) TRANSLATED to {{{language}}} verbatim inside the paragraph.
       - If the task paragraph text is empty, omit that task entirely.
     - If Expected Student Responses exist for a task, render immediately after that task paragraph:
-      <p>✅ Expected Student Responses</p>
+      <p>✅ (Translate "Expected Student Responses" to {{{language}}})</p>
       <ul><li>Response 1</li><li>Response 2</li></ul>
       - Use <ul> or <ol> based on whether responses are clearly ordered. Each response is one <li>. Do not nest lists inside <li>.
     - If Success Criteria exist for a task, render:
-      <p>Success Criteria</p>
+      <p>(Translate "Success Criteria" to {{{language}}})</p>
       <ul><li>Criterion 1</li><li>Criterion 2</li></ul>
       - Omit this block if the criteria array is empty.
     - If Reflection prompts exist for the task block, render:
-      <p><strong>Reflection:</strong></p>
+      <p><strong>(Translate "Reflection" to {{{language}}}):</strong></p>
       - Then render each reflection sentence or prompt as its own <p>. Use separate <p> for self-regulation and transcendent prompts if provided.
     - Render tasks in ascending task order. Omit any subsection whose source string or array is empty.
     - Use only the allowed tags and ensure HTML remains well-indented and readable.
     - Do NOT flatten these task-level paragraph + list blocks into the Assess Prior Knowledge / Direct Presentation flat <ol> rule; this block is the alternative format for teacher tasks and must follow the example structure exactly.
 
 REVIEW & SPACED RETRIEVAL (5 min)
-    - <h3><span style="color: rgb(115, 191, 39);">Review & Spaced Retrieval (5 min)</span></h3>
+    - <h3><span style="color: rgb(115, 191, 39);">Review & Spaced Retrieval (5 min) (Translate to {{{language}}})</span></h3>
     - Render the content from ReviewAndSpacedRetrieval string following these mapping rules:
-        - Header 📚 Materials: Follow with a list of items.
-        - Label Teacher Notes: Render as <p><strong>Teacher Notes:</strong> [notes text]</p>.
-        - Header 📋 Instructions for Teachers: Render as <p><strong>📋 Instructions for Teachers</strong></p>.
-        - Sub-header Active Recall: Bold. Follow withNumbered items and Say: script.
-        - Use the global ✅ Expected Student Responses pattern for all sample answers.
-        - Sub-header Correct Common Misconceptions: Bold. Render as <ul> with each "If student says... respond:..." as <li>.
-        - Sub-header 💭Essential Question Connection: Bold.
-        - Sub-header 🌍Transcendent Thinking: Bold.
-        - Sub-header ⌛Spaced Retrieval: Bold.
-        - Ensure each sub-header section follows the structure in the image (Numbered actions, Say: scripts, bullets).
+        - Header 📚 (Translate "Materials" to {{{language}}}): Follow with a list of items.
+        - Label (Translate "Teacher Notes" to {{{language}}}): Render as <p><strong>(Translate "Teacher Notes" to {{{language}}}):</strong> [notes text]</p>.
+        - Header 📋 (Translate "Instructions for Teachers" to {{{language}}}): Render as <p><strong>📋 (Translate "Instructions for Teachers" to {{{language}}})</strong></p>.
+        - Sub-header (Translate "Active Recall" to {{{language}}}): Bold. Follow withNumbered items and (Translate "Say" to {{{language}}}) script.
+        - Use the global ✅ (Translate "Expected Student Responses" to {{{language}}}) pattern for all sample answers.
+        - Sub-header (Translate "Correct Common Misconceptions" to {{{language}}}): Bold. Render as <ul> with each "If student says... respond:..." as <li>.
+        - Sub-header 💭(Translate "Essential Question Connection" to {{{language}}}): Bold.
+        - Sub-header 🌍(Translate "Transcendent Thinking" to {{{language}}}): Bold.
+        - Sub-header ⌛(Translate "Spaced Retrieval" to {{{language}}}): Bold.
+        - Ensure each sub-header section follows the structure in the image (Numbered actions, (Translate "Say" to {{{language}}}) scripts, bullets).
 
 FORMATIVE ASSESSMENT (Rendered as part of the Review chapter)
-    - <p><strong>✅Formative Assessment</strong></p>
+    - <p><strong>✅(Translate "Formative Assessment" to {{{language}}})</strong></p>
     - Render the intro paragraph (if present).
-    - For each Prompt N (DOK X):
-        - <p><strong>Prompt N (DOK X):</strong> {QuestionText}</p>
-        - Render "✅ Expected Student Responses" as its own <p>. Use the global ✅ symbol.
+    - For each (Translate "Prompt" to {{{language}}}) N (DOK X):
+        - <p><strong>(Translate "Prompt" to {{{language}}}) N (DOK X):</strong> {QuestionText}</p>
+        - Render "✅ (Translate 'Expected Student Responses' to {{{language}}})" as its own <p>. Use the global ✅ symbol.
         - Render the accompanying responses as a <ul> bullet list with each response in its own <li>.
 
 Hard rules (UI-safe, no nesting):
@@ -345,20 +344,20 @@ Hard rules (UI-safe, no nesting):
 
 Reflection:
     -  After the closed </ul>, render reflection as paragraphs only:
-    -  <p><strong>Reflection:</strong></p>
+    -  <p><strong>(Translate "Reflection" to {{{language}}}):</strong></p>
     -  <p>Self-regulation prompts: ...</p>
     -  <p>Transcendent prompts: ...</p>
 
 STUDENT PRACTICE
-    - <h3><span style="color: rgb(115, 191, 39);">🖊 Student Practice</span></h3>
-    - <p><strong>Teacher Notes:</strong> {StudentPractice.StudentPractice_TeacherNotes}</p>
+    - <h3><span style="color: rgb(115, 191, 39);">🖊 (Translate "Student Practice" to {{{language}}})</span></h3>
+    - <p><strong>(Translate "Teacher Notes" to {{{language}}}):</strong> {StudentPractice.StudentPractice_TeacherNotes}</p>
 
     - For each task in StudentPractice.StudentPractice_Tasks (Numbered 1, 2, 3...):
         - <p><strong>{Number}. ({DOK})</strong> {StudentDirections}</p>
-        - <p><strong>Success Criteria</strong></p>
+        - <p><strong>(Translate "Success Criteria" to {{{language}}})</strong></p>
         - <ul> with each SuccessCriteria item as an <li>.
     - If StudentPractice.StudentPractice_InterleavingIfMath is not empty:
-        - <p><strong>Interleaving (Math only)</strong></p>
+        - <p><strong>(Translate "Interleaving (Math only)" to {{{language}}})</strong></p>
         - Render the interleaving content as one or more <p> blocks.
 
 
@@ -381,6 +380,8 @@ UNIT PLAN JSON:
 Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. Do NOT explain or comment on it; just parse it and render it.
 
 GLOBAL RULES
+    -  Render ALL HTML content in {{{language}}}. You MUST translate all hardcoded section titles (e.g., "Essential Questions", "Key Vocabulary") into {{{language}}}.
+    -  You MUST translate all paragraph labels, list headers, and bolded keywords into {{{language}}}.
     -  Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
     -  Allowed tags: <p>, <h1>, <h2>, <h3>, 
     -  (wrapped inside <p>), <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
@@ -407,15 +408,15 @@ GLOBAL RULES
     -  One <p> for UnitDescription.
 
 - Essential Questions (if any):
-    -  <h2>💭 Essential Questions</h2>
+    -  <h2>💭 Essential Questions (Translate to {{{language}}})</h2>
     -  <ul> with each item from EssentialQuestions as <li>.
 
 - Student Learning Objectives (if any):
-    -  <h2>🎯 Student Learning Objectives</h2>
+    -  <h2>🎯 Student Learning Objectives (Translate to {{{language}}})</h2>
     -  <ul> with each item from StudentLearningObjectives as <li>.
 
 - Standards (if any):
-    -  <h2>📏 Standards Aligned</h2>
+    -  <h2>📏 Standards Aligned (Translate to {{{language}}})</h2>
     -  <ul> with each string from StandardsAligned as <li>.
 `;
 
