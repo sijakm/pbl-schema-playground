@@ -171,7 +171,7 @@
       });
       logLine("[Cleo] Requesting feedback...");
       
-      const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+      const HARDCODED_PASSWORD = ""; // Enter password here while working locally
       const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey")?.value?.trim() || "";
 
       const responseText = await callResponsesApiStream({

@@ -328,7 +328,7 @@
   async function runChain() {
     if (isRunning) return;
 
-    const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+    const HARDCODED_PASSWORD = ""; // Enter password here while working locally
     const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
     const model = els.model()?.value || "gpt-5.4-mini";

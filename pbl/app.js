@@ -184,7 +184,7 @@ async function run() {
   console.log("🚀 Running with model:", model, "and schema:", schema);
   lastEditedSchema = schema;
 
-  const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+  const HARDCODED_PASSWORD = ""; // Enter password here while working locally
   const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
@@ -407,7 +407,7 @@ async function renderHtml() {
   ];
 
   const responseLanguage = document.getElementById("input_ResponseLanguage")?.value || "English";
-  const HARDCODED_PASSWORD = ""; // Unesi ovde lozinku dok radiš u lokalu
+  const HARDCODED_PASSWORD = ""; // Enter password here while working locally
   const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey").value.trim();
   const model = document.getElementById("modelSelect").value;
   
