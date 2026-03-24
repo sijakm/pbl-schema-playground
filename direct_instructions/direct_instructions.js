@@ -17,7 +17,6 @@
     gradeLevel: () => $("gradeLevel"),
     classDuration: () => $("classDuration"),
     numberOfLessons: () => $("numberOfLessons"),
-    languageSelect: () => $("languageSelect"),
     standards: () => $("standards"),
     userPrompt: () => $("userPrompt"),
     learningPlans: () => $("learningPlans"),
@@ -212,8 +211,7 @@
       LearningPlans: els.learningPlans()?.value?.trim() || "",
       MediaContext: els.mediaContext()?.value?.trim() || "",
       AttachedUnit: els.attachedUnit()?.value?.trim() || "",
-      AttachedLesson: els.attachedLesson()?.value?.trim() || "",
-      language: els.languageSelect()?.value || "English"
+      AttachedLesson: els.attachedLesson()?.value?.trim() || ""
     };
   }
 
@@ -314,6 +312,17 @@
   async function runChain() {
     if (isRunning) return;
 
+    const lang = document.getElementById('languageSelect')?.value || 'sr';
+    const prompts = lang === 'sr' ? window.promptsSR : window.promptsEN;
+    const {
+      STEP0_PROMPT_TEMPLATE,
+      STEP0_SCHEMA,
+      UNIT_COMMON_HTML_PROMPT_TEMPLATE,
+      PER_LESSON_PROMPT_TEMPLATE,
+      PER_LESSON_SCHEMA,
+      HTML_LESSON_PROMPT_TEMPLATE
+    } = prompts;
+
     const HARDCODED_PASSWORD = ""; // Enter password here while working locally
     const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
@@ -354,10 +363,7 @@
       // ---- Step 0: outline ----
       const t0 = nowMs();
       logLine("[1/5] Step 0: generating unit outline JSON…");
-      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, { 
-        ...vars,
-        language: vars.language || "English"
-      });
+      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
       console.log("[DEBUG] Step 0 Prompt (Unit Outline):", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
@@ -386,8 +392,7 @@
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
       const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson),
-        JsonResponse: JSON.stringify(unitCommonJson), // direct_instructions.js use JsonResponse
-        language: vars.language || "English"
+        JsonResponse: JSON.stringify(unitCommonJson) // direct_instructions.js use JsonResponse
       });
       console.log("[DEBUG] Unit Common HTML Prompt:", unitHtmlPrompt);
 
@@ -415,7 +420,6 @@
             const perLessonVars = {
               ...vars,
               UnitEssentialQuestions: (step0Obj?.UnitDescription?.EssentialQuestions || []).join("\n"),
-              language: vars.language || "English",
               // Since the prompt file cannot be changed, we include both unit and lesson-specific 
               // context in the ParentUnitData field which is present in the original template.
               ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
@@ -456,8 +460,7 @@
               LessonInquiryJson: JSON.stringify(lessonObj), // for compatibility
               JsonResponse: JSON.stringify(lessonObj),      // expected by direct_instructions prompts
               LessonNumber: i + 1,
-              LessonTitle: step0Obj?.Lessons?.[i]?.lessonTitle || "",
-              language: vars.language || "English"
+              LessonTitle: step0Obj?.Lessons?.[i]?.lessonTitle || ""
             });
             console.log(`[DEBUG] Lesson ${i + 1} HTML Prompt:`, lessonHtmlPrompt);
 

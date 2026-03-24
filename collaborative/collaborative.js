@@ -349,10 +349,14 @@
     const tTotal0 = nowMs();
 
     try {
+      // ---- Get Active Prompts ----
+      const lang = document.getElementById("languageSelect")?.value || "sr";
+      const prompts = lang === "en" ? window.promptsEN : window.promptsSR;
+
       // ---- Step 0: outline ----
       const t0 = nowMs();
       logLine("[1/5] Step 0: generating unit outline JSON…");
-      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
+      const step0Prompt = fillTemplate(prompts.STEP0_PROMPT_TEMPLATE, vars);
       console.log("[DEBUG] Step 0 Prompt (Unit Outline):", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
@@ -360,7 +364,7 @@
           endpoint, apiKey, model,
           prompt: step0Prompt,
           schemaName: "UnitPlanResponse",
-          schemaObj: STEP0_SCHEMA,
+          schemaObj: prompts.STEP0_SCHEMA,
           signal
         }), "Step 0 Outline");
 
@@ -379,7 +383,7 @@
       const t1 = nowMs();
       logLine("[2/5] Rendering common unit HTML…");
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
-      const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
+      const unitHtmlPrompt = fillTemplate(prompts.UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson),
         JsonResponse: JSON.stringify(unitCommonJson)
       });
@@ -412,14 +416,14 @@
               ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
             };
 
-            const perLessonPrompt = fillTemplate(PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+            const perLessonPrompt = fillTemplate(prompts.PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
             console.log(`[DEBUG] Lesson ${i + 1} JSON Prompt:`, perLessonPrompt);
 
             const lessonJsonText = await callResponsesApiStream({
               endpoint, apiKey, model,
               prompt: perLessonPrompt,
               schemaName: "LessonPlanResponse",
-              schemaObj: PER_LESSON_SCHEMA,
+              schemaObj: prompts.PER_LESSON_SCHEMA,
               signal
             });
 
@@ -443,7 +447,7 @@
         limit(() =>
           withRetry(async (signal) => {
             const ti0 = nowMs();
-            const lessonHtmlPrompt = fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
+            const lessonHtmlPrompt = fillTemplate(prompts.HTML_LESSON_PROMPT_TEMPLATE, {
               LessonInquiryJson: JSON.stringify(lessonObj), // for compatibility
               JsonResponse: JSON.stringify(lessonObj),      // expected by prompts
               LessonNumber: i + 1,

@@ -1,5 +1,6 @@
-const STEP0_PROMPT_TEMPLATE = `
-{Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
+window.promptsEN = {
+STEP0_PROMPT_TEMPLATE: `
+Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
                     
 Based on Unit Subject, NGSS Standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), and the requested Number of Lessons, generate a JSON response that includes a cohesive UnitDescription and a non-overlapping list of lesson “containers”.
 
@@ -53,10 +54,11 @@ Constraints:
 - Ensure logical sequencing from foundational ideas to more complex modeling.
 - Accuracy: All content must be scientifically accurate and age-appropriate.
 
-Output MUST be valid JSON matching the schema. Use compact formatting (no extra blank lines).}
-`;
+Output MUST be valid JSON matching the schema. Use compact formatting (no extra blank lines).
+`
 
-const PER_LESSON_PROMPT_TEMPLATE = `
+,
+PER_LESSON_PROMPT_TEMPLATE: `
 Create ONE collaborative-style lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
 
 You MUST output valid JSON that matches the provided JSON schema exactly (LessonPlanResponse with a single "LessonPlan" object). Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
@@ -155,9 +157,10 @@ OUTPUT REQUIREMENTS:
 - Output MUST be valid JSON matching the provided schema exactly.
 - Output MUST be a SINGLE lesson plan only.
 - No HTML. No emojis. No markdown. Plain text inside string fields.
-`;
+`
 
-const HTML_LESSON_PROMPT_TEMPLATE = `
+,
+HTML_LESSON_PROMPT_TEMPLATE: `
 You will receive ONE JSON object that strictly follows the LessonPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
 
 INPUT FORMAT
@@ -419,9 +422,10 @@ STUDENT PRACTICE
 - Render Teacher Notes as <p> blocks.
 - Render tasks as a single <ol> of plain-text <li> lines.
 - Render any ✅Expected Student Responses blocks using the ✅ pattern, outside of any <li>.
-`;
+`
 
-const UNIT_COMMON_HTML_PROMPT_TEMPLATE = `
+,
+UNIT_COMMON_HTML_PROMPT_TEMPLATE: `
 You will receive ONE JSON object that strictly follows the UnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
                    
 INPUT FORMAT
@@ -469,9 +473,10 @@ GLOBAL RULES
 - Standards (if any):
     -  <h2>📏 Standards Aligned</h2>
     -  <ul> with each string from StandardsAligned as <li>.
-`;
+`
 
-const STEP0_SCHEMA = {
+,
+STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",
   "properties": {
@@ -555,9 +560,8 @@ const STEP0_SCHEMA = {
       "UnitDescription.StandardsAligned"
     ]
   }
-}
-
-const PER_LESSON_SCHEMA = {
+},
+PER_LESSON_SCHEMA: {
   "title": "LessonPlanResponse",
   "type": "object",
   "properties": {
@@ -777,4 +781,4 @@ const PER_LESSON_SCHEMA = {
     ]
   }
 }
-
+};

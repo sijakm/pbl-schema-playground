@@ -108,6 +108,12 @@
     <input id="endpoint" type="text" value="https://fancy-sun-80f1.sijakmilan.workers.dev"
       style="width:100%; padding:10px; font-size:13px; display:none;" />
 
+    <label for="languageSelect">Jezik / Language</label>
+    <select id="languageSelect" style="width:100%; padding:10px; font-size:13px; margin-bottom:12px;">
+      <option value="sr" selected>Srpski</option>
+      <option value="en">English</option>
+    </select>
+
     <label for="modelSelect">OpenAI Model</label>
     <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
       <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
@@ -126,16 +132,16 @@
     <div class="grid">
       <div>
         <label for="subject">Unit Subject</label>
-        <input id="subject" type="text" value="Physical Science (Molecules & Structures)"
+        <input id="subject" type="text" value="Fizičke nauke (Molekuli i strukture)"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="name">Unit Name</label>
-        <input id="name" type="text" value="Building Blocks: Modeling Atomic Composition"
+        <input id="name" type="text" value="Gradivni blokovi: Modeliranje atomskog sastava"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="gradeLevel">Grade Level</label>
         <input id="gradeLevel" type="text"
-          value="Middle School (6th-8th Grade)"
+          value="Osnovna škola (6-8. razred)"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="classDuration">Class Duration (minutes)</label>
@@ -150,31 +156,31 @@
       <div>
         <label for="standards">Standards</label>
         <textarea id="standards" placeholder="Paste standards here..."
-          style="height:84px;">MS-PS1-1 Develop models to describe the atomic composition of simple molecules and extended structures.</textarea>
+          style="height:84px;">MS-PS1-1 Razviti modele za opisivanje atomskog sastava jednostavnih molekula i proširenih struktura.</textarea>
 
         <label for="userPrompt">Unit Description/Instruction (User Prompt)</label>
         <textarea id="userPrompt" placeholder="Paste unit instruction here..."
-          style="height:120px;">Students will develop and use models to describe the atomic composition of simple molecules and extended structures. They will differentiate between molecules and extended structures (like crystals) and understand how the arrangement of atoms affects properties. Emphasize physical modeling and structural reasoning.</textarea>
+          style="height:120px;">Učenici će razvijati i koristiti modele da opišu atomski sastav jednostavnih molekula i proširenih struktura. Oni će razlikovati molekule i proširene strukture (poput kristala) i razumeti kako raspored atoma utiče na svojstva. Naglasite fizičko modeliranje i strukturno zaključivanje.</textarea>
 
         <label for="learningPlans">Students with individualized support (context)</label>
-        <textarea id="learningPlans" placeholder="Paste student names + plans..." style="height:84px;">Student Name: Maria Valdez
-Plan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.
+        <textarea id="learningPlans" placeholder="Paste student names + plans..." style="height:84px;">Ime učenika: Maria Valdez
+Plan: Obezbedite delimično unapred označene atomske modele i okvire rečenica za opise strukture.
 
-Student Name: Jacob Garrow
-Plan: Allow speech-to-text for explaining structural differences.
+Ime učenika: Jacob Garrow
+Plan: Dozvolite funkciju govora u tekst za objašnjavanje strukturnih razlika.
 
-Student Name: Ava Lund
-Plan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.</textarea>
+Ime učenika: Ava Lund
+Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molekule obeležene bojom.</textarea>
       </div>
     </div>
 
     <label for="mediaContext">Resources/Media to use</label>
     <textarea id="mediaContext" placeholder="Links, materials, media..."
-      style="height:70px;">Molecular model kits (balls and sticks), periodic table charts, images of crystal structures (e.g., salt, diamond), interactive online molecular builders (like PhET), student science journals.</textarea>
+      style="height:70px;">Modeli molekula (kuglice i štapići), tabele periodnog sistema, slike kristalnih struktura (npr. so, dijamant), interaktivni onlajn alati za izgradnju molekula (poput PhET-a), učenički naučni dnevnici.</textarea>
 
     <label for="attachedUnit">Unit Content (AttachedUnit)</label>
     <textarea id="attachedUnit" placeholder="Paste attached unit content..."
-      style="height:110px;">No attached unit text provided.</textarea>
+      style="height:110px;">Nije obezbeđen tekst priložene jedinice.</textarea>
 
     <label for="attachedLesson">Attached Lesson Content (optional)</label>
     <textarea id="attachedLesson" placeholder="Paste attached lesson content..." style="height:70px;"></textarea>
@@ -223,6 +229,47 @@ Plan: Supply bilingual atomic symbol charts and visual color-coded maps for mole
   </div>
 
   <script src="prompts_collaborative.js"></script>
+  <script src="prompts_collaborative_sr.js"></script>
+  <script>
+    const defaults = {
+      en: {
+        subject: "Physical Science (Molecules & Structures)",
+        name: "Building Blocks: Modeling Atomic Composition",
+        gradeLevel: "Middle School (6th-8th Grade)",
+        standards: "MS-PS1-1 Develop models to describe the atomic composition of simple molecules and extended structures.",
+        userPrompt: "Students will develop and use models to describe the atomic composition of simple molecules and extended structures. They will differentiate between molecules and extended structures (like crystals) and understand how the arrangement of atoms affects properties. Emphasize physical modeling and structural reasoning.",
+        learningPlans: "Student Name: Maria Valdez\\nPlan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.\\n\\nStudent Name: Jacob Garrow\\nPlan: Allow speech-to-text for explaining structural differences.\\n\\nStudent Name: Ava Lund\\nPlan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.",
+        mediaContext: "Molecular model kits (balls and sticks), periodic table charts, images of crystal structures (e.g., salt, diamond), interactive online molecular builders (like PhET), student science journals.",
+        attachedUnit: "No attached unit text provided."
+      },
+      sr: {
+        subject: "Fizičke nauke (Molekuli i strukture)",
+        name: "Gradivni blokovi: Modeliranje atomskog sastava",
+        gradeLevel: "Osnovna škola (6-8. razred)",
+        standards: "MS-PS1-1 Razviti modele za opisivanje atomskog sastava jednostavnih molekula i proširenih struktura.",
+        userPrompt: "Učenici će razvijati i koristiti modele da opišu atomski sastav jednostavnih molekula i proširenih struktura. Oni će razlikovati molekule i proširene strukture (poput kristala) i razumeti kako raspored atoma utiče na svojstva. Naglasite fizičko modeliranje i strukturno zaključivanje.",
+        learningPlans: "Ime učenika: Maria Valdez\\nPlan: Obezbedite delimično unapred označene atomske modele i okvire rečenica za opise strukture.\\n\\nIme učenika: Jacob Garrow\\nPlan: Dozvolite funkciju govora u tekst za objašnjavanje strukturnih razlika.\\n\\nIme učenika: Ava Lund\\nPlan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molekule obeležene bojom.",
+        mediaContext: "Modeli molekula (kuglice i štapići), tabele periodnog sistema, slike kristalnih struktura (npr. so, dijamant), interaktivni onlajn alati za izgradnju molekula (poput PhET-a), učenički naučni dnevnici.",
+        attachedUnit: "Nije obezbeđen tekst priložene jedinice."
+      }
+    };
+
+    document.getElementById("languageSelect").addEventListener("change", function(e) {
+      const lang = e.target.value;
+      const d = defaults[lang];
+      if (d) {
+        document.getElementById("subject").value = d.subject;
+        document.getElementById("name").value = d.name;
+        document.getElementById("gradeLevel").value = d.gradeLevel;
+        document.getElementById("standards").value = d.standards.replace(/\\\\n/g, "\\n");
+        document.getElementById("userPrompt").value = d.userPrompt.replace(/\\\\n/g, "\\n");
+        document.getElementById("learningPlans").value = d.learningPlans.replace(/\\\\n/g, "\\n");
+        document.getElementById("mediaContext").value = d.mediaContext.replace(/\\\\n/g, "\\n");
+        document.getElementById("attachedUnit").value = d.attachedUnit.replace(/\\\\n/g, "\\n");
+      }
+    });
+
+  </script>
   <script src="collaborative.js"></script>
 </body>
 
