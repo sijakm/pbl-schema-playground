@@ -16,12 +16,12 @@ window.pblDemoData = {
     "Subject": "Nauka o Zemlji i svemiru (Gravitacija i orbite)",
     "Name": "„Gravitacija na delu: Modeliranje kretanja u našem solarnom sistemu“",
     "UserPrompt": "Učenici će istraživati kako gravitacija utiče na kretanje u solarnom sistemu i kreirati model koji objašnjava i predviđa orbitalno kretanje. Finalni proizvod treba da bude jasan model (fizički i/ili digitalni) uz kratko objašnjenje za publiku iz zajednice, koristeći dokaze iz zapažanja i jednostavne podatke. Naglasiti osmišljavanje, modeliranje i komunikaciju.",
-    "GradeLevel": "1. razred srednje škole (7. razred osnovne)",
+    "GradeLevel": "1. razred srednje škole",
     "NumberOfDays": "10",
-    "Location": "Beograd, Srbija",
+    "Location": "Novi Sad, Petrovaradinska tvrdjava, Srbija",
     "MediaContext": "Kratki NASA video snimci gravitacije/orbite, slike solarnog sistema, učionički rekviziti (kanap/loptice), jednostavne simulacije orbita (bazirane na pretraživaču), hamer papir, naučne sveske učenika.",
     "AttachedUnit": "",
-    "Standards": "BIO.1.1. Analizira i objašnjava povezanost strukture i funkcije na različitim nivoima organizacije živih sistema.",
+    "Standards": "MS-ESS1-2 Razvija i koristi model da opiše ulogu gravitacije u kretanju unutar galaksija i solarnog sistema.",
     "LearningPlans": "Marija Valdez: Obezbediti delimično unapred označenu mapu orbite i okvire rečenica za objašnjenja.\nJakob Garou: Dozvoliti pretvaranje govora u tekst za rezonovanje i označavanje.\nAva Lund: Obezbediti dvojezične nalepnice za planete i vizuelni dijagram toka koji pokazuje Sunce → Planete → Meseci.",
     "ResponseLanguage": "Serbian"
   }
