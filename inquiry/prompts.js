@@ -1,5 +1,5 @@
-// ---- Prompt templates (as provided) ----
-const STEP0_PROMPT_TEMPLATE = `Create ONLY the INQUIRY unit outline (Step 0) using the info below. Do NOT create a full unit plan and do NOT write full lesson plans.
+window.promptsEN = {
+  STEP0_PROMPT_TEMPLATE: `Create ONLY the INQUIRY unit outline (Step 0) using the info below. Do NOT create a full unit plan and do NOT write full lesson plans.
 
 You MUST output valid JSON that matches the provided JSON schema exactly: UnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. Plain text inside string fields.
 
@@ -35,9 +35,9 @@ LESSONS ARRAY CONSTRAINTS:
 - Pacing must fit {{$ClassDuration}} minute class periods at grade {{$GradeLevel}}.
 
 OUTPUT RULE:
-Return ONLY JSON that validates against the UnitPlanResponse schema.`;
+Return ONLY JSON that validates against the UnitPlanResponse schema.`,
 
-const PER_LESSON_PROMPT_TEMPLATE = `Create ONE inquiry lesson plan (NOT a unit plan, NOT multiple lessons) using the info below. You MUST output valid JSON that matches the provided JSON schema exactly: InquiryUnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. No markdown. Plain text inside string fields.
+  PER_LESSON_PROMPT_TEMPLATE: `Create ONE inquiry lesson plan (NOT a unit plan, NOT multiple lessons) using the info below. You MUST output valid JSON that matches the provided JSON schema exactly: InquiryUnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. No markdown. Plain text inside string fields.
 
 Unit Subject: {{$Subject}}
 Unit Name: {{$Name}}
@@ -79,9 +79,9 @@ FIELD-SPECIFIC RULES (map to schema):
   - IndividualSupport: array must include exactly the provided students and their plans (same names/plans; no extra students; no missing students).
 
 OUTPUT RULE:
-Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`;
+Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
 
-const HTML_LESSON_PROMPT_TEMPLATE = `You are a professional instructional HTML formatter writing for classroom teachers.
+  HTML_LESSON_PROMPT_TEMPLATE: `You are a professional instructional HTML formatter writing for classroom teachers.
 
 CRITICAL RULES
 - Output ONLY valid HTML.
@@ -505,9 +505,9 @@ Reflection MUST be:
 <p>One reflective prompt.</p>
 
 FINAL OUTPUT RULE:
-Return ONLY the combined HTML for all sections in order. No extra wrapper text.`;
+Return ONLY the combined HTML for all sections in order. No extra wrapper text.`,
 
-const UNIT_COMMON_HTML_PROMPT_TEMPLATE = `You are a professional instructional HTML formatter writing for classroom teachers.
+  UNIT_COMMON_HTML_PROMPT_TEMPLATE: `You are a professional instructional HTML formatter writing for classroom teachers.
 
 You will receive a structured JSON payload representing high-level unit information.
 
@@ -556,10 +556,9 @@ Render as an ordered list.
 --------------------------------
 INPUT JSON:
 {{$UnitCommonJson}}
-`;
+`,
 
-// ---- Schemas (JSON Schema objects) ----
-const STEP0_SCHEMA = {
+  STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",
   "properties": {
@@ -651,9 +650,9 @@ const STEP0_SCHEMA = {
       "UnitDescription.StandardsAligned"
     ]
   }
-};
+},
 
-const PER_LESSON_SCHEMA = {
+PER_LESSON_SCHEMA: {
   "title": "InquiryUnitPlanResponse",
   "type": "object",
   "properties": {
@@ -946,4 +945,5 @@ const PER_LESSON_SCHEMA = {
     "StudentPractice"
   ],
   "additionalProperties": false
+  }
 };

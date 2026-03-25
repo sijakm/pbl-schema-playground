@@ -5,8 +5,11 @@
   const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
 
   // ---- Prompt templates and schemas moved to prompts.js ----
-
-
+  function getPrompts() {
+    const langEl = $("languageSelect");
+    const lang = langEl ? langEl.value : "en";
+    return lang === "sr" ? window.promptsSR : window.promptsEN;
+  }
   // ---- DOM helpers ----
   const $ = (id) => document.getElementById(id);
 
@@ -30,6 +33,7 @@
 
     runChainBtn: () => $("runChainBtn"),
     cancelBtn: () => $("cancelBtn"),
+    downloadPromptsBtn: () => $("downloadPromptsBtn"),
     status: () => $("status"),
 
     log: () => $("log"),
@@ -376,7 +380,8 @@
       const t0 = nowMs();
       logLine("[1/5] Step 0: generating unit outline JSON…");
 
-      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
+      const pmpts = getPrompts();
+      const step0Prompt = fillTemplate(pmpts.STEP0_PROMPT_TEMPLATE, vars);
 
       const step0JsonText = await withRetry((signal) =>
         callResponsesApiStream({
@@ -385,7 +390,7 @@
           model,
           prompt: step0Prompt,
           schemaName: "UnitPlanResponse",
-          schemaObj: STEP0_SCHEMA,
+          schemaObj: pmpts.STEP0_SCHEMA,
           signal: signal
         }), "Step 0 Outline");
 
@@ -415,7 +420,7 @@
       logLine("[2/5] Rendering common unit HTML…");
 
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
-      const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
+      const unitHtmlPrompt = fillTemplate(pmpts.UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson)
       });
 
@@ -473,7 +478,8 @@
               LessonOutline: String(L.lessonOutline ?? "")
             };
 
-            const perLessonPrompt = fillTemplate(PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+            const pmpts = getPrompts();
+            const perLessonPrompt = fillTemplate(pmpts.PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
 
             const lessonJsonText = await callResponsesApiStream({
               endpoint,
@@ -481,7 +487,7 @@
               model,
               prompt: perLessonPrompt,
               schemaName: "InquiryUnitPlanResponse",
-              schemaObj: PER_LESSON_SCHEMA,
+              schemaObj: pmpts.PER_LESSON_SCHEMA,
               signal: signal
             });
 
@@ -521,7 +527,8 @@
           withRetry(async (signal) => {
             const ti0 = nowMs();
 
-            const lessonHtmlPrompt = fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
+            const pmpts = getPrompts();
+            const lessonHtmlPrompt = fillTemplate(pmpts.HTML_LESSON_PROMPT_TEMPLATE, {
               LessonInquiryJson: JSON.stringify(lessonObj)
             });
 
@@ -625,13 +632,68 @@
     if (currentAbortController) currentAbortController.abort();
   }
 
+  async function downloadPrompts() {
+    try {
+      if (typeof JSZip === "undefined") {
+        alert("JSZip library not loaded. Check your internet connection or CDN link.");
+        return;
+      }
+
+      const zipEN = new JSZip();
+      const zipSR = new JSZip();
+
+      // window.promptsEN and window.promptsSR are defined in prompts.js / prompts_sr.js
+      const pEN = window.promptsEN || {};
+      const pSR = window.promptsSR || {};
+
+      const addFiles = (zip, obj) => {
+        for (const [key, value] of Object.entries(obj)) {
+          if (typeof value === "object" && value !== null) {
+            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
+          } else if (typeof value === "string") {
+            zip.file(`${key}.txt`, value);
+          }
+        }
+      };
+
+      addFiles(zipEN, pEN);
+      addFiles(zipSR, pSR);
+
+      const contentEN = await zipEN.generateAsync({ type: "blob" });
+      const contentSR = await zipSR.generateAsync({ type: "blob" });
+
+      const saveZip = (blob, filename) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      };
+
+      saveZip(contentEN, "prompts_en_inquiry.zip");
+      setTimeout(() => {
+        saveZip(contentSR, "prompts_sr_inquiry.zip");
+      }, 500);
+
+      logLine("[OK] Prompts downloaded successfully.");
+    } catch (err) {
+      logLine("[error] Failed to download prompts: " + err.message);
+      console.error(err);
+    }
+  }
+
   function onReady() {
     setStatus("");
 
     const runBtn = els.runChainBtn();
     const cancelBtn = els.cancelBtn();
+    const downloadBtn = els.downloadPromptsBtn();
     if (runBtn) runBtn.addEventListener("click", runChain);
     if (cancelBtn) cancelBtn.addEventListener("click", cancel);
+    if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);

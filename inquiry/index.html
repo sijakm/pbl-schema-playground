@@ -102,7 +102,8 @@
   <div class="row card">
     <h3>OpenAI / Proxy</h3>
     <label for="apiKey">Access Password</label>
-    <input id="apiKey" type="password" placeholder="Enter password..." style="width:100%; padding:10px; font-size:13px;" />
+    <input id="apiKey" type="password" placeholder="Enter password..."
+      style="width:100%; padding:10px; font-size:13px;" />
     <p class="muted">Required to access your protected proxy.</p>
 
     <label for="endpoint" style="display:none;">Endpoint (proxy)</label>
@@ -110,6 +111,12 @@
       style="width:100%; padding:10px; font-size:13px; display:none;" />
 
     <label for="modelSelect">OpenAI Model</label>
+    <label for="languageSelect">Jezik / Language</label>
+    <select id="languageSelect" style="width:100%; padding:10px; font-size:13px; margin-bottom:12px;">
+      <option value="en" selected>English</option>
+      <option value="sr">Srpski</option>
+    </select>
+
     <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
       <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
       <option value="gpt-5.4-nano">gpt-5.4-nano</option>
@@ -189,6 +196,7 @@ Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Pla
   <div class="row">
     <button id="runChainBtn" type="button">Run Chain</button>
     <button id="cancelBtn" type="button" disabled>Cancel</button>
+    <button id="downloadPromptsBtn" type="button">Download Prompts</button>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
   </div>
 
@@ -224,7 +232,54 @@ Plan: Supply bilingual planet labels and a visual flow chart showing Sun → Pla
     <p class="muted">Preview uses <strong>iframe srcdoc</strong> with sandbox for safety.</p>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="prompts.js"></script>
+  <script src="prompts_sr.js"></script>
+  <script>
+    const defaults = {
+      en: {
+        subject: "Earth & Space Science (Gravity & Orbits)",
+        name: "Gravity at Work: Modeling Motion in Our Solar System",
+        gradeLevel: "The student is in the 1st grade of middle school, which consists of 4 grades total.",
+        classDuration: "60",
+        numberOfLessons: "1",
+        standards: "MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.",
+        userPrompt: "Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.",
+        learningPlans: "Student Name: Maria Valdez\nPlan: Provide a partially pre-labeled orbit map and sentence frames for explanations.\n\nStudent Name: Jacob Garrow\nPlan: Allow speech-to-text for reasoning and labeling.\n\nStudent Name: Ava Lund\nPlan: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.",
+        mediaContext: "Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple browser-based orbit simulations, chart paper, student science notebooks.",
+        attachedUnit: "No attached unit text provided."
+      },
+      sr: {
+        subject: "Nauka o Zemlji i svemiru (Gravitacija i orbite)",
+        name: "Gravitacija na delu: Modeliranje kretanja u našem solarnom sistemu",
+        gradeLevel: "Učenik je u 1. razredu srednje škole, koja ukupno traje 4 godine.",
+        classDuration: "60",
+        numberOfLessons: "1",
+        standards: "MS-ESS1-2 Razviti i koristiti model za opisivanje uloge gravitacije u kretanjima unutar galaksija i solarnog sistema.",
+        userPrompt: "Učenici će istraživati kako gravitacija utiče na kretanje u solarnom sistemu i kreirati model koji objašnjava i predviđa orbitalno kretanje. Finalni proizvod treba da bude jasan model (fizički i/ili digitalni) uz kratko objašnjenje za publiku iz zajednice, koristeći dokaze iz zapažanja i jednostavne podatke. Naglasite osmišljavanje, modeliranje i komunikaciju.",
+        learningPlans: "Ime učenika: Maria Valdez\nPlan: Obezbedite delimično unapred označenu mapu orbite i okvire rečenica za objašnjenja.\n\nIme učenika: Jacob Garrow\nPlan: Dozvolite funkciju govora u tekst za zaključivanje i označavanje.\n\nIme učenika: Ava Lund\nPlan: Obezbedite dvojezične oznake planeta i vizuelni dijagram toka koji pokazuje Sunce → Planete → Meseci.",
+        mediaContext: "Kratki NASA vizuelni prikazi gravitacije/orbita, slike solarnog sistema, laboratorijski materijali (kanap/loptice), jednostavne simulacije orbita u pretraživaču, hamer papir, učeničke naučne sveske.",
+        attachedUnit: "Nije obezbeđen tekst priložene jedinice."
+      }
+    };
+
+    document.getElementById("languageSelect").addEventListener("change", function (e) {
+      const lang = e.target.value;
+      const d = defaults[lang];
+      if (d) {
+        document.getElementById("subject").value = d.subject;
+        document.getElementById("name").value = d.name;
+        document.getElementById("gradeLevel").value = d.gradeLevel;
+        document.getElementById("classDuration").value = d.classDuration;
+        document.getElementById("numberOfLessons").value = d.numberOfLessons;
+        document.getElementById("standards").value = d.standards.replace(/\\n/g, "\n");
+        document.getElementById("userPrompt").value = d.userPrompt.replace(/\\n/g, "\n");
+        document.getElementById("learningPlans").value = d.learningPlans.replace(/\\n/g, "\n");
+        document.getElementById("mediaContext").value = d.mediaContext.replace(/\\n/g, "\n");
+        document.getElementById("attachedUnit").value = d.attachedUnit.replace(/\\n/g, "\n");
+      }
+    });
+  </script>
   <script src="inquiry_app.js"></script>
 </body>
 
