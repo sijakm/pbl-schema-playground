@@ -560,9 +560,9 @@
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       };
 
-      saveZip(contentEN, "prompts_en_collaborative.zip");
+      saveZip(contentEN, "collaborative_prompts_en.zip");
       setTimeout(() => {
-        saveZip(contentSR, "prompts_sr_collaborative.zip");
+        saveZip(contentSR, "collaborative_prompts_sr.zip");
       }, 500);
 
       logLine("[OK] Prompts downloaded successfully.");

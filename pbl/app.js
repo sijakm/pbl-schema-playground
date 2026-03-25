@@ -620,8 +620,8 @@ async function downloadPrompts() {
 
   try {
     const configs = [
-      { filename: "prompts_en.zip", data: window.pblPrompts_en },
-      { filename: "prompts_sr.zip", data: window.pblPrompts_sr }
+      { filename: "pbl_prompts_en.zip", data: window.pblPrompts_en },
+      { filename: "pbl_prompts_sr.zip", data: window.pblPrompts_sr }
     ];
 
     for (const config of configs) {

@@ -673,9 +673,9 @@
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       };
 
-      saveZip(contentEN, "prompts_en_inquiry.zip");
+      saveZip(contentEN, "inquiry_prompts_en.zip");
       setTimeout(() => {
-        saveZip(contentSR, "prompts_sr_inquiry.zip");
+        saveZip(contentSR, "inquiry_prompts_sr.zip");
       }, 500);
 
       logLine("[OK] Prompts downloaded successfully.");
