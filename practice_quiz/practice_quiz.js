@@ -155,6 +155,12 @@
     `;
     container.appendChild(header);
 
+    const currentLang = document.getElementById("languageSelect").value;
+    const labels = {
+        en: { hint: "💡 Show Hint", rationale: "Rationale" },
+        sr: { hint: "💡 Prikaži nagoveštaj", rationale: "Obrazloženje" }
+    }[currentLang] || { hint: "💡 Show Hint", rationale: "Rationale" };
+
     quizData.forEach((q, i) => {
       const card = document.createElement("div");
       card.className = "question-card";
@@ -204,11 +210,32 @@
       }
       
       answerSection.appendChild(optionsContainer);
+
+      // Hint area
+      if (q.questionHint) {
+          const hintBtn = document.createElement("button");
+          hintBtn.className = "hint-btn";
+          hintBtn.textContent = labels.hint;
+          hintBtn.onclick = () => showHint(i);
+          answerSection.appendChild(hintBtn);
+
+          const hintText = document.createElement("div");
+          hintText.className = "hint-text";
+          hintText.id = `hint-text-${i}`;
+          hintText.textContent = q.questionHint;
+          answerSection.appendChild(hintText);
+      }
       
       const feedback = document.createElement("div");
       feedback.className = "feedback-area";
       feedback.id = `feedback-${i}`;
       answerSection.appendChild(feedback);
+
+      const rationale = document.createElement("div");
+      rationale.className = "feedback-rationale";
+      rationale.id = `rationale-${i}`;
+      rationale.innerHTML = q.rationale;
+      answerSection.appendChild(rationale);
 
       card.appendChild(answerSection);
       container.appendChild(card);
@@ -221,6 +248,13 @@
     finishBtn.onclick = showResults;
     container.appendChild(finishBtn);
   }
+
+  window.showHint = (qIdx) => {
+    const hintText = document.getElementById(`hint-text-${qIdx}`);
+    if (hintText) {
+        hintText.style.display = hintText.style.display === 'block' ? 'none' : 'block';
+    }
+  };
 
   window.selectTF = (qIdx, val) => {
     userAnswers[qIdx] = val;
@@ -263,6 +297,11 @@
         feedback.innerHTML = `<span class="feedback-correct">Your Answer is: CORRECT! ✔</span>`;
     } else {
         feedback.innerHTML = `<span class="feedback-wrong">Your Answer is: WRONG! </span>`;
+    }
+
+    const rationale = document.getElementById(`rationale-${qIdx}`);
+    if (rationale) {
+        rationale.style.display = "block";
     }
   }
 
