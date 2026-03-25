@@ -22,25 +22,14 @@ Vaš zadatak je da kreirate fleš kartice (flashcards) za učenike na osnovu spe
 - Osigurajte da je sadržaj kartica tačan, sažet, direktno relevantan za lekciju i generisan na jeziku: {{$language}}.
 - Varirajte tipove pitanja ili upita na prednjoj strani kako biste podstakli različite vrste razmišljanja i prisećanja.
 - Osigurajte da je korišćeni jezik prikladan za navedeni nivo/razred.
-- Fleš kartice treba kolektivno da pokriju sve ključne koncepte, dajući prioritet najvažnijim.
+- Fleš kartice treba kolektivno da pokriju sve ključne koncepte, dajući prioritet najvažnijim ako je broj kartica ograničen.
 - Osigurajte da su kartice kulturološki osetljive i inkluzivne.
 
 4. Format izlaza:
 - Struktuirajte svaku fleš karticu kao JSON objekat sa ključevima "front" i "back".
-- Sav izlaz treba da bude jedan JSON objekat sa nizom pod ključem "flashcards".
+- Sav izlaz mora biti jedan JSON objekat sa nizom pod ključem "flashcards", u skladu sa priloženom šemom.
 
-VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generisane fleš kartice u navedenom JSON formatu. Osigurajte da je JSON čist, dobro struktuiran i da sadrži samo neophodne informacije, bez dodatnog formatiranja poput markdown-a ili navodnika.
-Jezik fleš kartica treba da bude {{$language}}.
-
-Primer:
-{
-  "flashcards": [
-    {
-      "front": "Koje vrste dokaza naučnici koriste za proučavanje prošlih udara asteroida?",
-      "back": "Naučnici proučavaju udarne kratere, fosilne zapise, slojeve iridijuma i sedimentne slojeve kako bi razumeli prošle sudare asteroida."
-    }
-  ]
-}
+VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generisane fleš kartice u navedenom JSON formatu. Osigurajte da je JSON čist, dobro struktuiran i da sadrži samo neophodne informacije, bez dodatnog formatiranja poput markdown-a ili navodnika. Broj fleš kartica mora odgovarati unetom parametru. Jezik fleš kartica treba da bude {{$language}}.
 `,
         FLASHCARD_SCHEMA: {
             "title": "FlashcardResponse",
@@ -51,8 +40,14 @@ Primer:
                     "items": {
                         "type": "object",
                         "properties": {
-                            "front": { "type": "string", "description": "Front of the card (question/term)" },
-                            "back": { "type": "string", "description": "Back of the card (answer/definition)" }
+                            "front": { 
+                                "type": "string", 
+                                "description": "Prednja strana fleš kartice koja sadrži upit, pitanje ili ključni termin dizajniran da podstakne prisećanje. Osigurajte da je jasno, specifično i prilagođeno uzrastu." 
+                            },
+                            "back": { 
+                                "type": "string", 
+                                "description": "Zadnja strana fleš kartice koja sadrži tačan, sažet odgovor, definiciju ili objašnjenje koje odgovara prednjoj strani." 
+                            }
                         },
                         "required": ["front", "back"],
                         "additionalProperties": false
@@ -66,6 +61,7 @@ Primer:
     en: {
         FLASHCARD_PROMPT: `
 Your task is to create flashcards for students based on specific lessons, following these instructions:
+
 1. Collect Input Parameters:
 Subject: {{$subject}}.
 Lesson Name: {{$workItemTitle}}.
@@ -78,31 +74,22 @@ Carefully read and analyze the provided lesson content.
 Identify core concepts, vocabulary terms, and ideas that are crucial for understanding the lesson.
 Ensure that the identified concepts are appropriate for the given grade level.
 
+Note: These core concepts and vocabulary should be used to guide the creation of flashcards.
+
 3. Generate Flashcards:
 Create exactly {{$numberOfFlashcards}} flashcards based on the core concepts and vocabulary identified from the lesson content.
 Each flashcard should have a front side (question or term) and a back side (answer or definition).
 Ensure that the content of the flashcards is accurate, concise, directly relevant to the lesson and generated in {{$language}} language.
-Vary the types of questions or prompts on the front side to encourage different types of thinking and recall
+Vary the types of questions or prompts on the front side to encourage different types of thinking and recall.
 Make sure the language used is appropriate for the specified grade level.
-Ensure that the flashcards collectively cover all the core concepts and vocabulary identified in step 2.
-Ensure flash cards are culturally sensitive and inclusive
+Ensure that the flashcards collectively cover all the core concepts and vocabulary identified in step 2, prioritizing the most important concepts if the number of flashcards is limited.
+Ensure flash cards are culturally sensitive and inclusive.
 
 4. Format Output:
 Structure each flashcard as a JSON object with "front" and "back" keys.
-The entire output should be a single JSON object with a "flashcards" array.
+The entire output must be a single JSON object with a "flashcards" array containing these objects, matching the provided schema.
 
-IMPORTANT: No additional explanation is needed, response should just contain the generated flashcards in the specified JSON format. Ensure the JSON is clean, well-structured, and only contains necessary information, without additional formatting like markdown or quotes.
-The language of the flashcards should be {{$language}}.
-
-Example:
-{
-  "flashcards": [
-    {
-      "front": "What types of evidence do scientists use to study past asteroid impacts?",
-      "back": "Scientists study impact craters, fossil records, iridium layers, debris clouds, and sediment layers to understand past asteroid collisions."
-    }
-  ]
-}
+IMPORTANT: No additional explanation is needed, response should just contain the generated flashcards in the specified JSON format. Ensure the JSON is clean, well-structured, and only contains necessary information, without additional formatting like markdown or quotes. The output should be a single JSON object with a "flashcards" array, with the number of flashcards matching the input parameter. The language of the flashcards should be {{$language}}.
 `,
         FLASHCARD_SCHEMA: {
             "title": "FlashcardResponse",
@@ -113,8 +100,14 @@ Example:
                     "items": {
                         "type": "object",
                         "properties": {
-                            "front": { "type": "string", "description": "Front side of the flashcard" },
-                            "back": { "type": "string", "description": "Back side of the flashcard" }
+                            "front": { 
+                                "type": "string", 
+                                "description": "The front side of the flashcard containing a prompt, question, or key term designed to trigger recall. Ensure it is clear, specific, and appropriate for the grade level." 
+                            },
+                            "back": { 
+                                "type": "string", 
+                                "description": "The back side of the flashcard containing the accurate, concise answer, definition, or explanation that corresponds to the front side." 
+                            }
                         },
                         "required": ["front", "back"],
                         "additionalProperties": false
