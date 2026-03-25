@@ -16,16 +16,7 @@ VAŽNO!!! NEMOJTE DAVATI TAČAN ODGOVOR NITI CITIRATI NJEGOVE DELOVE!!!
 
 SVI nagoveštaji MORAJU biti na jeziku: {response_language}.
 
-Formatirajte svoj odgovor kao JSON objekat sa listom "hints", gde svaki element odgovara jednom pitanju iz liste pitanja:
-{
-  "hints": [
-    {
-      "initial_hint": "",
-      "follow_up_hint": "",
-      "reteach_hint": ""
-    }
-  ]
-}
+Vratite odgovor u JSON formatu koji odgovara priloženoj šemi, gde svaki element niza "hints" odgovara jednom pitanju iz liste pitanja.
 
 Nikada nemojte direktno navesti tačan odgovor u nagoveštajima.
 Koristite ulazne podatke za generisanje odgovora:
@@ -48,9 +39,18 @@ Obezbedite nagoveštaje na {response_language} jeziku.`,
                     "items": {
                         "type": "object",
                         "properties": {
-                            "initial_hint": { "type": "string" },
-                            "follow_up_hint": { "type": "string" },
-                            "reteach_hint": { "type": "string" }
+                            "initial_hint": { 
+                                "type": "string",
+                                "description": "1. POČETNI NAGOVEŠTAJ: Pružite blagi podsticaj koji aktivira učenikovo zaključivanje bez otkrivanja specifičnih detalja iz tačnog odgovora. Fokusirajte se na podsećanje na koncept, definiciju ili odnos relevantan za pitanje. Koristite jezik koji vodi, poput „Razmislite o...“, „Setite se kako smo naučili da...“ ili „Šta se dešava kada...“. Nagoveštaj treba da uputi na proces ili princip, a ne na činjenicu. Ne koristite reči, fraze ili brojeve koji se pojavljuju u tačnom odgovoru."
+                            },
+                            "follow_up_hint": { 
+                                "type": "string",
+                                "description": "2. DODATNI NAGOVEŠTAJ: Ponudite jaču podršku koja sužava fokus, ali i dalje zahteva od učenika da samostalno izvede konačan zaključak. Pružite strateški podsticaj, a ne delimičan odgovor: koristite kontraste ili eliminaciju, povežite sa logikom lekcije (obrascem razmišljanja, procesom ili odnosom) umesto sa detaljima sadržaja. Povežite sa vizuelnim elementima lekcije ako postoje. Podstaknite razmišljanje naglas: „Ako znate da ovaj proces počinje isparavanjem, šta se mora dogoditi sledeće?“"
+                            },
+                            "reteach_hint": { 
+                                "type": "string",
+                                "description": "3. PONOVNO PODUČAVANJE: Koristeći priloženi sadržaj, ponovo podučite gradivo kako biste razjasnili znanje potrebno za odgovor. Modelujte proces rešavanja ili dajte primer kako bi neko mogao doći do zaključka, bez direktnog davanja odgovora. Pokažite učeniku koji deo sadržaja lekcije treba ponovo da pročita i dajte primer bez davanja odgovora. VAŽNO!!! NEMOJTE DAVATI TAČAN ODGOVOR NITI GA POMINJATI!!!"
+                            }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
                         "additionalProperties": false
@@ -87,16 +87,7 @@ IMPORTANT!!! DO NOT GIVE THE ANSWER OR QUOTE PARTS OF IT!!!
 
 ALL hints MUST be in {response_language} language.
  
-Format your response as a JSON object with a "hints" array, where each element corresponds to one question from the question data: 
-{ 
-  "hints": [
-    {
-      "initial_hint": "", 
-      "follow_up_hint": "", 
-      "reteach_hint": "" 
-    }
-  ]
-} 
+Return your response in JSON format according to the provided schema, where each element in the "hints" array corresponds to one question from the question data.
  
 The hints should progressively help students arrive at the answer while maintaining educational value. 
 Never directly state the correct answer in the hints. 
@@ -120,9 +111,18 @@ Provide hints on {response_language} language.`,
                     "items": {
                         "type": "object",
                         "properties": {
-                            "initial_hint": { "type": "string" },
-                            "follow_up_hint": { "type": "string" },
-                            "reteach_hint": { "type": "string" }
+                            "initial_hint": { 
+                                "type": "string",
+                                "description": "1. INITIAL HINT: Provide a gentle prompt that activates the student’s reasoning without revealing specific details from the correct answer. Focus on reminding the student of a concept, definition, or relationship relevant to the question. Use guiding language like “Think about…”, “Remember how we learned that…\" (drawing from student content), or “What happens when…”. The hint should point toward a process or principle, not a fact. Do not use words, phrases, or numbers that appear in the correct answer."
+                            },
+                            "follow_up_hint": { 
+                                "type": "string",
+                                "description": "2. FOLLOW-UP HINT: Offer a stronger scaffold that narrows focus but still requires the student to draw the final conclusion independently. Provide a strategic nudge, not a partial answer, such as: Use contrast or elimination cues (“Which of these steps doesn’t fit the pattern?”). Link back to lesson logic (the reasoning pattern, process, or relationship students learned in the lesson) rather than content details. Link back to lesson visuals, if provided in lesson (diagrams, models, or examples used to explain the concept). Encourage reasoning aloud: “If you know this process starts with evaporation, what must happen next?”"
+                            },
+                            "reteach_hint": { 
+                                "type": "string",
+                                "description": "3. RE-TEACH: Using the content provided, reteach the content to clarify the knowledge the student must know to answer the question provided. Demonstrate how to approach answering the question by modeling the process or providing an example of how someone might figure it out, without directly giving the answer. Show the student what content they should review (where in the lesson content do they need to reread) and also give an example without giving the answer. IMPORTANT!!! DO NOT GIVE THE ANSWER OR MENTION IT!!!"
+                            }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
                         "additionalProperties": false
