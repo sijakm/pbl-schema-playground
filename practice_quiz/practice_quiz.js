@@ -293,15 +293,47 @@
   function showFeedback(qIdx, isCorrect) {
     const feedback = document.getElementById(`feedback-${qIdx}`);
     if (!feedback) return;
+    
+    const currentLang = document.getElementById("languageSelect").value;
+    const labels = {
+        en: { 
+            correct: "CORRECT! ✔", 
+            wrong: "WRONG! ✖", 
+            rationalePrefixC: "Correct — ", 
+            rationalePrefixW: "Incorrect — ",
+            answeredPrefix: "Your Answer is: "
+        },
+        sr: { 
+            correct: "TAČNO! ✔", 
+            wrong: "NETAČNO! ✖", 
+            rationalePrefixC: "Tačno — ", 
+            rationalePrefixW: "Netačno — ",
+            answeredPrefix: "Vaš odgovor je: "
+        }
+    }[currentLang] || { 
+        correct: "CORRECT! ✔", 
+        wrong: "WRONG! ✖", 
+        rationalePrefixC: "Correct — ", 
+        rationalePrefixW: "Incorrect — ",
+        answeredPrefix: "Your Answer is: "
+    };
+
     if (isCorrect) {
-        feedback.innerHTML = `<span class="feedback-correct">Your Answer is: CORRECT! ✔</span>`;
+        feedback.innerHTML = `<span class="feedback-correct">${labels.answeredPrefix}${labels.correct}</span>`;
     } else {
-        feedback.innerHTML = `<span class="feedback-wrong">Your Answer is: WRONG! </span>`;
+        feedback.innerHTML = `<span class="feedback-wrong">${labels.answeredPrefix}${labels.wrong}</span>`;
     }
 
     const rationale = document.getElementById(`rationale-${qIdx}`);
     if (rationale) {
+        const prefix = isCorrect ? labels.rationalePrefixC : labels.rationalePrefixW;
+        rationale.innerHTML = `<strong>${prefix}</strong>${quizData[qIdx].rationale}`;
         rationale.style.display = "block";
+        if (isCorrect) {
+            rationale.classList.remove("wrong");
+        } else {
+            rationale.classList.add("wrong");
+        }
     }
   }
 

@@ -54,7 +54,7 @@ Opšte smernice:
  
 - Uključite mešavinu pitanja za prisećanje, primenu i analizu 
  
-Nakon što generišete pitanja, dodajte povratnu informaciju za učenika ili obrazloženje (rationale) nakon svakog pitanja (npr. „Tačno — to je zato što…“) kako biste učvrstili učenje. 
+Nakon što generišete pitanja, dodajte obrazloženje (rationale) nakon svakog pitanja (bez prefiksa "Tačno" ili "Netačno", samo čisto objašnjenje) kako biste učvrstili učenje. 
  
 Ako je dostavljeni kontekst nedovoljan za generisanje potpuno novih pitanja, koristite svoje znanje da kreirate nova, relevantna pitanja koja održavaju jasnu vezu sa originalnim sadržajem. 
 Pitanja i odgovori treba da budu na jeziku: {{$language}}. 
@@ -188,7 +188,7 @@ General Guidelines:
  
 - Include a mix of recall, application, and analysis questions 
  
-Once submitted, add student feedback or rationale after each question (e.g., “Correct — that’s because…”) to reinforce learning. 
+Once submitted, add student feedback or rationale after each question (no "Correct" or "Incorrect" prefix, just a clear explanation) to reinforce learning. 
  
 If the provided context is insufficient for generating entirely new questions, use your knowledge to create novel, relevant questions that maintain a clear connection to the original content matter. 
 Questions and answers should be in {{$language}} language. 
