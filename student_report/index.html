@@ -168,7 +168,8 @@
       resize: none;
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       padding: 12px;
       border: 1px solid var(--border);
@@ -185,27 +186,29 @@
     <p class="subtitle">Generate short report card comments based on student performance data.</p>
 
 
-  <div class="row card">
-    <h3>Configuration</h3>
-    <label for="apiKey">Access Password</label>
-    <input id="apiKey" type="password" placeholder="Enter password..." />
+    <div class="row card">
+      <h3>Configuration</h3>
+      <label for="apiKey">Access Password</label>
+      <input id="apiKey" type="password" placeholder="Enter password..." />
 
-    <label for="modelSelect">OpenAI Model</label>
-    <select id="modelSelect">
-      <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
-      <option value="gpt-5.4-nano">gpt-5.4-nano</option>
-      <option value="gpt-5.4">gpt-5.4</option>
-      <option value="gpt-5-mini">gpt-5-mini</option>
-      <option value="gpt-5.2">gpt-5.2</option>
-    </select>
-  </div>
+      <label for="modelSelect">OpenAI Model</label>
+      <select id="modelSelect">
+        <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
+        <option value="gpt-5.4-nano">gpt-5.4-nano</option>
+        <option value="gpt-5.4">gpt-5.4</option>
+        <option value="gpt-5-mini">gpt-5-mini</option>
+        <option value="gpt-5.2">gpt-5.2</option>
+      </select>
+    </div>
 
-  <div class="row card">
-    <h3>Prompt Tuning (AI Instructions)</h3>
-    <p class="muted">Edit the instructions below to find the perfect prompt. The injected student data parameters will automatically be appended to the bottom of this prompt when validating.</p>
-    <textarea id="basePrompt" style="height: 220px;">Generate feedback with no more than 300 characters using the data provided. (You will use this information – grades and teacher comments on assessments, student assessment answers, attendance.)
+    <div class="row card">
+      <h3>Prompt Tuning (AI Instructions)</h3>
+      <p class="muted">Edit the instructions below to find the perfect prompt. The injected student data parameters will
+        automatically be appended to the bottom of this prompt when validating.</p>
+      <textarea id="basePrompt" style="height: 220px;">Generate feedback with no more than 300 characters using the data provided. (You will use this information – grades and teacher comments on assessments, student assessment answers, attendance.)
 
 Feedback should:
+-Be written as speaking to the student.  
 - Summarize overall engagement and performance trends (e.g., steady progress, recent improvement, or decline).
 - Highlight one strength or success area specific to the course.
 - Identify one area for growth or give actionable advice for improvement or continued success.
@@ -214,43 +217,46 @@ Output requirements:
 - NO HTML formatting.
 - Plain text only.
 - Strict 300 character limit.</textarea>
-  </div>
+    </div>
 
-  <div class="row card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-    <div>
-      <h3>Student Info & System</h3>
-      <label for="studentSelector">Load Demo Student</label>
-      <select id="studentSelector" style="background:#eef2ff; border-color:#6366f1; font-weight:bold; margin-bottom: 24px;">
-        <option value="1">1. Jordan Smith (Perfect Grades, Perfect Attendance)</option>
-        <option value="2">2. Emma Johnson (Catastrophic Grades, Catastrophic Attendance)</option>
-        <option value="3">3. Liam Williams (Great Grades, Bad Attendance)</option>
-        <option value="4">4. Olivia Brown (Bad Grades, Perfect Attendance)</option>
-        <option value="5">5. Noah Martinez (Failing to Perfect - Immense Turnaround)</option>
-      </select>
+    <div class="row card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <h3>Student Info & System</h3>
+        <label for="studentSelector">Load Demo Student</label>
+        <select id="studentSelector"
+          style="background:#eef2ff; border-color:#6366f1; font-weight:bold; margin-bottom: 24px;">
+          <option value="1">1. Jordan Smith (Perfect Grades, Perfect Attendance)</option>
+          <option value="2">2. Emma Johnson (Catastrophic Grades, Catastrophic Attendance)</option>
+          <option value="3">3. Liam Williams (Great Grades, Bad Attendance)</option>
+          <option value="4">4. Olivia Brown (Bad Grades, Perfect Attendance)</option>
+          <option value="5">5. Noah Martinez (Failing to Perfect - Immense Turnaround)</option>
+        </select>
 
-      <label for="studentInfo">Student Information</label>
-      <input id="studentInfo" type="text" value="Jordan Smith | #12345 | Course: Algebra II | Semester: Spring 2026" />
+        <label for="studentInfo">Student Information</label>
+        <input id="studentInfo" type="text"
+          value="Jordan Smith | #12345 | Course: Algebra II | Semester: Spring 2026" />
 
-      <label for="gradingSystem">Grading System</label>
-      <select id="gradingSystem">
-        <option value="A-F (USA/UK: A is best)" selected>A-F (USA/UK: A is best, F is failing)</option>
-        <option value="1-5 (Balkans/Eastern Europe: 5 is best)">1-5 (Balkans/Eastern Europe: 5 is best, 1 is failing)</option>
-        <option value="1-6 (Germany/Austria: 1 is best)">1-6 (Germany/Austria: 1 is best, 6 is failing)</option>
-      </select>
+        <label for="gradingSystem">Grading System</label>
+        <select id="gradingSystem">
+          <option value="A-F (USA/UK: A is best)" selected>A-F (USA/UK: A is best, F is failing)</option>
+          <option value="1-5 (Balkans/Eastern Europe: 5 is best)">1-5 (Balkans/Eastern Europe: 5 is best, 1 is failing)
+          </option>
+          <option value="1-6 (Germany/Austria: 1 is best)">1-6 (Germany/Austria: 1 is best, 6 is failing)</option>
+        </select>
 
-      <label for="attendanceData">Attendance Record</label>
-      <textarea id="attendanceData" style="height: 180px;">Total: 26 Sessions
+        <label for="attendanceData">Attendance Record</label>
+        <textarea id="attendanceData" style="height: 180px;">Total: 26 Sessions
 Present: 23
 Excused Absence (Medical): 1
 Unexcused Absence: 1
 Late: 2
 Recent Notes: Missed 2 sessions in early Feb.</textarea>
-    </div>
+      </div>
 
-    <div>
-      <h3>Performance Details</h3>
-      <label for="gradesData">Grades</label>
-      <textarea id="gradesData" style="height: 180px;">FORMATIVE ASSESSMENTS:
+      <div>
+        <h3>Performance Details</h3>
+        <label for="gradesData">Grades</label>
+        <textarea id="gradesData" style="height: 180px;">FORMATIVE ASSESSMENTS:
 - Factoring Trinomials: 85%
 - Functions and Domain: 92%
 - Quadratic Equations: 88%
@@ -261,12 +267,13 @@ SUMMATIVE ASSESSMENTS:
 - Unit 1 Quiz: 85% (B)
 - Unit 2 Quiz: 92% (A-)
 - Unit 3 Quiz: 75% (C)</textarea>
+      </div>
     </div>
-  </div>
 
-  <div class="row card">
-    <label for="qualitativeData">Teacher Comments, Assessment Answers & Trends</label>
-    <textarea id="qualitativeData" style="height: 140px;">TEACHER COMMENTS:
+    <div class="row card">
+      <label for="qualitativeData">Teacher Comments, Assessment Answers & Trends</label>
+      <textarea id="qualitativeData"
+        style="height: 140px;">TEACHER COMMENTS:
 "Good progress, missed one steps in decomposition."
 "Shows mastery of the quadratic formula."
 "A few errors in finding the vertex, but generally sound."
@@ -275,23 +282,23 @@ ASSESSMENT ANSWERS:
 [Unit 3 Quiz]: Jordan's Answer: "x+2 = log(150), so x = log(150) - 2. Final answer: -0.824" (Correct, took very long to solve).
 
 TRENDS: Very high engagement but steady outline since intro to Logarithms in Feb. Homework usually 100% complete, but recent assignments were 60% complete.</textarea>
-  </div>
+    </div>
 
-  <div class="row">
-    <button id="generateBtn" type="button">Generate Feedback</button>
-    <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
-  </div>
+    <div class="row">
+      <button id="generateBtn" type="button">Generate Feedback</button>
+      <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
+    </div>
 
-  <div class="row card">
-    <h3>Cleo Feedback Output</h3>
-    <div id="feedbackOutput" class="mono">Cleo comment will appear here...</div>
-    <div id="charCount" class="char-count">0 characters</div>
-  </div>
+    <div class="row card">
+      <h3>Cleo Feedback Output</h3>
+      <div id="feedbackOutput" class="mono">Cleo comment will appear here...</div>
+      <div id="charCount" class="char-count">0 characters</div>
+    </div>
 
-  <div class="row">
-    <h3>Log</h3>
-    <textarea id="log" class="log-area" readonly></textarea>
-  </div>
+    <div class="row">
+      <h3>Log</h3>
+      <textarea id="log" class="log-area" readonly></textarea>
+    </div>
 
   </div> <!-- end container -->
 
