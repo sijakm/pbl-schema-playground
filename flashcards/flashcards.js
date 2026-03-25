@@ -241,7 +241,7 @@
             yourAnswer: "Your answer was:"
         },
         sr: { 
-            header: "Flashcards", 
+            header: "Kartice za učenje", 
             instruction: "Klikni na karticu da je okreneš.",
             front: "Pitanje",
             back: "Odgovor",

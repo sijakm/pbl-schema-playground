@@ -257,7 +257,7 @@ Naučnici koriste oblik kratera, sadržaj minerala i fosilne dokaze u blizini da
 🔎Razmisli i odgovori: Kako misliš da bi se ekosistemi planete promenili da je asteroid Čiksulub udario u drugi deo sveta?
 
 Čitanje fosilnog zapisa
-Fosilni zapis je kao vremenska linija života na Zemlji. Kada naučnici uporede fosile od pre i posle udara, primećuju dramatične promene. U many layers fosili biljaka iznenada nestaju — pokazujući da je sunčevu svetlost blokirao oblak krhotina. U okeanskim slojevima mali morski organizmi nestaju, što sugeriše da su promene u temperaturi i hemiji otežale preživljavanje.
+Fosilni zapis je kao vremenska linija života na Zemlji. Kada naučnici uporede fosile od pre i posle udara, primećuju dramatične promene. U mnogim slojevima fosili biljaka iznenada nestaju — pokazujući da je sunčevu svetlost blokirao oblak krhotina. U okeanskim slojevima mali morski organizmi nestaju, što sugeriše da su promene u temperaturi i hemiji otežale preživljavanje.
 
 Sklapajući ovo, naučnici mogu povezati fosilni zapis sa udarom asteroida, pokazujući kako je jedan događaj izazvao dugotrajne promene u životu na Zemlji. Ovi nalazi pomažu naučnicima da razumeju ne samo šta se dogodilo dinosaurusima, već i kako se život razvija i prilagođava nakon katastrofe.
 Ključni zaključci:

@@ -1,35 +1,35 @@
 window.flashcardPrompts = {
     sr: {
         FLASHCARD_PROMPT: `
-Vaš zadatak je da kreirate fleš kartice (flashcards) za učenike na osnovu specifičnih lekcija, prateći ova uputstva:
+Vaš zadatak je da kreirate kartice za učenje za učenike na osnovu specifičnih lekcija, prateći ova uputstva:
 
 1. Prikupite ulazne parametre:
 - Predmet: {{$subject}}
 - Naziv lekcije: {{$workItemTitle}}
 - Sadržaj lekcije: {{$context}}
 - Nivo/Razred: {{$gradeLevel}}
-- Broj fleš kartica: {{$numberOfFlashcards}}
+- Broj kartica za učenje: {{$numberOfFlashcards}}
 
 2. Analizirajte sadržaj lekcije:
 - Pažljivo pročitajte i analizirajte dostavljeni sadržaj lekcije.
 - Identifikujte osnovne koncepte, termine rečnika i ideje koji su ključni za razumevanje lekcije.
 - Osigurajte da su identifikovani koncepti prikladni za dati nivo/razred.
-- Ovi osnovni koncepti i rečnik treba da vode kreiranje fleš kartica.
+- Ovi osnovni koncepti i rečnik treba da vode kreiranje kartica za učenje.
 
-3. Generisanje fleš kartica:
-- Kreirajte tačno {{$numberOfFlashcards}} fleš kartica na osnovu identifikovanih koncepata i rečnika.
-- Svaka fleš kartica treba da ima prednju stranu (pitanje ili termin) i zadnju stranu (odgovor ili definicija).
+3. Generisanje kartica za učenje:
+- Kreirajte tačno {{$numberOfFlashcards}} kartica za učenje na osnovu identifikovanih koncepata i rečnika.
+- Svaka kartica za učenje treba da ima prednju stranu (pitanje ili termin) i zadnju stranu (odgovor ili definicija).
 - Osigurajte da je sadržaj kartica tačan, sažet, direktno relevantan za lekciju i generisan na jeziku: {{$language}}.
 - Varirajte tipove pitanja ili upita na prednjoj strani kako biste podstakli različite vrste razmišljanja i prisećanja.
 - Osigurajte da je korišćeni jezik prikladan za navedeni nivo/razred.
-- Fleš kartice treba kolektivno da pokriju sve ključne koncepte, dajući prioritet najvažnijim ako je broj kartica ograničen.
+- Kartice za učenje treba kolektivno da pokriju sve ključne koncepte, dajući prioritet najvažnijim ako je broj kartica ograničen.
 - Osigurajte da su kartice kulturološki osetljive i inkluzivne.
 
 4. Format izlaza:
-- Struktuirajte svaku fleš karticu kao JSON objekat sa ključevima "front" i "back".
+- Struktuirajte svaku karticu za učenje kao JSON objekat sa ključevima "front" i "back".
 - Sav izlaz mora biti jedan JSON objekat sa nizom pod ključem "flashcards", u skladu sa priloženom šemom.
 
-VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generisane fleš kartice u navedenom JSON formatu. Osigurajte da je JSON čist, dobro struktuiran i da sadrži samo neophodne informacije, bez dodatnog formatiranja poput markdown-a ili navodnika. Broj fleš kartica mora odgovarati unetom parametru. Jezik fleš kartica treba da bude {{$language}}.
+VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generisane kartice za učenje u navedenom JSON formatu. Osigurajte da je JSON čist, dobro struktuiran i da sadrži samo neophodne informacije, bez dodatnog formatiranja poput markdown-a ili navodnika. Broj kartica za učenje mora odgovarati unetom parametru. Jezik kartica za učenje treba da bude {{$language}}.
 `,
         FLASHCARD_SCHEMA: {
             "title": "FlashcardResponse",
@@ -42,11 +42,11 @@ VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generi
                         "properties": {
                             "front": { 
                                 "type": "string", 
-                                "description": "Prednja strana fleš kartice koja sadrži upit, pitanje ili ključni termin dizajniran da podstakne prisećanje. Osigurajte da je jasno, specifično i prilagođeno uzrastu." 
+                                "description": "Prednja strana kartice za učenje koja sadrži upit, pitanje ili ključni termin dizajniran da podstakne prisećanje. Osigurajte da je jasno, specifično i prilagođeno uzrastu." 
                             },
                             "back": { 
                                 "type": "string", 
-                                "description": "Zadnja strana fleš kartice koja sadrži tačan, sažet odgovor, definiciju ili objašnjenje koje odgovara prednjoj strani." 
+                                "description": "Zadnja strana kartice za učenje koja sadrži tačan, sažet odgovor, definiciju ili objašnjenje koje odgovara prednjoj strani." 
                             }
                         },
                         "required": ["front", "back"],
