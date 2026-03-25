@@ -7,6 +7,7 @@ const STUDENT_REPORT_PROMPT_TEMPLATE = `
 Generate feedback with no more than 300 characters using the data provided. (You will use this information – grades and teacher comments on assessments, student assessment answers, attendance.)
 
 Feedback should:
+-Be written as speaking to the student.  
 - Summarize overall engagement and performance trends (e.g., steady progress, recent improvement, or decline).
 - Highlight one strength or success area specific to the course.
 - Identify one area for growth or give actionable advice for improvement or continued success.

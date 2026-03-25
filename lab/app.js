@@ -38,44 +38,7 @@ function stopTimer(finalMessage) {
 /************************************
  * DEFAULT PROMPT
  ************************************/
-const defaultPrompt = `
-Create a complete LAB unit plan and lab-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
 
-MVP planning requirements (must be reflected in the unit):
-• Zip code localization: If a zip code is provided, include examples, stakeholders, audiences, and place-based resources that plausibly fit the community and surrounding area. Do not invent exact addresses/phone numbers; refer to realistic local institution types and roles.
-• Project Duration: The project lasts 10 days, so the plan and lesson progression must be written across multiple days (not a single class period).
-
-Use these unit inputs exactly:
-Unit Subject: Earth & Space Science (Gravity & Orbits)
-Unit Name: “Gravity at Work: Modeling Motion in Our Solar System”
-Unit Description/Instruction (teacher request): Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.
-Grade Level: The student is in the 1st grade of middle school, which consists of 4 grades total.
-Duration of class period (minutes): 45
-Project Duration (days): 10
-Location: Greenville, Wisconsin, United States
-Zip code: 54942
-Resources/Media to use: Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple orbit simulations (browser-based), chart paper, student science notebooks.
-Standards: MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system.
-
-Students with plans:
-Maria Valdez: Provide a partially pre-labeled orbit map and sentence frames for explanations.
-Jacob Garrow: Allow speech-to-text for reasoning and labeling.
-Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.
-
-Output rule: Return ONLY JSON that validates against the response schema.
-Follow the exact section order and headings shown below. 
-Do not add extra sections or rename headings. 
-Use clear teacher-facing prose and student-facing directions where specified. 
-Include specific examples, scripts, and expected answers (not placeholders like “e.g.”).  
-Before introducing any new concept or content, include an Attention Reset activity designed to re-engage students, increase cognitive focus, and prepare working memory for new learning. 
-Language to use: Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (same language here for every attention reset & Interactivity) 
-Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to a apply a skill.  
-Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving. 
-Cultural Relevance & Inclusion: 
-Incorporate multiple perspectives and reflect on the impacts for all involved. \ 
-Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons 
-Avoid stereotypes. 
-`;
 
 /************************************
  * DESCRIPTION COLLECTION
@@ -326,7 +289,8 @@ if (invalidFields.length > 0) {
     const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
   method: "POST",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    ...(apiKey ? { "Authorization": `Bearer ${apiKey}` } : {})
   },  
   signal,
   body: JSON.stringify({
@@ -496,20 +460,14 @@ function isUserNearBottom(el, threshold = 40) {
  * INIT
  ************************************/
 window.onload = () => {
-  if (!window.masterSchema) {
-    alert("Schema failed to load.");
+  if (!window.labPrompts || !window.labPrompts.SCHEMA) {
+    alert("Prompts/Schema failed to load.");
     return;
   }
 
-  try {
-    //const cleaned = sanitizeSchemaText(window.masterSchema);
-    parsedMasterSchema = JSON.parse(window.masterSchema);
-  } catch (e) {
-    console.error("❌ Schema still invalid after sanitization", e);
-    alert("Schema could not be loaded even after auto-fix.");
-    return;
-  }
+  // Use the extracted schema object directly
+  parsedMasterSchema = window.labPrompts.SCHEMA;
 
-  document.getElementById("prompt").value = defaultPrompt;
+  document.getElementById("prompt").value = window.labPrompts.DEFAULT_PROMPT.trim();
   renderDescriptionEditor();
 };
