@@ -1186,7 +1186,7 @@ const pblResponseSchema = {
                                                         },
                                                         "StandardsConnection": {
                                                             "type": "string",
-                                                            "description": "List the standard that aligns with the vocabulary word. Example: NGSS Connection: MS-PS1-4 Develop a model to describe that substances are made of particles too small to be seen."
+                                                            "description": "List the standard that aligns with the vocabulary word. Example: Connection: MS-PS1-4 Develop a model to describe that substances are made of particles too small to be seen."
                                                         }
                                                     }
                                                 }

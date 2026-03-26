@@ -22,7 +22,7 @@ ZAHTEVI ZA OKVIR ISTRAŽIVANJA:
   (3) prikupljanje dokaza + pronalaženje obrazaca,
   (4) izgradnja modela + revizija pomoću dokaza,
   (5) objašnjenje/argumentacija + komunikacija + transfer.
-- Održi NGSS smisleno učenje: učenici grade i revidiraju modele koristeći zapažanja i jednostavne podatke; naglasi dokaze, rezonovanje i komunikaciju.
+- Održi smisleno učenje kroz otkrivanje: učenici grade i revidiraju modele koristeći zapažanja i jednostavne podatke; naglasi dokaze, rezonovanje i komunikaciju.
 - Zadrži usklađenost SAMO sa priloženim standardima. NEMOJ dodavati nikakve nove standarde ili okvire.
 - Kulturološka relevantnost i inkluzija: uključi kratke kontekste ili perspektive relevantne za zajednicu bez stereotipa.
 - Preplitanje i transfer: ponavljaj veštine kroz lekcije (posmatranje, modelovanje, argumentacija na osnovu dokaza, komunikacija).
@@ -57,7 +57,7 @@ Priloženi sadržaj lekcije (ako postoji): {{$AttachedLesson}}
 
 ZAHTEVI ZA TOK ISTRAŽIVAČKE LEKCIJE:
 - Ova lekcija mora pratiti istraživački luk i biti usklađena sa granicama okvira lekcije: Orijentacija → Konceptualizacija → Istraživanje → Zaključak → Diskusija.
-- Održi NGSS smisleno učenje: učenici grade i revidiraju ideje koristeći zapažanja i jednostavne podatke; naglasi dokaze, rezonovanje i komunikaciju.
+- Održi smisleno učenje kroz otkrivanje: učenici grade i revidiraju ideje koristeći zapažanja i jednostavne podatke; naglasi dokaze, rezonovanje i komunikaciju.
 - Kulturološka relevantnost i inkluzija: uključi kratke kontekste ili perspektive relevantne za zajednicu bez stereotipa.
 - NEMOJ uvoditi značajne nove koncepte koji pripadaju drugim lekcijama; ostani unutar obima i granica okvira ove lekcije.
 - Zadrži usklađenost SAMO sa priloženim standardima. NEMOJ dodavati nikakve nove standarde ili okvire.
@@ -579,7 +579,7 @@ ULAZNI JSON:
           },
           "StandardsAligned": {
             "type": "array",
-            "description": "Navedi sve jedinstvene NGSS standarde korišćene bilo gde u ovom unit-u i njegovim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju unit-a. Svaki standard mora uključivati kod standarda i opis, npr. 'NGSS MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
+            "description": "Navedi sve jedinstvene obrazovne standarde korišćene bilo gde u ovom unit-u i njegovim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju unit-a. Svaki standard mora uključivati kod standarda i opis, npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
             "items": {
               "type": "string"
             }

@@ -22,7 +22,7 @@ INQUIRY OUTLINE REQUIREMENTS:
   (3) evidence collection + pattern-finding,
   (4) model-building + revision using evidence,
   (5) explanation/argument + communication + transfer.
-- Maintain NGSS sensemaking: students build and revise models using observations and simple data; emphasize evidence, reasoning, and communication.
+- Maintain sensemaking through discovery: students build and revise models using observations and simple data; emphasize evidence, reasoning, and communication.
 - Keep alignment ONLY to the provided standards. Do NOT add any new standards or frameworks.
 - Cultural relevance & inclusion: include brief community-relevant contexts or perspectives without stereotypes.
 - Interleaving & transfer: revisit skills across lessons (observing, modeling, arguing from evidence, communicating).
@@ -57,7 +57,7 @@ Attached Lesson Content (if any): {{$AttachedLesson}}
 
 INQUIRY LESSON FLOW REQUIREMENTS:
 - This lesson must follow the inquiry arc and be aligned to the lesson outline boundaries: Orientation → Conceptualization → Investigation → Conclusion → Discussion.
-- Maintain NGSS sensemaking: students build and revise ideas using observations and simple data; emphasize evidence, reasoning, and communication.
+- Maintain sensemaking through discovery: students build and revise ideas using observations and simple data; emphasize evidence, reasoning, and communication.
 - Cultural relevance & inclusion: include brief community-relevant contexts or perspectives without stereotypes.
 - Do NOT introduce major new concepts that belong to other lessons; stay within the scope and boundaries of this lesson’s outline.
 - Keep alignment ONLY to the provided standards. Do NOT add any new standards or frameworks.
@@ -578,7 +578,7 @@ INPUT JSON:
           },
           "StandardsAligned": {
             "type": "array",
-            "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+            "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
             "items": {
               "type": "string"
             }

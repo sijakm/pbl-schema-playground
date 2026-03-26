@@ -2,7 +2,7 @@ window.promptsEN = {
 STEP0_PROMPT_TEMPLATE: `
 Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
                     
-Based on Unit Subject, NGSS Standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), and the requested Number of Lessons, generate a JSON response that includes a cohesive UnitDescription and a non-overlapping list of lesson “containers”.
+Based on Unit Subject, educational standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), and the requested Number of Lessons, generate a JSON response that includes a cohesive UnitDescription and a non-overlapping list of lesson “containers”.
 
 Unit Subject:
 {{$Subject}}
@@ -505,7 +505,7 @@ STEP0_SCHEMA: {
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
           "items": {
             "type": "string"
           }
@@ -599,7 +599,7 @@ PER_LESSON_SCHEMA: {
         },
         "StandardsAligned": {
           "type": "string",
-          "description": "Aligned NGSS standards for this lesson. Must match unit standards exactly in code + description."
+          "description": "Aligned educational standards for this lesson. Must match unit standards exactly in code + description."
         },
         "AssessPriorKnowledge": {
           "type": "string",

@@ -2,7 +2,7 @@ window.promptsSR = {
 STEP0_PROMPT_TEMPLATE: `
 Kreiraj nacrt jedinice i strukturu lekcija koristeći informacije u nastavku. NEMOJ pisati pune planove lekcija.
                     
-Na osnovu predmeta jedinice (Unit Subject), NGSS standarda, opisa/instrukcija jedinice (Unit Description/Instruction), uzrasta (Grade Level), trajanja časa u minutima (Duration of class period), i zahtevanog broja lekcija (Number of Lessons), generiši JSON odgovor koji uključuje kohezivan opis jedinice (UnitDescription) i listu „kontejnera“ lekcija (Lessons) koji se ne preklapaju.
+Na osnovu predmeta jedinice (Unit Subject), obrazovnih standarda, opisa/instrukcija jedinice (Unit Description/Instruction), uzrasta (Grade Level), trajanja časa u minutima (Duration of class period), i zahtevanog broja lekcija (Number of Lessons), generiši JSON odgovor koji uključuje kohezivan opis jedinice (UnitDescription) i listu „kontejnera“ lekcija (Lessons) koji se ne preklapaju.
 
 Predmet jedinice (Unit Subject):
 {{$Subject}}
@@ -454,7 +454,7 @@ STEP0_SCHEMA: {
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "Navedi sve jedinstvene NGSS standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora uključivati kod standarda i opis, npr. 'NGSS MS-ESS1-1: Razvijanje i korišćenje modela sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
+          "description": "Navedi sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora uključivati kod standarda i opis, npr. 'MS-ESS1-1: Razvijanje i korišćenje modela sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
           "items": {
             "type": "string"
           }
@@ -548,7 +548,7 @@ PER_LESSON_SCHEMA: {
         },
         "StandardsAligned": {
           "type": "string",
-          "description": "Usklađeni NGSS standardi za ovu lekciju. Moraju se tačno podudarati sa standardima jedinice u kodu i opisu."
+          "description": "Usklađeni obrazovni standardi za ovu lekciju. Moraju se tačno podudarati sa standardima jedinice u kodu i opisu."
         },
         "AssessPriorKnowledge": {
           "type": "string",

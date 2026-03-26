@@ -1186,7 +1186,7 @@ const pblResponseSchema = {
                                                         },
                                                         "StandardsConnection": {
                                                             "type": "string",
-                                                            "description": "Navedite standard koji se podudara sa rečju iz rečnika. Primer: NGSS Veza: MS-PS1-4 Razviti model koji opisuje da su supstance napravljene od čestica koje su premale da bi se videle."
+                                                            "description": "Navedite standard koji se podudara sa rečju iz rečnika. Primer: Veza: MS-PS1-4 Razviti model koji opisuje da su supstance napravljene od čestica koje su premale da bi se videle."
                                                         }
                                                     }
                                                 }

@@ -2,7 +2,7 @@ window.promptsSR = {
     STEP0_PROMPT_TEMPLATE: `
 Kreiraj nacrt jedinice i strukturu lekcija koristeći informacije u nastavku. NEMOJ pisati pune planove lekcija.
                     
-Na osnovu predmeta jedinice (Unit Subject), NGSS standarda, opisa/instrukcija jedinice (Unit Description/Instruction), uzrasta (Grade Level), trajanja časa u minutima (Duration of class period), i zahtevanog broja lekcija (Number of Lessons), generiši JSON odgovor koji uključuje kohezivan opis jedinice (UnitDescription) i listu „kontejnera“ lekcija (Lessons) koji se ne preklapaju.
+Na osnovu predmeta jedinice (Unit Subject), obrazovnih standarda, opisa/instrukcija jedinice (Unit Description/Instruction), uzrasta (Grade Level), trajanja časa u minutima (Duration of class period), i zahtevanog broja lekcija (Number of Lessons), generiši JSON odgovor koji uključuje kohezivan opis jedinice (UnitDescription) i listu „kontejnera“ lekcija (Lessons) koji se ne preklapaju.
 
 Predmet jedinice (Unit Subject):
 {{$Subject}}
@@ -86,7 +86,7 @@ UČENICI SA INDIVIDUALIZOVANOM PODRŠKOM (MORAJU se koristiti SAMO unutar Guided
 
 VAŽNA PRAVILA SADRŽAJA:
 - Drži lekciju usklađenu sa fokusom jedinice.
-- Uključi kratke veze na visokom nivou sa drugim relevantnim NGSS DCI gde je to prikladno, ali zadrži lekciju usmerenu na modeliranju i strukturno-svojstvenom zaključivanju (bez duboke matematike, bez balansiranja jednačina osim ako to izričito ne zahtevaju standardi).
+- Uključi kratke veze na visokom nivou sa drugim relevantnim DCI gde je to prikladno, ali zadrži lekciju usmerenu na modeliranju i strukturno-svojstvenom zaključivanju (bez duboke matematike, bez balansiranja jednačina osim ako to izričito ne zahtevaju standardi).
 - Osiguraj da svi delovi lekcije odražavaju okvire lekcije iznad; izbegavaj uvođenje novih bitnih koncepta koji pripadaju drugim lekcijama.
 - EssentialQuestions: MORAJU biti potpuno identična ključnim pitanjima na nivou jedinice (isti tekst, isti redosled).
 - AssessPriorKnowledge: SAMO ako je LessonNumber == 1, napiši 150–250 reči i prati obaveznu strukturu opisanu u šemi. Ako LessonNumber != 1, vrati "" (prazan string).
@@ -442,7 +442,7 @@ GLOBALNA PRAVILA
                     },
                     "StandardsAligned": {
                         "type": "array",
-                        "description": "Navedi sve jedinstvene NGSS standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora uključivati kod standarda i opis, npr. 'NGSS MS-ESS1-1: Razvijanje i korišćenje modela sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
+                        "description": "Navedi sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora uključivati kod standarda i opis, npr. 'MS-ESS1-1: Razvijanje i korišćenje modela sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
                         "items": {
                             "type": "string"
                         }
