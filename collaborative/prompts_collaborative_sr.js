@@ -237,8 +237,8 @@ INSTRUКCIJA (INSTRUCTION)
 - Instrukcije za nastavnike:
   <p><strong>📋 Instrukcije za nastavnike</strong></p>
   Renderuj Instruction.InstructionsForTeachers kao čitljive <p> blokove. Kada tekst sadrži liste (kao Listen for: bullets), koristi odvojene <ul> liste na najvišem nivou nakon povezanog <p>. Nemoj gnezditi liste unutar <li>.
-- Predviđene zablude:
-  <p><strong>⚠️ Predviđene zablude</strong></p>
+- Moguća pogrešna uverenja:
+  <p><strong>⚠️ Moguća pogrešna uverenja</strong></p>
   Koristi <p> i/ili <ul> na najvišem nivou (samo običan tekst u <li>).
 - Transcendentno razmišljanje:
   - <h3>🌍 Transcendentno razmišljanje</h3>
@@ -312,7 +312,7 @@ Brza provera:
   <li>✅ Očekivani odgovor učenika — …</li>
 - Diferencijacija:
   <p><strong>🪜 Diferencijacija</strong></p>
-  Koristi <p> blokove za tekst odeljka. Za označene pododeljke kao što su „Učenici koji uče jezik“, „Učenici kojima je potrebna dodatna podrška“, „Idi dublje“, renderuj:
+  Koristi <p> blokove za tekst odeljka. Za označene pododeljke kao što su „Učenici koji uče jezik“, „Učenici kojima je potrebna dodatna podrška“, „Za napredne učenike“, renderuj:
     <p><strong>Oznaka</strong></p>
     <ul><li>...</li></ul>
 - Prilagođavanja i modifikacije:
@@ -351,8 +351,8 @@ REFLEKSIJA O DINAMICI GRUPE (REFLECTION ON GROUP DYNAMICS)
    - Ukloni sva trajanja vremena (npr. "(30 sek)") iz teksta.
    - Za bilo koje očekivane odgovore učenika, koristi ✅ obrazac (p + ul) odmah nakon uputstva.
 
-4) Ispravljanje uobičajenih zabluda:
-   - Renderuj: <p><strong>Ispravljanje uobičajenih zabluda</strong></p>
+4) Ispravljanje uobičajenih pogrešnih uverenja:
+   - Renderuj: <p><strong>Ispravljanje uobičajenih pogrešnih uverenja</strong></p>
    - Ovo SE MORA pojaviti odmah ispod odeljka Aktivno prisećanje.
    - Renderuj kao <ul> gde je svaka stavka jedan <li> sa običnim tekstom.
 
@@ -552,7 +552,7 @@ PER_LESSON_SCHEMA: {
         },
         "AssessPriorKnowledge": {
           "type": "string",
-          "description": "Kompletan odeljak „Procena predznanja“ kao običan tekst (ukupno 150-250 reči). SAMO lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za lekciju 1, struktura mora uključivati: 1. Uključi ovaj odeljak samo u prvu lekciju jedinice, postavljen odmah nakon ciljeva učenja učenika. 2. Osiguraj da se koriste DOK 1-3 uputstva. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Izaberi jedan modalitet sa ove liste i potpuno ga razvij: ispitivanje, K-W-L, vizuelni prikazi, konceptualne mape, refleksivno pisanje, vodiči za predviđanje, ocena vokabulara. 5. Početno uputstvo nastavnika sa rečenicom „Kaži:“ koja uvodi izabrani modalitet i objašnjava kako će učenici ispoljiti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak „Očekivani odgovori učenika“ koji prikazuje predviđene odgovore ili uobičajene zablude za izabrani modalitet. 8. Završno uputstvo nastavnika „Kaži:“ koje potvrđuje razmišljanje učenika i najavljuje istraživanje u jedinici. 9. Nakon potpunog razvijanja jednog modaliteta, navedi 2 kratke alternativne opcije koje nastavnik može izabrati."
+          "description": "Kompletan odeljak „Procena predznanja“ kao običan tekst (ukupno 150-250 reči). SAMO lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za lekciju 1, struktura mora uključivati: 1. Uključi ovaj odeljak samo u prvu lekciju jedinice, postavljen odmah nakon ciljeva učenja učenika. 2. Osiguraj da se koriste DOK 1-3 uputstva. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Izaberi jedan modalitet sa ove liste i potpuno ga razvij: ispitivanje, K-W-L, vizuelni prikazi, konceptualne mape, refleksivno pisanje, vodiči za predviđanje, ocena vokabulara. 5. Početno uputstvo nastavnika sa rečenicom „Kaži:“ koja uvodi izabrani modalitet i objašnjava kako će učenici ispoljiti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak „Očekivani odgovori učenika“ koji prikazuje predviđene odgovore ili uobičajena pogrešna uverenja za izabrani modalitet. 8. Završno uputstvo nastavnika „Kaži:“ koje potvrđuje razmišljanje učenika i najavljuje istraživanje u jedinici. 9. Nakon potpunog razvijanja jednog modaliteta, navedi 2 kratke alternativne opcije koje nastavnik može izabrati."
         },
         "Instruction": {
           "type": "object",
@@ -571,7 +571,7 @@ PER_LESSON_SCHEMA: {
             },
             "AnticipatedMisconceptions": {
               "type": "string",
-              "description": "Uobičajene zablude i tačan jezik za ispravljanje svake od njih."
+              "description": "Uobičajena pogrešna uverenja i tačan jezik za ispravljanje svakog od njih."
             },
             "TranscendentThinking": {
               "type": "string",
@@ -616,7 +616,7 @@ PER_LESSON_SCHEMA: {
             },
             "Differentiation": {
               "type": "string",
-              "description": "ISKLJUČIVO instruktivna diferencijacija (ne prilagođavanja/modifikacije). Mora biti organizovana u tri označena nivoa tačno ovim redosledom: 'Učenici koji uče jezik:', 'Učenici kojima je potrebna dodatna podrška:', 'Idi dublje:'. Svaki nivo mora uključivati konkretne poteze u nastavi (2–3 strategije za prva dva nivoa; 1–2 zadatka za proširenje za „Idi dublje“) usklađene sa istim ciljevima učenja. Uključi barem jedan očekivani odgovor/primer po nivou koji pokazuje kako uspeh izgleda. Zadrži nivo zahtevnosti; variraj složenost, podršku i zahteve diskursa."
+              "description": "ISKLJUČIVO instruktivna diferencijacija (ne prilagođavanja/modifikacije). Mora biti organizovana u tri označena nivoa tačno ovim redosledom: 'Učenici koji uče jezik:', 'Učenici kojima je potrebna dodatna podrška:', 'Za napredne učenike:'. Svaki nivo mora uključivati konkretne poteze u nastavi (2–3 strategije za prva dva nivoa; 1–2 zadatka za proširenje za „Za napredne učenike“) usklađene sa istim ciljevima učenja. Uključi barem jedan očekivani odgovor/primer po nivou koji pokazuje kako uspeh izgleda. Zadrži nivo zahtevnosti; variraj složenost, podršku i zahteve diskursa."
             },
             "AccommodationsAndModifications": {
               "type": "object",
@@ -674,7 +674,7 @@ PER_LESSON_SCHEMA: {
         },
         "ReviewAndSpacedRetrieval": {
           "type": "string",
-          "description": "Kompletan odeljak „Pregled i prisećanje uz vremenske razmake“ kao običan tekst (400-600 reči). MORA uključivati ove komponente po redu: (1) Lista materijala, (2) Napomene za nastavnika: Jedan pasus koji objašnjava „zašto“ i „kako“ (teorija/nauka), a ne uputstva za nastavnika. Koristi ovaj početak: 'Napomena za nastavnika: Ova strategija podstiče zadržavanje informacija kroz aktivno prisećanje i povezuje današnje ideje o [tema] sa prethodnim konceptima [koncept]. Prisećanje uz vremenske razmake pomaže učenicima da prepoznaju kako [tema] utiče na [velika ideja]...', (3) Aktivno prisećanje: 2-3 numerisane stavke koje traže od učenika da se prisete NOVOG učenja iz DANAŠNJE lekcije (NE dopunjavanje praznina, BEZ izlaznih listića, BEZ refleksije o poboljšanju), (4) Ispravljanje uobičajenih zabluda: Postavljeno odmah ispod Aktivnog prisećanja i usklađeno sa postavljenim pitanjima, (5) Povezivanje sa ključnim pitanjem: Uputstvo nastavnika koje povezuje sa pitanjem jedinice + očekivani odgovori, (6) Transcendentno razmišljanje: Pitanje o primeni u stvarnom svetu + očekivani odgovori, (7) Prisećanje uz vremenske razmake: Prisećanje iz specifične prethodne lekcije/jedinice (navodeći broj lekcije). Za sva uputstva, uključi „Očekivani odgovor učenika:“ sa 2-3 konkretna primera."
+          "description": "Kompletan odeljak „Pregled i prisećanje uz vremenske razmake“ kao običan tekst (400-600 reči). MORA uključivati ove komponente po redu: (1) Lista materijala, (2) Napomene za nastavnika: Jedan pasus koji objašnjava „zašto“ i „kako“ (teorija/nauka), a ne uputstva za nastavnika. Koristi ovaj početak: 'Napomena za nastavnika: Ova strategija podstiče zadržavanje informacija kroz aktivno prisećanje i povezuje današnje ideje o [tema] sa prethodnim konceptima [koncept]. Prisećanje uz vremenske razmake pomaže učenicima da prepoznaju kako [tema] utiče na [velika ideja]...', (3) Aktivno prisećanje: 2-3 numerisane stavke koje traže od učenika da se prisete NOVOG učenja iz DANAŠNJE lekcije (NE dopunjavanje praznina, BEZ izlaznih listića, BEZ refleksije o poboljšanju), (4) Ispravljanje uobičajenih pogrešnih uverenja: Postavljeno odmah ispod Aktivnog prisećanja i usklađeno sa postavljenim pitanjima, (5) Povezivanje sa ključnim pitanjem: Uputstvo nastavnika koje povezuje sa pitanjem jedinice + očekivani odgovori, (6) Transcendentno razmišljanje: Pitanje o primeni u stvarnom svetu + očekivani odgovori, (7) Prisećanje uz vremenske razmake: Prisećanje iz specifične prethodne lekcije/jedinice (navodeći broj lekcije). Za sva uputstva, uključi „Očekivani odgovor učenika:“ sa 2-3 konkretna primera."
         },
         "FormativeAssessment": {
           "type": "string",

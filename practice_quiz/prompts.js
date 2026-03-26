@@ -106,7 +106,7 @@ Obezbedite povratnu informaciju nakon svakog pitanja kako biste učvrstili učen
 
 Objasnite zašto je tačan odgovor tačan
 
-Adresirajte zašto su zablude netačne kada je to korisno
+Adresirajte zašto su pogrešna uverenja netačna kada je to korisno
 
 Sav izlaz mora biti na jeziku: {{$language}}.
 

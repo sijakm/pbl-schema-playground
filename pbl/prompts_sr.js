@@ -66,7 +66,7 @@ STROGA STRUKTURA (MORAŠ JE SE PRIDRŽAVATI):
 <h3><span style="color: rgb(115, 191, 39);">💡 Procena predznanja</span></h3>
 
 2) Odmah nakon naslova, UVEK prikazuj ovaj tekst Svrhe (Purpose) tačno kako je napisan:
-<p><strong>Svrha:</strong> Aktiviranje predznanja učenika nije samo zagrevanje – to je neuronauka na delu. Kada se učenici prisećaju onoga u šta već veruju ili čega se sećaju, oni aktiviraju postojeće neuronske putanje. Ovo „elaborativno kodiranje“ olakšava mozgu formiranje novih koncepata na temeljima onoga što je već poznato, čime se jača dugoročno pamćenje. Ova aktivnost ti pomaže da otkriješ tačne koncepcije, delimične ideje i moguće zablude koje će postati snažna sidra za učenje tokom celog projekta.</p>
+<p><strong>Svrha:</strong> Aktiviranje predznanja učenika nije samo zagrevanje – to je neuronauka na delu. Kada se učenici prisećaju onoga u šta već veruju ili čega se sećaju, oni aktiviraju postojeće neuronske putanje. Ovo „elaborativno kodiranje“ olakšava mozgu formiranje novih koncepata na temeljima onoga što je već poznato, čime se jača dugoročno pamćenje. Ova aktivnost ti pomaže da otkriješ tačne koncepcije, delimične ideje i moguća pogrešna uverenja koja će postati snažna sidra za učenje tokom celog projekta.</p>
 
 3) Renderuj sekciju "Kaži:" koja je usmerena ka nastavniku.
 - Čak i ako ulazni tekst NE sadrži izričito reč "Kaži:"
@@ -548,7 +548,7 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
 <ul>
 <li><strong>Učenici koji uče jezik: </strong>{{{Differentiation_LanguageLearners}}}</li>
 <li><strong>Učenici kojima je potrebna dodatna podrška: </strong>{{{Differentiation_Scaffolding}}}</li>
-<li><strong>Idite korak dalje (Za napredne): </strong>{{{Differentiation_GoDeeper}}}</li>
+<li><strong>Za napredne učenike: </strong>{{{Differentiation_GoDeeper}}}</li>
 </ul>
 
 5. Smeštaj, Prilagodbe i modifikacije (Accommodations & Modifications)
@@ -568,9 +568,9 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
     - Ponovi ovaj striktan šablon za apsolutno svakog učenika na listi.
 - Koristi SAMO navedena imena učenika i njihove planove prisutne i vidljive u JSON-u (Nemoj izmišljati dodatne učenike).
 
-6. Predviđene zablude (Anticipated Misconceptions)
-<p><strong style="color: rgb(145, 56, 230);">❗ Predviđene zablude</strong></p>
-- Par zablude (Misconception{i}) + Reakcije nastavnika (Teacher Response) ispisuj kao rednu (ordered) listu isključivo.
+6. Moguća pogrešna uverenja (Anticipated Misconceptions)
+<p><strong style="color: rgb(145, 56, 230);">❗ Moguća pogrešna uverenja</strong></p>
+- Par: pogrešno uverenje (Misconception{i}) + Reakcije nastavnika (Teacher Response) ispisuj kao rednu (ordered) listu isključivo.
 
 7. Pitanja za transcedentno/duboko razmišljanje (Transcendent Thinking)
 <p><strong style="color: rgb(145, 56, 230);">🌍 Transcendentno razmišljanje</strong></p>
@@ -684,7 +684,7 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
 <ul>
 <li><strong>Učenici koji uče jezik: </strong>{{{Differentiation_LanguageLearners}}}</li>
 <li><strong>Učenici kojima je potrebna dodatna podrška: </strong>{{{Differentiation_Scaffolding}}}</li>
-<li><strong>Idite korak dalje (Za napredne): </strong>{{{Differentiation_GoDeeper}}}</li>
+<li><strong>Za napredne učenike: </strong>{{{Differentiation_GoDeeper}}}</li>
 </ul>
 
 5. Smeštaj, Prilagodbe i modifikacije (Accommodations & Modifications)
@@ -704,9 +704,9 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
     - Ponovi ovaj striktan šablon za apsolutno svakog učenika na listi.
 - Koristi SAMO navedena imena učenika i njihove planove prisutne i vidljive u JSON-u (Nemoj izmišljati dodatne učenike).
 
-6. Predviđene zablude (Anticipated Misconceptions)
-<p><strong style="color: rgb(145, 56, 230);">❗ Predviđene zablude</strong></p>
-- Par zablude (Misconception{i}) + Reakcije nastavnika (Teacher Response) ispisuj kao rednu (ordered) listu isključivo.
+6. Moguća pogrešna uverenja (Anticipated Misconceptions)
+<p><strong style="color: rgb(145, 56, 230);">❗ Moguća pogrešna uverenja</strong></p>
+- Par: pogrešno uverenje (Misconception{i}) + Reakcije nastavnika (Teacher Response) ispisuj kao rednu (ordered) listu isključivo.
 
 7. Pitanja za transcedentno/duboko razmišljanje (Transcendent Thinking)
 <p><strong style="color: rgb(145, 56, 230);">🌍 Transcendentno razmišljanje</strong></p>
@@ -820,7 +820,7 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
 <ul>
 <li><strong>Učenici koji uče jezik: </strong>{{{Differentiation_LanguageLearners}}}</li>
 <li><strong>Učenici kojima je potrebna dodatna podrška: </strong>{{{Differentiation_Scaffolding}}}</li>
-<li><strong>Idite korak dalje (Za napredne): </strong>{{{Differentiation_GoDeeper}}}</li>
+<li><strong>Za napredne učenike: </strong>{{{Differentiation_GoDeeper}}}</li>
 </ul>
 
 5. Smeštaj, Prilagodbe i modifikacije (Accommodations & Modifications)
@@ -840,9 +840,9 @@ REDOSLED ODELJAKA (OBAVEZAN/ZAHTEVAN)
     - Ponovi ovaj striktan šablon za apsolutno svakog učenika na listi.
 - Koristi SAMO navedena imena učenika i njihove planove prisutne i vidljive u JSON-u (Nemoj izmišljati dodatne učenike).
 
-6. Predviđene zablude (Anticipated Misconceptions)
-<p><strong style="color: rgb(145, 56, 230);">❗ Predviđene zablude</strong></p>
-- Par zablude (Misconception{i}) + Reakcije nastavnika (Teacher Response) ispisuj kao rednu (ordered) listu isključivo.
+6. Moguća pogrešna uverenja (Anticipated Misconceptions)
+<p><strong style="color: rgb(145, 56, 230);">❗ Moguća pogrešna uverenja</strong></p>
+- Par: pogrešno uverenje (Misconception{i}) + Reakcije nastavnika (Teacher Response) ispisuj kao rednu (ordered) listu isključivo.
 
 7. Pitanja za transcedentno/duboko razmišljanje (Transcendent Thinking)
 <p><strong style="color: rgb(145, 56, 230);">🌍 Transcendentno razmišljanje</strong></p>
@@ -1000,7 +1000,7 @@ const pblResponseSchema = {
                 },
                 "AssessPriorKnowledge": {
                     "type": "string",
-                    "description": "Kompletna sekcija 'Procena predznanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju jedinice, postavljenu odmah nakon ciljeva učenja učenika. 2. Osiguraj da se koriste DOK 1-3 podsticaji. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Izaberi jedan modalitet sa ove liste i u potpunosti ga razvij: ispitivanje, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za anticipaciju, procena rečnika. 5. Početni podsticaj nastavnika sa 'Kaži:' izjavom koja uvodi izabrani modalitet i objašnjava kako će učenici ispoljiti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja prikazuje predviđene odgovore ili uobičajene zablude za izabrani modalitet. 8. Završni podsticaj nastavnika 'Kaži:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru jedinice. 9. Nakon potpunog razvoja jednog modaliteta, pruži 2 kratke alternativne opcije koje bi nastavnik mogao izabrati."
+                    "description": "Kompletna sekcija 'Procena predznanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju jedinice, postavljenu odmah nakon ciljeva učenja učenika. 2. Osiguraj da se koriste DOK 1-3 podsticaji. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Izaberi jedan modalitet sa ove liste i u potpunosti ga razvij: ispitivanje, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za anticipaciju, procena rečnika. 5. Početni podsticaj nastavnika sa 'Kaži:' izjavom koja uvodi izabrani modalitet i objašnjava kako će učenici ispoljiti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja prikazuje predviđene odgovore ili uobičajena pogrešna uverenja za izabrani modalitet. 8. Završni podsticaj nastavnika 'Kaži:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru jedinice. 9. Nakon potpunog razvoja jednog modaliteta, pruži 2 kratke alternativne opcije koje bi nastavnik mogao izabrati."
                 },
                 "UnitOverview": {
                     "type": "object",
@@ -1581,7 +1581,7 @@ const pblResponseSchema = {
                         },
                         "Phase1_AnticipatedMisconceptions": {
                             "type": "array",
-                            "description": "Lista čestih zabluda učenika koje će se verovatno pojaviti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju.",
+                            "description": "Lista čestih pogrešnih uverenja učenika koje će se verovatno pojaviti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju.",
                             "minItems": 2,
                             "items": {
                                 "type": "object",
@@ -1878,7 +1878,7 @@ const pblResponseSchema = {
                         },
                         "Phase2_AnticipatedMisconceptions": {
                             "type": "array",
-                            "description": "Lista čestih zabluda učenika koje će se verovatno pojaviti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju.",
+                            "description": "Lista čestih pogrešnih uverenja učenika koje će se verovatno pojaviti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju.",
                             "minItems": 2,
                             "items": {
                                 "type": "object",
@@ -2174,7 +2174,7 @@ const pblResponseSchema = {
                         },
                         "Phase3_AnticipatedMisconceptions": {
                             "type": "array",
-                            "description": "Lista čestih zabluda učenika koje će se verovatno pojaviti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju.",
+                            "description": "Lista čestih pogrešnih uverenja učenika koje će se verovatno pojaviti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju.",
                             "minItems": 2,
                             "items": {
                                 "type": "object",

@@ -264,9 +264,9 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   <li>Podsticaj za saradnju: Ko još nije doprineo i kako ćete ga/je uključiti?</li>
 </ul>
 
-<p><strong>❗ Česte zablude</strong></p>
+<p><strong>❗ Česta pogrešna uverenja</strong></p>
 <ul>
-  - Pretvori InvestigationPhase.AnticipatedMisconceptions u više <li> stavki (podeli u zasebne zablude ako je potrebno). NEMOJ uključivati numerisanje.
+  - Pretvori InvestigationPhase.AnticipatedMisconceptions u više <li> stavki (podeli u zasebna pogrešna uverenja ako je potrebno). NEMOJ uključivati numerisanje.
 </ul>
 
 <p><strong>🪜 Diferencijacija</strong></p>
@@ -400,7 +400,7 @@ RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni 
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
-<p><strong>Ispravljanje čestih zabluda</strong></p>
+<p><strong>Ispravljanje čestih pogrešnih uverenja</strong></p>
 <ul>
   <li>[Navedi sažet scenario za ispravljanje uobičajenih grešaka koristeći SAMO ono što se pojavljuje u ulaznoj sekciji; ako ništa nije eksplicitno, minimalno rezimiraj bez dodavanja novog sadržaja.]</li>
 </ul>
@@ -650,7 +650,7 @@ ULAZNI JSON:
     "properties": {
       "AssessPriorKnowledge": {
         "type": "string",
-        "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju unit-a, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajene zablude za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru unit-a. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
+        "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju unit-a, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajena pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru unit-a. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
       },
       "OrientationPhase": {
         "type": "object",
@@ -726,7 +726,7 @@ ULAZNI JSON:
           },
           "AnticipatedMisconceptions": {
             "type": "string",
-            "description": "Lista uobičajenih zabluda učenika koje će se verovatno javiti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje namenjenim nastavniku koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju."
+            "description": "Lista uobičajenih pogrešnih uverenja učenika koje će se verovatno javiti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje namenjenim nastavniku koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju."
           },
           "Differentiation": {
             "type": "string",
@@ -845,7 +845,7 @@ ULAZNI JSON:
       },
       "ReviewAndSpacedRetrieval": {
         "type": "object",
-        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake' kao običan tekst. Ova 5-minutna aktivnost mora uključivati ovim tačnim redosledom: 1. Lista materijala (često nisu potrebni) 2. Pasus sa napomenama za nastavnika koji objašnjava: - Kako ova strategija ponavljanja poboljšava zadržavanje informacija - Veza sa prethodnim konceptima učenja - Kako transcendentna refleksija produbljuje razumevanje 3. Instrukcije za nastavnike koje sadrže: - Podsticaj za aktivno prisećanje koristeći deljenje u paru/grupi - Očekivani odgovori učenika (2-3 primera sa nabrajanjem) 4. Blok za ispravljanje čestih zabluda sa: - Primerima izjava o zabludama - Skriptovima za odgovore nastavnika koji adresiraju svaku 5. Veza sa suštinskim pitanjem uključujući: - Podsticaj nastavnika koji povezuje sa pitanjem unit-a - Očekivani odgovori učenika (2-3 primera) 6. Sekcija Transcendentno razmišljanje sa: - Podsticajem za primenu u stvarnom svetu - Instrukcijom za vreme za razmišljanje - Očekivani odgovori učenika (2-3 primera) 7. Komponenta Prisećanje uz vremenske razmake koja sadrži: - Jasnu referencu na specifičnu prethodnu lekciju - Pitanje koje povezuje prošle + trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore Sve sekcije moraju koristiti 'Recite:' izjave za podsticaje nastavnika i jasno obeležene 'Očekivane odgovore učenika' koji pokazuju 2-3 uzorka odgovora. Vratiti kao običan tekst.",
+        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake' kao običan tekst. Ova 5-minutna aktivnost mora uključivati ovim tačnim redosledom: 1. Lista materijala (često nisu potrebni) 2. Pasus sa napomenama za nastavnika koji objašnjava: - Kako ova strategija ponavljanja poboljšava zadržavanje informacija - Veza sa prethodnim konceptima učenja - Kako transcendentna refleksija produbljuje razumevanje 3. Instrukcije za nastavnike koje sadrže: - Podsticaj za aktivno prisećanje koristeći deljenje u paru/grupi - Očekivani odgovori učenika (2-3 primera sa nabrajanjem) 4. Blok za ispravljanje čestih pogrešnih uverenja sa: - Primerima izjava o pogrešnim uverenjima - Skriptovima za odgovore nastavnika koji adresiraju svaku 5. Veza sa suštinskim pitanjem uključujući: - Podsticaj nastavnika koji povezuje sa pitanjem unit-a - Očekivani odgovori učenika (2-3 primera) 6. Sekcija Transcendentno razmišljanje sa: - Podsticajem za primenu u stvarnom svetu - Instrukcijom za vreme za razmišljanje - Očekivani odgovori učenika (2-3 primera) 7. Komponenta Prisećanje uz vremenske razmake koja sadrži: - Jasnu referencu na specifičnu prethodnu lekciju - Pitanje koje povezuje prošle + trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore Sve sekcije moraju koristiti 'Recite:' izjave za podsticaje nastavnika i jasno obeležene 'Očekivane odgovore učenika' koji pokazuju 2-3 uzorka odgovora. Vratiti kao običan tekst.",
         "properties": {
           "Materials": {
             "type": "array",

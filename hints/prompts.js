@@ -1,48 +1,10 @@
 window.hintsPrompts = {
     sr: {
-        HINTS_PROMPT: `Vi ste obrazovni AI asistent. Generišite tačno 3 nagoveštaja (hints) koji pomažu učeniku da dođe do odgovora bez otkrivanja istog.
+        HINTS_PROMPT: `Vi ste obrazovni AI asistent. Vaš zadatak je da generišete tačno 3 nivoa nagoveštaja (Početni, Dopunski, Obrazovni) za SVAKO dostavljeno pitanje, koji pomažu učeniku da reši zadatak bez direktnog otkrivanja odgovora.
 
-Nagoveštaji moraju pratiti ovu progresiju:
+Nagoveštaji moraju pratiti pedagošku progresiju od šireg koncepta ka dubljem razumevanju logike pitanja.
 
-Nagoveštaj 1: Širi koncept (veoma opšti)
-Nagoveštaj 2: Specifičniji trag (dodaje jedan koristan detalj)
-Nagoveštaj 3: Vođeno razumevanje (objašnjava kako razmišljati, a ne šta je odgovor)
-
-Osnovna pravila:
-
-Svaki nagoveštaj mora dodati NOVE informacije
-Svaki nagoveštaj mora smanjiti broj mogućnosti, ali NE sme ukazivati na jedan jasan odgovor
-Nagoveštaji moraju voditi razmišljanje, a ne otkrivati odgovor
-
-Ograničenja nagoveštaja:
-
-Nagoveštaj 1 NE SME sadržati specifičan metod, objekat ili sistem korišćen u odgovoru
-Nagoveštaj 2 mora suziti izbor, ali i dalje važiti za više mogućih odgovora
-Nagoveštaj 3 mora objasniti zaključivanje, ali NE sme učiniti odgovor očiglednim
-
-NE SME se:
-
-Uključiti odgovor niti bilo koji njegov deo
-Koristiti prva slova ili skriveni tragovi
-Ponavljati pitanje
-Ponavljati ista ideja
-Gomilati više specifičnih tragova koji identifikuju samo jedan odgovor
-
-Uputstva po tipu pitanja:
-
-Višestruki izbor (Multiple Choice) → istaknite razlike u zaključivanju
-Otvoreni odgovor (Open Response) → usmerite ka vrsti odgovora
-Tačno/Netačno (True/False) → pomozite da se proceni da li je tvrdnja tačna
-
-Finalna provera:
-
-Da li bi učenik mogao pogoditi odgovor odmah nakon Nagoveštaja 2 ili 3?
-→ Ako je odgovor DA, ponovo napišite nagoveštaje.
-
-
-Svi nagoveštaji moraju biti na jeziku: {response_language}
-
-Vratite JSON koristeći zahtevanu šemu. Svako pitanje mora imati tačno 3 nagoveštaja.
+Strogo se pridržavajte detaljnih uputstava i zahteva za dužinom teksta koji su definisani u JSON šemi.
 
 Kontekst lekcije: {lesson_context}
 Naziv lekcije: {lesson_name}
@@ -62,15 +24,16 @@ Jezik odgovora: {response_language}`,
                         "properties": {
                             "initial_hint": { 
                                 "type": "string",
-                                "description": "Nagoveštaj 1: Širi koncept (veoma opšti). Ne pominjati specifične delove odgovora."
+                                "description": "Nagoveštaj 1: Širi koncept (veoma opšti). Ne pominjati specifične delove odgovora, metode ili sisteme korišćene u pitanju. Fokusirati se isključivo na širu naučnu ili istorijsku temu."
                             },
                             "follow_up_hint": { 
                                 "type": "string",
-                                "description": "Nagoveštaj 2: Specifičniji trag (dodaje jedan koristan detalj). Suziti izbor, ali ne otkrivati odgovor."
+                                "description": "Nagoveštaj 2: Specifičniji trag koji dodaje jedan ključan detalj. Treba da suzi izbor, ali i dalje ostavi prostora za razmišljanje. Ne sme biti očigledan niti sadržati delove tačnog odgovora."
                             },
                             "reteach_hint": { 
                                 "type": "string",
-                                "description": "Nagoveštaj 3: Vođeno razumevanje (objašnjava kako razmišljati). Ne činiti odgovor očiglednim."
+                                "minLength": 500,
+                                "description": "Nagoveštaj 3: Vođeno razumevanje i obrazloženje logike. Ovaj deo MORA BITI VEOMA OPŠIRAN (MINIMUM 500 KARAKTERA). Treba detaljno da objasni kako učenik treba da razmišlja, koje korake u zaključivanju da preduzme i poveže pitanje sa širim kontekstom lekcije, a da pritom i dalje ne izgovori direktno tačan odgovor."
                             }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
@@ -92,49 +55,11 @@ Jezik odgovora: {response_language}`,
         }
     },
     en: {
-        HINTS_PROMPT: `You are an educational AI assistant. Generate exactly 3 hints that help a student arrive at the answer without revealing it.
+        HINTS_PROMPT: `You are an educational AI assistant. Your task is to generate exactly 3 tiered hints (Initial, Follow-up, Reteach) for EACH provided question, that help a student solve the question without directly revealing the answer.
 
-Hints must follow this progression:
+The hints must follow a pedagogical progression from a broad concept to a deeper understanding of the question's logic.
 
-Hint 1: Broad concept (very general)
-Hint 2: Narrower clue (adds one useful detail)
-Hint 3: Guided understanding (explains how to think, not what the answer is)
-
-Core rules:
-
-Each hint must add NEW information
-Each hint must reduce possibilities but NOT point to one clear answer
-Hints must guide thinking, not reveal the answer
-
-Hint limits:
-
-Hint 1 must NOT include the specific method, object, or system used in the answer
-Hint 2 must narrow but still apply to multiple possible answers
-Hint 3 must explain reasoning but NOT make the answer obvious
-
-Do NOT:
-
-Include the answer or any part of it
-Use first letters or hidden clues
-Restate the question
-Repeat the same idea
-Stack multiple specific clues that identify one answer
-
-Question type guidance:
-
-Multiple Choice → highlight differences in reasoning
-Open Response → guide toward the type of answer
-True/False → help evaluate if the claim is correct
-
-Final check:
-
-Could a student guess the answer immediately after Hint 2 or 3?
-→ If YES, rewrite the hints
-
-
-All hints must be in {response_language}
-
-Return JSON using the required schema. Each question must have exactly 3 hints.
+Strictly adhere to the detailed instructions and character length requirements defined in the JSON schema.
 
 Lesson Context: {lesson_context}
 Lesson Name: {lesson_name}
@@ -154,15 +79,16 @@ Response Language: {response_language}`,
                         "properties": {
                             "initial_hint": { 
                                 "type": "string",
-                                "description": "Hint 1: Broad concept (very general). Do not include specific methods or systems from the answer."
+                                "description": "Hint 1: Broad concept (very general). Do NOT include specific methods, objects, or systems used in the answer. Focus solely on the high-level scientific or historical topic."
                             },
                             "follow_up_hint": { 
                                 "type": "string",
-                                "description": "Hint 2: Narrower clue (adds one useful detail). Narrow possibilities without being obvious."
+                                "description": "Hint 2: Narrower clue that adds one useful detail. Narrow the possibilities but still apply to multiple possible answers. Do not make it obvious or use parts of the correct answer."
                             },
                             "reteach_hint": { 
                                 "type": "string",
-                                "description": "Hint 3: Guided understanding (explains how to think). Help reasoning without giving away the answer."
+                                "minLength": 500,
+                                "description": "Hint 3: Guided understanding and logic explanation. This section MUST BE HIGHLY DETAILED AND COMPREHENSIVE (MINIMUM 500 CHARACTERS). It should explain the core reasoning, how to connect different pieces of evidence, and the logical steps the student should follow to arrive at the answer without stating it directly."
                             }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],

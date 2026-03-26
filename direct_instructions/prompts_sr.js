@@ -213,9 +213,9 @@ DIREKTNA PREZENTACIJA (DIRECT PRESENTATION)
       (Jedan odgovor po <li>; nemoj kombinovati odgovore unutar samo jednog <li>.)
     - Za Brze provere koje bi bile umetnute u niz, koristi globalni obrazac ✔Brza provera i ✅ Očekivani odgovori učenika.
     - Posle poslednjeg koraka ili konačnog <p>/<ul> bloka, ZATVORI <ul> oznaku ako si je prethodno otvorio za GLAVNE korake i tu nastavi na bilo koji sledeći odeljak kako se traži.
-    - Predviđene zablude (ako ih ima):
-    - <p><strong>⚠️ Predviđene zablude</strong></p>
-    - Prikazuj zablude unutar minimalnog pasusa redni <p> ili kroz <ul><li>…</li></ul>. Nemoj postavljati dodatne liste unutar <li> - ograniči to na najviši nivo <ul> lista gde je svaki <li> običan tekst.
+    - Moguća pogrešna uverenja (ako ih ima):
+    - <p><strong>⚠️ Moguća pogrešna uverenja</strong></p>
+    - Prikazuj pogrešna uverenja unutar minimalnog pasusa redni <p> ili kroz <ul><li>…</li></ul>. Nemoj postavljati dodatne liste unutar <li> - ograniči to na najviši nivo <ul> lista gde je svaki <li> običan tekst.
     - Transcendentno razmišljanje (ako ga ima):
     - <p><strong>🌍 Transcendentno razmišljanje</strong></p>
     - Koristi <p> pasuse za pojašnjavajući tekst, i <ul><li>…</li></ul> za primere. Drži svaki <li> običnim tekstom.
@@ -252,7 +252,7 @@ VOĐENA PRAKSA (GUIDED PRACTICE)
     - Diferencijacija (ako postoji):
     -  <p><strong>🪜 Diferencijacija</strong></p>
     -  Koristi <p> blokove za objašnjavajući tekst.
-    -  Za označene podsekcijske naslove kao "Učenici koji uče jezik", "Dodatni oslonac", "Idi dublje" (ili sl.):
+    -  Za označene podsekcijske naslove kao "Učenici koji uče jezik", "Dodatni oslonac", "Za napredne učenike" (ili sl.):
         - Primeni <p><strong>Oznaka</strong></p> na takav presek.
         - Spusti nivo najvišeg <ul><li>…</li></ul> s čistim opcijama teksta <li> stavki (bez ugnježdenja).
 
@@ -315,7 +315,7 @@ PREGLED I PRISEĆANJE UZ VREMENSKE RAZMAKE (REVIEW & SPACED RETRIEVAL) (5 min)
         - Zaglavlje 📋 Instrukcije za nastavnike: Renderuj kao <p><strong>📋 Instrukcije za nastavnike</strong></p>.
         - Podnaslov Aktivno prisećanje: Bolding opcija. Prate redovi kroz numeri i uz "Kaži:" oznaku s tekstovima pod ulogom skripte.
         - Ispostavi i prati šablon globalnih pregrada ✅ Očekivani odgovori učenika sa svim primercima modela i odgovora.
-        - Podnaslov Ispravka čestih zabluda: Bold. Kreni kroz <ul> i prikaži svaku "Ako učenik kaže... odgovori:..." kao njen tipski <li>.
+        - Podnaslov Ispravka čestih pogrešnih uverenja: Bold. Kreni kroz <ul> i prikaži svaku "Ako učenik kaže... odgovori:..." kao njen tipski <li>.
         - Podnaslov 💭Veza sa ključnim pitanjem: Bold.
         - Podnaslov 🌍Transcendentno razmišljanje: Bold.
         - Podnaslov ⏳Prisećanje uz vremenske razmake: Bold.
@@ -532,7 +532,7 @@ GLOBALNA PRAVILA
                     },
                     "AssessPriorKnowledge": {
                         "type": "string",
-                        "description": "Kompletan odeljak 'Procena predznanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovaj odeljak samo u prvu lekciju jedinice, postavljen odmah iza Ciljeva učenja učenika. 2. Osiguraj korišćenje podsticaja na DOK 1-3 nivoima. 3. Uključi preduslovne veštine potrebne za ostvarivanje ciljeva učenja učenika. 4. Izaberi jedan modalitet sa ove liste i u potpunosti ga razvij: postavljanje pitanja, K-W-L, vizuelna sredstva, konceptualne mape, reflektivno pisanje, upitnici o očekivanjima (anticipation guides), ocene vokabulara. 5. Početni podsticaj nastavnika sa 'Kaži:' ('Say:') izjavom koja predstavlja izabrani modalitet i objašnjava kako će učenici izraziti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak 'Očekivani odgovori učenika' ('Expected Student Responses') koji prikazuje predviđene odgovore ili česte zablude za odabrani modalitet. 8. Završni podsticaj nastavnika pomoću 'Kaži:' koji potvrđuje učeničko razmišljanje i daje uvid u predstojeće istraživanje u okviru jedinice. 9. Nakon u potpunosti razvijenog jednog modaliteta, pruži 2 kratke alternativne opcije koje bi nastavnik mogao odabrati."
+                        "description": "Kompletan odeljak 'Procena predznanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovaj odeljak samo u prvu lekciju jedinice, postavljen odmah iza Ciljeva učenja učenika. 2. Osiguraj korišćenje podsticaja na DOK 1-3 nivoima. 3. Uključi preduslovne veštine potrebne za ostvarivanje ciljeva učenja učenika. 4. Izaberi jedan modalitet sa ove liste i u potpunosti ga razvij: postavljanje pitanja, K-W-L, vizuelna sredstva, konceptualne mape, reflektivno pisanje, upitnici o očekivanjima (anticipation guides), ocene vokabulara. 5. Početni podsticaj nastavnika sa 'Kaži:' ('Say:') izjavom koja predstavlja izabrani modalitet i objašnjava kako će učenici izraziti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak 'Očekivani odgovori učenika' ('Expected Student Responses') koji prikazuje predviđene odgovore ili česta pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika pomoću 'Kaži:' koji potvrđuje učeničko razmišljanje i daje uvid u predstojeće istraživanje u okviru jedinice. 9. Nakon u potpunosti razvijenog jednog modaliteta, pruži 2 kratke alternativne opcije koje bi nastavnik mogao odabrati."
                     },
                     "DirectPresentation": {
                         "type": "object",
@@ -551,7 +551,7 @@ GLOBALNA PRAVILA
                             },
                             "AnticipatedMisconceptions": {
                                 "type": "string",
-                                "description": "Uobičajene zablude i tačan jezik za korigovanje svake"
+                                "description": "Uobičajena pogrešna uverenja i tačan jezik za korigovanje svakog"
                             },
                             "TranscendentThinking": {
                                 "type": "string",
@@ -588,7 +588,7 @@ GLOBALNA PRAVILA
                             },
                             "Differentiation": {
                                 "type": "string",
-                                "description": "Trodeli strategija diferencijacije koja uključuje: (1) Podršku za učenike koji uče jezik (2-3 strategije), (2) Dodatnu podršku skeliranjem / osloncem (Additional Scaffolding) (2-3 strategije), (3) 'Idi dublje' (Go Deeper) proširenja (1-2 aktivnosti sa očekivanim odgovorima)."
+                                "description": "Trodeli strategija diferencijacije koja uključuje: (1) Podršku za učenike koji uče jezik (2-3 strategije), (2) Dodatnu podršku skeliranjem / osloncem (Additional Scaffolding) (2-3 strategije), (3) 'Za napredne učenike' (Go Deeper) proširenja (1-2 aktivnosti sa očekivanim odgovorima)."
                             },
                             "AccommodationsAndModifications": {
                                 "type": "object",
@@ -646,7 +646,7 @@ GLOBALNA PRAVILA
                     },
                     "ReviewAndSpacedRetrieval": {
                         "type": "string",
-                        "description": "Kompletan odeljak 'Pregled i prisećanje uz vremenske razmake' kao običan tekst. Ova 5-minutna aktivnost mora da sadrži sledeće elemente u ovom tačnom redosledu: 1. Lista materijala (Materials List) (često ništa nije opcionalno) 2. Pasus sa napomenama za nastavnika (Teacher Notes) koji objašnjava: - Kako ova strategija pregleda poboljšava memorisanje - Vezu sa prethodnim konceptima učenja - Kako prisećanje uz vremenske razmake produbljuje razumevanje. 3. Instrukcije za nastavnike koje sadrže: - Aktivno prisećanje pomoću deljenja sa partnerom/grupom - Očekivane odgovore učenika (2-3 primera). 4. Blok za Ispravku čestih zabluda (Correct Common Misconceptions) sa: - Izjavama koje predstavljaju primer zablude - Skriptama nastavnika za ispravku. 5. Veza sa ključnim pitanjem (Essential Question Connection) što uključuje: - Nastavnikovo pitanje vezano za ključno pitanje celine - Očekivane odgovore učenika (2-3 primera). 6. Odeljak za transcendentno razmišljanje sa: - Primenom u stvarnom svetu - Vreme za razmišljanje - Očekivanim odgovorima učenika (2-3). 7. Komponenta prisećanja uz vremenske razmake (Spaced Retrieval) koja sadrži: - Jasnu referencu na određenu prošlu lekciju - Pitanje koje povezuje prošle i trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore. Svi odeljci moraju koristiti 'Kaži:' za instrukcije nastavnika i jasno obeležene 'Očekivani odgovori učenika' ('Expected Student Responses')."
+                        "description": "Kompletan odeljak 'Pregled i prisećanje uz vremenske razmake' kao običan tekst. Ova 5-minutna aktivnost mora da sadrži sledeće elemente u ovom tačnom redosledu: 1. Lista materijala (Materials List) (često ništa nije opcionalno) 2. Pasus sa napomenama za nastavnika (Teacher Notes) koji objašnjava: - Kako ova strategija pregleda poboljšava memorisanje - Vezu sa prethodnim konceptima učenja - Kako prisećanje uz vremenske razmake produbljuje razumevanje. 3. Instrukcije za nastavnike koje sadrže: - Aktivno prisećanje pomoću deljenja sa partnerom/grupom - Očekivane odgovore učenika (2-3 primera). 4. Blok za Ispravku čestih pogrešnih uverenja (Correct Common Misconceptions) sa: - Izjavama koje predstavljaju primer pogrešnog uverenja - Skriptama nastavnika za ispravku. 5. Veza sa ključnim pitanjem (Essential Question Connection) što uključuje: - Nastavnikovo pitanje vezano za ključno pitanje celine - Očekivane odgovore učenika (2-3 primera). 6. Odeljak za transcendentno razmišljanje sa: - Primenom u stvarnom svetu - Vreme za razmišljanje - Očekivanim odgovorima učenika (2-3). 7. Komponenta prisećanja uz vremenske razmake (Spaced Retrieval) koja sadrži: - Jasnu referencu na određenu prošlu lekciju - Pitanje koje povezuje prošle i trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore. Svi odeljci moraju koristiti 'Kaži:' za instrukcije nastavnika i jasno obeležene 'Očekivani odgovori učenika' ('Expected Student Responses')."
                     },
                     "FormativeAssessment": {
                         "type": "string",
