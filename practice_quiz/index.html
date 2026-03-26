@@ -409,6 +409,142 @@
         background: #24c17b;
         padding: 12px 40px;
     }
+
+    .hints-container {
+      margin-top: 20px;
+      padding: 0;
+      background: #fdfdfd;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      overflow: hidden;
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .hint-main-content {
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      min-height: 60px;
+    }
+
+    .hint-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      background: #e0f2f1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #009688;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .hint-text-body {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .hint-footer {
+      border-top: 1px solid #f0f0f0;
+      padding: 12px 20px;
+      background: #fafafa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hint-nav-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .hint-nav-arrow {
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+      transition: color 0.2s;
+    }
+
+    .hint-nav-arrow:hover:not(.disabled) {
+      color: #009688;
+    }
+
+    .hint-nav-arrow.disabled {
+      color: #eee;
+      cursor: not-allowed;
+    }
+
+    .new-hint-btn {
+      color: #009688;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: opacity 0.2s;
+    }
+
+    .new-hint-btn:hover:not(:disabled) {
+      opacity: 0.7;
+    }
+
+    .new-hint-btn:disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .get-hint-initial-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      color: #666;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.2s;
+    }
+
+    .get-hint-initial-btn:hover {
+      background: #f9f9f9;
+      border-color: #ccc;
+    }
+
+    .loading-hint {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #009688;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .loading-dots::after {
+      content: '...';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: ''; }
+      40% { content: '.'; }
+      60% { content: '..'; }
+      80% { content: '...'; }
+    }
   </style>
 </head>
 
@@ -584,6 +720,7 @@ Write 4â€“5 sentences describing what you would look for and what questions youâ
 
   <script src="../config.local.js"></script>
   <script src="../shared/local-config-loader.js"></script>
+  <script src="../hints/prompts.js"></script>
   <script src="prompts.js"></script>
   <script src="practice_quiz.js"></script>
   <script>

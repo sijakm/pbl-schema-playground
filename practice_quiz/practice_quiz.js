@@ -155,13 +155,12 @@
     `;
     container.appendChild(header);
 
-    const currentLang = document.getElementById("languageSelect").value;
-    const labels = {
-        en: { hint: "💡 Show Hint", rationale: "Rationale" },
-        sr: { hint: "💡 Prikaži nagoveštaj", rationale: "Obrazloženje" }
-    }[currentLang] || { hint: "💡 Show Hint", rationale: "Rationale" };
-
     quizData.forEach((q, i) => {
+      // Initialize hint state for each question
+      q.revealedCount = 0;
+      q.currentViewIdx = 0;
+      q.hintsArray = [];
+
       const card = document.createElement("div");
       card.className = "question-card";
       card.id = `question-${i}`;
@@ -211,20 +210,29 @@
       
       answerSection.appendChild(optionsContainer);
 
-      // Hint area
-      if (q.questionHint) {
-          const hintBtn = document.createElement("button");
-          hintBtn.className = "hint-btn";
-          hintBtn.textContent = labels.hint;
-          hintBtn.onclick = () => showHint(i);
-          answerSection.appendChild(hintBtn);
+      // Hierarchical Hints Area (Simplified for initial state)
+      const hintsWrapper = document.createElement("div");
+      hintsWrapper.id = `hints-wrapper-${i}`;
 
-          const hintText = document.createElement("div");
-          hintText.className = "hint-text";
-          hintText.id = `hint-text-${i}`;
-          hintText.textContent = q.questionHint;
-          answerSection.appendChild(hintText);
-      }
+      const initialHintBtn = document.createElement("button");
+      initialHintBtn.className = "get-hint-initial-btn";
+      initialHintBtn.id = `get-hint-init-${i}`;
+      initialHintBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#009688;">
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+          <path d="M12 8v4m0 4h.01"/>
+        </svg>
+        <span>Get a Hint</span>
+      `;
+      initialHintBtn.onclick = () => fetchHintsForQuestion(i);
+      hintsWrapper.appendChild(initialHintBtn);
+
+      const hintsContainer = document.createElement("div");
+      hintsContainer.className = "hints-container";
+      hintsContainer.id = `hints-container-${i}`;
+      hintsWrapper.appendChild(hintsContainer);
+
+      answerSection.appendChild(hintsWrapper);
       
       const feedback = document.createElement("div");
       feedback.className = "feedback-area";
@@ -249,12 +257,143 @@
     container.appendChild(finishBtn);
   }
 
-  window.showHint = (qIdx) => {
-    const hintText = document.getElementById(`hint-text-${qIdx}`);
-    if (hintText) {
-        hintText.style.display = hintText.style.display === 'block' ? 'none' : 'block';
+  async function fetchHintsForQuestion(qIdx) {
+    const q = quizData[qIdx];
+    const initBtn = document.getElementById(`get-hint-init-${qIdx}`);
+    const container = document.getElementById(`hints-container-${qIdx}`);
+    const currentLang = document.getElementById("languageSelect").value;
+
+    initBtn.style.display = "none";
+    container.style.display = "block";
+    
+    const hLabels = {
+        en: { working: "Working on Hint 1" },
+        sr: { working: "Pripremam nagoveštaj 1" }
+    }[currentLang];
+
+    container.innerHTML = `
+      <div class="loading-hint">
+        <span class="hint-icon">Σ</span>
+        <span class="loading-hint-text">${hLabels.working}<span class="loading-dots"></span></span>
+      </div>
+    `;
+
+    try {
+        const apiKey = els.apiKey().value.trim();
+        const model = els.model().value;
+        const endpoint = DEFAULT_ENDPOINT;
+        const hintsPrompts = window.hintsPrompts[currentLang] || window.hintsPrompts.en;
+        
+        const vars = {
+            lesson_context: els.context().value,
+            lesson_name: els.workItemTitle().value,
+            lesson_description: hintsPrompts.meta.lessonDescription,
+            subject: els.subject().value,
+            grade_level: els.gradeLevel().value,
+            question_data: JSON.stringify([ { question: q.question, options: q.answers, rationale: q.rationale } ]),
+            response_language: currentLang === 'sr' ? 'Serbian' : 'English'
+        };
+
+        const finalPrompt = fillTemplate(hintsPrompts.HINTS_PROMPT, vars);
+        
+        const resultText = await callApiStream({
+            endpoint,
+            apiKey,
+            model,
+            prompt: finalPrompt,
+            schemaObj: hintsPrompts.HINTS_SCHEMA
+        });
+
+        const data = JSON.parse(resultText);
+        const fetchedHints = data.hints[0];
+        
+        q.hintsArray = [
+            fetchedHints.initial_hint,
+            fetchedHints.follow_up_hint,
+            fetchedHints.reteach_hint
+        ];
+        q.revealedCount = 1;
+        q.currentViewIdx = 0;
+
+        updateHintUI(qIdx);
+
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p style="padding:20px; color:red;">Error fetching hints. <button onclick="fetchHintsForQuestion(${qIdx})">Retry</button></p>`;
+    }
+  }
+
+  window.revealNextHint = async (qIdx) => {
+    const q = quizData[qIdx];
+    if (q.revealedCount >= 3) return;
+
+    const container = document.getElementById(`hints-container-${qIdx}`);
+    const currentLang = document.getElementById("languageSelect").value;
+    const nextIdx = q.revealedCount + 1;
+
+    const hLabels = {
+        en: { working: `Working on Hint ${nextIdx}` },
+        sr: { working: `Pripremam nagoveštaj ${nextIdx}` }
+    }[currentLang];
+
+    // Show loading state for next hint
+    const currentContent = container.querySelector(".hint-text-body");
+    const currentFooter = container.querySelector(".hint-footer");
+    
+    // Smooth transition: replace content with loading
+    container.querySelector(".hint-main-content").innerHTML = `
+      <div class="loading-hint" style="padding:0;">
+        <span class="hint-icon">Σ</span>
+        <span class="loading-hint-text">${hLabels.working}<span class="loading-dots"></span></span>
+      </div>
+    `;
+    currentFooter.style.opacity = "0.5";
+    currentFooter.style.pointerEvents = "none";
+
+    // Simulate thinking/working time
+    await new Promise(r => setTimeout(r, 750));
+
+    q.revealedCount++;
+    q.currentViewIdx = q.revealedCount - 1;
+    updateHintUI(qIdx);
+  };
+
+  window.navigateHint = (qIdx, direction) => {
+    const q = quizData[qIdx];
+    const newIdx = q.currentViewIdx + direction;
+    if (newIdx >= 0 && newIdx < q.revealedCount) {
+        q.currentViewIdx = newIdx;
+        updateHintUI(qIdx);
     }
   };
+
+  function updateHintUI(qIdx) {
+    const q = quizData[qIdx];
+    const container = document.getElementById(`hints-container-${qIdx}`);
+    const currentLang = document.getElementById("languageSelect").value;
+
+    const labels = {
+        en: { hint: "Hint", max: "max 3", newHint: "New Hint" },
+        sr: { hint: "Nagoveštaj", max: "maks. 3", newHint: "Novi nagoveštaj" }
+    }[currentLang];
+
+    const currentHintText = q.hintsArray[q.currentViewIdx];
+
+    container.innerHTML = `
+      <div class="hint-main-content">
+        <div class="hint-icon">Σ</div>
+        <div class="hint-text-body">${currentHintText}</div>
+      </div>
+      <div class="hint-footer">
+        <div class="hint-nav-info">
+          <span class="hint-nav-arrow ${q.currentViewIdx === 0 ? 'disabled' : ''}" onclick="navigateHint(${qIdx}, -1)">❮</span>
+          <span>${labels.hint} ${q.currentViewIdx + 1}/${q.revealedCount} (${labels.max})</span>
+          <span class="hint-nav-arrow ${q.currentViewIdx === q.revealedCount - 1 ? 'disabled' : ''}" onclick="navigateHint(${qIdx}, 1)">❯</span>
+        </div>
+        ${q.revealedCount < 3 ? `<button class="new-hint-btn" onclick="revealNextHint(${qIdx})">${labels.newHint}</button>` : ''}
+      </div>
+    `;
+  }
 
   window.selectTF = (qIdx, val) => {
     userAnswers[qIdx] = val;

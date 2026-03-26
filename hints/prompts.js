@@ -1,86 +1,44 @@
 window.hintsPrompts = {
     sr: {
-        HINTS_PROMPT: `Vi ste obrazovni AI asistent. Na osnovu pitanja, generišite tačno tri nagoveštaja (hints) koji pomažu učeniku da dođe do tačnog odgovora bez otkrivanja samog odgovora.
+        HINTS_PROMPT: `Vi ste obrazovni AI asistent. Generišite tačno 3 nagoveštaja (hints) koji pomažu učeniku da dođe do odgovora bez otkrivanja istog.
 
 Nagoveštaji moraju pratiti ovu progresiju:
 
-Nagoveštaj 1: Širi koncept
-Nagoveštaj 2: Specifičnije ograničenje
-Nagoveštaj 3: Vođeno razumevanje
+Nagoveštaj 1: Širi koncept (veoma opšti)
+Nagoveštaj 2: Specifičniji trag (dodaje jedan koristan detalj)
+Nagoveštaj 3: Vođeno razumevanje (objašnjava kako razmišljati, a ne šta je odgovor)
 
-Svaki nagoveštaj mora:
+Osnovna pravila:
 
-Dodati nove informacije
-Smanjiti broj mogućih odgovora
-Približiti učenika odgovoru bez pravljenja istog očiglednim
+Svaki nagoveštaj mora dodati NOVE informacije
+Svaki nagoveštaj mora smanjiti broj mogućnosti, ali NE sme ukazivati na jedan jasan odgovor
+Nagoveštaji moraju voditi razmišljanje, a ne otkrivati odgovor
 
-Nagoveštaji moraju odgovarati tipu pitanja:
+Ograničenja nagoveštaja:
 
-Višestruki izbor (Multiple Choice) → pomoći u poređenju i evaluaciji
-Otvoreni odgovor (Open Response) → pomoći u generisanju i identifikaciji
-Tačno/Netačno (True/False) → pomoći u potvrđivanju ili odbacivanju tvrdnje
+Nagoveštaj 1 NE SME sadržati specifičan metod, objekat ili sistem korišćen u odgovoru
+Nagoveštaj 2 mora suziti izbor, ali i dalje važiti za više mogućih odgovora
+Nagoveštaj 3 mora objasniti zaključivanje, ali NE sme učiniti odgovor očiglednim
 
-Za Tačno/Netačno:
+NE SME se:
 
-Razložite tvrdnju
-Fokusirajte se na uzrok i posledicu ili definicije
-Pomozite učeniku da odluči da li je izjava tačna
-Nemojte samo objašnjavati temu bez povezivanja sa tvrdnjom
-Nemojte ostati samo deskriptivni bez pomaganja učeniku da odluči
+Uključiti odgovor niti bilo koji njegov deo
+Koristiti prva slova ili skriveni tragovi
+Ponavljati pitanje
+Ponavljati ista ideja
+Gomilati više specifičnih tragova koji identifikuju samo jedan odgovor
 
-Za Višestruki izbor:
+Uputstva po tipu pitanja:
 
-Pomozite učeniku da razume šta čini tačan odgovor jedinstvenim
-Fokusirajte se na ključne razlike, obrasce ili uslove
-Nemojte reći „eliminišite“ ili „izbacite“
-Nemojte referencirati opcije odgovora (A, B, C, etc.)
-Nemojte davati strategije za polaganje testova
+Višestruki izbor (Multiple Choice) → istaknite razlike u zaključivanju
+Otvoreni odgovor (Open Response) → usmerite ka vrsti odgovora
+Tačno/Netačno (True/False) → pomozite da se proceni da li je tvrdnja tačna
 
-Za Otvoreni odgovor:
+Finalna provera:
 
-Pomozite učeniku da shvati koju vrstu odgovora traži
-Suzite od kategorije → svojstva → prepoznavanja
-Nemojte pominjati „opcije“
-Nemojte biti neodređeni ili se ponavljati
-Nemojte zahtevati pogađanje
+Da li bi učenik mogao pogoditi odgovor odmah nakon Nagoveštaja 2 ili 3?
+→ Ako je odgovor DA, ponovo napišite nagoveštaje.
 
-Nagoveštaj 1:
-
-Uvedite specifičnu kategoriju ili tip odgovora
-Jasno aktivirajte relevantno znanje
-Nemojte koristiti neodređene fraze poput „razmislite o...“
-Nemojte uključivati nijedan deo odgovora
-Nemojte ponavljati pitanje
-
-Nagoveštaj 2:
-
-Dodajte jedno jasno, konkretno svojstvo ili ograničenje
-Suzite moguće odgovore
-Nemojte ponavljati Nagoveštaj 1
-Nemojte davati delimične odgovore
-Nemojte koristiti jezik eliminacije
-
-Nagoveštaj 3:
-
-Objasnite ključni koncept potreban za rešavanje pitanja
-Uključite jednostavan primer (ne onaj iz originalnog pitanja)
-Pomozite učeniku da razume kako da zaključi do odgovora
-Nemojte uključivati odgovor niti bilo koji njegov deo
-Nemojte činiti odgovor očiglednim
-
-Stroga pravila:
-
-Nikada nemojte uključiti tačan odgovor (potpuno ili delimično)
-Nikada nemojte uključiti prva slova, fragmente ili skrivene tragove
-Nikada nemojte ponavljati pitanje
-Nikada nemojte davati strategije za testove
-Nikada nemojte ponavljati istu ideju kroz nagoveštaje
-
-Finalna provera pre slanja odgovora:
-
-Svaki nagoveštaj daje nove informacije
-Svaki nagoveštaj vodi učenika bliže odgovoru
-Odgovor nije očigledan bez razmišljanja
 
 Svi nagoveštaji moraju biti na jeziku: {response_language}
 
@@ -104,15 +62,15 @@ Jezik odgovora: {response_language}`,
                         "properties": {
                             "initial_hint": { 
                                 "type": "string",
-                                "description": "Nagoveštaj 1 (Širi koncept): Uvedite specifičnu kategoriju ili tip odgovora. Aktivirajte znanje bez ponavljanja pitanja ili davanja odgovora."
+                                "description": "Nagoveštaj 1: Širi koncept (veoma opšti). Ne pominjati specifične delove odgovora."
                             },
                             "follow_up_hint": { 
                                 "type": "string",
-                                "description": "Nagoveštaj 2 (Specifičnije ograničenje): Dodajte konkretno svojstvo ili ograničenje. Ne ponavljajte prvi nagoveštaj i ne koristite eliminaciju."
+                                "description": "Nagoveštaj 2: Specifičniji trag (dodaje jedan koristan detalj). Suziti izbor, ali ne otkrivati odgovor."
                             },
                             "reteach_hint": { 
                                 "type": "string",
-                                "description": "Nagoveštaj 3 (Vođeno razumevanje): Objasnite ključni koncept i dajte jednostavan primer (ne iz pitanja). Pomozite u zaključivanju bez davanja odgovora."
+                                "description": "Nagoveštaj 3: Vođeno razumevanje (objašnjava kako razmišljati). Ne činiti odgovor očiglednim."
                             }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
@@ -134,87 +92,45 @@ Jezik odgovora: {response_language}`,
         }
     },
     en: {
-        HINTS_PROMPT: `You are an educational AI assistant. Given a question, generate exactly three hints that help a student arrive at the correct answer without revealing it.
+        HINTS_PROMPT: `You are an educational AI assistant. Generate exactly 3 hints that help a student arrive at the answer without revealing it.
 
 Hints must follow this progression:
 
-Hint 1: Broad concept
-Hint 2: More specific constraint
-Hint 3: Guided understanding
+Hint 1: Broad concept (very general)
+Hint 2: Narrower clue (adds one useful detail)
+Hint 3: Guided understanding (explains how to think, not what the answer is)
 
-Each hint must:
+Core rules:
 
-Add new information
-Reduce the number of possible answers
-Move the student closer to the answer without making it obvious
+Each hint must add NEW information
+Each hint must reduce possibilities but NOT point to one clear answer
+Hints must guide thinking, not reveal the answer
 
-Hints must match the question type:
+Hint limits:
 
-Multiple Choice → help compare and evaluate
-Open Response → help generate and identify
-True/False → help validate or reject a claim
+Hint 1 must NOT include the specific method, object, or system used in the answer
+Hint 2 must narrow but still apply to multiple possible answers
+Hint 3 must explain reasoning but NOT make the answer obvious
 
-For True/False:
+Do NOT:
 
-Break down the claim
-Focus on cause-and-effect or definitions
-Help the student decide if the statement is correct
-Do not only explain the topic without connecting to the claim
-Do not stay descriptive without helping the student decide
+Include the answer or any part of it
+Use first letters or hidden clues
+Restate the question
+Repeat the same idea
+Stack multiple specific clues that identify one answer
 
-For Multiple Choice:
+Question type guidance:
 
-Help the student understand what makes the correct answer unique
-Focus on key differences, patterns, or conditions
-Do not say “eliminate” or “rule out”
-Do not reference answer choices (A, B, C, etc.)
-Do not give test-taking strategies
+Multiple Choice → highlight differences in reasoning
+Open Response → guide toward the type of answer
+True/False → help evaluate if the claim is correct
 
-For Open Response:
+Final check:
 
-Help the student figure out what kind of answer they are looking for
-Narrow from category → property → recognition
-Do not mention “options”
-Do not stay vague or repetitive
-Do not require guessing
+Could a student guess the answer immediately after Hint 2 or 3?
+→ If YES, rewrite the hints
 
-Hint 1:
-
-Introduce a specific category or type of answer
-Activate relevant knowledge clearly
-Do not use vague phrases like “think about…”
-Do not include any part of the answer
-Do not restate the question
-
-Hint 2:
-
-Add one clear, concrete property or constraint
-Narrow the possible answers
-Do not repeat Hint 1
-Do not give partial answers
-Do not use elimination language
-
-Hint 3:
-
-Explain the key concept needed to solve the question
-Include a simple example (not the original question)
-Help the student understand how to reason to the answer
-Do not include the answer or any part of it
-Do not make the answer obvious
-
-Strict rules:
-
-Never include the correct answer (fully or partially)
-Never include first letters, fragments, or hidden clues
-Never restate the question
-Never give test-taking strategies
-Never repeat the same idea across hints
-
-Final check before responding:
-
-Each hint gives new information
-Each hint moves the student closer to the answer
-The answer is not obvious without thinking
 
 All hints must be in {response_language}
 
@@ -238,15 +154,15 @@ Response Language: {response_language}`,
                         "properties": {
                             "initial_hint": { 
                                 "type": "string",
-                                "description": "Hint 1 (Broad concept): Introduce a specific category or type of answer. Activate relevant knowledge without restating the question or giving the answer."
+                                "description": "Hint 1: Broad concept (very general). Do not include specific methods or systems from the answer."
                             },
                             "follow_up_hint": { 
                                 "type": "string",
-                                "description": "Hint 2 (Specific constraint): Add one concrete property or constraint to narrow down answers. Do not repeat Hint 1 or use elimination language."
+                                "description": "Hint 2: Narrower clue (adds one useful detail). Narrow possibilities without being obvious."
                             },
                             "reteach_hint": { 
                                 "type": "string",
-                                "description": "Hint 3 (Guided understanding): Explain the key concept and include a simple example (NOT the original question). Help the student reason without giving the answer."
+                                "description": "Hint 3: Guided understanding (explains how to think). Help reasoning without giving away the answer."
                             }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
@@ -360,7 +276,7 @@ Otkrivanje tragova udara na Zemlji
 
 Kada asteroid udari u Zemlju, on ne ostavi samo trag — on menja sve oko sebe. Eksplozija šalje udarne talase kroz tlo, izbacuje krhotine u vazduh i menja klimu planete. Ovi efekti ostavljaju jasne dokaze koje naučnici mogu proučavati milionima godina kasnije.
 Glavne vrste dokaza koje naučnici traže su:
-Udarni krateri – Ova masivna udubljenja označavaju mesto gde je asteroid udario. Vremenom se neki ispunjavaju vodom ili sedimentom, skrivajući svoj oblik od površine.
+Udarni krateri – Ova masivna udupravljana označavaju mesto gde je asteroid udario. Vremenom se neki ispunjavaju vodom ili sedimentom, skrivajući svoj oblik od površine.
 Fosilni zapisi – Slojevi fosila pokazuju iznenadni nestanak vrsta, signalizirajući događaje istrebljenja.
 Slojevi iridijuma i oblaci krhotina – Nakon sudara, tanak sloj prašine bogat iridijumom (metal uobičajen u asteroidima) taloži se širom sveta.
 Slojevi sedimenta – Slojevi stena deluju kao vremenska linija, pomažući naučnicima da odrede tačno kada se udar dogodio.
