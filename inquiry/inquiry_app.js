@@ -382,6 +382,7 @@
 
       const pmpts = getPrompts();
       const step0Prompt = fillTemplate(pmpts.STEP0_PROMPT_TEMPLATE, vars);
+      console.log("[STEP0_PROMPT]", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
         callResponsesApiStream({
@@ -423,7 +424,7 @@
       const unitHtmlPrompt = fillTemplate(pmpts.UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson)
       });
-
+      console.log("[UNIT_HTML_PROMPT]", unitHtmlPrompt);
       const unitHtml = await withRetry((signal) =>
         callResponsesApiStream({
           endpoint,
@@ -467,19 +468,21 @@
 
             const perLessonVars = {
               ...vars,
-              UnitDescriptionDescription: step0Obj?.UnitDescription?.Description ?? "",
               UnitEssentialQuestions: unitEqOverride || JSON.stringify(step0Obj?.UnitDescription?.EssentialQuestions ?? []),
-              UnitStudentLearningObjectives: JSON.stringify(step0Obj?.UnitDescription?.StudentLearningObjectives ?? []),
-              UnitKeyVocabulary: JSON.stringify(step0Obj?.UnitDescription?.KeyVocabulary ?? []),
-              UnitStandardsAligned: JSON.stringify(step0Obj?.UnitDescription?.StandardsAligned ?? []),
-
-              LessonNumber: String(L.lessonNumber ?? (i + 1)),
-              LessonTitle: String(L.lessonTitle ?? ""),
-              LessonOutline: String(L.lessonOutline ?? "")
+              ParentUnitData: [
+                `UnitDescription.Description: ${step0Obj?.UnitDescription?.Description ?? ""}`,
+                `UnitDescription.StudentLearningObjectives: ${JSON.stringify(step0Obj?.UnitDescription?.StudentLearningObjectives ?? [])}`,
+                `UnitDescription.KeyVocabulary: ${JSON.stringify(step0Obj?.UnitDescription?.KeyVocabulary ?? [])}`,
+                `UnitDescription.StandardsAligned: ${JSON.stringify(step0Obj?.UnitDescription?.StandardsAligned ?? [])}`,
+                `Lesson Number: ${L.lessonNumber ?? (i + 1)}`,
+                `Lesson Title: ${L.lessonTitle ?? ""}`,
+                `Lesson Outline: ${L.lessonOutline ?? ""}`
+              ].join("\n")
             };
 
             const pmpts = getPrompts();
             const perLessonPrompt = fillTemplate(pmpts.PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+            console.log(`[PER_LESSON_PROMPT ${i + 1}]`, perLessonPrompt);
 
             const lessonJsonText = await callResponsesApiStream({
               endpoint,
@@ -531,6 +534,7 @@
             const lessonHtmlPrompt = fillTemplate(pmpts.HTML_LESSON_PROMPT_TEMPLATE, {
               LessonInquiryJson: JSON.stringify(lessonObj)
             });
+            console.log(`[LESSON_HTML_PROMPT ${i + 1}]`, lessonHtmlPrompt);
 
             const lessonHtml = await callResponsesApiStream({
               endpoint,

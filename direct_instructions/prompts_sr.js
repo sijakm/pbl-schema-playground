@@ -722,5 +722,25 @@ GLOBALNA PRAVILA
             "LessonDescription"
         ],
         "additionalProperties": false,
+        "x-removablePaths": {
+            "EssentialQuestions": [
+                "LessonDescription.EssentialQuestions"
+            ],
+            "StandardsAligned": [
+                "LessonDescription.StandardsAligned"
+            ],
+            "AssessPriorKnowledge": [
+                "LessonDescription.AssessPriorKnowledge"
+            ],
+            "SpacedLearningAndRetrieval": [
+                "LessonDescription.ReviewAndSpacedRetrieval"
+            ],
+            "FormativeAssessment": [
+                "LessonDescription.FormativeAssessment"
+            ],
+            "AccommodationsAndModifications": [
+                "GuidedPractice.AccommodationsAndModifications"
+            ]
+        }
     }
 };

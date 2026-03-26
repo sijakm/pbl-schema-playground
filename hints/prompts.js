@@ -1,35 +1,98 @@
 window.hintsPrompts = {
     sr: {
-        HINTS_PROMPT: `Vi ste obrazovni AI asistent. Na osnovu liste pitanja, generišite tri elementa nagoveštaja za SVAKO pitanje koji će pomoći učenicima da razumeju tačan odgovor:
+        HINTS_PROMPT: `Vi ste obrazovni AI asistent. Na osnovu pitanja, generišite tačno tri nagoveštaja (hints) koji pomažu učeniku da dođe do tačnog odgovora bez otkrivanja samog odgovora.
 
-1. POČETNI NAGOVEŠTAJ (INITIAL HINT): Pružite blagi podsticaj koji aktivira učenikovo zaključivanje bez otkrivanja specifičnih detalja iz tačnog odgovora.
-Koristite jezik koji vodi, poput „Razmišljajte o...“, „Setite se kako smo naučili da...“ ili „Šta se dešava kada...“.
-Nemojte koristiti reči, fraze ili brojeve koji se pojavljuju u tačnom odgovoru.
+Nagoveštaji moraju pratiti ovu progresiju:
 
-2. DODATNI NAGOVEŠTAJ (FOLLOW-UP HINT): Ponudite jaču podršku koja sužava fokus, ali i dalje zahteva od učenika da samostalno izvede konačan zaključak.
-Povežite se sa logikom lekcije, a ne sa detaljima sadržaja.
-Podstaknite glasno razmišljanje: „Ako znate da ovaj proces počinje isparavanjem, šta se mora dogoditi sledeće?“.
+Nagoveštaj 1: Širi koncept
+Nagoveštaj 2: Specifičnije ograničenje
+Nagoveštaj 3: Vođeno razumevanje
 
-3. PONOVNO PODUČAVANJE (RE-TEACH): Koristeći priloženi sadržaj, ponovo podučite sadržaj kako biste razjasnili znanje koje učenik mora da zna da bi odgovorio na postavljeno pitanje.
-Pokažite učeniku koji sadržaj treba da pregleda i dajte primer bez davanja odgovora.
-VAŽNO!!! NEMOJTE DAVATI TAČAN ODGOVOR NITI CITIRATI NJEGOVE DELOVE!!!
+Svaki nagoveštaj mora:
 
-SVI nagoveštaji MORAJU biti na jeziku: {response_language}.
+Dodati nove informacije
+Smanjiti broj mogućih odgovora
+Približiti učenika odgovoru bez pravljenja istog očiglednim
 
-Vratite odgovor u JSON formatu koji odgovara priloženoj šemi, gde svaki element niza "hints" odgovara jednom pitanju iz liste pitanja.
+Nagoveštaji moraju odgovarati tipu pitanja:
 
-Nikada nemojte direktno navesti tačan odgovor u nagoveštajima.
-Koristite ulazne podatke za generisanje odgovora:
+Višestruki izbor (Multiple Choice) → pomoći u poređenju i evaluaciji
+Otvoreni odgovor (Open Response) → pomoći u generisanju i identifikaciji
+Tačno/Netačno (True/False) → pomoći u potvrđivanju ili odbacivanju tvrdnje
 
-Sadržaj lekcije: {lesson_context}
+Za Tačno/Netačno:
+
+Razložite tvrdnju
+Fokusirajte se na uzrok i posledicu ili definicije
+Pomozite učeniku da odluči da li je izjava tačna
+Nemojte samo objašnjavati temu bez povezivanja sa tvrdnjom
+Nemojte ostati samo deskriptivni bez pomaganja učeniku da odluči
+
+Za Višestruki izbor:
+
+Pomozite učeniku da razume šta čini tačan odgovor jedinstvenim
+Fokusirajte se na ključne razlike, obrasce ili uslove
+Nemojte reći „eliminišite“ ili „izbacite“
+Nemojte referencirati opcije odgovora (A, B, C, etc.)
+Nemojte davati strategije za polaganje testova
+
+Za Otvoreni odgovor:
+
+Pomozite učeniku da shvati koju vrstu odgovora traži
+Suzite od kategorije → svojstva → prepoznavanja
+Nemojte pominjati „opcije“
+Nemojte biti neodređeni ili se ponavljati
+Nemojte zahtevati pogađanje
+
+Nagoveštaj 1:
+
+Uvedite specifičnu kategoriju ili tip odgovora
+Jasno aktivirajte relevantno znanje
+Nemojte koristiti neodređene fraze poput „razmislite o...“
+Nemojte uključivati nijedan deo odgovora
+Nemojte ponavljati pitanje
+
+Nagoveštaj 2:
+
+Dodajte jedno jasno, konkretno svojstvo ili ograničenje
+Suzite moguće odgovore
+Nemojte ponavljati Nagoveštaj 1
+Nemojte davati delimične odgovore
+Nemojte koristiti jezik eliminacije
+
+Nagoveštaj 3:
+
+Objasnite ključni koncept potreban za rešavanje pitanja
+Uključite jednostavan primer (ne onaj iz originalnog pitanja)
+Pomozite učeniku da razume kako da zaključi do odgovora
+Nemojte uključivati odgovor niti bilo koji njegov deo
+Nemojte činiti odgovor očiglednim
+
+Stroga pravila:
+
+Nikada nemojte uključiti tačan odgovor (potpuno ili delimično)
+Nikada nemojte uključiti prva slova, fragmente ili skrivene tragove
+Nikada nemojte ponavljati pitanje
+Nikada nemojte davati strategije za testove
+Nikada nemojte ponavljati istu ideju kroz nagoveštaje
+
+Finalna provera pre slanja odgovora:
+
+Svaki nagoveštaj daje nove informacije
+Svaki nagoveštaj vodi učenika bliže odgovoru
+Odgovor nije očigledan bez razmišljanja
+
+Svi nagoveštaji moraju biti na jeziku: {response_language}
+
+Vratite JSON koristeći zahtevanu šemu. Svako pitanje mora imati tačno 3 nagoveštaja.
+
+Kontekst lekcije: {lesson_context}
 Naziv lekcije: {lesson_name}
 Opis lekcije: {lesson_description}
 Predmet: {subject}
 Nivo/Razred: {grade_level}
-Lista pitanja: {question_data}
-Jezik odgovora: {response_language}
-
-Obezbedite nagoveštaje na {response_language} jeziku.`,
+Podaci o pitanju: {question_data}
+Jezik odgovora: {response_language}`,
         HINTS_SCHEMA: {
             "title": "HintsResponse",
             "type": "object",
@@ -41,15 +104,15 @@ Obezbedite nagoveštaje na {response_language} jeziku.`,
                         "properties": {
                             "initial_hint": { 
                                 "type": "string",
-                                "description": "1. POČETNI NAGOVEŠTAJ: Pružite blagi podsticaj koji aktivira učenikovo zaključivanje bez otkrivanja specifičnih detalja iz tačnog odgovora. Fokusirajte se na podsećanje na koncept, definiciju ili odnos relevantan za pitanje. Koristite jezik koji vodi, poput „Razmislite o...“, „Setite se kako smo naučili da...“ ili „Šta se dešava kada...“. Nagoveštaj treba da uputi na proces ili princip, a ne na činjenicu. Ne koristite reči, fraze ili brojeve koji se pojavljuju u tačnom odgovoru."
+                                "description": "Nagoveštaj 1 (Širi koncept): Uvedite specifičnu kategoriju ili tip odgovora. Aktivirajte znanje bez ponavljanja pitanja ili davanja odgovora."
                             },
                             "follow_up_hint": { 
                                 "type": "string",
-                                "description": "2. DODATNI NAGOVEŠTAJ: Ponudite jaču podršku koja sužava fokus, ali i dalje zahteva od učenika da samostalno izvede konačan zaključak. Pružite strateški podsticaj, a ne delimičan odgovor: koristite kontraste ili eliminaciju, povežite sa logikom lekcije (obrascem razmišljanja, procesom ili odnosom) umesto sa detaljima sadržaja. Povežite sa vizuelnim elementima lekcije ako postoje. Podstaknite razmišljanje naglas: „Ako znate da ovaj proces počinje isparavanjem, šta se mora dogoditi sledeće?“"
+                                "description": "Nagoveštaj 2 (Specifičnije ograničenje): Dodajte konkretno svojstvo ili ograničenje. Ne ponavljajte prvi nagoveštaj i ne koristite eliminaciju."
                             },
                             "reteach_hint": { 
                                 "type": "string",
-                                "description": "3. PONOVNO PODUČAVANJE: Koristeći priloženi sadržaj, ponovo podučite gradivo kako biste razjasnili znanje potrebno za odgovor. Modelujte proces rešavanja ili dajte primer kako bi neko mogao doći do zaključka, bez direktnog davanja odgovora. Pokažite učeniku koji deo sadržaja lekcije treba ponovo da pročita i dajte primer bez davanja odgovora. VAŽNO!!! NEMOJTE DAVATI TAČAN ODGOVOR NITI GA POMINJATI!!!"
+                                "description": "Nagoveštaj 3 (Vođeno razumevanje): Objasnite ključni koncept i dajte jednostavan primer (ne iz pitanja). Pomozite u zaključivanju bez davanja odgovora."
                             }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
@@ -71,37 +134,99 @@ Obezbedite nagoveštaje na {response_language} jeziku.`,
         }
     },
     en: {
-        HINTS_PROMPT: `You are an educational AI assistant. Given a list of questions, generate three hint elements for EACH question to help students understand the correct answer: 
+        HINTS_PROMPT: `You are an educational AI assistant. Given a question, generate exactly three hints that help a student arrive at the correct answer without revealing it.
 
-1. INITIAL HINT: Provide a gentle prompt that activates the student’s reasoning without revealing specific details from the correct answer. 
-Use guiding language like “Think about…”, “Remember how we learned that…" or “What happens when…”. 
-Do not use words, phrases, or numbers that appear in the correct answer. 
- 
-2. FOLLOW-UP HINT: Offer a stronger scaffold that narrows focus but still requires the student to draw the final conclusion independently. 
-Link back to lesson logic rather than content details. 
-Encourage reasoning aloud: “If you know this process starts with evaporation, what must happen next?” 
- 
-3. RE-TEACH: Using the content provided, reteach the content to clarify the knowledge the student must know to answer the question provided. 
-Show the student what content they should review and also give an example without giving the answer. 
-IMPORTANT!!! DO NOT GIVE THE ANSWER OR QUOTE PARTS OF IT!!! 
+Hints must follow this progression:
 
-ALL hints MUST be in {response_language} language.
- 
-Return your response in JSON format according to the provided schema, where each element in the "hints" array corresponds to one question from the question data.
- 
-The hints should progressively help students arrive at the answer while maintaining educational value. 
-Never directly state the correct answer in the hints. 
-Use the input data to generate your response: 
- 
+Hint 1: Broad concept
+Hint 2: More specific constraint
+Hint 3: Guided understanding
+
+Each hint must:
+
+Add new information
+Reduce the number of possible answers
+Move the student closer to the answer without making it obvious
+
+Hints must match the question type:
+
+Multiple Choice → help compare and evaluate
+Open Response → help generate and identify
+True/False → help validate or reject a claim
+
+For True/False:
+
+Break down the claim
+Focus on cause-and-effect or definitions
+Help the student decide if the statement is correct
+Do not only explain the topic without connecting to the claim
+Do not stay descriptive without helping the student decide
+
+For Multiple Choice:
+
+Help the student understand what makes the correct answer unique
+Focus on key differences, patterns, or conditions
+Do not say “eliminate” or “rule out”
+Do not reference answer choices (A, B, C, etc.)
+Do not give test-taking strategies
+
+For Open Response:
+
+Help the student figure out what kind of answer they are looking for
+Narrow from category → property → recognition
+Do not mention “options”
+Do not stay vague or repetitive
+Do not require guessing
+
+Hint 1:
+
+Introduce a specific category or type of answer
+Activate relevant knowledge clearly
+Do not use vague phrases like “think about…”
+Do not include any part of the answer
+Do not restate the question
+
+Hint 2:
+
+Add one clear, concrete property or constraint
+Narrow the possible answers
+Do not repeat Hint 1
+Do not give partial answers
+Do not use elimination language
+
+Hint 3:
+
+Explain the key concept needed to solve the question
+Include a simple example (not the original question)
+Help the student understand how to reason to the answer
+Do not include the answer or any part of it
+Do not make the answer obvious
+
+Strict rules:
+
+Never include the correct answer (fully or partially)
+Never include first letters, fragments, or hidden clues
+Never restate the question
+Never give test-taking strategies
+Never repeat the same idea across hints
+
+Final check before responding:
+
+Each hint gives new information
+Each hint moves the student closer to the answer
+The answer is not obvious without thinking
+
+All hints must be in {response_language}
+
+Return JSON using the required schema. Each question must have exactly 3 hints.
+
 Lesson Context: {lesson_context}
-Lesson name: {lesson_name} 
-Lesson description: {lesson_description} 
-Subject: {subject} 
-grade_level: {grade_level} 
-Question data: {question_data} 
-Response language: {response_language} 
- 
-Provide hints on {response_language} language.`,
+Lesson Name: {lesson_name}
+Lesson Description: {lesson_description}
+Subject: {subject}
+Grade Level: {grade_level}
+Question Data: {question_data}
+Response Language: {response_language}`,
         HINTS_SCHEMA: {
             "title": "HintsResponse",
             "type": "object",
@@ -113,15 +238,15 @@ Provide hints on {response_language} language.`,
                         "properties": {
                             "initial_hint": { 
                                 "type": "string",
-                                "description": "1. INITIAL HINT: Provide a gentle prompt that activates the student’s reasoning without revealing specific details from the correct answer. Focus on reminding the student of a concept, definition, or relationship relevant to the question. Use guiding language like “Think about…”, “Remember how we learned that…\" (drawing from student content), or “What happens when…”. The hint should point toward a process or principle, not a fact. Do not use words, phrases, or numbers that appear in the correct answer."
+                                "description": "Hint 1 (Broad concept): Introduce a specific category or type of answer. Activate relevant knowledge without restating the question or giving the answer."
                             },
                             "follow_up_hint": { 
                                 "type": "string",
-                                "description": "2. FOLLOW-UP HINT: Offer a stronger scaffold that narrows focus but still requires the student to draw the final conclusion independently. Provide a strategic nudge, not a partial answer, such as: Use contrast or elimination cues (“Which of these steps doesn’t fit the pattern?”). Link back to lesson logic (the reasoning pattern, process, or relationship students learned in the lesson) rather than content details. Link back to lesson visuals, if provided in lesson (diagrams, models, or examples used to explain the concept). Encourage reasoning aloud: “If you know this process starts with evaporation, what must happen next?”"
+                                "description": "Hint 2 (Specific constraint): Add one concrete property or constraint to narrow down answers. Do not repeat Hint 1 or use elimination language."
                             },
                             "reteach_hint": { 
                                 "type": "string",
-                                "description": "3. RE-TEACH: Using the content provided, reteach the content to clarify the knowledge the student must know to answer the question provided. Demonstrate how to approach answering the question by modeling the process or providing an example of how someone might figure it out, without directly giving the answer. Show the student what content they should review (where in the lesson content do they need to reread) and also give an example without giving the answer. IMPORTANT!!! DO NOT GIVE THE ANSWER OR MENTION IT!!!"
+                                "description": "Hint 3 (Guided understanding): Explain the key concept and include a simple example (NOT the original question). Help the student reason without giving the answer."
                             }
                         },
                         "required": ["initial_hint", "follow_up_hint", "reteach_hint"],
@@ -274,76 +399,76 @@ Proučavanjem kratera, fosila i klimatskih pomaka, naučnici ne gledaju samo una
     sampleQuestions: {
         en: [
             {
-                "question": "Which metal, common in asteroids, was found in a global layer in rocks after the dinosaur extinction?",
+                "question": "What direct evidence do scientists use to determine the exact timeline of an asteroid impact?",
                 "questionType": 1,
-                "answers": ["Gold", "Iridium", "Iron", "Aluminum"],
+                "answers": ["Impact craters", "Sediment layers", "Climate records", "Cave paintings"],
                 "correctAnswers": [1],
-                "correctAnswerText": "Iridium"
+                "correctAnswerText": "Sediment layers"
             },
             {
-                "question": "What is the name of the crater in Mexico associated with the dinosaur extinction?",
+                "question": "What happened to the sunlight after the Chicxulub asteroid hit Earth?",
                 "questionType": 1,
-                "answers": ["Barringer Crater", "Chicxulub Crater", "Vredefort Crater", "Sudbury Basin"],
-                "correctAnswers": [1],
-                "correctAnswerText": "Chicxulub Crater"
+                "answers": ["It became much brighter", "It stayed the same", "It was blocked for months by a global debris cloud", "It turned red"],
+                "correctAnswers": [2],
+                "correctAnswerText": "It was blocked for months by a global debris cloud"
             },
             {
-                "question": "True or False: The asteroid impact caused a global winter by blocking sunlight with a debris cloud.",
+                "question": "True or False: The Chicxulub crater was easily found on the surface because of its perfect circular shape.",
                 "questionType": 4,
                 "answers": ["True", "False"],
-                "correctAnswers": [0],
-                "correctAnswerText": "True"
+                "correctAnswers": [1],
+                "correctAnswerText": "False"
             },
             {
-                "question": "Describe how the asteroid impact affected the animal populations on Earth.",
+                "question": "Explain why plant fossils often disappear suddenly in the rock layers corresponding to the impact period.",
                 "questionType": 0,
                 "answers": [],
                 "correctAnswers": [],
-                "correctAnswerText": "It caused a mass extinction of 75% of life, including most dinosaurs, primarily due to climate change and loss of food sources."
+                "correctAnswerText": "The debris cloud blocked sunlight, preventing photosynthesis and killing many plants, which is then reflected in the fossil record."
             },
             {
-                "question": "How do rock layers act as a timeline for scientists?",
+                "question": "How did the asteroid impact indirectly benefit the evolution of mammals?",
                 "questionType": 0,
                 "answers": [],
                 "correctAnswers": [],
-                "correctAnswerText": "Rock layers build up over millions of years, trapping fossils and minerals that show a sequence of events, much like a history book."
+                "correctAnswerText": "By eliminating the dominant dinosaurs, the impact cleared ecological niches, which allowed mammals to evolve rapidly and eventually lead to humans."
             }
         ],
         sr: [
             {
-                "question": "Koji metal, uobičajen u asteroidima, je pronađen u globalnom sloju stena nakon izumiranja dinosaurusa?",
+                "question": "Šta naučnici koriste kao preciznu 'vremensku liniju' da odrede kada se tačno dogodio udar asteroida?",
                 "questionType": 1,
-                "answers": ["Zlato", "Iridijum", "Gvožđe", "Aluminijum"],
+                "answers": ["Udarni krateri", "Slojevi sedimenta", "Klimatski zapisi", "Pećinski crteži"],
                 "correctAnswers": [1],
-                "correctAnswerText": "Iridijum"
+                "correctAnswerText": "Slojevi sedimenta"
             },
             {
-                "question": "Kako se zove krater u Meksiku koji se povezuje sa izumiranjem dinosaurusa?",
+                "question": "Šta se dogodilo sa sunčevom svetlošću nakon udara asteroida Čiksulub?",
                 "questionType": 1,
-                "answers": ["Baringerov krater", "Krater Čiksulub", "Krater Vredefort", "Sedberi basen"],
-                "correctAnswers": [1],
-                "correctAnswerText": "Krater Čiksulub"
+                "answers": ["Postala je mnogo svetlija", "Ostala je ista", "Bila je blokirana mesecima globalnim oblakom krhotina", "Postala je crvena"],
+                "correctAnswers": [2],
+                "correctAnswerText": "Bila je blokirana mesecima globalnim oblakom krhotina"
             },
             {
-                "question": "Tačno ili netačno: Udar asteroida je izazvao globalnu zimu blokirajući sunčevu svetlost oblakom krhotina.",
+                "question": "Tačno ili netačno: Krater Čiksulub je lako pronađen na površini jer ima savršen kružni oblik.",
                 "questionType": 4,
                 "answers": ["Tačno", "Netačno"],
-                "correctAnswers": [0],
-                "correctAnswerText": "Tačno"
+                "correctAnswers": [1],
+                "correctAnswerText": "Netačno"
             },
             {
-                "question": "Opišite kako je udar asteroida uticao na populacije životinja na Zemlji.",
+                "question": "Objasnite zašto fosili biljaka često naglo nestaju u slojevima stena koji odgovaraju periodu udara.",
                 "questionType": 0,
                 "answers": [],
                 "correctAnswers": [],
-                "correctAnswerText": "Izazvao je masovno istrebljenje 75% života, uključujući većinu dinosaurusa, prvenstveno zbog klimatskih promena i gubitka izvora hrane."
+                "correctAnswerText": "Oblak krhotina je blokirao sunčevu svetlost, onemogućavajući fotosintezu, što je dovelo do izumiranja mnogih biljaka, što se vidi u fosilnom zapisu."
             },
             {
-                "question": "Kako slojevi stena deluju kao vremenska linija za naučnike?",
+                "question": "Kako je udar asteroida indirektno pogodovao evoluciji sisara?",
                 "questionType": 0,
                 "answers": [],
                 "correctAnswers": [],
-                "correctAnswerText": "Slojevi stena se nakupljaju milionima godina, čuvajući fosile i minerale koji prikazuju redosled događaja, slično kao istorijska knjiga."
+                "correctAnswerText": "Eliminacijom dominantnih dinosaurusa, udar je oslobodio ekološke niše, što je omogućilo sisarima da se ubrzano razvijaju i na kraju dovedu do ljudi."
             }
         ]
     }

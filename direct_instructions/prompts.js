@@ -1,5 +1,5 @@
 window.promptsEN = {
-STEP0_PROMPT_TEMPLATE: `
+    STEP0_PROMPT_TEMPLATE: `
 Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
                     
 Based on Unit Subject, NGSS Standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), and the requested Number of Lessons, generate a JSON response that includes a cohesive UnitDescription and a non-overlapping list of lesson “containers”.
@@ -56,7 +56,7 @@ Constraints:
 
 Output MUST be valid JSON matching the schema. Use compact formatting (no extra blank lines).
 `,
-PER_LESSON_PROMPT_TEMPLATE: `
+    PER_LESSON_PROMPT_TEMPLATE: `
 Create ONE lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
 You MUST output valid JSON that matches the provided JSON schema exactly (LessonPlanResponse with a single "LessonPlan" object). Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
 Unit Subject: 
@@ -103,7 +103,7 @@ OUTPUT REQUIREMENTS:
 - Output MUST be a SINGLE lesson plan only.
 - No HTML. No emojis. No markdown. Plain text inside string fields.
 `,
-HTML_LESSON_PROMPT_TEMPLATE: `
+    HTML_LESSON_PROMPT_TEMPLATE: `
 You will receive ONE JSON object that strictly follows the UnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
 
 INPUT FORMAT
@@ -367,7 +367,7 @@ FINAL INSTRUCTIONS
     - Make sure the structure and ordering mirror the JSON schema and the patterns described above.
     - Do NOT include the lesson title (do not use <h2>); begin your output directly with the <h3>💭 Essential Questions</h3> section and continue from there.
 `,
-UNIT_COMMON_HTML_PROMPT_TEMPLATE: `
+    UNIT_COMMON_HTML_PROMPT_TEMPLATE: `
 You will receive ONE JSON object that strictly follows the UnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
                    
 INPUT FORMAT
@@ -416,313 +416,334 @@ GLOBAL RULES
     -  <h2>📏 Standards Aligned</h2>
     -  <ul> with each string from StandardsAligned as <li>.
 `,
-STEP0_SCHEMA: {
-    "title": "UnitPlanResponse",
-    "type": "object",
-    "properties": {
-        "UnitDescription": {
-            "type": "object",
-            "properties": {
-                "Description": {
-                    "type": "string",
-                    "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
-                },
-                "EssentialQuestions": {
-                    "type": "array",
-                    "minItems": 3,
-                    "maxItems": 3,
-                    "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "StudentLearningObjectives": {
-                    "type": "array",
-                    "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "StandardsAligned": {
-                    "type": "array",
-                    "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "Description",
-                "EssentialQuestions",
-                "StudentLearningObjectives",
-                "StandardsAligned"
-            ],
-            "additionalProperties": false
-        },
-        "Lessons": {
-            "type": "array",
-            "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
-            "items": {
+    STEP0_SCHEMA: {
+        "title": "UnitPlanResponse",
+        "type": "object",
+        "properties": {
+            "UnitDescription": {
                 "type": "object",
                 "properties": {
-                    "lessonNumber": {
-                        "type": "integer",
-                        "description": "Ordering number of a lesson. 1 Based."
-                    },
-                    "lessonTitle": {
+                    "Description": {
                         "type": "string",
-                        "description": "Short lesson title as plain text."
+                        "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
                     },
-                    "lessonOutline": {
-                        "type": "string",
-                        "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+                    "EssentialQuestions": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "StudentLearningObjectives": {
+                        "type": "array",
+                        "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "StandardsAligned": {
+                        "type": "array",
+                        "description": "List all unique NGSS standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "required": [
-                    "lessonNumber",
-                    "lessonTitle",
-                    "lessonOutline"
+                    "Description",
+                    "EssentialQuestions",
+                    "StudentLearningObjectives",
+                    "StandardsAligned"
                 ],
                 "additionalProperties": false
+            },
+            "Lessons": {
+                "type": "array",
+                "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "lessonNumber": {
+                            "type": "integer",
+                            "description": "Ordering number of a lesson. 1 Based."
+                        },
+                        "lessonTitle": {
+                            "type": "string",
+                            "description": "Short lesson title as plain text."
+                        },
+                        "lessonOutline": {
+                            "type": "string",
+                            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+                        }
+                    },
+                    "required": [
+                        "lessonNumber",
+                        "lessonTitle",
+                        "lessonOutline"
+                    ],
+                    "additionalProperties": false
+                }
             }
+        },
+        "required": [
+            "UnitDescription",
+            "Lessons"
+        ],
+        "additionalProperties": false,
+        "x-removablePaths": {
+            "EssentialQuestions": [
+                "UnitDescription.EssentialQuestions"
+            ],
+            "StandardsAligned": [
+                "UnitDescription.StandardsAligned"
+            ]
         }
     },
-    "required": [
-        "UnitDescription",
-        "Lessons"
-    ],
-    "additionalProperties": false,
-    "x-removablePaths": {
-        "EssentialQuestions": [
-            "UnitDescription.EssentialQuestions"
-        ],
-        "StandardsAligned": [
-            "UnitDescription.StandardsAligned"
-        ]
-    }
-},
-PER_LESSON_SCHEMA: {
-    "title": "LessonPlanResponse",
-    "type": "object",
-    "properties": {
-        "LessonDescription": {
-            "type": "object",
-            "properties": {
-                "EssentialQuestions": {
-                    "type": "array",
-                    "description": "Just paste all the essential questions that are generated in unit level in same order.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "KeyVocabulary": {
-                    "type": "array",
-                    "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "StudentLearningObjectives": {
-                    "type": "array",
-                    "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "StandardsAligned": {
-                    "type": "string",
-                    "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'"
-                },
-                "AssessPriorKnowledge": {
-                    "type": "string",
-                    "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
-                },
-                "DirectPresentation": {
-                    "type": "object",
-                    "description": "Full 'Direct Presentation' section as plain text. This is the FIRST in-class activity and should last NO LONGER THAN 10 minutes.",
-                    "properties": {
-                        "Materials": {
-                            "type": "array",
-                            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "InstructionsForTeachers": {
-                            "type": "string",
-                            "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
-                        },
-                        "AnticipatedMisconceptions": {
-                            "type": "string",
-                            "description": "Common misconceptions and exact correction language for addressing each one"
-                        },
-                        "TranscendentThinking": {
-                            "type": "string",
-                            "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding"
-                        },
-                        "QuickCheck": {
-                            "type": "string",
-                            "description": "A final check of understanding for a student learning objective already declared in the lesson. This MUST be an individual task for EVERY student to complete (not just a verbal question to the class), e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'. Include 2-3 specific expected student responses."
+    PER_LESSON_SCHEMA: {
+        "title": "LessonPlanResponse",
+        "type": "object",
+        "properties": {
+            "LessonDescription": {
+                "type": "object",
+                "properties": {
+                    "EssentialQuestions": {
+                        "type": "array",
+                        "description": "Just paste all the essential questions that are generated in unit level in same order.",
+                        "items": {
+                            "type": "string"
                         }
                     },
-                    "required": [
-                        "Materials",
-                        "InstructionsForTeachers",
-                        "AnticipatedMisconceptions",
-                        "TranscendentThinking",
-                        "QuickCheck"
-                    ],
-                    "additionalProperties": false
-                },
-                "GuidedPractice": {
-                    "type": "object",
-                    "description": "Structured Guided Practice section with separate fields for materials, instructions, differentiation, and optional accommodations.",
-                    "properties": {
-                        "Materials": {
-                            "type": "array",
-                            "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "InstructionsForTeachers": {
-                            "type": "string",
-                            "description": "400–600 words. Format as a strict numbered list of teacher actions (1, 2, 3...). Each step should combine teacher actions (Show:, On the board, write:, Demonstrate:) and teacher script (Say:). Step 6 MUST be 'As students work, circulate and use these prompts:' followed by 2-4 circulation prompts, each with its own 'Expected Student Responses' label and bulleted sample answers. End the section with a 'Quick Check' bold header, the individual task, and sample responses."
-                        },
-                        "Differentiation": {
-                            "type": "string",
-                            "description": "Three-part differentiation strategies including: (1) Language Learners support (2-3 strategies), (2) Additional Scaffolding support (2-3 strategies), (3) Go Deeper extensions (1-2 activities with expected responses)"
-                        },
-                        "AccommodationsAndModifications": {
-                            "type": "object",
-                            "description": "General accommodations for the class plus individual student support plans. The model must use ONLY the student names and plans provided in the prompt.",
-                            "properties": {
-                                "General": {
-                                    "type": "string",
-                                    "description": "General classroom supports and modifications that apply to most or all students during this activity."
-                                },
-                                "IndividualSupport": {
-                                    "type": "array",
-                                    "description": "Exactly the provided students. PlanProvided must match prompt exactly. Add concrete implementation in PlanImplementation.",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "StudentName": {
-                                                "type": "string"
-                                            },
-                                            "PlanProvided": {
-                                                "type": "string",
-                                                "description": "MUST match the plan text from the prompt exactly."
-                                            },
-                                            "PlanImplementation": {
-                                                "type": "string",
-                                                "description": "Concrete tools/stems/visuals/organizers for this task (e.g., exact sentence frames, organizer layout, labels)."
-                                            }
-                                        },
-                                        "required": [
-                                            "StudentName",
-                                            "PlanProvided",
-                                            "PlanImplementation"
-                                        ],
-                                        "additionalProperties": false
-                                    }
+                    "KeyVocabulary": {
+                        "type": "array",
+                        "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "StudentLearningObjectives": {
+                        "type": "array",
+                        "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "StandardsAligned": {
+                        "type": "string",
+                        "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'NGSS MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'"
+                    },
+                    "AssessPriorKnowledge": {
+                        "type": "string",
+                        "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
+                    },
+                    "DirectPresentation": {
+                        "type": "object",
+                        "description": "Full 'Direct Presentation' section as plain text. This is the FIRST in-class activity and should last NO LONGER THAN 10 minutes.",
+                        "properties": {
+                            "Materials": {
+                                "type": "array",
+                                "description": "List of required materials (e.g. visual aids, markers, etc.)",
+                                "items": {
+                                    "type": "string"
                                 }
                             },
-                            "required": [
-                                "General",
-                                "IndividualSupport"
-                            ],
-                            "additionalProperties": false
-                        }
-                    },
-                    "required": [
-                        "Materials",
-                        "InstructionsForTeachers",
-                        "Differentiation",
-                        "AccommodationsAndModifications"
-                    ],
-                    "additionalProperties": false
-                },
-                "IndependentPractice": {
-                    "type": "string",
-                    "description": "Full 'Independent Practice' section as plain text. Structure must follow this format: Start with 'Materials' header and simple bulleted list of needed items. A 'Purpose' paragraph explaining how practice strengthens understanding and transfer. 3-4 sequentially numbered tasks labeled as 'Task 1 (DOK level):', 'Task 2 (DOK level):', etc. For each task: - Brief 'Teacher Notes:' explaining connection to lesson/goals. - Required 'Say:' statement with exact teacher prompt. - 'Expected Student Responses' with sample answers. - 'Success Criteria' listing 2-4 elements showing mastery. 'Reflection' section with: - 2 self-regulation prompts about managing learning. - 2 transcendent questions about broader impact/future. 'Early Finishers' extension task that: - Uses same core concepts at higher depth. - Lists specific elements students must address. - Requires applying accurate content principles. See solar system example for detailed format model."
-                },
-                "ReviewAndSpacedRetrieval": {
-                    "type": "string",
-                    "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text."
-                },
-                "FormativeAssessment": {
-                    "type": "string",
-                    "description": "Full 'Formative Assessment' section as plain text. This MUST contain exactly 4 question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', 'Prompt 3 (DOK 3):', and 'Prompt 4 (DOK 4):'. For each prompt: - Question that tests understanding at stated DOK level - Header '✅ Expected Student Responses' - 1-2 sample responses showing mastery. DO NOT include a 'Reflection' section. Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit?' ✅ Expected Student Responses - 'Gravity and forward motion.' [Continue for Prompts 2-4]"
-                },
-                "StudentPractice": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": [
-                        "StudentPractice_TeacherNotes",
-                        "StudentPractice_Tasks",
-                        "StudentPractice_InterleavingIfMath"
-                    ],
-                    "properties": {
-                        "StudentPractice_TeacherNotes": {
-                            "type": "string",
-                            "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this lesson. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant lesson content, followed by an explanation of how these tasks strengthen long-term retention."
+                            "InstructionsForTeachers": {
+                                "type": "string",
+                                "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+                            },
+                            "AnticipatedMisconceptions": {
+                                "type": "string",
+                                "description": "Common misconceptions and exact correction language for addressing each one"
+                            },
+                            "TranscendentThinking": {
+                                "type": "string",
+                                "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding"
+                            },
+                            "QuickCheck": {
+                                "type": "string",
+                                "description": "A final check of understanding for a student learning objective already declared in the lesson. This MUST be an individual task for EVERY student to complete (not just a verbal question to the class), e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'. Include 2-3 specific expected student responses."
+                            }
                         },
-                        "StudentPractice_Tasks": {
-                            "type": "array",
-                            "minItems": 2,
-                            "maxItems": 3,
-                            "description": "Tasks should align to the lesson focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
-                            "items": {
+                        "required": [
+                            "Materials",
+                            "InstructionsForTeachers",
+                            "AnticipatedMisconceptions",
+                            "TranscendentThinking",
+                            "QuickCheck"
+                        ],
+                        "additionalProperties": false
+                    },
+                    "GuidedPractice": {
+                        "type": "object",
+                        "description": "Structured Guided Practice section with separate fields for materials, instructions, differentiation, and optional accommodations.",
+                        "properties": {
+                            "Materials": {
+                                "type": "array",
+                                "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "InstructionsForTeachers": {
+                                "type": "string",
+                                "description": "400–600 words. Format as a strict numbered list of teacher actions (1, 2, 3...). Each step should combine teacher actions (Show:, On the board, write:, Demonstrate:) and teacher script (Say:). Step 6 MUST be 'As students work, circulate and use these prompts:' followed by 2-4 circulation prompts, each with its own 'Expected Student Responses' label and bulleted sample answers. End the section with a 'Quick Check' bold header, the individual task, and sample responses."
+                            },
+                            "Differentiation": {
+                                "type": "string",
+                                "description": "Three-part differentiation strategies including: (1) Language Learners support (2-3 strategies), (2) Additional Scaffolding support (2-3 strategies), (3) Go Deeper extensions (1-2 activities with expected responses)"
+                            },
+                            "AccommodationsAndModifications": {
                                 "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                    "DOK",
-                                    "StudentDirections",
-                                    "SuccessCriteria"
-                                ],
+                                "description": "General accommodations for the class plus individual student support plans. The model must use ONLY the student names and plans provided in the prompt.",
                                 "properties": {
-                                    "DOK": {
+                                    "General": {
                                         "type": "string",
-                                        "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                                        "description": "General classroom supports and modifications that apply to most or all students during this activity."
                                     },
-                                    "StudentDirections": {
-                                        "type": "string"
-                                    },
-                                    "SuccessCriteria": {
+                                    "IndividualSupport": {
                                         "type": "array",
+                                        "description": "Exactly the provided students. PlanProvided must match prompt exactly. Add concrete implementation in PlanImplementation.",
                                         "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "StudentName": {
+                                                    "type": "string"
+                                                },
+                                                "PlanProvided": {
+                                                    "type": "string",
+                                                    "description": "MUST match the plan text from the prompt exactly."
+                                                },
+                                                "PlanImplementation": {
+                                                    "type": "string",
+                                                    "description": "Concrete tools/stems/visuals/organizers for this task (e.g., exact sentence frames, organizer layout, labels)."
+                                                }
+                                            },
+                                            "required": [
+                                                "StudentName",
+                                                "PlanProvided",
+                                                "PlanImplementation"
+                                            ],
+                                            "additionalProperties": false
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "General",
+                                    "IndividualSupport"
+                                ],
+                                "additionalProperties": false
+                            }
+                        },
+                        "required": [
+                            "Materials",
+                            "InstructionsForTeachers",
+                            "Differentiation",
+                            "AccommodationsAndModifications"
+                        ],
+                        "additionalProperties": false
+                    },
+                    "IndependentPractice": {
+                        "type": "string",
+                        "description": "Full 'Independent Practice' section as plain text. Structure must follow this format: Start with 'Materials' header and simple bulleted list of needed items. A 'Purpose' paragraph explaining how practice strengthens understanding and transfer. 3-4 sequentially numbered tasks labeled as 'Task 1 (DOK level):', 'Task 2 (DOK level):', etc. For each task: - Brief 'Teacher Notes:' explaining connection to lesson/goals. - Required 'Say:' statement with exact teacher prompt. - 'Expected Student Responses' with sample answers. - 'Success Criteria' listing 2-4 elements showing mastery. 'Reflection' section with: - 2 self-regulation prompts about managing learning. - 2 transcendent questions about broader impact/future. 'Early Finishers' extension task that: - Uses same core concepts at higher depth. - Lists specific elements students must address. - Requires applying accurate content principles. See solar system example for detailed format model."
+                    },
+                    "ReviewAndSpacedRetrieval": {
+                        "type": "string",
+                        "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text."
+                    },
+                    "FormativeAssessment": {
+                        "type": "string",
+                        "description": "Full 'Formative Assessment' section as plain text. This MUST contain exactly 4 question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', 'Prompt 3 (DOK 3):', and 'Prompt 4 (DOK 4):'. For each prompt: - Question that tests understanding at stated DOK level - Header '✅ Expected Student Responses' - 1-2 sample responses showing mastery. DO NOT include a 'Reflection' section. Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit?' ✅ Expected Student Responses - 'Gravity and forward motion.' [Continue for Prompts 2-4]"
+                    },
+                    "StudentPractice": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "StudentPractice_TeacherNotes",
+                            "StudentPractice_Tasks",
+                            "StudentPractice_InterleavingIfMath"
+                        ],
+                        "properties": {
+                            "StudentPractice_TeacherNotes": {
+                                "type": "string",
+                                "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this lesson. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant lesson content, followed by an explanation of how these tasks strengthen long-term retention."
+                            },
+                            "StudentPractice_Tasks": {
+                                "type": "array",
+                                "minItems": 2,
+                                "maxItems": 3,
+                                "description": "Tasks should align to the lesson focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+                                "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                        "DOK",
+                                        "StudentDirections",
+                                        "SuccessCriteria"
+                                    ],
+                                    "properties": {
+                                        "DOK": {
+                                            "type": "string",
+                                            "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                                        },
+                                        "StudentDirections": {
                                             "type": "string"
+                                        },
+                                        "SuccessCriteria": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
                                         }
                                     }
                                 }
+                            },
+                            "StudentPractice_InterleavingIfMath": {
+                                "type": "string",
+                                "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
                             }
-                        },
-                        "StudentPractice_InterleavingIfMath": {
-                            "type": "string",
-                            "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
                         }
                     }
-                }
-            },
-            "required": [
-                "EssentialQuestions",
-                "KeyVocabulary",
-                "StudentLearningObjectives",
-                "StandardsAligned",
-                "AssessPriorKnowledge",
-                "DirectPresentation",
-                "GuidedPractice",
-                "IndependentPractice",
-                "ReviewAndSpacedRetrieval",
-                "FormativeAssessment",
-                "StudentPractice"
+                },
+                "required": [
+                    "EssentialQuestions",
+                    "KeyVocabulary",
+                    "StudentLearningObjectives",
+                    "StandardsAligned",
+                    "AssessPriorKnowledge",
+                    "DirectPresentation",
+                    "GuidedPractice",
+                    "IndependentPractice",
+                    "ReviewAndSpacedRetrieval",
+                    "FormativeAssessment",
+                    "StudentPractice"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "required": [
+            "LessonDescription"
+        ],
+        "additionalProperties": false,
+        "x-removablePaths": {
+            "EssentialQuestions": [
+                "LessonDescription.EssentialQuestions"
             ],
-            "additionalProperties": false
+            "StandardsAligned": [
+                "LessonDescription.StandardsAligned"
+            ],
+            "AssessPriorKnowledge": [
+                "LessonDescription.AssessPriorKnowledge"
+            ],
+            "SpacedLearningAndRetrieval": [
+                "LessonDescription.ReviewAndSpacedRetrieval"
+            ],
+            "FormativeAssessment": [
+                "LessonDescription.FormativeAssessment"
+            ],
+            "AccommodationsAndModifications": [
+                "GuidedPractice.AccommodationsAndModifications"
+            ]
         }
-    },
-    "required": [
-        "LessonDescription"
-    ],
-}
+    }
 };
