@@ -20,7 +20,9 @@
     status: () => $("status"),
     log: () => $("log"),
     jsonOutput: () => $("jsonOutput"),
-    previewContainer: () => $("previewContainer")
+    previewContainer: () => $("previewContainer"),
+    hintsPromptTemplate: () => $("hintsPromptTemplate"),
+    hintsSchemaTemplate: () => $("hintsSchemaTemplate")
   };
 
   let currentAbortController = null;
@@ -282,26 +284,27 @@
         const apiKey = els.apiKey().value.trim();
         const model = els.model().value;
         const endpoint = DEFAULT_ENDPOINT;
-        const hintsPrompts = window.hintsPrompts[currentLang] || window.hintsPrompts.en;
+        const hintsPromptTemplate = els.hintsPromptTemplate().value;
+        const hintsSchemaObj = JSON.parse(els.hintsSchemaTemplate().value);
         
         const vars = {
             lesson_context: els.context().value,
             lesson_name: els.workItemTitle().value,
-            lesson_description: hintsPrompts.meta.lessonDescription,
+            lesson_description: (window.hintsPrompts[currentLang] || window.hintsPrompts.en).meta.lessonDescription,
             subject: els.subject().value,
             grade_level: els.gradeLevel().value,
             question_data: JSON.stringify([ { question: q.question, options: q.answers, rationale: q.rationale } ]),
             response_language: currentLang === 'sr' ? 'Serbian' : 'English'
         };
 
-        const finalPrompt = fillTemplate(hintsPrompts.HINTS_PROMPT, vars);
+        const finalPrompt = fillTemplate(hintsPromptTemplate, vars);
         
         const resultText = await callApiStream({
             endpoint,
             apiKey,
             model,
             prompt: finalPrompt,
-            schemaObj: hintsPrompts.HINTS_SCHEMA
+            schemaObj: hintsSchemaObj
         });
 
         const data = JSON.parse(resultText);

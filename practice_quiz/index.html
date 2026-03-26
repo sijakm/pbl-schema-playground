@@ -691,8 +691,19 @@ Write 4â€“5 sentences describing what you would look for and what questions youâ
     <h3>Prompt Template</h3>
     <textarea id="promptTemplate" style="height:300px;"></textarea>
     
-    <label>JSON Schema</label>
-    <textarea id="schemaTemplate" style="height:200px;"></textarea>
+    <div style="display:none;">
+      <label>JSON Schema (Hidden)</label>
+      <textarea id="schemaTemplate" style="height:200px;"></textarea>
+    </div>
+  </div>
+
+  <div class="row card">
+    <h3>Hints Configuration</h3>
+    <label for="hintsPromptTemplate">Hints Prompt Template</label>
+    <textarea id="hintsPromptTemplate" style="height:300px;"></textarea>
+
+    <label for="hintsSchemaTemplate">Hints JSON Schema</label>
+    <textarea id="hintsSchemaTemplate" style="height:200px;"></textarea>
   </div>
 
   <div class="row">
@@ -728,6 +739,10 @@ Write 4â€“5 sentences describing what you would look for and what questions youâ
         const p = window.practiceQuizPrompts[lang] || window.practiceQuizPrompts.en;
         document.getElementById('promptTemplate').value = (p.PRACTICE_QUIZ_PROMPT || "").trim();
         document.getElementById('schemaTemplate').value = JSON.stringify(p.PRACTICE_QUIZ_SCHEMA, null, 2);
+
+        const hp = window.hintsPrompts[lang] || window.hintsPrompts.en;
+        document.getElementById('hintsPromptTemplate').value = (hp.HINTS_PROMPT || "").trim();
+        document.getElementById('hintsSchemaTemplate').value = JSON.stringify(hp.HINTS_SCHEMA, null, 2);
     }
 
     // Initialize templates (default to English as per previous fix)
