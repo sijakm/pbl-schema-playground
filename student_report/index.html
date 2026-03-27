@@ -191,6 +191,12 @@
       <label for="apiKey">Access Password</label>
       <input id="apiKey" type="password" placeholder="Enter password..." />
 
+      <label for="languageSelect">Jezik / Language</label>
+      <select id="languageSelect">
+        <option value="en">English</option>
+        <option value="sr" selected>Srpski</option>
+      </select>
+
       <label for="modelSelect">OpenAI Model</label>
       <select id="modelSelect">
         <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
@@ -286,6 +292,7 @@ TRENDS: Very high engagement but steady outline since intro to Logarithms in Feb
 
     <div class="row">
       <button id="generateBtn" type="button">Generate Feedback</button>
+      <button id="downloadPromptsBtn" type="button" style="background: #64748b;">Download Prompts</button>
       <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
     </div>
 
@@ -302,9 +309,11 @@ TRENDS: Very high engagement but steady outline since intro to Logarithms in Feb
 
   </div> <!-- end container -->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="../config.local.js"></script>
   <script src="../shared/local-config-loader.js"></script>
   <script src="prompts.js"></script>
+  <script src="prompts_sr.js"></script>
   <script src="data_simulation.js"></script>
   <script src="student_report.js"></script>
 </body>

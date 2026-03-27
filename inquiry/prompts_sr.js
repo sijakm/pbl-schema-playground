@@ -8,7 +8,7 @@ Naziv unit-a: {{$Name}}
 Opis unit-a/Instrukcija: {{$UserPrompt}}
 Razred: {{$GradeLevel}}
 Trajanje časa u minutima: {{$ClassDuration}}
-Traženi broj lekcija: {{$NumberOfLessons}}
+Traženi broj lekcija: {{$NumberOfItems}}
 Standardi za usklađivanje (koristi doslovno ako su prisutni; NEMOJ dodavati nove standarde): {{$Standards}}
 Učenici sa individualizovanom podrškom (samo kontekst): {{$LearningPlans}}
 Resursi/Mediji za korišćenje: {{$MediaContext}}
@@ -43,7 +43,6 @@ Naziv unit-a: {{$Name}}
 Opis unit-a/Instrukcija: {{$UserPrompt}}
 Razred: {{$GradeLevel}}
 Trajanje časa u minutima: {{$ClassDuration}}
-Traženi broj lekcija (samo kontekst): {{$NumberOfLessons}}
 Standardi za usklađivanje (koristi doslovno ako su prisutni; NEMOJ dodavati nove standarde): {{$Standards}}
 Učenici sa individualizovanom podrškom (MORA se koristiti SAMO unutar InvestigationPhase.AccommodationsAndModifications; koristi imena učenika/planove tačno onako kako su napisani): {{$LearningPlans}}
 Resursi/Mediji za korišćenje: {{$MediaContext}}

@@ -8,7 +8,7 @@ Unit Name: {{$Name}}
 Unit Description/Instruction: {{$UserPrompt}}
 Grade Level: {{$GradeLevel}}
 Duration of class period in minutes: {{$ClassDuration}}
-Requested Number of Lessons: {{$NumberOfLessons}}
+Requested Number of Lessons: {{$NumberOfItems}}
 Standards to Align (use verbatim if present; do NOT add new standards): {{$Standards}}
 Students with individualized support (context only): {{$LearningPlans}}
 Resources/Media to use: {{$MediaContext}}
@@ -29,7 +29,7 @@ INQUIRY OUTLINE REQUIREMENTS:
 - Lessons MUST be non-overlapping with clear boundaries.
 
 LESSONS ARRAY CONSTRAINTS:
-- The Lessons array MUST contain exactly {{$NumberOfLessons}} lessons.
+- The Lessons array MUST contain exactly {{$NumberOfItems}} lessons.
 - lessonNumber is 1-based and strictly increasing by 1.
 - Ensure logical sequencing from foundational inquiry moves to more complex modeling and explanation.
 - Pacing must fit {{$ClassDuration}} minute class periods at grade {{$GradeLevel}}.

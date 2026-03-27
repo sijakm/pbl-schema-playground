@@ -46,7 +46,7 @@ Zahtevi za Ključna Pitanja (Essential Questions):
   - "StudentLearningObjectives": Navedi 3-5 ključnih merljivih ciljeva učenja za jedinicu.
   - "StandardsAligned": Navedi sve standarde koji se obrađuju tokom jedinice.
   - "EssentialQuestions": Tačno 3 konceptualna pitanja prateći gore navedena pravila.
-- GENERIŠI listu "Lessons" koja sadrži tačno {{$NumberOfLessons}} lekcija.
+- GENERIŠI listu "Lessons" koja sadrži tačno {{$NumberOfItems}} lekcija.
   - Svaka lekcija mora uključivati "lessonNumber" (indeks koji počinje od 1), "lessonTitle" i "lessonOutline" (2–4 rečenice koje opisuju obim lekcije).
 
 Ograničenja:

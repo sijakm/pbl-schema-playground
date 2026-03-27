@@ -207,7 +207,7 @@
       UserPrompt: els.userPrompt()?.value?.trim() || "",
       GradeLevel: els.gradeLevel()?.value?.trim() || "",
       ClassDuration: els.classDuration()?.value?.trim() || "",
-      NumberOfLessons: els.numberOfLessons()?.value?.trim() || "",
+      NumberOfItems: els.numberOfLessons()?.value?.trim() || "",
       Standards: els.standards()?.value?.trim() || "",
       LearningPlans: els.learningPlans()?.value?.trim() || "",
       MediaContext: els.mediaContext()?.value?.trim() || "",
@@ -319,10 +319,10 @@
     const model = els.model()?.value || "gpt-5.4-mini";
 
     const vars = buildVarsFromUi();
-    const numLessons = parseInt(vars.NumberOfLessons, 10);
+    const numLessons = parseInt(vars.NumberOfItems, 10);
 
-    if (!vars.Subject || !vars.Name || !vars.UserPrompt || !vars.GradeLevel || !vars.ClassDuration || !vars.NumberOfLessons) {
-      alert("Please fill in at least: Subject, Name, UserPrompt, GradeLevel, ClassDuration, NumberOfLessons.");
+    if (!vars.Subject || !vars.Name || !vars.UserPrompt || !vars.GradeLevel || !vars.ClassDuration || !vars.NumberOfItems) {
+      alert("Please fill in at least: Subject, Name, UserPrompt, GradeLevel, ClassDuration, NumberOfItems.");
       return;
     }
 

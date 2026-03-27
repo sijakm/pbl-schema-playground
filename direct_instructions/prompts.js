@@ -46,7 +46,7 @@ What to generate:
   - "StudentLearningObjectives": List 3-5 key measurable learning goals for the unit.
   - "StandardsAligned": List all standards being addressed throughout the unit.
   - "EssentialQuestions": Exactly 3 conceptual questions following the rules above.
-- GENERATE the "Lessons" list containing exactly {{$NumberOfLessons}} lessons.
+- GENERATE the "Lessons" list containing exactly {{$NumberOfItems}} lessons.
   - Each lesson must include "lessonNumber" (1-based index), "lessonName", and "lessonDescription" (2–4 sentences describing lesson scope).
 
 Constraints:

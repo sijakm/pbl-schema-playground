@@ -11,7 +11,52 @@
     status: $("status"),
     log: $("log"),
     feedback: $("feedbackOutput"),
-    charCount: $("charCount")
+    charCount: $("charCount"),
+    lang: $("languageSelect"),
+    downloadPromptsBtn: $("downloadPromptsBtn")
+  };
+  const PROMPT_INSTRUCTIONS = {
+    en: `Generate feedback with no more than 300 characters using the data provided. (You will use this information – grades and teacher comments on assessments, student assessment answers, attendance.)
+
+Feedback should:
+-Be written as speaking to the student.  
+- Summarize overall engagement and performance trends (e.g., steady progress, recent improvement, or decline).
+- Highlight one strength or success area specific to the course.
+- Identify one area for growth or give actionable advice for improvement or continued success.
+
+Output requirements:
+- NO HTML formatting.
+- Plain text only.
+- Strict 300 character limit.`,
+    sr: `Generišite povratnu informaciju od najviše 300 karaktera koristeći priložene podatke. (Koristićete ove informacije – ocene i komentare nastavnika na proverama, odgovore učenika, prisustvo.)
+
+Povratna informacija treba da:
+- Bude napisana u drugom licu, kao da se obraćate direktno učeniku.
+- Sumira opšti angažman i trendove u postignuću (npr. stabilan napredak, nedavno poboljšanje ili pad).
+- Istakne jednu vrlinu ili oblast uspeha specifičnu za ovaj kurs.
+- Identifikuje jednu oblast za razvoj ili pruži konkretan savet za povoljšanje ili nastavak uspešnog rada.
+
+Zahtevi za izlaz:
+- BEZ HTML formatiranja.
+- Isključivo običan tekst.
+- Strogo ograničenje od 300 karaktera.`
+  };
+
+  const PROMPT_HEADERS = {
+    en: {
+      studentInfo: "STUDENT INFORMATION:",
+      gradingSystem: "GRADING SYSTEM CONTEXT:",
+      attendanceData: "ATTENDANCE RECORD:",
+      gradesData: "GRADES:",
+      qualitativeData: "TEACHER COMMENTS, ASSESSMENT ANSWERS & TRENDS:"
+    },
+    sr: {
+      studentInfo: "INFORMACIJE O UČENIKU:",
+      gradingSystem: "KONTEKST SISTEMA OCENJIVANJA:",
+      attendanceData: "EVIDENCIJA PRISUSTVA:",
+      gradesData: "OCENE:",
+      qualitativeData: "KOMENTARI NASTAVNIKA, ODGOVORI NA PROVERAMA I TRENDOVI:"
+    }
   };
 
   function fillTemplate(tpl, vars) {
@@ -155,12 +200,15 @@
 
     try {
       // Build the prompt dynamically
+      const currentLang = els.lang?.value || "en";
+      const headers = PROMPT_HEADERS[currentLang] || PROMPT_HEADERS.en;
+
       const dynamicTemplate = basePromptUI + `\n\n` +
-        `STUDENT INFORMATION:\n{{$StudentInfo}}\n\n` +
-        `GRADING SYSTEM CONTEXT:\n{{$GradingSystem}}\n\n` +
-        `ATTENDANCE RECORD:\n{{$AttendanceData}}\n\n` +
-        `GRADES:\n{{$GradesData}}\n\n` +
-        `TEACHER COMMENTS, ASSESSMENT ANSWERS & TRENDS:\n{{$QualitativeData}}`;
+        `${headers.studentInfo}\n{{$StudentInfo}}\n\n` +
+        `${headers.gradingSystem}\n{{$GradingSystem}}\n\n` +
+        `${headers.attendanceData}\n{{$AttendanceData}}\n\n` +
+        `${headers.gradesData}\n{{$GradesData}}\n\n` +
+        `${headers.qualitativeData}\n{{$QualitativeData}}`;
 
       const prompt = fillTemplate(dynamicTemplate, { 
         StudentInfo: studentInfo,
@@ -174,12 +222,16 @@
       const HARDCODED_PASSWORD = ""; // Enter password here while working locally
       const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey")?.value?.trim() || "";
 
+      const schemaObj = (currentLang === "sr" && typeof STUDENT_REPORT_SCHEMA_SR !== 'undefined') 
+        ? STUDENT_REPORT_SCHEMA_SR 
+        : STUDENT_REPORT_SCHEMA;
+
       const responseText = await callResponsesApiStream({
         endpoint: DEFAULT_ENDPOINT,
         apiKey,
         model,
         prompt,
-        schemaObj: STUDENT_REPORT_SCHEMA
+        schemaObj
       });
 
       const responseObj = JSON.parse(responseText);
@@ -282,6 +334,89 @@
     }
     // Trigger change to load the first student automatically on boot
     updateMockData();
+  }
+
+  // Handle language switch
+  if (els.lang) {
+    els.lang.addEventListener("change", (e) => {
+      const lang = e.target.value;
+      const basePrompt = document.getElementById("basePrompt");
+      if (basePrompt && PROMPT_INSTRUCTIONS[lang]) {
+        basePrompt.value = PROMPT_INSTRUCTIONS[lang];
+      }
+      
+      const gs = document.getElementById("gradingSystem");
+      if (gs) {
+        if (lang === "sr") {
+          gs.value = "1-5 (Balkans/Eastern Europe: 5 is best)";
+        } else {
+          gs.value = "A-F (USA/UK: A is best)";
+        }
+        updateMockData();
+      }
+    });
+
+    // Initialize UI based on current language
+    const currentLang = els.lang.value;
+    const basePrompt = document.getElementById("basePrompt");
+    if (basePrompt && PROMPT_INSTRUCTIONS[currentLang]) {
+      basePrompt.value = PROMPT_INSTRUCTIONS[currentLang];
+    }
+  }
+
+  async function downloadPrompts() {
+    try {
+      if (typeof JSZip === "undefined") {
+        alert("JSZip library not loaded.");
+        return;
+      }
+
+      const zipEN = new JSZip();
+      const zipSR = new JSZip();
+
+      const pEN = window.studentReportPromptsEN || {};
+      const pSR = window.studentReportPromptsSR || {};
+
+      const addFiles = (zip, obj) => {
+        for (const [key, value] of Object.entries(obj)) {
+          if (typeof value === "object" && value !== null) {
+            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
+          } else if (typeof value === "string") {
+            zip.file(`${key}.txt`, value);
+          }
+        }
+      };
+
+      addFiles(zipEN, pEN);
+      addFiles(zipSR, pSR);
+
+      const contentEN = await zipEN.generateAsync({ type: "blob" });
+      const contentSR = await zipSR.generateAsync({ type: "blob" });
+
+      const saveZip = (blob, filename) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      };
+
+      saveZip(contentEN, "student_report_prompts_en.zip");
+      setTimeout(() => {
+        saveZip(contentSR, "student_report_prompts_sr.zip");
+      }, 500);
+
+      logLine("[OK] Prompts downloaded successfully.");
+    } catch (err) {
+      logLine("[error] Failed to download: " + err.message);
+    }
+  }
+
+  if (els.downloadPromptsBtn) {
+    els.downloadPromptsBtn.addEventListener("click", downloadPrompts);
   }
 
 })();

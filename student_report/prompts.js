@@ -44,3 +44,8 @@ const STUDENT_REPORT_SCHEMA = {
   required: ["feedback"],
   additionalProperties: false
 };
+
+window.studentReportPromptsEN = {
+  STUDENT_REPORT_PROMPT_TEMPLATE,
+  STUDENT_REPORT_SCHEMA
+};

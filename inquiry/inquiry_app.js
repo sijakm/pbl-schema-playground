@@ -213,7 +213,7 @@
       UserPrompt: els.userPrompt()?.value?.trim() || "",
       GradeLevel: els.gradeLevel()?.value?.trim() || "",
       ClassDuration: els.classDuration()?.value?.trim() || "",
-      NumberOfLessons: els.numberOfLessons()?.value?.trim() || "",
+      NumberOfItems: els.numberOfLessons()?.value?.trim() || "",
       Standards: els.standards()?.value?.trim() || "",
       LearningPlans: els.learningPlans()?.value?.trim() || "",
       MediaContext: els.mediaContext()?.value?.trim() || "",
@@ -338,15 +338,15 @@
     const model = els.model()?.value || "gpt-5.4-mini";
 
     const vars = buildVarsFromUi();
-    const numLessons = parseInt(vars.NumberOfLessons, 10);
+    const numLessons = parseInt(vars.NumberOfItems, 10);
 
-    if (!vars.Subject || !vars.Name || !vars.UserPrompt || !vars.GradeLevel || !vars.ClassDuration || !vars.NumberOfLessons) {
-      alert("Please fill in at least: Subject, Name, UserPrompt, GradeLevel, ClassDuration, NumberOfLessons.");
+    if (!vars.Subject || !vars.Name || !vars.UserPrompt || !vars.GradeLevel || !vars.ClassDuration || !vars.NumberOfItems) {
+      alert("Please fill in at least: Subject, Name, UserPrompt, GradeLevel, ClassDuration, NumberOfItems.");
       return;
     }
 
     if (!Number.isFinite(numLessons) || numLessons < 1) {
-      alert("NumberOfLessons must be a positive integer.");
+      alert("NumberOfItems must be a positive integer.");
       return;
     }
 
@@ -448,7 +448,7 @@
       // ---- Per-lesson JSON (PARALLEL) ----
       const lessons = Array.isArray(step0Obj?.Lessons) ? step0Obj.Lessons : [];
       if (lessons.length !== numLessons) {
-        logLine(`[warn] Step 0 returned ${lessons.length} lessons but NumberOfLessons is ${numLessons}. Continuing with returned lessons.`);
+        logLine(`[warn] Step 0 returned ${lessons.length} lessons but NumberOfItems is ${numLessons}. Continuing with returned lessons.`);
       }
 
       const unitEqOverride = readUnitEQsOptional();
