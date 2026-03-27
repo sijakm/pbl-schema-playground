@@ -81,6 +81,13 @@ Priloženi sadržaj lekcije:
 Ključna Pitanja jedinice (KORISTI IH DOSLOVNO):
 {{$UnitEssentialQuestions}}
 
+Ako su gornja Ključna Pitanja prazna, generišite tačno 3 konceptualna pitanja prateći ova pravila:
+- Svako pitanje MORA biti potpuna, gramatički ispravna rečenica koja se završava znakom pitanja.
+- Svako pitanje MORA početi sa „Kako“ ili „Zašto“.
+- Pitanja MORAJU biti konceptualna i istraživačka, a ne činjenična, proceduralna ili definiciona.
+- Pitanja MORAJU biti fokusirana na široke, univerzalne ideje (kao što su promena, dokazi, obrasci, odnosi, sistemi ili zaključivanje), a ne na sadržaj specifičan za predmet.
+- Pitanja MORAJU biti primenljiva u različitim disciplinama i izvan ove jedinice.
+
 UČENICI SA INDIVIDUALIZOVANOM PODRŠKOM (MORAJU se koristiti SAMO unutar GuidedPractice.AccommodationsAndModifications; koristi imena učenika/planove tačno onako kako su napisani):
 {{$LearningPlans}}
 
@@ -507,7 +514,7 @@ GLOBALNA PRAVILA
                 "properties": {
                     "EssentialQuestions": {
                         "type": "array",
-                        "description": "Jednostavno zalepi sva ključna pitanja koja su generisana na nivou jedinice istim redosledom.",
+                        "description": "Zalepi doslovno ključna pitanja sa nivoa jedinice istim redosledom ako su data. Ako nisu data, kreiraj ključna pitanja koja se fokusiraju isključivo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili zaključivanje. NEMOJ pominjati usko stručne termine specifične za predmet, procese, vokabular ili primere. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguća za odgovor jednostavnim učenjem sadržaja lekcije ili jedinice. Fokusiraj se samo na velike ideje, a ne na samu materiju predmeta.",
                         "items": {
                             "type": "string"
                         }

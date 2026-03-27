@@ -81,6 +81,13 @@ Attached Lesson Content:
 Unit Essential Questions (USE THESE VERBATIM):
 {{$UnitEssentialQuestions}}
 
+If Unit Essential Questions above is empty, generate exactly 3 conceptual questions following these rules:
+- Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
+- Each question MUST begin with either "How" or "Why".
+- Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
+- Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
+- Questions MUST be transferable across disciplines and applicable beyond this unit.
+
 
 STUDENTS WITH INDIVIDUALIZED SUPPORT (MUST be used ONLY inside GuidedPractice.AccommodationsAndModifications; use the student names/plans exactly as written):
 {{$LearningPlans}}
@@ -510,7 +517,7 @@ GLOBAL RULES
                 "properties": {
                     "EssentialQuestions": {
                         "type": "array",
-                        "description": "Just paste all the essential questions that are generated in unit level in same order.",
+                        "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
                         "items": {
                             "type": "string"
                         }
