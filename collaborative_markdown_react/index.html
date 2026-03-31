@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collaborative Playground (React)</title>
+    <meta name="description" content="Collaborative lesson plan generator using AI - runs unit outline JSON, per-lesson JSON, and Markdown output with CKEditor." />
+
+    <!-- CKEditor 5 must remain as CDN global (no npm package) -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/ckeditor.js"></script>
+
+    <!-- Local config (optional, pre-fills password) - served by Vite middleware from parent dir -->
+    <script src="/config.local.js" onerror="window.LOCAL_CONFIG={}"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
