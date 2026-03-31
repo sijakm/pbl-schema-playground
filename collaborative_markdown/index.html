@@ -396,9 +396,15 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
   </div>
 
   <div class="row">
-    <h3>CKEditor / Markdown Preview</h3>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <h3>CKEditor / Markdown Preview</h3>
+      <div>
+        <button id="finishEditBtn" type="button" style="display:none; background: #2ea043; color: white; border: none; border-radius: 6px; padding: 6px 12px; font-weight: 600;">Završi uređivanje</button>
+        <button id="editAgainBtn" type="button" style="display:none; background: #0969da; color: white; border: none; border-radius: 6px; padding: 6px 12px; font-weight: 600;">Uredi ponovo</button>
+      </div>
+    </div>
     <div id="editor"></div>
-    <div id="markdownPreview" style="display:none; width:100%; min-height:420px; border:1px solid #ccc; background:#fff; padding: 20px; box-sizing: border-box;"></div>
+    <div id="markdownPreview" style="display:none; width:100%; min-height:420px; border:1px solid #ccc; background:#fff; padding: 20px; box-sizing: border-box; border-radius: 8px;"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

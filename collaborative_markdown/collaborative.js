@@ -439,6 +439,15 @@
       const html = typeof marked !== "undefined" ? marked.parse(finalMarkdown) : "Marked.js not loaded";
       if (editorInstance) {
         editorInstance.setData(html);
+        const fb = $("finishEditBtn");
+        if (fb) fb.style.display = "block";
+        const ea = $("editAgainBtn");
+        if (ea) ea.style.display = "none";
+        
+        const ed = document.querySelector(".ck-editor");
+        if (ed) ed.style.display = "block";
+        const pr = $("markdownPreview");
+        if (pr) pr.style.display = "none";
       } else {
         const preview = $("markdownPreview");
         if (preview) {
@@ -713,6 +722,30 @@
     if (els.cancelBtn()) els.cancelBtn().addEventListener("click", () => currentAbortController?.abort());
     if (els.downloadPromptsBtn()) els.downloadPromptsBtn().addEventListener("click", downloadPrompts);
 
+    const fBtn = $("finishEditBtn");
+    const eBtn = $("editAgainBtn");
+    const mPrev = $("markdownPreview");
+
+    if (fBtn) {
+      fBtn.addEventListener("click", () => {
+        if (!editorInstance) return;
+        mPrev.innerHTML = editorInstance.getData();
+        mPrev.style.display = "block";
+        document.querySelector(".ck-editor").style.display = "none";
+        fBtn.style.display = "none";
+        eBtn.style.display = "block";
+      });
+    }
+
+    if (eBtn) {
+      eBtn.addEventListener("click", () => {
+        mPrev.style.display = "none";
+        document.querySelector(".ck-editor").style.display = "block";
+        eBtn.style.display = "none";
+        fBtn.style.display = "block";
+      });
+    }
+
     // Init CKEditor
     if (typeof CKEDITOR !== "undefined") {
       CKEDITOR.ClassicEditor
@@ -720,18 +753,48 @@
           licenseKey: 'GPL',
           toolbar: {
             items: [
+              'findAndReplace', 'selectAll', '|',
               'heading', '|',
-              'bold', 'italic', 'strikethrough', 'underline', 'link', '|',
+              'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', 'code', 'removeFormat', '|',
               'bulletedList', 'numberedList', 'todoList', '|',
               'outdent', 'indent', '|',
               'undo', 'redo', '-',
               'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
               'alignment', '|',
-              'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+              'link', 'uploadImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
               'specialCharacters', 'horizontalLine', 'pageBreak', '|',
               'sourceEditing'
             ],
             shouldNotGroupWhenFull: true
+          },
+          image: {
+            toolbar: [
+              'imageStyle:inline',
+              'imageStyle:block',
+              'imageStyle:side',
+              '|',
+              'toggleImageCaption',
+              'imageTextAlternative'
+            ]
+          },
+          table: {
+            contentToolbar: [
+              'tableColumn',
+              'tableRow',
+              'mergeTableCells',
+              'tableProperties',
+              'tableCellProperties'
+            ]
+          },
+          list: {
+            properties: {
+              styles: true,
+              startIndex: true,
+              reversed: true
+            }
+          },
+          mediaEmbed: {
+            previewsInData: true
           },
           removePlugins: [
             'AIAssistant', 'CKBox', 'CKFinder', 'EasyImage', 
