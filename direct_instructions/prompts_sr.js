@@ -97,7 +97,7 @@ VAŽNA PRAVILA SADRŽAJA:
 - Osiguraj da svi delovi lekcije odražavaju okvire lekcije iznad; izbegavaj uvođenje novih bitnih koncepta koji pripadaju drugim lekcijama.
 - EssentialQuestions: MORAJU biti potpuno identična ključnim pitanjima na nivou jedinice (isti tekst, isti redosled).
 - AssessPriorKnowledge: SAMO ako je LessonNumber == 1, napiši 150–250 reči i prati obaveznu strukturu opisanu u šemi. Ako LessonNumber != 1, vrati "" (prazan string).
-- DirectPresentation mora trajati ≤10 minuta ukupno i mora pratiti obavezni UVOD (HOOK)/PREDSTAVLJANJE (INTRODUCTION)/DIREKTNO PODUČAVANJE (DIRECT TEACHING)/VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) format sa uputstvom Kaži(Say)/Uradi(Do)/Pitaj(Ask)/Slušaj da čuješ(Listen for)/Zapiši(Write), i očekivane odgovore učenika kao stavke liste.
+- DirectPresentation mora trajati ≤10 minuta ukupno i mora pratiti obavezni UVOD (HOOK)/PREDSTAVLJANJE (INTRODUCTION)/DIREKTNO PODUČAVANJE (DIRECT TEACHING)/VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) format sa uputstvom Kaži(Say)/Uradi(Do)/Pitaj(Ask)/Slušaj da čuješ(Listen for)/Zapiši(Write), i očekivane odgovore učenika kao stavke liste (NEMOJ uključivati naslove/zaglavlja sekcija u string).
 - GuidedPractice.InstructionsForTeachers mora imati najmanje 700 reči i mora uključiti obavezne komponente navedene u opisu šeme.
 - GuidedPractice.AccommodationsAndModifications mora uključiti:
   - Opšta podrška: opšte podrške (general)
@@ -320,7 +320,7 @@ PREGLED I PRISEĆANJE UZ VREMENSKE RAZMAKE (REVIEW & SPACED RETRIEVAL) (5 min)
         - Zaglavlje 📚 Materijali: Sledi lista predmeta.
         - Oznaka Napomene za nastavnika: Prepisati iz teksta format <p><strong>Napomene za nastavnika:</strong> [tekst napomena]</p>.
         - Zaglavlje 📋 Instrukcije za nastavnike: Renderuj kao <p><strong>📋 Instrukcije za nastavnike</strong></p>.
-        - Podnaslov Aktivno prisećanje: Bolding opcija. Prate redovi kroz numeri i uz "Kaži:" oznaku s tekstovima pod ulogom skripte.
+        - Podnaslov Aktivno prisećanje: Renderuj kao <p><strong>Aktivno prisećanje</strong></p>. Prate redovi kroz numeri i uz "Kaži:" oznaku s tekstovima pod ulogom skripte.
         - Ispostavi i prati šablon globalnih pregrada ✅ Očekivani odgovori učenika sa svim primercima modela i odgovora.
         - Podnaslov Ispravka čestih pogrešnih uverenja: Bold. Kreni kroz <ul> i prikaži svaku "Ako učenik kaže... odgovori:..." kao njen tipski <li>.
         - Podnaslov 💭Veza sa ključnim pitanjem: Bold.
@@ -554,7 +554,7 @@ GLOBALNA PRAVILA
                             },
                             "InstructionsForTeachers": {
                                 "type": "string",
-                                "description": "Korak po korak instrukcije za nastavnika prateći ovaj TAČAN format za uvod i svaku komponentu aktivnosti: 1. UVOD (HOOK) (1-2 min) [Postavi intrigantno početno pitanje ili demonstraciju] Kaži: [Tačno privlačno pitanje za uvod] Uradi: [Specifične aktivnosti nastavnika] Slušaj da čuješ: [2-3 očekivana odgovora učenika] 2. PREDSTAVLJANJE (INTRODUCTION) (1-2 min) Kaži: [Okviri svrhu lekcije i plan rada] Zapiši: [Šta napisati na tablu] Uradi: [Aktivnosti nastavnika pri postavci lekcije] 3. DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min) Kaži: [Glavno objašnjenje sadržaja razbijeno u male celine] Nacrtaj/Prikaži: [Vizuelna pomagala / dijagrami / modeli za korišćenje] Pitaj: [Pitanja za proveru razumevanja] Slušaj da čuješ: [2-3 očekivana odgovora učenika po pitanju] Zapiši: [Šta zabeležiti na tabli] 4. VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min) Kaži: [Instrukcije za učešće učenika] Uradi: [Kako strukturirati angažovanje učenika] Slušaj da čuješ: [Šta bi učenici trebalo da kažu/urade] Svaki deo mora uključivati tačan tajming, nastavnikov govor pomoću 'Kaži'/'Pitaj'/'Slušaj da čuješ' izjava, nastavničke aktivnosti korišćenjem 'Uradi'/'Nacrtaj'/'Prikaži'/'Zapiši' smernica, i odgovore učenika nakon svakog podsticaja. Formatiraj sve očekivane odgovore učenika uz pomoć listi sa mecima (bullet points)."
+                                "description": "Korak po korak instrukcije za nastavnika prateći ovaj TAČAN redosled: (1) UVOD (HOOK) (1-2 min), (2) PREDSTAVLJANJE (INTRODUCTION) (1-2 min), (3) DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min), i (4) VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min). VAŽNO: NEMOJ uključivati naslove '1. UVOD (HOOK) (1-2 min)', '2. PREDSTAVLJANJE (INTRODUCTION) (1-2 min)', '3. DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min)', ili '4. VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min)' u finalni string. Umesto toga, navedi sadržaj svake komponente direktno počevši od prvog uputstva (Kaži:, Uradi:, itd.). Svaki deo mora uključivati nastavnikov govor (Kaži:/Pitaj:), akcije (Uradi:/Zapiši:/Nacrtaj/Prikaži:), i odgovore učenika (Slušaj da čuješ: - sa stavkama liste). Sav sadržaj mora biti naučno tačan i prilagođen uzrastu."
                             },
                             "AnticipatedMisconceptions": {
                                 "type": "string",

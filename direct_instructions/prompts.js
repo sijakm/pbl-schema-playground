@@ -98,7 +98,7 @@ IMPORTANT CONTENT RULES:
 - Ensure all parts of the lesson reflect the Lesson Scope/Boundaries above; avoid introducing new major concepts that belong to other lessons.
 - EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
 - AssessPriorKnowledge: ONLY if LessonNumber == 1, write 150–250 words and follow the required structure in the schema description. If LessonNumber != 1, return "" (empty string).
-- DirectPresentation must be ≤10 minutes total and must follow the required HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT format with Say/Do/Ask/Listen for/Write, and expected student responses as bullet points.
+- DirectPresentation must be ≤10 minutes total and must follow the required HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT format with Say/Do/Ask/Listen for/Write, and expected student responses as bullet points (DO NOT include the section headers/titles in the string).
 - GuidedPractice.InstructionsForTeachers must be at least 700 words and must include the required components listed in the schema description.
 - GuidedPractice.AccommodationsAndModifications must include:
   - General: general supports
@@ -320,7 +320,7 @@ REVIEW & SPACED RETRIEVAL (5 min)
         - Header 📚 Materials: Follow with a list of items.
         - Label Teacher Notes: Render as <p><strong>Teacher Notes:</strong> [notes text]</p>.
         - Header 📋 Instructions for Teachers: Render as <p><strong>📋 Instructions for Teachers</strong></p>.
-        - Sub-header Active Recall: Bold. Follow withNumbered items and Say: script.
+        - Sub-header Active Recall: Render as <p><strong>Active Recall</strong></p>. Follow with numbered items and Say: script.
         - Use the global ✅ Expected Student Responses pattern for all sample answers.
         - Sub-header Correct Common Misconceptions: Bold. Render as <ul> with each "If student says... respond:..." as <li>.
         - Sub-header 💭Essential Question Connection: Bold.
@@ -557,7 +557,7 @@ GLOBAL RULES
                             },
                             "InstructionsForTeachers": {
                                 "type": "string",
-                                "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: 1. HOOK (1-2 min) [Pose an intriguing opening question or demonstration] Say: [Exact engaging hook question] Do: [Specific teacher actions] Listen for: [2-3 expected student responses] 2. INTRODUCTION (1-2 min) Say: [Frame lesson purpose and agenda] Write: [What to put on board] Do: [Teacher setup actions] 3. DIRECT TEACHING (4-5 min) Say: [Main content explanation broken into small chunks] Draw/Show: [Visual aids / diagrams / models to use] Ask: [Check for understanding questions] Listen for: [2-3 expected student responses per question] Write: [What to capture on board] 4. GUIDED ENGAGEMENT (2-3 min) Say: [Instructions for student participation] Do: [How to structure student engagement] Listen for: [What students should say/do] Each section must include exact timing, teacher talk using Say/Ask/Listen for statements, teacher actions using Do/Draw/Show/Write directives, and student responses after each prompt. Format all expected student responses with bullet points."
+                                "description": "Step-by-step teacher instructions following this EXACT sequence: (1) HOOK (1-2 min), (2) INTRODUCTION (1-2 min), (3) DIRECT TEACHING (4-5 min), and (4) GUIDED ENGAGEMENT (2-3 min). IMPORTANT: DO NOT include the headers '1. HOOK (1-2 min)', '2. INTRODUCTION (1-2 min)', '3. DIRECT TEACHING (4-5 min)', or '4. GUIDED ENGAGEMENT (2-3 min)' in the final string. Instead, provide the content of each section directly starting with the first teacher prompt (Say:, Do:, etc.). Each component must include teacher talk (Say:/Ask:), teacher actions (Do:/Write:/Draw/Show:), and student responses (Listen for: - with bullets). All content must be scientifically accurate and age-appropriate."
                             },
                             "AnticipatedMisconceptions": {
                                 "type": "string",
