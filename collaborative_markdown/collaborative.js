@@ -38,6 +38,7 @@
   // ---- state ----
   let currentAbortController = null;
   let isRunning = false;
+  let editorInstance = null;
 
   // ---- token usage tracking ----
   const tokenUsage = { input: 0, output: 0, total: 0, calls: 0 };
@@ -436,7 +437,7 @@
       if (els.markdownOutput()) els.markdownOutput().value = finalMarkdown;
 
       const html = typeof marked !== "undefined" ? marked.parse(finalMarkdown) : "Marked.js not loaded";
-      if (typeof editorInstance !== "undefined" && editorInstance) {
+      if (editorInstance) {
         editorInstance.setData(html);
       } else {
         const preview = $("markdownPreview");
@@ -733,6 +734,43 @@
     if (els.runChainBtn()) els.runChainBtn().addEventListener("click", runChain);
     if (els.cancelBtn()) els.cancelBtn().addEventListener("click", () => currentAbortController?.abort());
     if (els.downloadPromptsBtn()) els.downloadPromptsBtn().addEventListener("click", downloadPrompts);
+
+    // Init CKEditor
+    if (typeof CKEDITOR !== "undefined") {
+      CKEDITOR.ClassicEditor
+        .create(document.querySelector("#editor"), {
+          licenseKey: 'GPL',
+          toolbar: {
+            items: [
+              'heading', '|',
+              'bold', 'italic', 'strikethrough', 'underline', 'link', '|',
+              'bulletedList', 'numberedList', 'todoList', '|',
+              'outdent', 'indent', '|',
+              'undo', 'redo', '-',
+              'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+              'alignment', '|',
+              'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+              'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+              'sourceEditing'
+            ],
+            shouldNotGroupWhenFull: true
+          },
+          removePlugins: [
+            'AIAssistant', 'CKBox', 'CKFinder', 'EasyImage', 
+            'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 
+            'RealTimeCollaborativeRevisionHistory', 'PresenceList', 'Comments', 
+            'TrackChanges', 'TrackChangesData', 'RevisionHistory', 'Pagination', 
+            'WProofreader', 'MathType', 'SlashCommand', 'Template', 'DocumentOutline', 
+            'FormatPainter', 'TableOfContents', 'PasteFromOfficeEnhanced', 'CaseChange'
+          ]
+        })
+        .then(editor => {
+          editorInstance = editor;
+        })
+        .catch(err => {
+          console.error("CKEditor error", err);
+        });
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);
