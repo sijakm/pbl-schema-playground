@@ -48,6 +48,56 @@
   let currentAbortController = null;
   let isRunning = false;
 
+  // ---- token usage tracking ----
+  const tokenUsage = { input: 0, output: 0, total: 0, calls: 0 };
+
+  function resetTokenUsage() {
+    tokenUsage.input = 0; tokenUsage.output = 0; tokenUsage.total = 0; tokenUsage.calls = 0;
+    const panel = $("tokenSummary");
+    if (panel) panel.style.display = "none";
+  }
+
+  function addTokenUsage(usage) {
+    if (!usage) return;
+    tokenUsage.input += usage.input_tokens || 0;
+    tokenUsage.output += usage.output_tokens || 0;
+    tokenUsage.total += usage.total_tokens || 0;
+    tokenUsage.calls += 1;
+  }
+
+  const MODEL_PRICING = {
+    "gpt-5.4":       { input: 2.50,  output: 15.00 },
+    "gpt-5.4-mini":  { input: 0.75,  output: 4.50  },
+    "gpt-5.4-nano":  { input: 0.20,  output: 1.25  },
+    "gpt-5-mini":    { input: 0.75,  output: 4.50  },
+    "gpt-5.2":       { input: 2.50,  output: 15.00 }
+  };
+
+  function updateTokenSummaryUI(model) {
+    const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
+    const inputCost  = (tokenUsage.input  / 1_000_000) * pricing.input;
+    const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
+    const totalCost  = inputCost + outputCost;
+
+    const fmt = n => n.toLocaleString("en-US");
+    const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
+
+    const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
+
+    set("tsInput",        fmt(tokenUsage.input));
+    set("tsInputCost",    fmtUSD(inputCost));
+    set("tsOutput",       fmt(tokenUsage.output));
+    set("tsOutputCost",   fmtUSD(outputCost));
+    set("tsTotal",        fmt(tokenUsage.total));
+    set("tsTotalCost",    `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
+    set("tsCallCount",    String(tokenUsage.calls));
+    set("tsModel",        model);
+    set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
+
+    const panel = $("tokenSummary");
+    if (panel) panel.style.display = "block";
+  }
+
   // ---- timing helpers ----
   function nowMs() {
     return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
@@ -178,6 +228,10 @@
 
           if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
             finalText += evt.delta;
+          }
+
+          if (evt.type === "response.completed" && evt.response?.usage) {
+            addTokenUsage(evt.response.usage);
           }
 
           if (evt.type === "response.error") {
@@ -357,6 +411,7 @@
     if (els.lessonsBundle()) els.lessonsBundle().value = "";
     if (els.finalHtml()) els.finalHtml().value = "";
     if (els.htmlPreview()) els.htmlPreview().srcdoc = "";
+    resetTokenUsage();
 
     setRunning(true);
     setStatus("Running…");
@@ -614,6 +669,8 @@
       logLine(`Join final HTML: ${fmtMs(timings.join_final_ms)}`);
       logLine(`TOTAL: ${fmtMs(timings.total_ms)}`);
       logLine("==========================");
+
+      updateTokenSummaryUI(model);
 
       setStatus("Done.");
       logLine("[OK] Done.");

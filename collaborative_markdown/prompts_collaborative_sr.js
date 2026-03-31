@@ -283,8 +283,45 @@ PRAVILA SPECIFIČNA ZA POLJA:
             "description": "Usklađeni obrazovni standardi za ovu lekciju. Moraju se tačno podudarati sa standardima jedinice u kodu i opisu."
           },
           "AssessPriorKnowledge": {
-            "type": "string",
-            "description": "Kompletan odeljak „Procena predznanja“ kao običan tekst (ukupno 150-250 reči). SAMO lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za lekciju 1, struktura mora uključivati: 1. Uključi ovaj odeljak samo u prvu lekciju jedinice, postavljen odmah nakon ciljeva učenja učenika. 2. Osiguraj da se koriste DOK 1-3 uputstva. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Izaberi jedan modalitet sa ove liste i potpuno ga razvij: ispitivanje, K-W-L, vizuelni prikazi, konceptualne mape, refleksivno pisanje, vodiči za predviđanje, ocena vokabulara. 5. Početno uputstvo nastavnika sa rečenicom „Kaži:“ koja uvodi izabrani modalitet i objašnjava kako će učenici ispoljiti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak „Očekivani odgovori učenika“ koji prikazuje predviđene odgovore ili uobičajena pogrešna uverenja za izabrani modalitet. 8. Završno uputstvo nastavnika „Kaži:“ koje potvrđuje razmišljanje učenika i najavljuje istraživanje u jedinici. 9. Nakon potpunog razvijanja jednog modaliteta, navedi 2 kratke alternativne opcije koje nastavnik može izabrati."
+            "type": "object",
+            "description": "Odeljak za procenu predznanja (DOK 1-3 uputstva, preduslovne veštine i specifičan modalitet). SAMO lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI podrazumevane vrednosti (prazni nizovi/stringovi) za ova polja.",
+            "properties": {
+              "PrerequisiteSkills": {
+                "type": "array",
+                "description": "Lista preduslovnih veština potrebnih za ciljeve učenja učenika.",
+                "items": { "type": "string" }
+              },
+              "Modality": {
+                "type": "string",
+                "description": "Jedan modalitet od: ispitivanje, K-W-L, vizuelni prikazi, konceptualne mape, refleksivno pisanje, vodiči za predviđanje, ocena vokabulara. Potpuno razvijen."
+              },
+              "TeacherPrompt": {
+                "type": "string",
+                "description": "Početno uputstvo nastavnika sa rečenicom 'Kaži:' koja uvodi izabrani modalitet."
+              },
+              "InstructionsAndTemplate": {
+                "type": "string",
+                "description": "Jasna uputstva i šablon/struktura za izabrani modalitet."
+              },
+              "ExpectedStudentResponses": {
+                "type": "array",
+                "description": "Predviđeni odgovori ili uobičajena pogrešna uverenja za izabrani modalitet.",
+                "items": { "type": "string" }
+              },
+              "ClosingPrompt": {
+                "type": "string",
+                "description": "Završno uputstvo nastavnika 'Kaži:' koje potvrđuje razmišljanje učenika i najavljuje istraživanje u jedinici."
+              },
+              "AlternateOptions": {
+                "type": "array",
+                "description": "Tačno 2 kratke alternativne opcije koje nastavnik može izabrati.",
+                "items": { "type": "string" },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "required": ["PrerequisiteSkills", "Modality", "TeacherPrompt", "InstructionsAndTemplate", "ExpectedStudentResponses", "ClosingPrompt", "AlternateOptions"],
+            "additionalProperties": false
           },
           "Instruction": {
             "type": "object",

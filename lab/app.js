@@ -35,10 +35,55 @@ function stopTimer(finalMessage) {
     `(${minutes}:${seconds.toString().padStart(2, "0")})`;
 }
 
-/************************************
- * DEFAULT PROMPT
- ************************************/
+// ---- token usage tracking ----
+const tokenUsage = { input: 0, output: 0, total: 0, calls: 0 };
 
+function resetTokenUsage() {
+  tokenUsage.input = 0; tokenUsage.output = 0; tokenUsage.total = 0; tokenUsage.calls = 0;
+  const panel = document.getElementById("tokenSummary");
+  if (panel) panel.style.display = "none";
+}
+
+function addTokenUsage(usage) {
+  if (!usage) return;
+  tokenUsage.input += usage.input_tokens || 0;
+  tokenUsage.output += usage.output_tokens || 0;
+  tokenUsage.total += usage.total_tokens || 0;
+  tokenUsage.calls += 1;
+}
+
+const MODEL_PRICING = {
+  "gpt-5.4":       { input: 2.50,  output: 15.00 },
+  "gpt-5.4-mini":  { input: 0.75,  output: 4.50  },
+  "gpt-5.4-nano":  { input: 0.20,  output: 1.25  },
+  "gpt-5-mini":    { input: 0.75,  output: 4.50  },
+  "gpt-5.2":       { input: 2.50,  output: 15.00 }
+};
+
+function updateTokenSummaryUI(model) {
+  const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
+  const inputCost  = (tokenUsage.input  / 1_000_000) * pricing.input;
+  const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
+  const totalCost  = inputCost + outputCost;
+
+  const fmt = n => n.toLocaleString("en-US");
+  const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+  set("tsInput",        fmt(tokenUsage.input));
+  set("tsInputCost",    fmtUSD(inputCost));
+  set("tsOutput",       fmt(tokenUsage.output));
+  set("tsOutputCost",   fmtUSD(outputCost));
+  set("tsTotal",        fmt(tokenUsage.total));
+  set("tsTotalCost",    `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
+  set("tsCallCount",    String(tokenUsage.calls));
+  set("tsModel",        model);
+  set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
+
+  const panel = document.getElementById("tokenSummary");
+  if (panel) panel.style.display = "block";
+}
 
 /************************************
  * DESCRIPTION COLLECTION
@@ -77,8 +122,6 @@ function findInvalidChars(text) {
   if (/[\u2018\u2019]/.test(text)) issues.push("Smart single quotes");
   if (/[\u2013\u2014]/.test(text)) issues.push("Long dash");
   if (/[^\x09\x0A\x0D\x20-\x7E]/.test(text)) issues.push("Non-ASCII characters (emoji, special characters)");
-  // if (/\n/.test(text)) issues.push("Line breaks");
-  // if (/\t/.test(text)) issues.push("Tabs");
   return issues;
 }
 
@@ -172,14 +215,8 @@ function copySchema() {
  * STREAMING HELPERS (SSE parsing)
  ************************************/
 function parseSseLines(buffer) {
-  // SSE payload is lines like:
-  // data: {...}\n
-  // data: {...}\n
-  // \n
-  // We'll return {events, rest}
   const events = [];
   const parts = buffer.split("\n");
-  // Keep last partial line as remainder
   let rest = parts.pop() ?? "";
 
   for (const line of parts) {
@@ -218,30 +255,27 @@ function cancelRun() {
 }
 
 async function run() {
-  // Clone schema and apply description edits
   const invalidFields = [];
   const model = document.getElementById("modelSelect").value;
 
-document.querySelectorAll("#descriptions textarea").forEach(t => {
-  if (findInvalidChars(t.value).length > 0) {
-    invalidFields.push(t);
-  }
-});
+  document.querySelectorAll("#descriptions textarea").forEach(t => {
+    if (findInvalidChars(t.value).length > 0) {
+      invalidFields.push(t);
+    }
+  });
 
-if (invalidFields.length > 0) {
-  alert(
-  "Your text contains characters that aren’t supported yet.\n\n" +
-  "Please remove or replace the following before continuing:\n\n" +
-  "Curly quotes ( “ ” or ‘ ’ ) → use straight quotes ( \" ' )\n\n" +
-  "Long dashes ( – or — ) → use a regular hyphen ( - )\n\n" +
-  "Emojis or special symbols\n\n" +
-  // "Line breaks (new lines)\n\n" +
-  // "Tabs or extra spacing\n\n" +
-  "These characters can cause errors when your content is processed.\n" +
-  "Once everything is in plain text, you’re good to go."
-);
-  return;
-}
+  if (invalidFields.length > 0) {
+    alert(
+      "Your text contains characters that aren’t supported yet.\n\n" +
+      "Please remove or replace the following before continuing:\n\n" +
+      "Curly quotes ( “ ” or ‘ ’ ) → use straight quotes ( \" ' )\n\n" +
+      "Long dashes ( – or — ) → use a regular hyphen ( - )\n\n" +
+      "Emojis or special symbols\n\n" +
+      "These characters can cause errors when your content is processed.\n" +
+      "Once everything is in plain text, you’re good to go."
+    );
+    return;
+  }
   
   const schema = JSON.parse(JSON.stringify(parsedMasterSchema));
   document.querySelectorAll("#descriptions textarea").forEach(textarea => {
@@ -250,10 +284,9 @@ if (invalidFields.length > 0) {
   });
   lastEditedSchema = schema;
 
-  // Show final schema in UI
   document.getElementById("finalSchema").value = JSON.stringify(schema, null, 2);
 
-  const HARDCODED_PASSWORD = ""; // Enter password here while working locally
+  const HARDCODED_PASSWORD = "";
   const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey").value.trim();
   const prompt = document.getElementById("prompt").value;
   const output = document.getElementById("output");
@@ -261,61 +294,50 @@ if (invalidFields.length > 0) {
   output.value = "";
   startTimer();
   setUiRunning(true);
+  resetTokenUsage();
 
-  // if (!apiKey) {
-  //   output.value = "API key is required.";
-  //   stopTimer("Stopped");
-  //   setUiRunning(false);
-  //   return;
-  // }
-
-  // Abort support
   currentAbortController = new AbortController();
   const { signal } = currentAbortController;
 
-  // Simple “stuck detector”: if no deltas for 20s, print a marker.
   let lastDeltaAt = Date.now();
   const stuckInterval = setInterval(() => {
     const diff = Date.now() - lastDeltaAt;
     if (diff > 30000) {
       output.value += `\n\n[⚠️ No streamed output for ${(diff/1000).toFixed(0)}s — The model is still thinking 🤔]\n`;
       output.scrollTop = output.scrollHeight;
-      lastDeltaAt = Date.now(); // avoid spamming
+      lastDeltaAt = Date.now();
     }
   }, 4000);
 
   try {
-    // ✅ Responses API streaming (recommended) :contentReference[oaicite:2]{index=2}
     const response = await fetch("https://fancy-sun-80f1.sijakmilan.workers.dev", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    ...(apiKey ? { "Authorization": `Bearer ${apiKey}` } : {})
-  },  
-  signal,
-  body: JSON.stringify({
-    model: model,
-    stream: true,
-    reasoning: { effort: "low" },
-    input: [
-      { role: "user", content: prompt }
-    ],
-    text: {
-      format: {
-        type: "json_schema",
-        name: "LabUnitPlanResponse",
-        schema: schema,
-        strict: true
-      }
-    }
-  })
-});
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(apiKey ? { "Authorization": `Bearer ${apiKey}` } : {})
+      },  
+      signal,
+      body: JSON.stringify({
+        model: model,
+        stream: true,
+        reasoning: { effort: "low" },
+        input: [
+          { role: "user", content: prompt }
+        ],
+        text: {
+          format: {
+            type: "json_schema",
+            name: "LabUnitPlanResponse",
+            schema: schema,
+            strict: true
+          }
+        }
+      })
+    });
 
     if (!response.ok) {
       const errText = await response.text().catch(() => "");
-      output.value =
-        `HTTP ${response.status} ${response.statusText}\n\n` +
-        (errText || "(no body)");
+      output.value = `HTTP ${response.status} ${response.statusText}\n\n` + (errText || "(no body)");
       stopTimer("Error");
       return;
     }
@@ -337,15 +359,11 @@ if (invalidFields.length > 0) {
       if (done) break;
 
       buffer += decoder.decode(value, { stream: true });
-
       const { events, rest } = parseSseLines(buffer);
       buffer = rest;
 
       for (const raw of events) {
-        // Some servers emit [DONE]; Responses API mostly emits typed events, but handle both.
-        if (raw === "[DONE]") {
-          break;
-        }
+        if (raw === "[DONE]") break;
 
         let evt;
         try {
@@ -354,22 +372,15 @@ if (invalidFields.length > 0) {
           continue;
         }
 
-        // Primary: text deltas :contentReference[oaicite:4]{index=4}
-        if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+        if (evt.type === 'response.output_text.delta' && typeof evt.delta === 'string') {
           lastDeltaAt = Date.now();
-
-          const shouldAutoScroll = isUserNearBottom(output);
-
-          output.value += evt.delta;
           finalText += evt.delta;
-
-          if (shouldAutoScroll) {
-            output.scrollTop = output.scrollHeight;
-          }
+          const shouldAutoScroll = isUserNearBottom(output);
+          output.value += evt.delta;
+          if (shouldAutoScroll) output.scrollTop = output.scrollHeight;
           continue;
         }
 
-        // Optional: show refusals inline (so you see why it stopped)
         if (evt.type === "response.refusal.delta" && typeof evt.delta === "string") {
           lastDeltaAt = Date.now();
           output.value += evt.delta;
@@ -377,8 +388,11 @@ if (invalidFields.length > 0) {
           continue;
         }
 
-        // Optional: show terminal errors as text
-        if (evt.type === "error") {
+        if (evt.type === "response.completed" && evt.response?.usage) {
+          addTokenUsage(evt.response.usage);
+        }
+
+        if (evt.type === "error" || evt.type === "response.error") {
           lastDeltaAt = Date.now();
           output.value += `\n\n[ERROR]\n${JSON.stringify(evt, null, 2)}\n`;
           output.scrollTop = output.scrollHeight;
@@ -387,8 +401,6 @@ if (invalidFields.length > 0) {
       }
     }
 
-    // Try parse + pretty-print at end (keeps “stream-only” feel, but fixes readability)
-    // If parsing fails, you still have the raw partial output which is exactly what you want for debugging.
     try {
       const parsed = JSON.parse(finalText);
       output.value = JSON.stringify(parsed, null, 2);
@@ -397,6 +409,7 @@ if (invalidFields.length > 0) {
     }
 
     stopTimer("Completed");
+    updateTokenSummaryUI(model);
   } catch (err) {
     if (err?.name === "AbortError") {
       output.value += "\n\n[Cancelled]\n";
@@ -412,46 +425,6 @@ if (invalidFields.length > 0) {
   }
 }
 
-function sanitizeSchemaText(raw) {
-  let text = raw
-    .replace(/\r\n/g, "\n")
-    .replace(/\u00A0/g, " ")
-    .replace(/[\u2028\u2029]/g, "\n")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u2013\u2014]/g, "-")
-    .replace(/[→⇒↔]/g, "->");
-  let result = "";
-  let inString = false;
-  let prev = "";
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-
-    if (char === '"' && prev !== "\\") {
-      inString = !inString;
-      result += char;
-    }
-    else if (inString && char === "\n") {
-      result += "\\n";
-    }
-    else if (inString && char === "\t") {
-      result += "\\t";
-    }
-    else if (inString && char === '"' && prev !== "\\") {
-      result += '\\"';
-    }
-    else {
-      result += char;
-    }
-
-    prev = char;
-  }
-
-  return result;
-}
-
-
 function isUserNearBottom(el, threshold = 40) {
   return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
 }
@@ -464,10 +437,7 @@ window.onload = () => {
     alert("Prompts/Schema failed to load.");
     return;
   }
-
-  // Use the extracted schema object directly
   parsedMasterSchema = window.labPrompts.SCHEMA;
-
   document.getElementById("prompt").value = window.labPrompts.DEFAULT_PROMPT.trim();
   renderDescriptionEditor();
 };

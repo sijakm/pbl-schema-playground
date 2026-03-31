@@ -109,7 +109,7 @@ IMPORTANT CONTENT RULES (Collaborative Style):
 
 FIELD-SPECIFIC RULES:
 - EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
-- AssessPriorKnowledge: If this section is required (e.g., for the first lesson or when introducing new major concepts), write 150–250 words following the required structure in the schema description. Otherwise, return "" (empty string).
+- AssessPriorKnowledge: ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN empty arrays/strings for all sub-fields. For Lesson 1, populate ALL sub-fields: PrerequisiteSkills (array of prerequisite skills), Modality (name of chosen modality), TeacherPrompt (opening 'Say:' statement), InstructionsAndTemplate (full instructions for chosen modality), ExpectedStudentResponses (array of 2–3 anticipated answers or misconceptions), ClosingPrompt (closing 'Say:' prompt linking to unit), AlternateOptions (exactly 2 brief alternate modalities). Use DOK 1-3 prompts. Modality choices: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings.
 - Instruction:
   - This is the same structure as Direct Presentation, but renamed.
   - Structure must flow naturally with Say/Do/Ask/Listen for/Write prompts.
@@ -290,8 +290,45 @@ OUTPUT REQUIREMENTS:
             "description": "Aligned educational standards for this lesson. Must match unit standards exactly in code + description."
           },
           "AssessPriorKnowledge": {
-            "type": "string",
-            "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
+            "type": "object",
+            "description": "Section for assessing prior knowledge (DOK 1-3 prompts, prerequisite skills, and specific modality). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN defaults (empty arrays/strings) for these fields.",
+            "properties": {
+              "PrerequisiteSkills": {
+                "type": "array",
+                "description": "List of prerequisite skills needed for the student learning objectives.",
+                "items": { "type": "string" }
+              },
+              "Modality": {
+                "type": "string",
+                "description": "One modality from: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. Fully developed."
+              },
+              "TeacherPrompt": {
+                "type": "string",
+                "description": "Initial teacher prompt with 'Say:' statement that introduces the chosen modality."
+              },
+              "InstructionsAndTemplate": {
+                "type": "string",
+                "description": "Clear instructions and template/structure for the chosen modality."
+              },
+              "ExpectedStudentResponses": {
+                "type": "array",
+                "description": "Anticipated answers or common misconceptions for the chosen modality.",
+                "items": { "type": "string" }
+              },
+              "ClosingPrompt": {
+                "type": "string",
+                "description": "Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation."
+              },
+              "AlternateOptions": {
+                "type": "array",
+                "description": "Exactly 2 brief alternate options a teacher could choose.",
+                "items": { "type": "string" },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "required": ["PrerequisiteSkills", "Modality", "TeacherPrompt", "InstructionsAndTemplate", "ExpectedStudentResponses", "ClosingPrompt", "AlternateOptions"],
+            "additionalProperties": false
           },
           "Instruction": {
             "type": "object",

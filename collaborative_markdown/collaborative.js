@@ -39,6 +39,56 @@
   let currentAbortController = null;
   let isRunning = false;
 
+  // ---- token usage tracking ----
+  const tokenUsage = { input: 0, output: 0, total: 0, calls: 0 };
+
+  function resetTokenUsage() {
+    tokenUsage.input = 0; tokenUsage.output = 0; tokenUsage.total = 0; tokenUsage.calls = 0;
+    const panel = $("tokenSummary");
+    if (panel) panel.style.display = "none";
+  }
+
+  function addTokenUsage(usage) {
+    if (!usage) return;
+    tokenUsage.input += usage.input_tokens || 0;
+    tokenUsage.output += usage.output_tokens || 0;
+    tokenUsage.total += usage.total_tokens || 0;
+    tokenUsage.calls += 1;
+  }
+
+  const MODEL_PRICING = {
+    "gpt-5.4":       { input: 2.50,  output: 15.00 },
+    "gpt-5.4-mini":  { input: 0.75,  output: 4.50  },
+    "gpt-5.4-nano":  { input: 0.20,  output: 1.25  },
+    "gpt-5-mini":    { input: 0.75,  output: 4.50  },
+    "gpt-5.2":       { input: 2.50,  output: 15.00 }
+  };
+
+  function updateTokenSummaryUI(model) {
+    const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
+    const inputCost  = (tokenUsage.input  / 1_000_000) * pricing.input;
+    const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
+    const totalCost  = inputCost + outputCost;
+
+    const fmt = n => n.toLocaleString("en-US");
+    const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
+
+    const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
+
+    set("tsInput",        fmt(tokenUsage.input));
+    set("tsInputCost",    fmtUSD(inputCost));
+    set("tsOutput",       fmt(tokenUsage.output));
+    set("tsOutputCost",   fmtUSD(outputCost));
+    set("tsTotal",        fmt(tokenUsage.total));
+    set("tsTotalCost",    `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
+    set("tsCallCount",    String(tokenUsage.calls));
+    set("tsModel",        model);
+    set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
+
+    const panel = $("tokenSummary");
+    if (panel) panel.style.display = "block";
+  }
+
   // ---- timing helpers ----
   function nowMs() {
     return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
@@ -172,22 +222,13 @@
             finalText += evt.delta;
           }
 
+          if (evt.type === "response.completed" && evt.response?.usage) {
+            addTokenUsage(evt.response.usage);
+          }
+
           if (evt.type === "response.error") {
             throw new Error(evt.error?.message || "Unknown model error");
           }
-        }
-      }
-
-      if (buffer.trim() && !streamClosed) {
-        const lines = buffer.split("\n");
-        for (const ln of lines) {
-          const m = ln.match(/^data:\s?(.*)$/);
-          const raw = m ? m[1] : ln.trim();
-          if (raw === "[DONE]") break;
-          try {
-            const evt = JSON.parse(raw);
-            if (evt.delta) finalText += evt.delta;
-          } catch { }
         }
       }
     } finally {
@@ -213,16 +254,6 @@
     };
   }
 
-  function readUnitEQsOptional() {
-    const raw = els.unitEssentialQuestions()?.value?.trim();
-    if (!raw) return "";
-    try {
-      const arr = JSON.parse(raw);
-      if (Array.isArray(arr)) return JSON.stringify(arr);
-    } catch { }
-    return raw;
-  }
-
   function buildUnitCommonJson(step0Obj, unitTitle) {
     return {
       UnitTitle: unitTitle,
@@ -232,15 +263,6 @@
       StandardsAligned: step0Obj?.UnitDescription?.StandardsAligned || [],
       KeyVocabulary: step0Obj?.UnitDescription?.KeyVocabulary || []
     };
-  }
-
-  function dbg(label, payload) {
-    console.log(`[DBG] ${label}`, payload);
-  }
-
-  function previewText(s, n = 400) {
-    if (typeof s !== "string") return s;
-    return s.length <= n ? s : s.slice(0, n) + "…";
   }
 
   function createLimiter(maxConcurrent = 4) {
@@ -310,8 +332,7 @@
   async function runChain() {
     if (isRunning) return;
 
-    const HARDCODED_PASSWORD = ""; // Enter password here while working locally
-    const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
+    const apiKey = els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
     const model = els.model()?.value || "gpt-5.4-mini";
 
@@ -326,6 +347,7 @@
     if (els.log()) els.log().value = "";
     if (els.step0Json()) els.step0Json().value = "";
     if (els.markdownOutput()) els.markdownOutput().value = "";
+    resetTokenUsage();
 
     setRunning(true);
     setStatus("Running…");
@@ -333,26 +355,19 @@
 
     const timings = {
       step0_outline_ms: 0,
-      unit_common_html_ms: 0,
-      per_lesson_json_ms: [],
-      per_lesson_html_ms: [],
       all_lessons_json_parallel_ms: 0,
-      all_lessons_html_parallel_ms: 0,
-      join_final_ms: 0,
       total_ms: 0
     };
     const tTotal0 = nowMs();
 
     try {
-      // ---- Get Active Prompts ----
       const lang = document.getElementById("languageSelect")?.value || "sr";
       const prompts = lang === "en" ? window.promptsEN : window.promptsSR;
 
       // ---- Step 0: outline ----
       const t0 = nowMs();
-      logLine("[1/5] Step 0: generating unit outline JSON…");
+      logLine("[1/3] Step 0: generating unit outline JSON…");
       const step0Prompt = fillTemplate(prompts.STEP0_PROMPT_TEMPLATE, vars);
-      console.log(">>> STEP 0 REQUEST (Prompt):\n", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
         callResponsesApiStream({
@@ -362,26 +377,23 @@
           schemaObj: prompts.STEP0_SCHEMA,
           signal
         }), "Step 0 Outline");
-      console.log("<<< STEP 0 RESPONSE (JSON):\n", step0JsonText);
 
       let step0Obj;
       try {
         step0Obj = JSON.parse(step0JsonText);
       } catch (e) {
-        throw new Error("Step 0 did not return valid JSON.\n\n" + step0JsonText.slice(0, 1200));
+        throw new Error("Step 0 did not return valid JSON.");
       }
 
       if (els.step0Json()) els.step0Json().value = JSON.stringify(step0Obj, null, 2);
       timings.step0_outline_ms = nowMs() - t0;
       logLine(`[OK] Step 0 JSON received. (${fmtMs(timings.step0_outline_ms)})`);
 
-      // ---- [SKIP] Rendering common unit HTML via AI ----
-      // (Replacing with local building)
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
 
       // ---- Per-lesson JSON (PARALLEL) ----
       const lessons = Array.isArray(step0Obj?.Lessons) ? step0Obj.Lessons : [];
-      const limit = createLimiter(4);
+      const limit = createLimiter(25);
       const tJsonAll0 = nowMs();
       logLine(`[2/3] Generating lesson JSON in parallel (${lessons.length} lessons)…`);
 
@@ -392,11 +404,10 @@
             const perLessonVars = {
               ...vars,
               UnitEssentialQuestions: (step0Obj?.UnitDescription?.EssentialQuestions || []).join("\n"),
-              ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
+              ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT:\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
             };
 
             const perLessonPrompt = fillTemplate(prompts.PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
-            console.log(`>>> LESSON ${i + 1} REQUEST (Prompt):\n`, perLessonPrompt);
 
             const lessonJsonText = await callResponsesApiStream({
               endpoint, apiKey, model,
@@ -405,11 +416,9 @@
               schemaObj: prompts.PER_LESSON_SCHEMA,
               signal
             });
-            console.log(`<<< LESSON ${i + 1} RESPONSE (JSON):\n`, lessonJsonText);
 
             let lessonObj = JSON.parse(lessonJsonText);
             const dur = nowMs() - ti0;
-            timings.per_lesson_json_ms[i] = dur;
             logLine(`[OK] Lesson ${i + 1}/${lessons.length} JSON done. (${fmtMs(dur)})`);
             return lessonObj;
           }, `Lesson ${i + 1} JSON`)
@@ -420,22 +429,17 @@
       timings.all_lessons_json_parallel_ms = nowMs() - tJsonAll0;
       logLine(`[OK] All lesson JSON done. (${fmtMs(timings.all_lessons_json_parallel_ms)})`);
 
-      // ---- [NEW] Step 3: Generate Markdown locally ----
-      const tMarkdown0 = nowMs();
+      // ---- Step 3: Generate Markdown locally ----
       logLine("[3/3] Generating final Markdown locally…");
-      
       const finalMarkdown = generateMarkdown(unitCommonJson, lessonJsons, lang);
-      
-      if (els.markdownOutput()) els.markdownOutput().value = finalMarkdown;
-      console.log("=== FINAL RAW MARKDOWN ===\n", finalMarkdown);
 
-      // Render Markdown to HTML and push to CKEditor or Preview div
+      if (els.markdownOutput()) els.markdownOutput().value = finalMarkdown;
+
       const html = typeof marked !== "undefined" ? marked.parse(finalMarkdown) : "Marked.js not loaded";
-      console.log("=== FINAL RENDERED HTML ===\n", html);
-      if (editorInstance) {
+      if (typeof editorInstance !== "undefined" && editorInstance) {
         editorInstance.setData(html);
       } else {
-        const preview = document.getElementById("markdownPreview");
+        const preview = $("markdownPreview");
         if (preview) {
           preview.style.display = "block";
           preview.innerHTML = html;
@@ -443,16 +447,11 @@
       }
 
       timings.total_ms = nowMs() - tTotal0;
+      logLine(`\nTOTAL: ${fmtMs(timings.total_ms)}`);
 
-      logLine("\n===== TIMING SUMMARY =====");
-      logLine(`Step 0 (outline): ${fmtMs(timings.step0_outline_ms)}`);
-      logLine(`All lessons JSON (parallel): ${fmtMs(timings.all_lessons_json_parallel_ms)}`);
-      logLine(`Markdown build: ${fmtMs(nowMs() - tMarkdown0)}`);
-      logLine(`TOTAL: ${fmtMs(timings.total_ms)}`);
-      logLine("==========================");
-
+      updateTokenSummaryUI(model);
       setStatus("Done.");
-      logLine("[OK] Done.");
+
     } catch (err) {
       if (currentAbortController?.signal?.aborted) {
         setStatus("Canceled.");
@@ -460,7 +459,6 @@
       } else {
         setStatus("Error.");
         logLine("[error] " + (err?.message || String(err)));
-        console.error(err);
       }
     } finally {
       setRunning(false);
@@ -479,6 +477,10 @@
         lessonObjectives: "🎯 Ciljevi učenja",
         lessonStandards: "📏 Usklađeni standardi",
         priorKnowledge: "💡 Procena predznanja",
+        apkPrerequisites: "Preduslovne veštine",
+        apkModality: "Modalitet",
+        apkInstructions: "Uputstva i šablon",
+        apkAlternates: "Alternativne opcije",
         instruction: "Instrukcija",
         materials: "📚 Materijali",
         teacherInstructions: "📋 Instrukcije za nastavnike",
@@ -505,6 +507,10 @@
         lessonObjectives: "🎯 Student Learning Objectives",
         lessonStandards: "📏 Standards Aligned",
         priorKnowledge: "💡 Assess Prior Knowledge",
+        apkPrerequisites: "Prerequisite Skills",
+        apkModality: "Modality",
+        apkInstructions: "Instructions & Template",
+        apkAlternates: "Alternate Options",
         instruction: "Instruction",
         materials: "📚 Materials",
         teacherInstructions: "📋 Instructions for Teachers",
@@ -546,9 +552,9 @@
     }
 
     lessonObjs.forEach((lWrap, i) => {
-      const l = lWrap.LessonPlan || lWrap.LessonDescription; 
+      const l = lWrap.LessonPlan || lWrap.LessonDescription;
       if (!l) return;
-      md += `---\n\n# Lesson ${l.LessonNumber || (i+1)}: ${l.LessonTitle}\n\n`;
+      md += `---\n\n# Lesson ${l.LessonNumber || (i + 1)}: ${l.LessonTitle}\n\n`;
 
       if (l.EssentialQuestions?.length) {
         md += `### ${labels.lessonEq}\n`;
@@ -573,12 +579,32 @@
         md += `- ${l.StandardsAligned}\n\n`;
       }
 
-      if (l.AssessPriorKnowledge) {
-        md += `### ${labels.priorKnowledge}\n`;
-        md += l.AssessPriorKnowledge + "\n\n";
+      const apk = l.AssessPriorKnowledge;
+      const hasApk = apk && (apk.Modality || apk.TeacherPrompt || apk.PrerequisiteSkills?.length);
+      if (hasApk) {
+        md += `### ${labels.priorKnowledge}\n\n`;
+        if (apk.PrerequisiteSkills?.length) {
+          md += `**${labels.apkPrerequisites}**\n`;
+          apk.PrerequisiteSkills.forEach(s => md += `- ${s}\n`);
+          md += "\n";
+        }
+        if (apk.Modality) md += `**${labels.apkModality}:** ${apk.Modality}\n\n`;
+        if (apk.TeacherPrompt) md += `${apk.TeacherPrompt}\n\n`;
+        if (apk.InstructionsAndTemplate) md += `**${labels.apkInstructions}**\n\n${apk.InstructionsAndTemplate}\n\n`;
+        if (apk.ExpectedStudentResponses?.length) {
+          md += `**${labels.expected}**\n`;
+          apk.ExpectedStudentResponses.forEach(r => md += `- ${r}\n`);
+          md += "\n";
+        }
+        if (apk.ClosingPrompt) md += `${apk.ClosingPrompt}\n\n`;
+        if (apk.AlternateOptions?.length) {
+          md += `**${labels.apkAlternates}**\n`;
+          apk.AlternateOptions.forEach((opt, i) => md += `${i + 1}. ${opt}\n`);
+          md += "\n";
+        }
       }
 
-      md += `### <span style="color:rgb(115, 191, 39);">${labels.instruction}</span>\n\n`;
+      md += `### ${labels.instruction}\n\n`;
       if (l.Instruction?.Materials?.length) {
         md += `**${labels.materials}**\n`;
         l.Instruction.Materials.forEach(m => md += `- ${m}\n`);
@@ -593,20 +619,13 @@
       if (l.Instruction?.TranscendentThinking) {
         md += `### ${labels.transcendent}\n\n${l.Instruction.TranscendentThinking}\n\n`;
       }
-      if (l.Instruction?.QuickCheck) {
-        md += `**${labels.quickCheck}**\n\n${l.Instruction.QuickCheck}\n\n`;
-      }
+      if (l.Instruction?.QuickCheck) md += `**${labels.quickCheck}**\n\n${l.Instruction.QuickCheck}\n\n`;
 
-      if (l.GroupStructureAndRoles) {
-        md += `### <span style="color:rgb(115, 191, 39);">${labels.groupStructure}</span>\n\n${l.GroupStructureAndRoles}\n\n`;
-      }
-
-      if (l.CollaborationGuidelines) {
-        md += `### <span style="color:rgb(115, 191, 39);">${labels.collabGuidelines}</span>\n\n${l.CollaborationGuidelines}\n\n`;
-      }
+      if (l.GroupStructureAndRoles) md += `### ${labels.groupStructure}\n\n${l.GroupStructureAndRoles}\n\n`;
+      if (l.CollaborationGuidelines) md += `### ${labels.collabGuidelines}\n\n${l.CollaborationGuidelines}\n\n`;
 
       if (l.CollaborativeActivities) {
-        md += `### <span style="color:rgb(115, 191, 39);">${labels.collabActivities}</span>\n\n`;
+        md += `### ${labels.collabActivities}\n\n`;
         if (l.CollaborativeActivities.Materials?.length) {
           md += `**${labels.materials}**\n`;
           l.CollaborativeActivities.Materials.forEach(m => md += `- ${m}\n`);
@@ -615,16 +634,14 @@
         if (l.CollaborativeActivities.InstructionsForTeachers) {
           md += `**${labels.teacherInstructions}**\n\n${l.CollaborativeActivities.InstructionsForTeachers}\n\n`;
         }
-        if (l.CollaborativeActivities.Differentiation) {
-          md += `**${labels.differentiation}**\n\n${l.CollaborativeActivities.Differentiation}\n\n`;
-        }
+        if (l.CollaborativeActivities.Differentiation) md += `**${labels.differentiation}**\n\n${l.CollaborativeActivities.Differentiation}\n\n`;
         if (l.CollaborativeActivities.AccommodationsAndModifications) {
           const am = l.CollaborativeActivities.AccommodationsAndModifications;
           md += `**${labels.accommodations}**\n\n`;
           if (am.General) md += `**General:** ${am.General}\n\n`;
           if (am.IndividualSupport?.length) {
             am.IndividualSupport.forEach(st => {
-              md += `<span style="color:red;">**${st.StudentName}**</span>\n`;
+              md += `**${st.StudentName}**\n`;
               md += `- ${st.PlanProvided}\n`;
               md += `- ${st.PlanImplementation}\n\n`;
             });
@@ -632,51 +649,58 @@
         }
       }
 
-      if (l.ReflectionOnGroupDynamics) {
-        md += `### <span style="color:rgb(115, 191, 39);">${labels.reflection}</span>\n\n${l.ReflectionOnGroupDynamics}\n\n`;
-      }
-
-      if (l.ReviewAndSpacedRetrieval) {
-        md += `### <span style="color:rgb(115, 191, 39);">${labels.review}</span>\n\n${l.ReviewAndSpacedRetrieval}\n\n`;
-      }
+      if (l.ReflectionOnGroupDynamics) md += `### ${labels.reflection}\n\n${l.ReflectionOnGroupDynamics}\n\n`;
+      if (l.ReviewAndSpacedRetrieval) md += `### ${labels.review} (5 min)\n\n${l.ReviewAndSpacedRetrieval}\n\n`;
 
       if (l.FormativeAssessment) {
-        md += `### ${labels.formative}\n\n${l.FormativeAssessment}\n\n`;
+        md += `### ${labels.formative}\n\n`;
+        if (l.FormativeAssessment.Materials?.length) {
+          md += `**${labels.materials}**\n`;
+          l.FormativeAssessment.Materials.forEach(m => md += `- ${m}\n`);
+          md += "\n";
+        }
+        if (l.FormativeAssessment.InstructionsForTeachers) md += `**${labels.teacherInstructions}**\n\n${l.FormativeAssessment.InstructionsForTeachers}\n\n`;
+        if (l.FormativeAssessment.ExpectedStudentResponses?.length) {
+          md += `**${labels.expected}**\n`;
+          l.FormativeAssessment.ExpectedStudentResponses.forEach(r => md += `- ${r}\n`);
+          md += "\n";
+        }
       }
 
       if (l.StudentPractice) {
-        md += `### <span style="color:rgb(115, 191, 39);">${labels.practice}</span>\n\n${l.StudentPractice}\n\n`;
+        md += `### ${labels.practice}\n\n`;
+        if (l.StudentPractice.Materials?.length) {
+          md += `**${labels.materials}**\n`;
+          l.StudentPractice.Materials.forEach(m => md += `- ${m}\n`);
+          md += "\n";
+        }
+        if (l.StudentPractice.InstructionsForTeachers) md += `**${labels.teacherInstructions}**\n\n${l.StudentPractice.InstructionsForTeachers}\n\n`;
+        if (l.StudentPractice.ExpectedStudentResponses?.length) {
+          md += `**${labels.expected}**\n`;
+          l.StudentPractice.ExpectedStudentResponses.forEach(r => md += `- ${r}\n`);
+          md += "\n";
+        }
       }
     });
 
     return md;
   }
 
-  function cancel() {
-    if (currentAbortController) currentAbortController.abort();
-  }
-
   async function downloadPrompts() {
     try {
       if (typeof JSZip === "undefined") {
-        alert("JSZip library not loaded. Check your internet connection or CDN link.");
+        alert("JSZip library not loaded.");
         return;
       }
-
       const zipEN = new JSZip();
       const zipSR = new JSZip();
-
-      // window.promptsEN and window.promptsSR are defined in prompts_collaborative.js / prompts_collaborative_sr.js
       const pEN = window.promptsEN || {};
       const pSR = window.promptsSR || {};
 
       const addFiles = (zip, obj) => {
         for (const [key, value] of Object.entries(obj)) {
-          if (typeof value === "object" && value !== null) {
-            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
-          } else if (typeof value === "string") {
-            zip.file(`${key}.txt`, value);
-          }
+          if (typeof value === "object" && value !== null) zip.file(`${key}.json`, JSON.stringify(value, null, 2));
+          else if (typeof value === "string") zip.file(`${key}.txt`, value);
         }
       };
 
@@ -698,64 +722,17 @@
       };
 
       saveZip(contentEN, "collaborative_prompts_en.zip");
-      setTimeout(() => {
-        saveZip(contentSR, "collaborative_prompts_sr.zip");
-      }, 500);
-
-      logLine("[OK] Prompts downloaded successfully.");
+      setTimeout(() => saveZip(contentSR, "collaborative_prompts_sr.zip"), 500);
+      logLine("[OK] Prompts downloaded.");
     } catch (err) {
       logLine("[error] Failed to download prompts: " + err.message);
-      console.error(err);
     }
   }
 
-  let editorInstance = null;
-
   function onReady() {
-    const runBtn = els.runChainBtn();
-    const cancelBtn = els.cancelBtn();
-    const downloadBtn = els.downloadPromptsBtn();
-    if (runBtn) runBtn.addEventListener("click", runChain);
-    if (cancelBtn) cancelBtn.addEventListener("click", cancel);
-    if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
-
-    // Init CKEditor (Super-build version requires CKEDITOR global and removing premium plugins)
-    if (typeof CKEDITOR !== "undefined") {
-      CKEDITOR.ClassicEditor
-        .create(document.querySelector("#editor"), {
-          licenseKey: 'GPL',
-          toolbar: {
-            items: [
-              'heading', '|',
-              'bold', 'italic', 'strikethrough', 'underline', 'link', '|',
-              'bulletedList', 'numberedList', 'todoList', '|',
-              'outdent', 'indent', '|',
-              'undo', 'redo', '-',
-              'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-              'alignment', '|',
-              'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-              'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-              'sourceEditing'
-            ],
-            shouldNotGroupWhenFull: true
-          },
-          // Super-build contains premium plugins that must be removed if no license/account is used
-          removePlugins: [
-            'AIAssistant', 'CKBox', 'CKFinder', 'EasyImage', 
-            'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 
-            'RealTimeCollaborativeRevisionHistory', 'PresenceList', 'Comments', 
-            'TrackChanges', 'TrackChangesData', 'RevisionHistory', 'Pagination', 
-            'WProofreader', 'MathType', 'SlashCommand', 'Template', 'DocumentOutline', 
-            'FormatPainter', 'TableOfContents', 'PasteFromOfficeEnhanced', 'CaseChange'
-          ]
-        })
-        .then(editor => {
-          editorInstance = editor;
-        })
-        .catch(err => {
-          console.error("CKEditor error", err);
-        });
-    }
+    if (els.runChainBtn()) els.runChainBtn().addEventListener("click", runChain);
+    if (els.cancelBtn()) els.cancelBtn().addEventListener("click", () => currentAbortController?.abort());
+    if (els.downloadPromptsBtn()) els.downloadPromptsBtn().addEventListener("click", downloadPrompts);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);

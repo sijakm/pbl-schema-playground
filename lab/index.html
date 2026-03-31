@@ -47,6 +47,82 @@
       font-size: 12px;
       margin-left: 8px;
     }
+
+    #tokenSummary {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 18px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      color: #e6edf3;
+      font-size: 13px;
+    }
+
+    #tokenSummary .ts-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #58a6ff;
+      letter-spacing: 0.02em;
+    }
+
+    #tokenSummary .ts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    #tokenSummary .ts-stat {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    #tokenSummary .ts-stat .ts-label {
+      font-size: 11px;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    #tokenSummary .ts-stat .ts-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #e6edf3;
+      font-family: ui-monospace, monospace;
+    }
+
+    #tokenSummary .ts-stat .ts-sub {
+      font-size: 11px;
+      color: #3fb950;
+      margin-top: 2px;
+    }
+
+    #tokenSummary .ts-cost {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #0e1c12;
+      border: 1px solid #2ea04326;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #tokenSummary .ts-cost .ts-cost-label {
+      font-size: 12px;
+      color: #8b949e;
+    }
+
+    #tokenSummary .ts-cost .ts-cost-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #3fb950;
+      font-family: ui-monospace, monospace;
+    }
   </style>
 </head>
 <body>
@@ -100,6 +176,36 @@
     <button id="runBtn" onclick="run()">Run (Stream)</button>
     <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
+
+    <div id="tokenSummary">
+      <div class="ts-title">📊 Token Usage Summary</div>
+      <div class="ts-grid">
+        <div class="ts-stat">
+          <div class="ts-label">Input Tokens</div>
+          <div class="ts-value" id="tsInput">—</div>
+          <div class="ts-sub" id="tsInputCost"></div>
+        </div>
+        <div class="ts-stat">
+          <div class="ts-label">Output Tokens</div>
+          <div class="ts-value" id="tsOutput">—</div>
+          <div class="ts-sub" id="tsOutputCost"></div>
+        </div>
+        <div class="ts-stat">
+          <div class="ts-label">Total Tokens</div>
+          <div class="ts-value" id="tsTotal">—</div>
+          <div class="ts-sub" id="tsTotalCost"></div>
+        </div>
+        <div class="ts-stat">
+          <div class="ts-label">API Calls</div>
+          <div class="ts-value" id="tsCallCount">—</div>
+          <div class="ts-sub" id="tsModel"></div>
+        </div>
+      </div>
+      <div class="ts-cost">
+        <span class="ts-cost-label">💵 Estimated Total Cost</span>
+        <span class="ts-cost-value" id="tsTotalCostValue">$—</span>
+      </div>
+    </div>
   </div>
 
   <div class="row">
