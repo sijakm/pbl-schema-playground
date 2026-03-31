@@ -605,7 +605,7 @@
         }
       }
 
-      md += `### ${labels.instruction}\n\n`;
+      md += `### <span style="color:rgb(115, 191, 39);">${labels.instruction}</span>\n\n`;
       if (l.Instruction?.Materials?.length) {
         md += `**${labels.materials}**\n`;
         l.Instruction.Materials.forEach(m => md += `- ${m}\n`);
@@ -622,11 +622,11 @@
       }
       if (l.Instruction?.QuickCheck) md += `**${labels.quickCheck}**\n\n${l.Instruction.QuickCheck}\n\n`;
 
-      if (l.GroupStructureAndRoles) md += `### ${labels.groupStructure}\n\n${l.GroupStructureAndRoles}\n\n`;
-      if (l.CollaborationGuidelines) md += `### ${labels.collabGuidelines}\n\n${l.CollaborationGuidelines}\n\n`;
+      if (l.GroupStructureAndRoles) md += `### <span style="color:rgb(115, 191, 39);">${labels.groupStructure}</span>\n\n${l.GroupStructureAndRoles}\n\n`;
+      if (l.CollaborationGuidelines) md += `### <span style="color:rgb(115, 191, 39);">${labels.collabGuidelines}</span>\n\n${l.CollaborationGuidelines}\n\n`;
 
       if (l.CollaborativeActivities) {
-        md += `### ${labels.collabActivities}\n\n`;
+        md += `### <span style="color:rgb(115, 191, 39);">${labels.collabActivities}</span>\n\n`;
         if (l.CollaborativeActivities.Materials?.length) {
           md += `**${labels.materials}**\n`;
           l.CollaborativeActivities.Materials.forEach(m => md += `- ${m}\n`);
@@ -642,7 +642,7 @@
           if (am.General) md += `**General:** ${am.General}\n\n`;
           if (am.IndividualSupport?.length) {
             am.IndividualSupport.forEach(st => {
-              md += `**${st.StudentName}**\n`;
+              md += `<span style="color:red;">**${st.StudentName}**</span>\n`;
               md += `- ${st.PlanProvided}\n`;
               md += `- ${st.PlanImplementation}\n\n`;
             });
@@ -650,37 +650,15 @@
         }
       }
 
-      if (l.ReflectionOnGroupDynamics) md += `### ${labels.reflection}\n\n${l.ReflectionOnGroupDynamics}\n\n`;
-      if (l.ReviewAndSpacedRetrieval) md += `### ${labels.review} (5 min)\n\n${l.ReviewAndSpacedRetrieval}\n\n`;
+      if (l.ReflectionOnGroupDynamics) md += `### <span style="color:rgb(115, 191, 39);">${labels.reflection}</span>\n\n${l.ReflectionOnGroupDynamics}\n\n`;
+      if (l.ReviewAndSpacedRetrieval) md += `### <span style="color:rgb(115, 191, 39);">${labels.review}</span>\n\n${l.ReviewAndSpacedRetrieval}\n\n`;
 
       if (l.FormativeAssessment) {
-        md += `### ${labels.formative}\n\n`;
-        if (l.FormativeAssessment.Materials?.length) {
-          md += `**${labels.materials}**\n`;
-          l.FormativeAssessment.Materials.forEach(m => md += `- ${m}\n`);
-          md += "\n";
-        }
-        if (l.FormativeAssessment.InstructionsForTeachers) md += `**${labels.teacherInstructions}**\n\n${l.FormativeAssessment.InstructionsForTeachers}\n\n`;
-        if (l.FormativeAssessment.ExpectedStudentResponses?.length) {
-          md += `**${labels.expected}**\n`;
-          l.FormativeAssessment.ExpectedStudentResponses.forEach(r => md += `- ${r}\n`);
-          md += "\n";
-        }
+        md += `### ${labels.formative}\n\n${l.FormativeAssessment}\n\n`;
       }
 
       if (l.StudentPractice) {
-        md += `### ${labels.practice}\n\n`;
-        if (l.StudentPractice.Materials?.length) {
-          md += `**${labels.materials}**\n`;
-          l.StudentPractice.Materials.forEach(m => md += `- ${m}\n`);
-          md += "\n";
-        }
-        if (l.StudentPractice.InstructionsForTeachers) md += `**${labels.teacherInstructions}**\n\n${l.StudentPractice.InstructionsForTeachers}\n\n`;
-        if (l.StudentPractice.ExpectedStudentResponses?.length) {
-          md += `**${labels.expected}**\n`;
-          l.StudentPractice.ExpectedStudentResponses.forEach(r => md += `- ${r}\n`);
-          md += "\n";
-        }
+        md += `### <span style="color:rgb(115, 191, 39);">${labels.practice}</span>\n\n${l.StudentPractice}\n\n`;
       }
     });
 
@@ -762,7 +740,17 @@
             'TrackChanges', 'TrackChangesData', 'RevisionHistory', 'Pagination', 
             'WProofreader', 'MathType', 'SlashCommand', 'Template', 'DocumentOutline', 
             'FormatPainter', 'TableOfContents', 'PasteFromOfficeEnhanced', 'CaseChange'
-          ]
+          ],
+          htmlSupport: {
+            allow: [
+              {
+                name: /.*/,
+                attributes: true,
+                classes: true,
+                styles: true
+              }
+            ]
+          }
         })
         .then(editor => {
           editorInstance = editor;
