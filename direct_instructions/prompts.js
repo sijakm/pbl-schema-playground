@@ -98,7 +98,7 @@ IMPORTANT CONTENT RULES:
 - Ensure all parts of the lesson reflect the Lesson Scope/Boundaries above; avoid introducing new major concepts that belong to other lessons.
 - EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
 - AssessPriorKnowledge: ONLY if LessonNumber == 1, write 150–250 words and follow the required structure in the schema description. If LessonNumber != 1, return "" (empty string).
-- DirectPresentation must be ≤10 minutes total and must follow the required HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT format with Say/Do/Ask/Listen for/Write, and expected student responses as bullet points (DO NOT include the section headers/titles in the string).
+- DirectPresentation must be ≤10 minutes total and must follow the required HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT format with Say/Do/Ask/✅ Expected Student Responses/Write, and expected student responses as bullet points (DO NOT include the section headers/titles in the string).
 - GuidedPractice.InstructionsForTeachers must be at least 700 words and must include the required components listed in the schema description.
 - GuidedPractice.AccommodationsAndModifications must include:
   - General: general supports
@@ -200,15 +200,15 @@ DIRECT PRESENTATION
     - <ul> with <li> items from DirectPresentation.Materials.
     - Instructions for Teachers:
     - <p><strong>📋 Instructions for Teachers</strong></p>
-    - Render teacher-facing script as a sequence of <p> blocks. Each teacher cue or sentence that begins with labels like "Say:", "Do:", "Ask:", "Write:", "Draw/Show:", "Listen for:" should be its own numbered <p> when it is explanatory or stage-setting (for example: Say: "…", Do: Show …).
-    - When short student-cue lists follow a teacher prompt (e.g., "Listen for:" examples), render those as a separate top-level <ul> immediately after the related <p>. Each <li> in that <ul> must be plain text (for example: <li>Listen for: - "I would see tiny balls." - "I would see lots of different shapes."</li>).
+    - Render teacher-facing script as a sequence of <p> blocks. Each teacher cue or sentence that begins with labels like "Say:", "Do:", "Ask:", "Write:", or "Draw/Show:" should be its own numbered <p> when it is explanatory or stage-setting (for example: Say: "…", Do: Show …).
+    - IMPORTANT: Whenever you encounter student responses (e.g., "✅ Expected Student Responses:"), DO NOT include them inside any <p> block. Instead, ALWAYS render them as an independent top-level <ul> immediately after the preceding <p>. Each individual response MUST be its own <li>. Do NOT combine multiple responses into a single <li>. Each <li> must start with the label "✅ Expected Student Responses — ".
     - If you instead choose to render the sequence of MAIN steps as a list, use a top-level <ul> where each MAIN step is one <li>. Each such <li> MUST contain only plain text (no HTML tags inside the <li>). Preserve teacher cues as plain text inside those <li>.
     - Do NOT nest <ul>, <ol>, <p>, <span>, or any other HTML inside a <li>. To represent sub-points, prompts, questions, model responses, or ordered substeps, FLATTEN them as additional consecutive top-level <li> entries immediately after the parent step, using a clear prefix tying them to the parent step. Examples of required prefixes:
         - "Related to previous step: …"
         - "From step 2: …"
         - "Step 3.a — …"
     - Expected student responses that would normally be nested MUST be flattened into individual top-level <li> elements. Each such <li> must begin with the plain-text label:
-        ✅ Expected Student Response — Response text
+        ✅ Expected Student Responses — [Response text]
            - Keep one response per <li>.
 
         7) Strict formatting and safety:
@@ -218,7 +218,7 @@ DIRECT PRESENTATION
            - Ensure readable indentation.
 
         APPLY THESE MAPPING RULES:
-      (One response per <li>; do not combine responses in one <li>.)
+      (One response per <li>; ALWAYS separate them; do not combine via dashes or combine in one <li>.)
     - For Quick Checks that would be embedded in the sequence, use the global ✔Quick Check and ✅Expected Student Responses pattern.
     - After the final step or final <p>/<ul> block, CLOSE the <ul> tag if you opened one for MAIN steps and continue with the next labeled block or section as required.
     - Anticipated Misconceptions (if any):
@@ -557,7 +557,7 @@ GLOBAL RULES
                             },
                             "InstructionsForTeachers": {
                                 "type": "string",
-                                "description": "Step-by-step teacher instructions following this EXACT sequence: (1) HOOK (1-2 min), (2) INTRODUCTION (1-2 min), (3) DIRECT TEACHING (4-5 min), and (4) GUIDED ENGAGEMENT (2-3 min). IMPORTANT: DO NOT include the headers '1. HOOK (1-2 min)', '2. INTRODUCTION (1-2 min)', '3. DIRECT TEACHING (4-5 min)', or '4. GUIDED ENGAGEMENT (2-3 min)' in the final string. Instead, provide the content of each section directly starting with the first teacher prompt (Say:, Do:, etc.). Each component must include teacher talk (Say:/Ask:), teacher actions (Do:/Write:/Draw/Show:), and student responses (Listen for: - with bullets). All content must be scientifically accurate and age-appropriate."
+                                "description": "Step-by-step teacher instructions following this EXACT sequence: (1) HOOK (1-2 min), (2) INTRODUCTION (1-2 min), (3) DIRECT TEACHING (4-5 min), and (4) GUIDED ENGAGEMENT (2-3 min). IMPORTANT: DO NOT include the headers '1. HOOK (1-2 min)', '2. INTRODUCTION (1-2 min)', '3. DIRECT TEACHING (4-5 min)', or '4. GUIDED ENGAGEMENT (2-3 min)' in the final string. Instead, provide the content of each section directly starting with the first teacher prompt (Say:, Do:, etc.). Each component must include teacher talk (Say:/Ask:), teacher actions (Do:/Write:/Draw/Show:), and student responses (✅ Expected Student Responses: - with bullets). All content must be scientifically accurate and age-appropriate."
                             },
                             "AnticipatedMisconceptions": {
                                 "type": "string",

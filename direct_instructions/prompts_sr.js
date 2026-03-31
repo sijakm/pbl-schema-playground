@@ -97,7 +97,7 @@ VAŽNA PRAVILA SADRŽAJA:
 - Osiguraj da svi delovi lekcije odražavaju okvire lekcije iznad; izbegavaj uvođenje novih bitnih koncepta koji pripadaju drugim lekcijama.
 - EssentialQuestions: MORAJU biti potpuno identična ključnim pitanjima na nivou jedinice (isti tekst, isti redosled).
 - AssessPriorKnowledge: SAMO ako je LessonNumber == 1, napiši 150–250 reči i prati obaveznu strukturu opisanu u šemi. Ako LessonNumber != 1, vrati "" (prazan string).
-- DirectPresentation mora trajati ≤10 minuta ukupno i mora pratiti obavezni UVOD (HOOK)/PREDSTAVLJANJE (INTRODUCTION)/DIREKTNO PODUČAVANJE (DIRECT TEACHING)/VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) format sa uputstvom Kaži(Say)/Uradi(Do)/Pitaj(Ask)/Slušaj da čuješ(Listen for)/Zapiši(Write), i očekivane odgovore učenika kao stavke liste (NEMOJ uključivati naslove/zaglavlja sekcija u string).
+- DirectPresentation mora trajati ≤10 minuta ukupno i mora pratiti obavezni UVOD (HOOK)/PREDSTAVLJANJE (INTRODUCTION)/DIREKTNO PODUČAVANJE (DIRECT TEACHING)/VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) format sa uputstvom Kaži(Say)/Uradi(Do)/Pitaj(Ask)/✅ Očekivani odgovori učenika/Zapiši(Write), i očekivane odgovore učenika kao stavke liste (NEMOJ uključivati naslove/zaglavlja sekcija u string).
 - GuidedPractice.InstructionsForTeachers mora imati najmanje 700 reči i mora uključiti obavezne komponente navedene u opisu šeme.
 - GuidedPractice.AccommodationsAndModifications mora uključiti:
   - Opšta podrška: opšte podrške (general)
@@ -199,15 +199,15 @@ DIREKTNA PREZENTACIJA (DIRECT PRESENTATION)
     - <ul> sa <li> stavkama iz DirectPresentation.Materials.
     - Uputstva za nastavnike:
     - <p><strong>📋 Instrukcije za nastavnike</strong></p>
-    - Renderuj skriptu za nastavnike kao niz <p> blokova. Svaka rečenica za nastavnika koja počinje oznakama kao što su "Kaži:", "Uradi:", "Pitaj:", "Zapiši:", "Nacrtaj/Prikaži:", "Slušaj da čuješ:" treba da bude u sopstvenom numerisanom <p> pasusu kada predstavlja objašnjenje ili postavljanje scene (na primer: Kaži: "…", Uradi: Prikaži …).
-    - Kada kratke liste odgovora učenika prate prethodni izraz (npr., primeri kod "Slušaj da čuješ:"), prikaži to kao zaseban top-level <ul> neposredno nakon odgovarajućeg <p>. Svaki <li> iz tog <ul> mora biti čist tekst (na primer: <li>Slušaj da čuješ: - "Video bih sitne loptice." - "Video bih puno različitih oblika."</li>).
+    - Renderuj skriptu za nastavnike kao niz <p> blokova. Svaka rečenica za nastavnika koja počinje oznakama kao što su "Kaži:", "Uradi:", "Pitaj:", "Zapiši:", ili "Nacrtaj/Prikaži:" treba da bude u sopstvenom numerisanom <p> pasusu kada predstavlja objašnjenje ili postavljanje scene (na primer: Kaži: "…", Uradi: Prikaži …).
+    - VAŽNO: Kad god naiđeš na odgovore učenika (npr., "✅ Očekivani odgovori učenika:"), NEMOJ ih uključivati unutar bilo kog <p> bloka. Umesto toga, UVEK ih renderuj kao nezavisnu listu <<ul> najvišeg nivoa neposredno nakon odgovarajućeg <p> bloka. Svaki pojedinačan odgovor MORA biti u sopstvenom <li> elementu. NEMOJ kombinovati više odgovora u jedan <li>. Svaki <li> mora početi oznakom: "✅ Očekivani odgovori učenika — ".
     - Ako, umesto toga, odlučiš da renderuješ GLAVNE korake kao listu, koristi <ul> najvišeg nivoa gde je svaki GLAVNI korak jedan <li>. Svaki takav <li> MORA sadržati samo običan tekst (bez HTML oznaka unutar <li>). Zadrži nastavnička uputstva kao običan tekst unutar tih <li>-jeva.
     - NEMOJ ugnježđivati <ul>, <ol>, <p>, <span>, ili bilo koji drugi HTML unutar <li>. Da bi prikazao pod-tačke, izjave, pitanja, modelovane odgovore ili raspoređene potkorake, ISRAVNAJ ih kao dodatne redom poređane <li> unose najvišeg nivoa neposredno nakon roditeljskog koraka, koristeći jasan prefiks koji ih povezuje nazad sa roditeljskim korakom. Primeri potrebnih prefiksa:
         - "Povezano na prethodni korak: …"
         - "Od koraka 2: …"
         - "Korak 3.a — …"
     - Očekivani odgovori učenika koji bi normalno bili ugnježdeni MORAJU biti poravnati kao pojedinačni <li> elementi najvišeg nivoa. Svaki takav <li> mora početi sa oznakom običnog teksta:
-        ✅ Očekivani odgovor učenika — Tekst odgovora
+        ✅ Očekivani odgovori učenika — [Tekst odgovora]
            - Zadrži jedan odgovor po <li>.
 
         7) Strogo formatiranje i bezbednost:
@@ -217,7 +217,7 @@ DIREKTNA PREZENTACIJA (DIRECT PRESENTATION)
            - Omogući čitljivo uvlačenje u kodu.
 
         PRIMENI OVA PRAVILA MAPIRANJA:
-      (Jedan odgovor po <li>; nemoj kombinovati odgovore unutar samo jednog <li>.)
+      (Jedan odgovor po <li>; UVEK ih razdvoj; nemoj ih spajati crticama niti kombinovati unutar jednog <li>.)
     - Za Brze provere koje bi bile umetnute u niz, koristi globalni obrazac ✔Brza provera i ✅ Očekivani odgovori učenika.
     - Posle poslednjeg koraka ili konačnog <p>/<ul> bloka, ZATVORI <ul> oznaku ako si je prethodno otvorio za GLAVNE korake i tu nastavi na bilo koji sledeći odeljak kako se traži.
     - Moguća pogrešna uverenja (ako ih ima):
@@ -554,7 +554,7 @@ GLOBALNA PRAVILA
                             },
                             "InstructionsForTeachers": {
                                 "type": "string",
-                                "description": "Korak po korak instrukcije za nastavnika prateći ovaj TAČAN redosled: (1) UVOD (HOOK) (1-2 min), (2) PREDSTAVLJANJE (INTRODUCTION) (1-2 min), (3) DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min), i (4) VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min). VAŽNO: NEMOJ uključivati naslove '1. UVOD (HOOK) (1-2 min)', '2. PREDSTAVLJANJE (INTRODUCTION) (1-2 min)', '3. DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min)', ili '4. VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min)' u finalni string. Umesto toga, navedi sadržaj svake komponente direktno počevši od prvog uputstva (Kaži:, Uradi:, itd.). Svaki deo mora uključivati nastavnikov govor (Kaži:/Pitaj:), akcije (Uradi:/Zapiši:/Nacrtaj/Prikaži:), i odgovore učenika (Slušaj da čuješ: - sa stavkama liste). Sav sadržaj mora biti naučno tačan i prilagođen uzrastu."
+                                "description": "Korak po korak instrukcije za nastavnika prateći ovaj TAČAN redosled: (1) UVOD (HOOK) (1-2 min), (2) PREDSTAVLJANJE (INTRODUCTION) (1-2 min), (3) DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min), i (4) VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min). VAŽNO: NEMOJ uključivati naslove '1. UVOD (HOOK) (1-2 min)', '2. PREDSTAVLJANJE (INTRODUCTION) (1-2 min)', '3. DIREKTNO PODUČAVANJE (DIRECT TEACHING) (4-5 min)', ili '4. VOĐENI ANGAŽMAN (GUIDED ENGAGEMENT) (2-3 min)' u finalni string. Umesto toga, navedi sadržaj svake komponente direktno počevši od prvog uputstva (Kaži:, Uradi:, itd.). Svaki deo mora uključivati nastavnikov govor (Kaži:/Pitaj:), akcije (Uradi:/Zapiši:/Nacrtaj/Prikaži:), i odgovore učenika (✅ Očekivani odgovori učenika: - sa stavkama liste). Sav sadržaj mora biti naučno tačan i prilagođen uzrastu."
                             },
                             "AnticipatedMisconceptions": {
                                 "type": "string",
