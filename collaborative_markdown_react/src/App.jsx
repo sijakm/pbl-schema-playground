@@ -101,6 +101,27 @@ export default function App() {
     }
   }, [logLines]);
 
+  // KaTeX rendering for math in preview
+  useEffect(() => {
+    if (!previewHtml || isEditing) return;
+    // Small delay to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      const el = document.getElementById("markdownPreview");
+      if (el && window.renderMathInElement) {
+        window.renderMathInElement(el, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          throwOnError: false,
+        });
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [previewHtml, isEditing]);
+
   // Init CKEditor safely
   useEffect(() => {
     if (!editorRef.current || ckeditorRef.current || isInitializingRef.current) return;
