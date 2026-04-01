@@ -380,10 +380,15 @@ FORMATIVNA PROCENA
 - NEMOJ koristiti gnježdene liste. NEMOJ koristiti <p> unutar <li>.
 
 VEŽBA UČENIKA (STUDENT PRACTICE)
-- <h3><span style="color: rgb(115, 191, 39);">🖊 Vežba učenika</span></h3>
-- Renderuj Napomene za nastavnika kao <p> blokove.
-- Renderuj zadatke kao jednu <ol> listu sa <li> stavkama.
-- Renderuj sve ✅ Očekivani odgovori učenika blokove koristeći ✅ obrazac, izvan bilo kog <li>.
+    - <h3><span style="color: rgb(115, 191, 39);">🖊 Vežba učenika</span></h3>
+    - <p><strong>Napomene za nastavnika:</strong> {StudentPractice.StudentPractice_TeacherNotes}</p>
+    - Za svaki deo naveden u zahtevnoj listi za formaciji StudentPractice.StudentPractice_Tasks (Brojčano obelezavani znakom od 1, 2, 3...):
+    - <p><strong>{Number}. ({DOK})</strong> {StudentDirections}</p>
+    - <p><strong>Kriterijumi uspeha</strong></p>
+    - Postavi <ul> oznaku na svaku stavku zvanu KriterijumUspeha pod vrstom <li> rasporeda.
+    - Ukoliko izlaže da prepliće i da postoji (ako matematike ima istaklo StudentPractice.StudentPractice_InterleavingIfMath bez prebrojavanja da je isključivo nevažeći i obrisan string oblik):
+    - <p><strong>Preplitanje (Matematika opcija)</strong></p>
+    - Obezbedite polje za uvezivanje materijala sa preplitanja koristeći jednog a potom nekoliko odvojenih slova na formaciji blokova za <p> i prikazujući obrise kao jedan ili nekoliko različitih opcija.
 `,
   UNIT_COMMON_HTML_PROMPT_TEMPLATE: `
 Dobićeš JEDAN JSON objekat koji striktno prati UnitPlanResponse šemu (već validiranu sa moje strane). Tvoj posao je da transformišeš ovaj JSON u čist, čitljiv HTML koji nastavnik može direktno da koristi na času.

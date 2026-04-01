@@ -329,7 +329,7 @@ PREGLED I PRISEĆANJE UZ VREMENSKE RAZMAKE (REVIEW & SPACED RETRIEVAL) (5 min)
         - Zadrži strukturu na vizuelno predstavljenom primerku obezbeđenu sliku na odsečak za (brojne sekvencije zadataka, napomenu, mete).
 
 FORMATIVNA PROCENA (FORMATIVE ASSESSMENT) (Renderovana kao deo pregleda)
-    - <p><strong>✅Formativna procena</strong></p>
+    - <h3><span style="color: rgb(115, 191, 39);">✅Formativna procena</span></h3>
     - Navedi početni <p> pasus uvoda ako postoji.
     - Za svaki upit/zadatak Prompta N (DOK X):
         - <p><strong>Uputstvo N (DOK X):</strong> {PitanjeZadatka}</p>

@@ -425,10 +425,15 @@ FORMATIVE ASSESSMENT
 - DO NOT use nested lists. DO NOT use <p> inside <li>.
 
 STUDENT PRACTICE
-- <h3><span style="color: rgb(115, 191, 39);">🖊 Student Practice</span></h3>
-- Render Teacher Notes as <p> blocks.
-- Render tasks as a single <ol> of plain-text <li> lines.
-- Render any ✅Expected Student Responses blocks using the ✅ pattern, outside of any <li>.
+    - <h3><span style="color: rgb(115, 191, 39);">🖊 Student Practice</span></h3>
+    - <p><strong>Teacher Notes:</strong> {StudentPractice.StudentPractice_TeacherNotes}</p>
+    - For each task in StudentPractice.StudentPractice_Tasks (Numbered 1, 2, 3...):
+    - <p><strong>{Number}. ({DOK})</strong> {StudentDirections}</p>
+    - <p><strong>Success Criteria</strong></p>
+    - <ul> with each SuccessCriteria item as an <li>.
+    - If StudentPractice.StudentPractice_InterleavingIfMath is not empty:
+    - <p><strong>Interleaving (Math only)</strong></p>
+    - Render the interleaving content as one or more <p> blocks.
 `
 
   ,

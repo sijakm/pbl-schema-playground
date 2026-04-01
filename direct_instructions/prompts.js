@@ -329,7 +329,7 @@ REVIEW & SPACED RETRIEVAL (5 min)
         - Ensure each sub-header section follows the structure in the image (Numbered actions, Say: scripts, bullets).
 
 FORMATIVE ASSESSMENT (Rendered as part of the Review chapter)
-    - <p><strong>✅Formative Assessment</strong></p>
+    - <h3><span style="color: rgb(115, 191, 39);">✅Formative Assessment</span></h3>
     - Render the intro paragraph (if present).
     - For each Prompt N (DOK X):
         - <p><strong>Prompt N (DOK X):</strong> {QuestionText}</p>
