@@ -1,11 +1,11 @@
 export const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
 
 export const MODEL_PRICING = {
-  "gpt-5.4":      { input: 2.50,  output: 15.00 },
-  "gpt-5.4-mini": { input: 0.75,  output: 4.50  },
-  "gpt-5.4-nano": { input: 0.20,  output: 1.25  },
-  "gpt-5-mini":   { input: 0.75,  output: 4.50  },
-  "gpt-5.2":      { input: 2.50,  output: 15.00 },
+  "gpt-5.4":       { input: 2.50,  output: 15.00, cached: 0.25  }, 
+  "gpt-5.4-mini":  { input: 0.75,  output: 4.50,  cached: 0.075 },
+  "gpt-5.2-nano":  { input: 0.20,  output: 1.25,  cached: 0.02  },
+  "gpt-5-mini":    { input: 0.75,  output: 4.50,  cached: 0.075 },
+  "gpt-5.2":       { input: 2.50,  output: 15.00, cached: 0.25  }
 };
 
 export function fillTemplate(tpl, vars) {
@@ -32,7 +32,7 @@ function parseSseLines(text) {
   return { events, rest };
 }
 
-export async function callResponsesApiStream({ endpoint, apiKey, model, prompt, schemaName, schemaObj, signal, onUsage }) {
+export async function callResponsesApiStream({ endpoint, apiKey, model, prompt, schemaName, schemaObj, signal, onUsage, onChunk }) {
   const headers = { "Content-Type": "application/json" };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
@@ -88,6 +88,7 @@ export async function callResponsesApiStream({ endpoint, apiKey, model, prompt, 
 
         if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
           finalText += evt.delta;
+          onChunk && onChunk(evt.delta);
         }
         if (evt.type === "response.completed" && evt.response?.usage) {
           onUsage && onUsage(evt.response.usage);
@@ -296,7 +297,7 @@ export function generateMarkdown(unitObj, lessonObjs, lang) {
       }
     }
 
-    md += `### <span style="color:rgb(115, 191, 39);">${labels.instruction}</span>\n\n`;
+    md += `### <span style="color:rgb(16, 185, 129);">${labels.instruction}</span>\n\n`;
     if (l.Instruction?.Materials?.length) {
       md += `**${labels.materials}**\n`;
       l.Instruction.Materials.forEach(m => md += `- ${m}\n`);
@@ -307,11 +308,11 @@ export function generateMarkdown(unitObj, lessonObjs, lang) {
     if (l.Instruction?.TranscendentThinking) md += `### ${labels.transcendent}\n\n${l.Instruction.TranscendentThinking}\n\n`;
     if (l.Instruction?.QuickCheck) md += `**${labels.quickCheck}**\n\n${l.Instruction.QuickCheck}\n\n`;
 
-    if (l.GroupStructureAndRoles) md += `### <span style="color:rgb(115, 191, 39);">${labels.groupStructure}</span>\n\n${l.GroupStructureAndRoles}\n\n`;
-    if (l.CollaborationGuidelines) md += `### <span style="color:rgb(115, 191, 39);">${labels.collabGuidelines}</span>\n\n${l.CollaborationGuidelines}\n\n`;
+    if (l.GroupStructureAndRoles) md += `### <span style="color:rgb(16, 185, 129);">${labels.groupStructure}</span>\n\n${l.GroupStructureAndRoles}\n\n`;
+    if (l.CollaborationGuidelines) md += `### <span style="color:rgb(16, 185, 129);">${labels.collabGuidelines}</span>\n\n${l.CollaborationGuidelines}\n\n`;
 
     if (l.CollaborativeActivities) {
-      md += `### <span style="color:rgb(115, 191, 39);">${labels.collabActivities}</span>\n\n`;
+      md += `### <span style="color:rgb(16, 185, 129);">${labels.collabActivities}</span>\n\n`;
       if (l.CollaborativeActivities.Materials?.length) {
         md += `**${labels.materials}**\n`;
         l.CollaborativeActivities.Materials.forEach(m => md += `- ${m}\n`);
@@ -325,7 +326,7 @@ export function generateMarkdown(unitObj, lessonObjs, lang) {
         if (am.General) md += `**General:** ${am.General}\n\n`;
         if (am.IndividualSupport?.length) {
           am.IndividualSupport.forEach(st => {
-            md += `<span style="color:red;">**${st.StudentName}**</span>\n`;
+            md += `<span style="color:rgb(239, 68, 68);">**${st.StudentName}**</span>\n`;
             md += `- ${st.PlanProvided}\n`;
             md += `- ${st.PlanImplementation}\n\n`;
           });
@@ -333,10 +334,10 @@ export function generateMarkdown(unitObj, lessonObjs, lang) {
       }
     }
 
-    if (l.ReflectionOnGroupDynamics) md += `### <span style="color:rgb(115, 191, 39);">${labels.reflection}</span>\n\n${l.ReflectionOnGroupDynamics}\n\n`;
-    if (l.ReviewAndSpacedRetrieval) md += `### <span style="color:rgb(115, 191, 39);">${labels.review}</span>\n\n${l.ReviewAndSpacedRetrieval}\n\n`;
+    if (l.ReflectionOnGroupDynamics) md += `### <span style="color:rgb(16, 185, 129);">${labels.reflection}</span>\n\n${l.ReflectionOnGroupDynamics}\n\n`;
+    if (l.ReviewAndSpacedRetrieval) md += `### <span style="color:rgb(16, 185, 129);">${labels.review}</span>\n\n${l.ReviewAndSpacedRetrieval}\n\n`;
     if (l.FormativeAssessment) md += `### ${labels.formative}\n\n${l.FormativeAssessment}\n\n`;
-    if (l.StudentPractice) md += `### <span style="color:rgb(115, 191, 39);">${labels.practice}</span>\n\n${l.StudentPractice}\n\n`;
+    if (l.StudentPractice) md += `### <span style="color:rgb(16, 185, 129);">${labels.practice}</span>\n\n${l.StudentPractice}\n\n`;
   });
 
   return md;
