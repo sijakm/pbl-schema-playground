@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <title>JSON Schema Playground (Streaming)</title>
+  <title>Lab Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -10,15 +11,22 @@
       margin: 20px;
       background: #f7f7f7;
     }
-    h1 { margin-bottom: 8px; }
-    p { color: #555; margin-top: 4px; }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #555;
+      margin-top: 6px;
+    }
 
     textarea {
       width: 100%;
       height: 70px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       padding: 10px;
-      font-family: monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 13px;
       resize: vertical;
       box-sizing: border-box;
@@ -31,13 +39,20 @@
       margin-right: 8px;
     }
 
+    input,
+    select {
+      box-sizing: border-box;
+    }
+
     .output {
       min-height: 220px;
       background: #111;
       color: #0f0;
     }
 
-    .row { margin-bottom: 24px; }
+    .row {
+      margin-bottom: 18px;
+    }
 
     .pill {
       display: inline-block;
@@ -46,6 +61,34 @@
       background: #e9e9e9;
       font-size: 12px;
       margin-left: 8px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 10px 0 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .muted {
+      color: #777;
+      font-size: 12px;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     #tokenSummary {
@@ -125,56 +168,121 @@
     }
   </style>
 </head>
+
 <body>
 
-  <h1>JSON Schema Playground <span class="pill">Streaming</span></h1>
-  <p>Edit the prompt and schema descriptions, then stream the response into the output.</p>
+  <h1><span id="pageTitle">Lab Playground</span> <span id="pagePill" class="pill">Lab</span></h1>
+  <p id="pageSubtitle">Runs: Step 0 outline JSON → common unit HTML → per-lesson JSON → per-lesson HTML → final joined HTML.</p>
 
-
-
-  <div class="row">
-    <h3>Access Password</h3>
+  <div class="row card">
+    <h3>OpenAI / Proxy</h3>
+    <label for="apiKey">Access Password</label>
     <input id="apiKey" type="password" placeholder="Enter password..." style="width:100%; padding:10px; font-size:13px;" />
-    <p style="font-size:12px; color:#777; margin-top:8px;">
-      Required to access your protected proxy.
-    </p>
-  </div>
+    <p class="muted">Required to access your protected proxy.</p>
 
-  <div class="row">
-  <h3>OpenAI Model</h3>
-  <select
-    id="modelSelect"
-    style="width:100%; padding:10px; font-size:13px;"
-  >
+    <label for="endpoint" style="display:none;">Endpoint (proxy)</label>
+    <input id="endpoint" type="text" value="https://fancy-sun-80f1.sijakmilan.workers.dev"
+      style="width:100%; padding:10px; font-size:13px; display:none;" />
+
+    <label for="languageSelect">Jezik / Language</label>
+    <select id="languageSelect" style="width:100%; padding:10px; font-size:13px; margin-bottom:12px;">
+      <option value="en" selected>English</option>
+      <option value="sr">Srpski</option>
+    </select>
+
+    <label for="modelSelect">OpenAI Model</label>
+    <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
       <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
       <option value="gpt-5.4-nano">gpt-5.4-nano</option>
       <option value="gpt-5.4">gpt-5.4</option>
       <option value="gpt-5-mini">gpt-5-mini</option>
       <option value="gpt-5.2">gpt-5.2</option>
-  </select>
-  <p style="font-size:12px; color:#777; margin-top:6px;">
-    Smaller models prioritize speed, while larger models typically deliver higher-quality responses.
-  </p>
-</div>
+    </select>
+  </div>
 
-  <div class="row">
-    <h3>Prompt</h3>
-    <p>You can safely edit the prompt.</p>
-    <textarea id="prompt"></textarea>
+  <div class="row card">
+    <h3>Input variables</h3>
+    <p class="muted">These values are substituted into prompt templates by replacing <span
+        class="mono">{{$Variable}}</span> placeholders.</p>
+
+    <div class="grid">
+      <div>
+        <label for="subject">Unit Subject</label>
+        <input id="subject" type="text" value="Physical Science (Molecules & Structures)"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="name">Unit Name</label>
+        <input id="name" type="text" value="Building Blocks: Modeling Atomic Composition"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="gradeLevel">Grade Level</label>
+        <input id="gradeLevel" type="text"
+          value="Middle School (6th-8th Grade)"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="classDuration">Class Duration (minutes)</label>
+        <input id="classDuration" type="number" min="1" step="1" value="45"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="numberOfLessons">Requested Number of Lessons</label>
+        <input id="numberOfLessons" type="number" min="1" step="1" value="1"
+          style="width:100%; padding:10px; font-size:13px;" />
+      </div>
+
+      <div>
+        
+        <label for="projectDuration">Project Duration (days)</label>
+        <input id="projectDuration" type="number" min="1" step="1" value="10"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="location">Location</label>
+        <input id="location" type="text" value="Greenville, Wisconsin, United States"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="zipCode">Zip code</label>
+        <input id="zipCode" type="text" value="54942"
+          style="width:100%; padding:10px; font-size:13px;" />
+
+        <label for="standards">Standards</label>
+        <textarea id="standards" placeholder="Paste standards here..."
+          style="height:84px;">MS-PS1-1 Develop models to describe the atomic composition of simple molecules and extended structures.</textarea>
+
+        <label for="userPrompt">Unit Description/Instruction (User Prompt)</label>
+        <textarea id="userPrompt" placeholder="Paste unit instruction here..."
+          style="height:120px;">Students will develop and use models to describe the atomic composition of simple molecules and extended structures. They will differentiate between molecules and extended structures (like crystals) and understand how the arrangement of atoms affects properties. Emphasize physical modeling and structural reasoning.</textarea>
+
+        <label for="learningPlans">Students with individualized support (context)</label>
+        <textarea id="learningPlans" placeholder="Paste student names + plans..." style="height:84px;">Student Name: Maria Valdez
+Plan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.
+
+Student Name: Jacob Garrow
+Plan: Allow speech-to-text for explaining structural differences.
+
+Student Name: Ava Lund
+Plan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.</textarea>
+      </div>
+    </div>
+
+    <label for="mediaContext">Resources/Media to use</label>
+    <textarea id="mediaContext" placeholder="Links, materials, media..."
+      style="height:70px;">Molecular model kits (balls and sticks), periodic table charts, images of crystal structures (e.g., salt, diamond), interactive online molecular builders (like PhET), student science journals.</textarea>
+
+    <label for="attachedUnit">Unit Content (AttachedUnit)</label>
+    <textarea id="attachedUnit" placeholder="Paste attached unit content..."
+      style="height:110px;">No attached unit text provided.</textarea>
+
+    <label for="attachedLesson">Attached Lesson Content (optional)</label>
+    <textarea id="attachedLesson" placeholder="Paste attached lesson content..." style="height:70px;"></textarea>
+
+    <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ connection)</label>
+    <textarea id="unitEssentialQuestions" placeholder='Example: ["How... ?","How... ?","Why... ?"]'
+      style="height:60px;"></textarea>
   </div>
 
   <div class="row">
-    <h3>Schema Instructions (Safe Mode)</h3>
-    <p>
-      Edit <strong>descriptions only</strong>.
-      The JSON structure, required fields, and validation rules are locked.
-    </p>
-    <div id="descriptions"></div>
-  </div>
-
-  <div class="row">
-    <button id="runBtn" onclick="run()">Run (Stream)</button>
-    <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
+    <button id="runChainBtn" type="button">Run Chain</button>
+    <button id="cancelBtn" type="button" disabled>Cancel</button>
+    <button id="downloadPromptsBtn" type="button">Download Prompts</button>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
 
     <div id="tokenSummary">
@@ -209,26 +317,83 @@
   </div>
 
   <div class="row">
-    <h3>Output (Streaming)</h3>
-    <textarea
-      id="output"
-      class="output"
-      readonly
-      style="height:400px;"
-    ></textarea>
+    <h3>Log</h3>
+    <textarea id="log" class="output" readonly style="height:260px;"></textarea>
   </div>
 
   <div class="row">
-    <h3>Final JSON Schema (after edits)</h3>
-    <button onclick="copySchema()" style="margin-bottom:8px;">
-      Copy schema
-    </button>
-    <textarea id="finalSchema" readonly style="height:240px;"></textarea>
+    <h3>Step 0 JSON (UnitPlanResponse)</h3>
+    <textarea id="step0Json" class="output" readonly style="height:220px;"></textarea>
   </div>
 
+  <div class="row">
+    <h3>Common Unit HTML</h3>
+    <textarea id="unitHtml" class="output" readonly style="height:220px;"></textarea>
+  </div>
+
+  <div class="row">
+    <h3>Per-lesson bundle (JSON + HTML snippets)</h3>
+    <textarea id="lessonsBundle" class="output" readonly style="height:260px;"></textarea>
+  </div>
+
+  <div class="row">
+    <h3>Final HTML (Unit + Lessons)</h3>
+    <textarea id="finalHtml" class="output" readonly style="height:260px;"></textarea>
+  </div>
+
+  <div class="row">
+    <h3>HTML Preview</h3>
+    <iframe id="htmlPreview" style="width:100%; height:420px; border:1px solid #ccc; background:#fff;"
+      sandbox=""></iframe>
+    <p class="muted">Preview uses <strong>iframe srcdoc</strong> with sandbox for safety.</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="prompts.js"></script>
+  
+  <script>
+    const defaults = {
+      en: {
+        subject: "Physical Science (Molecules & Structures)",
+        name: "Building Blocks: Modeling Atomic Composition",
+        gradeLevel: "Middle School (6th-8th Grade)",
+        standards: "MS-PS1-1 Develop models to describe the atomic composition of simple molecules and extended structures.",
+        userPrompt: "Students will develop and use models to describe the atomic composition of simple molecules and extended structures. They will differentiate between molecules and extended structures (like crystals) and understand how the arrangement of atoms affects properties. Emphasize physical modeling and structural reasoning.",
+        learningPlans: "Student Name: Maria Valdez\\nPlan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.\\n\\nStudent Name: Jacob Garrow\\nPlan: Allow speech-to-text for explaining structural differences.\\n\\nStudent Name: Ava Lund\\nPlan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.",
+        mediaContext: "Molecular model kits (balls and sticks), periodic table charts, images of crystal structures (e.g., salt, diamond), interactive online molecular builders (like PhET), student science journals.",
+        attachedUnit: "No attached unit text provided."
+      },
+      sr: {
+        subject: "Fizičke nauke (Molekuli i strukture)",
+        name: "Gradivni blokovi: Modeliranje atomskog sastava",
+        gradeLevel: "Osnovna škola (6-8. razred)",
+        standards: "MS-PS1-1 Razviti modele za opisivanje atomskog sastava jednostavnih molekula i proširenih struktura.",
+        userPrompt: "Učenici će razvijati i koristiti modele da opišu atomski sastav jednostavnih molekula i proširenih struktura. Oni će razlikovati molekule i proširene strukture (poput kristala) i razumeti kako raspored atoma utiče na svojstva. Naglasite fizičko modeliranje i strukturno zaključivanje.",
+        learningPlans: "Ime učenika: Maria Valdez\\nPlan: Obezbedite delimično unapred označene atomske modele i okvire rečenica za opise strukture.\\n\\nIme učenika: Jacob Garrow\\nPlan: Dozvolite funkciju govora u tekst za objašnjavanje strukturnih razlika.\\n\\nIme učenika: Ava Lund\\nPlan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molekule obeležene bojom.",
+        mediaContext: "Modeli molekula (kuglice i štapići), tabele periodnog sistema, slike kristalnih struktura (npr. so, dijamant), interaktivni onlajn alati za izgradnju molekula (poput PhET-a), učenički naučni dnevnici.",
+        attachedUnit: "Nije obezbeđen tekst priložene jedinice."
+      }
+    };
+
+    document.getElementById("languageSelect").addEventListener("change", function(e) {
+      const lang = e.target.value;
+      const d = defaults[lang];
+      if (d) {
+        document.getElementById("subject").value = d.subject;
+        document.getElementById("name").value = d.name;
+        document.getElementById("gradeLevel").value = d.gradeLevel;
+        document.getElementById("standards").value = d.standards.replace(/\\\\n/g, "\\n");
+        document.getElementById("userPrompt").value = d.userPrompt.replace(/\\\\n/g, "\\n");
+        document.getElementById("learningPlans").value = d.learningPlans.replace(/\\\\n/g, "\\n");
+        document.getElementById("mediaContext").value = d.mediaContext.replace(/\\\\n/g, "\\n");
+        document.getElementById("attachedUnit").value = d.attachedUnit.replace(/\\\\n/g, "\\n");
+      }
+    });
+
+  </script>
   <script src="../config.local.js"></script>
   <script src="../shared/local-config-loader.js"></script>
-  <script src="prompts.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
