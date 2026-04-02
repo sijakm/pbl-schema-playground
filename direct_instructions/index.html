@@ -251,6 +251,32 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
     </div>
   </div>
 
+  <div class="row card">
+    <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+      <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
+    </div>
+    
+    <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
+      <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schemas. These changes will be used in the next "Run Chain" to guide the AI's output.</p>
+    
+      <div class="tab-container" style="margin-bottom: 20px;">
+        <button id="schemaPerLessonTab" class="tab-btn active-tab" type="button">Per Lesson</button>
+        <button id="schemaStep0Tab" class="tab-btn" type="button">Unit Outline (Step 0)</button>
+      </div>
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+        <button id="copySchemaBtn" class="btn btn-outline">Copy Current Schema</button>
+      </div>
+      
+      <div id="schemaPerLessonEditor" class="schema-pane">
+        <!-- populated by JS -->
+      </div>
+      <div id="schemaStep0Editor" class="schema-pane" style="display: none;">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div style="margin-top: 20px; display: flex; gap: 10px;">
       <button id="runChainBtn" class="btn btn-primary" style="padding: 12px 24px; font-size: 15px;">Run Chain</button>
@@ -289,6 +315,163 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
       </div>
     </div>
   </div>
+
+  <style>
+    .tab-btn {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .tab-btn.active-tab {
+      background: #fff;
+      border-bottom: 1px solid #fff;
+      font-weight: bold;
+      margin-bottom: -1px;
+    }
+    .schema-pane {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 0 4px 4px 4px;
+    }
+    .schema-section {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #eee;
+    }
+    .schema-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .prompt-template-textarea {
+      width: 100%;
+      min-height: 100px;
+      font-size: 13px;
+      font-family: inherit;
+      line-height: 1.6;
+      padding: 12px;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      background: #fdfdfd;
+      resize: none;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    .prompt-template-textarea:focus {
+      background: #fff;
+      border-color: #0969da;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(9,105,218,0.2);
+    }
+    .schema-tree-node {
+      border-left: 2px solid #e1e4e8;
+      margin-left: 14px;
+      padding-left: 10px;
+    }
+    .schema-phase-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      color: #777;
+      background: #f0f0f0;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 6px;
+      text-transform: uppercase;
+      border: 1px solid #e1e4e8;
+    }
+    .schema-field-group {
+      margin-bottom: 4px;
+      padding: 1px 0;
+      position: relative;
+    }
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: background 0.1s;
+    }
+    .node-header:hover {
+      background: #f6f8fa;
+    }
+    .node-header.collapsible::before {
+      content: '▾';
+      display: inline-block;
+      width: 12px;
+      font-size: 9px;
+      margin-left: -12px;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    .node-header.collapsed::before {
+      transform: rotate(-90deg);
+    }
+    .children-container.hidden {
+      display: none;
+    }
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+    .schema-label {
+      font-weight: 500;
+      font-size: 12px;
+      color: #1f2328;
+    }
+    .color-blue { border-color: #0969da !important; }
+    .color-green { border-color: #1a7f37 !important; }
+    .color-orange { border-color: #9a6700 !important; }
+    .color-purple { border-color: #8250df !important; }
+    .color-pink { border-color: #bf3989 !important; }
+    .color-teal { border-color: #0599a0 !important; }
+    .color-gray { border-color: #6e7781 !important; }
+
+    .schema-action-btn {
+      padding: 0px 4px;
+      font-size: 11px;
+      line-height: 1.2;
+      cursor: pointer;
+      border: 1px solid #d0d7de;
+      background: #f6f8fa;
+      border-radius: 4px;
+      margin-left: 2px;
+      font-weight: normal;
+    }
+    .schema-textarea {
+      width: 100%;
+      min-height: 24px;
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 3px 8px;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      resize: none;
+      background: #fafafa;
+      margin-top: 0px;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+    }
+    .schema-textarea:focus {
+      background: #fff;
+      border-color: #0969da;
+      outline: none;
+      box-shadow: inset 0 0 0 1px #0969da;
+    }
+  </style>
 
   <div class="row">
     <h3>Log</h3>
@@ -362,6 +545,9 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
         document.getElementById("learningPlans").value = d.learningPlans.replace(/\\\\n/g, "\\n");
         document.getElementById("mediaContext").value = d.mediaContext.replace(/\\\\n/g, "\\n");
         document.getElementById("attachedUnit").value = d.attachedUnit.replace(/\\\\n/g, "\\n");
+      }
+      if (window.SchemaEditor) {
+        window.SchemaEditor.init();
       }
     });
 
