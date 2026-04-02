@@ -35,7 +35,12 @@
     unitHtml: () => $("unitHtml"),
     lessonsBundle: () => $("lessonsBundle"),
     finalHtml: () => $("finalHtml"),
-    htmlPreview: () => $("htmlPreview")
+    htmlPreview: () => $("htmlPreview"),
+
+    // Toggles
+    toggleInputVariablesHeader: () => $("toggleInputVariablesHeader"),
+    toggleInputVariablesBtn: () => $("toggleInputVariablesBtn"),
+    inputVariablesContainer: () => $("inputVariablesContainer")
   };
 
   // ---- state ----
@@ -645,6 +650,18 @@
     if (runBtn) runBtn.addEventListener("click", runChain);
     if (cancelBtn) cancelBtn.addEventListener("click", cancel);
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
+
+    // Toggle Input Variables
+    const ivHeader = els.toggleInputVariablesHeader();
+    const ivContainer = els.inputVariablesContainer();
+    const ivBtn = els.toggleInputVariablesBtn();
+    if (ivHeader && ivContainer && ivBtn) {
+      ivHeader.addEventListener("click", () => {
+        const isHidden = ivContainer.style.display === "none";
+        ivContainer.style.display = isHidden ? "block" : "none";
+        ivBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+      });
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);
