@@ -57,22 +57,55 @@ Constraints:
 Output MUST be valid JSON matching the schema. Use compact formatting (no extra blank lines).
 `,
   PER_LESSON_PROMPT_TEMPLATE: `
-Create ONE LAB lesson plan using the info below. 
-You MUST output valid JSON that matches the provided JSON schema exactly.
+Create ONE LAB lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
+You MUST output valid JSON that matches the provided JSON schema exactly (LabUnitPlanResponse). Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
+Unit Subject: 
+{{$Subject}}
+Unit Name: 
+{{$Name}}
+Unit Description/Instruction: 
+{{$UserPrompt}}
+Grade Level: 
+{{$GradeLevel}}
+Duration of class period in minutes 
+{{$ClassDuration}}
+Resources/Media to use: 
+{{$MediaContext}}
+Unit Content: 
+{{$ParentUnitData}}
+Standards to Align:
+{{$Standards}}
+Attached Lesson Content: 
+{{$AttachedLesson}}
 
-Unit Subject: {{$Subject}}
-Unit Name: {{$Name}}
-Unit Description/Instruction: {{$UserPrompt}}
-Grade Level: {{$GradeLevel}}
-Duration: {{$ClassDuration}}
-Location: {{$Location}}
-Zip Code: {{$ZipCode}}
-Standards: {{$Standards}}
+Unit Essential Questions (USE THESE VERBATIM):
+{{$UnitEssentialQuestions}}
 
-Attached Lesson Context: {{$ParentUnitData}}
-Resources/Media: {{$MediaContext}}
+If Unit Essential Questions above is empty, generate exactly 3 conceptual questions following these rules:
+- Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
+- Each question MUST begin with either "How" or "Why".
+- Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
+- Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
+- Questions MUST be transferable across disciplines and applicable beyond this unit.
 
-Ensure you fill out all sections: KeyVocabulary, StudentLearningObjectives, AssessPriorKnowledge, Question, Research, Hypothesize, Experiment, Analyze, Share, ReviewAndSpacedRetrieval, FormativeAssessment, StudentPractice.
+
+STUDENTS WITH INDIVIDUALIZED SUPPORT (MUST be used ONLY inside Experiment.AccommodationsAndModifications; use the student names/plans exactly as written):
+{{$LearningPlans}}
+
+IMPORTANT CONTENT RULES:
+- Keep the lesson aligned to the unit focus: developing and using models to describe atomic composition of simple molecules and/or extended structures.
+- Include brief, high-level connections to other relevant DCIs where appropriate, but keep the lesson centered on modeling and structure–property reasoning (no deep math, no balancing equations unless explicitly required by standards).
+- Ensure all parts of the lesson reflect the Lesson Scope/Boundaries provided in the unit context; avoid introducing new major concepts that belong to other lessons.
+- EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
+- AssessPriorKnowledge: ONLY if LessonNumber == 1, write 150–250 words and follow the required structure in the schema description. If LessonNumber != 1, return "" (empty string).
+- Lab Phases (Question, Research, Hypothesize, Experiment, Analyze, Share): Follow the specific instructional requirements and "Purpose:" strings for each phase as defined in the JSON schema.
+- Experiment.AccommodationsAndModifications must include general supports followed by individual support for each student provided in {{$LearningPlans}}.
+- StudentPractice MUST include a TeacherNotes paragraph starting with 'These tasks reinforce today’s learning about ____ by ______.', a list of 2-3 tasks with DOK 2-4 and success criteria, and interleaving if the subject is math.
+
+OUTPUT REQUIREMENTS:
+- Output MUST be valid JSON matching the provided schema exactly.
+- Output MUST be a SINGLE lesson plan only.
+- No HTML. No emojis. No markdown. Plain text inside string fields.
 `,
   HTML_LESSON_PROMPT_TEMPLATE: `You will receive ONE JSON object that strictly follows the LabUnitPlanResponse schema. Your job is to transform this JSON into clean, readable HTML for a single lesson.
 
@@ -88,37 +121,67 @@ Lesson Title: {{$LessonTitle}}
 
 GLOBAL RULES
     - Output ONLY valid HTML.
-    - Allowed tags: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>.
-    - Do NOT invent content.
-    - Render model/expected student responses as: <p>✅ Expected Student Responses</p> followed by <ul><li>.
+    - Allowed tags: <p>, <h1>, <h2>, <h3>, <h4>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>.
+    - Do NOT invent content. Render exactly what is in the JSON.
+    - Format expected student responses as: <p>✅<strong>Expected Student Responses</strong></p> followed by a <ul>.
+    - Format 'Say' prompts and Teacher Notes distinctly using <strong> or <em> where appropriate.
+    - Preserve line breaks from text by using <br> or multiple <p> tags.
 
 MAPPING RULES:
-- Top level: <h2>Lesson {{$LessonNumber}}: {{$LessonTitle}}</h2>
 
-- Essential Questions: <h3>💭 Essential Questions</h3> (UL list from EssentialQuestions)
-- Key Vocabulary: <h3>🔤 Key Vocabulary</h3> (OL list from KeyVocabulary, Term - Definition)
-- Student Learning Objectives: <h3>🎯 Student Learning Objectives</h3> (UL list from StudentLearningObjectives)
-- Standards Aligned: <h3>📏 Standards Aligned</h3> (Show as text or list from StandardsAligned)
-- Assess Prior Knowledge: <h3>💡 Assess Prior Knowledge</h3> (Render if string is not empty)
+- <h3>💭 Essential Questions</h3> (if available, UL list from EssentialQuestions)
+- <h3>🔤 Key Vocabulary</h3> (if available, UL or text from KeyVocabulary)
+- <h3>🎯 Student Learning Objectives</h3> (UL list from StudentLearningObjectives)
+- <h3>📏 Standards Aligned</h3> (UL list or paragraphs from StandardsAligned)
+- <h3>💡 Assess Prior Knowledge</h3> (If string is not empty. Render text structurally: use Teacher Note:, Say:, Options:, and ✅ Expected Student Responses labels if present based on text contents)
 
-LAB SECTIONS (Render each if it exists):
-- Question Phase: <h3>🔍 Question</h3>
-  - Purpose, Materials (UL), Instructions (P), Expected Responses (pattern), Final Question (P with strong label).
-- Research Phase: <h3>📚 Research</h3>
-  - Purpose, Materials (UL), Instructions (P), Misconceptions (pattern).
-- Hypothesize Phase: <h3>🧪 Hypothesize</h3>
-  - Purpose, Materials (UL), Instructions (P), Expected Responses (pattern).
-- Experiment Phase: <h3>🔬 Experiment</h3>
-  - Purpose, Materials (UL), Instructions (P), Differentiation (P), Accommodations (P), Quick Check (pattern).
-- Analyze Phase: <h3>📊 Analyze</h3>
-  - Purpose, Materials (UL), Instructions (P).
-- Share Phase: <h3>🗣️ Share</h3>
-  - Purpose, Materials (UL), Instructions (P), Transcendent Thinking (pattern).
+LAB SECTIONS (Render exactly in this order if they exist in the JSON):
+
+- <h3>Question (5 min)</h3>
+  - <p><strong>Purpose:</strong> {Purpose}</p>
+  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
+  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+  - <p>✅ <strong>Expected Student Responses</strong></p> <ul>{ExpectedStudentResponses}</ul>
+  - <p><strong>Final Investigation Question:</strong> {FinalInvestigationQuestion}</p>
+
+- <h3>Research (5 min)</h3>
+  - <p><strong>Purpose:</strong> {Purpose}</p>
+  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
+  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+  - <h4>❗️ Anticipated Misconceptions</h4> (Iterate AnticipatedMisconceptions: <p><strong>Misconception:</strong> {Misconception}</p> <p><strong>Teacher Response:</strong> {TeacherResponse}</p>)
+
+- <h3>Hypothesize (5 min)</h3>
+  - <p><strong>Purpose:</strong> {Purpose}</p>
+  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
+  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+  - <p>✅ <strong>Expected Student Responses</strong></p> <ul>{ExpectedStudentResponses}</ul>
+
+- <h3>Experiment (20 min)</h3>
+  - <p><strong>Purpose:</strong> {Purpose}</p>
+  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
+  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+  - <h4>🪜 Differentiation</h4> <p>{Differentiation}</p>
+  - <h4>🤝 Accommodations & Modifications</h4> <p>{AccommodationsAndModifications}</p>
+  - <h4>✅ Quick Check</h4> <p>{QuickCheck}</p>
+
+- <h3>Analyze (5 min)</h3>
+  - <p><strong>Purpose:</strong> {Purpose}</p>
+  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
+  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+
+- <h3>Share (5 min)</h3>
+  - <p><strong>Purpose:</strong> {Purpose}</p>
+  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
+  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+  - <h4>🌍 Transcendent Thinking</h4> <p>{TranscendentThinking}</p>
 
 CLOSING SECTIONS:
-- Review & Spaced Retrieval: <h3>🔄 Review & Spaced Retrieval</h3>
-- Formative Assessment: <h3>✅ Formative Assessment</h3>
-- Student Practice: <h3>�� Student Practice</h3>`,
+- <h3>⏳ Review & Spaced Retrieval (5 min)</h3>
+  - (Format text from ReviewAndSpacedRetrieval ensuring headings like Teacher Notes, Active Recall, Misconceptions, Transcendent Thinking are bolded and easily readable)
+- <h3>✅ Formative Assessment</h3>
+  - (Format text from FormativeAssessment, separating the prompts and expected responses clearly)
+- <h3>🖊 Student Practice</h3>
+  - (Format text from StudentPractice ensuring tasks and expected responses are structured cleanly)`,
   UNIT_COMMON_HTML_PROMPT_TEMPLATE: `You will receive ONE JSON object that strictly follows the UnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
                    
 INPUT FORMAT
@@ -153,42 +216,6 @@ GLOBAL RULES
 - Standards:
     - <h2>📏 Standards Aligned</h2>
     - <ul> with each string from UnitDescription.StandardsAligned as <li>.`,
-  DEFAULT_PROMPT: `
-Create a complete LAB unit plan and lab-based lessons using ONLY the information provided below. Your response MUST be valid JSON that strictly matches the provided response schema (no extra keys, no text outside JSON).
-
-MVP planning requirements (must be reflected in the unit):
-• Zip code localization: If a zip code is provided, include examples, stakeholders, audiences, and place-based resources that plausibly fit the community and surrounding area. Do not invent exact addresses/phone numbers; refer to realistic local institution types and roles.
-• Project Duration: The project lasts {{$ProjectDuration}} days, so the plan and lesson progression must be written across multiple days (not a single class period).
-
-Use these unit inputs exactly:
-Unit Subject: {{$Subject}}
-Unit Name: {{$Name}}
-Unit Description/Instruction (teacher request): {{$UserPrompt}}
-Grade Level: {{$GradeLevel}}
-Duration of class period (minutes): {{$ClassDuration}}
-Project Duration (days): {{$ProjectDuration}}
-Location: {{$Location}}
-Zip code: {{$ZipCode}}
-Resources/Media to use: {{$MediaContext}}
-Standards: {{$Standards}}
-
-Students with plans:
-{{$LearningPlans}}
-
-Output rule: Return ONLY JSON that validates against the response schema.
-Follow the exact section order and headings shown below. 
-Do not add extra sections or rename headings. 
-Use clear teacher-facing prose and student-facing directions where specified. 
-Include specific examples, scripts, and expected answers (not placeholders like “e.g.”).  
-Before introducing any new concept or content, include an Attention Reset activity designed to re-engage students, increase cognitive focus, and prepare working memory for new learning. 
-Language to use: Attention Reset & Interactive Activity: This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (same language here for every attention reset & Interactivity) 
-Include interleaving: When providing practice problems, mix strategies, content, skills rather than blocking to help students learn to know when to a apply a skill.  
-Ensure transfer knowledge is embedded throughout so students can apply knowledge in various ways and under different circumstances using real-world application of skills and promoting critical thinking and problem solving. 
-Cultural Relevance & Inclusion: 
-Incorporate multiple perspectives and reflect on the impacts for all involved.  
-Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons 
-Avoid stereotypes. 
-`,
   STEP0_SCHEMA: {
     "title": "UnitPlanResponse",
     "type": "object",
@@ -320,38 +347,36 @@ Avoid stereotypes.
           "Materials": {
             "type": "array",
             "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string"
-            }
+            "items": { "type": "string" }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Must direct the teacher to present a phenomenon, prompt students to observe closely, ask what they notice, and invite them to share questions about what might be happening. The model must require the teacher to record all student questions publicly without judging or correcting them. The instructions must conclude with the teacher guiding the class toward identifying one central question that will anchor the investigation."
-          },
-          "ExpectedStudentResponses": {
-            "type": "array",
-            "description": "Expected Student Responses [3-4 bullet points showing mastery]",
-            "items": {
-              "type": "string"
-            }
-          },
-          "FinalInvestigationQuestion": {
-            "type": "string",
-            "description": "The model must output one clear investigation question selected by the teacher that the class will explore. The question must be written as a single open-ended inquiry aligned to the phenomenon introduced in the Question Phase. It must reflect what students are genuinely wondering and set up an investigation rather than explain the answer."
+            "type": "object",
+            "properties": {
+              "Instructions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to present a phenomenon and invite questions."
+              },
+              "ExpectedStudentResponses": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "3-4 expected student questions or ideas about the phenomenon."
+              },
+              "FinalInvestigationQuestion": {
+                "type": "string",
+                "description": "The closing teacher prompt that synthesizes the students' ideas into one big question to investigate today."
+              }
+            },
+            "required": ["Instructions", "ExpectedStudentResponses", "FinalInvestigationQuestion"],
+            "additionalProperties": false
           }
         },
-        "required": [
-          "Purpose",
-          "Materials",
-          "InstructionsForTeachers",
-          "ExpectedStudentResponses",
-          "FinalInvestigationQuestion"
-        ],
+        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "Research": {
         "type": "object",
-        "description": "Guide teacher so students learn background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation.",
+        "description": "Guide teacher so students learn background information, vocabulary, and prior knowledge needed to understand the topic.",
         "properties": {
           "Purpose": {
             "type": "string",
@@ -360,49 +385,39 @@ Avoid stereotypes.
           "Materials": {
             "type": "array",
             "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string"
-            }
+            "items": { "type": "string" }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Provide a universal, step-by-step teacher script in which the teacher directs students to record key ideas and vocabulary, demonstrates or presents a phenomenon using physical or visual tools, prompts students to observe closely, asks what they notice and wonder, and explains that the information gathered will support the upcoming investigation without revealing final conclusions. The end must contain 2 to 4 concise statements that summarize essential background knowledge students gain in this phase, establishing foundational concepts needed for later investigation while avoiding giving away the final explanation."
-          },
-          "AnticipatedMisconceptions": {
-            "type": "array",
-            "description": "",
-            "items": {
-              "type": "object",
-              "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
-              "properties": {
-                "Misconception": {
-                  "type": "string",
-                  "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
-                },
-                "TeacherResponse": {
-                  "type": "string",
-                  "description": "Specific teacher language or instructional moves-such as probing questions, prompts, or examples-that help students examine their thinking and move toward accurate understanding without directly giving the answer."
-                }
+            "type": "object",
+            "properties": {
+              "Instructions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to explain background knowledge, vocabulary, and model the phenomenon."
               },
-              "required": [
-                "Misconception",
-                "TeacherResponse"
-              ],
-              "additionalProperties": false
-            }
+              "AnticipatedMisconceptions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Misconception": { "type": "string", "description": "Student misconception" },
+                    "TeacherResponse": { "type": "string", "description": "What the teacher should say to correct it" }
+                  },
+                  "required": ["Misconception", "TeacherResponse"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": ["Instructions", "AnticipatedMisconceptions"],
+            "additionalProperties": false
           }
         },
-        "required": [
-          "Purpose",
-          "Materials",
-          "InstructionsForTeachers",
-          "AnticipatedMisconceptions"
-        ],
+        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "Hypothesize": {
         "type": "object",
-        "description": "Guide teacher so students develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen.",
+        "description": "Guide teacher so students develop a testable prediction.",
         "properties": {
           "Purpose": {
             "type": "string",
@@ -410,34 +425,32 @@ Avoid stereotypes.
           },
           "Materials": {
             "type": "array",
-            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string"
-            }
+            "items": { "type": "string" }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Provide a universal teacher script in which the teacher explains that scientists make evidence-based predictions, provides model examples, offers clear sentence starters for students to use, prompts students to write an individual hypothesis, and invites a small number of students to share aloud while recording several examples publicly. Must output 2 to 4 sentence starters that guide students in forming testable 'If..., then...' predictions without revealing any final scientific explanation."
-          },
-          "ExpectedStudentResponses": {
-            "type": "array",
-            "description": "Expected Student Responses [3-4 bullet points showing mastery]",
-            "items": {
-              "type": "string"
-            }
+            "type": "object",
+            "properties": {
+              "Instructions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Teacher instructions, including 'Say:' prompts for hypothesis sentence frames."
+              },
+              "ExpectedStudentResponses": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "3-4 expected hypothesis examples."
+              }
+            },
+            "required": ["Instructions", "ExpectedStudentResponses"],
+            "additionalProperties": false
           }
         },
-        "required": [
-          "Purpose",
-          "Materials",
-          "InstructionsForTeachers",
-          "ExpectedStudentResponses"
-        ],
+        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "Experiment": {
         "type": "object",
-        "description": "Guide teacher so students carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement.",
+        "description": "Guide teacher so students carry out a structured investigation.",
         "properties": {
           "Purpose": {
             "type": "string",
@@ -445,41 +458,56 @@ Avoid stereotypes.
           },
           "Materials": {
             "type": "array",
-            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string"
-            }
+            "items": { "type": "string" }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "must direct the teacher to place students in small groups, introduce a physical or representational model related to the phenomenon, and have students manipulate or adjust the model to observe changes. Students must be required to record specific observations, note patterns, and document how the model behaves under different conditions. The model must also include a teacher prompt that asks groups to modify a variable or condition in the model and compare the results to their initial observations. The InstructionsForTeachers must end with circulation prompts that support sensemaking without giving answers, such as What do you notice as the model changes, How does this representation help you understand the phenomenon, and What changes when you adjust the model in different ways."
-          },
-          "Differentiation": {
-            "type": "string",
-            "description": "Three-part differentiation strategies including: (1) Language Learners support (2-3 strategies), (2) Additional Scaffolding support (2-3 strategies), (3) Go Deeper extensions (1-2 activities with expected responses)"
-          },
-          "AccommodationsAndModifications": {
-            "type": "string",
-            "description": "Accommodations General - General classroom supports and modifications that apply to most or all students during this activity. Accommodations Individual Support - List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt. Accommodations Individual Support Student Name - Full name of the student exactly as provided in the prompt. Accommodations Individual Support Plan Implementation - Short description of the individualized accommodation or modification for this student."
-          },
-          "QuickCheck": {
-            "type": "string",
-            "description": "Final comprehension check question with 2-3 expected student responses showing mastery"
+            "type": "object",
+            "properties": {
+              "Instructions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Step-by-step teacher instructions to organize the experiment, give directions, and circulate."
+              },
+              "Differentiation": {
+                "type": "object",
+                "properties": {
+                  "LanguageLearners": { "type": "array", "items": { "type": "string" } },
+                  "AdditionalScaffolding": { "type": "array", "items": { "type": "string" } },
+                  "GoDeeper": { "type": "array", "items": { "type": "string" } },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "For Go Deeper responses." }
+                },
+                "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "AccommodationsAndModifications": {
+                "type": "object",
+                "properties": {
+                  "GeneralSupports": { "type": "array", "items": { "type": "string" } },
+                  "IndividualSupports": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["GeneralSupports", "IndividualSupports"],
+                "additionalProperties": false
+              },
+              "QuickCheck": {
+                "type": "object",
+                "properties": {
+                  "Question": { "type": "string" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Question", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["Instructions", "Differentiation", "AccommodationsAndModifications", "QuickCheck"],
+            "additionalProperties": false
           }
         },
-        "required": [
-          "Purpose",
-          "Materials",
-          "InstructionsForTeachers",
-          "Differentiation",
-          "AccommodationsAndModifications",
-          "QuickCheck"
-        ],
+        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "Analyze": {
         "type": "object",
-        "description": "Guide teachers so students interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions.",
+        "description": "Guide teachers so students interpret the data they collected.",
         "properties": {
           "Purpose": {
             "type": "string",
@@ -494,20 +522,29 @@ Avoid stereotypes.
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Direct the teacher to help students move from simple observations to clear, evidence-based explanations. Must begin with the teacher telling students that scientists do more than observe; they explain why patterns occur using complete sentences supported by evidence from their model, data, or investigation. The teacher must provide an example of turning an observation into an explanation by pairing what was seen with why it happened. The model must instruct the teacher to display two labeled components on the board: Observation and Explanation- and demonstrate how an explanation connects the observed pattern to an underlying cause, mechanism, or principle. Must also include a list of generic sentence starters such as 'Our model showed that when...happened,' 'This occurred because ...,' 'The pattern changed when we adjusted...,' and 'This explains...because...' Students must be prompted to share one observation and one explanation with a partner before writing their own full sentences. The teacher must circulate and prompt deeper reasoning without giving answers, ensuring explanations include both what happened and why it happened."
+            "type": "object",
+            "properties": {
+              "Instructions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Teacher instructions and sentence starters for analysis."
+              },
+              "ExpectedStudentResponses": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Expected answers or sentence frame completions from students."
+              }
+            },
+            "required": ["Instructions", "ExpectedStudentResponses"],
+            "additionalProperties": false
           }
         },
-        "required": [
-          "Purpose",
-          "Materials",
-          "InstructionsForTeachers"
-        ],
+        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "Share": {
         "type": "object",
-        "description": "Guide teachers so students communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding.",
+        "description": "Guide teachers so students communicate their findings clearly.",
         "properties": {
           "Purpose": {
             "type": "string",
@@ -515,26 +552,36 @@ Avoid stereotypes.
           },
           "Materials": {
             "type": "array",
-            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string"
-            }
+            "items": { "type": "string" }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Must begin with the teacher stating that experts share their work with others and that each group will present its question, hypothesis or prediction, method or model, data or evidence, and final conclusion. The model must instruct the teacher to display a simple presentation structure with the following section headers exactly as written: Our Question, Our Hypothesis, Our Model and Data, Our Conclusion, and Why This Matters. Must guide the teacher to remind students that sharing findings involves summarizing key ideas, using evidence to support claims, and explaining the significance of their results. The teacher must prompt groups to speak clearly, reference their recorded evidence, and connect their conclusion to the broader purpose of the investigation. The model must instruct the teacher to circulate, support equitable group participation, and encourage students to ask respectful questions after each presentation."
-          },
-          "TranscendentThinking": {
-            "type": "string",
-            "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding"
+            "type": "object",
+            "properties": {
+              "Instructions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Teacher instructions for organizing student sharing."
+              },
+              "ExpectedStudentResponses": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Expected ideas shared by students."
+              },
+              "TranscendentThinking": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Prompt", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["Instructions", "ExpectedStudentResponses", "TranscendentThinking"],
+            "additionalProperties": false
           }
         },
-        "required": [
-          "Purpose",
-          "Materials",
-          "InstructionsForTeachers",
-          "TranscendentThinking"
-        ],
+        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "ReviewAndSpacedRetrieval": {

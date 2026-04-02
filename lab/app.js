@@ -17,9 +17,6 @@
     gradeLevel: () => $("gradeLevel"),
     classDuration: () => $("classDuration"),
     numberOfLessons: () => $("numberOfLessons"),
-    projectDuration: () => $("projectDuration"),
-    location: () => $("location"),
-    zipCode: () => $("zipCode"),
     standards: () => $("standards"),
     userPrompt: () => $("userPrompt"),
     learningPlans: () => $("learningPlans"),
@@ -38,7 +35,23 @@
     unitHtml: () => $("unitHtml"),
     lessonsBundle: () => $("lessonsBundle"),
     finalHtml: () => $("finalHtml"),
-    htmlPreview: () => $("htmlPreview")
+    htmlPreview: () => $("htmlPreview"),
+
+    // Toggles
+    toggleInputVariablesHeader: () => $("toggleInputVariablesHeader"),
+    toggleInputVariablesBtn: () => $("toggleInputVariablesBtn"),
+    inputVariablesContainer: () => $("inputVariablesContainer"),
+
+    toggleSchemaEditorHeader: () => $("toggleSchemaEditorHeader"),
+    toggleSchemaEditorBtn: () => $("toggleSchemaEditorBtn"),
+    schemaEditorContainer: () => $("schemaEditorContainer"),
+
+    // Schema Editor tabs/editors
+    schemaStep0Tab: () => $("schemaStep0Tab"),
+    schemaPerLessonTab: () => $("schemaPerLessonTab"),
+    schemaStep0Editor: () => $("schemaStep0Editor"),
+    schemaPerLessonEditor: () => $("schemaPerLessonEditor"),
+    copySchemaBtn: () => $("copySchemaBtn")
   };
 
   // ---- state ----
@@ -63,32 +76,32 @@
   }
 
   const MODEL_PRICING = {
-    "gpt-5.4":       { input: 2.50,  output: 15.00 },
-    "gpt-5.4-mini":  { input: 0.75,  output: 4.50  },
-    "gpt-5.4-nano":  { input: 0.20,  output: 1.25  },
-    "gpt-5-mini":    { input: 0.75,  output: 4.50  },
-    "gpt-5.2":       { input: 2.50,  output: 15.00 }
+    "gpt-5.4": { input: 2.50, output: 15.00 },
+    "gpt-5.4-mini": { input: 0.75, output: 4.50 },
+    "gpt-5.4-nano": { input: 0.20, output: 1.25 },
+    "gpt-5-mini": { input: 0.75, output: 4.50 },
+    "gpt-5.2": { input: 2.50, output: 15.00 }
   };
 
   function updateTokenSummaryUI(model) {
     const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
-    const inputCost  = (tokenUsage.input  / 1_000_000) * pricing.input;
+    const inputCost = (tokenUsage.input / 1_000_000) * pricing.input;
     const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
-    const totalCost  = inputCost + outputCost;
+    const totalCost = inputCost + outputCost;
 
     const fmt = n => n.toLocaleString("en-US");
     const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
 
     const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
 
-    set("tsInput",        fmt(tokenUsage.input));
-    set("tsInputCost",    fmtUSD(inputCost));
-    set("tsOutput",       fmt(tokenUsage.output));
-    set("tsOutputCost",   fmtUSD(outputCost));
-    set("tsTotal",        fmt(tokenUsage.total));
-    set("tsTotalCost",    `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
-    set("tsCallCount",    String(tokenUsage.calls));
-    set("tsModel",        model);
+    set("tsInput", fmt(tokenUsage.input));
+    set("tsInputCost", fmtUSD(inputCost));
+    set("tsOutput", fmt(tokenUsage.output));
+    set("tsOutputCost", fmtUSD(outputCost));
+    set("tsTotal", fmt(tokenUsage.total));
+    set("tsTotalCost", `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
+    set("tsCallCount", String(tokenUsage.calls));
+    set("tsModel", model);
     set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
 
     const panel = $("tokenSummary");
@@ -123,7 +136,309 @@
     const cancelBtn = els.cancelBtn();
     if (runBtn) runBtn.disabled = running;
     if (cancelBtn) cancelBtn.disabled = !running;
-  }
+  } const SchemaEditor = {
+    schemas: { step0: null, perLesson: null, templates: { step0: "", perLesson: "" } },
+
+    init() {
+      const p = window.labPrompts;
+      if (p) {
+        this.schemas.step0 = JSON.parse(JSON.stringify(p.STEP0_SCHEMA));
+        this.schemas.perLesson = JSON.parse(JSON.stringify(p.PER_LESSON_SCHEMA));
+        this.schemas.templates.step0 = p.STEP0_PROMPT_TEMPLATE;
+        this.schemas.templates.perLesson = p.PER_LESSON_PROMPT_TEMPLATE;
+      }
+      this.render();
+      this.bindEvents();
+    },
+
+    render() {
+      const renderTab = (type, container) => {
+        const schema = this.schemas[type];
+        const template = this.schemas.templates[type];
+
+        container.innerHTML = `
+          <!-- Template Section -->
+          <div class="schema-section">
+            <div class="schema-section-header">
+              <strong>Prompt Template</strong>
+              <button class="btn btn-outline btn-pill" onclick="SchemaEditor.copyTemplateUI('${type}')">Copy Template</button>
+            </div>
+            <textarea class="prompt-template-textarea" data-type="${type}">${template}</textarea>
+          </div>
+
+          <!-- Schema Section -->
+          <div class="schema-section" style="border-bottom: none;">
+            <div class="schema-section-header">
+              <strong>JSON Output Schema (Instructions)</strong>
+              <div>
+                <button class="btn btn-success btn-pill" onclick="SchemaEditor.addPropertyUI('${type}', '')">+ Add Top-Level Property</button>
+                <button class="btn btn-outline btn-pill" onclick="SchemaEditor.copySchemaUI('${type}')">Copy Schema JSON</button>
+              </div>
+            </div>
+            <div class="schema-tree-root">
+              ${this.renderNode(type, schema, "", [], "")}
+            </div>
+          </div>
+        `;
+
+        // Resize and Listen to Template
+        const templateTa = container.querySelector(".prompt-template-textarea");
+        if (templateTa) {
+          this.autoResize(templateTa);
+          templateTa.addEventListener("input", (e) => {
+            this.schemas.templates[type] = e.target.value;
+            this.autoResize(e.target);
+          });
+        }
+
+        // Resize and Listen to Schema textareas
+        setTimeout(() => {
+          container.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
+        }, 10);
+
+        container.querySelectorAll(".schema-textarea").forEach(ta => {
+          ta.addEventListener("input", (e) => {
+            this.updateDescription(type, e.target.dataset.path, e.target.value);
+            this.autoResize(e.target);
+          });
+        });
+
+        // Toggle buttons
+        container.querySelectorAll(".node-header.collapsible").forEach(header => {
+          header.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn")) return;
+            header.classList.toggle("collapsed");
+            const children = header.nextElementSibling;
+            if (children) {
+              children.classList.toggle("hidden");
+              if (!children.classList.contains("hidden")) {
+                children.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
+              }
+            }
+          });
+        });
+      };
+
+      if (els.schemaStep0Editor()) renderTab("step0", els.schemaStep0Editor());
+      if (els.schemaPerLessonEditor()) renderTab("perLesson", els.schemaPerLessonEditor());
+    },
+
+    renderNode(type, node, name, pathArr, inheritedColor) {
+      const isRoot = pathArr.length === 0;
+      const depth = pathArr.length;
+      let colorClass = inheritedColor;
+      if (depth === 2 && pathArr[0] === "properties") colorClass = this.getPhaseColor(name);
+
+      const label = isRoot ? "Root Object" : name;
+      const nodeType = node.type || (node.properties ? "object" : "unknown");
+      const isCollapsible = node.properties || (node.items && node.items.properties);
+
+      let parentName = "";
+      if (depth >= 4) parentName = pathArr[depth - 2];
+
+      let html = `<div class="schema-field-group">`;
+      html += `
+        <div class="node-header ${isCollapsible ? "collapsible" : ""}" data-path="${pathArr.join(".")}">
+          <div class="field-header" style="flex: 1;">
+            <div>
+              <span class="schema-label">${this.formatLabel(label)}</span>
+              <span class="schema-type-badge">${nodeType}</span>
+              ${parentName && node.description !== undefined ? `<span class="schema-phase-badge">${this.formatLabel(parentName)}</span>` : ""}
+            </div>
+            <div class="node-actions">
+               ${nodeType === "object" ? `<button class="btn btn-success btn-pill" style="width: 24px; height: 24px; padding: 0;" title="Add Child" onclick="SchemaEditor.addPropertyUI('${type}', '${pathArr.join(".")}')">+</button>` : ""}
+               ${isRoot ? "" : `<button class="btn btn-danger btn-pill" style="width: 24px; height: 24px; padding: 0;" title="Delete" onclick="SchemaEditor.removePropertyUI('${type}', '${pathArr.join(".")}')">−</button>`}
+            </div>
+          </div>
+        </div>
+      `;
+
+      html += `<div class="children-container ${isCollapsible ? "schema-tree-node" : ""} ${colorClass}">`;
+      if (node.description !== undefined) {
+        html += `<textarea class="schema-textarea" data-path="${pathArr.join(".")}">${node.description}</textarea>`;
+      }
+      if (node.properties) {
+        for (const key in node.properties) {
+          html += this.renderNode(type, node.properties[key], key, [...pathArr, "properties", key], colorClass);
+        }
+      }
+      if (node.items) {
+        if (node.items.properties || node.items.description !== undefined) {
+          html += this.renderNode(type, node.items, name + " Item", [...pathArr, "items"], colorClass);
+        }
+      }
+      html += `</div></div>`;
+      return html;
+    },
+
+    getPhaseColor(name) {
+      const colors = {
+        Question: "color-blue", Research: "color-green", Hypothesize: "color-orange",
+        Experiment: "color-purple", Analyze: "color-pink", Share: "color-teal",
+        ReviewAndSpacedRetrieval: "color-gray", StudentPractice: "color-gray", FormativeAssessment: "color-gray",
+        UnitDescription: "color-blue", Lessons: "color-green"
+      };
+      return colors[name] || "color-gray";
+    },
+
+    bindEvents() {
+      // Toggle Input Variables
+      const ivHeader = els.toggleInputVariablesHeader();
+      const ivContainer = els.inputVariablesContainer();
+      const ivBtn = els.toggleInputVariablesBtn();
+      if (ivHeader && ivContainer && ivBtn) {
+        ivHeader.addEventListener("click", () => {
+          const isHidden = ivContainer.style.display === "none";
+          ivContainer.style.display = isHidden ? "block" : "none";
+          ivBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+        });
+      }
+
+      // Toggle Schema Editor
+      const seHeader = els.toggleSchemaEditorHeader();
+      const seContainer = els.schemaEditorContainer();
+      const seBtn = els.toggleSchemaEditorBtn();
+      if (seHeader && seContainer && seBtn) {
+        seHeader.addEventListener("click", () => {
+          const isHidden = seContainer.style.display === "none";
+          seContainer.style.display = isHidden ? "block" : "none";
+          seBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+        });
+      }
+
+      const step0Tab = els.schemaStep0Tab();
+      const perLessonTab = els.schemaPerLessonTab();
+      if (step0Tab && perLessonTab) {
+        step0Tab.addEventListener("click", () => {
+          step0Tab.classList.add("active-tab");
+          perLessonTab.classList.remove("active-tab");
+          els.schemaStep0Editor().style.display = "block";
+          els.schemaPerLessonEditor().style.display = "none";
+          setTimeout(() => {
+            els.schemaStep0Editor().querySelectorAll("textarea").forEach(ta => this.autoResize(ta));
+          }, 0);
+        });
+        perLessonTab.addEventListener("click", () => {
+          perLessonTab.classList.add("active-tab");
+          step0Tab.classList.remove("active-tab");
+          els.schemaPerLessonEditor().style.display = "block";
+          els.schemaStep0Editor().style.display = "none";
+          setTimeout(() => {
+            els.schemaPerLessonEditor().querySelectorAll("textarea").forEach(ta => this.autoResize(ta));
+          }, 0);
+        });
+      }
+
+      window.SchemaEditor = this;
+    },
+
+    autoResize(ta) {
+      if (!ta || ta.offsetHeight === 0) return;
+      ta.style.height = "1px";
+      ta.style.height = (ta.scrollHeight + 2) + "px";
+    },
+
+    updateDescription(type, path, val) {
+      const schema = this.schemas[type];
+      const parts = path.split(".");
+      let curr = schema;
+      for (const p of parts) curr = curr[p];
+      curr.description = val;
+    },
+
+    addPropertyUI(type, parentPath) {
+      const name = prompt("Name of the new property (e.g. LessonSummary):");
+      if (!name) return;
+      const t = prompt("Type (string / number / integer / object / array):", "string");
+      if (!t) return;
+      this.addProperty(type, parentPath, name, t);
+      this.render();
+    },
+
+    addProperty(type, parentPath, name, propType) {
+      const schema = this.schemas[type];
+      let parentObj = schema;
+      if (parentPath) {
+        const parts = parentPath.split(".");
+        for (const p of parts) parentObj = parentObj[p];
+      }
+      if (!parentObj.properties) parentObj.properties = {};
+      if (!parentObj.required) parentObj.required = [];
+      const newProp = { type: propType, description: "" };
+      if (propType === "object") {
+        newProp.properties = {};
+        newProp.required = [];
+        newProp.additionalProperties = false;
+      } else if (propType === "array") {
+        newProp.items = { type: "string" };
+      }
+      parentObj.properties[name] = newProp;
+      if (!parentObj.required.includes(name)) parentObj.required.push(name);
+      if (parentObj.type === "object") parentObj.additionalProperties = false;
+    },
+
+    removePropertyUI(type, path) {
+      if (confirm(`Are you sure you want to delete ${path}?`)) {
+        this.removeProperty(type, path);
+        this.render();
+      }
+    },
+
+    removeProperty(type, path) {
+      const schema = this.schemas[type];
+      const parts = path.split(".");
+      const propName = parts.pop();
+      let parentObj = schema;
+      for (const p of parts) parentObj = parentObj[p];
+      if (parentObj.properties) delete parentObj.properties[propName];
+      if (parentObj.required) parentObj.required = parentObj.required.filter(r => r !== propName);
+    },
+
+    copyTemplateUI(type) {
+      const text = this.schemas.templates[type];
+
+      // Detect required placeholders based on EXACT lists provided by user
+      const required = type === "step0" 
+        ? ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
+        : ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"];
+
+      const missing = required.filter(key => {
+        // Regex to match {{key}}, {{$key}}, {{{key}}}, etc.
+        const regex = new RegExp(`\\{\\{\\{?\\$?${key}\\}\\}\\}?`, "i");
+        return !regex.test(text);
+      });
+
+      if (missing.length > 0) {
+        const msg = `WARNING: The following required variables are missing from your template: ${missing.join(", ")}.\n\nThis will likely break the generation process because the AI won't receive these parameters.\n\nDo you still want to copy to clipboard?`;
+        if (!confirm(msg)) return;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Template copied to clipboard!");
+      });
+    },
+
+    copySchemaUI(type) {
+      const modified = this.schemas[type];
+      const json = JSON.stringify(modified, null, 2);
+      navigator.clipboard.writeText(json).then(() => {
+        alert("Schema JSON copied to clipboard!");
+      });
+    },
+
+    getModifiedSchema(type) {
+      return JSON.parse(JSON.stringify(this.schemas[type]));
+    },
+
+    getModifiedTemplate(type) {
+      return this.schemas.templates[type];
+    },
+
+    formatLabel(pathOrName) {
+      const name = pathOrName.split(".").pop();
+      return name.replace(/([A-Z])/g, " $1").trim();
+    }
+  };
 
   // ---- flexible template substitution ----
   function fillTemplate(tpl, vars) {
@@ -265,9 +580,6 @@
       GradeLevel: els.gradeLevel()?.value?.trim() || "",
       ClassDuration: els.classDuration()?.value?.trim() || "",
       NumberOfItems: els.numberOfLessons()?.value?.trim() || "",
-      ProjectDuration: els.projectDuration()?.value?.trim() || "",
-      Location: els.location()?.value?.trim() || "",
-      ZipCode: els.zipCode()?.value?.trim() || "",
       Standards: els.standards()?.value?.trim() || "",
       LearningPlans: els.learningPlans()?.value?.trim() || "",
       MediaContext: els.mediaContext()?.value?.trim() || "",
@@ -375,10 +687,8 @@
 
     const prompts = window.labPrompts;
     const {
-      STEP0_PROMPT_TEMPLATE,
       STEP0_SCHEMA,
       UNIT_COMMON_HTML_PROMPT_TEMPLATE,
-      PER_LESSON_PROMPT_TEMPLATE,
       PER_LESSON_SCHEMA,
       HTML_LESSON_PROMPT_TEMPLATE
     } = prompts;
@@ -424,7 +734,7 @@
       // ---- Step 0: outline ----
       const t0 = nowMs();
       logLine("[1/5] Step 0: generating unit outline JSON…");
-      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
+      const step0Prompt = fillTemplate(SchemaEditor.getModifiedTemplate("step0"), vars);
       console.log("[DEBUG] Step 0 Prompt (Unit Outline):", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
@@ -432,7 +742,7 @@
           endpoint, apiKey, model,
           prompt: step0Prompt,
           schemaName: "UnitPlanResponse",
-          schemaObj: STEP0_SCHEMA,
+          schemaObj: SchemaEditor.getModifiedSchema("step0", STEP0_SCHEMA),
           signal
         }), "Step 0 Outline");
 
@@ -486,14 +796,14 @@
               ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
             };
 
-            const perLessonPrompt = fillTemplate(PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+            const perLessonPrompt = fillTemplate(SchemaEditor.getModifiedTemplate("perLesson"), perLessonVars);
             console.log(`[DEBUG] Lesson ${i + 1} JSON Prompt:`, perLessonPrompt);
 
             const lessonJsonText = await callResponsesApiStream({
               endpoint, apiKey, model,
               prompt: perLessonPrompt,
               schemaName: "LessonPlanResponse",
-              schemaObj: PER_LESSON_SCHEMA,
+              schemaObj: SchemaEditor.getModifiedSchema("perLesson", PER_LESSON_SCHEMA),
               signal
             });
 
@@ -629,6 +939,9 @@
     if (runBtn) runBtn.addEventListener("click", runChain);
     if (cancelBtn) cancelBtn.addEventListener("click", cancel);
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
+
+    // Init Schema Editor
+    SchemaEditor.init();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);
