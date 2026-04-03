@@ -29,6 +29,7 @@ ZAHTEVI ZA OKVIR ISTRAŽIVANJA:
 - Lekcije MORAJU biti bez preklapanja sa jasnim granicama.
 
 OGRANIČENJA NIZA LEKCIJA (LESSONS ARRAY):
+- Niz Lessons MORA sadržati tačno {{$NumberOfItems}} lekcija.
 - lessonNumber je zasnovan na 1 i strogo se povećava za 1.
 - Osiguraj logičan redosled od osnovnih istraživačkih koraka do složenijeg modelovanja i objašnjavanja.
 - Tempo mora odgovarati časovima od {{$ClassDuration}} minuta za razred {{$GradeLevel}}.
@@ -90,6 +91,17 @@ ULAZNI JSON (InquiryUnitPlanResponse za JEDNU lekciju):
 
 ZADATAK
 Transformiši ULAZNI JSON u HTML namenjen nastavnicima koristeći SAMO dozvoljene tagove i prateći tačna pravila renderovanja i strukture u nastavku.
+
+Prvo renderuj ključna pitanja i usklađene standarde:
+<h3><span>💭 Ključna pitanja</span></h3>
+<ul>
+  - Renderuj svaku stavku iz EssentialQuestions kao <li>.
+</ul>
+
+<h3><span>📏 Usklađeni standardi</span></h3>
+<ul>
+  - Renderuj svaku stavku iz StandardsAligned kao <li>.
+</ul>
 
 ==================================================
 SEKCIJA 0: PROCENA PRETHODNOG ZNANJA (USLOVNO)
@@ -651,6 +663,20 @@ ULAZNI JSON:
         "type": "string",
         "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju unit-a, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajena pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru unit-a. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
       },
+      "EssentialQuestions": {
+        "type": "array",
+        "description": "Samo nalepi sva ključna pitanja na nivou unit-a istim redosledom ako su data. Ako nisu data, generiši tačno 3 konceptualna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokaz, obrasci, odnosi, sistemi ili rezonovanje. NEMOJ pominjati nikakve pojmove, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguća za odgovor jednostavnim učenjem sadržaja lekcije ili unit-a. Fokusiraj se samo na velike ideje, ne na predmetnu materiju.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "StandardsAligned": {
+        "type": "array",
+        "description": "Kompletna sekcija 'Usklađeni standardi' za ovu lekciju. Svaki standard mora uključivati kod i opis standarda, i moraju biti potpuno isti onima koji su korišćeni u Unit-u. npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
+        "items": {
+          "type": "string"
+        }
+      },
       "OrientationPhase": {
         "type": "object",
         "properties": {
@@ -933,10 +959,18 @@ ULAZNI JSON:
       "DiscussionPhase",
       "ReviewAndSpacedRetrieval",
       "FormativeAssessment",
-      "StudentPractice"
+      "StudentPractice",
+      "EssentialQuestions",
+      "StandardsAligned"
     ],
     "additionalProperties": false,
     "x-removablePaths": {
+      "EssentialQuestions": [
+        "EssentialQuestions"
+      ],
+      "StandardsAligned": [
+        "StandardsAligned"
+      ],
       "AssessPriorKnowledge": [
         "AssessPriorKnowledge"
       ],
