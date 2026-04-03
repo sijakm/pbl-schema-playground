@@ -92,6 +92,13 @@ INPUT JSON (InquiryUnitPlanResponse for ONE lesson):
 TASK
 Transform the INPUT JSON into teacher-facing HTML using ONLY allowed tags and following the exact rendering rules and structures below.
 
+First render essential questions and standards aligned:
+<h3>💭 Essential Questions</h3>
+<ul> with each item in Lesson.EssentialQuestions as <li>.
+
+<h3>📏 Standards Aligned</h3>
+<ul> with each item in Lesson.StandardsAligned as <li>.
+
 ==================================================
 SECTION 0: ASSESS PRIOR KNOWLEDGE (CONDITIONAL)
 ==================================================
@@ -651,6 +658,20 @@ INPUT JSON:
         "type": "string",
         "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
       },
+      "EssentialQuestions": {
+        "type": "array",
+        "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "StandardsAligned": {
+        "type": "array",
+        "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+        "items": {
+          "type": "string"
+        }
+      },
       "OrientationPhase": {
         "type": "object",
         "properties": {
@@ -933,10 +954,18 @@ INPUT JSON:
       "DiscussionPhase",
       "ReviewAndSpacedRetrieval",
       "FormativeAssessment",
-      "StudentPractice"
+      "StudentPractice",
+      "EssentialQuestions",
+      "StandardsAligned"
     ],
     "additionalProperties": false,
     "x-removablePaths": {
+      "EssentialQuestions": [
+        "EssentialQuestions"
+      ],
+      "StandardsAligned": [
+        "StandardsAligned"
+      ],
       "AssessPriorKnowledge": [
         "AssessPriorKnowledge"
       ],
