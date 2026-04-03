@@ -828,10 +828,7 @@
           withRetry(async (signal) => {
             const ti0 = nowMs();
             const lessonHtmlPrompt = fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
-              LessonInquiryJson: JSON.stringify(lessonObj), // for compatibility
-              JsonResponse: JSON.stringify(lessonObj),      // expected by direct_instructions prompts
-              LessonNumber: i + 1,
-              LessonTitle: step0Obj?.Lessons?.[i]?.lessonTitle || ""
+              JsonResponse: JSON.stringify(lessonObj)
             });
             console.log(`[DEBUG] Lesson ${i + 1} HTML Prompt:`, lessonHtmlPrompt);
 

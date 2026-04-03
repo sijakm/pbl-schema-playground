@@ -112,51 +112,95 @@ OUTPUT REQUIREMENTS:
 INPUT FORMAT
 I will send you the JSON object like this:
 
-LESSON JSON:
+UNIT PLAN JSON:
 {{{JsonResponse}}}
 
-Also, you have these variables available:
-Lesson Number: {{$LessonNumber}}
-Lesson Title: {{$LessonTitle}}
+Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. Do NOT explain or comment on it; just parse it and render it.
 
 GLOBAL RULES
-    - Output ONLY valid HTML.
-    - Allowed tags: <p>, <h1>, <h2>, <h3>, <h4>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>.
-    - Do NOT invent content. Render exactly what is in the JSON.
-    - Format expected student responses as: <p>✅<strong>Expected Student Responses</strong></p> followed by a <ul>.
-    - Format 'Say' prompts and Teacher Notes distinctly using <strong> or <em> where appropriate.
-    - Preserve line breaks from text by using <br> or multiple <p> tags.
+    - Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
+    - Allowed tags: <p>, <h1>, <h2>, <h3>, 
+    - (wrapped inside <p>), <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
+    - Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h4>, etc.).
+    - HTML should be well-indented and easy to read.
+    - In any <ol> or <ul>, ONLY use <li> elements as direct children. Never place <p>, <span>, <ul>, <ol>, or any other tag as a child of a list.
+    - Do NOT invent new instructional content; use only what exists in the JSON fields.
+    - Preserve the logical order implied by the schema:
+    - Inside each lesson, follow the schema field order.
+    - If a string field is empty (""), OMIT that subsection and its label.
+    - If an array is empty, omit its heading and the corresponding <ul> or <ol>.
+    - Whenever the text clearly forms a list of prompts/questions/statements/responses, use <ul><li>…</li></ul> or <ol><li>…</li></ol>. Otherwise, use <p>.
+    - Whenever you render model/expected student responses in ANY section, use this pattern:
+        - First: <p>✅ Expected Student Responses</p> (no bullets on this line)
+        - Then a <ul> or <ol> list containing the responses (one response per <li>).
+    - Whenever you render a Quick Check:
+        - Use this exact header: <p><strong>✔Quick Check</strong></p>
+        - Render the question or task immediately following the header as a paragraph that tasks EVERY student to show their understanding (not just one student in a verbal check).
+        - Use the global ✅Expected Student Responses pattern for the answers.
+    - Use emojis if they exist in following mapping rules.
 
 MAPPING RULES:
 
 - <h3>💭 Essential Questions</h3> (if available, UL list from EssentialQuestions)
-- <h3>🔤 Key Vocabulary</h3> (if available, UL or text from KeyVocabulary)
 - <h3>🎯 Student Learning Objectives</h3> (UL list from StudentLearningObjectives)
 - <h3>📏 Standards Aligned</h3> (UL list or paragraphs from StandardsAligned)
-- <h3>💡 Assess Prior Knowledge</h3> (If string is not empty. Render text structurally: use Teacher Note:, Say:, Options:, and ✅ Expected Student Responses labels if present based on text contents)
 
-LAB SECTIONS (Render exactly in this order if they exist in the JSON):
+ASSESS PRIOR KNOWLEDGE:
+- Start with this exact heading:
+<h3>💡 Assess Prior Knowledge</h3>
+- Immediately after the heading, ALWAYS render this Purpose text exactly as written:
+<p><strong>Purpose:</strong> Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. When students recall what they already believe or remember about materials, particles, or chemical changes, they activate existing neural pathways. This “elaborative encoding” makes it easier for the brain to connect new chemistry concepts to what is already known, strengthening long-term retention. This activity helps you uncover accurate ideas, partial ideas, and misconceptions that will become powerful anchors for learning throughout the project.</p>
+- Render a teacher-facing "Say:" section.
+- Even if the input text does NOT explicitly contain "Say:"
+- Synthesize or rephrase existing content into 1-2 clear teacher talk paragraphs
+- Begin with:
+<p><strong>Say:</strong></p>
+- Follow with one or more <p> elements
+- Any student tasks, prompts, statements, or instructions:
+- Render as <ol> or <ul>
+- Each item MUST be a single <li>
+- NO <p> or other tags inside <li>
+- When expected or model student responses appear:
+- Render this EXACT label:
+<p>✅ Expected Student Responses</p>
+- Then render all expected responses as a <ul> with <li> only
+- NO nested lists
+- NO <p> inside <li>
+- If alternate options or variations appear:
+- Render:
+<p><strong>Alternate Options:</strong></p>
+- Then a <ul> with brief <li> items
 
-- <h3>Question (5 min)</h3>
+DO NOT:
+- Use any tags not listed
+- Nest lists
+- Skip the Purpose section
+- Invent new instructional content, but use all provided ideas
+
+
+- <h3><span style="color: rgb(115, 191, 39);">Question</span> (5 min)</h3>
+Purpose needs to be word for word as in the JSON
   - <p><strong>Purpose:</strong> {Purpose}</p>
+  then render (with emojis if available in html tags)
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
   - <p>✅ <strong>Expected Student Responses</strong></p> <ul>{ExpectedStudentResponses}</ul>
   - <p><strong>Final Investigation Question:</strong> {FinalInvestigationQuestion}</p>
 
-- <h3>Research (5 min)</h3>
+  // i need Research (5 min) in green color
+- <h3><span style="color: rgb(115, 191, 39);">Research (5 min)</span></h3>
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
   - <h4>❗️ Anticipated Misconceptions</h4> (Iterate AnticipatedMisconceptions: <p><strong>Misconception:</strong> {Misconception}</p> <p><strong>Teacher Response:</strong> {TeacherResponse}</p>)
 
-- <h3>Hypothesize (5 min)</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Hypothesize (5 min)</span></h3>
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
   - <p>✅ <strong>Expected Student Responses</strong></p> <ul>{ExpectedStudentResponses}</ul>
 
-- <h3>Experiment (20 min)</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Experiment (20 min)</span></h3>
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
@@ -164,12 +208,12 @@ LAB SECTIONS (Render exactly in this order if they exist in the JSON):
   - <h4>🤝 Accommodations & Modifications</h4> <p>{AccommodationsAndModifications}</p>
   - <h4>✅ Quick Check</h4> <p>{QuickCheck}</p>
 
-- <h3>Analyze (5 min)</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Analyze (5 min)</span></h3>
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
 
-- <h3>Share (5 min)</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Share (5 min)</span></h3>
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
@@ -203,7 +247,9 @@ GLOBAL RULES
 
 - At the top:
     - <h1>Unit Plan Overview</h1>
-    - <p><strong>Description:</strong> {{{UnitDescription.Description}}}</p>
+    - <p>{{{UnitDescription.Description}}}</p>
+- Then add a new line with:
+    <h1>Unit Overview</h1>
 
 - Essential Questions:
     - <h2>💭 Essential Questions</h2>
@@ -215,7 +261,12 @@ GLOBAL RULES
 
 - Standards:
     - <h2>📏 Standards Aligned</h2>
-    - <ul> with each string from UnitDescription.StandardsAligned as <li>.`,
+    - <ul> with each string from UnitDescription.StandardsAligned as <li>.
+
+- Key Vocabulary:
+    - <h2>🔤 Key Vocabulary</h2>
+    - <ul> with each string from UnitDescription.KeyVocabulary as <li>.`,
+
   STEP0_SCHEMA: {
     "title": "UnitPlanResponse",
     "type": "object",
@@ -249,13 +300,21 @@ GLOBAL RULES
             "items": {
               "type": "string"
             }
+          },
+          "KeyVocabulary": {
+            "type": "array",
+            "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "Description",
           "EssentialQuestions",
           "StudentLearningObjectives",
-          "StandardsAligned"
+          "StandardsAligned",
+          "KeyVocabulary"
         ],
         "additionalProperties": false
       },
@@ -308,13 +367,6 @@ GLOBAL RULES
       "EssentialQuestions": {
         "type": "array",
         "description": "Just paste all the essential questions that are generated in unit level in same order.",
-        "items": {
-          "type": "string"
-        }
-      },
-      "KeyVocabulary": {
-        "type": "array",
-        "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
         "items": {
           "type": "string"
         }
@@ -599,7 +651,6 @@ GLOBAL RULES
     },
     "required": [
       "EssentialQuestions",
-      "KeyVocabulary",
       "StudentLearningObjectives",
       "StandardsAligned",
       "AssessPriorKnowledge",
