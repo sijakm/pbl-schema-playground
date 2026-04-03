@@ -57,7 +57,7 @@ Constraints:
 Output MUST be valid JSON matching the schema. Use compact formatting (no extra blank lines).
 `,
   PER_LESSON_PROMPT_TEMPLATE: `
-Create ONE LAB lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
+Create ONE LECTURE lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
 You MUST output valid JSON that matches the provided JSON schema exactly. Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
 Unit Subject: 
 {{$Subject}}
@@ -361,174 +361,132 @@ GLOBAL RULES
     }
   },
   PER_LESSON_SCHEMA: {
-    "title": "LabUnitPlanResponse",
+    "title": "LectureUnitPlanResponse",
     "type": "object",
     "properties": {
       "EssentialQuestions": {
         "type": "array",
         "description": "Just paste all the essential questions that are generated in unit level in same order.",
-        "items": {
-          "type": "string"
-        }
+        "items": { "type": "string" }
+      },
+      "KeyVocabulary": {
+        "type": "array",
+        "description": "List of vocabulary terms with definitions. (e.g. 'Solar System – The Sun and all...').",
+        "items": { "type": "string" }
       },
       "StudentLearningObjectives": {
         "type": "array",
-        "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+        "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses.",
         "minItems": 2,
         "maxItems": 3,
-        "items": {
-          "type": "string"
-        }
+        "items": { "type": "string" }
       },
       "StandardsAligned": {
         "type": "string",
-        "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'"
+        "description": "Full 'Standards Aligned' section as plain text for this lesson."
       },
       "AssessPriorKnowledge": {
         "type": "string",
-        "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
+        "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field."
       },
-      "Question": {
+      "Objective": {
         "type": "object",
-        "description": "Guide teacher so students will observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.",
+        "description": "Block for introducing objectives.",
         "properties": {
-          "Purpose": {
-            "type": "string",
-            "description": "Word for Word - Purpose: Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation."
-          },
-          "Materials": {
-            "type": "array",
-            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": { "type": "string" }
-          },
-          "InstructionsForTeachers": {
-            "type": "object",
-            "properties": {
-              "Instructions": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to present a phenomenon and invite questions."
-              },
-              "ExpectedStudentResponses": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "3-4 expected student questions or ideas about the phenomenon."
-              },
-              "FinalInvestigationQuestion": {
-                "type": "string",
-                "description": "The closing teacher prompt that synthesizes the students' ideas into one big question to investigate today."
-              }
-            },
-            "required": ["Instructions", "ExpectedStudentResponses", "FinalInvestigationQuestion"],
-            "additionalProperties": false
-          }
+          "Duration": { "type": "string", "description": "Time estimate (e.g. '(2-3 min)')" },
+          "Materials": { "type": "array", "items": { "type": "string" } },
+          "InstructionsForTeachers": { "type": "array", "items": { "type": "string" }, "description": "Teacher instructions, actions, and 'Say:' prompts to communicate the goals and why they matter." }
         },
-        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
+        "required": ["Duration", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
-      "Research": {
+      "ContentDeliveryAndInteractiveActivities": {
         "type": "object",
-        "description": "Guide teacher so students learn background information, vocabulary, and prior knowledge needed to understand the topic.",
+        "description": "Block for content delivery.",
         "properties": {
-          "Purpose": {
-            "type": "string",
-            "description": "Word for word: Purpose: Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation."
-          },
+          "Duration": { "type": "string", "description": "Time estimate (e.g. '(30 min)')" },
           "Materials": {
-            "type": "array",
-            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": { "type": "string" }
+            "type": "object",
+            "properties": {
+              "TeacherOnlyMaterials": { "type": "array", "items": { "type": "string" } },
+              "StudentMaterials": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["TeacherOnlyMaterials", "StudentMaterials"],
+            "additionalProperties": false
           },
           "InstructionsForTeachers": {
             "type": "object",
             "properties": {
-              "Instructions": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to explain background knowledge, vocabulary, and model the phenomenon."
+              "Hook": { "type": "array", "items": { "type": "string" }, "description": "Hook statements including 'Say:'" },
+              "Vocabulary": { "type": "array", "items": { "type": "string" }, "description": "Teacher script for defining terms" },
+              "ClarifyObjective": { "type": "array", "items": { "type": "string" } },
+              "NewConceptsAndKnowledge": { "type": "array", "items": { "type": "string" }, "description": "Teacher lecture with scripts" },
+              "AttentionReset": {
+                "type": "object",
+                "properties": {
+                  "WhyThisWorks": { "type": "array", "items": { "type": "string" } },
+                  "Directions": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["WhyThisWorks", "Directions"],
+                "additionalProperties": false
               },
+              "ContinueInstruction": { "type": "array", "items": { "type": "string" } },
               "AnticipatedMisconceptions": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "Misconception": { "type": "string", "description": "Student misconception" },
-                    "TeacherResponse": { "type": "string", "description": "What the teacher should say to correct it" }
+                    "Misconception": { "type": "string" },
+                    "TeacherResponse": { "type": "string" }
                   },
                   "required": ["Misconception", "TeacherResponse"],
                   "additionalProperties": false
                 }
-              }
-            },
-            "required": ["Instructions", "AnticipatedMisconceptions"],
-            "additionalProperties": false
-          }
-        },
-        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
-        "additionalProperties": false
-      },
-      "Hypothesize": {
-        "type": "object",
-        "description": "Guide teacher so students develop a testable prediction.",
-        "properties": {
-          "Purpose": {
-            "type": "string",
-            "description": "Word for Word: Purpose: Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen."
-          },
-          "Materials": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "InstructionsForTeachers": {
-            "type": "object",
-            "properties": {
-              "Instructions": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Teacher instructions, including 'Say:' prompts for hypothesis sentence frames."
               },
-              "ExpectedStudentResponses": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "3-4 expected hypothesis examples."
-              }
-            },
-            "required": ["Instructions", "ExpectedStudentResponses"],
-            "additionalProperties": false
-          }
-        },
-        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
-        "additionalProperties": false
-      },
-      "Experiment": {
-        "type": "object",
-        "description": "Guide teacher so students carry out a structured investigation.",
-        "properties": {
-          "Purpose": {
-            "type": "string",
-            "description": "Word for word: Purpose: Carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement."
-          },
-          "Materials": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "InstructionsForTeachers": {
-            "type": "object",
-            "properties": {
-              "Instructions": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Step-by-step teacher instructions to organize the experiment, give directions, and circulate."
+              "Connect": { "type": "array", "items": { "type": "string" } },
+              "EssentialQuestion": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Prompt", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "SpacedRetrieval": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Prompt", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "QuickCheck": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Prompt", "ExpectedStudentResponses"],
+                "additionalProperties": false
               },
               "Differentiation": {
                 "type": "object",
                 "properties": {
                   "LanguageLearners": { "type": "array", "items": { "type": "string" } },
                   "AdditionalScaffolding": { "type": "array", "items": { "type": "string" } },
-                  "GoDeeper": { "type": "array", "items": { "type": "string" } },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "For Go Deeper responses." }
+                  "GoDeeper": {
+                    "type": "object",
+                    "properties": {
+                      "Tasks": { "type": "array", "items": { "type": "string" } },
+                      "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                    },
+                    "required": ["Tasks", "ExpectedStudentResponses"],
+                    "additionalProperties": false
+                  }
                 },
-                "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper", "ExpectedStudentResponses"],
+                "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
                 "additionalProperties": false
               },
               "AccommodationsAndModifications": {
@@ -539,128 +497,68 @@ GLOBAL RULES
                 },
                 "required": ["GeneralSupports", "IndividualSupports"],
                 "additionalProperties": false
-              },
-              "QuickCheck": {
-                "type": "object",
-                "properties": {
-                  "Question": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                },
-                "required": ["Question", "ExpectedStudentResponses"],
-                "additionalProperties": false
               }
             },
-            "required": ["Instructions", "Differentiation", "AccommodationsAndModifications", "QuickCheck"],
+            "required": [
+              "Hook", "Vocabulary", "ClarifyObjective", "NewConceptsAndKnowledge", "AttentionReset",
+              "ContinueInstruction", "AnticipatedMisconceptions", "Connect", "EssentialQuestion",
+              "SpacedRetrieval", "QuickCheck", "Differentiation", "AccommodationsAndModifications"
+            ],
             "additionalProperties": false
           }
         },
-        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
+        "required": ["Duration", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
-      "Analyze": {
+      "QAndAAndDiscussion": {
         "type": "object",
-        "description": "Guide teachers so students interpret the data they collected.",
+        "description": "Block for Q&A.",
         "properties": {
-          "Purpose": {
-            "type": "string",
-            "description": "Purpose: Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions."
-          },
-          "Materials": {
-            "type": "array",
-            "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string",
-              "description": ""
-            }
-          },
-          "InstructionsForTeachers": {
+          "Duration": { "type": "string" },
+          "Materials": { "type": "array", "items": { "type": "string" } },
+          "InstructionsForTeachers": { "type": "array", "items": { "type": "string" }, "description": "Teacher questions and directions." }
+        },
+        "required": ["Duration", "Materials", "InstructionsForTeachers"],
+        "additionalProperties": false
+      },
+      "Conclusion": {
+        "type": "object",
+        "description": "Block for Conclusion.",
+        "properties": {
+          "Duration": { "type": "string" },
+          "TranscendentThinking": {
             "type": "object",
             "properties": {
-              "Instructions": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Teacher instructions and sentence starters for analysis."
-              },
-              "ExpectedStudentResponses": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Expected answers or sentence frame completions from students."
-              }
+              "Prompt": { "type": "array", "items": { "type": "string" } },
+              "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } },
+              "BuildCuriosity": { "type": "string" }
             },
-            "required": ["Instructions", "ExpectedStudentResponses"],
+            "required": ["Prompt", "ExpectedStudentResponses", "BuildCuriosity"],
             "additionalProperties": false
           }
         },
-        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
+        "required": ["Duration", "TranscendentThinking"],
         "additionalProperties": false
-      },
-      "Share": {
-        "type": "object",
-        "description": "Guide teachers so students communicate their findings clearly.",
-        "properties": {
-          "Purpose": {
-            "type": "string",
-            "description": "Word for word: Purpose: Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding."
-          },
-          "Materials": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "InstructionsForTeachers": {
-            "type": "object",
-            "properties": {
-              "Instructions": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Teacher instructions for organizing student sharing."
-              },
-              "ExpectedStudentResponses": {
-                "type": "array",
-                "items": { "type": "string" },
-                "description": "Expected ideas shared by students."
-              },
-              "TranscendentThinking": {
-                "type": "object",
-                "properties": {
-                  "Prompt": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                },
-                "required": ["Prompt", "ExpectedStudentResponses"],
-                "additionalProperties": false
-              }
-            },
-            "required": ["Instructions", "ExpectedStudentResponses", "TranscendentThinking"],
-            "additionalProperties": false
-          }
-        },
-        "required": ["Purpose", "Materials", "InstructionsForTeachers"],
-        "additionalProperties": false
-      },
-      "ReviewAndSpacedRetrieval": {
-        "type": "string",
-        "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing:  Clear reference to specific prior lesson. Example (Draws from Unit 3, Lesson 2.  Must use active recall question connecting past + current concepts. Must not require students using notes or resources to answer. - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text."
       },
       "FormativeAssessment": {
         "type": "string",
-        "description": "Full 'Formative Assessment' section as plain text. Must follow this structure: A teacher-facing introduction paragraph briefly stating purpose and how to implement. 4 required question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', etc. covering DOK levels 1-4. For each prompt: - Question that tests understanding at stated DOK level - Header 'Expected Student Responses' (without checkmarks/emojis) - 1-2 complete sentence responses showing mastery End with short paragraph naming specific formative assessment strategy to use (e.g.,'Exit Ticket','Think-Pair-Share'). Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit instead of flying off into space?' Expected Student Responses 'Because their forward motion and the Sun's gravity work together to create a stable orbit.' [Continue with Prompts 2-4 following same structure]"
+        "description": "Full 'Formative Assessment' section as plain text."
       },
       "StudentPractice": {
         "type": "string",
-        "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'"
+        "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice."
       }
     },
     "required": [
       "EssentialQuestions",
+      "KeyVocabulary",
       "StudentLearningObjectives",
       "StandardsAligned",
       "AssessPriorKnowledge",
-      "Question",
-      "Research",
-      "Hypothesize",
-      "Experiment",
-      "Analyze",
-      "Share",
-      "ReviewAndSpacedRetrieval",
+      "Objective",
+      "ContentDeliveryAndInteractiveActivities",
+      "QAndAAndDiscussion",
+      "Conclusion",
       "FormativeAssessment",
       "StudentPractice"
     ],
