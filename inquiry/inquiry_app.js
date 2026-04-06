@@ -889,7 +889,8 @@
 
       const tJoin0 = nowMs();
       logLine("[5/5] Joining final HTML…");
-      const finalHtml = [unitHtml, ...lessonHtmls].join("\n");
+      const separator = '<hr style="border: none; border-top: 8px solid #f0f0f0; margin: 60px 0; border-radius: 4px;">';
+      const finalHtml = [unitHtml, separator, ...lessonHtmls].join("\n");
       if (els.finalHtml()) els.finalHtml().value = finalHtml;
       if (els.htmlPreview()) els.htmlPreview().srcdoc = finalHtml;
       timings.join_final_ms = nowMs() - tJoin0;
