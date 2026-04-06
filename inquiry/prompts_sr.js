@@ -140,7 +140,7 @@ Alternativne opcije (ako su prisutne):
 SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 ==================================================
 
-<h3><span style="color: rgb(115, 191, 39);">Faza orijentacije – Definisanje problema</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">Faza orijentacije – Definisanje problema (5 min)</span></h3>
 
 <p><strong>Svrha:</strong> Učenici se upoznaju sa stvarnom misterijom koja budi radoznalost i motiviše istraživanje. Oni prepoznaju problem i aktiviraju prethodno znanje kako bi se pripremili za dublje istraživanje.</p>
 

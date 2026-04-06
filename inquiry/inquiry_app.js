@@ -41,7 +41,23 @@
     unitHtml: () => $("unitHtml"),
     lessonsBundle: () => $("lessonsBundle"),
     finalHtml: () => $("finalHtml"),
-    htmlPreview: () => $("htmlPreview")
+    htmlPreview: () => $("htmlPreview"),
+
+    // Toggles
+    toggleInputVariablesHeader: () => $("toggleInputVariablesHeader"),
+    toggleInputVariablesBtn: () => $("toggleInputVariablesBtn"),
+    inputVariablesContainer: () => $("inputVariablesContainer"),
+
+    toggleSchemaEditorHeader: () => $("toggleSchemaEditorHeader"),
+    toggleSchemaEditorBtn: () => $("toggleSchemaEditorBtn"),
+    schemaEditorContainer: () => $("schemaEditorContainer"),
+
+    // Schema Editor tabs/editors
+    schemaStep0Tab: () => $("schemaStep0Tab"),
+    schemaPerLessonTab: () => $("schemaPerLessonTab"),
+    schemaStep0Editor: () => $("schemaStep0Editor"),
+    schemaPerLessonEditor: () => $("schemaPerLessonEditor"),
+    copySchemaBtn: () => $("copySchemaBtn")
   };
 
   // ---- state ----
@@ -66,32 +82,32 @@
   }
 
   const MODEL_PRICING = {
-    "gpt-5.4":       { input: 2.50,  output: 15.00 },
-    "gpt-5.4-mini":  { input: 0.75,  output: 4.50  },
-    "gpt-5.4-nano":  { input: 0.20,  output: 1.25  },
-    "gpt-5-mini":    { input: 0.75,  output: 4.50  },
-    "gpt-5.2":       { input: 2.50,  output: 15.00 }
+    "gpt-5.4": { input: 2.50, output: 15.00 },
+    "gpt-5.4-mini": { input: 0.75, output: 4.50 },
+    "gpt-5.4-nano": { input: 0.20, output: 1.25 },
+    "gpt-5-mini": { input: 0.75, output: 4.50 },
+    "gpt-5.2": { input: 2.50, output: 15.00 }
   };
 
   function updateTokenSummaryUI(model) {
     const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
-    const inputCost  = (tokenUsage.input  / 1_000_000) * pricing.input;
+    const inputCost = (tokenUsage.input / 1_000_000) * pricing.input;
     const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
-    const totalCost  = inputCost + outputCost;
+    const totalCost = inputCost + outputCost;
 
     const fmt = n => n.toLocaleString("en-US");
     const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
 
     const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
 
-    set("tsInput",        fmt(tokenUsage.input));
-    set("tsInputCost",    fmtUSD(inputCost));
-    set("tsOutput",       fmt(tokenUsage.output));
-    set("tsOutputCost",   fmtUSD(outputCost));
-    set("tsTotal",        fmt(tokenUsage.total));
-    set("tsTotalCost",    `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
-    set("tsCallCount",    String(tokenUsage.calls));
-    set("tsModel",        model);
+    set("tsInput", fmt(tokenUsage.input));
+    set("tsInputCost", fmtUSD(inputCost));
+    set("tsOutput", fmt(tokenUsage.output));
+    set("tsOutputCost", fmtUSD(outputCost));
+    set("tsTotal", fmt(tokenUsage.total));
+    set("tsTotalCost", `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
+    set("tsCallCount", String(tokenUsage.calls));
+    set("tsModel", model);
     set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
 
     const panel = $("tokenSummary");
@@ -128,15 +144,321 @@
     if (cancelBtn) cancelBtn.disabled = !running;
   }
 
-  // ---- simple template substitution ----
+  const SchemaEditor = {
+    schemas: { step0: null, perLesson: null, templates: { step0: "", perLesson: "" } },
+
+    init() {
+      const p = getPrompts();
+      if (p) {
+        this.schemas.step0 = JSON.parse(JSON.stringify(p.STEP0_SCHEMA));
+        this.schemas.perLesson = JSON.parse(JSON.stringify(p.PER_LESSON_SCHEMA));
+        this.schemas.templates.step0 = p.STEP0_PROMPT_TEMPLATE;
+        this.schemas.templates.perLesson = p.PER_LESSON_PROMPT_TEMPLATE;
+      }
+      this.render();
+      if (!this.eventsBound) {
+        this.bindEvents();
+        this.eventsBound = true;
+      }
+    },
+
+    render() {
+      const renderTab = (type, container) => {
+        const schema = this.schemas[type];
+        const template = this.schemas.templates[type];
+
+        container.innerHTML = `
+          <!-- Template Section -->
+          <div class="schema-section">
+            <div class="schema-section-header">
+              <strong>Prompt Template</strong>
+              <button class="btn btn-outline btn-pill" onclick="SchemaEditor.copyTemplateUI('${type}')">Copy Template</button>
+            </div>
+            <textarea class="prompt-template-textarea" data-type="${type}">${template}</textarea>
+          </div>
+
+          <!-- Schema Section -->
+          <div class="schema-section" style="border-bottom: none;">
+            <div class="schema-section-header">
+              <strong>JSON Output Schema (Instructions)</strong>
+              <div>
+                <button class="btn btn-success btn-pill" onclick="SchemaEditor.addPropertyUI('${type}', '')">+ Add Top-Level Property</button>
+                <button class="btn btn-outline btn-pill" onclick="SchemaEditor.copySchemaUI('${type}')">Copy Schema JSON</button>
+              </div>
+            </div>
+            <div class="schema-tree-root">
+              ${this.renderNode(type, schema, "", [], "")}
+            </div>
+          </div>
+        `;
+
+        // Resize and Listen to Template
+        const templateTa = container.querySelector(".prompt-template-textarea");
+        if (templateTa) {
+          this.autoResize(templateTa);
+          templateTa.addEventListener("input", (e) => {
+            this.schemas.templates[type] = e.target.value;
+            this.autoResize(e.target);
+          });
+        }
+
+        // Resize and Listen to Schema textareas
+        setTimeout(() => {
+          container.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
+        }, 10);
+
+        container.querySelectorAll(".schema-textarea").forEach(ta => {
+          ta.addEventListener("input", (e) => {
+            this.updateDescription(type, e.target.dataset.path, e.target.value);
+            this.autoResize(e.target);
+          });
+        });
+
+        // Toggle buttons
+        container.querySelectorAll(".node-header.collapsible").forEach(header => {
+          header.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn")) return;
+            header.classList.toggle("collapsed");
+            const children = header.nextElementSibling;
+            if (children) {
+              children.classList.toggle("hidden");
+              if (!children.classList.contains("hidden")) {
+                children.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
+              }
+            }
+          });
+        });
+      };
+
+      if (els.schemaStep0Editor()) renderTab("step0", els.schemaStep0Editor());
+      if (els.schemaPerLessonEditor()) renderTab("perLesson", els.schemaPerLessonEditor());
+    },
+
+    renderNode(type, node, name, pathArr, inheritedColor) {
+      const isRoot = pathArr.length === 0;
+      const depth = pathArr.length;
+      let colorClass = inheritedColor;
+      if (depth === 2 && pathArr[0] === "properties") colorClass = this.getPhaseColor(name);
+
+      const label = isRoot ? "Root Object" : name;
+      const nodeType = node.type || (node.properties ? "object" : "unknown");
+      const isCollapsible = node.properties || (node.items && node.items.properties);
+
+      let parentName = "";
+      if (depth >= 4) parentName = pathArr[depth - 2];
+
+      let html = `<div class="schema-field-group">`;
+      html += `
+        <div class="node-header ${isCollapsible ? "collapsible" : ""}" data-path="${pathArr.join(".")}">
+          <div class="field-header" style="flex: 1;">
+            <div>
+              <span class="schema-label">${this.formatLabel(label)}</span>
+              <span class="schema-type-badge">${nodeType}</span>
+              ${parentName && node.description !== undefined ? `<span class="schema-phase-badge">${this.formatLabel(parentName)}</span>` : ""}
+            </div>
+            <div class="node-actions">
+               ${nodeType === "object" ? `<button class="btn btn-success btn-pill" style="width: 24px; height: 24px; padding: 0;" title="Add Child" onclick="SchemaEditor.addPropertyUI('${type}', '${pathArr.join(".")}')">+</button>` : ""}
+               ${isRoot ? "" : `<button class="btn btn-danger btn-pill" style="width: 24px; height: 24px; padding: 0;" title="Delete" onclick="SchemaEditor.removePropertyUI('${type}', '${pathArr.join(".")}')">−</button>`}
+            </div>
+          </div>
+        </div>
+      `;
+
+      html += `<div class="children-container ${isCollapsible ? "schema-tree-node" : ""} ${colorClass}">`;
+      if (node.description !== undefined) {
+        html += `<textarea class="schema-textarea" data-path="${pathArr.join(".")}">${node.description}</textarea>`;
+      }
+      if (node.properties) {
+        for (const key in node.properties) {
+          html += this.renderNode(type, node.properties[key], key, [...pathArr, "properties", key], colorClass);
+        }
+      }
+      if (node.items) {
+        if (node.items.properties || node.items.description !== undefined) {
+          html += this.renderNode(type, node.items, name + " Item", [...pathArr, "items"], colorClass);
+        }
+      }
+      html += `</div></div>`;
+      return html;
+    },
+
+    getPhaseColor(name) {
+      const colors = {
+        OrientationPhase: "color-blue", ConceptualizationPhase: "color-green", InvestigationPhase: "color-orange",
+        ConclusionPhase: "color-purple", DiscussionPhase: "color-pink", ReviewAndSpacedRetrieval: "color-teal",
+        FormativeAssessment: "color-gray", StudentPractice: "color-gray", UnitDescription: "color-blue", Lessons: "color-green"
+      };
+      return colors[name] || "color-gray";
+    },
+
+    bindEvents() {
+      // Toggle Input Variables
+      const ivHeader = els.toggleInputVariablesHeader();
+      const ivContainer = els.inputVariablesContainer();
+      const ivBtn = els.toggleInputVariablesBtn();
+      if (ivHeader && ivContainer && ivBtn) {
+        ivHeader.onclick = () => {
+          const isHidden = ivContainer.style.display === "none";
+          ivContainer.style.display = isHidden ? "block" : "none";
+          ivBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+        };
+      }
+
+      // Toggle Schema Editor
+      const seHeader = els.toggleSchemaEditorHeader();
+      const seContainer = els.schemaEditorContainer();
+      const seBtn = els.toggleSchemaEditorBtn();
+      if (seHeader && seContainer && seBtn) {
+        seHeader.onclick = () => {
+          const isHidden = seContainer.style.display === "none";
+          seContainer.style.display = isHidden ? "block" : "none";
+          seBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+        };
+      }
+
+      const step0Tab = els.schemaStep0Tab();
+      const perLessonTab = els.schemaPerLessonTab();
+      if (step0Tab && perLessonTab) {
+        step0Tab.onclick = () => {
+          step0Tab.classList.add("active-tab");
+          perLessonTab.classList.remove("active-tab");
+          els.schemaStep0Editor().style.display = "block";
+          els.schemaPerLessonEditor().style.display = "none";
+          setTimeout(() => {
+            els.schemaStep0Editor().querySelectorAll("textarea").forEach(ta => this.autoResize(ta));
+          }, 0);
+        };
+        perLessonTab.onclick = () => {
+          perLessonTab.classList.add("active-tab");
+          step0Tab.classList.remove("active-tab");
+          els.schemaPerLessonEditor().style.display = "block";
+          els.schemaStep0Editor().style.display = "none";
+          setTimeout(() => {
+            els.schemaPerLessonEditor().querySelectorAll("textarea").forEach(ta => this.autoResize(ta));
+          }, 0);
+        };
+      }
+
+      window.SchemaEditor = this;
+    },
+
+    autoResize(ta) {
+      if (!ta || ta.offsetHeight === 0) return;
+      ta.style.height = "1px";
+      ta.style.height = (ta.scrollHeight + 2) + "px";
+    },
+
+    updateDescription(type, path, val) {
+      const schema = this.schemas[type];
+      const parts = path.split(".");
+      let curr = schema;
+      for (const p of parts) curr = curr[p];
+      curr.description = val;
+    },
+
+    addPropertyUI(type, parentPath) {
+      const name = prompt("Name of the new property (e.g. LessonSummary):");
+      if (!name) return;
+      const t = prompt("Type (string / number / integer / object / array):", "string");
+      if (!t) return;
+      this.addProperty(type, parentPath, name, t);
+      this.render();
+    },
+
+    addProperty(type, parentPath, name, propType) {
+      const schema = this.schemas[type];
+      let parentObj = schema;
+      if (parentPath) {
+        const parts = parentPath.split(".");
+        for (const p of parts) parentObj = parentObj[p];
+      }
+      if (!parentObj.properties) parentObj.properties = {};
+      if (!parentObj.required) parentObj.required = [];
+      const newProp = { type: propType, description: "" };
+      if (propType === "object") {
+        newProp.properties = {};
+        newProp.required = [];
+        newProp.additionalProperties = false;
+      } else if (propType === "array") {
+        newProp.items = { type: "string" };
+      }
+      parentObj.properties[name] = newProp;
+      if (!parentObj.required.includes(name)) parentObj.required.push(name);
+      if (parentObj.type === "object") parentObj.additionalProperties = false;
+    },
+
+    removePropertyUI(type, path) {
+      if (confirm(`Are you sure you want to delete ${path}?`)) {
+        this.removeProperty(type, path);
+        this.render();
+      }
+    },
+
+    removeProperty(type, path) {
+      const schema = this.schemas[type];
+      const parts = path.split(".");
+      const propName = parts.pop();
+      let parentObj = schema;
+      for (const p of parts) parentObj = parentObj[p];
+      if (parentObj.properties) delete parentObj.properties[propName];
+      if (parentObj.required) parentObj.required = parentObj.required.filter(r => r !== propName);
+    },
+
+    copyTemplateUI(type) {
+      const text = this.schemas.templates[type];
+
+      // Detect required placeholders based on EXACT lists
+      const required = type === "step0"
+        ? ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "AttachedLesson", "NumberOfItems"]
+        : ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedUnit", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"];
+
+      const missing = required.filter(key => {
+        const regex = new RegExp(`\\{\\{\\{?\\$?${key}\\}\\}\\}?`, "i");
+        return !regex.test(text);
+      });
+
+      if (missing.length > 0) {
+        const msg = `WARNING: The following required variables are missing from your template: ${missing.join(", ")}.\n\nThis will likely break the generation process because the AI won't receive these parameters.\n\nDo you still want to copy to clipboard?`;
+        if (!confirm(msg)) return;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Template copied to clipboard!");
+      });
+    },
+
+    copySchemaUI(type) {
+      const modified = this.schemas[type];
+      const json = JSON.stringify(modified, null, 2);
+      navigator.clipboard.writeText(json).then(() => {
+        alert("Schema JSON copied to clipboard!");
+      });
+    },
+
+    getModifiedSchema(type) {
+      return JSON.parse(JSON.stringify(this.schemas[type]));
+    },
+
+    getModifiedTemplate(type) {
+      return this.schemas.templates[type];
+    },
+
+    formatLabel(pathOrName) {
+      const name = pathOrName.split(".").pop();
+      return name.replace(/([A-Z])/g, " $1").trim();
+    }
+  };
+
+  // ---- flexible template substitution ----
   function fillTemplate(tpl, vars) {
-    return tpl.replace(/\{\{\$([A-Za-z0-9_]+)\}\}/g, (_, key) => {
+    // Supports {{$Key}}, {{Key}}, and {{{Key}}}
+    return tpl.replace(/\{\{\{?\$?([A-Za-z0-9_]+)\}\}\}?/g, (match, key) => {
       const v = vars[key];
-      return v === undefined || v === null ? "" : String(v);
+      return v === undefined || v === null ? match : String(v);
     });
   }
 
-  // ---- SSE parsing (same format as playground.js) ----
+  // ---- SSE parsing ----
   function parseSseLines(text) {
     const events = [];
     let rest = text;
@@ -240,7 +562,6 @@
         }
       }
 
-      // Attempt to process any remaining content in the buffer as a raw event if it didn't end with \n\n
       if (buffer.trim() && !streamClosed) {
         const lines = buffer.split("\n");
         for (const ln of lines) {
@@ -279,7 +600,6 @@
   function readUnitEQsOptional() {
     const raw = els.unitEssentialQuestions()?.value?.trim();
     if (!raw) return "";
-    // Accept either JSON array or plain text.
     try {
       const arr = JSON.parse(raw);
       if (Array.isArray(arr)) return JSON.stringify(arr);
@@ -311,7 +631,6 @@
     return s.length <= n ? s : s.slice(0, n) + "…";
   }
 
-  // ---- concurrency helpers ----
   function createLimiter(maxConcurrent = 4) {
     let active = 0;
     const queue = [];
@@ -339,10 +658,6 @@
     };
   }
 
-  /**
-   * Wraps a task with a timeout and retry logic.
-   * If timeoutMs is reached, the signal is aborted and the task is retried up to maxRetries.
-   */
   async function withRetry(taskFn, label, timeoutMs = 180000, maxRetries = 2) {
     let lastError;
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -353,7 +668,6 @@
       }, timeoutMs);
 
       try {
-        // Also respect the global cancel button
         const onGlobalAbort = () => controller.abort();
         if (currentAbortController) {
           currentAbortController.signal.addEventListener("abort", onGlobalAbort, { once: true });
@@ -372,7 +686,7 @@
         const isTimeout = controller.signal.aborted && (!currentAbortController || !currentAbortController.signal.aborted);
         const isGlobalAbort = currentAbortController && currentAbortController.signal.aborted;
 
-        if (isGlobalAbort) throw err; // Don't retry if user clicked Cancel
+        if (isGlobalAbort) throw err;
 
         if (attempt < maxRetries) {
           const reason = isTimeout ? "Timeout" : (err.message || "Unknown error");
@@ -386,25 +700,24 @@
   async function runChain() {
     if (isRunning) return;
 
-    const HARDCODED_PASSWORD = ""; // Enter password here while working locally
+    const pmpts = getPrompts();
+    const {
+      UNIT_COMMON_HTML_PROMPT_TEMPLATE,
+      HTML_LESSON_PROMPT_TEMPLATE
+    } = pmpts;
+
+    const HARDCODED_PASSWORD = ""; 
     const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
     const model = els.model()?.value || "gpt-5.4-mini";
 
     const vars = buildVarsFromUi();
-    const numLessons = parseInt(vars.NumberOfItems, 10);
 
     if (!vars.Subject || !vars.Name || !vars.UserPrompt || !vars.GradeLevel || !vars.ClassDuration || !vars.NumberOfItems) {
       alert("Please fill in at least: Subject, Name, UserPrompt, GradeLevel, ClassDuration, NumberOfItems.");
       return;
     }
 
-    if (!Number.isFinite(numLessons) || numLessons < 1) {
-      alert("NumberOfItems must be a positive integer.");
-      return;
-    }
-
-    // reset outputs
     if (els.log()) els.log().value = "";
     if (els.step0Json()) els.step0Json().value = "";
     if (els.unitHtml()) els.unitHtml().value = "";
@@ -417,7 +730,6 @@
     setStatus("Running…");
     currentAbortController = new AbortController();
 
-    // timings
     const timings = {
       step0_outline_ms: 0,
       unit_common_html_ms: 0,
@@ -434,83 +746,53 @@
       // ---- Step 0: outline ----
       const t0 = nowMs();
       logLine("[1/5] Step 0: generating unit outline JSON…");
-
-      const pmpts = getPrompts();
-      const step0Prompt = fillTemplate(pmpts.STEP0_PROMPT_TEMPLATE, vars);
+      const step0Prompt = fillTemplate(SchemaEditor.getModifiedTemplate("step0"), vars);
       console.log("[STEP0_PROMPT]", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
         callResponsesApiStream({
-          endpoint,
-          apiKey,
-          model,
+          endpoint, apiKey, model,
           prompt: step0Prompt,
           schemaName: "UnitPlanResponse",
-          schemaObj: pmpts.STEP0_SCHEMA,
-          signal: signal
+          schemaObj: SchemaEditor.getModifiedSchema("step0"),
+          signal
         }), "Step 0 Outline");
-
-      dbg("Step0 raw response received", {
-        chars: step0JsonText?.length ?? 0,
-        preview: previewText(step0JsonText, 500)
-      });
 
       let step0Obj;
       try {
         step0Obj = JSON.parse(step0JsonText);
-        dbg("Step0 parsed JSON", {
-          hasUnitDescription: !!step0Obj?.UnitDescription,
-          lessonsCount: Array.isArray(step0Obj?.Lessons) ? step0Obj.Lessons.length : 0
-        });
       } catch (e) {
         throw new Error("Step 0 did not return valid JSON.\n\n" + step0JsonText.slice(0, 1200));
       }
 
       if (els.step0Json()) els.step0Json().value = JSON.stringify(step0Obj, null, 2);
-
       timings.step0_outline_ms = nowMs() - t0;
       logLine(`[OK] Step 0 JSON received. (${fmtMs(timings.step0_outline_ms)})`);
 
       // ---- Common unit HTML ----
       const t1 = nowMs();
       logLine("[2/5] Rendering common unit HTML…");
-
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
-      const unitHtmlPrompt = fillTemplate(pmpts.UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
+      const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson)
       });
       console.log("[UNIT_HTML_PROMPT]", unitHtmlPrompt);
+
       const unitHtml = await withRetry((signal) =>
         callResponsesApiStream({
-          endpoint,
-          apiKey,
-          model,
+          endpoint, apiKey, model,
           prompt: unitHtmlPrompt,
-          schemaObj: null,
-          signal: signal
+          signal
         }), "Unit Common HTML");
 
-      dbg("Unit common HTML received", {
-        chars: unitHtml?.length ?? 0,
-        preview: previewText(unitHtml, 500)
-      });
-
       if (els.unitHtml()) els.unitHtml().value = unitHtml;
-
       timings.unit_common_html_ms = nowMs() - t1;
       logLine(`[OK] Common unit HTML received. (${fmtMs(timings.unit_common_html_ms)})`);
 
       // ---- Per-lesson JSON (PARALLEL) ----
       const lessons = Array.isArray(step0Obj?.Lessons) ? step0Obj.Lessons : [];
-      if (lessons.length !== numLessons) {
-        logLine(`[warn] Step 0 returned ${lessons.length} lessons but NumberOfItems is ${numLessons}. Continuing with returned lessons.`);
-      }
-
       const unitEqOverride = readUnitEQsOptional();
-
-      // (optional) limiter to avoid rate limits; bump/down as needed
       const limit = createLimiter(4);
-
       const tJsonAll0 = nowMs();
       logLine(`[3/5] Generating lesson JSON in parallel (${lessons.length} lessons)…`);
 
@@ -520,7 +802,6 @@
         limit(() =>
           withRetry(async (signal) => {
             const ti0 = nowMs();
-
             const perLessonVars = {
               ...vars,
               UnitEssentialQuestions: unitEqOverride || JSON.stringify(step0Obj?.UnitDescription?.EssentialQuestions ?? []),
@@ -535,36 +816,27 @@
               ].join("\n")
             };
 
-            const pmpts = getPrompts();
-            const perLessonPrompt = fillTemplate(pmpts.PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+            const perLessonPrompt = fillTemplate(SchemaEditor.getModifiedTemplate("perLesson"), perLessonVars);
             console.log(`[PER_LESSON_PROMPT ${i + 1}]`, perLessonPrompt);
 
             const lessonJsonText = await callResponsesApiStream({
-              endpoint,
-              apiKey,
-              model,
+              endpoint, apiKey, model,
               prompt: perLessonPrompt,
               schemaName: "InquiryUnitPlanResponse",
-              schemaObj: pmpts.PER_LESSON_SCHEMA,
-              signal: signal
-            });
-
-            dbg(`Lesson ${i} JSON raw response received`, {
-              chars: lessonJsonText?.length ?? 0,
-              preview: previewText(lessonJsonText, 500)
+              schemaObj: SchemaEditor.getModifiedSchema("perLesson"),
+              signal
             });
 
             let lessonObj;
             try {
               lessonObj = JSON.parse(lessonJsonText);
             } catch {
-              throw new Error(`Lesson ${i} did not return valid JSON.\n\n` + lessonJsonText.slice(0, 1200));
+              throw new Error(`Lesson ${i + 1} did not return valid JSON.\n\n` + lessonJsonText.slice(0, 1200));
             }
 
             const dur = nowMs() - ti0;
             timings.per_lesson_json_ms[i] = dur;
             logLine(`[OK] Lesson ${i + 1}/${lessons.length} JSON done. (${fmtMs(dur)})`);
-
             return lessonObj;
           }, `Lesson ${i + 1} JSON`)
         )
@@ -584,31 +856,20 @@
         limit(() =>
           withRetry(async (signal) => {
             const ti0 = nowMs();
-
-            const pmpts = getPrompts();
-            const lessonHtmlPrompt = fillTemplate(pmpts.HTML_LESSON_PROMPT_TEMPLATE, {
+            const lessonHtmlPrompt = fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
               LessonInquiryJson: JSON.stringify(lessonObj)
             });
             console.log(`[LESSON_HTML_PROMPT ${i + 1}]`, lessonHtmlPrompt);
 
             const lessonHtml = await callResponsesApiStream({
-              endpoint,
-              apiKey,
-              model,
+              endpoint, apiKey, model,
               prompt: lessonHtmlPrompt,
-              schemaObj: null,
-              signal: signal
-            });
-
-            dbg(`Lesson ${i} HTML received`, {
-              chars: lessonHtml?.length ?? 0,
-              preview: previewText(lessonHtml, 500)
+              signal
             });
 
             const dur = nowMs() - ti0;
             timings.per_lesson_html_ms[i] = dur;
             logLine(`[OK] Lesson ${i + 1}/${lessonJsons.length} HTML done. (${fmtMs(dur)})`);
-
             return lessonHtml;
           }, `Lesson ${i + 1} HTML`)
         )
@@ -618,62 +879,36 @@
       timings.all_lessons_html_parallel_ms = nowMs() - tHtmlAll0;
       logLine(`[OK] All lesson HTML done (parallel). (${fmtMs(timings.all_lessons_html_parallel_ms)})`);
 
-      // ---- Bundle (debug output) ----
       const bundleEl = els.lessonsBundle();
       if (bundleEl) {
         bundleEl.value = "";
         for (let i = 0; i < lessonJsons.length; i++) {
-          const block = [
-            `=== Lesson ${i} JSON ===`,
-            JSON.stringify(lessonJsons[i], null, 2),
-            `=== Lesson ${i} HTML ===`,
-            lessonHtmls[i]
-          ].join("\n");
-          bundleEl.value += (bundleEl.value ? "\n\n" : "") + block;
+          bundleEl.value += (bundleEl.value ? "\n\n" : "") + `=== Lesson ${i + 1} JSON ===\n${JSON.stringify(lessonJsons[i], null, 2)}\n=== Lesson ${i + 1} HTML ===\n${lessonHtmls[i]}`;
         }
-        bundleEl.scrollTop = bundleEl.scrollHeight;
       }
 
-      // ---- Join final HTML ----
       const tJoin0 = nowMs();
       logLine("[5/5] Joining final HTML…");
-
       const finalHtml = [unitHtml, ...lessonHtmls].join("\n");
-
-      dbg("Final HTML joined", {
-        lessonHtmlCount: lessonHtmls.length,
-        chars: finalHtml.length,
-        preview: previewText(finalHtml, 500)
-      });
-
       if (els.finalHtml()) els.finalHtml().value = finalHtml;
       if (els.htmlPreview()) els.htmlPreview().srcdoc = finalHtml;
-
       timings.join_final_ms = nowMs() - tJoin0;
-
       timings.total_ms = nowMs() - tTotal0;
 
-      // ---- Timing summary ----
       logLine("");
       logLine("===== TIMING SUMMARY =====");
       logLine(`Step 0 (outline JSON): ${fmtMs(timings.step0_outline_ms)}`);
       logLine(`Unit common HTML: ${fmtMs(timings.unit_common_html_ms)}`);
       logLine(`All lessons JSON (parallel): ${fmtMs(timings.all_lessons_json_parallel_ms)}`);
-      for (let i = 0; i < timings.per_lesson_json_ms.length; i++) {
-        logLine(`  - Lesson ${i + 1} JSON: ${fmtMs(timings.per_lesson_json_ms[i])}`);
-      }
       logLine(`All lessons HTML (parallel): ${fmtMs(timings.all_lessons_html_parallel_ms)}`);
-      for (let i = 0; i < timings.per_lesson_html_ms.length; i++) {
-        logLine(`  - Lesson ${i + 1} HTML: ${fmtMs(timings.per_lesson_html_ms[i])}`);
-      }
       logLine(`Join final HTML: ${fmtMs(timings.join_final_ms)}`);
       logLine(`TOTAL: ${fmtMs(timings.total_ms)}`);
       logLine("==========================");
 
       updateTokenSummaryUI(model);
-
       setStatus("Done.");
       logLine("[OK] Done.");
+
     } catch (err) {
       if (currentAbortController?.signal?.aborted) {
         setStatus("Canceled.");
@@ -696,65 +931,59 @@
   async function downloadPrompts() {
     try {
       if (typeof JSZip === "undefined") {
-        alert("JSZip library not loaded. Check your internet connection or CDN link.");
+        alert("JSZip library not loaded.");
         return;
       }
-
       const zipEN = new JSZip();
       const zipSR = new JSZip();
-
-      // window.promptsEN and window.promptsSR are defined in prompts.js / prompts_sr.js
       const pEN = window.promptsEN || {};
       const pSR = window.promptsSR || {};
 
       const addFiles = (zip, obj) => {
         for (const [key, value] of Object.entries(obj)) {
-          if (typeof value === "object" && value !== null) {
-            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
-          } else if (typeof value === "string") {
-            zip.file(`${key}.txt`, value);
-          }
+          if (typeof value === "object") zip.file(`${key}.json`, JSON.stringify(value, null, 2));
+          else zip.file(`${key}.txt`, String(value));
         }
       };
-
       addFiles(zipEN, pEN);
       addFiles(zipSR, pSR);
 
       const contentEN = await zipEN.generateAsync({ type: "blob" });
       const contentSR = await zipSR.generateAsync({ type: "blob" });
 
-      const saveZip = (blob, filename) => {
+      const save = (blob, name) => {
         const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const a = document.body.appendChild(document.createElement("a"));
+        a.href = url; a.download = name; a.click(); a.remove();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       };
-
-      saveZip(contentEN, "inquiry_prompts_en.zip");
-      setTimeout(() => {
-        saveZip(contentSR, "inquiry_prompts_sr.zip");
-      }, 500);
-
-      logLine("[OK] Prompts downloaded successfully.");
+      save(contentEN, "inquiry_prompts_en.zip");
+      setTimeout(() => save(contentSR, "inquiry_prompts_sr.zip"), 500);
+      logLine("[OK] Prompts downloaded.");
     } catch (err) {
-      logLine("[error] Failed to download prompts: " + err.message);
-      console.error(err);
+      logLine("[error] Failed to download: " + err.message);
     }
   }
 
   function onReady() {
     setStatus("");
-
     const runBtn = els.runChainBtn();
     const cancelBtn = els.cancelBtn();
     const downloadBtn = els.downloadPromptsBtn();
     if (runBtn) runBtn.addEventListener("click", runChain);
     if (cancelBtn) cancelBtn.addEventListener("click", cancel);
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
+
+    // Initial Editor load
+    SchemaEditor.init();
+
+    // Re-init on language change
+    const langSel = $("languageSelect");
+    if (langSel) {
+      langSel.addEventListener("change", () => {
+        SchemaEditor.init();
+      });
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);

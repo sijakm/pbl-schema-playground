@@ -136,7 +136,7 @@ Alternate options (if present):
 SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
 ==================================================
 
-<h3><span style="color: rgb(115, 191, 39);">Orientation Phase – Define the Problem</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">Orientation Phase – Define the Problem (5 min)</span></h3>
 
 <p><strong>Purpose:</strong> Students are introduced to a real mystery that sparks curiosity and motivates investigation. They recognize the problem and activate prior knowledge to prepare for deeper inquiry.</p>
 
