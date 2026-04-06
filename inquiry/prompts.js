@@ -148,43 +148,47 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
 <p><strong>📋Instructions for Teachers</strong></p>
 
 <p><strong>Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</strong></p>
+<p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
+<p><strong>Prompting Options:</strong></p>
 <ul>
-  <li>Say: Invite students to closely observe the visual phenomenon and share what they notice without offering explanations.</li>
-  <li>Prompt observation with questions such as: What stands out to you? What seems surprising or worth investigating?</li>
-  <li>Display or project the core visual related to the phenomenon.</li>
-  <li>Facilitation move: Invite quiet observation before discussion.</li>
-  <li>Facilitation move: Ask open noticing questions such as “What patterns or motions stand out to you?” and “What makes you say that?”</li>
-  <li>Record student observations publicly without confirming or correcting.</li>
+  - Split OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions into <li> items.
+</ul>
+<p><strong>Facilitation Moves:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves into <li> items.
 </ul>
 
 <p><strong>Connect – Help students link their observations to the broader mystery that will anchor the investigation.</strong></p>
+<p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
+<p><strong>Prompting Options:</strong></p>
 <ul>
-  <li>Say: Ask students what questions are forming based on their observations.</li>
-  <li>Prompt wondering with questions such as: What do you wonder about how this works? What seems unclear or puzzling?</li>
-  <li>Point to specific parts of the visual when students reference details.</li>
-  <li>Facilitation move: Encourage students to generate multiple possible questions.</li>
-  <li>Facilitation move: Prompt reasoning with “What might be influencing what you’re seeing?”</li>
-  <li>Cluster similar student questions to highlight emerging themes.</li>
+  - Split OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions into <li> items.
+</ul>
+<p><strong>Facilitation Moves:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves into <li> items.
 </ul>
 
 <p><strong>Activate – Shift students into collaborative sensemaking.</strong></p>
+<p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
+<p><strong>Prompting Options:</strong></p>
 <ul>
-  <li>Say: Turn students to a partner or small group to discuss initial ideas or hypotheses.</li>
-  <li>Prompt students to support ideas using evidence from the visual or observations.</li>
-  <li>Facilitation move: Encourage students to reference the model or image directly.</li>
-  <li>Facilitation move: Circulate and ask guiding questions such as “What evidence supports your idea?” and “What might help refine your thinking?”</li>
-  <li>Invite a few groups to share different hypotheses without evaluating them.</li>
-  <li>Expected student responses may include ideas about forces, motion, balance, or multiple factors acting together.</li>
+  - Split OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions into <li> items.
+</ul>
+<p><strong>Facilitation Moves:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves into <li> items.
 </ul>
 
 <p><strong>Probe – Encourage refinement of thinking by pushing students to examine assumptions.</strong></p>
+<p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
+<p><strong>Prompting Options:</strong></p>
 <ul>
-  <li>Say: Reference a common student idea and ask what might cause that outcome.</li>
-  <li>Ask probing questions such as: What makes a path curve instead of going straight?</li>
-  <li>Facilitation move: Challenge assumptions with “What would happen if that force disappeared?”</li>
-  <li>Encourage modeling gestures to show predicted motion or change.</li>
-  <li>Prompt evidence-based reasoning by asking what in the visual supports their idea.</li>
-  <li>Expected student responses may include ideas about forces pulling, motion continuing, or changes in direction.</li>
+  - Split OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions into <li> items.
+</ul>
+<p><strong>Facilitation Moves:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves into <li> items.
 </ul>
 
 ==================================================
@@ -688,8 +692,51 @@ INPUT JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Step-by-step teacher instructions following this EXACT format for the intro and each activity component: The model must include the following four sections with headers and definition. These are in (). (Engage- Introduce the phenomenon in a way that sparks curiosity without explaining it.) Provide a teacher script that draws attention to the phenomenon. Include observation-based questions without revealing explanations. Facilitation moves must encourage noticing, wondering, and curiosity. (Connect- Help students with their observations to the broader mystery that will anchor the investigation.) Include prompts that help students turn observations into questions. Facilitation moves cluster student ideas and highlight emerging patterns. Must guide teachers to build the anchor problem without giving content. (Activate- Shift students into collaborative sensemaking.) Include partner or small group discussion prompts. Students share initial hypotheses without evaluation. Teacher circulates asking open, evidence-seeking questions. (Probe- Encourage refinement of thinking by pushing students to examine assumptions.) Include probing questions that disrupt simplistic reasoning. Teacher challenges students to justify ideas or test predictions. Example moves- What makes you say that? What would happen if that assumption were wrong?"
+            "type": "object",
+            "properties": {
+              "Engage": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "" },
+                  "FacilitationMoves": { "type": "string", "description": "Generate 2-3 specific pedagogical moves for this lesson that guide silent observation and partner sharing. Instructions should focus on capturing and organizing student observations into categories and encouraging multiple perspectives." },
+                  "PromptingOptions": { "type": "string", "description": "Suggest 2-3 lesson-specific prompts to help students identify details, notice patterns, and surface wonderings. Prompts should encourage students to explain the importance of their observations." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "Connect": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create a specific teacher script (starting with 'Say:') that helps students turn their observations of the phenomenon into research questions or problems while clustering ideas into key themes." },
+                  "PromptingOptions": { "type": "string", "description": "Provide 2-3 specific prompts for this lesson to help students connect observations to underlying challenges, justify thinking with evidence, and prioritize what is worth investigating." },
+                  "FacilitationMoves": { "type": "string", "description": "Suggest 2-3 moves to support students in refining their ideas and grouping them, while pressing them to explain their reasoning for this specific lesson." }
+                },
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "additionalProperties": false
+              },
+              "Activate": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Develop a teacher-led instruction to facilitate partner or group discussion that generates specific ideas, explanations, or solutions for this lesson's content." },
+                  "PromptingOptions": { "type": "string", "description": "List 2-3 prompts for this lesson to encourage students to propose ideas, explain reasoning, and evaluate which parts of their thinking are most certain." },
+                  "FacilitationMoves": { "type": "string", "description": "Describe 2-3 circulation moves to listen for reasoning, press for clarity/justification, and highlight diverse approaches for this specific lesson's context." }
+                },
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "additionalProperties": false
+              },
+              "Probe": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create a script to push students to refine and test their ideas by examining assumptions, considering different conditions, and identifying key factors of this lesson." },
+                  "PromptingOptions": { "type": "string", "description": "Suggest 2-3 specific prompts to test ideas against new conditions, identify weaknesses, and revise thinking using evidence for this lesson's phenomena." },
+                  "FacilitationMoves": { "type": "string", "description": "Provide 2-3 specific moves to encourage students to revisit and revise their initial ideas based on evidence and justify changes in their thinking." }
+                },
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["Engage", "Connect", "Activate", "Probe"],
+            "additionalProperties": false
           }
         },
         "required": [

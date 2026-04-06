@@ -151,44 +151,48 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 
-<p><strong>Angažovanje – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</strong></p>
+<p><strong>Angažovanje (Engage) – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</strong></p>
+<p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
+<p><strong>Opcije za podsticaj:</strong></p>
 <ul>
-  <li>Recite: Pozovite učenike da pažljivo posmatraju vizuelni fenomen i podele ono što primećuju bez nuđenja objašnjenja.</li>
-  <li>Podstaknite posmatranje pitanjima kao što su: Šta vam privlači pažnju? Šta deluje iznenađujuće ili vredno istraživanja?</li>
-  <li>Prikažite ili projektujte ključni vizuelni materijal povezan sa fenomenom.</li>
-  <li>Potez za facilitaciju: Pozovite na tiho posmatranje pre diskusije.</li>
-  <li>Potez za facilitaciju: Postavljajte otvorena pitanja o primećivanju kao što su „Koji obrasci ili pokreti vam privlače pažnju?“ i „Zašto to kažete?“</li>
-  <li>Zabeležite zapažanja učenika javno bez potvrđivanja ili ispravljanja.</li>
+  - Podeli OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions u <li> stavke.
+</ul>
+<p><strong>Potezi za facilitaciju:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves u <li> stavke.
 </ul>
 
-<p><strong>Povezivanje – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</strong></p>
+<p><strong>Povezivanje (Connect) – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</strong></p>
+<p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
+<p><strong>Opcije za podsticaj:</strong></p>
 <ul>
-  <li>Recite: Pitajte učenike koja se pitanja javljaju na osnovu njihovih zapažanja.</li>
-  <li>Podstaknite zapitanost pitanjima kao što su: Šta se pitate o tome kako ovo funkcioniše? Šta deluje nejasno ili zbunjujuće?</li>
-  <li>Pokažite na specifične delove vizuelnog materijala kada se učenici pozivaju na detalje.</li>
-  <li>Potez za facilitaciju: Podstaknite učenike da generišu više mogućih pitanja.</li>
-  <li>Potez za facilitaciju: Podstaknite rezonovanje sa „Šta bi moglo uticati na ono što vidite?“</li>
-  <li>Grupišite slična pitanja učenika kako biste istakli teme koje se javljaju.</li>
+  - Podeli OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions u <li> stavke.
+</ul>
+<p><strong>Potezi za facilitaciju:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves u <li> stavke.
 </ul>
 
-<p><strong>Aktivacija – Prebacite učenike na zajedničko pronalaženje smisla.</strong></p>
+<p><strong>Aktivacija (Activate) – Prebacite učenike na zajedničko pronalaženje smisla.</strong></p>
+<p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
+<p><strong>Opcije za podsticaj:</strong></p>
 <ul>
-  <li>Recite: Uputite učenike na rad u paru ili maloj grupi kako bi prodiskutovali početne ideje ili hipoteze.</li>
-  <li>Podstaknite učenike da potkrepe ideje koristeći dokaze iz vizuelnog materijala ili zapažanja.</li>
-  <li>Potez za facilitaciju: Podstaknite učenike da se direktno pozivaju na model ili sliku.</li>
-  <li>Potez za facilitaciju: Cirkulišite i postavljajte vodeća pitanja kao što su „Koji dokazi potkrepljuju vašu ideju?“ i „Šta bi moglo pomoći da preciznije razmislite?“</li>
-  <li>Pozovite nekoliko grupa da podele različite hipoteze bez njihovog ocenjivanja.</li>
-  <li>Očekivani odgovori učenika mogu uključivati ideje o silama, kretanju, ravnoteži ili više faktora koji deluju zajedno.</li>
+  - Podeli OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions u <li> stavke.
+</ul>
+<p><strong>Potezi za facilitaciju:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves u <li> stavke.
 </ul>
 
-<p><strong>Ispitivanje – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</strong></p>
+<p><strong>Ispitivanje (Probe) – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</strong></p>
+<p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
+<p><strong>Opcije za podsticaj:</strong></p>
 <ul>
-  <li>Recite: Pozovite se na uobičajenu ideju učenika i pitajte šta bi moglo uzrokovati taj ishod.</li>
-  <li>Postavljajte ispitivačka pitanja kao što su: Šta čini da putanja bude zakrivljena umesto prava?</li>
-  <li>Potez za facilitaciju: Izazovite pretpostavke sa „Šta bi se desilo kada bi ta sila nestala?“</li>
-  <li>Podstaknite korišćenje gestikulacije za modelovanje kako bi pokazali predviđeno kretanje ili promenu.</li>
-  <li>Podstaknite rezonovanje zasnovano na dokazima pitajući šta u vizuelnom materijalu potkrepljuje njihovu ideju.</li>
-  <li>Očekivani odgovori učenika mogu uključivati ideje o privlačenju sila, nastavku kretanja ili promenama pravca.</li>
+  - Podeli OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions u <li> stavke.
+</ul>
+<p><strong>Potezi za facilitaciju:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves u <li> stavke.
 </ul>
 
 ==================================================
@@ -693,8 +697,51 @@ ULAZNI JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Uputstva za nastavnika korak-po-korak prateći TAČAN format za uvod i svaku komponentu aktivnosti: Model mora uključivati sledeće četiri sekcije sa zaglavljima i definicijom (u zagradama). (Angažovanje- Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.) Obezbedi scenario za nastavnika koji skreće pažnju na fenomen. Uključi pitanja zasnovana na posmatranju bez otkrivanja objašnjenja. Potezi za facilitaciju moraju podsticati primećivanje, zapitanost i radoznalost. (Povezivanje- Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.) Uključi podsticaje koji pomažu učenicima da zapažanja pretvore u pitanja. Potezi za facilitaciju grupišu ideje učenika i ističu obrasce koji se javljaju. Mora voditi nastavnike da izgrade osnovni problem bez davanja sadržaja. (Aktivacija- Prebacite učenike na zajedničko pronalaženje smisla.) Uključi podsticaje za diskusiju u paru ili maloj grupi. Učenici dele početne hipoteze bez ocenjivanja. Nastavnik cirkuliše postavljajući otvorena pitanja koja traže dokaze. (Ispitivanje- Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.) Uključi ispitivačka pitanja koja narušavaju uprošćeno rezonovanje. Nastavnik izaziva učenike da opravdaju ideje ili testiraju predviđanja. Primeri poteza- Zašto to kažeš? Šta bi se desilo kada bi ta pretpostavka bila pogrešna?"
+            "type": "object",
+            "properties": {
+              "Engage": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "" },
+                  "FacilitationMoves": { "type": "string", "description": "Generišite 2-3 specifična pedagoška poteza za ovu lekciju koji vode tiho posmatranje i deljenje u paru. Instrukcije treba da se fokusiraju na beleženje i organizovanje zapažanja učenika u kategorije i podsticanje više perspektiva." },
+                  "PromptingOptions": { "type": "string", "description": "Predložite 2-3 podsticaja specifična za lekciju kako biste pomogli učenicima da identifikuju detalje, uoče obrasce i iznesu čuđenja. Podsticaji treba da ohrabre učenike da objasne važnost svojih zapažanja." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "Connect": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte specifičan scenario za nastavnika (koji počinje sa 'Recite:') koji pomaže učenicima da svoja zapažanja fenomena pretvore u istraživačka pitanja ili probleme dok grupišu ideje u ključne teme." },
+                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 specifična podsticaja za ovu lekciju kako biste pomogli učenicima da povežu zapažanja sa osnovnim izazovima, opravdaju razmišljanje dokazima i odrede prioritete o tome šta vredi istraživati." },
+                  "FacilitationMoves": { "type": "string", "description": "Predložite 2-3 poteza za podršku učenicima u doterivanju njihovih ideja i njihovom grupisanju, uz podsticanje da objasne svoje rezonovanje za ovu specifičnu lekciju." }
+                },
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "additionalProperties": false
+              },
+              "Activate": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Razvijte instrukciju vođenu nastavnikom za olakšavanje diskusije u paru ili grupi koja generiše specifične ideje, objašnjenja ili rešenja za sadržaj ove lekcije." },
+                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 podsticaja za ovu lekciju kako biste ohrabrili učenike da predlože ideje, objasne rezonovanje i procene koji delovi njihovog razmišljanja su najsigurniji." },
+                  "FacilitationMoves": { "type": "string", "description": "Opišite 2-3 poteza tokom cirkulisanja za slušanje rezonovanja, traženje jasnoće/opravdanja i isticanje različitih pristupa za kontekst ove specifične lekcije." }
+                },
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "additionalProperties": false
+              },
+              "Probe": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte scenario koji podstiče učenike da doteraju i testiraju svoje ideje ispitivanjem pretpostavki, razmatranjem različitih uslova i identifikacijom ključnih faktora ove lekcije." },
+                  "PromptingOptions": { "type": "string", "description": "Predložite 2-3 specifična podsticaja za testiranje ideja u novim uslovima, identifikaciju slabosti i revidiranje razmišljanja koristeći dokaze za fenomene ove lekcije." },
+                  "FacilitationMoves": { "type": "string", "description": "Navedite 2-3 specifična poteza za podsticanje učenika da se vrate na svoje početne ideje i revidiraju ih na osnovu dokaza i opravdaju promene u svom razmišljanju." }
+                },
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["Engage", "Connect", "Activate", "Probe"],
+            "additionalProperties": false
           }
         },
         "required": [
