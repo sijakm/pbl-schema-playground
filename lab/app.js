@@ -4,8 +4,8 @@
   // ---- Defaults ----
   const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
 
-  // ---- DOM helpers ----
-  const $ = (id) => document.getElementById(id);
+  // ---- Shared Helpers Aliases ----
+  const { $, nowMs, fmtMs, logLine, setStatus, fillTemplate } = window.utils;
 
   const els = {
     apiKey: () => $("apiKey"),
@@ -42,11 +42,10 @@
     toggleInputVariablesBtn: () => $("toggleInputVariablesBtn"),
     inputVariablesContainer: () => $("inputVariablesContainer"),
 
+    // Schema Editor
     toggleSchemaEditorHeader: () => $("toggleSchemaEditorHeader"),
     toggleSchemaEditorBtn: () => $("toggleSchemaEditorBtn"),
     schemaEditorContainer: () => $("schemaEditorContainer"),
-
-    // Schema Editor tabs/editors
     schemaStep0Tab: () => $("schemaStep0Tab"),
     schemaPerLessonTab: () => $("schemaPerLessonTab"),
     schemaStep0Editor: () => $("schemaStep0Editor"),
@@ -58,77 +57,8 @@
   let currentAbortController = null;
   let isRunning = false;
 
-  // ---- token usage tracking ----
-  const tokenUsage = { input: 0, output: 0, total: 0, calls: 0 };
-
-  function resetTokenUsage() {
-    tokenUsage.input = 0; tokenUsage.output = 0; tokenUsage.total = 0; tokenUsage.calls = 0;
-    const panel = $("tokenSummary");
-    if (panel) panel.style.display = "none";
-  }
-
-  function addTokenUsage(usage) {
-    if (!usage) return;
-    tokenUsage.input += usage.input_tokens || 0;
-    tokenUsage.output += usage.output_tokens || 0;
-    tokenUsage.total += usage.total_tokens || 0;
-    tokenUsage.calls += 1;
-  }
-
-  const MODEL_PRICING = {
-    "gpt-5.4": { input: 2.50, output: 15.00 },
-    "gpt-5.4-mini": { input: 0.75, output: 4.50 },
-    "gpt-5.4-nano": { input: 0.20, output: 1.25 },
-    "gpt-5-mini": { input: 0.75, output: 4.50 },
-    "gpt-5.2": { input: 2.50, output: 15.00 }
-  };
-
-  function updateTokenSummaryUI(model) {
-    const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
-    const inputCost = (tokenUsage.input / 1_000_000) * pricing.input;
-    const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
-    const totalCost = inputCost + outputCost;
-
-    const fmt = n => n.toLocaleString("en-US");
-    const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
-
-    const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
-
-    set("tsInput", fmt(tokenUsage.input));
-    set("tsInputCost", fmtUSD(inputCost));
-    set("tsOutput", fmt(tokenUsage.output));
-    set("tsOutputCost", fmtUSD(outputCost));
-    set("tsTotal", fmt(tokenUsage.total));
-    set("tsTotalCost", `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
-    set("tsCallCount", String(tokenUsage.calls));
-    set("tsModel", model);
-    set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
-
-    const panel = $("tokenSummary");
-    if (panel) panel.style.display = "block";
-  }
-
-  // ---- timing helpers ----
-  function nowMs() {
-    return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-  }
-  function fmtMs(ms) {
-    if (!Number.isFinite(ms)) return "—";
-    if (ms < 1000) return `${ms.toFixed(0)} ms`;
-    return `${(ms / 1000).toFixed(2)} s`;
-  }
-
-  function setStatus(msg) {
-    const el = els.status();
-    if (el) el.textContent = msg || "";
-  }
-
-  function logLine(line) {
-    const log = els.log();
-    if (!log) return;
-    log.value += (log.value ? "\n" : "") + line;
-    log.scrollTop = log.scrollHeight;
-  }
+  // ---- shared components ----
+  const tokenManager = new window.TokenManager();
 
   function setRunning(running) {
     isRunning = running;
@@ -136,6 +66,37 @@
     const cancelBtn = els.cancelBtn();
     if (runBtn) runBtn.disabled = running;
     if (cancelBtn) cancelBtn.disabled = !running;
+  }
+
+  // ---- Wrapper for shared helpers ----
+  const log = (msg) => window.utils.logLine(els.log(), msg);
+  const status = (msg) => window.utils.setStatus(els.status(), msg);
+
+  // ---- API Client Wrapper ----
+  async function callResponsesApiStream(params) {
+    const { endpoint, apiKey, model, prompt, schemaName, schemaObj, signal } = params;
+    const body = {
+      model,
+      stream: true,
+      reasoning: { effort: "low" },
+      input: [{ role: "user", content: prompt }]
+    };
+    if (schemaObj) {
+      body.text = {
+        format: {
+          type: "json_schema",
+          name: schemaName || "Response",
+          schema: schemaObj,
+          strict: true
+        }
+      };
+    }
+    return await window.apiClient.stream({
+      endpoint, apiKey, body, signal,
+      onDelta: params.onDelta,
+      onUsage: (usage) => tokenManager.add(usage),
+      onError: (err) => { throw new Error(err.message || "Unknown error"); }
+    });
   }
 
   let schemaEditor; // Initialized in initSchemaEditor
@@ -206,136 +167,22 @@
     });
   }
 
-  // ---- flexible template substitution ----
-  function fillTemplate(tpl, vars) {
-    // Supports {{$Key}}, {{Key}}, and {{{Key}}}
-    return tpl.replace(/\{\{\{?\$?([A-Za-z0-9_]+)\}\}\}?/g, (match, key) => {
-      const v = vars[key];
-      return v === undefined || v === null ? match : String(v);
-    });
+  function formatTime(ms) {
+    if (ms < 1000) return ms.toFixed(0) + "ms";
+    return (ms / 1000).toFixed(2) + "s";
   }
 
-  // ---- SSE parsing ----
-  function parseSseLines(text) {
-    const events = [];
-    let rest = text;
-
-    while (true) {
-      const idx = rest.indexOf("\n\n");
-      if (idx === -1) break;
-
-      const chunk = rest.slice(0, idx);
-      rest = rest.slice(idx + 2);
-
-      const lines = chunk.split("\n");
-      for (const ln of lines) {
-        const m = ln.match(/^data:\s?(.*)$/);
-        if (m) events.push(m[1]);
+  async function withRetry(fn, label = "Task", maxRetries = 3) {
+    for (let i = 0; i < maxRetries; i++) {
+      try {
+        return await fn(currentAbortController.signal);
+      } catch (err) {
+        if (err.name === "AbortError") throw err;
+        log(`[RETRY ${i + 1}/${maxRetries}] ${label} failed: ${err.message}`);
+        if (i === maxRetries - 1) throw err;
+        await new Promise(r => setTimeout(r, 1000 * (i + 1)));
       }
     }
-
-    return { events, rest };
-  }
-
-  async function callResponsesApiStream({ endpoint, apiKey, model, prompt, schemaName, schemaObj, signal }) {
-    const headers = { "Content-Type": "application/json" };
-    if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-
-    const body = {
-      model,
-      stream: true,
-      reasoning: { effort: "low" },
-      input: [{ role: "user", content: prompt }]
-    };
-
-    if (schemaObj) {
-      body.text = {
-        format: {
-          type: "json_schema",
-          name: schemaName || "Response",
-          schema: schemaObj,
-          strict: true
-        }
-      };
-    }
-
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
-      signal
-    });
-
-    if (!res.ok) {
-      const errText = await res.text().catch(() => "");
-      throw new Error(`HTTP ${res.status} ${res.statusText}${errText ? `\n${errText}` : ""}`);
-    }
-    if (!res.body) throw new Error("No response body");
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-
-    let buffer = "";
-    let finalText = "";
-    let streamClosed = false;
-
-    try {
-      while (!streamClosed) {
-        const { value, done } = await reader.read();
-        if (done) {
-          streamClosed = true;
-          break;
-        }
-
-        buffer += decoder.decode(value, { stream: true });
-        const parsed = parseSseLines(buffer);
-        buffer = parsed.rest;
-
-        for (const raw of parsed.events) {
-          if (raw === "[DONE]") {
-            streamClosed = true;
-            break;
-          }
-
-          let evt;
-          try {
-            evt = JSON.parse(raw);
-          } catch (e) {
-            console.warn("Ignored non-JSON event:", raw);
-            continue;
-          }
-
-          if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-            finalText += evt.delta;
-          }
-
-          if (evt.type === "response.completed" && evt.response?.usage) {
-            addTokenUsage(evt.response.usage);
-          }
-
-          if (evt.type === "response.error") {
-            throw new Error(evt.error?.message || "Unknown model error");
-          }
-        }
-      }
-
-      if (buffer.trim() && !streamClosed) {
-        const lines = buffer.split("\n");
-        for (const ln of lines) {
-          const m = ln.match(/^data:\s?(.*)$/);
-          const raw = m ? m[1] : ln.trim();
-          if (raw === "[DONE]") break;
-          try {
-            const evt = JSON.parse(raw);
-            if (evt.delta) finalText += evt.delta;
-          } catch { }
-        }
-      }
-    } finally {
-      reader.releaseLock();
-    }
-
-    return finalText;
   }
 
   function buildVarsFromUi() {
@@ -379,11 +226,6 @@
     console.log(`[DBG] ${label}`, payload);
   }
 
-  function previewText(s, n = 400) {
-    if (typeof s !== "string") return s;
-    return s.length <= n ? s : s.slice(0, n) + "…";
-  }
-
   function createLimiter(maxConcurrent = 4) {
     let active = 0;
     const queue = [];
@@ -411,55 +253,16 @@
     };
   }
 
-  async function withRetry(taskFn, label, timeoutMs = 180000, maxRetries = 2) {
-    let lastError;
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => {
-        logLine(`[timeout] ${label} (Attempt ${attempt}) timed out after ${timeoutMs / 1000}s. Retrying...`);
-        controller.abort();
-      }, timeoutMs);
-
-      try {
-        const onGlobalAbort = () => controller.abort();
-        if (currentAbortController) {
-          currentAbortController.signal.addEventListener("abort", onGlobalAbort, { once: true });
-        }
-
-        const result = await taskFn(controller.signal);
-        clearTimeout(timeoutId);
-        if (currentAbortController) {
-          currentAbortController.signal.removeEventListener("abort", onGlobalAbort);
-        }
-        return result;
-      } catch (err) {
-        clearTimeout(timeoutId);
-        lastError = err;
-
-        const isGlobalAbort = currentAbortController && currentAbortController.signal.aborted;
-        if (isGlobalAbort) throw err;
-
-        if (attempt < maxRetries) {
-          const reason = (controller.signal.aborted && !isGlobalAbort) ? "Timeout" : (err.message || "Unknown error");
-          logLine(`[retry] ${label} failed (${reason}). Starting attempt ${attempt + 1}...`);
-        }
-      }
-    }
-    throw lastError;
-  }
-
   async function runChain() {
-    if (isRunning) return;
-
     const prompts = window.labPrompts;
-    const {
-      STEP0_SCHEMA,
-      UNIT_COMMON_HTML_PROMPT_TEMPLATE,
-      PER_LESSON_SCHEMA,
-      HTML_LESSON_PROMPT_TEMPLATE
-    } = prompts;
+    
+    // Fallbacks just in case schemaEditor isn't ready
+    const STEP0_PROMPT_TEMPLATE = (window.schemaEditor && window.schemaEditor.getModifiedTemplate("step0")) || prompts.STEP0_PROMPT_TEMPLATE;
+    const STEP0_SCHEMA = (window.schemaEditor && window.schemaEditor.getModifiedSchema("step0")) || prompts.STEP0_SCHEMA;
+    const PER_LESSON_PROMPT_TEMPLATE = (window.schemaEditor && window.schemaEditor.getModifiedTemplate("perLesson")) || prompts.PER_LESSON_PROMPT_TEMPLATE;
+    const PER_LESSON_SCHEMA = (window.schemaEditor && window.schemaEditor.getModifiedSchema("perLesson")) || prompts.PER_LESSON_SCHEMA;
 
-    const HARDCODED_PASSWORD = ""; // Enter password here while working locally
+    const HARDCODED_PASSWORD = ""; 
     const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
     const model = els.model()?.value || "gpt-5.4-mini";
@@ -478,10 +281,10 @@
     if (els.lessonsBundle()) els.lessonsBundle().value = "";
     if (els.finalHtml()) els.finalHtml().value = "";
     if (els.htmlPreview()) els.htmlPreview().srcdoc = "";
-    resetTokenUsage();
+    tokenManager.reset();
 
     setRunning(true);
-    setStatus("Running…");
+    status("Running…");
     currentAbortController = new AbortController();
 
     const timings = {
@@ -499,8 +302,8 @@
     try {
       // ---- Step 0: outline ----
       const t0 = nowMs();
-      logLine("[1/5] Step 0: generating unit outline JSON…");
-      const step0Prompt = fillTemplate(schemaEditor.getModifiedTemplate("step0"), vars);
+      log("[1/5] Step 0: generating unit outline JSON…");
+      const step0Prompt = window.utils.fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
       console.log("[DEBUG] Step 0 Prompt (Unit Outline):", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
@@ -508,7 +311,7 @@
           endpoint, apiKey, model,
           prompt: step0Prompt,
           schemaName: "UnitPlanResponse",
-          schemaObj: schemaEditor.getModifiedSchema("step0", STEP0_SCHEMA),
+          schemaObj: STEP0_SCHEMA,
           signal
         }), "Step 0 Outline");
 
@@ -521,15 +324,15 @@
 
       if (els.step0Json()) els.step0Json().value = JSON.stringify(step0Obj, null, 2);
       timings.step0_outline_ms = nowMs() - t0;
-      logLine(`[OK] Step 0 JSON received. (${fmtMs(timings.step0_outline_ms)})`);
+      log(`[OK] Step 0 JSON received. (${fmtMs(timings.step0_outline_ms)})`);
 
       // ---- Common unit HTML ----
       const t1 = nowMs();
-      logLine("[2/5] Rendering common unit HTML…");
+      log("[2/5] Rendering common unit HTML…");
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
-      const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
+      const unitHtmlPrompt = window.utils.fillTemplate(prompts.UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson),
-        JsonResponse: JSON.stringify(unitCommonJson) // direct_instructions.js use JsonResponse
+        JsonResponse: JSON.stringify(unitCommonJson)
       });
       console.log("[DEBUG] Unit Common HTML Prompt:", unitHtmlPrompt);
 
@@ -538,119 +341,111 @@
           endpoint, apiKey, model,
           prompt: unitHtmlPrompt,
           signal
-        }), "Unit Common HTML");
+        }), "Unit HTML");
 
       if (els.unitHtml()) els.unitHtml().value = unitHtml;
       timings.unit_common_html_ms = nowMs() - t1;
-      logLine(`[OK] Common unit HTML received. (${fmtMs(timings.unit_common_html_ms)})`);
+      log(`[OK] Unit HTML rendered. (${fmtMs(timings.unit_common_html_ms)})`);
 
-      // ---- Per-lesson JSON (PARALLEL) ----
-      const lessons = Array.isArray(step0Obj?.Lessons) ? step0Obj.Lessons : [];
-      const limit = createLimiter(4);
-      const tJsonAll0 = nowMs();
-      logLine(`[3/5] Generating lesson JSON in parallel (${lessons.length} lessons)…`);
+      // ---- Parallel Lessons JSON ----
+      const tParallelJson0 = nowMs();
+      log(`[3/5] Generating ${numLessons} lessons in parallel…`);
+      const limitJson = createLimiter(5);
+      const lessonObjects = [];
 
-      const lessonJsonPromises = lessons.map((L, i) =>
-        limit(() =>
-          withRetry(async (signal) => {
-            const ti0 = nowMs();
-            const perLessonVars = {
-              ...vars,
-              UnitEssentialQuestions: (step0Obj?.UnitDescription?.EssentialQuestions || []).join("\n"),
-              // Since the prompt file cannot be changed, we include both unit and lesson-specific 
-              // context in the ParentUnitData field which is present in the original template.
-              ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
-            };
+      const jsonTasks = (step0Obj.Lessons || []).map((outline, idx) => {
+        return limitJson(async () => {
+          const tStart = nowMs();
+          const perLessonVars = {
+            ...vars,
+            ParentUnitData: JSON.stringify(unitCommonJson),
+            UnitEssentialQuestions: JSON.stringify(unitCommonJson.EssentialQuestions),
+            AttachedLesson: JSON.stringify(outline)
+          };
 
-            const perLessonPrompt = fillTemplate(schemaEditor.getModifiedTemplate("perLesson"), perLessonVars);
-            console.log(`[DEBUG] Lesson ${i + 1} JSON Prompt:`, perLessonPrompt);
+          const perLessonPrompt = window.utils.fillTemplate(PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+          const lessonJsonText = await callResponsesApiStream({
+            endpoint, apiKey, model,
+            prompt: perLessonPrompt,
+            schemaName: "LabUnitPlanResponse",
+            schemaObj: PER_LESSON_SCHEMA,
+            signal: currentAbortController.signal
+          });
 
-            const lessonJsonText = await callResponsesApiStream({
-              endpoint, apiKey, model,
-              prompt: perLessonPrompt,
-              schemaName: "LessonPlanResponse",
-              schemaObj: schemaEditor.getModifiedSchema("perLesson", PER_LESSON_SCHEMA),
-              signal
-            });
+          try {
+            const lObj = JSON.parse(lessonJsonText);
+            lessonObjects[idx] = lObj;
+            const ms = nowMs() - tStart;
+            timings.per_lesson_json_ms[idx] = ms;
+            log(`  - Lesson ${idx + 1} JSON ok (${fmtMs(ms)})`);
+          } catch (err) {
+            throw new Error(`Lesson ${idx + 1} JSON invalid: ${err.message}`);
+          }
+        });
+      });
 
-            let lessonObj = JSON.parse(lessonJsonText);
-            const dur = nowMs() - ti0;
-            timings.per_lesson_json_ms[i] = dur;
-            logLine(`[OK] Lesson ${i + 1}/${lessons.length} JSON done. (${fmtMs(dur)})`);
-            return lessonObj;
-          }, `Lesson ${i + 1} JSON`)
-        )
-      );
+      await Promise.all(jsonTasks);
+      timings.all_lessons_json_parallel_ms = nowMs() - tParallelJson0;
+      log(`[OK] All lessons JSON generated. (${fmtMs(timings.all_lessons_json_parallel_ms)})`);
+      if (els.lessonsBundle()) els.lessonsBundle().value = JSON.stringify(lessonObjects, null, 2);
 
-      const lessonJsons = await Promise.all(lessonJsonPromises);
-      timings.all_lessons_json_parallel_ms = nowMs() - tJsonAll0;
-      logLine(`[OK] All lesson JSON done. (${fmtMs(timings.all_lessons_json_parallel_ms)})`);
+      // ---- Parallel Lessons HTML ----
+      const tParallelHtml0 = nowMs();
+      log("[4/5] Rendering lessons HTML in parallel…");
+      const limitHtml = createLimiter(5);
+      const lessonHtmls = [];
 
-      // ---- Per-lesson HTML (PARALLEL) ----
-      const tHtmlAll0 = nowMs();
-      logLine(`[4/5] Rendering lesson HTML in parallel…`);
-      const lessonHtmlPromises = lessonJsons.map((lessonObj, i) =>
-        limit(() =>
-          withRetry(async (signal) => {
-            const ti0 = nowMs();
-            const lessonHtmlPrompt = fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
-              JsonResponse: JSON.stringify(lessonObj)
-            });
-            console.log(`[DEBUG] Lesson ${i + 1} HTML Prompt:`, lessonHtmlPrompt);
+      const htmlTasks = lessonObjects.map((lObj, idx) => {
+        return limitHtml(async () => {
+          const tStart = nowMs();
+          const lessonHtmlPrompt = window.utils.fillTemplate(prompts.HTML_LESSON_PROMPT_TEMPLATE, {
+            JsonResponse: JSON.stringify(lObj)
+          });
 
-            const lessonHtml = await callResponsesApiStream({
-              endpoint, apiKey, model,
-              prompt: lessonHtmlPrompt,
-              signal
-            });
+          const lHtml = await callResponsesApiStream({
+            endpoint, apiKey, model,
+            prompt: lessonHtmlPrompt,
+            signal: currentAbortController.signal
+          });
 
-            const dur = nowMs() - ti0;
-            timings.per_lesson_html_ms[i] = dur;
-            logLine(`[OK] Lesson ${i + 1}/${lessonJsons.length} HTML done. (${fmtMs(dur)})`);
-            return lessonHtml;
-          }, `Lesson ${i + 1} HTML`)
-        )
-      );
+          lessonHtmls[idx] = lHtml;
+          const ms = nowMs() - tStart;
+          timings.per_lesson_html_ms[idx] = ms;
+          log(`  - Lesson ${idx + 1} HTML ok (${fmtMs(ms)})`);
+        });
+      });
 
-      const lessonHtmls = await Promise.all(lessonHtmlPromises);
-      timings.all_lessons_html_parallel_ms = nowMs() - tHtmlAll0;
+      await Promise.all(htmlTasks);
+      timings.all_lessons_html_parallel_ms = nowMs() - tParallelHtml0;
+      log(`[OK] All lessons HTML rendered. (${fmtMs(timings.all_lessons_html_parallel_ms)})`);
 
-      // Bundle debug output
-      if (els.lessonsBundle()) {
-        els.lessonsBundle().value = lessonJsons.map((obj, i) =>
-          `=== Lesson ${i + 1} JSON ===\n${JSON.stringify(obj, null, 2)}\n\n=== Lesson ${i + 1} HTML ===\n${lessonHtmls[i]}`
-        ).join("\n\n");
-      }
-
-      // ---- Join final HTML ----
+      // ---- Join & Preview ----
       const tJoin0 = nowMs();
-      logLine("[5/5] Joining final HTML…");
-      const finalHtml = [unitHtml, ...lessonHtmls].join("\n");
-      if (els.finalHtml()) els.finalHtml().value = finalHtml;
-      if (els.htmlPreview()) els.htmlPreview().srcdoc = finalHtml;
-
+      log("[5/5] Joining results…");
+      const combinedHtml = `
+        <div class="unit-plan">
+          ${unitHtml}
+          <hr/>
+          ${lessonHtmls.join("<hr class='lesson-sep'/>")}
+        </div>
+      `;
+      if (els.finalHtml()) els.finalHtml().value = combinedHtml;
+      if (els.htmlPreview()) els.htmlPreview().srcdoc = combinedHtml;
+      
       timings.join_final_ms = nowMs() - tJoin0;
       timings.total_ms = nowMs() - tTotal0;
 
-      logLine("\n===== TIMING SUMMARY =====");
-      logLine(`Step 0 (outline): ${fmtMs(timings.step0_outline_ms)}`);
-      logLine(`Unit common HTML: ${fmtMs(timings.unit_common_html_ms)}`);
-      logLine(`All lessons JSON (parallel): ${fmtMs(timings.all_lessons_json_parallel_ms)}`);
-      logLine(`All lessons HTML (parallel): ${fmtMs(timings.all_lessons_html_parallel_ms)}`);
-      logLine(`TOTAL: ${fmtMs(timings.total_ms)}`);
-      logLine("==========================");
+      tokenManager.updateUI(model);
+      status(`Done! (${fmtMs(timings.total_ms)})`);
+      log(`[FINISHED] Total time: ${fmtMs(timings.total_ms)}`);
 
-      updateTokenSummaryUI(model);
-
-      setStatus("Done.");
-      logLine("[OK] Done.");
     } catch (err) {
-      if (currentAbortController?.signal?.aborted) {
-        setStatus("Canceled.");
-        logLine("[canceled]");
+      if (err.name === "AbortError") {
+        status("Cancelled");
+        log("❌ Process aborted by user.");
       } else {
-        setStatus("Error.");
-        logLine("[error] " + (err?.message || String(err)));
+        status("Error");
+        log(`❌ CRITICAL ERROR: ${err.message}`);
         console.error(err);
       }
     } finally {
@@ -659,40 +454,32 @@
     }
   }
 
-  function cancel() {
-    if (currentAbortController) currentAbortController.abort();
+  function cancelChain() {
+    if (currentAbortController) {
+      currentAbortController.abort();
+    }
   }
 
   async function downloadPrompts() {
-    try {
-      if (typeof JSZip === "undefined") {
-        alert("JSZip library not loaded. Check your internet connection or CDN link.");
-        return;
-      }
-
-      const zipEN = new JSZip();
-      const zipSR = new JSZip();
-
-      // window.promptsEN and window.promptsSR are defined in prompts.js / prompts_sr.js
-      const pLab = window.labPrompts || {};
-      const addFiles = (zip, obj) => {
-        for (const [key, value] of Object.entries(obj)) {
-          if (typeof value === "object" && value !== null) {
-            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
-          } else if (typeof value === "string") {
-            zip.file(`${key}.txt`, value);
-          }
-        }
-      };
-      addFiles(zipEN, pLab);
-      const contentLab = await zipEN.generateAsync({ type: "blob" });
-      saveZip(contentLab, "lab_prompts.zip");
-
-      logLine("[OK] Prompts downloaded successfully.");
-    } catch (err) {
-      logLine("[error] Failed to download prompts: " + err.message);
-      console.error(err);
+    if (typeof JSZip === "undefined") {
+      alert("JSZip not found!"); return;
     }
+    const zip = new JSZip();
+    const p = window.labPrompts;
+    const vars = buildVarsFromUi();
+
+    zip.file("1_step0_outline_prompt.txt", window.utils.fillTemplate(p.STEP0_PROMPT_TEMPLATE, vars));
+    zip.file("2_step0_schema.json", JSON.stringify(p.STEP0_SCHEMA, null, 2));
+    zip.file("3_per_lesson_plan_prompt.txt", window.utils.fillTemplate(p.PER_LESSON_PROMPT_TEMPLATE, vars));
+    zip.file("4_per_lesson_schema.json", JSON.stringify(p.PER_LESSON_SCHEMA, null, 2));
+    zip.file("5_html_rendering_prompt.txt", p.HTML_LESSON_PROMPT_TEMPLATE);
+
+    const content = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lab_prompts.zip";
+    a.click();
   }
 
   function onReady() {
@@ -700,13 +487,21 @@
     const cancelBtn = els.cancelBtn();
     const downloadBtn = els.downloadPromptsBtn();
     if (runBtn) runBtn.addEventListener("click", runChain);
-    if (cancelBtn) cancelBtn.addEventListener("click", cancel);
+    if (cancelBtn) cancelBtn.addEventListener("click", cancelChain);
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
 
-    // Init Schema Editor
     initSchemaEditor();
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);
-  else onReady();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", onReady);
+  } else {
+    onReady();
+  }
+
+  // Expose to window
+  window.runChain = runChain;
+  window.cancelChain = cancelChain;
+  window.downloadPrompts = downloadPrompts;
+
 })();

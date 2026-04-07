@@ -500,7 +500,7 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
         style="height:110px;">No attached unit text provided.</textarea>
 
       <label for="attachedLesson">Attached Lesson Content (optional)</label>
-      <textarea id="attachedLesson" placeholder="Paste attached lesson content..." style="height:70px;"></textarea>
+    <textarea id="attachedLesson" placeholder="Paste attached lesson content..." style="height:70px;"></textarea>
 
       <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ connection)</label>
       <textarea id="unitEssentialQuestions" placeholder='Example: ["How... ?","How... ?","Why... ?"]'
@@ -511,10 +511,10 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
   <div class="row card">
     <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
       <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
-      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide Editor</button>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
     </div>
     
-    <div id="schemaEditorContainer" style="display: block; margin-top: 15px;">
+    <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
       <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schemas. These changes will be used in the next "Run Chain" to guide the AI's output.</p>
     
       <div class="tab-container" style="margin-bottom: 20px;">
@@ -901,6 +901,9 @@ Refleksija i deljenje (5 min): Šta je neke sisteme kanala učinilo efikasnijim?
   </script>
   <script src="../config.local.js"></script>
   <script src="../shared/local-config-loader.js"></script>
+  <script src="../shared/utils.js"></script>
+  <script src="../shared/token-manager.js"></script>
+  <script src="../shared/api-client.js"></script>
   <script src="../shared/schema-editor.js"></script>
   <script src="inquiry_app.js"></script>
 </body>

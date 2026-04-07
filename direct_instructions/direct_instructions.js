@@ -4,8 +4,8 @@
   // ---- Defaults ----
   const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
 
-  // ---- DOM helpers ----
-  const $ = (id) => document.getElementById(id);
+  // ---- Shared Helpers Aliases ----
+  const { $, nowMs, fmtMs, logLine, setStatus, fillTemplate } = window.utils;
 
   const els = {
     apiKey: () => $("apiKey"),
@@ -57,77 +57,8 @@
   let currentAbortController = null;
   let isRunning = false;
 
-  // ---- token usage tracking ----
-  const tokenUsage = { input: 0, output: 0, total: 0, calls: 0 };
-
-  function resetTokenUsage() {
-    tokenUsage.input = 0; tokenUsage.output = 0; tokenUsage.total = 0; tokenUsage.calls = 0;
-    const panel = $("tokenSummary");
-    if (panel) panel.style.display = "none";
-  }
-
-  function addTokenUsage(usage) {
-    if (!usage) return;
-    tokenUsage.input += usage.input_tokens || 0;
-    tokenUsage.output += usage.output_tokens || 0;
-    tokenUsage.total += usage.total_tokens || 0;
-    tokenUsage.calls += 1;
-  }
-
-  const MODEL_PRICING = {
-    "gpt-5.4":       { input: 2.50,  output: 15.00 },
-    "gpt-5.4-mini":  { input: 0.75,  output: 4.50  },
-    "gpt-5.4-nano":  { input: 0.20,  output: 1.25  },
-    "gpt-5-mini":    { input: 0.75,  output: 4.50  },
-    "gpt-5.2":       { input: 2.50,  output: 15.00 }
-  };
-
-  function updateTokenSummaryUI(model) {
-    const pricing = MODEL_PRICING[model] || { input: 0, output: 0 };
-    const inputCost  = (tokenUsage.input  / 1_000_000) * pricing.input;
-    const outputCost = (tokenUsage.output / 1_000_000) * pricing.output;
-    const totalCost  = inputCost + outputCost;
-
-    const fmt = n => n.toLocaleString("en-US");
-    const fmtUSD = n => n < 0.01 ? `< $0.01` : `$${n.toFixed(4)}`;
-
-    const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
-
-    set("tsInput",        fmt(tokenUsage.input));
-    set("tsInputCost",    fmtUSD(inputCost));
-    set("tsOutput",       fmt(tokenUsage.output));
-    set("tsOutputCost",   fmtUSD(outputCost));
-    set("tsTotal",        fmt(tokenUsage.total));
-    set("tsTotalCost",    `${tokenUsage.calls} call${tokenUsage.calls !== 1 ? "s" : ""}`);
-    set("tsCallCount",    String(tokenUsage.calls));
-    set("tsModel",        model);
-    set("tsTotalCostValue", `$${totalCost.toFixed(4)}`);
-
-    const panel = $("tokenSummary");
-    if (panel) panel.style.display = "block";
-  }
-
-  // ---- timing helpers ----
-  function nowMs() {
-    return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-  }
-  function fmtMs(ms) {
-    if (!Number.isFinite(ms)) return "—";
-    if (ms < 1000) return `${ms.toFixed(0)} ms`;
-    return `${(ms / 1000).toFixed(2)} s`;
-  }
-
-  function setStatus(msg) {
-    const el = els.status();
-    if (el) el.textContent = msg || "";
-  }
-
-  function logLine(line) {
-    const log = els.log();
-    if (!log) return;
-    log.value += (log.value ? "\n" : "") + line;
-    log.scrollTop = log.scrollHeight;
-  }
+  // ---- shared components ----
+  const tokenManager = new window.TokenManager();
 
   function setRunning(running) {
     isRunning = running;
@@ -208,41 +139,17 @@
   // Expose to window globally for onclick handlers in index.html
   window.schemaEditor = schemaEditor;
 
+  // ---- Wrapper for shared helpers ----
+  const log = (msg) => window.utils.logLine(els.log(), msg);
+  const status = (msg) => window.utils.setStatus(els.status(), msg);
+
   // ---- flexible template substitution ----
-  function fillTemplate(tpl, vars) {
-    // Supports {{$Key}}, {{Key}}, and {{{Key}}}
-    return tpl.replace(/\{\{\{?\$?([A-Za-z0-9_]+)\}\}\}?/g, (match, key) => {
-      const v = vars[key];
-      return v === undefined || v === null ? match : String(v);
-    });
-  }
+  // We use the shared window.utils.fillTemplate
 
-  // ---- SSE parsing ----
-  function parseSseLines(text) {
-    const events = [];
-    let rest = text;
-
-    while (true) {
-      const idx = rest.indexOf("\n\n");
-      if (idx === -1) break;
-
-      const chunk = rest.slice(0, idx);
-      rest = rest.slice(idx + 2);
-
-      const lines = chunk.split("\n");
-      for (const ln of lines) {
-        const m = ln.match(/^data:\s?(.*)$/);
-        if (m) events.push(m[1]);
-      }
-    }
-
-    return { events, rest };
-  }
-
-  async function callResponsesApiStream({ endpoint, apiKey, model, prompt, schemaName, schemaObj, signal }) {
-    const headers = { "Content-Type": "application/json" };
-    if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-
+  // ---- API Client Wrapper ----
+  async function callResponsesApiStream(params) {
+    const { endpoint, apiKey, model, prompt, schemaName, schemaObj, signal } = params;
+    
     const body = {
       model,
       stream: true,
@@ -260,84 +167,15 @@
         }
       };
     }
-
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
-      signal
+    return await window.apiClient.stream({
+      endpoint,
+      apiKey,
+      body,
+      signal,
+      onDelta: params.onDelta,
+      onUsage: (usage) => tokenManager.add(usage),
+      onError: (err) => { throw new Error(err.message || "Unknown error"); }
     });
-
-    if (!res.ok) {
-      const errText = await res.text().catch(() => "");
-      throw new Error(`HTTP ${res.status} ${res.statusText}${errText ? `\n${errText}` : ""}`);
-    }
-    if (!res.body) throw new Error("No response body");
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-
-    let buffer = "";
-    let finalText = "";
-    let streamClosed = false;
-
-    try {
-      while (!streamClosed) {
-        const { value, done } = await reader.read();
-        if (done) {
-          streamClosed = true;
-          break;
-        }
-
-        buffer += decoder.decode(value, { stream: true });
-        const parsed = parseSseLines(buffer);
-        buffer = parsed.rest;
-
-        for (const raw of parsed.events) {
-          if (raw === "[DONE]") {
-            streamClosed = true;
-            break;
-          }
-
-          let evt;
-          try {
-            evt = JSON.parse(raw);
-          } catch (e) {
-            console.warn("Ignored non-JSON event:", raw);
-            continue;
-          }
-
-          if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
-            finalText += evt.delta;
-          }
-
-          if (evt.type === "response.completed" && evt.response?.usage) {
-            addTokenUsage(evt.response.usage);
-          }
-
-          if (evt.type === "response.error") {
-            throw new Error(evt.error?.message || "Unknown model error");
-          }
-        }
-      }
-
-      if (buffer.trim() && !streamClosed) {
-        const lines = buffer.split("\n");
-        for (const ln of lines) {
-          const m = ln.match(/^data:\s?(.*)$/);
-          const raw = m ? m[1] : ln.trim();
-          if (raw === "[DONE]") break;
-          try {
-            const evt = JSON.parse(raw);
-            if (evt.delta) finalText += evt.delta;
-          } catch { }
-        }
-      }
-    } finally {
-      reader.releaseLock();
-    }
-
-    return finalText;
   }
 
   function buildVarsFromUi() {
@@ -418,7 +256,7 @@
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => {
-        logLine(`[timeout] ${label} (Attempt ${attempt}) timed out after ${timeoutMs / 1000}s. Retrying...`);
+        log(`[timeout] ${label} (Attempt ${attempt}) timed out after ${timeoutMs / 1000}s. Retrying...`);
         controller.abort();
       }, timeoutMs);
 
@@ -443,7 +281,7 @@
 
         if (attempt < maxRetries) {
           const reason = (controller.signal.aborted && !isGlobalAbort) ? "Timeout" : (err.message || "Unknown error");
-          logLine(`[retry] ${label} failed (${reason}). Starting attempt ${attempt + 1}...`);
+          log(`[retry] ${label} failed (${reason}). Starting attempt ${attempt + 1}...`);
         }
       }
     }
@@ -485,10 +323,10 @@
     if (els.lessonsBundle()) els.lessonsBundle().value = "";
     if (els.finalHtml()) els.finalHtml().value = "";
     if (els.htmlPreview()) els.htmlPreview().srcdoc = "";
-    resetTokenUsage();
+    tokenManager.reset();
 
     setRunning(true);
-    setStatus("Running…");
+    status("Running…");
     currentAbortController = new AbortController();
 
     const timings = {
@@ -506,8 +344,8 @@
     try {
       // ---- Step 0: outline ----
       const t0 = nowMs();
-      logLine("[1/5] Step 0: generating unit outline JSON…");
-      const step0Prompt = fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
+      log("[1/5] Step 0: generating unit outline JSON…");
+      const step0Prompt = window.utils.fillTemplate(STEP0_PROMPT_TEMPLATE, vars);
       console.log("[DEBUG] Step 0 Prompt (Unit Outline):", step0Prompt);
 
       const step0JsonText = await withRetry((signal) =>
@@ -528,13 +366,13 @@
 
       if (els.step0Json()) els.step0Json().value = JSON.stringify(step0Obj, null, 2);
       timings.step0_outline_ms = nowMs() - t0;
-      logLine(`[OK] Step 0 JSON received. (${fmtMs(timings.step0_outline_ms)})`);
+      log(`[OK] Step 0 JSON received. (${fmtMs(timings.step0_outline_ms)})`);
 
       // ---- Common unit HTML ----
       const t1 = nowMs();
-      logLine("[2/5] Rendering common unit HTML…");
+      log("[2/5] Rendering common unit HTML…");
       const unitCommonJson = buildUnitCommonJson(step0Obj, vars.Name);
-      const unitHtmlPrompt = fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
+      const unitHtmlPrompt = window.utils.fillTemplate(UNIT_COMMON_HTML_PROMPT_TEMPLATE, {
         UnitCommonJson: JSON.stringify(unitCommonJson),
         JsonResponse: JSON.stringify(unitCommonJson) // direct_instructions.js use JsonResponse
       });
@@ -549,13 +387,13 @@
 
       if (els.unitHtml()) els.unitHtml().value = unitHtml;
       timings.unit_common_html_ms = nowMs() - t1;
-      logLine(`[OK] Common unit HTML received. (${fmtMs(timings.unit_common_html_ms)})`);
+      log(`[OK] Common unit HTML received. (${fmtMs(timings.unit_common_html_ms)})`);
 
       // ---- Per-lesson JSON (PARALLEL) ----
       const lessons = Array.isArray(step0Obj?.Lessons) ? step0Obj.Lessons : [];
       const limit = createLimiter(4);
       const tJsonAll0 = nowMs();
-      logLine(`[3/5] Generating lesson JSON in parallel (${lessons.length} lessons)…`);
+      log(`[3/5] Generating lesson JSON in parallel (${lessons.length} lessons)…`);
 
       const lessonJsonPromises = lessons.map((L, i) =>
         limit(() =>
@@ -569,7 +407,7 @@
               ParentUnitData: `UNIT DESCRIPTION: ${step0Obj.UnitDescription.Description}\n\nCURRENT LESSON CONTEXT (MUST follow these constraints):\n- Lesson Number: ${L.lessonNumber ?? (i + 1)}\n- Lesson Title: ${L.lessonTitle ?? ""}\n- Lesson Outline: ${L.lessonOutline ?? ""}`
             };
 
-            const perLessonPrompt = fillTemplate(PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
+            const perLessonPrompt = window.utils.fillTemplate(PER_LESSON_PROMPT_TEMPLATE, perLessonVars);
             console.log(`[DEBUG] Lesson ${i + 1} JSON Prompt:`, perLessonPrompt);
 
             const lessonJsonText = await callResponsesApiStream({
@@ -583,7 +421,7 @@
             let lessonObj = JSON.parse(lessonJsonText);
             const dur = nowMs() - ti0;
             timings.per_lesson_json_ms[i] = dur;
-            logLine(`[OK] Lesson ${i + 1}/${lessons.length} JSON done. (${fmtMs(dur)})`);
+            log(`[OK] Lesson ${i + 1}/${lessons.length} JSON done. (${fmtMs(dur)})`);
             return lessonObj;
           }, `Lesson ${i + 1} JSON`)
         )
@@ -591,16 +429,16 @@
 
       const lessonJsons = await Promise.all(lessonJsonPromises);
       timings.all_lessons_json_parallel_ms = nowMs() - tJsonAll0;
-      logLine(`[OK] All lesson JSON done. (${fmtMs(timings.all_lessons_json_parallel_ms)})`);
+      log(`[OK] All lesson JSON done. (${fmtMs(timings.all_lessons_json_parallel_ms)})`);
 
       // ---- Per-lesson HTML (PARALLEL) ----
       const tHtmlAll0 = nowMs();
-      logLine(`[4/5] Rendering lesson HTML in parallel…`);
+      log(`[4/5] Rendering lesson HTML in parallel…`);
       const lessonHtmlPromises = lessonJsons.map((lessonObj, i) =>
         limit(() =>
           withRetry(async (signal) => {
             const ti0 = nowMs();
-            const lessonHtmlPrompt = fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
+            const lessonHtmlPrompt = window.utils.fillTemplate(HTML_LESSON_PROMPT_TEMPLATE, {
               LessonInquiryJson: JSON.stringify(lessonObj), // for compatibility
               JsonResponse: JSON.stringify(lessonObj),      // expected by direct_instructions prompts
               LessonNumber: i + 1,
@@ -616,7 +454,7 @@
 
             const dur = nowMs() - ti0;
             timings.per_lesson_html_ms[i] = dur;
-            logLine(`[OK] Lesson ${i + 1}/${lessonJsons.length} HTML done. (${fmtMs(dur)})`);
+            log(`[OK] Lesson ${i + 1}/${lessonJsons.length} HTML done. (${fmtMs(dur)})`);
             return lessonHtml;
           }, `Lesson ${i + 1} HTML`)
         )
@@ -634,7 +472,7 @@
 
       // ---- Join final HTML ----
       const tJoin0 = nowMs();
-      logLine("[5/5] Joining final HTML…");
+      log("[5/5] Joining final HTML…");
       const finalHtml = [unitHtml, ...lessonHtmls].join("\n");
       if (els.finalHtml()) els.finalHtml().value = finalHtml;
       if (els.htmlPreview()) els.htmlPreview().srcdoc = finalHtml;
@@ -642,25 +480,25 @@
       timings.join_final_ms = nowMs() - tJoin0;
       timings.total_ms = nowMs() - tTotal0;
 
-      logLine("\n===== TIMING SUMMARY =====");
-      logLine(`Step 0 (outline): ${fmtMs(timings.step0_outline_ms)}`);
-      logLine(`Unit common HTML: ${fmtMs(timings.unit_common_html_ms)}`);
-      logLine(`All lessons JSON (parallel): ${fmtMs(timings.all_lessons_json_parallel_ms)}`);
-      logLine(`All lessons HTML (parallel): ${fmtMs(timings.all_lessons_html_parallel_ms)}`);
-      logLine(`TOTAL: ${fmtMs(timings.total_ms)}`);
-      logLine("==========================");
+      log("\n===== TIMING SUMMARY =====");
+      log(`Step 0 (outline): ${fmtMs(timings.step0_outline_ms)}`);
+      log(`Unit common HTML: ${fmtMs(timings.unit_common_html_ms)}`);
+      log(`All lessons JSON (parallel): ${fmtMs(timings.all_lessons_json_parallel_ms)}`);
+      log(`All lessons HTML (parallel): ${fmtMs(timings.all_lessons_html_parallel_ms)}`);
+      log(`TOTAL: ${fmtMs(timings.total_ms)}`);
+      log("==========================");
 
-      updateTokenSummaryUI(model);
+      tokenManager.updateUI(model);
 
-      setStatus("Done.");
-      logLine("[OK] Done.");
+      status("Done.");
+      log("[OK] Done.");
     } catch (err) {
       if (currentAbortController?.signal?.aborted) {
-        setStatus("Canceled.");
-        logLine("[canceled]");
+        status("Canceled.");
+        log("[canceled]");
       } else {
-        setStatus("Error.");
-        logLine("[error] " + (err?.message || String(err)));
+        status("Error.");
+        log("[error] " + (err?.message || String(err)));
         console.error(err);
       }
     } finally {
@@ -719,9 +557,9 @@
         saveZip(contentSR, "direct_instructions_prompts_sr.zip");
       }, 500);
 
-      logLine("[OK] Prompts downloaded successfully.");
+      log("[OK] Prompts downloaded successfully.");
     } catch (err) {
-      logLine("[error] Failed to download prompts: " + err.message);
+      log("[error] Failed to download prompts: " + err.message);
       console.error(err);
     }
   }
