@@ -574,4 +574,11 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);
   else onReady();
+
+  // Expose to window
+  window.runChain = runChain;
+  window.cancel = cancel;
+  window.downloadPrompts = downloadPrompts;
+  window.getPrompts = getPrompts;
+
 })();

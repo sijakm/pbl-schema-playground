@@ -534,7 +534,7 @@ Renderuj koristeći TAČAN šablon:
 
 <h2><strong>{UnitTitle}</strong></h2>
 <p>{UnitDescription}</p>
-<h3><span>Unit Overview</span></h3>
+<h3><span>Pregled oblasti</span></h3>
 
 --------------------------------
 SEKCIJA 2: KLJUČNA PITANJA
