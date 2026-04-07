@@ -6,165 +6,274 @@
   <title>Collaborative Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --primary-color: #007aff;
+      --primary-hover: #0062cc;
+      --secondary-color: #6e6e73;
+      --secondary-hover: #48484a;
+      --danger-color: #ff3b30;
+      --danger-hover: #d70015;
+      --success-color: #34c759;
+      --success-hover: #248a3d;
+      --bg-color: #f5f5f7;
+      --card-bg: #ffffff;
+      --border-color: #d2d2d7;
+      --text-color: #1d1d1f;
+      --muted-color: #86868b;
+      --accent-blue: #007aff;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 20px;
-      background: #f7f7f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 1000px;
+      line-height: 1.5;
+      background: var(--bg-color);
+      color: var(--text-color);
     }
 
-    h1 {
-      margin-bottom: 8px;
+    h1 { margin-bottom: 8px; font-weight: 700; letter-spacing: -0.02em; }
+    h2, h3 { font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
+    p { color: var(--secondary-color); margin-top: 6px; }
+
+    textarea, input, select {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s ease;
+      box-sizing: border-box;
+      background: white;
     }
 
-    p {
-      color: #555;
-      margin-top: 6px;
+    textarea:focus, input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
     }
 
     textarea {
-      width: 100%;
+      font-family: 'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
       height: 70px;
-      margin-bottom: 12px;
-      padding: 10px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 13px;
       resize: vertical;
-      box-sizing: border-box;
     }
 
-    button {
-      padding: 10px 18px;
-      font-size: 14px;
-      cursor: pointer;
-      margin-right: 8px;
-    }
-
-    input,
-    select {
-      box-sizing: border-box;
-    }
-
-    .output {
-      min-height: 220px;
-      background: #111;
-      color: #0f0;
-    }
-
-    .row {
-      margin-bottom: 18px;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #e9e9e9;
-      font-size: 12px;
-      margin-left: 8px;
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      margin: 10px 0 6px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e6e6e6;
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .muted {
-      color: #777;
-      font-size: 12px;
-    }
-
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-
-    #tokenSummary {
-      display: none;
-      margin-top: 14px;
-      padding: 14px 18px;
-      background: #0d1117;
-      border: 1px solid #30363d;
-      border-radius: 10px;
-      color: #e6edf3;
+    /* --- Global Button System --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
       font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      gap: 6px;
+      white-space: nowrap;
+      user-select: none;
     }
 
-    #tokenSummary .ts-title {
-      font-weight: 700;
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary { background: var(--primary-color); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-primary:disabled { background: #b2d7ff; cursor: not-allowed; opacity: 0.7; }
+
+    .btn-secondary { background: #e8e8ed; color: var(--secondary-color); }
+    .btn-secondary:hover { background: #d2d2d7; color: var(--text-color); }
+    .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-outline { background: transparent; border-color: var(--border-color); color: var(--secondary-color); }
+    .btn-outline:hover { border-color: var(--primary-color); color: var(--primary-color); background: rgba(0, 122, 255, 0.05); }
+
+    .btn-danger { background: rgba(255, 59, 48, 0.1); color: var(--danger-color); }
+    .btn-danger:hover { background: var(--danger-color); color: white; }
+
+    .btn-success { background: rgba(52, 199, 89, 0.1); color: var(--success-color); }
+    .btn-success:hover { background: var(--success-color); color: white; }
+
+    .btn-pill { border-radius: 20px; font-size: 11px; padding: 4px 12px; }
+
+    /* --- Tab System --- */
+    .tab-container { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 8px 16px;
       font-size: 14px;
-      margin-bottom: 10px;
-      color: #58a6ff;
-      letter-spacing: 0.02em;
+      font-weight: 500;
+      color: var(--secondary-color);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .tab-btn:hover { color: var(--text-color); }
+    .tab-btn.active-tab { color: var(--primary-color); }
+    .tab-btn.active-tab::after {
+      content: "";
+      position: absolute;
+      bottom: -11px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-color);
     }
 
-    #tokenSummary .ts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 10px;
-    }
+    .output { min-height: 220px; background: #000; color: #34c759; border-radius: 12px; border: 1px solid #1c1c1e; }
+    .row { margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .muted { color: var(--muted-color); font-size: 12px; margin-bottom: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 4px; }
 
-    #tokenSummary .ts-stat {
-      background: #161b22;
-      border: 1px solid #21262d;
-      border-radius: 8px;
-      padding: 10px 14px;
-    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    label { display: block; font-weight: 600; margin: 16px 0 6px; font-size: 13px; color: var(--text-color); }
 
-    #tokenSummary .ts-stat .ts-label {
-      font-size: 11px;
-      color: #8b949e;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
+    #tokenSummary { display: none; margin-top: 20px; padding: 20px; background: #1c1c1e; border-radius: 16px; color: white; }
+    .ts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .ts-stat { background: #2c2c2e; border-radius: 12px; padding: 12px 16px; }
+    .ts-label { font-size: 10px; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .ts-value { font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .ts-cost { margin-top: 15px; border-top: 1px solid #3a3a3c; padding-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .ts-cost-value { font-size: 22px; font-weight: 700; color: #34c759; font-family: 'JetBrains Mono', monospace; }
 
-    #tokenSummary .ts-stat .ts-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #e6edf3;
-      font-family: ui-monospace, monospace;
+    .card-header-toggle:hover { background-color: rgba(0, 122, 255, 0.05); }
+    .pill { background: var(--primary-color); color: white; border: none; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-left: 8px; }
+    .pill:hover { filter: brightness(1.1); }
+    
+    .schema-pane {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 0 4px 4px 4px;
     }
-
-    #tokenSummary .ts-stat .ts-sub {
-      font-size: 11px;
-      color: #3fb950;
-      margin-top: 2px;
+    .schema-section {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #eee;
     }
-
-    #tokenSummary .ts-cost {
-      margin-top: 10px;
-      padding: 10px 14px;
-      background: #0e1c12;
-      border: 1px solid #2ea04326;
-      border-radius: 8px;
+    .schema-section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 10px;
     }
-
-    #tokenSummary .ts-cost .ts-cost-label {
+    .prompt-template-textarea {
+      width: 100%;
+      min-height: 100px;
+      font-size: 13px;
+      font-family: inherit;
+      line-height: 1.6;
+      padding: 12px;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      background: #fdfdfd;
+      resize: none;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    .prompt-template-textarea:focus {
+      background: #fff;
+      border-color: #0969da;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(9,105,218,0.2);
+    }
+    .schema-tree-node {
+      border-left: 2px solid #e1e4e8;
+      margin-left: 14px;
+      padding-left: 10px;
+    }
+    .schema-phase-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      color: #777;
+      background: #f0f0f0;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 6px;
+      text-transform: uppercase;
+      border: 1px solid #e1e4e8;
+    }
+    .schema-field-group {
+      margin-bottom: 4px;
+      padding: 1px 0;
+      position: relative;
+    }
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: background 0.1s;
+    }
+    .node-header:hover {
+      background: #f6f8fa;
+    }
+    .node-header.collapsible::before {
+      content: '▾';
+      display: inline-block;
+      width: 12px;
+      font-size: 9px;
+      margin-left: -12px;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    .node-header.collapsed::before {
+      transform: rotate(-90deg);
+    }
+    .children-container.hidden {
+      display: none;
+    }
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+    .schema-label {
+      font-weight: 500;
       font-size: 12px;
-      color: #8b949e;
+      color: #1f2328;
     }
+    .color-blue { border-color: #0969da !important; }
+    .color-green { border-color: #1a7f37 !important; }
+    .color-orange { border-color: #9a6700 !important; }
+    .color-purple { border-color: #8250df !important; }
+    .color-pink { border-color: #bf3989 !important; }
+    .color-teal { border-color: #0599a0 !important; }
+    .color-gray { border-color: #6e7781 !important; }
 
-    #tokenSummary .ts-cost .ts-cost-value {
-      font-size: 20px;
-      font-weight: 700;
-      color: #3fb950;
-      font-family: ui-monospace, monospace;
+    .schema-textarea {
+      width: 100%;
+      min-height: 24px;
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 3px 8px;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      resize: none;
+      background: #fafafa;
+      margin-top: 0px;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+    }
+    .schema-textarea:focus {
+      background: #fff;
+      border-color: #0969da;
+      outline: none;
+      box-shadow: inset 0 0 0 1px #0969da;
     }
   </style>
 </head>
@@ -201,9 +310,14 @@
   </div>
 
   <div class="row card">
-    <h3>Input variables</h3>
-    <p class="muted">These values are substituted into prompt templates by replacing <span
-        class="mono">{{$Variable}}</span> placeholders.</p>
+    <div id="toggleInputVariablesHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+      <h3 style="margin: 0;">Input variables</h3>
+      <button id="toggleInputVariablesBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide Editor</button>
+    </div>
+    
+    <div id="inputVariablesContainer" style="display: block; margin-top: 15px;">
+      <p class="muted">These values are substituted into prompt templates by replacing <span
+          class="mono">{{$Variable}}</span> placeholders.</p>
 
     <div class="grid">
       <div>
@@ -264,12 +378,41 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
     <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ connection)</label>
     <textarea id="unitEssentialQuestions" placeholder='Example: ["How... ?","How... ?","Why... ?"]'
       style="height:60px;"></textarea>
+    </div>
+  </div>
+
+  <div class="row card">
+    <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+      <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
+    </div>
+    
+    <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
+      <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schemas. These changes will be used in the next "Run Chain" to guide the AI's output.</p>
+    
+      <div class="tab-container" style="margin-bottom: 20px;">
+        <button id="schemaPerLessonTab" class="tab-btn active-tab" type="button">Per Lesson</button>
+        <button id="schemaStep0Tab" class="tab-btn" type="button">Unit Outline (Step 0)</button>
+      </div>
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+        <button id="copySchemaBtn" class="btn btn-outline">Copy Current Schema</button>
+      </div>
+      
+      <div id="schemaPerLessonEditor" class="schema-pane">
+        <!-- populated by JS -->
+      </div>
+      <div id="schemaStep0Editor" class="schema-pane" style="display: none;">
+        <!-- populated by JS -->
+      </div>
+    </div>
   </div>
 
   <div class="row">
-    <button id="runChainBtn" type="button">Run Chain</button>
-    <button id="cancelBtn" type="button" disabled>Cancel</button>
-    <button id="downloadPromptsBtn" type="button">Download Prompts</button>
+    <div style="margin-top: 20px; display: flex; gap: 10px;">
+      <button id="runChainBtn" class="btn btn-primary" style="padding: 12px 24px; font-size: 15px;">Run Chain</button>
+      <button id="cancelBtn" class="btn btn-danger" disabled style="padding: 12px 24px; font-size: 15px;">Cancel</button>
+      <button id="downloadPromptsBtn" class="btn btn-secondary">Download All Prompts (ZIP)</button>
+    </div>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
 
     <div id="tokenSummary">
@@ -330,14 +473,16 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
 
   <div class="row">
     <h3>HTML Preview</h3>
-    <iframe id="htmlPreview" style="width:100%; height:420px; border:1px solid #ccc; background:#fff;"
-      sandbox=""></iframe>
+    <div style="display: flex; justify-content: center; padding: 20px 0; border: 1px solid var(--border-color); border-radius: 12px; overflow-x: auto; background: #fafafa;">
+      <iframe id="htmlPreview" style="background: white; width: 210mm; height: 297mm; border: 1px solid #ddd; border-radius: 4px;" sandbox=""></iframe>
+    </div>
     <p class="muted">Preview uses <strong>iframe srcdoc</strong> with sandbox for safety.</p>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="prompts_collaborative.js"></script>
   <script src="prompts_collaborative_sr.js"></script>
+  
   <script>
     const defaults = {
       en: {
@@ -346,7 +491,7 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
         gradeLevel: "Middle School (6th-8th Grade)",
         standards: "MS-PS1-1 Develop models to describe the atomic composition of simple molecules and extended structures.",
         userPrompt: "Students will develop and use models to describe the atomic composition of simple molecules and extended structures. They will differentiate between molecules and extended structures (like crystals) and understand how the arrangement of atoms affects properties. Emphasize physical modeling and structural reasoning.",
-        learningPlans: "Student Name: Maria Valdez\\nPlan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.\\n\\nStudent Name: Jacob Garrow\\nPlan: Allow speech-to-text for explaining structural differences.\\n\\nStudent Name: Ava Lund\\nPlan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.",
+        learningPlans: "Student Name: Maria Valdez\nPlan: Provide partially pre-labeled atomic models and sentence frames for structure descriptions.\n\nStudent Name: Jacob Garrow\nPlan: Allow speech-to-text for explaining structural differences.\n\nStudent Name: Ava Lund\nPlan: Supply bilingual atomic symbol charts and visual color-coded maps for molecules.",
         mediaContext: "Molecular model kits (balls and sticks), periodic table charts, images of crystal structures (e.g., salt, diamond), interactive online molecular builders (like PhET), student science journals.",
         attachedUnit: "No attached unit text provided."
       },
@@ -356,7 +501,7 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
         gradeLevel: "Osnovna škola (6-8. razred)",
         standards: "MS-PS1-1 Razviti modele za opisivanje atomskog sastava jednostavnih molekula i proširenih struktura.",
         userPrompt: "Učenici će razvijati i koristiti modele da opišu atomski sastav jednostavnih molekula i proširenih struktura. Oni će razlikovati molekule i proširene strukture (poput kristala) i razumeti kako raspored atoma utiče na svojstva. Naglasite fizičko modeliranje i strukturno zaključivanje.",
-        learningPlans: "Ime učenika: Maria Valdez\\nPlan: Obezbedite delimično unapred označene atomske modele i okvire rečenica za opise strukture.\\n\\nIme učenika: Jacob Garrow\\nPlan: Dozvolite funkciju govora u tekst za objašnjavanje strukturnih razlika.\\n\\nIme učenika: Ava Lund\\nPlan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molekule obeležene bojom.",
+        learningPlans: "Ime učenika: Maria Valdez\nPlan: Obezbedite delimično unapred označene atomske modele i okvire rečenica za opise strukture.\n\nIme učenika: Jacob Garrow\nPlan: Dozvolite funkciju govora u tekst za objašnjavanje strukturnih razlika.\n\nIme učenika: Ava Lund\nPlan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molekule obeležene bojom.",
         mediaContext: "Modeli molekula (kuglice i štapići), tabele periodnog sistema, slike kristalnih struktura (npr. so, dijamant), interaktivni onlajn alati za izgradnju molekula (poput PhET-a), učenički naučni dnevnici.",
         attachedUnit: "Nije obezbeđen tekst priložene jedinice."
       }
@@ -369,11 +514,16 @@ Plan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molek
         document.getElementById("subject").value = d.subject;
         document.getElementById("name").value = d.name;
         document.getElementById("gradeLevel").value = d.gradeLevel;
-        document.getElementById("standards").value = d.standards.replace(/\\\\n/g, "\\n");
-        document.getElementById("userPrompt").value = d.userPrompt.replace(/\\\\n/g, "\\n");
-        document.getElementById("learningPlans").value = d.learningPlans.replace(/\\\\n/g, "\\n");
-        document.getElementById("mediaContext").value = d.mediaContext.replace(/\\\\n/g, "\\n");
-        document.getElementById("attachedUnit").value = d.attachedUnit.replace(/\\\\n/g, "\\n");
+        document.getElementById("standards").value = d.standards;
+        document.getElementById("userPrompt").value = d.userPrompt;
+        document.getElementById("learningPlans").value = d.learningPlans;
+        document.getElementById("mediaContext").value = d.mediaContext;
+        document.getElementById("attachedUnit").value = d.attachedUnit;
+        
+        // Re-init SchemaEditor if it exists (it's initialized in collaborative.js)
+        if (window.SchemaEditor) {
+          window.SchemaEditor.init();
+        }
       }
     });
 
