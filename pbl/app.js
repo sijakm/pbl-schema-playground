@@ -60,8 +60,7 @@ function updateTokenSummaryUI(model) {
 }
 
 function setRenderEnabled(enabled) {
-  const renderBtn = document.getElementById("renderBtn");
-  if (renderBtn) renderBtn.disabled = !enabled;
+  // Logic removed (Run Chain handles rendering)
 }
 
 function startTimer() {
@@ -174,34 +173,236 @@ function parseSseLines(buffer) {
 /************************************
  * RUN (STREAM ONLY into #output)
  ************************************/
+const SchemaEditor = {
+  schema: null,
+
+  init() {
+    const prompts = window.currentPblPrompts || window.pblPrompts_en;
+    const rawSchema = prompts?.pblResponseSchema || window.pblResponseSchema;
+    if (rawSchema) {
+      this.schema = JSON.parse(JSON.stringify(typeof rawSchema === "string" ? JSON.parse(rawSchema) : rawSchema));
+    }
+    this.render();
+    if (!this.initialized) {
+      this.bindEvents();
+      this.initialized = true;
+    }
+  },
+
+  render() {
+    const container = document.getElementById("schemaMainEditor");
+    if (!container || !this.schema) return;
+
+    container.innerHTML = `
+      <div class="schema-section" style="border-bottom: none;">
+        <div class="schema-section-header">
+          <strong>JSON Output Schema (Instructions)</strong>
+        </div>
+        <div class="schema-tree-root">
+          ${this.renderNode(this.schema, "Root", [], "")}
+        </div>
+      </div>
+    `;
+
+    // Resize and Listen to Schema textareas
+    setTimeout(() => {
+      container.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
+    }, 10);
+
+    container.querySelectorAll(".schema-textarea").forEach(ta => {
+      ta.addEventListener("input", (e) => {
+        this.updateDescription(e.target.dataset.path, e.target.value);
+        this.autoResize(e.target);
+      });
+    });
+
+    // Toggle buttons
+    container.querySelectorAll(".node-header.collapsible").forEach(header => {
+      header.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn")) return;
+        header.classList.toggle("collapsed");
+        const children = header.nextElementSibling;
+        if (children) {
+          children.classList.toggle("hidden");
+          if (!children.classList.contains("hidden")) {
+            children.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
+          }
+        }
+      });
+    });
+  },
+
+  renderNode(node, name, pathArr, inheritedColor) {
+    const isRoot = pathArr.length === 0;
+    const depth = pathArr.length;
+    let colorClass = inheritedColor;
+    
+    // Simple color logic for PBL
+    if (depth === 4 && pathArr[0] === "properties" && pathArr[2] === "properties") {
+        const colors = ["color-blue", "color-green", "color-orange", "color-purple", "color-pink", "color-teal"];
+        const unitPlanProps = this.schema.properties.UnitPlan.properties || {};
+        const idx = Object.keys(unitPlanProps).indexOf(name);
+        if (idx !== -1) colorClass = colors[idx % colors.length];
+    }
+
+    const label = isRoot ? "Root Object" : name;
+    const nodeType = node.type || (node.properties ? "object" : "unknown");
+    const isCollapsible = node.properties || (node.items && node.items.properties);
+
+    let html = `<div class="schema-field-group">`;
+    html += `
+      <div class="node-header ${isCollapsible ? "collapsible" : ""}" data-path="${pathArr.join(".")}">
+        <div class="field-header" style="flex: 1;">
+          <div>
+            <span class="schema-label">${this.formatLabel(label)}</span>
+            <span class="schema-type-badge">${nodeType}</span>
+          </div>
+          <div class="node-actions">
+             ${nodeType === "object" ? `<button class="btn btn-success btn-pill" style="width: 20px; height: 20px; padding: 0; font-size: 14px;" title="Add Child" onclick="SchemaEditor.addPropertyUI('${pathArr.join(".")}')">+</button>` : ""}
+             ${isRoot ? "" : `<button class="btn btn-danger btn-pill" style="width: 20px; height: 20px; padding: 0; font-size: 14px;" title="Delete" onclick="SchemaEditor.removePropertyUI('${pathArr.join(".")}')">−</button>`}
+          </div>
+        </div>
+      </div>
+    `;
+
+    html += `<div class="children-container ${isCollapsible ? "schema-tree-node" : ""} ${colorClass}">`;
+    if (node.description !== undefined) {
+      html += `<textarea class="schema-textarea" data-path="${pathArr.join(".")}">${node.description}</textarea>`;
+    }
+    if (node.properties) {
+      for (const key in node.properties) {
+        html += this.renderNode(node.properties[key], key, [...pathArr, "properties", key], colorClass);
+      }
+    }
+    if (node.items) {
+      if (node.items.properties || node.items.description !== undefined) {
+        html += this.renderNode(node.items, name + " Item", [...pathArr, "items"], colorClass);
+      }
+    }
+    html += `</div></div>`;
+    return html;
+  },
+
+  addPropertyUI(parentPath) {
+    const name = prompt("Name of the new property (e.g. LessonSummary):");
+    if (!name) return;
+    const t = prompt("Type (string / number / integer / object / array):", "string");
+    if (!t) return;
+    this.addProperty(parentPath, name, t);
+    this.render();
+  },
+
+  addProperty(parentPath, name, propType) {
+    let parentObj = this.schema;
+    if (parentPath) {
+      const parts = parentPath.split(".");
+      for (const p of parts) parentObj = parentObj[p];
+    }
+    if (!parentObj.properties) parentObj.properties = {};
+    if (!parentObj.required) parentObj.required = [];
+    const newProp = { type: propType, description: "" };
+    if (propType === "object") {
+      newProp.properties = {};
+      newProp.required = [];
+      newProp.additionalProperties = false;
+    } else if (propType === "array") {
+      newProp.items = { type: "string" };
+    }
+    parentObj.properties[name] = newProp;
+    if (!parentObj.required.includes(name)) parentObj.required.push(name);
+    if (parentObj.type === "object") parentObj.additionalProperties = false;
+  },
+
+  removePropertyUI(path) {
+    if (confirm(`Are you sure you want to delete ${path}?`)) {
+      this.removeProperty(path);
+      this.render();
+    }
+  },
+
+  removeProperty(path) {
+    const parts = path.split(".");
+    const propName = parts.pop();
+    let parentObj = this.schema;
+    for (const p of parts) parentObj = parentObj[p];
+    if (parentObj.properties) delete parentObj.properties[propName];
+    if (parentObj.required) parentObj.required = parentObj.required.filter(r => r !== propName);
+  },
+
+  bindEvents() {
+    // Toggle Input Variables
+    const ivHeader = document.getElementById("toggleInputVariablesHeader");
+    const ivContainer = document.getElementById("inputVariablesContainer");
+    const ivBtn = document.getElementById("toggleInputVariablesBtn");
+    if (ivHeader && ivContainer && ivBtn) {
+      ivHeader.onclick = () => {
+        const isHidden = ivContainer.style.display === "none";
+        ivContainer.style.display = isHidden ? "block" : "none";
+        ivBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+      };
+    }
+
+    // Toggle Schema Editor
+    const seHeader = document.getElementById("toggleSchemaEditorHeader");
+    const seContainer = document.getElementById("schemaEditorContainer");
+    const seBtn = document.getElementById("toggleSchemaEditorBtn");
+    if (seHeader && seContainer && seBtn) {
+      seHeader.onclick = () => {
+        const isHidden = seContainer.style.display === "none";
+        seContainer.style.display = isHidden ? "block" : "none";
+        seBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+        if (!isHidden) {
+            this.render(); // Re-render to ensure proper height
+        }
+      };
+    }
+
+    window.SchemaEditor = this;
+  },
+
+  autoResize(ta) {
+    if (!ta || ta.offsetHeight === 0) return;
+    ta.style.height = "1px";
+    ta.style.height = (ta.scrollHeight + 2) + "px";
+  },
+
+  updateDescription(path, val) {
+    const parts = path.split(".");
+    let curr = this.schema;
+    for (const p of parts) curr = curr[p];
+    curr.description = val;
+  },
+
+  copySchemaUI() {
+    const json = JSON.stringify(this.schema, null, 2);
+    navigator.clipboard.writeText(json).then(() => {
+      alert("Schema JSON copied to clipboard!");
+    });
+  },
+
+  getModifiedSchema() {
+    return JSON.parse(JSON.stringify(this.schema));
+  },
+
+  formatLabel(pathOrName) {
+    const name = pathOrName.split(".").pop();
+    return name.replace(/([A-Z])/g, " $1").trim();
+  }
+};
+
 let lastEditedSchema = null;
 let currentAppSchema = null; 
 
 function ensureSchema() {
-  if (currentAppSchema) return currentAppSchema;
-
-  const prompts = window.currentPblPrompts || window.pblPrompts_en;
-  const rawSchema = prompts?.pblResponseSchema || window.pblResponseSchema;
-  
-  if (!rawSchema) {
-    console.warn("⚠️ No schema found in currentPblPrompts or pblResponseSchema");
-    return null;
-  }
-
-  try {
-    currentAppSchema = typeof rawSchema === "string" ? JSON.parse(rawSchema) : rawSchema;
-    console.log("✅ Schema initialized:", currentAppSchema);
-    return currentAppSchema;
-  } catch (e) {
-    console.error("❌ Schema parsing failed", e);
-    return null;
-  }
+  if (SchemaEditor.schema) return SchemaEditor.schema;
+  SchemaEditor.init();
+  return SchemaEditor.schema;
 }
 
 let currentAbortController = null;
 
 function resetAppSchema() {
-  currentAppSchema = null;
+  SchemaEditor.schema = null;
 }
 window.resetAppSchema = resetAppSchema;
 
@@ -230,7 +431,7 @@ function cancelRun() {
 async function run() {
   generatePrompt();
   
-  const schema = ensureSchema();
+  const schema = SchemaEditor.getModifiedSchema();
   if (!schema) {
     alert("Critical Error: JSON Schema is missing or invalid. Please check the console.");
     return;
@@ -417,7 +618,9 @@ async function run() {
 
       lastJsonObject = parsed;
       lastJsonText = pretty;
-      setRenderEnabled(true);
+      
+      // Automatically trigger HTML rendering (Run Chain)
+      await renderHtml();
     } catch {
       output.value += "\n\n[⚠️ Could not parse JSON at end — leaving raw streamed output as-is.]\n";
       lastJsonObject = null;
@@ -443,15 +646,9 @@ async function run() {
 }
 
 async function renderHtml() {
-  if (!lastJsonText) {
-    alert("No JSON to render. Please run the unit plan generation first.");
-    return;
-  }
-
   const htmlOutput = document.getElementById("htmlOutput");
   const output = document.getElementById("output");
   
-  setRenderEnabled(false);
   htmlOutput.innerHTML = "<p>Rendering all 11 sections in parallel... Please wait.</p>";
   
   const promptsSet = window.currentPblPrompts || window.pblPrompts_en;
@@ -622,7 +819,7 @@ window.loadJsonAndEnableRender = loadJsonAndEnableRender;
 window.run = run;
 window.renderHtml = renderHtml;
 window.cancelRun = cancelRun;
-window.copySchema = copySchema;
+window.copySchema = () => SchemaEditor.copySchemaUI();
 
 /************************************
  * TEMPLATE ENGINE
@@ -733,16 +930,19 @@ async function downloadPrompts() {
 
 window.downloadPrompts = downloadPrompts;
 
-/************************************
- * INIT
- ************************************/
-window.onload = () => {
+function onReady() {
   const schema = ensureSchema();
   if (!schema) {
-    alert("Schema failed to load. Check console for details.");
+    console.error("Schema failed to load. Check console for details.");
   }
   generatePrompt();
   setRenderEnabled(false);
-};
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", onReady);
+} else {
+  onReady();
+}
 
 window.generatePrompt = generatePrompt;

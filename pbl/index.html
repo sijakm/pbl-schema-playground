@@ -6,133 +6,236 @@
   <title>JSON Schema Playground (Streaming)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --primary-color: #007aff;
+      --primary-hover: #0062cc;
+      --secondary-color: #6e6e73;
+      --secondary-hover: #48484a;
+      --danger-color: #ff3b30;
+      --danger-hover: #d70015;
+      --success-color: #34c759;
+      --success-hover: #248a3d;
+      --bg-color: #f5f5f7;
+      --card-bg: #ffffff;
+      --border-color: #d2d2d7;
+      --text-color: #1d1d1f;
+      --muted-color: #86868b;
+      --accent-blue: #007aff;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 20px;
-      background: #f7f7f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 1000px;
+      line-height: 1.5;
+      background: var(--bg-color);
+      color: var(--text-color);
     }
 
-    h1 {
-      margin-bottom: 8px;
+    h1 { margin-bottom: 8px; font-weight: 700; letter-spacing: -0.02em; }
+    h2, h3 { font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
+    p { color: var(--secondary-color); margin-top: 6px; }
+
+    textarea, input, select {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s ease;
+      box-sizing: border-box;
+      background: white;
     }
 
-    p {
-      color: #555;
-      margin-top: 4px;
+    textarea:focus, input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
     }
 
     textarea {
-      width: 100%;
+      font-family: 'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
       height: 70px;
-      margin-bottom: 16px;
-      padding: 10px;
-      font-family: monospace;
-      font-size: 13px;
       resize: vertical;
-      box-sizing: border-box;
     }
 
-    button {
-      padding: 10px 18px;
-      font-size: 14px;
-      cursor: pointer;
-      margin-right: 8px;
-    }
-
-    .output {
-      min-height: 220px;
-      background: #111;
-      color: #0f0;
-    }
-
-    .row {
-      margin-bottom: 24px;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #e9e9e9;
-      font-size: 12px;
-      margin-left: 8px;
-    }
-
-    #tokenSummary {
-      display: none;
-      margin-top: 14px;
-      padding: 14px 18px;
-      background: #0d1117;
-      border: 1px solid #30363d;
-      border-radius: 10px;
-      color: #e6edf3;
+    /* --- Global Button System --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
       font-size: 13px;
-    }
-
-    #tokenSummary .ts-title {
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #58a6ff;
-      letter-spacing: 0.02em;
-    }
-
-    #tokenSummary .ts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 10px;
-    }
-
-    #tokenSummary .ts-stat {
-      background: #161b22;
-      border: 1px solid #21262d;
+      font-weight: 500;
       border-radius: 8px;
-      padding: 10px 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      gap: 6px;
+      white-space: nowrap;
+      user-select: none;
     }
 
-    #tokenSummary .ts-stat .ts-label {
-      font-size: 11px;
-      color: #8b949e;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
+    .btn:active { transform: scale(0.97); }
 
-    #tokenSummary .ts-stat .ts-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #e6edf3;
-      font-family: ui-monospace, monospace;
-    }
+    .btn-primary { background: var(--primary-color); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-primary:disabled { background: #b2d7ff; cursor: not-allowed; opacity: 0.7; }
 
-    #tokenSummary .ts-stat .ts-sub {
-      font-size: 11px;
-      color: #3fb950;
-      margin-top: 2px;
-    }
+    .btn-secondary { background: #e8e8ed; color: var(--secondary-color); }
+    .btn-secondary:hover { background: #d2d2d7; color: var(--text-color); }
+    .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    #tokenSummary .ts-cost {
-      margin-top: 10px;
-      padding: 10px 14px;
-      background: #0e1c12;
-      border: 1px solid #2ea04326;
+    .btn-outline { background: transparent; border-color: var(--border-color); color: var(--secondary-color); }
+    .btn-outline:hover { border-color: var(--primary-color); color: var(--primary-color); background: rgba(0, 122, 255, 0.05); }
+
+    .btn-danger { background: rgba(255, 59, 48, 0.1); color: var(--danger-color); }
+    .btn-danger:hover { background: var(--danger-color); color: white; }
+
+    .btn-success { background: rgba(52, 199, 89, 0.1); color: var(--success-color); }
+    .btn-success:hover { background: var(--success-color); color: white; }
+
+    .btn-pill { border-radius: 20px; font-size: 11px; padding: 4px 12px; }
+
+    .row { margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .muted { color: var(--muted-color); font-size: 12px; margin-bottom: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 4px; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    label { display: block; font-weight: 600; margin: 16px 0 6px; font-size: 13px; color: var(--text-color); }
+
+    #tokenSummary { display: none; margin-top: 20px; padding: 20px; background: #1c1c1e; border-radius: 16px; color: white; }
+    .ts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .ts-stat { background: #2c2c2e; border-radius: 12px; padding: 12px 16px; }
+    .ts-label { font-size: 10px; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .ts-value { font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .ts-cost { margin-top: 15px; border-top: 1px solid #3a3a3c; padding-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .ts-cost-value { font-size: 22px; font-weight: 700; color: #34c759; font-family: 'JetBrains Mono', monospace; }
+
+    .card-header-toggle:hover { background-color: rgba(0, 122, 255, 0.05); }
+    .pill { background: var(--primary-color); color: white; border: none; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-left: 8px; }
+    .pill:hover { filter: brightness(1.1); }
+
+    /* Schema Editor Specifics */
+    .schema-pane {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
       border-radius: 8px;
+    }
+    .schema-section {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #eee;
+    }
+    .schema-section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 10px;
+    }
+    .prompt-template-textarea {
+      width: 100%;
+      min-height: 100px;
+      font-size: 13px;
+      font-family: inherit;
+      line-height: 1.6;
+      padding: 12px;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      background: #fdfdfd;
+      resize: none;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    .schema-tree-node {
+      border-left: 2px solid #e1e4e8;
+      margin-left: 14px;
+      padding-left: 10px;
+    }
+    .schema-phase-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      color: #777;
+      background: #f0f0f0;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 6px;
+      text-transform: uppercase;
+      border: 1px solid #e1e4e8;
+    }
+    .schema-field-group {
+      margin-bottom: 4px;
+      padding: 1px 0;
+      position: relative;
+    }
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: background 0.1s;
+    }
+    .node-header:hover { background: #f6f8fa; }
+    .node-header.collapsible::before {
+      content: '▾';
+      display: inline-block;
+      width: 12px;
+      font-size: 9px;
+      margin-left: -12px;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    .node-header.collapsed::before { transform: rotate(-90deg); }
+    .children-container.hidden { display: none; }
+    .field-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+    .node-actions { display: flex; gap: 4px; visibility: hidden; }
+    .node-header:hover .node-actions { visibility: visible; }
+    .schema-label { font-weight: 500; font-size: 12px; color: #1f2328; }
+    .schema-type-badge { font-size: 10px; color: #6e7781; background: #eff1f3; padding: 1px 4px; border-radius: 3px; margin-left: 4px; }
+    
+    .schema-textarea {
+      width: 100%;
+      min-height: 24px;
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 3px 8px;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      resize: none;
+      background: #fafafa;
+      margin-top: 0px;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+    }
+    .schema-textarea:focus {
+      background: #fff;
+      border-color: #0969da;
+      outline: none;
+      box-shadow: inset 0 0 0 1px #0969da;
     }
 
-    #tokenSummary .ts-cost .ts-cost-label {
-      font-size: 12px;
-      color: #8b949e;
-    }
+    /* Phase-specific colors */
+    .color-blue { border-color: #0969da !important; }
+    .color-green { border-color: #1a7f37 !important; }
+    .color-orange { border-color: #9a6700 !important; }
+    .color-purple { border-color: #8250df !important; }
+    .color-pink { border-color: #bf3989 !important; }
+    .color-teal { border-color: #0599a0 !important; }
+    .color-gray { border-color: #6e7781 !important; }
 
-    #tokenSummary .ts-cost .ts-cost-value {
-      font-size: 20px;
-      font-weight: 700;
-      color: #3fb950;
-      font-family: ui-monospace, monospace;
-    }
+    .output { min-height: 220px; background: #000; color: #34c759; border-radius: 12px; border: 1px solid #1c1c1e; }
   </style>
 </head>
 
@@ -141,114 +244,119 @@
   <h1>JSON Schema Playground <span class="pill">Streaming</span></h1>
   <p>Edit the prompt and schema descriptions, then stream the response into the output.</p>
 
-
-
-  <div class="row">
+  <div class="row card">
     <h3>Access Password</h3>
-    <input id="apiKey" type="password" placeholder="Enter password..." style="width:100%; padding:10px; font-size:13px;" />
-    <p style="font-size:12px; color:#777; margin-top:8px;">
-      Required to access your protected proxy.
-    </p>
+    <input id="apiKey" type="password" placeholder="Enter password..." />
+    <p class="muted">Required to access your protected proxy.</p>
   </div>
 
-  <div class="row">
-    <h3>Application Language</h3>
-    <select id="languageSelect" onchange="changeLanguage()" style="width:100%; padding:10px; font-size:13px; font-weight: bold; background: #fff; border: 2px solid #333;">
-      <option value="en" selected>English / Engleski</option>
-      <option value="sr">Serbian / Srpski</option>
-    </select>
-    <p style="font-size:12px; color:#777; margin-top:6px;">
-      Switch between English and Serbian schemas, prompts, and demo data.
-    </p>
-  </div>
-
-  <div class="row">
-    <h3>OpenAI Model</h3>
-    <select id="modelSelect" style="width:100%; padding:10px; font-size:13px;">
-      <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
-      <option value="gpt-5.4-nano">gpt-5.4-nano</option>
-      <option value="gpt-5.4">gpt-5.4</option>
-      <option value="gpt-5-mini">gpt-5-mini</option>
-      <option value="gpt-5.2">gpt-5.2</option>
-    </select>
-    <p style="font-size:12px; color:#777; margin-top:6px;">
-      Smaller models prioritize speed, while larger models typically deliver higher-quality responses.
-    </p>
-  </div>
-
-  <div class="row">
-    <h3>Unit Inputs</h3>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+  <div class="row card">
+    <div class="grid">
       <div>
-        <label style="display:block; font-size:12px; font-weight:bold;">Subject</label>
-        <input id="input_Subject" type="text" placeholder="e.g. Earth & Space Science"
-          style="width:100%; padding:8px; box-sizing:border-box;" value="Earth & Space Science (Gravity & Orbits)" />
+        <label for="languageSelect">Application Language</label>
+        <select id="languageSelect" onchange="changeLanguage()">
+          <option value="en" selected>English / Engleski</option>
+          <option value="sr">Serbian / Srpski</option>
+        </select>
       </div>
       <div>
-        <label style="display:block; font-size:12px; font-weight:bold;">Unit Name</label>
-        <input id="input_Name" type="text" placeholder="e.g. Gravity at Work"
-          style="width:100%; padding:8px; box-sizing:border-box;"
-          value="“Gravity at Work: Modeling Motion in Our Solar System”" />
-      </div>
-      <div style="grid-column: span 2;">
-        <label style="display:block; font-size:12px; font-weight:bold;">User Prompt / Description</label>
-        <textarea id="input_UserPrompt"
-          style="height:60px;">Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.</textarea>
-      </div>
-      <div>
-        <label style="display:block; font-size:12px; font-weight:bold;">Grade Level</label>
-        <input id="input_GradeLevel" type="text" style="width:100%; padding:8px; box-sizing:border-box;"
-          value="The student is in the 1st grade of middle school, which consists of 4 grades total." />
-      </div>
-      <div>
-        <label style="display:block; font-size:12px; font-weight:bold;">Number of Days</label>
-        <input id="input_NumberOfDays" type="text" style="width:100%; padding:8px; box-sizing:border-box;" value="10" />
-      </div>
-      <div>
-        <label style="display:block; font-size:12px; font-weight:bold;">Location</label>
-        <input id="input_Location" type="text" style="width:100%; padding:8px; box-sizing:border-box;"
-          value="Greenville, Wisconsin, United States" />
-      </div>
-      <div>
-        <label style="display:block; font-size:12px; font-weight:bold;">Response Language</label>
-        <input id="input_ResponseLanguage" type="text" style="width:100%; padding:8px; box-sizing:border-box;"
-          value="English" />
-      </div>
-      <div style="grid-column: span 2;">
-        <label style="display:block; font-size:12px; font-weight:bold;">Media/Resources</label>
-        <textarea id="input_MediaContext"
-          style="height:40px;">Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple orbit simulations (browser-based), chart paper, student science notebooks.</textarea>
-      </div>
-      <div style="grid-column: span 2;">
-        <label style="display:block; font-size:12px; font-weight:bold;">Attached Unit Content</label>
-        <textarea id="input_AttachedUnit" style="height:60px;"></textarea>
-      </div>
-      <div style="grid-column: span 2;">
-        <label style="display:block; font-size:12px; font-weight:bold;">Standards</label>
-        <input id="input_Standards" type="text" style="width:100%; padding:8px; box-sizing:border-box;"
-          value="MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system." />
-      </div>
-      <div style="grid-column: span 2;">
-        <label style="display:block; font-size:12px; font-weight:bold;">Learning Plans (Students with plans)</label>
-        <textarea id="input_LearningPlans" style="height:60px;">Maria Valdez: Provide a partially pre-labeled orbit map and sentence frames for explanations.
-Jacob Garrow: Allow speech-to-text for reasoning and labeling.
-Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.</textarea>
+        <label for="modelSelect">OpenAI Model</label>
+        <select id="modelSelect">
+          <option value="gpt-5.4-mini" selected>gpt-5.4-mini (default)</option>
+          <option value="gpt-5.4-nano">gpt-5.4-nano</option>
+          <option value="gpt-5.4">gpt-5.4</option>
+          <option value="gpt-5-mini">gpt-5-mini</option>
+          <option value="gpt-5.2">gpt-5.2</option>
+        </select>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <h3>Prompt</h3>
-    <p>You can safely edit the prompt.</p>
-    <textarea id="prompt"></textarea>
+  <div class="row card">
+    <div id="toggleInputVariablesHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+      <h3 style="margin: 0;">Unit Inputs</h3>
+      <button id="toggleInputVariablesBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide Editor</button>
+    </div>
+    
+    <div id="inputVariablesContainer" style="display: block; margin-top: 15px;">
+      <div class="grid">
+        <div>
+          <label>Subject</label>
+          <input id="input_Subject" type="text" value="Earth & Space Science (Gravity & Orbits)" />
+        </div>
+        <div>
+          <label>Unit Name</label>
+          <input id="input_Name" type="text" value="“Gravity at Work: Modeling Motion in Our Solar System”" />
+        </div>
+        <div style="grid-column: span 2;">
+          <label>User Prompt / Description</label>
+          <textarea id="input_UserPrompt" style="height:80px;">Students will investigate how gravity affects motion in the solar system and create a model that explains and predicts orbital motion. The final product should be a clear model (physical and/or digital) plus a short explanation for a community audience, using evidence from observations and simple data. Emphasize sensemaking, modeling, and communication.</textarea>
+        </div>
+        <div>
+          <label>Grade Level</label>
+          <input id="input_GradeLevel" type="text" value="Middle School (6th-8th Grade)" />
+        </div>
+        <div>
+          <label>Number of Days</label>
+          <input id="input_NumberOfDays" type="text" value="10" />
+        </div>
+        <div>
+          <label>Location</label>
+          <input id="input_Location" type="text" value="Greenville, Wisconsin, United States" />
+        </div>
+        <div>
+          <label>Response Language</label>
+          <input id="input_ResponseLanguage" type="text" value="English" />
+        </div>
+        <div style="grid-column: span 2;">
+          <label>Media/Resources</label>
+          <textarea id="input_MediaContext" style="height:60px;">Short NASA gravity/orbit visuals, images of the solar system, classroom manipulatives (string/balls), simple orbit simulations (browser-based), chart paper, student science notebooks.</textarea>
+        </div>
+        <div style="grid-column: span 2;">
+          <label>Attached Unit Content</label>
+          <textarea id="input_AttachedUnit" style="height:60px;"></textarea>
+        </div>
+        <div style="grid-column: span 2;">
+          <label>Standards</label>
+          <input id="input_Standards" type="text" value="MS-ESS1-2 Develop and use a model to describe the role of gravity in the motions within galaxies and the solar system." />
+        </div>
+        <div style="grid-column: span 2;">
+          <label>Learning Plans (Students with plans)</label>
+          <textarea id="input_LearningPlans" style="height:84px;">Maria Valdez: Provide a partially pre-labeled orbit map and sentence frames for explanations.
+Jacob Garrow: Allow speech-to-text for reasoning and labeling.
+Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun → Planets → Moons.</textarea>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <div class="row card">
+    <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+      <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
+    </div>
+    
+    <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
+      <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schema. These changes will be used in the next "Run" to guide the AI's output.</p>
+    
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+        <button id="copySchemaBtn" class="btn btn-outline" onclick="SchemaEditor.copySchemaUI()">Copy Current Schema</button>
+      </div>
+      
+      <div id="schemaMainEditor" class="schema-pane">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
 
-  <div class="row">
-    <button id="runBtn" onclick="run()">Run (Stream)</button>
-    <button id="cancelBtn" onclick="cancelRun()" disabled>Cancel</button>
-    <button id="renderBtn" onclick="renderHtml()" disabled>Render HTML</button>
-    <button id="downloadBtn" onclick="downloadPrompts()">Download Prompts</button>
+  <div class="row card">
+    <h3>Prompt</h3>
+    <textarea id="prompt" style="height: 120px;"></textarea>
+    <div style="margin-top: 15px; display: flex; gap: 10px;">
+      <button id="runBtn" class="btn btn-primary" onclick="run()">Run Chain</button>
+      <button id="cancelBtn" class="btn btn-danger" onclick="cancelRun()" disabled>Cancel</button>
+      <button id="downloadBtn" class="btn btn-secondary" onclick="downloadPrompts()">Download Prompts</button>
+    </div>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
 
     <div id="tokenSummary">
@@ -282,25 +390,22 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
     </div>
   </div>
 
-  <div class="row">
+  <div class="row card">
     <h3>Output (Streaming)</h3>
     <textarea id="output" class="output" readonly style="height:400px;"></textarea>
   </div>
 
-  <div class="row">
+  <div class="row card">
     <h3>HTML Output</h3>
-    <p>The structured unit plan rendered as clean HTML for your LMS or document.</p>
     <textarea id="htmlOutput" readonly style="height:320px; background:#fff; color:#333;"></textarea>
   </div>
 
-  <div class="row">
+  <div class="row card">
     <h3>HTML Preview Window</h3>
-    <p>A visual preview of how the unit plan looks to teachers and students.</p>
-    <div style="border:1px solid #ccc; border-radius:8px; overflow:hidden; background:#fff;">
-      <iframe id="htmlPreview" style="width:100%; height:800px; border:none;"></iframe>
+    <div style="border:1px solid #ccc; border-radius:12px; overflow:hidden; background:#fff; padding: 20px;">
+      <iframe id="htmlPreview" style="width:100%; height:800px; border:1px solid #ddd; border-radius: 4px;"></iframe>
     </div>
   </div>
-
 
   <script src="../config.local.js"></script>
   <script src="../shared/local-config-loader.js"></script>
@@ -318,6 +423,9 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
       // Update the global configuration used by app.js
       window.currentPblPrompts = (lang === "sr") ? window.pblPrompts_sr : window.pblPrompts_en;
       window.resetAppSchema();
+      
+      // Re-initialize Schema Editor with new language defaults
+      if (window.SchemaEditor) window.SchemaEditor.init();
       
       // Update demo data in text fields
       const data = window.pblDemoData[lang];
@@ -342,8 +450,8 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
     // Initialize with English on load
     window.addEventListener('load', () => {
       window.currentPblPrompts = window.pblPrompts_en;
+      if (window.SchemaEditor) window.SchemaEditor.init();
     });
   </script>
 </body>
-
 </html>
