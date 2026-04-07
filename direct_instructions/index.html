@@ -359,10 +359,10 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
   <div class="row card">
     <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
       <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
-      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide Editor</button>
     </div>
     
-    <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
+    <div id="schemaEditorContainer" style="display: block; margin-top: 15px;">
       <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schemas. These changes will be used in the next "Run Chain" to guide the AI's output.</p>
     
       <div class="tab-container" style="margin-bottom: 20px;">
@@ -651,14 +651,32 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
         document.getElementById("mediaContext").value = d.mediaContext.replace(/\\\\n/g, "\\n");
         document.getElementById("attachedUnit").value = d.attachedUnit.replace(/\\\\n/g, "\\n");
       }
-      if (window.SchemaEditor) {
-        window.SchemaEditor.init();
+      if (window.schemaEditor) {
+        const lang = e.target.value;
+        const p = lang === 'sr' ? window.promptsSR : window.promptsEN;
+        window.schemaEditor.updateData([
+          { 
+            id: "perLesson", 
+            label: "Per Lesson", 
+            schema: p.PER_LESSON_SCHEMA, 
+            template: p.PER_LESSON_PROMPT_TEMPLATE,
+            requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
+          },
+          { 
+            id: "step0", 
+            label: "Unit Outline (Step 0)", 
+            schema: p.STEP0_SCHEMA, 
+            template: p.STEP0_PROMPT_TEMPLATE,
+            requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
+          }
+        ]);
       }
     });
 
   </script>
   <script src="../config.local.js"></script>
   <script src="../shared/local-config-loader.js"></script>
+  <script src="../shared/schema-editor.js"></script>
   <script src="direct_instructions.js"></script>
 </body>
 

@@ -173,236 +173,49 @@ function parseSseLines(buffer) {
 /************************************
  * RUN (STREAM ONLY into #output)
  ************************************/
-const SchemaEditor = {
-  schema: null,
-
-  init() {
-    const prompts = window.currentPblPrompts || window.pblPrompts_en;
-    const rawSchema = prompts?.pblResponseSchema || window.pblResponseSchema;
-    if (rawSchema) {
-      this.schema = JSON.parse(JSON.stringify(typeof rawSchema === "string" ? JSON.parse(rawSchema) : rawSchema));
+const schemaEditor = new window.SchemaEditor({
+  container: document.getElementById("schemaMainEditor"),
+  tabs: [
+    { 
+      id: "main", 
+      label: "Main", 
+      schema: (window.currentPblPrompts || window.pblPrompts_en)?.pblResponseSchema || window.pblResponseSchema, 
+      template: (window.currentPblPrompts || window.pblPrompts_en)?.defaultPrompt
     }
-    this.render();
-    if (!this.initialized) {
-      this.bindEvents();
-      this.initialized = true;
-    }
-  },
-
-  render() {
-    const container = document.getElementById("schemaMainEditor");
-    if (!container || !this.schema) return;
-
-    container.innerHTML = `
-      <div class="schema-section" style="border-bottom: none;">
-        <div class="schema-section-header">
-          <strong>JSON Output Schema (Instructions)</strong>
-        </div>
-        <div class="schema-tree-root">
-          ${this.renderNode(this.schema, "Root", [], "")}
-        </div>
-      </div>
-    `;
-
-    // Resize and Listen to Schema textareas
-    setTimeout(() => {
-      container.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
-    }, 10);
-
-    container.querySelectorAll(".schema-textarea").forEach(ta => {
-      ta.addEventListener("input", (e) => {
-        this.updateDescription(e.target.dataset.path, e.target.value);
-        this.autoResize(e.target);
-      });
-    });
-
-    // Toggle buttons
-    container.querySelectorAll(".node-header.collapsible").forEach(header => {
-      header.addEventListener("click", (e) => {
-        if (e.target.classList.contains("btn")) return;
-        header.classList.toggle("collapsed");
-        const children = header.nextElementSibling;
-        if (children) {
-          children.classList.toggle("hidden");
-          if (!children.classList.contains("hidden")) {
-            children.querySelectorAll(".schema-textarea").forEach(ta => this.autoResize(ta));
-          }
-        }
-      });
-    });
-  },
-
-  renderNode(node, name, pathArr, inheritedColor) {
-    const isRoot = pathArr.length === 0;
+  ],
+  colorProvider: (node, name, pathArr, inheritedColor) => {
     const depth = pathArr.length;
-    let colorClass = inheritedColor;
-    
-    // Simple color logic for PBL
     if (depth === 4 && pathArr[0] === "properties" && pathArr[2] === "properties") {
         const colors = ["color-blue", "color-green", "color-orange", "color-purple", "color-pink", "color-teal"];
-        const unitPlanProps = this.schema.properties.UnitPlan.properties || {};
+        // We use the initial schema for reference to find property indices
+        const initialSchema = (window.currentPblPrompts || window.pblPrompts_en)?.pblResponseSchema || window.pblResponseSchema;
+        const unitPlanProps = initialSchema.properties?.UnitPlan?.properties || {};
         const idx = Object.keys(unitPlanProps).indexOf(name);
-        if (idx !== -1) colorClass = colors[idx % colors.length];
+        if (idx !== -1) return colors[idx % colors.length];
     }
-
-    const label = isRoot ? "Root Object" : name;
-    const nodeType = node.type || (node.properties ? "object" : "unknown");
-    const isCollapsible = node.properties || (node.items && node.items.properties);
-
-    let html = `<div class="schema-field-group">`;
-    html += `
-      <div class="node-header ${isCollapsible ? "collapsible" : ""}" data-path="${pathArr.join(".")}">
-        <div class="field-header" style="flex: 1;">
-          <div>
-            <span class="schema-label">${this.formatLabel(label)}</span>
-            <span class="schema-type-badge">${nodeType}</span>
-          </div>
-          <div class="node-actions">
-             ${nodeType === "object" ? `<button class="btn btn-success btn-pill" style="width: 20px; height: 20px; padding: 0; font-size: 14px;" title="Add Child" onclick="SchemaEditor.addPropertyUI('${pathArr.join(".")}')">+</button>` : ""}
-             ${isRoot ? "" : `<button class="btn btn-danger btn-pill" style="width: 20px; height: 20px; padding: 0; font-size: 14px;" title="Delete" onclick="SchemaEditor.removePropertyUI('${pathArr.join(".")}')">−</button>`}
-          </div>
-        </div>
-      </div>
-    `;
-
-    html += `<div class="children-container ${isCollapsible ? "schema-tree-node" : ""} ${colorClass}">`;
-    if (node.description !== undefined) {
-      html += `<textarea class="schema-textarea" data-path="${pathArr.join(".")}">${node.description}</textarea>`;
-    }
-    if (node.properties) {
-      for (const key in node.properties) {
-        html += this.renderNode(node.properties[key], key, [...pathArr, "properties", key], colorClass);
-      }
-    }
-    if (node.items) {
-      if (node.items.properties || node.items.description !== undefined) {
-        html += this.renderNode(node.items, name + " Item", [...pathArr, "items"], colorClass);
-      }
-    }
-    html += `</div></div>`;
-    return html;
+    return inheritedColor || "color-gray";
   },
-
-  addPropertyUI(parentPath) {
-    const name = prompt("Name of the new property (e.g. LessonSummary):");
-    if (!name) return;
-    const t = prompt("Type (string / number / integer / object / array):", "string");
-    if (!t) return;
-    this.addProperty(parentPath, name, t);
-    this.render();
-  },
-
-  addProperty(parentPath, name, propType) {
-    let parentObj = this.schema;
-    if (parentPath) {
-      const parts = parentPath.split(".");
-      for (const p of parts) parentObj = parentObj[p];
-    }
-    if (!parentObj.properties) parentObj.properties = {};
-    if (!parentObj.required) parentObj.required = [];
-    const newProp = { type: propType, description: "" };
-    if (propType === "object") {
-      newProp.properties = {};
-      newProp.required = [];
-      newProp.additionalProperties = false;
-    } else if (propType === "array") {
-      newProp.items = { type: "string" };
-    }
-    parentObj.properties[name] = newProp;
-    if (!parentObj.required.includes(name)) parentObj.required.push(name);
-    if (parentObj.type === "object") parentObj.additionalProperties = false;
-  },
-
-  removePropertyUI(path) {
-    if (confirm(`Are you sure you want to delete ${path}?`)) {
-      this.removeProperty(path);
-      this.render();
-    }
-  },
-
-  removeProperty(path) {
-    const parts = path.split(".");
-    const propName = parts.pop();
-    let parentObj = this.schema;
-    for (const p of parts) parentObj = parentObj[p];
-    if (parentObj.properties) delete parentObj.properties[propName];
-    if (parentObj.required) parentObj.required = parentObj.required.filter(r => r !== propName);
-  },
-
-  bindEvents() {
-    // Toggle Input Variables
-    const ivHeader = document.getElementById("toggleInputVariablesHeader");
-    const ivContainer = document.getElementById("inputVariablesContainer");
-    const ivBtn = document.getElementById("toggleInputVariablesBtn");
-    if (ivHeader && ivContainer && ivBtn) {
-      ivHeader.onclick = () => {
-        const isHidden = ivContainer.style.display === "none";
-        ivContainer.style.display = isHidden ? "block" : "none";
-        ivBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
-      };
-    }
-
-    // Toggle Schema Editor
-    const seHeader = document.getElementById("toggleSchemaEditorHeader");
-    const seContainer = document.getElementById("schemaEditorContainer");
-    const seBtn = document.getElementById("toggleSchemaEditorBtn");
-    if (seHeader && seContainer && seBtn) {
-      seHeader.onclick = () => {
-        const isHidden = seContainer.style.display === "none";
-        seContainer.style.display = isHidden ? "block" : "none";
-        seBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
-        if (!isHidden) {
-            this.render(); // Re-render to ensure proper height
-        }
-      };
-    }
-
-    window.SchemaEditor = this;
-  },
-
-  autoResize(ta) {
-    if (!ta || ta.offsetHeight === 0) return;
-    ta.style.height = "1px";
-    ta.style.height = (ta.scrollHeight + 2) + "px";
-  },
-
-  updateDescription(path, val) {
-    const parts = path.split(".");
-    let curr = this.schema;
-    for (const p of parts) curr = curr[p];
-    curr.description = val;
-  },
-
-  copySchemaUI() {
-    const json = JSON.stringify(this.schema, null, 2);
-    navigator.clipboard.writeText(json).then(() => {
-      alert("Schema JSON copied to clipboard!");
-    });
-  },
-
-  getModifiedSchema() {
-    return JSON.parse(JSON.stringify(this.schema));
-  },
-
-  formatLabel(pathOrName) {
-    const name = pathOrName.split(".").pop();
-    return name.replace(/([A-Z])/g, " $1").trim();
-  }
-};
+  onUpdate: () => window.generatePrompt ? window.generatePrompt() : null
+});
+window.schemaEditor = schemaEditor;
 
 let lastEditedSchema = null;
 let currentAppSchema = null; 
 
 function ensureSchema() {
-  if (SchemaEditor.schema) return SchemaEditor.schema;
-  SchemaEditor.init();
-  return SchemaEditor.schema;
+  if (schemaEditor.getModifiedSchema()) return schemaEditor.getModifiedSchema();
+  schemaEditor.init();
+  return schemaEditor.getModifiedSchema();
 }
 
 let currentAbortController = null;
 
 function resetAppSchema() {
-  SchemaEditor.schema = null;
+  const prompts = window.currentPblPrompts || window.pblPrompts_en;
+  const schema = prompts?.pblResponseSchema || window.pblResponseSchema;
+  schemaEditor.updateData([
+    { id: "main", label: "Main", schema: schema, template: null }
+  ]);
 }
 window.resetAppSchema = resetAppSchema;
 
@@ -431,7 +244,7 @@ function cancelRun() {
 async function run() {
   generatePrompt();
   
-  const schema = SchemaEditor.getModifiedSchema();
+  const schema = schemaEditor.getModifiedSchema();
   if (!schema) {
     alert("Critical Error: JSON Schema is missing or invalid. Please check the console.");
     return;
@@ -819,7 +632,7 @@ window.loadJsonAndEnableRender = loadJsonAndEnableRender;
 window.run = run;
 window.renderHtml = renderHtml;
 window.cancelRun = cancelRun;
-window.copySchema = () => SchemaEditor.copySchemaUI();
+window.copySchema = () => schemaEditor.copySchemaUI();
 
 /************************************
  * TEMPLATE ENGINE
@@ -935,6 +748,31 @@ function onReady() {
   if (!schema) {
     console.error("Schema failed to load. Check console for details.");
   }
+
+  // Toggle buttons logic for PBL
+  const seHeader = document.getElementById("toggleSchemaEditorHeader");
+  const seContainer = document.getElementById("schemaEditorContainer");
+  const seBtn = document.getElementById("toggleSchemaEditorBtn");
+  if (seHeader && seContainer && seBtn) {
+    seHeader.addEventListener("click", () => {
+      const isHidden = seContainer.style.display === "none";
+      seContainer.style.display = isHidden ? "block" : "none";
+      seBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+      if (isHidden && window.schemaEditor) window.schemaEditor.render();
+    });
+  }
+
+  const ivHeader = document.getElementById("toggleInputVariablesHeader");
+  const ivContainer = document.getElementById("inputVariablesContainer");
+  const ivBtn = document.getElementById("toggleInputVariablesBtn");
+  if (ivHeader && ivContainer && ivBtn) {
+    ivHeader.addEventListener("click", () => {
+      const isHidden = ivContainer.style.display === "none";
+      ivContainer.style.display = isHidden ? "block" : "none";
+      ivBtn.textContent = isHidden ? "Hide Editor" : "Show Editor";
+    });
+  }
+
   generatePrompt();
   setRenderEnabled(false);
 }

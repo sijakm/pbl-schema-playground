@@ -333,14 +333,14 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
   <div class="row card">
     <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
       <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
-      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide Editor</button>
     </div>
     
-    <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
+    <div id="schemaEditorContainer" style="display: block; margin-top: 15px;">
       <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schema. These changes will be used in the next "Run" to guide the AI's output.</p>
     
       <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
-        <button id="copySchemaBtn" class="btn btn-outline" onclick="SchemaEditor.copySchemaUI()">Copy Current Schema</button>
+        <button id="copySchemaBtn" class="btn btn-outline" onclick="schemaEditor.copySchemaUI()">Copy Current Schema</button>
       </div>
       
       <div id="schemaMainEditor" class="schema-pane">
@@ -413,6 +413,7 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
   <script src="prompts.js"></script>
   <script src="prompts_sr.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="../shared/schema-editor.js"></script>
   <script src="app.js"></script>
 
   <script>
@@ -425,7 +426,11 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
       window.resetAppSchema();
       
       // Re-initialize Schema Editor with new language defaults
-      if (window.SchemaEditor) window.SchemaEditor.init();
+      if (window.schemaEditor) {
+        window.schemaEditor.updateData([
+          { id: "main", label: "Schema", schema: window.currentPblPrompts.SCHEMA }
+        ]);
+      }
       
       // Update demo data in text fields
       const data = window.pblDemoData[lang];
@@ -450,7 +455,7 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
     // Initialize with English on load
     window.addEventListener('load', () => {
       window.currentPblPrompts = window.pblPrompts_en;
-      if (window.SchemaEditor) window.SchemaEditor.init();
+      if (window.schemaEditor) window.schemaEditor.init();
     });
   </script>
 </body>
