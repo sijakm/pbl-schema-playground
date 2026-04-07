@@ -173,7 +173,10 @@
       body,
       signal,
       onDelta: params.onDelta,
-      onUsage: (usage) => tokenManager.add(usage),
+      onUsage: (usage) => {
+        tokenManager.add(usage);
+        console.log("Usage raw object:", usage);
+      },
       onError: (err) => { throw new Error(err.message || "Unknown error"); }
     });
   }

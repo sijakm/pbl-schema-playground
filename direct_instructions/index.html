@@ -32,11 +32,27 @@
       color: var(--text-color);
     }
 
-    h1 { margin-bottom: 8px; font-weight: 700; letter-spacing: -0.02em; }
-    h2, h3 { font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
-    p { color: var(--secondary-color); margin-top: 6px; }
+    h1 {
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
 
-    textarea, input, select {
+    h2,
+    h3 {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--secondary-color);
+      margin-top: 6px;
+    }
+
+    textarea,
+    input,
+    select {
       width: 100%;
       border: 1px solid var(--border-color);
       border-radius: 8px;
@@ -48,7 +64,9 @@
       background: white;
     }
 
-    textarea:focus, input:focus, select:focus {
+    textarea:focus,
+    input:focus,
+    select:focus {
       outline: none;
       border-color: var(--primary-color);
       box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
@@ -79,29 +97,87 @@
       user-select: none;
     }
 
-    .btn:active { transform: scale(0.97); }
+    .btn:active {
+      transform: scale(0.97);
+    }
 
-    .btn-primary { background: var(--primary-color); color: white; }
-    .btn-primary:hover { background: var(--primary-hover); }
-    .btn-primary:disabled { background: #b2d7ff; cursor: not-allowed; opacity: 0.7; }
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
 
-    .btn-secondary { background: #e8e8ed; color: var(--secondary-color); }
-    .btn-secondary:hover { background: #d2d2d7; color: var(--text-color); }
-    .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
 
-    .btn-outline { background: transparent; border-color: var(--border-color); color: var(--secondary-color); }
-    .btn-outline:hover { border-color: var(--primary-color); color: var(--primary-color); background: rgba(0, 122, 255, 0.05); }
+    .btn-primary:disabled {
+      background: #b2d7ff;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
 
-    .btn-danger { background: rgba(255, 59, 48, 0.1); color: var(--danger-color); }
-    .btn-danger:hover { background: var(--danger-color); color: white; }
+    .btn-secondary {
+      background: #e8e8ed;
+      color: var(--secondary-color);
+    }
 
-    .btn-success { background: rgba(52, 199, 89, 0.1); color: var(--success-color); }
-    .btn-success:hover { background: var(--success-color); color: white; }
+    .btn-secondary:hover {
+      background: #d2d2d7;
+      color: var(--text-color);
+    }
 
-    .btn-pill { border-radius: 20px; font-size: 11px; padding: 4px 12px; }
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border-color);
+      color: var(--secondary-color);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background: rgba(0, 122, 255, 0.05);
+    }
+
+    .btn-danger {
+      background: rgba(255, 59, 48, 0.1);
+      color: var(--danger-color);
+    }
+
+    .btn-danger:hover {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    .btn-success {
+      background: rgba(52, 199, 89, 0.1);
+      color: var(--success-color);
+    }
+
+    .btn-success:hover {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .btn-pill {
+      border-radius: 20px;
+      font-size: 11px;
+      padding: 4px 12px;
+    }
 
     /* --- Tab System --- */
-    .tab-container { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .tab-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
     .tab-btn {
       background: none;
       border: none;
@@ -113,8 +189,15 @@
       position: relative;
       transition: color 0.2s;
     }
-    .tab-btn:hover { color: var(--text-color); }
-    .tab-btn.active-tab { color: var(--primary-color); }
+
+    .tab-btn:hover {
+      color: var(--text-color);
+    }
+
+    .tab-btn.active-tab {
+      color: var(--primary-color);
+    }
+
     .tab-btn.active-tab::after {
       content: "";
       position: absolute;
@@ -125,38 +208,138 @@
       background: var(--primary-color);
     }
 
-    .output { min-height: 220px; background: #000; color: #34c759; border-radius: 12px; border: 1px solid #1c1c1e; }
-    .row { margin-bottom: 24px; }
-    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .muted { color: var(--muted-color); font-size: 12px; margin-bottom: 12px; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 4px; }
+    .output {
+      min-height: 220px;
+      background: #000;
+      color: #34c759;
+      border-radius: 12px;
+      border: 1px solid #1c1c1e;
+    }
 
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    label { display: block; font-weight: 600; margin: 16px 0 6px; font-size: 13px; color: var(--text-color); }
+    .row {
+      margin-bottom: 24px;
+    }
 
-    #tokenSummary { display: none; margin-top: 20px; padding: 20px; background: #1c1c1e; border-radius: 16px; color: white; }
-    .ts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-    .ts-stat { background: #2c2c2e; border-radius: 12px; padding: 12px 16px; }
-    .ts-label { font-size: 10px; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-    .ts-value { font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-    .ts-cost { margin-top: 15px; border-top: 1px solid #3a3a3c; padding-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .ts-cost-value { font-size: 22px; font-weight: 700; color: #34c759; font-family: 'JetBrains Mono', monospace; }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
 
-    .card-header-toggle:hover { background-color: rgba(0, 122, 255, 0.05); }
-    .pill { background: var(--primary-color); color: white; border: none; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-left: 8px; }
-    .pill:hover { filter: brightness(1.1); }
+    .muted {
+      color: var(--muted-color);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 16px 0 6px;
+      font-size: 13px;
+      color: var(--text-color);
+    }
+
+    #tokenSummary {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #1c1c1e;
+      border-radius: 16px;
+      color: white;
+    }
+
+    .ts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .ts-stat {
+      background: #2c2c2e;
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .ts-label {
+      font-size: 10px;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .ts-value {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ts-cost {
+      margin-top: 15px;
+      border-top: 1px solid #3a3a3c;
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ts-cost-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #34c759;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card-header-toggle:hover {
+      background-color: rgba(0, 122, 255, 0.05);
+    }
+
+    .pill {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 8px;
+    }
+
+    .pill:hover {
+      filter: brightness(1.1);
+    }
   </style>
 </head>
 
 <body>
 
   <h1><span id="pageTitle">Direct Instructions Playground</span> <span id="pagePill" class="pill">Direct</span></h1>
-  <p id="pageSubtitle">Runs: Step 0 outline JSON → common unit HTML → per-lesson JSON → per-lesson HTML → final joined HTML.</p>
+  <p id="pageSubtitle">Runs: Step 0 outline JSON → common unit HTML → per-lesson JSON → per-lesson HTML → final joined
+    HTML.</p>
 
   <div class="row card">
     <h3>OpenAI / Proxy</h3>
     <label for="apiKey">Access Password</label>
-    <input id="apiKey" type="password" placeholder="Enter password..." style="width:100%; padding:10px; font-size:13px;" />
+    <input id="apiKey" type="password" placeholder="Enter password..."
+      style="width:100%; padding:10px; font-size:13px;" />
     <p class="muted">Required to access your protected proxy.</p>
 
     <label for="endpoint" style="display:none;">Endpoint (proxy)</label>
@@ -180,28 +363,27 @@
   </div>
 
   <div class="row card">
-    <div id="toggleInputVariablesHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+    <div id="toggleInputVariablesHeader" class="card-header-toggle"
+      style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
       <h3 style="margin: 0;">Input variables</h3>
-      <button id="toggleInputVariablesBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide Editor</button>
+      <button id="toggleInputVariablesBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Hide
+        Editor</button>
     </div>
-    
+
     <div id="inputVariablesContainer" style="display: block; margin-top: 15px;">
       <p class="muted">These values are substituted into prompt templates by replacing <span
           class="mono">{{$Variable}}</span> placeholders.</p>
 
-    <div class="grid">
-            <label for="subject">Unit Subject</label>
-        <input id="subject" type="text" value="Science"
-          style="width:100%; padding:10px; font-size:13px;" />
+      <div class="grid">
+        <label for="subject">Unit Subject</label>
+        <input id="subject" type="text" value="Science" style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="name">Unit Name</label>
         <input id="name" type="text" value="Engineering & Innovation in Ancient Egypt"
           style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="gradeLevel">Grade Level</label>
-        <input id="gradeLevel" type="text"
-          value="8"
-          style="width:100%; padding:10px; font-size:13px;" />
+        <input id="gradeLevel" type="text" value="8" style="width:100%; padding:10px; font-size:13px;" />
 
         <label for="classDuration">Class Duration (minutes)</label>
         <input id="classDuration" type="number" min="1" step="1" value="45"
@@ -214,8 +396,7 @@
 
       <div>
         <label for="standards">Standards</label>
-        <textarea id="standards" placeholder="Paste standards here..."
-          style="height:84px;">SC.8.N.1.1: Define a problem, conduct investigations, use appropriate reference materials, and report, display, and argue the findings of an investigation to draw conclusions. 
+        <textarea id="standards" placeholder="Paste standards here..." style="height:84px;">SC.8.N.1.1: Define a problem, conduct investigations, use appropriate reference materials, and report, display, and argue the findings of an investigation to draw conclusions. 
 SC.8.P.8.4: Classify and compare substances based on physical properties. 
 SC.8.P.9.2: Distinguish between physical and chemical changes. 
 SC.8.E.5.12: Summarize the effects of space exploration on the economy and culture of Florida. 
@@ -349,21 +530,25 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
     <label for="attachedLesson">Attached Lesson Content (optional)</label>
     <textarea id="attachedLesson" placeholder="Paste attached lesson content..." style="height:70px;"></textarea>
 
-    <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ connection)</label>
+    <label for="unitEssentialQuestions">Unit Essential Questions (optional; used only by Review & Spaced Retrieval EQ
+      connection)</label>
     <textarea id="unitEssentialQuestions" placeholder='Example: ["How... ?","How... ?","Why... ?"]'
       style="height:60px;"></textarea>
-    </div>
+  </div>
   </div>
 
   <div class="row card">
-    <div id="toggleSchemaEditorHeader" class="card-header-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
+    <div id="toggleSchemaEditorHeader" class="card-header-toggle"
+      style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: -20px -20px 0 -20px; padding: 15px 20px; border-radius: 8px 8px 0 0;">
       <h3 style="margin: 0;">AI Instructions (Schema Editor)</h3>
-      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show Editor</button>
+      <button id="toggleSchemaEditorBtn" class="btn btn-pill btn-primary" style="pointer-events: none;">Show
+        Editor</button>
     </div>
-    
+
     <div id="schemaEditorContainer" style="display: none; margin-top: 15px;">
-      <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schemas. These changes will be used in the next "Run Chain" to guide the AI's output.</p>
-    
+      <p class="muted">Edit the internal descriptions (instructions) for each field in the JSON schemas. These changes
+        will be used in the next "Run Chain" to guide the AI's output.</p>
+
       <div class="tab-container" style="margin-bottom: 20px;">
         <button id="schemaPerLessonTab" class="tab-btn active-tab" type="button">Per Lesson</button>
         <button id="schemaStep0Tab" class="tab-btn" type="button">Unit Outline (Step 0)</button>
@@ -371,7 +556,7 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
         <button id="copySchemaBtn" class="btn btn-outline">Copy Current Schema</button>
       </div>
-      
+
       <div id="schemaPerLessonEditor" class="schema-pane">
         <!-- populated by JS -->
       </div>
@@ -384,7 +569,8 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
   <div class="row">
     <div style="margin-top: 20px; display: flex; gap: 10px;">
       <button id="runChainBtn" class="btn btn-primary" style="padding: 12px 24px; font-size: 15px;">Run Chain</button>
-      <button id="cancelBtn" class="btn btn-danger" disabled style="padding: 12px 24px; font-size: 15px;">Cancel</button>
+      <button id="cancelBtn" class="btn btn-danger" disabled
+        style="padding: 12px 24px; font-size: 15px;">Cancel</button>
       <button id="downloadPromptsBtn" class="btn btn-secondary">Download All Prompts (ZIP)</button>
     </div>
     <div id="status" style="margin-top:10px; font-size:13px; color:#333;"></div>
@@ -429,29 +615,34 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       padding: 8px 16px;
       cursor: pointer;
     }
+
     .tab-btn.active-tab {
       background: #fff;
       border-bottom: 1px solid #fff;
       font-weight: bold;
       margin-bottom: -1px;
     }
+
     .schema-pane {
       background: #fff;
       border: 1px solid #ccc;
       padding: 15px;
       border-radius: 0 4px 4px 4px;
     }
+
     .schema-section {
       margin-bottom: 25px;
       padding-bottom: 15px;
       border-bottom: 2px solid #eee;
     }
+
     .schema-section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
+
     .prompt-template-textarea {
       width: 100%;
       min-height: 100px;
@@ -468,17 +659,20 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       box-sizing: border-box;
       margin-bottom: 10px;
     }
+
     .prompt-template-textarea:focus {
       background: #fff;
       border-color: #0969da;
       outline: none;
-      box-shadow: 0 0 0 2px rgba(9,105,218,0.2);
+      box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.2);
     }
+
     .schema-tree-node {
       border-left: 2px solid #e1e4e8;
       margin-left: 14px;
       padding-left: 10px;
     }
+
     .schema-phase-badge {
       display: inline-block;
       font-size: 9px;
@@ -491,11 +685,13 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       text-transform: uppercase;
       border: 1px solid #e1e4e8;
     }
+
     .schema-field-group {
       margin-bottom: 4px;
       padding: 1px 0;
       position: relative;
     }
+
     .node-header {
       display: flex;
       justify-content: space-between;
@@ -506,9 +702,11 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       border-radius: 4px;
       transition: background 0.1s;
     }
+
     .node-header:hover {
       background: #f6f8fa;
     }
+
     .node-header.collapsible::before {
       content: '▾';
       display: inline-block;
@@ -518,30 +716,55 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       color: #999;
       transition: transform 0.2s;
     }
+
     .node-header.collapsed::before {
       transform: rotate(-90deg);
     }
+
     .children-container.hidden {
       display: none;
     }
+
     .field-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 2px;
     }
+
     .schema-label {
       font-weight: 500;
       font-size: 12px;
       color: #1f2328;
     }
-    .color-blue { border-color: #0969da !important; }
-    .color-green { border-color: #1a7f37 !important; }
-    .color-orange { border-color: #9a6700 !important; }
-    .color-purple { border-color: #8250df !important; }
-    .color-pink { border-color: #bf3989 !important; }
-    .color-teal { border-color: #0599a0 !important; }
-    .color-gray { border-color: #6e7781 !important; }
+
+    .color-blue {
+      border-color: #0969da !important;
+    }
+
+    .color-green {
+      border-color: #1a7f37 !important;
+    }
+
+    .color-orange {
+      border-color: #9a6700 !important;
+    }
+
+    .color-purple {
+      border-color: #8250df !important;
+    }
+
+    .color-pink {
+      border-color: #bf3989 !important;
+    }
+
+    .color-teal {
+      border-color: #0599a0 !important;
+    }
+
+    .color-gray {
+      border-color: #6e7781 !important;
+    }
 
     .schema-action-btn {
       padding: 0px 4px;
@@ -554,6 +777,7 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       margin-left: 2px;
       font-weight: normal;
     }
+
     .schema-textarea {
       width: 100%;
       min-height: 24px;
@@ -569,6 +793,7 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       display: block;
       box-sizing: border-box;
     }
+
     .schema-textarea:focus {
       background: #fff;
       border-color: #0969da;
@@ -604,8 +829,11 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
 
   <div class="row">
     <h3>HTML Preview</h3>
-    <div style="display: flex; justify-content: center; padding: 20px 0; border: 1px solid var(--border-color); border-radius: 12px; overflow-x: auto; background: #fafafa;">
-      <iframe id="htmlPreview" style="background: white; width: 210mm; height: 297mm; border: 1px solid #ddd; border-radius: 4px;" sandbox=""></iframe>
+    <div
+      style="display: flex; justify-content: center; padding: 20px 0; border: 1px solid var(--border-color); border-radius: 12px; overflow-x: auto; background: #fafafa;">
+      <iframe id="htmlPreview"
+        style="background: white; width: 210mm; height: 297mm; border: 1px solid #ddd; border-radius: 4px;"
+        sandbox=""></iframe>
     </div>
     <p class="muted">Preview uses <strong>iframe srcdoc</strong> with sandbox for safety.</p>
   </div>
@@ -637,7 +865,7 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
       }
     };
 
-    document.getElementById("languageSelect").addEventListener("change", function(e) {
+    document.getElementById("languageSelect").addEventListener("change", function (e) {
       const lang = e.target.value;
       const d = defaults[lang];
       if (d) {
@@ -654,17 +882,17 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
         const lang = e.target.value;
         const p = lang === 'sr' ? window.promptsSR : window.promptsEN;
         window.schemaEditor.updateData([
-          { 
-            id: "perLesson", 
-            label: "Per Lesson", 
-            schema: p.PER_LESSON_SCHEMA, 
+          {
+            id: "perLesson",
+            label: "Per Lesson",
+            schema: p.PER_LESSON_SCHEMA,
             template: p.PER_LESSON_PROMPT_TEMPLATE,
             requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
           },
-          { 
-            id: "step0", 
-            label: "Unit Outline (Step 0)", 
-            schema: p.STEP0_SCHEMA, 
+          {
+            id: "step0",
+            label: "Unit Outline (Step 0)",
+            schema: p.STEP0_SCHEMA,
             template: p.STEP0_PROMPT_TEMPLATE,
             requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
           }
