@@ -589,10 +589,8 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
     </div>
   </div>
 
-  <div class="row card">
-    <h3>Prompt</h3>
-    <textarea id="prompt" style="height: 120px;"></textarea>
-    <div style="margin-top: 15px; display: flex; gap: 10px;">
+  <div class="row" style="margin-top: 20px;">
+    <div style="display: flex; gap: 10px; align-items: center;">
       <button id="runBtn" class="btn btn-primary" onclick="run()">Run Chain</button>
       <button id="cancelBtn" class="btn btn-danger" onclick="cancelRun()" disabled>Cancel</button>
       <button id="downloadBtn" class="btn btn-secondary" onclick="downloadPrompts()">Download Prompts</button>
@@ -633,6 +631,11 @@ Ava Lund: Supply bilingual planet labels and a visual flow chart showing Sun →
         <span class="ts-cost-value" id="tsTotalCostValue">$—</span>
       </div>
     </div>
+  </div>
+
+  <div class="row card" style="display: none;">
+    <h3>Prompt</h3>
+    <textarea id="prompt" style="height: 120px;"></textarea>
   </div>
 
   <div class="row card">
