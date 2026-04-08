@@ -149,46 +149,46 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
 
 <p><strong>Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
-<p><strong>Prompting Options:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions into <li> items.
-</ul>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
   - Split OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves into <li> items.
 </ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions into <li> items.
+</ul>
 
 <p><strong>Connect – Help students link their observations to the broader mystery that will anchor the investigation.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
-<p><strong>Prompting Options:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions into <li> items.
-</ul>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
   - Split OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves into <li> items.
 </ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions into <li> items.
+</ul>
 
 <p><strong>Activate – Shift students into collaborative sensemaking.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
-<p><strong>Prompting Options:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions into <li> items.
-</ul>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
   - Split OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves into <li> items.
 </ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions into <li> items.
+</ul>
 
 <p><strong>Probe – Encourage refinement of thinking by pushing students to examine assumptions.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
-<p><strong>Prompting Options:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions into <li> items.
-</ul>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
   - Split OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves into <li> items.
+</ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Split OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions into <li> items.
 </ul>
 
 ==================================================

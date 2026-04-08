@@ -153,46 +153,46 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 
 <p><strong>Angažovanje (Engage) – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
-<p><strong>Opcije za podsticaj:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions u <li> stavke.
-</ul>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
   - Podeli OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves u <li> stavke.
 </ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions u <li> stavke.
+</ul>
 
 <p><strong>Povezivanje (Connect) – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
-<p><strong>Opcije za podsticaj:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions u <li> stavke.
-</ul>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
   - Podeli OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves u <li> stavke.
 </ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions u <li> stavke.
+</ul>
 
 <p><strong>Aktivacija (Activate) – Prebacite učenike na zajedničko pronalaženje smisla.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
-<p><strong>Opcije za podsticaj:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions u <li> stavke.
-</ul>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
   - Podeli OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves u <li> stavke.
 </ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions u <li> stavke.
+</ul>
 
 <p><strong>Ispitivanje (Probe) – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
-<p><strong>Opcije za podsticaj:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions u <li> stavke.
-</ul>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
   - Podeli OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves u <li> stavke.
+</ul>
+<p><strong>Prompt with questions such as:</strong></p>
+<ul>
+  - Podeli OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions u <li> stavke.
 </ul>
 
 ==================================================
