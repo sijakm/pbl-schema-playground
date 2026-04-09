@@ -151,45 +151,34 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
-  - Split OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves into <li> items.
-</ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions into <li> items.
+  - For each move in OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
 <p><strong>Connect – Help students link their observations to the broader mystery that will anchor the investigation.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
-  - Split OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves into <li> items.
-</ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions into <li> items.
+  <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions}</li>
+  - For each move in OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, render as <li>.
 </ul>
 
 <p><strong>Activate – Shift students into collaborative sensemaking.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
-  - Split OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves into <li> items.
-</ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions into <li> items.
+  - For each move in OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
 <p><strong>Probe – Encourage refinement of thinking by pushing students to examine assumptions.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
-  - Split OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves into <li> items.
+  <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions}</li>
+  - For each move in OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves, render as <li>.
 </ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Split OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions into <li> items.
-</ul>
+<p>{OrientationPhase.InstructionsForTeachers.Probe.Closing}</p>
 
 ==================================================
 SECTION 2: CONCEPTUALIZATION PHASE – RESEARCH QUESTION + ACTION PLAN
@@ -207,30 +196,27 @@ SECTION 2: CONCEPTUALIZATION PHASE – RESEARCH QUESTION + ACTION PLAN
 <p><strong>📋Instructions for Teachers</strong></p>
 
 <p><strong>Guide Question Generation – Introduce the inquiry by prompting curiosity, not delivering content.</strong></p>
+<p><strong>Say:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.Prompt}</p>
+<p><strong>Facilitation Moves:</strong></p>
 <ul>
-  <li>Say: Explain that scientists begin investigations by asking questions that help them make sense of what they observe.</li>
-  <li>Invite students to examine the phenomenon and brainstorm as many questions as possible.</li>
-  <li>Prompt question generation with open-ended cues such as: What are you wondering? What seems interesting, surprising, or puzzling?</li>
-  <li>Record all student-generated questions publicly without judging, ranking, or refining them yet.</li>
-  <li>Facilitation move: Encourage volume and variety of questions to surface student curiosity.</li>
+  - For each move in ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.PromptingOptions}</li>
 </ul>
 
 <p><strong>Identify Research Question – Help students collaboratively decide which question is most useful for investigation.</strong></p>
+<p><strong>Say:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.Prompt}</p>
+<p><strong>Facilitation Moves:</strong></p>
 <ul>
-  <li>Say: Ask students to review the list of questions and consider which ones would help them understand the core problem more deeply.</li>
-  <li>Support students in sorting questions into categories such as cause, effect, mechanism, prediction, or evidence.</li>
-  <li>Facilitation move: Ask which questions could be explored using models, data, or observations.</li>
-  <li>Guide students to discuss and nominate a strong candidate research question.</li>
-  <li>Teacher charts and confirms the final class research question without evaluating correctness.</li>
+  - For each move in ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.PromptingOptions}</li>
 </ul>
 
 <p><strong>Create an Action Plan – Support students in designing their own investigation rather than giving them the plan.</strong></p>
+<p><strong>Say:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.Prompt}</p>
+<p><strong>Facilitation Moves:</strong></p>
 <ul>
-  <li>Say: Explain that scientists design an action plan before collecting evidence.</li>
-  <li>Prompt students to decide what they will observe during the investigation.</li>
-  <li>Guide students to identify what they will test or compare.</li>
-  <li>Ask students to clarify what evidence they need to collect to answer their research question.</li>
-  <li>Encourage students to document thinking, track evidence, and revise ideas as their investigation unfolds.</li>
+  - For each move in ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.PromptingOptions}</li>
 </ul>
 
 ==================================================
@@ -697,9 +683,9 @@ INPUT JSON:
               "Engage": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "" },
-                  "FacilitationMoves": { "type": "string", "description": "Generate 2-3 specific pedagogical moves for this lesson that guide silent observation and partner sharing. Instructions should focus on capturing and organizing student observations into categories and encouraging multiple perspectives." },
-                  "PromptingOptions": { "type": "string", "description": "Suggest 2-3 lesson-specific prompts to help students identify details, notice patterns, and surface wonderings. Prompts should encourage students to explain the importance of their observations." }
+                  "Prompt": { "type": "string", "description": "Create a script to introduce the phenomenon. Ensure it focuses on sparking curiosity without giving scientific explanations." },
+                  "FacilitationMoves": { "type": "array", "description": "Generate 2-3 specific pedagogical moves that guide silent observation and partner sharing. Include scripts starting with 'Say:' (e.g., 'Say: Take 30 seconds to look silently...'). Focus on capturing and organizing student observations into meaningful categories and encouraging multiple perspectives.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generate 2-3 specific prompts as a single string to help students identify details, notice patterns, and surface initial wonderings. Encourage students to explain why certain details feel important and to build on or contrast each other’s observations." }
                 },
                 "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
                 "additionalProperties": false
@@ -708,8 +694,8 @@ INPUT JSON:
                 "type": "object",
                 "properties": {
                   "Prompt": { "type": "string", "description": "Create a specific teacher script (starting with 'Say:') that helps students turn their observations of the phenomenon into research questions or problems while clustering ideas into key themes." },
-                  "PromptingOptions": { "type": "string", "description": "Provide 2-3 specific prompts for this lesson to help students connect observations to underlying challenges, justify thinking with evidence, and prioritize what is worth investigating." },
-                  "FacilitationMoves": { "type": "string", "description": "Suggest 2-3 moves to support students in refining their ideas and grouping them, while pressing them to explain their reasoning for this specific lesson." }
+                  "PromptingOptions": { "type": "string", "description": "Provide 2-3 specific prompts to help students connect observations to underlying challenges, justify thinking with evidence, and prioritize which ideas are most worth investigating." },
+                  "FacilitationMoves": { "type": "array", "description": "Suggest 2-3 moves to support students in refining and grouping their ideas, while pressing them to explain their reasoning. Include instructions to record and highlight recurring questions without answering them.", "items": { "type": "string" } }
                 },
                 "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
                 "additionalProperties": false
@@ -717,9 +703,9 @@ INPUT JSON:
               "Activate": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "Develop a teacher-led instruction to facilitate partner or group discussion that generates specific ideas, explanations, or solutions for this lesson's content." },
-                  "PromptingOptions": { "type": "string", "description": "List 2-3 prompts for this lesson to encourage students to propose ideas, explain reasoning, and evaluate which parts of their thinking are most certain." },
-                  "FacilitationMoves": { "type": "string", "description": "Describe 2-3 circulation moves to listen for reasoning, press for clarity/justification, and highlight diverse approaches for this specific lesson's context." }
+                  "Prompt": { "type": "string", "description": "Develop a teacher-led instruction ('Say:') to facilitate partner or group discussion that generates specific ideas, explanations, or solutions using available information and constraints. Encourage comparison and reasoning." },
+                  "PromptingOptions": { "type": "string", "description": "List 2-3 prompts to encourage students to propose ideas, explain reasoning, consider alternative approaches, and evaluate which parts of their thinking are strongest or most uncertain." },
+                  "FacilitationMoves": { "type": "array", "description": "Describe 2-3 circulation moves to listen for reasoning, press for clarity/justification, and highlight diverse approaches without evaluating which is correct.", "items": { "type": "string" } }
                 },
                 "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
                 "additionalProperties": false
@@ -729,9 +715,10 @@ INPUT JSON:
                 "properties": {
                   "Prompt": { "type": "string", "description": "Create a script to push students to refine and test their ideas by examining assumptions, considering different conditions, and identifying key factors of this lesson." },
                   "PromptingOptions": { "type": "string", "description": "Suggest 2-3 specific prompts to test ideas against new conditions, identify weaknesses, and revise thinking using evidence for this lesson's phenomena." },
-                  "FacilitationMoves": { "type": "string", "description": "Provide 2-3 specific moves to encourage students to revisit and revise their initial ideas based on evidence and justify changes in their thinking." }
+                  "FacilitationMoves": { "type": "array", "description": "Provide 2-3 specific moves to encourage students to revisit and revise their initial ideas based on evidence and justify changes in their thinking.", "items": { "type": "string" } },
+                  "Closing": { "type": "string", "description": "A final instruction to push students to test and revise their ideas, consider long-term effects and changing conditions, and use evidence from observations to strengthen or challenge their thinking." }
                 },
-                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves", "Closing"],
                 "additionalProperties": false
               }
             },
@@ -762,8 +749,41 @@ INPUT JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "The model must include these three required section headers with definitions. These are in (). (Guide Question Generation - Introduce the inquiry by prompting curiosity, not delivering content.) Students brainstorm questions based on the phenomenon. Teacher records all questions publicly without judging them. (Identify Research Question - Help students collaboratively decide which question is most useful for investigation.) Students sort questions, compare them, and select the one with the highest investigative potential. Teacher prompts must help refine questions into testable forms. (Create an Action Plan - Support students in designing their own investigation rather than giving them the plan.) The output must guide students to define: what they will observe, what they will test or compare, and what evidence they need to collect. Teacher facilitation moves must support planning without providing the investigation steps directly."
+            "type": "object",
+            "properties": {
+              "GuideQuestionGeneration": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create a teacher script (starting with 'Say:') to introduce the question brainstorming session. Focus on moving from individual to partner sharing to expand ideas." },
+                  "FacilitationMoves": { "type": "array", "description": "Generate 2-3 specific moves to support student generation of questions. Include providing think time, capturing all questions publicly, and encouraging students to refine, combine, or expand questions without judgmental evaluation.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generate 2-3 specific prompts to help students surface curiosities, identify what they want to understand, and focus on key aspects of the system or design." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "IdentifyResearchQuestion": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create a script ('Say:') to guide students in selecting a question that would help them learn the most from a testable model." },
+                  "FacilitationMoves": { "type": "array", "description": "Suggest 2-3 moves to guide students in sorting questions into themes and comparing ideas based on testability. Include moves to support students in refining broad questions into clear investigations by identifying variables.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generate 2-3 prompts to help students evaluate questions based on testability, clarity, focus on variables, and potential to generate useful evidence." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "CreateAnActionPlan": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create a script ('Say:') to prompt students to define what they will observe, change, and collect as evidence." },
+                  "FacilitationMoves": { "type": "array", "description": "Describe 2-3 moves to support students in designing an investigation plan and identifying variables. Include moves to press students to make plans specific and testable, and ensure they have a clear way to determine success.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Provide 2-3 specific prompts to help students clarify what they will change, keep the same, and how they will compare results." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["GuideQuestionGeneration", "IdentifyResearchQuestion", "CreateAnActionPlan"],
+            "additionalProperties": false
           }
         },
         "required": [

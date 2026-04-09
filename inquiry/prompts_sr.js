@@ -155,45 +155,34 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves u <li> stavke.
-</ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions u <li> stavke.
+  - Za svaki potez u OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
 <p><strong>Povezivanje (Connect) – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves u <li> stavke.
-</ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions u <li> stavke.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions}</li>
+  - Za svaki potez u OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, renderuj kao <li>.
 </ul>
 
 <p><strong>Aktivacija (Activate) – Prebacite učenike na zajedničko pronalaženje smisla.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves u <li> stavke.
-</ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions u <li> stavke.
+  - Za svaki potez u OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
 <p><strong>Ispitivanje (Probe) – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves u <li> stavke.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions}</li>
+  - Za svaki potez u OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves, renderuj kao <li>.
 </ul>
-<p><strong>Prompt with questions such as:</strong></p>
-<ul>
-  - Podeli OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions u <li> stavke.
-</ul>
+<p>{OrientationPhase.InstructionsForTeachers.Probe.Closing}</p>
 
 ==================================================
 SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
@@ -211,30 +200,27 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 
 <p><strong>Vođenje generisanja pitanja – Uvedite istraživanje podsticanjem radoznalosti, a ne izlaganjem sadržaja.</strong></p>
+<p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.Prompt}</p>
+<p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  <li>Recite: Objasnite da naučnici započinju istraživanja postavljanjem pitanja koja im pomažu da daju smisao onome što posmatraju.</li>
-  <li>Pozovite učenike da ispitaju fenomen i smisle što više pitanja.</li>
-  <li>Podstaknite generisanje pitanja otvorenim uputstvima kao što su: Šta se pitate? Šta vam deluje zanimljivo, iznenađujuće ili zbunjujuće?</li>
-  <li>Zabeležite sva pitanja koja su učenici generisali javno bez njihovog prosuđivanja, rangiranja ili doterivanja u ovoj fazi.</li>
-  <li>Potez za facilitaciju: Podstaknite kvantitet i raznolikost pitanja kako bi isplivala radoznalost učenika.</li>
+  - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.PromptingOptions}</li>
 </ul>
 
 <p><strong>Identifikacija istraživačkog pitanja – Pomozite učenicima da zajednički odluče koje pitanje je najkorisnije za istraživanje.</strong></p>
+<p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.Prompt}</p>
+<p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  <li>Recite: Zamolite učenike da pregledaju listu pitanja i razmisle koja bi im pomogla da dublje razumeju srž problema.</li>
-  <li>Pomozite učenicima da razvrstaju pitanja u kategorije kao što su uzrok, posledica, mehanizam, predviđanje ili dokaz.</li>
-  <li>Potez za facilitaciju: Pitajte koja pitanja bi mogla biti istražena pomoću modela, podataka ili zapažanja.</li>
-  <li>Vodite učenike da prodiskutuju i nominuju snažnog kandidata za istraživačko pitanje.</li>
-  <li>Nastavnik beleži i potvrđuje finalno istraživačko pitanje odeljenja bez ocenjivanja tačnosti.</li>
+  - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.PromptingOptions}</li>
 </ul>
 
 <p><strong>Kreiranje plana akcije – Podržite učenike u dizajniranju sopstvenog istraživanja umesto da im date gotov plan.</strong></p>
+<p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.Prompt}</p>
+<p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  <li>Recite: Objasnite da naučnici dizajniraju plan akcije pre prikupljanja dokaza.</li>
-  <li>Podstaknite učenike da odluče šta će posmatrati tokom istraživanja.</li>
-  <li>Vodite učenike da identifikuju šta će testirati ili upoređivati.</li>
-  <li>Zamolite učenike da pojasne koje dokaze treba da prikupe kako bi odgovorili na svoje istraživačko pitanje.</li>
-  <li>Podstaknite učenike da dokumentuju razmišljanje, prate dokaze i revidiraju ideje kako se njihovo istraživanje odvija.</li>
+  - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.PromptingOptions}</li>
 </ul>
 
 ==================================================
@@ -702,9 +688,9 @@ ULAZNI JSON:
               "Engage": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "" },
-                  "FacilitationMoves": { "type": "string", "description": "Generišite 2-3 specifična pedagoška poteza za ovu lekciju koji vode tiho posmatranje i deljenje u paru. Instrukcije treba da se fokusiraju na beleženje i organizovanje zapažanja učenika u kategorije i podsticanje više perspektiva." },
-                  "PromptingOptions": { "type": "string", "description": "Predložite 2-3 podsticaja specifična za lekciju kako biste pomogli učenicima da identifikuju detalje, uoče obrasce i iznesu čuđenja. Podsticaji treba da ohrabre učenike da objasne važnost svojih zapažanja." }
+                  "Prompt": { "type": "string", "description": "Kreirajte scenario za uvođenje fenomena. Osigurajte da se fokusira na buđenje radoznalosti bez davanja naučnih objašnjenja." },
+                  "FacilitationMoves": { "type": "array", "description": "Generišite 2-3 specifična pedagoška poteza koji vode tiho posmatranje i deljenje u paru. Uključite skripte koje počinju sa 'Recite:' (npr. 'Recite: Odvojite 30 sekundi da tiho posmatrate...'). Fokusirajte se na beleženje i organizovanje zapažanja učenika u smislene kategorije i podsticanje više perspektiva.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generišite 2-3 specifična podsticaja kao jedan string kako biste pomogli učenicima da identifikuju detalje, uoče obrasce i iznesu početna čuđenja. Ohrabrite učenike da objasne zašto određeni detalji deluju važno i da nadograđuju ili upoređuju svoja zapažanja." }
                 },
                 "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
                 "additionalProperties": false
@@ -713,8 +699,8 @@ ULAZNI JSON:
                 "type": "object",
                 "properties": {
                   "Prompt": { "type": "string", "description": "Kreirajte specifičan scenario za nastavnika (koji počinje sa 'Recite:') koji pomaže učenicima da svoja zapažanja fenomena pretvore u istraživačka pitanja ili probleme dok grupišu ideje u ključne teme." },
-                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 specifična podsticaja za ovu lekciju kako biste pomogli učenicima da povežu zapažanja sa osnovnim izazovima, opravdaju razmišljanje dokazima i odrede prioritete o tome šta vredi istraživati." },
-                  "FacilitationMoves": { "type": "string", "description": "Predložite 2-3 poteza za podršku učenicima u doterivanju njihovih ideja i njihovom grupisanju, uz podsticanje da objasne svoje rezonovanje za ovu specifičnu lekciju." }
+                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 specifična podsticaja kako biste pomogli učenicima da povežu zapažanja sa osnovnim izazovima, opravdaju razmišljanje dokazima i odrede prioritete o tome šta vredi istraživati." },
+                  "FacilitationMoves": { "type": "array", "description": "Predložite 2-3 poteza za podršku učenicima u doterivanju njihovih ideja i njihovom grupisanju, uz podsticanje da objasne svoje rezonovanje. Uključite instrukciju za beleženje i isticanje ponavljajućih pitanja bez davanja odgovora.", "items": { "type": "string" } }
                 },
                 "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
                 "additionalProperties": false
@@ -722,9 +708,9 @@ ULAZNI JSON:
               "Activate": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "Razvijte instrukciju vođenu nastavnikom za olakšavanje diskusije u paru ili grupi koja generiše specifične ideje, objašnjenja ili rešenja za sadržaj ove lekcije." },
-                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 podsticaja za ovu lekciju kako biste ohrabrili učenike da predlože ideje, objasne rezonovanje i procene koji delovi njihovog razmišljanja su najsigurniji." },
-                  "FacilitationMoves": { "type": "string", "description": "Opišite 2-3 poteza tokom cirkulisanja za slušanje rezonovanja, traženje jasnoće/opravdanja i isticanje različitih pristupa za kontekst ove specifične lekcije." }
+                  "Prompt": { "type": "string", "description": "Razvijte instrukciju vođenu nastavnikom ('Recite:') za olakšavanje diskusije u paru ili grupi koja generiše specifične ideje, objašnjenja ili rešenja koristeći dostupne informacije i ograničenja. Podstaknite poređenje i rezonovanje." },
+                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 podsticaja kako biste ohrabrili učenike da predlože ideje, objasne rezonovanje, razmotre alternativne pristupe i procene koji delovi njihovog razmišljanja su najsigurniji ili najneizvesniji." },
+                  "FacilitationMoves": { "type": "array", "description": "Opišite 2-3 poteza tokom cirkulisanja za slušanje rezonovanja, traženje jasnoće/opravdanja i isticanje različitih pristupa bez ocenjivanja tačnosti.", "items": { "type": "string" } }
                 },
                 "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
                 "additionalProperties": false
@@ -734,9 +720,10 @@ ULAZNI JSON:
                 "properties": {
                   "Prompt": { "type": "string", "description": "Kreirajte scenario koji podstiče učenike da doteraju i testiraju svoje ideje ispitivanjem pretpostavki, razmatranjem različitih uslova i identifikacijom ključnih faktora ove lekcije." },
                   "PromptingOptions": { "type": "string", "description": "Predložite 2-3 specifična podsticaja za testiranje ideja u novim uslovima, identifikaciju slabosti i revidiranje razmišljanja koristeći dokaze za fenomene ove lekcije." },
-                  "FacilitationMoves": { "type": "string", "description": "Navedite 2-3 specifična poteza za podsticanje učenika da se vrate na svoje početne ideje i revidiraju ih na osnovu dokaza i opravdaju promene u svom razmišljanju." }
+                  "FacilitationMoves": { "type": "array", "description": "Navedite 2-3 specifična poteza za podsticanje učenika da se vrate na svoje početne ideje i revidiraju ih na osnovu dokaza i opravdaju promene u svom razmišljanju.", "items": { "type": "string" } },
+                  "Closing": { "type": "string", "description": "Završna instrukcija da podstaknete učenike da testiraju i revidiraju svoje ideje, razmotre dugoročne efekte i promenu uslova, i koriste dokaze iz posmatranja kako bi ojačali ili odbacili svoja razmišljanja." }
                 },
-                "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
+                "required": ["Prompt", "PromptingOptions", "FacilitationMoves", "Closing"],
                 "additionalProperties": false
               }
             },
@@ -767,8 +754,41 @@ ULAZNI JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Model mora uključivati ova tri zahtevana zaglavlja sekcija sa definicijama (u zagradama). (Vođenje generisanja pitanja - Uvedite istraživanje podsticanjem radoznalosti, a ne izlaganjem sadržaja.) Učenici smišljaju pitanja na osnovu fenomena. Nastavnik beleži sva pitanja javno bez njihovog prosuđivanja. (Identifikacija istraživačkog pitanja - Pomozite učenicima da zajednički odluče koje pitanje je najkorisnije za istraživanje.) Učenici razvrstavaju pitanja, upoređuju ih i biraju ono sa najvećim istraživačkim potencijalom. Podsticaji nastavnika moraju pomoći da se pitanja preformulišu u oblike koji se mogu testirati. (Kreiranje plana akcije - Podržite učenike u dizajniranju sopstvenog istraživanja umesto da im date gotov plan.) Izlaz mora voditi učenike da definišu: šta će posmatrati, šta će testirati ili upoređivati, i koje dokaze treba da prikupe. Potezi za facilitaciju nastavnika moraju podržati planiranje bez direktnog davanja koraka istraživanja."
+            "type": "object",
+            "properties": {
+              "GuideQuestionGeneration": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte scenario za nastavnika (koji počinje sa 'Recite:') za uvod u sesiju osmišljavanja pitanja. Fokusirajte se na prelazak sa individualnog na deljenje u paru kako bi se proširile ideje." },
+                  "FacilitationMoves": { "type": "array", "description": "Generišite 2-3 specifična poteza za podršku generisanju pitanja učenika. Uključite obezbeđivanje vremena za razmišljanje, javno beleženje svih pitanja i podsticanje učenika da doteraju, kombinuju ili prošire pitanja bez prosuđivanja.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generišite 2-3 specifična podsticaja kako biste pomogli učenicima da iznesu čuđenja, identifikuju šta žele da razumeju i fokusiraju se na ključne aspekte sistema ili dizajna." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "IdentifyResearchQuestion": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte scenario ('Recite:') koji vodi učenike u odabiru pitanja koje bi im pomoglo da najviše nauče iz modela koji se može testirati." },
+                  "FacilitationMoves": { "type": "array", "description": "Predložite 2-3 poteza koji vode učenike u razvrstavanju pitanja u teme i poređenju ideja na osnovu mogućnosti testiranja. Uključite poteze za podršku učenicima u doterivanju širokih pitanja u jasna istraživanja identifikovanjem varijabli.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generišite 2-3 podsticaja koji pomažu učenicima da procene pitanja na osnovu mogućnosti testiranja, jasnosti, fokusa na varijable i potencijala za generisanje korisnih dokaza." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "CreateAnActionPlan": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte scenario ('Recite:') koji podstiče učenike da definišu šta će posmatrati, menjati i prikupljati kao dokaze." },
+                  "FacilitationMoves": { "type": "array", "description": "Opišite 2-3 poteza za podršku učenicima u dizajniranju plana istraživanja i identifikovanju varijabli. Uključite poteze koji podstiču učenike da planovi budu specifični i proverljivi, i osiguraju da imaju jasan način za utvrđivanje uspeha.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 specifična podsticaja kako biste pomogli učenicima da razjasne šta će menjati, šta će ostati isto i kako će upoređivati rezultate." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["GuideQuestionGeneration", "IdentifyResearchQuestion", "CreateAnActionPlan"],
+            "additionalProperties": false
           }
         },
         "required": [
