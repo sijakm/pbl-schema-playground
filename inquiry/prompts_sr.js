@@ -98,6 +98,11 @@ Prvo renderuj ključna pitanja i usklađene standarde:
   - Renderuj svaku stavku iz EssentialQuestions kao <li>.
 </ul>
 
+<h3><span>🎯 Ciljevi učenja učenika</span></h3>
+<ul>
+  - Renderuj svaku stavku iz StudentLearningObjectives kao <li>.
+</ul>
+
 <h3><span>📏 Usklađeni standardi</span></h3>
 <ul>
   - Renderuj svaku stavku iz StandardsAligned kao <li>.
@@ -698,10 +703,13 @@ ULAZNI JSON:
       },
       "EssentialQuestions": {
         "type": "array",
-        "description": "Samo nalepi sva ključna pitanja na nivou unit-a istim redosledom ako su data. Ako nisu data, generiši tačno 3 konceptualna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokaz, obrasci, odnosi, sistemi ili rezonovanje. NEMOJ pominjati nikakve pojmove, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguća za odgovor jednostavnim učenjem sadržaja lekcije ili unit-a. Fokusiraj se samo na velike ideje, ne na predmetnu materiju.",
-        "items": {
-          "type": "string"
-        }
+        "description": "Samo nalepite sva ključna pitanja sa nivoa unit-a istim redosledom ako su data. Ako nisu data, generišite tačno 3 konceptualna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. NEMOJTE pominjati nikakve termine, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguće ih je odgovoriti učenjem sadržaja lekcije ili unit-a. Fokusirajte se samo na velike ideje, a ne na predmetnu materiju.",
+        "items": { "type": "string" }
+      },
+      "StudentLearningObjectives": {
+        "type": "array",
+        "description": "Navedite samo specifične ciljeve učenja učenika za ovu lekciju, izvedene iz ciljeva na nivou unit-a. Svaki cilj treba da bude merljiv i da uključuje DOK oznaku.",
+        "items": { "type": "string" }
       },
       "StandardsAligned": {
         "type": "array",
@@ -1176,6 +1184,7 @@ ULAZNI JSON:
       "FormativeAssessment",
       "StudentPractice",
       "EssentialQuestions",
+      "StudentLearningObjectives",
       "StandardsAligned"
     ],
     "additionalProperties": false,

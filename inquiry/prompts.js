@@ -94,10 +94,19 @@ Transform the INPUT JSON into teacher-facing HTML using ONLY allowed tags and fo
 
 First render essential questions and standards aligned:
 <h3>💭 Essential Questions</h3>
-<ul> with each item in Lesson.EssentialQuestions as <li>.
+<ul>
+  - Render each item from EssentialQuestions as a <li>.
+</ul>
+
+<h3>🎯 Student Learning Objectives</h3>
+<ul>
+  - Render each item from StudentLearningObjectives as a <li>.
+</ul>
 
 <h3>📏 Standards Aligned</h3>
-<ul> with each item in Lesson.StandardsAligned as <li>.
+<ul>
+  - Render each item from StandardsAligned as a <li>.
+</ul>
 
 ==================================================
 SECTION 0: ASSESS PRIOR KNOWLEDGE (CONDITIONAL)
@@ -693,16 +702,17 @@ INPUT JSON:
       "EssentialQuestions": {
         "type": "array",
         "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
-        "items": {
-          "type": "string"
-        }
+        "items": { "type": "string" }
+      },
+      "StudentLearningObjectives": {
+        "type": "array",
+        "description": "List only the specific student learning objectives for this lesson, derived from the unit-level objectives. Each objective should be measurable and include a DOK label.",
+        "items": { "type": "string" }
       },
       "StandardsAligned": {
         "type": "array",
-        "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
-        "items": {
-          "type": "string"
-        }
+        "description": "List only the unique educational standards addressed in this specific lesson. Each standard must include standard code and description and must be exactly the same used in the Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+        "items": { "type": "string" }
       },
       "OrientationPhase": {
         "type": "object",
@@ -1170,6 +1180,7 @@ INPUT JSON:
       "FormativeAssessment",
       "StudentPractice",
       "EssentialQuestions",
+      "StudentLearningObjectives",
       "StandardsAligned"
     ],
     "additionalProperties": false,
