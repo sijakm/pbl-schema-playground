@@ -269,10 +269,6 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 <p><strong>Podsticaji za saradnju</strong></p>
 <ul>
   - Za svaki podsticaj u InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Collaboration, renderuj kao <li>.
-</ul>da objasniš ono što posmatraš?</li>
-  <li>Podsticaj za rezonovanje: Kako promena udaljenosti utiče na kretanje u ovom modelu?</li>
-  <li>Podsticaj za rezonovanje: Šta bi se desilo kada ovaj objekat ne bi imao kretanje unapred?</li>
-  <li>Podsticaj za saradnju: Ko još nije doprineo i kako ćete ga/je uključiti?</li>
 </ul>
 
 <p><strong>❗ <span style="color: rgb(145, 56, 230);">Česta pogrešna uverenja</span></strong></p>
@@ -282,9 +278,36 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   <li>{item.TeacherResponse} (Osigurajte da se ovde NE koristi boldovanje/strong tagovi)</li>
 </ul>
 
-<p><strong>🪜 Diferencijacija</strong></p>
+<p><strong>🪜 <span style="color: rgb(145, 56, 230);">Diferencijacija</span></strong></p>
+
+<p><strong>Učenici kojima je jezik strani:</strong></p>
+- Za svaku strategiju u InvestigationPhase.Differentiation.LanguageLearners.Strategies:
+<p>{strategija}</p>
+<p>Koristite okvire rečenica (sentence frames) za podršku objašnjavanju i rezonovanju:</p>
 <ul>
-  - Pretvori InvestigationPhase.Differentiation u tačno 3 <li> stavke: (1) Učenici kojima je jezik strani, (2) Dodatna podrška (skela), (3) Napredniji nivo. Ako je ulaz već strukturiran, sačuvaj značenje i očisti formulaciju.
+  - Za svaki početak u InvestigationPhase.Differentiation.LanguageLearners.SentenceStarters, renderuj kao <li>.
+</ul>
+
+<p><strong>Dodatna podrška (skela):</strong></p>
+- Za svaku strategiju u InvestigationPhase.Differentiation.AdditionalScaffolding.Strategies:
+<p>{strategija}</p>
+<p>Ponudite kontrolnu listu korak-po-korak za vođenje istraživanja:</p>
+<ul>
+  - Za svaku stavku u InvestigationPhase.Differentiation.AdditionalScaffolding.Checklist, renderuj kao <li>.
+</ul>
+
+<p><strong>Proširenja (idite dublje):</strong></p>
+- Za svaku strategiju u InvestigationPhase.Differentiation.GoDeeper.Strategies:
+<p>{strategija}</p>
+
+<p><strong>Pitanje za napredno razmišljanje:</strong></p>
+<ul>
+  <li>Recite: "{InvestigationPhase.Differentiation.GoDeeper.AdvancedQuestion}"</li>
+</ul>
+
+<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<ul>
+  - Za svaki odgovor u InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, renderuj kao <li>.
 </ul>
 
 <p><strong>🤝 Prilagođavanja i modifikacije</strong></p>
@@ -877,8 +900,39 @@ ULAZNI JSON:
             }
           },
           "Differentiation": {
-            "type": "string",
-            "description": "Trodelne strategije diferencijacije uključujući: (1) Podrška učenicima kojima je jezik strani (2-3 strategije), (2) Dodatna podrška - skela (2-3 strategije), (3) Napredniji nivo - proširenja (1-2 aktivnosti sa očekivanim odgovorima)"
+            "type": "object",
+            "properties": {
+              "LanguageLearners": {
+                "type": "object",
+                "properties": {
+                  "Strategies": { "type": "array", "description": "Generišite 2-3 podrške specifične za lekciju (vizuelni materijali, banke reči, gestovi) koje pomažu učenicima kojima je jezik strani da pristupe idejama i iskažu ih.", "items": { "type": "string" } },
+                  "SentenceStarters": { "type": "array", "description": "Generišite 3-4 početka rečenica koji pomažu učenicima da opišu, objasne i komuniciraju svoje razmišljanje za ovu specifičnu lekciju.", "items": { "type": "string" } }
+                },
+                "required": ["Strategies", "SentenceStarters"],
+                "additionalProperties": false
+              },
+              "AdditionalScaffolding": {
+                "type": "object",
+                "properties": {
+                  "Strategies": { "type": "array", "description": "Generišite 2-3 podrške korak-po-korak (strukturirani alati, modelovani primeri, razmišljanje naglas) i tačna uputstva koja pomažu učenicima da završe zadatak.", "items": { "type": "string" } },
+                  "Checklist": { "type": "array", "description": "Generišite 3-4 pitanja za kontrolnu listu koja vode učenike u osmišljavanju njihovog učenja tokom istraživanja.", "items": { "type": "string" } }
+                },
+                "required": ["Strategies", "Checklist"],
+                "additionalProperties": false
+              },
+              "GoDeeper": {
+                "type": "object",
+                "properties": {
+                  "Strategies": { "type": "array", "description": "Generišite 2-3 proširenja koja povećavaju kompleksnost (specifični izazovi, identifikacija obrazaca) kako bi pomogli učenicima da prodube ili poboljšaju svoje razmišljanje koristeći dokaze.", "items": { "type": "string" } },
+                  "AdvancedQuestion": { "type": "string", "description": "Generišite jedno kompleksno 'Recite:' pitanje za podsticanje dubljeg konceptualnog razumevanja." },
+                  "ExpectedResponses": { "type": "array", "description": "Generišite 3-4 specifična primera visokokvalitetnih odgovora učenika na napredno pitanje.", "items": { "type": "string" } }
+                },
+                "required": ["Strategies", "AdvancedQuestion", "ExpectedResponses"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+            "additionalProperties": false
           },
           "AccommodationsAndModifications": {
             "type": "object",

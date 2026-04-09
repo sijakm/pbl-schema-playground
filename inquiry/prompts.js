@@ -274,9 +274,36 @@ SECTION 3: INVESTIGATION PHASE
   <li>{item.TeacherResponse} (Ensure NO bolding/strong tags are used here)</li>
 </ul>
 
-<p><strong>🪜Differentiation</strong></p>
+<p><strong>🪜 <span style="color: rgb(145, 56, 230);">Differentiation</span></strong></p>
+
+<p><strong>Language Learners:</strong></p>
+- For each strategy in InvestigationPhase.Differentiation.LanguageLearners.Strategies:
+<p>{strategy}</p>
+<p>Use sentence frames to support explanation and reasoning:</p>
 <ul>
-  - Convert InvestigationPhase.Differentiation into exactly 3 <li> items: (1) Language Learners, (2) Additional Scaffolding, (3) Go Deeper. If the input is already structured, preserve meaning and clean wording.
+  - For each starter in InvestigationPhase.Differentiation.LanguageLearners.SentenceStarters, render as <li>.
+</ul>
+
+<p><strong>Additional Scaffolding:</strong></p>
+- For each strategy in InvestigationPhase.Differentiation.AdditionalScaffolding.Strategies:
+<p>{strategy}</p>
+<p>Offer a step-by-step checklist to guide the investigation:</p>
+<ul>
+  - For each item in InvestigationPhase.Differentiation.AdditionalScaffolding.Checklist, render as <li>.
+</ul>
+
+<p><strong>Go Deeper:</strong></p>
+- For each strategy in InvestigationPhase.Differentiation.GoDeeper.Strategies:
+<p>{strategy}</p>
+
+<p><strong>Advanced Thinking Question:</strong></p>
+<ul>
+  <li>Say: "{InvestigationPhase.Differentiation.GoDeeper.AdvancedQuestion}"</li>
+</ul>
+
+<p><strong>✅ Expected Student Responses</strong></p>
+<ul>
+  - For each response in InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, render as <li>.
 </ul>
 
 <p><strong>🤝Accommodations & Modifications</strong></p>
@@ -868,8 +895,39 @@ INPUT JSON:
             }
           },
           "Differentiation": {
-            "type": "string",
-            "description": "Three-part differentiation strategies including: (1) Language Learners support (2-3 strategies), (2) Additional Scaffolding support (2-3 strategies), (3) Go Deeper extensions (1-2 activities with expected responses)"
+            "type": "object",
+            "properties": {
+              "LanguageLearners": {
+                "type": "object",
+                "properties": {
+                  "Strategies": { "type": "array", "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas.", "items": { "type": "string" } },
+                  "SentenceStarters": { "type": "array", "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson.", "items": { "type": "string" } }
+                },
+                "required": ["Strategies", "SentenceStarters"],
+                "additionalProperties": false
+              },
+              "AdditionalScaffolding": {
+                "type": "object",
+                "properties": {
+                  "Strategies": { "type": "array", "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task.", "items": { "type": "string" } },
+                  "Checklist": { "type": "array", "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation.", "items": { "type": "string" } }
+                },
+                "required": ["Strategies", "Checklist"],
+                "additionalProperties": false
+              },
+              "GoDeeper": {
+                "type": "object",
+                "properties": {
+                  "Strategies": { "type": "array", "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence.", "items": { "type": "string" } },
+                  "AdvancedQuestion": { "type": "string", "description": "Generate one complex 'Say:' prompt/question to press for deeper conceptual understanding." },
+                  "ExpectedResponses": { "type": "array", "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question.", "items": { "type": "string" } }
+                },
+                "required": ["Strategies", "AdvancedQuestion", "ExpectedResponses"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+            "additionalProperties": false
           },
           "AccommodationsAndModifications": {
             "type": "object",
