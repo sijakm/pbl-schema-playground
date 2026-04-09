@@ -306,7 +306,7 @@ SECTION 3: INVESTIGATION PHASE
   - For each response in InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, render as <li>.
 </ul>
 
-<p><strong>🤝Accommodations & Modifications</strong></p>
+<p><strong>🤝 <span style="color: rgb(145, 56, 230);">Accommodations & Modifications</span></strong></p>
 
 <p><strong>General Supports:</strong></p>
 <ul>
@@ -314,14 +314,19 @@ SECTION 3: INVESTIGATION PHASE
 </ul>
 
 <p><strong>Individual Supports:</strong></p>
+- For each item in InvestigationPhase.AccommodationsAndModifications.IndividualSupport render:
+<p><strong><span style="color: rgb(240, 56, 40);">{StudentName}:</span></strong></p>
+- For each entry in InvestigationPhase.AccommodationsAndModifications.IndividualSupport.Plan:
+<p>{entry.item}</p>
 <ul>
-  - For each item in InvestigationPhase.AccommodationsAndModifications.IndividualSupport render:
-  <li><strong>{StudentName}:</strong> {Plan}</li>
+  - For each subItem in entry.subItems, render as <li>.
 </ul>
 
-<p><strong>✔Quick Checks</strong></p>
+<p><strong>✔ <span style="color: rgb(145, 56, 230);">Quick Checks</span></strong></p>
+<p>{InvestigationPhase.QuickCheck.Question}</p>
+<p><strong>✅ Expected Student Responses</strong></p>
 <ul>
-  <li>{Render InvestigationPhase.QuickCheck}</li>
+  - For each response in InvestigationPhase.QuickCheck.ExpectedResponses, render as <li>.
 </ul>
 
 ==================================================
@@ -948,8 +953,17 @@ INPUT JSON:
                       "description": "Full name of the student exactly as provided in the prompt."
                     },
                     "Plan": {
-                      "type": "string",
-                      "description": "Short description of the individualized accommodation or modification for this student."
+                      "type": "array",
+                      "description": "A mix of instructions and sub-lists. Each entry has a 'item' (as a paragraph) and optional 'subItems' (as bullets) for when a task needs to be broken down logically.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "item": { "type": "string", "description": "The main instruction or list header." },
+                          "subItems": { "type": "array", "description": "Optional bulleted steps or specific examples linked to the item.", "items": { "type": "string" } }
+                        },
+                        "required": ["item", "subItems"],
+                        "additionalProperties": false
+                      }
                     }
                   },
                   "required": [
@@ -967,8 +981,13 @@ INPUT JSON:
             "additionalProperties": false
           },
           "QuickCheck": {
-            "type": "string",
-            "description": "Final comprehension check question with 2-3 expected student responses showing mastery"
+            "type": "object",
+            "properties": {
+              "Question": { "type": "string", "description": "Generate one specific 'Say:' question to check for student understanding during or at the end of the investigation." },
+              "ExpectedResponses": { "type": "array", "description": "Generate 3-4 expected student responses that show mastery of the lesson concept.", "items": { "type": "string" } }
+            },
+            "required": ["Question", "ExpectedResponses"],
+            "additionalProperties": false
           }
         },
         "required": [

@@ -310,7 +310,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaki odgovor u InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, renderuj kao <li>.
 </ul>
 
-<p><strong>🤝 Prilagođavanja i modifikacije</strong></p>
+<p><strong>🤝 <span style="color: rgb(145, 56, 230);">Prilagođavanja i modifikacije</span></strong></p>
 
 <p><strong>Opšta podrška:</strong></p>
 <ul>
@@ -318,14 +318,19 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 </ul>
 
 <p><strong>Individualna podrška:</strong></p>
+- Za svaku stavku u InvestigationPhase.AccommodationsAndModifications.IndividualSupport renderuj:
+<p><strong><span style="color: rgb(240, 56, 40);">{StudentName}:</span></strong></p>
+- Za svaki unos u InvestigationPhase.AccommodationsAndModifications.IndividualSupport.Plan:
+<p>{unos.item}</p>
 <ul>
-  - Za svaku stavku u InvestigationPhase.AccommodationsAndModifications.IndividualSupport renderuj:
-  <li><strong>{StudentName}:</strong> {Plan}</li>
+  - Za svaku podstavku u unos.subItems, renderuj kao <li>.
 </ul>
 
-<p><strong>✔ Brze provere</strong></p>
+<p><strong>✔ <span style="color: rgb(145, 56, 230);">Brze provere</span></strong></p>
+<p>{InvestigationPhase.QuickCheck.Question}</p>
+<p><strong>✅ Očekivani odgovori učenika</strong></p>
 <ul>
-  <li>{Renderuj InvestigationPhase.QuickCheck}</li>
+  - Za svaki odgovor u InvestigationPhase.QuickCheck.ExpectedResponses, renderuj kao <li>.
 </ul>
 
 ==================================================
@@ -953,8 +958,17 @@ ULAZNI JSON:
                       "description": "Puno ime učenika tačno onako kako je navedeno u promptu."
                     },
                     "Plan": {
-                      "type": "string",
-                      "description": "Kratak opis individualizovanog prilagođavanja ili modifikacije za ovog učenika."
+                      "type": "array",
+                      "description": "Kombinacija instrukcija i pod-lista. Svaki unos ima 'item' (kao pasus) i opcione 'subItems' (kao metke/bullets) kada se zadatak može logično podeliti.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "item": { "type": "string", "description": "Glavna instrukcija ili naslov liste." },
+                          "subItems": { "type": "array", "description": "Opcioni meci (bullet points) ili specifični primeri povezani sa stavkom.", "items": { "type": "string" } }
+                        },
+                        "required": ["item"],
+                        "additionalProperties": false
+                      }
                     }
                   },
                   "required": [
@@ -972,8 +986,13 @@ ULAZNI JSON:
             "additionalProperties": false
           },
           "QuickCheck": {
-            "type": "string",
-            "description": "Finalno pitanje za proveru razumevanja sa 2-3 očekivana odgovora učenika koji pokazuju postignuće"
+            "type": "object",
+            "properties": {
+              "Question": { "type": "string", "description": "Generišite jedno specifično 'Recite:' pitanje za proveru razumevanja učenika tokom ili na kraju istraživanja." },
+              "ExpectedResponses": { "type": "array", "description": "Generišite 3-4 očekivana odgovora učenika koji pokazuju postignuće koncepta lekcije.", "items": { "type": "string" } }
+            },
+            "required": ["Question", "ExpectedResponses"],
+            "additionalProperties": false
           }
         },
         "required": [
