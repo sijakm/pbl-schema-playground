@@ -342,23 +342,24 @@ SECTION 4: CONCLUSION PHASE
   - Render each item from ConclusionPhase.Materials as a <li>. If empty, output <li>None</li>.
 </ul>
 
-<p><strong>📋Instructions for Teachers</strong></p>
+<p><strong>📋 Instructions for Teachers</strong></p>
+<p>{ConclusionPhase.InstructionsForTeachers.OpeningScript}</p>
+- For each move in ConclusionPhase.InstructionsForTeachers.FacilitationMoves render as <p>:
+<p>{move}</p>
+
+<p><strong>Prompt with questions such as:</strong></p>
 <ul>
-  <li>Say: Invite students to revisit the research question and consider how their collected evidence helps answer it.</li>
-  <li>Say: Prompt students to review their notes and data and identify patterns they notice across observations.</li>
-  <li>Encourage students to discuss emerging ideas in small groups and compare explanations.</li>
-  <li>Say: Ask students to justify ideas by responding to prompts such as “What evidence supports this idea?”</li>
-  <li>Guide students to refine explanations through peer discussion without confirming or correcting ideas.</li>
-  <li>Say: Instruct students to write an explanation independently, using evidence to support each claim.</li>
-  <li>Have students share their written explanation with a partner or small group.</li>
+  - For each question in ConclusionPhase.InstructionsForTeachers.ProbingQuestions, render as <li>.
 </ul>
 
-<p><strong>Expected Student Responses</strong></p>
+- For each move in ConclusionPhase.InstructionsForTeachers.FacilitationMoves (additional moves if any), render as <p>.
+<p>{ConclusionPhase.InstructionsForTeachers.WritingPrompt}</p>
+<p>{ConclusionPhase.InstructionsForTeachers.CollaborationInstruction}</p>
+<p><em>{ConclusionPhase.InstructionsForTeachers.Guardrail}</em></p>
+
+<p><strong>✅ Expected Student Responses</strong></p>
 <ul>
-  <li>References to specific observations or data points as evidence.</li>
-  <li>Claims that are supported by patterns noticed across the investigation.</li>
-  <li>Explanations that connect evidence to conclusions.</li>
-  <li>Use of reasoning language such as “because,” “this shows,” or “based on our data.”</li>
+  - For each response in ConclusionPhase.ExpectedStudentResponses, render as <li>.
 </ul>
 
 ==================================================
@@ -1017,14 +1018,31 @@ INPUT JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "The Instructions for Teachers must follow this structure: teachers prompt students to revisit the research question, review collected data, identify patterns, refine ideas through group discussion, and justify explanations with evidence. Teachers must guide but never provide scientific explanations. The model must include scripted teacher prompts such as Review your notes and data, What patterns do you notice, What evidence supports this idea, and Use your data to support your claim. The Instructions must require students to write an explanation independently and then share with a partner or group. Expected Student Responses must demonstrate evidence-based reasoning in a general way, without domain-specific examples. The entire output must remain content-neutral."
+            "type": "object",
+            "properties": {
+              "OpeningScript": { "type": "string", "description": "A 'Say:' statement to bring students back to the research question and surfacing emerging ideas about how the design works." },
+              "FacilitationMoves": { "type": "array", "description": "2-3 pedagogical moves to give students time to review data, identify patterns, and compare results through discussion.", "items": { "type": "string" } },
+              "ProbingQuestions": { "type": "array", "description": "3-4 specific questions to push students to explain patterns, justify decisions with evidence, and describe cause-and-effect relationships.", "items": { "type": "string" } },
+              "WritingPrompt": { "type": "string", "description": "A 'Say:' statement outlining what their written explanation must include (content-specific components) and a reminder to use data as evidence." },
+              "CollaborationInstruction": { "type": "string", "description": "Instruction for students to write independently then share with a partner or group to refine their reasoning." },
+              "Guardrail": { "type": "string", "description": "A firm reminder that the teacher should NOT provide the scientific explanation, but instead press students to point to data." }
+            },
+            "required": ["OpeningScript", "FacilitationMoves", "ProbingQuestions", "WritingPrompt", "CollaborationInstruction", "Guardrail"],
+            "additionalProperties": false
+          },
+          "ExpectedStudentResponses": {
+            "type": "array",
+            "description": "3-4 responses that directly answer the research question using evidence and cause-and-effect reasoning (e.g., 'when we changed ___, ___ happened').",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "Purpose",
           "Materials",
-          "InstructionsForTeachers"
+          "InstructionsForTeachers",
+          "ExpectedStudentResponses"
         ],
         "additionalProperties": false
       },

@@ -347,22 +347,24 @@ SEKCIJA 4: FAZA ZAKLJUČKA
 </ul>
 
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
+<p><strong>📋 Instrukcije za nastavnike</strong></p>
+<p>{ConclusionPhase.InstructionsForTeachers.OpeningScript}</p>
+- Za svaki potez u ConclusionPhase.InstructionsForTeachers.FacilitationMoves renderuj kao <p>:
+<p>{potez}</p>
+
+<p><strong>Podstaknite pitanjima kao što su:</strong></p>
 <ul>
-  <li>Recite: Pozovite učenike da se vrate na istraživačko pitanje i razmisle kako njihovi prikupljeni dokazi pomažu da se na njega odgovori.</li>
-  <li>Recite: Podstaknite učenike da pregledaju svoje beleške i podatke i identifikuju obrasce koje primećuju kroz zapažanja.</li>
-  <li>Podstaknite učenike da prodiskutuju o idejama koje se javljaju u malim grupama i uporede objašnjenja.</li>
-  <li>Recite: Zamolite učenike da opravdaju ideje odgovarajući na podsticaje kao što su „Koji dokazi potkrepljuju ovu ideju?“</li>
-  <li>Vodite učenike da doteraju objašnjenja kroz diskusiju sa vršnjacima bez potvrđivanja ili ispravljanja ideja.</li>
-  <li>Recite: Uputite učenike da samostalno napišu objašnjenje, koristeći dokaze za potkrepljivanje svake tvrdnje.</li>
-  <li>Neka učenici podele svoje napisano objašnjenje sa partnerom ili malom grupom.</li>
+  - Za svako pitanje u ConclusionPhase.InstructionsForTeachers.ProbingQuestions, renderuj kao <li>.
 </ul>
 
-<p><strong>Očekivani odgovori učenika</strong></p>
+- Za svaki potez u ConclusionPhase.InstructionsForTeachers.FacilitationMoves (dodatni potezi ako ih ima), renderuj kao <p>.
+<p>{ConclusionPhase.InstructionsForTeachers.WritingPrompt}</p>
+<p>{ConclusionPhase.InstructionsForTeachers.CollaborationInstruction}</p>
+<p><em>{ConclusionPhase.InstructionsForTeachers.Guardrail}</em></p>
+
+<p><strong>✅ Očekivani odgovori učenika</strong></p>
 <ul>
-  <li>Pozivanje na specifična zapažanja ili podatke kao dokaze.</li>
-  <li>Tvrdnje koje su potkrepljene obrascima primećenim tokom istraživanja.</li>
-  <li>Objašnjenja koja povezuju dokaze sa zaključcima.</li>
-  <li>Korišćenje jezika rezonovanja kao što je „zato što“, „ovo pokazuje“ ili „na osnovu naših podataka“.</li>
+  - Za svaki odgovor u ConclusionPhase.ExpectedStudentResponses, renderuj kao <li>.
 </ul>
 
 ==================================================
@@ -1022,14 +1024,31 @@ ULAZNI JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Instrukcije za nastavnike moraju pratiti ovu strukturu: nastavnici podstiču učenike da se vrate na istraživačko pitanje, pregledaju prikupljene podatke, identifikuju obrasce, doteraju ideje kroz grupnu diskusiju i opravdaju objašnjenja dokazima. Nastavnici moraju voditi, ali nikada davati naučna objašnjenja. Model mora uključiti skriptovane podsticaje nastavnika kao što su Pregledajte svoje beleške i podatke, Koje obrasce primećujete, Koji dokazi potkrepljuju ovu ideju i Koristite svoje podatke da potkrepite tvrdnju. Instrukcije moraju zahtevati od učenika da samostalno napišu objašnjenje, a zatim ga podele sa partnerom ili grupom. Očekivani odgovori učenika moraju pokazati rezonovanje zasnovano na dokazima na opšti način, bez primera specifičnih za domen. Ceo izlaz mora ostati sadržajno neutralan."
+            "type": "object",
+            "properties": {
+              "OpeningScript": { "type": "string", "description": "Uvodna 'Recite:' izjava za vraćanje učenika na istraživačko pitanje i iznošenje ideja o tome kako dizajn funkcioniše." },
+              "FacilitationMoves": { "type": "array", "description": "2-3 pedagoška poteza kako bi se učenicima dalo vreme da pregledaju podatke, identifikuju obrasce i uporede rezultate kroz diskusiju.", "items": { "type": "string" } },
+              "ProbingQuestions": { "type": "array", "description": "3-4 specifična pitanja koja podstiču učenike da objasne obrasce, opravdaju odluke dokazima i opišu uzročno-posledične veze.", "items": { "type": "string" } },
+              "WritingPrompt": { "type": "string", "description": "Izjava 'Recite:' koja navodi šta njihovo pismeno objašnjenje mora da sadrži i podsetnik da koriste podatke kao dokaze." },
+              "CollaborationInstruction": { "type": "string", "description": "Instrukcija za učenike da prvo pišu samostalno, a zatim podele i dorade svoje rezonovanje sa partnerom ili grupom." },
+              "Guardrail": { "type": "string", "description": "Čvrst podsetnik da nastavnik NE bi trebalo da daje naučno objašnjenje, već da podstiče učenike da se pozovu na podatke." }
+            },
+            "required": ["OpeningScript", "FacilitationMoves", "ProbingQuestions", "WritingPrompt", "CollaborationInstruction", "Guardrail"],
+            "additionalProperties": false
+          },
+          "ExpectedStudentResponses": {
+            "type": "array",
+            "description": "3-4 odgovora koji direktno odgovaraju na istraživačko pitanje koristeći dokaze i uzročno-posledično rezonovanje (npr. 'kada smo promenili ___, desilo se ___').",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "Purpose",
           "Materials",
-          "InstructionsForTeachers"
+          "InstructionsForTeachers",
+          "ExpectedStudentResponses"
         ],
         "additionalProperties": false
       },
