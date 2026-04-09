@@ -235,35 +235,43 @@ SECTION 3: INVESTIGATION PHASE
 <p><strong>📋Instructions for Teachers</strong></p>
 
 <p><strong>Launch the Investigation – Introduce the task without explaining content.</strong></p>
+<p><strong>Say:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.Prompt}</p>
+<p><strong>Facilitation Moves:</strong></p>
 <ul>
-  <li>Say: Position students as investigators and explain that their role is to explore the model and gather evidence.</li>
-  <li>Display or distribute the investigation materials and reference model.</li>
-  <li>Prompt students to look for anything that does not match expectations or reference examples.</li>
-  <li>Emphasize that errors or mismatches are clues meant to spark thinking.</li>
+  - For each move in InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.PromptingOptions}</li>
 </ul>
 
-<p><strong>Collaboration Expectations – Establish shared responsibility.</strong></p>
+<p><strong>Collaboration Expectations – Frame the task as interdependent—each student contributes to shared analysis.</strong></p>
+<p><strong>Say:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.Prompt}</p>
+<p><strong>Facilitation Moves:</strong></p>
 <ul>
-  <li>Frame the investigation as interdependent work where every student contributes.</li>
-  <li>Require students to identify inaccuracies or mismatches in the model.</li>
-  <li>Direct students to record observations and evidence in a structured data table.</li>
-  <li>Have students compare their findings to a reference example and justify claims using evidence.</li>
-  <li>Encourage use of sentence starters such as “I think ___ because ___.”</li>
-  <li>Use participation structures (e.g., talking chips) to ensure equitable contribution.</li>
+  - For each move/expectation in InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.FacilitationMoves, render as <li>.
+  <li><strong>Prompt with questions such as:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.PromptingOptions}</li>
 </ul>
 
-<p><strong>Circulation Prompts – Use only while circulating.</strong></p>
+<p><strong>Circulation Prompts – Use these only while circulating.</strong></p>
+
+<p><strong>Conceptual Prompts</strong></p>
 <ul>
-  <li>Conceptual Prompt: What evidence tells you this part of the model is incorrect?</li>
-  <li>Conceptual Prompt: How does gravity help explain what you are observing?</li>
-  <li>Reasoning Prompt: How does changing distance affect motion in this model?</li>
-  <li>Reasoning Prompt: What would happen if this object had no forward motion?</li>
-  <li>Collaboration Prompt: Who has not contributed yet, and how will you include them?</li>
+  - For each move in InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Conceptual, render as <li>.
 </ul>
 
-<p><strong>❗Anticipated Misconceptions</strong></p>
+<p><strong>Reasoning Prompts</strong></p>
 <ul>
-  - Convert InvestigationPhase.AnticipatedMisconceptions into multiple <li> items (split into separate misconceptions if needed). Do NOT include numbering.
+  - For each move in InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Reasoning, render as <li>.
+</ul>
+
+<p><strong>Collaboration Prompts</strong></p>
+<ul>
+  - For each move in InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Collaboration, render as <li>.
+</ul>
+
+<p><strong>❗ <span style="color: rgb(145, 56, 230);">Anticipated Misconceptions</span></strong></p>
+- For each item in InvestigationPhase.AnticipatedMisconceptions:
+<p>{item.Misconception} (Ensure NO bolding/strong tags are used here)</p>
+<ul>
+  <li>{item.TeacherResponse} (Ensure NO bolding/strong tags are used here)</li>
 </ul>
 
 <p><strong>🪜Differentiation</strong></p>
@@ -809,12 +817,55 @@ INPUT JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "The model must include the following sections with headers and definition. These are in ().(Launch the Investigation - Introduce the investigation task without explaining content so students uncover ideas through exploration and evidence-gathering.) The model must show that the teacher sets up materials and expectations and that students run tests, trials, or observations without being told the scientific explanation. (Collaboration Expectations - Guide students to work interdependently with shared responsibility.) The model must produce a paragraph that instructs teachers on how to establish collaboration expectations during group investigations, ensuring all tasks require shared responsibility and equal participation. Do not create 'roles'. The paragraph must explicitly direct the model to include a list of required student actions presented as general investigation behaviors, not subject-specific outcomes. These required actions must include: identifying inaccuracies or mismatches in a the project; recording observations and evidence in a structured data table; comparing their work to a reference example and justifying claims with evidence; using sentence starters to explain reasoning (such as 'I think _ because _'); and using participation structures (such as talking chips) to ensure every student contributes. The schema must emphasize that teachers support collaboration by reinforcing norms, monitoring engagement, and prompting evidence-based discussion without supplying  explanations.(Circulation Prompts - Use these only while circulating, each prompt supports thinking, not answers.) Prompts must be categorized into Conceptual (example: 'What evidence tells you this is happening?'), Reasoning (example: 'How does this trial change your thinking?'), and Collaboration (example: 'Who has not contributed yet? How can you include them?'). The model must clearly state that the teacher must not give away scientific explanations."
+            "type": "object",
+            "properties": {
+              "LaunchInvestigation": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create teacher scripts (starting with 'Say:') to introduce a puzzling scenario or model. Include an instruction to 'Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result' to spark curiosity." },
+                  "FacilitationMoves": { "type": "array", "description": "Generate 2-3 moves to guide the launch. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generate 2-3 specific prompts to help students notice important or unexpected features, generate possible explanations, and justify thinking with evidence." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "CollaborationExpectations": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Create a script ('Say:') to frame the task as interdependent and emphasize shared responsibility. Include instructions to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips." },
+                  "FacilitationMoves": { "type": "array", "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Ensure they focus on all students contributing to observing and refining ideas.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Provide 2-3 prompts to encourage students to share observations, compare interpretations, justify claims with evidence, and collaboratively revise ideas." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "CirculationPrompts": {
+                "type": "object",
+                "description": "Specific prompts to be used by the teacher while circulating between groups.",
+                "properties": {
+                  "Conceptual": { "type": "array", "description": "2-3 prompts focusing on key scientific or lesson concepts (e.g., 'What evidence shows this is working?').", "items": { "type": "string" } },
+                  "Reasoning": { "type": "array", "description": "2-3 prompts to press for justification and logic (e.g., 'How does this trial change your thinking?').", "items": { "type": "string" } },
+                  "Collaboration": { "type": "array", "description": "2-3 prompts to ensure all voices are included (e.g., 'Who has not contributed yet?').", "items": { "type": "string" } }
+                },
+                "required": ["Conceptual", "Reasoning", "Collaboration"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["LaunchInvestigation", "CollaborationExpectations", "CirculationPrompts"],
+            "additionalProperties": false
           },
           "AnticipatedMisconceptions": {
-            "type": "string",
-            "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding."
+            "type": "array",
+            "description": "Generate 2-3 common student misconceptions likely to arise during this lesson. Each item must focus on a specific misunderstanding and a teacher response script.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Misconception": { "type": "string", "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags." },
+                "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (starting with 'Say:'). DO NOT use any bolding or strong tags." }
+              },
+              "required": ["Misconception", "TeacherResponse"],
+              "additionalProperties": false
+            }
           },
           "Differentiation": {
             "type": "string",

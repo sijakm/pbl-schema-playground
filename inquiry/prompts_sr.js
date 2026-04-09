@@ -239,35 +239,47 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 
 <p><strong>Pokretanje istraživanja – Uvedite zadatak bez objašnjavanja sadržaja.</strong></p>
+<p><strong>Recite:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.Prompt}</p>
+<p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  <li>Recite: Postavite učenike u ulogu istraživača i objasnite da je njihova uloga da istraže model i prikupe dokaze.</li>
-  <li>Prikažite ili podelite materijale za istraživanje i referentni model.</li>
-  <li>Podstaknite učenike da traže bilo šta što se ne poklapa sa očekivanjima ili referentnim primerima.</li>
-  <li>Naglasite da su greške ili neslaganja tragovi koji treba da pokrenu razmišljanje.</li>
+  - Za svaki potez u InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.PromptingOptions}</li>
 </ul>
 
-<p><strong>Očekivanja za saradnju – Uspostavite zajedničku odgovornost.</strong></p>
+<p><strong>Očekivanja za saradnju – Predstavite zadatak kao međuzavistan rad u kojem svaki učenik doprinosi zajedničkoj analizi.</strong></p>
+<p><strong>Recite:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.Prompt}</p>
+<p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
-  <li>Postavite istraživanje kao međuzavisan rad u kojem svaki učenik doprinosi.</li>
-  <li>Zahtevajte od učenika da identifikuju netačnosti ili neslaganja u modelu.</li>
-  <li>Uputite učenike da beleže zapažanja i dokaze u strukturiranu tabelu podataka.</li>
-  <li>Neka učenici uporede svoja saznanja sa referentnim primerom i opravdaju tvrdnje koristeći dokaze.</li>
-  <li>Podstaknite korišćenje početaka rečenica kao što su „Mislim da ___ zato što ___.“</li>
-  <li>Koristite strukture za participaciju (npr. žetoni za razgovor) kako biste osigurali ravnopravan doprinos.</li>
+  - Za svaki potez/očekivanje u InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.FacilitationMoves, renderuj kao <li>.
+  <li><strong>Podstaknite pitanjima kao što su:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.PromptingOptions}</li>
 </ul>
 
 <p><strong>Podsticaji tokom cirkulisanja – Koristite samo dok obilazite grupe.</strong></p>
+
+<p><strong>Konceptualni podsticaji</strong></p>
 <ul>
-  <li>Konceptualni podsticaj: Koji dokazi ti govore da je ovaj deo modela netačan?</li>
-  <li>Konceptualni podsticaj: Kako gravitacija pomaže da objasniš ono što posmatraš?</li>
+  - Za svaki podsticaj u InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Conceptual, renderuj kao <li>.
+</ul>
+
+<p><strong>Podsticaji za rezonovanje</strong></p>
+<ul>
+  - Za svaki podsticaj u InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Reasoning, renderuj kao <li>.
+</ul>
+
+<p><strong>Podsticaji za saradnju</strong></p>
+<ul>
+  - Za svaki podsticaj u InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Collaboration, renderuj kao <li>.
+</ul>da objasniš ono što posmatraš?</li>
   <li>Podsticaj za rezonovanje: Kako promena udaljenosti utiče na kretanje u ovom modelu?</li>
   <li>Podsticaj za rezonovanje: Šta bi se desilo kada ovaj objekat ne bi imao kretanje unapred?</li>
   <li>Podsticaj za saradnju: Ko još nije doprineo i kako ćete ga/je uključiti?</li>
 </ul>
 
-<p><strong>❗ Česta pogrešna uverenja</strong></p>
+<p><strong>❗ <span style="color: rgb(145, 56, 230);">Česta pogrešna uverenja</span></strong></p>
+- Za svaku stavku u InvestigationPhase.AnticipatedMisconceptions:
+<p>{item.Misconception} (Osigurajte da se ovde NE koristi boldovanje/strong tagovi)</p>
 <ul>
-  - Pretvori InvestigationPhase.AnticipatedMisconceptions u više <li> stavki (podeli u zasebna pogrešna uverenja ako je potrebno). NEMOJ uključivati numerisanje.
+  <li>{item.TeacherResponse} (Osigurajte da se ovde NE koristi boldovanje/strong tagovi)</li>
 </ul>
 
 <p><strong>🪜 Diferencijacija</strong></p>
@@ -814,12 +826,55 @@ ULAZNI JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Model mora uključivati sledeće sekcije sa zaglavljima i definicijom (u zagradama). (Pokretanje istraživanja - Uvedite zadatak istraživanja bez objašnjavanja sadržaja tako da učenici otkriju ideje kroz istraživanje i prikupljanje dokaza.) Model mora pokazati da nastavnik priprema materijale i očekivanja, a da učenici sprovode testove, pokušaje ili posmatranja bez davanja naučnog objašnjenja. (Očekivanja za saradnju - Vodite učenike da rade međuzavisno sa zajedničkom odgovornošću.) Model mora generisati pasus koji instruiše nastavnike kako da uspostave očekivanja za saradnju tokom grupnih istraživanja, osiguravajući da svi zadaci zahtevaju zajedničku odgovornost i ravnopravno učešće. Nemoj kreirati 'uloge'. Pasus mora eksplicitno usmeriti model da uključi listu zahtevanih postupaka učenika predstavljenih kao opšta istraživačka ponašanja, a ne ishodi specifični za predmet. Ovi zahtevani postupci moraju uključivati: identifikaciju netačnosti ili neslaganja u projektu; beleženje zapažanja i dokaza u strukturiranu tabelu podataka; upoređivanje njihovog rada sa referentnim primerom i opravdavanje tvrdnji dokazima; korišćenje početaka rečenica za objašnjavanje rezonovanja (kao što je 'Mislim da _ zato što _'); i korišćenje struktura za participaciju (kao što su žetoni za razgovor) kako bi se osiguralo da svaki učenik doprinosi. Šema mora naglasiti da nastavnici podržavaju saradnju učvršćivanjem normi, praćenjem angažovanja i podsticanjem diskusije zasnovane na dokazima bez davanja objašnjenja. (Podsticaji tokom cirkulisanja - Koristite ove samo dok obilazite grupe, svaki podsticaj podržava razmišljanje, a ne odgovore.) Podsticaji moraju biti kategorisani u Konceptualne (primer: 'Koji dokazi ti govore da se ovo dešava?'), Rezonovanje (primer: 'Kako ovaj pokušaj menja tvoje razmišljanje?'), i Saradnju (primer: 'Ko još nije doprineo? Kako ga/je možete uključiti?'). Model mora jasno navesti da nastavnik ne sme otkriti naučna objašnjenja."
+            "type": "object",
+            "properties": {
+              "LaunchInvestigation": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte skripte (koje počinju sa 'Recite:') za uvođenje zbunjujućeg scenarija ili modela. Uključite instrukciju za 'Prikazivanje modela, scenarija, demonstracije ili kratke priče koja uključuje grešku, neefikasnost ili neočekivani rezultat' kako biste podstakli radoznalost." },
+                  "FacilitationMoves": { "type": "array", "description": "Generišite 2-3 poteza za vođenje pokretanja. Uključite omogućavanje vremena učenicima za posmatranje pre reagovanja, podsticanje više interpretacija i naglašavanje da može postojati više validnih ideja.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Generišite 2-3 specifična podsticaja kako biste pomogli učenicima da uoče važne ili neočekivane karakteristike, generišu moguća objašnjenja i opravdaju razmišljanje dokazima." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "CollaborationExpectations": {
+                "type": "object",
+                "properties": {
+                  "Prompt": { "type": "string", "description": "Kreirajte scenario ('Recite:') za postavljanje zadatka kao međuzavisnog rada i naglasite zajedničku odgovornost. Uključite instrukcije za korišćenje početaka rečenica (npr. 'Mislim... zato što...') i struktura za participaciju kao što su žetoni za razgovor." },
+                  "FacilitationMoves": { "type": "array", "description": "Navedite 3-5 specifičnih poteza ili ponašanja učenika koja treba pratiti tokom grupnog rada (npr. identifikovanje obrazaca, beleženje u zajedničke tabele podataka, upoređivanje interpretacija). Osigurajte da su fokusirani na to da svi učenici doprinose posmatranju i doterivanju ideja.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Navedite 2-3 podsticaja kako biste ohrabrili učenike da dele zapažanja, upoređuju interpretacije, opravdavaju tvrdnje dokazima i zajednički revidiraju ideje." }
+                },
+                "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
+                "additionalProperties": false
+              },
+              "CirculationPrompts": {
+                "type": "object",
+                "description": "Specifični podsticaji koje nastavnik koristi dok obilazi grupe.",
+                "properties": {
+                  "Conceptual": { "type": "array", "description": "2-3 podsticaja fokusirana na ključne naučne ili koncepte lekcije (npr. 'Koji dokazi pokazuju da ovo radi?').", "items": { "type": "string" } },
+                  "Reasoning": { "type": "array", "description": "2-3 podsticaja za podsticanje opravdanja i logike (npr. 'Kako ovaj pokušaj menja tvoje razmišljanje?').", "items": { "type": "string" } },
+                  "Collaboration": { "type": "array", "description": "2-3 podsticaja za osiguravanje uključivanja svih glasova (npr. 'Ko još nije doprineo?').", "items": { "type": "string" } }
+                },
+                "required": ["Conceptual", "Reasoning", "Collaboration"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["LaunchInvestigation", "CollaborationExpectations", "CirculationPrompts"],
+            "additionalProperties": false
           },
           "AnticipatedMisconceptions": {
-            "type": "string",
-            "description": "Lista uobičajenih pogrešnih uverenja učenika koje će se verovatno javiti tokom ove faze nastave, uparena sa jasnim jezikom za ispravljanje namenjenim nastavniku koji modeluje kako odgovoriti u trenutku da bi se učenici vodili ka tačnom konceptualnom razumevanju."
+            "type": "array",
+            "description": "Generišite 2-3 česta pogrešna uverenja učenika koja će se verovatno pojaviti tokom ove lekcije. Svaka stavka mora da se fokusira na specifično nerazumevanje i skriptu odgovora nastavnika.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Misconception": { "type": "string", "description": "Opišite pogrešno uverenje u 1 rečenici, počevši sa 'Učenici mogu misliti...'. NEMOJTE koristiti boldovanje niti strong tagove." },
+                "TeacherResponse": { "type": "string", "description": "Jasna skripta odgovora za nastavnika (počevši sa 'Reakcija nastavnika: ') koja modeluje kako odgovoriti u trenutku pomoću specifičnog podsticaja (počevši sa 'Recite:'). NEMOJTE koristiti boldovanje niti strong tagove." }
+              },
+              "required": ["Misconception", "TeacherResponse"],
+              "additionalProperties": false
+            }
           },
           "Differentiation": {
             "type": "string",
