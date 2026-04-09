@@ -156,7 +156,7 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 
-<p><strong>Angažovanje (Engage) – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Angažovanje (Engage) – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
@@ -164,7 +164,7 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
-<p><strong>Povezivanje (Connect) – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Povezivanje (Connect) – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
@@ -172,7 +172,7 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, renderuj kao <li>.
 </ul>
 
-<p><strong>Aktivacija (Activate) – Prebacite učenike na zajedničko pronalaženje smisla.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Aktivacija (Activate) – Prebacite učenike na zajedničko pronalaženje smisla.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>
@@ -180,7 +180,7 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
-<p><strong>Ispitivanje (Probe) – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Ispitivanje (Probe) – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
 <p><strong>Potezi za facilitaciju:</strong></p>
 <ul>

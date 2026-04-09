@@ -156,7 +156,7 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
 
 <p><strong>📋Instructions for Teachers</strong></p>
 
-<p><strong>Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</span></strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
@@ -164,7 +164,7 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
   <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
-<p><strong>Connect – Help students link their observations to the broader mystery that will anchor the investigation.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Connect – Help students link their observations to the broader mystery that will anchor the investigation.</span></strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
@@ -172,7 +172,7 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
   - For each move in OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, render as <li>.
 </ul>
 
-<p><strong>Activate – Shift students into collaborative sensemaking.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Activate – Shift students into collaborative sensemaking.</span></strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
@@ -180,7 +180,7 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
   <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
-<p><strong>Probe – Encourage refinement of thinking by pushing students to examine assumptions.</strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Probe – Encourage refinement of thinking by pushing students to examine assumptions.</span></strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
 <p><strong>Facilitation Moves:</strong></p>
 <ul>
