@@ -1,18 +1,18 @@
 window.promptsSR = {
-  STEP0_PROMPT_TEMPLATE: `Kreiraj SAMO okvir unit-a zasnovanog na ISTRAŽIVANJU (Korak 0) koristeći informacije u nastavku. NEMOJ kreirati pun plan unit-a i NEMOJ pisati pune planove lekcija.
+  STEP0_PROMPT_TEMPLATE: `Kreiraj SAMO okvir nastavne oblasti zasnovane na ISTRAŽIVANJU (Korak 0) koristeći informacije u nastavku. NEMOJ kreirati pun plan nastavne oblasti i NEMOJ pisati pune planove lekcija.
 
 MORAŠ izbaciti validan JSON koji se tačno poklapa sa priloženom JSON šemom: UnitPlanResponse. Nemoj uključivati nikakve dodatne ključeve. Koristi kompaktno JSON formatiranje (bez dodatnih praznih redova ili razmaka između JSON propertija). Bez HTML-a. Bez emojija. Običan tekst unutar string polja.
 
-Predmet unit-a: {{$Subject}}
-Naziv unit-a: {{$Name}}
-Opis unit-a/Instrukcija: {{$UserPrompt}}
+Predmet nastavne oblasti: {{$Subject}}
+Naziv nastavne oblasti: {{$Name}}
+Opis nastavne oblasti/Instrukcija: {{$UserPrompt}}
 Razred: {{$GradeLevel}}
 Trajanje časa u minutima: {{$ClassDuration}}
 Traženi broj lekcija: {{$NumberOfItems}}
 Standardi za usklađivanje (koristi doslovno ako su prisutni; NEMOJ dodavati nove standarde): {{$Standards}}
 Učenici sa individualizovanom podrškom (samo kontekst): {{$LearningPlans}}
 Resursi/Mediji za korišćenje: {{$MediaContext}}
-Sadržaj unit-a: {{$AttachedUnit}}
+Sadržaj nastavne oblasti: {{$AttachedUnit}}
 Priloženi sadržaj lekcije (ako postoji): {{$AttachedLesson}}
 
 ZAHTEVI ZA OKVIR ISTRAŽIVANJA:
@@ -37,19 +37,19 @@ OGRANIČENJA NIZA LEKCIJA (LESSONS ARRAY):
 PRAVILO ZA OUTPUT:
 Vrati SAMO JSON koji se validira prema UnitPlanResponse šemi.`,
 
-  PER_LESSON_PROMPT_TEMPLATE: `Kreiraj JEDAN istraživački plan lekcije (NE plan unit-a, NE više lekcija) koristeći informacije u nastavku. MORAŠ izbaciti validan JSON koji se tačno poklapa sa priloženom JSON šemom: InquiryUnitPlanResponse. Nemoj uključivati nikakve dodatne ključeve. Koristi kompaktno JSON formatiranje (bez dodatnih praznih redova ili razmaka između JSON propertija). Bez HTML-a. Bez emojija. Bez markdown-a. Običan tekst unutar string polja.
+  PER_LESSON_PROMPT_TEMPLATE: `Kreiraj JEDAN istraživački plan lekcije (NE plan nastavne oblasti, NE više lekcija) koristeći informacije u nastavku. MORAŠ izbaciti validan JSON koji se tačno poklapa sa priloženom JSON šemom: InquiryUnitPlanResponse. Nemoj uključivati nikakve dodatne ključeve. Koristi kompaktno JSON formatiranje (bez dodatnih praznih redova ili razmaka između JSON propertija). Bez HTML-a. Bez emojija. Bez markdown-a. Običan tekst unutar string polja.
 
-Predmet unit-a: {{$Subject}}
-Naziv unit-a: {{$Name}}
-Opis unit-a/Instrukcija: {{$UserPrompt}}
+Predmet nastavne oblasti: {{$Subject}}
+Naziv nastavne oblasti: {{$Name}}
+Opis nastavne oblasti/Instrukcija: {{$UserPrompt}}
 Razred: {{$GradeLevel}}
 Trajanje časa u minutima: {{$ClassDuration}}
 Standardi za usklađivanje (koristi doslovno ako su prisutni; NEMOJ dodavati nove standarde): {{$Standards}}
 Učenici sa individualizovanom podrškom (MORA se koristiti SAMO unutar InvestigationPhase.AccommodationsAndModifications; koristi imena učenika/planove tačno onako kako su napisani): {{$LearningPlans}}
 Resursi/Mediji za korišćenje: {{$MediaContext}}
-Sadržaj unit-a: {{$AttachedUnit}}
+Sadržaj nastavne oblasti: {{$AttachedUnit}}
 
-Elementi unit-a i lekcije iz Koraka 0 (koristi doslovno):
+Elementi nastavne oblasti i lekcije iz Koraka 0 (koristi doslovno):
 {{$ParentUnitData}}
 - UnitDescription.EssentialQuestions (tačno onako kako je navedeno; ponovo koristi doslovno gde je relevantno): {{$UnitEssentialQuestions}}
 
@@ -156,33 +156,33 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Angažovanje (Engage) – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</span></strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Angažovanje – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Povezivanje (Connect) – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</span></strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Povezivanje – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions}</li>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, renderuj kao <li>.
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Aktivacija (Activate) – Prebacite učenike na zajedničko pronalaženje smisla.</span></strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Aktivacija – Prebacite učenike na zajedničko pronalaženje smisla.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Ispitivanje (Probe) – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</span></strong></p>
+<p><strong><span style="color: rgb(145, 56, 230);">Ispitivanje – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</span></strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions}</li>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves, renderuj kao <li>.
@@ -206,7 +206,7 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 
 <p><strong>Vođenje generisanja pitanja – Uvedite istraživanje podsticanjem radoznalosti, a ne izlaganjem sadržaja.</strong></p>
 <p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.PromptingOptions}</li>
@@ -214,7 +214,7 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 
 <p><strong>Identifikacija istraživačkog pitanja – Pomozite učenicima da zajednički odluče koje pitanje je najkorisnije za istraživanje.</strong></p>
 <p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.PromptingOptions}</li>
@@ -222,7 +222,7 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 
 <p><strong>Kreiranje plana akcije – Podržite učenike u dizajniranju sopstvenog istraživanja umesto da im date gotov plan.</strong></p>
 <p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.PromptingOptions}</li>
@@ -245,7 +245,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 
 <p><strong>Pokretanje istraživanja – Uvedite zadatak bez objašnjavanja sadržaja.</strong></p>
 <p><strong>Recite:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez u InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.PromptingOptions}</li>
@@ -253,7 +253,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 
 <p><strong>Očekivanja za saradnju – Predstavite zadatak kao međuzavistan rad u kojem svaki učenik doprinosi zajedničkoj analizi.</strong></p>
 <p><strong>Recite:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.Prompt}</p>
-<p><strong>Potezi za facilitaciju:</strong></p>
+<p><strong>Facilitatorski koraci:</strong></p>
 <ul>
   - Za svaki potez/očekivanje u InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.PromptingOptions}</li>
@@ -293,7 +293,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaki početak u InvestigationPhase.Differentiation.LanguageLearners.SentenceStarters, renderuj kao <li>.
 </ul>
 
-<p><strong>Dodatna podrška (skela):</strong></p>
+<p><strong>Dodatna podrška:</strong></p>
 - Za svaku strategiju u InvestigationPhase.Differentiation.AdditionalScaffolding.Strategies:
 <p>{strategija}</p>
 <p>Ponudite kontrolnu listu korak-po-korak za vođenje istraživanja:</p>
@@ -301,7 +301,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaku stavku u InvestigationPhase.Differentiation.AdditionalScaffolding.Checklist, renderuj kao <li>.
 </ul>
 
-<p><strong>Proširenja (idite dublje):</strong></p>
+<p><strong>Proširenja:</strong></p>
 - Za svaku strategiju u InvestigationPhase.Differentiation.GoDeeper.Strategies:
 <p>{strategija}</p>
 
@@ -351,7 +351,6 @@ SEKCIJA 4: FAZA ZAKLJUČKA
   - Renderuj svaku stavku iz ConclusionPhase.Materials kao <li>. Ako je prazno, izbaci <li>Nema</li>.
 </ul>
 
-<p><strong>📋 Instrukcije za nastavnike</strong></p>
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 <p>{ConclusionPhase.InstructionsForTeachers.OpeningScript}</p>
 - Za svaki potez u ConclusionPhase.InstructionsForTeachers.FacilitationMoves renderuj kao <p>:
@@ -517,7 +516,7 @@ Vrati SAMO kombinovani HTML za sve sekcije po redu. Bez dodatnog omotačkog teks
 
   UNIT_COMMON_HTML_PROMPT_TEMPLATE: `Ti si profesionalni formater HTML-a za nastavu koji piše za nastavnike u učionici.
 
-Dobićeš strukturirani JSON koji predstavlja informacije o unit-u na visokom nivou.
+Dobićeš strukturirani JSON koji predstavlja informacije o nastavnoj oblasti na visokom nivou.
 
 KRITIČNA PRAVILA
 - Izbaci SAMO validan HTML.
@@ -577,27 +576,27 @@ ULAZNI JSON:
         "properties": {
           "Description": {
             "type": "string",
-            "description": "Opis kao jedan povezan pasus u običnom tekstu (4–5 celih rečenica) napisan prirodnim glasom nastavnika koji biste mogli direktno reći učenicima. Bez HTML-a, bez emojija, bez nabrajanja. Mora teći konverzacijski, ali pratiti ovu strukturu (bez naslova): (1) rečenica sa „udicom“ koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica „U ovom unit-u ćete...“ o ishodima postignuća, (3) rečenica „Ojačaćete svoje veštine u...“ o sposobnostima razmišljanja/analize, (4) rečenica „Ovo se povezuje sa...“ o relevantnosti za stvarni svet, (5) rečenica „Razumevanje ovoga je važno jer...“ o širem značaju ili dugoročnom uticaju."
+            "description": "Opis kao jedan povezan pasus u običnom tekstu (4–5 celih rečenica) napisan prirodnim glasom nastavnika koji biste mogli direktno reći učenicima. Bez HTML-a, bez emojija, bez nabrajanja. Mora teći konverzacijski, ali pratiti ovu strukturu (bez naslova): (1) rečenica sa „udicom“ koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica „U ovoj nastavnoj oblasti ćete...“ o ishodima postignuća, (3) rečenica „Ojačaćete svoje veštine u...“ o sposobnostima razmišljanja/analize, (4) rečenica „Ovo se povezuje sa...“ o relevantnosti za stvarni svet, (5) rečenica „Razumevanje ovoga je važno jer...“ o širem značaju ili dugoročnom uticaju."
           },
           "EssentialQuestions": {
             "type": "array",
             "minItems": 3,
             "maxItems": 3,
-            "description": "Kreiraj ključna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokaz, obrasci, odnosi, sistemi ili rezonovanje. NEMOJ pominjati nikakve pojmove, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguća za odgovor jednostavnim učenjem sadržaja lekcije ili unit-a. Fokusiraj se samo na velike ideje, ne na predmetnu materiju.",
+            "description": "Kreiraj ključna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokaz, obrasci, odnosi, sistemi ili rezonovanje. NEMOJ pominjati nikakve pojmove, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguća za odgovor jednostavnim učenjem sadržaja lekcije ili nastavne oblasti. Fokusiraj se samo na velike ideje, ne na predmetnu materiju.",
             "items": {
               "type": "string"
             }
           },
           "StudentLearningObjectives": {
             "type": "array",
-            "description": "Kompletna sekcija 'Ciljevi učenja učenika' za ceo unit. Svaka stavka na listi mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se sa DOK oznakom u zagradi",
+            "description": "Kompletna sekcija 'Ciljevi učenja učenika' za celu nastavnu oblast. Svaka stavka na listi mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se sa DOK oznakom u zagradi",
             "items": {
               "type": "string"
             }
           },
           "StandardsAligned": {
             "type": "array",
-            "description": "Navedi sve jedinstvene obrazovne standarde korišćene bilo gde u ovom unit-u i njegovim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju unit-a. Svaki standard mora uključivati kod standarda i opis, npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
+            "description": "Navedi sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj nastavnoj oblasti i njenim lekcijama. NEMOJ dodavati standarde koji se ne pojavljuju u sadržaju unit-a. Svaki standard mora uključivati kod standarda i opis, npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
             "items": {
               "type": "string"
             }
@@ -621,7 +620,7 @@ ULAZNI JSON:
       },
       "Lessons": {
         "type": "array",
-        "description": "Lista kontejnera lekcija za ovaj unit (samo okvir). Svaka stavka mora biti bez preklapanja i jasno omeđena tako da se sadržaj ne ponavlja kroz lekcije.",
+        "description": "Lista kontejnera lekcija za ovu nastavnu oblast (samo okvir). Svaka stavka mora biti bez preklapanja i jasno omeđena tako da se sadržaj ne ponavlja kroz lekcije.",
         "items": {
           "type": "object",
           "properties": {
@@ -668,21 +667,21 @@ ULAZNI JSON:
     "properties": {
       "AssessPriorKnowledge": {
         "type": "string",
-        "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju unit-a, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajena pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru unit-a. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
+        "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju nastavne oblasti, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajena pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru nastavne oblasti. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
       },
       "EssentialQuestions": {
         "type": "array",
-        "description": "Samo nalepite sva ključna pitanja sa nivoa unit-a istim redosledom ako su data. Ako nisu data, generišite tačno 3 konceptualna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. NEMOJTE pominjati nikakve termine, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguće ih je odgovoriti učenjem sadržaja lekcije ili unit-a. Fokusirajte se samo na velike ideje, a ne na predmetnu materiju.",
+        "description": "Samo nalepite sva ključna pitanja sa nivoa nastavne oblasti istim redosledom ako su data. Ako nisu data, generišite tačno 3 konceptualna pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. NEMOJTE pominjati nikakve termine, procese, rečnik ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguće ih je odgovoriti učenjem sadržaja lekcije ili nastavne oblasti. Fokusirajte se samo na velike ideje, a ne na predmetnu materiju.",
         "items": { "type": "string" }
       },
       "StudentLearningObjectives": {
         "type": "array",
-        "description": "Navedite samo specifične ciljeve učenja učenika za ovu lekciju, izvedene iz ciljeva na nivou unit-a. Svaki cilj treba da bude merljiv i da uključuje DOK oznaku.",
+        "description": "Navedite samo specifične ciljeve učenja učenika za ovu lekciju, izvedene iz ciljeva na nivou nastavne oblasti. Svaki cilj treba da bude merljiv i da uključuje DOK oznaku.",
         "items": { "type": "string" }
       },
       "StandardsAligned": {
         "type": "array",
-        "description": "Kompletna sekcija 'Usklađeni standardi' za ovu lekciju. Svaki standard mora uključivati kod i opis standarda, i moraju biti potpuno isti onima koji su korišćeni u Unit-u. npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
+        "description": "Kompletna sekcija 'Usklađeni standardi' za ovu lekciju. Svaki standard mora uključivati kod i opis standarda, i moraju biti potpuno isti onima koji su korišćeni u nastavnoj oblasti. npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec za opisivanje cikličnih obrazaca lunarnih faza, pomračenja i godišnjih doba.'",
         "items": {
           "type": "string"
         }
@@ -1078,7 +1077,7 @@ ULAZNI JSON:
       },
       "ReviewAndSpacedRetrieval": {
         "type": "object",
-        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake'. Ova 5-minutna aktivnost mora uključivati: 1. Sekcija Instrukcije za nastavnike koja sadrži aktivno prisećanje, ispravljanje pogrešnih uverenja, povezivanje sa ciljevima unit-a i prisećanje na prethodno naučeno.",
+        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake'. Ova 5-minutna aktivnost mora uključivati: 1. Sekcija Instrukcije za nastavnike koja sadrži aktivno prisećanje, ispravljanje pogrešnih uverenja, povezivanje sa ciljevima nastavne oblasti i prisećanje na prethodno naučeno.",
         "properties": {
           "InstructionsForTeachers": {
             "type": "object",
@@ -1116,11 +1115,11 @@ ULAZNI JSON:
               },
               "EssentialQuestionConnection": {
                 "type": "object",
-                "description": "Pomozite učenicima da povežu današnje specifične dokaze sa širim ključnim pitanjima unit-a.",
+                "description": "Pomozite učenicima da povežu današnje specifične dokaze sa širim ključnim pitanjima nastavne oblasti.",
                 "properties": {
                   "Question": {
                     "type": "string",
-                    "description": "Scenario za nastavnika (počinje sa 'Recite:') koji povezuje današnja saznanja sa jednim od ključnih pitanja unit-a."
+                    "description": "Scenario za nastavnika (počinje sa 'Recite:') koji povezuje današnja saznanja sa jednim od ključnih pitanja nastavne oblasti."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -1133,11 +1132,11 @@ ULAZNI JSON:
               },
               "SpacedRetrieval": {
                 "type": "object",
-                "description": "Ponovo prođite kroz koncept iz prethodnog unit-a ili lekcije kako biste ojačali kumulativno zadržavanje znanja.",
+                "description": "Ponovo prođite kroz koncept iz prethodne nastavne oblasti ili lekcije kako biste ojačali kumulativno zadržavanje znanja.",
                 "properties": {
                   "TeacherSay": {
                     "type": "string",
-                    "description": "Scenario za nastavnika (počinje sa 'Recite:') koji eksplicitno povezuje koncept iz prethodne lekcije sa današnjim radom. Mora uključiti meta-referencu (npr. '(Vodi poreklo iz Unit 1, Lekcije 2.)') direktno u tekst."
+                    "description": "Scenario za nastavnika (počinje sa 'Recite:') koji eksplicitno povezuje koncept iz prethodne lekcije sa današnjim radom. Mora uključiti meta-referencu (npr. '(Vodi poreklo iz Nastavne oblasti 1, Lekcije 2.)') direktno u tekst."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
