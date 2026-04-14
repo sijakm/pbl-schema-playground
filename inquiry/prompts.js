@@ -420,53 +420,35 @@ CONTENT PROCESSING RULES:
 
 RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty output <li>None</li>):
 
-<h3><span style="color: rgb(115, 191, 39);">Review & Spaced Retrieval (5 min)</span></h3>
+<h3><span style="color: rgb(145, 56, 230);">Review & Spaced Retrieval (5 min)</span></h3>
 
-<p>📚 <strong>Materials</strong></p>
-<ul>
-  [List items from ReviewAndSpacedRetrieval.Materials or <li>None</li>]
-</ul>
-
-<p><strong>Teacher Notes:</strong> [Write a brief pedagogical context about active recall and long-term retention based on the lesson's goal, using ONLY ideas present in the input section.]</p>
+<p>Teacher Notes: This strategy strengthens retention through active recall and connects today’s investigation of the shaduf to core science ideas about levers and mechanical advantage. The transcendent reflection helps students recognize how simple machines like levers allow people to solve real-world problems efficiently, both in ancient Egypt and today. It reinforces that changing variables such as arm length or counterweight affects force, effort, and efficiency in a system. </p>
 
 <h3>📋 Instructions for Teachers</h3>
 
 <p><strong>Active Recall</strong></p>
-<ul>
-  <li><strong>Say:</strong> [Extract and clean ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question]</li>
-</ul>
+<p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question using Single Say Rule]</p>
 <p>✅ <strong>Expected Student Responses</strong></p>
 <ul>
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses as <li> items]
 </ul>
 
 <p><strong>Correct Common Misconceptions</strong></p>
+- For each item in ReviewAndSpacedRetrieval.InstructionsForTeachers.CorrectCommonMisconceptions:
+<p>{item.Misconception}</p>
 <ul>
-  <li>[Provide a concise correction script for common errors using ONLY what appears in the input section; if none are explicit, summarize minimally without adding new content.]</li>
+  <li>{item.TeacherResponse}</li>
 </ul>
 
 <p><strong>💭 Essential Question Connection</strong></p>
-<ul>
-  <li><strong>Say:</strong> [Create a prompt connecting today's evidence to the unit's big question using only the provided Unit Essential Questions context if present, otherwise keep generic and content-neutral.]</li>
-</ul>
+<p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question using Single Say Rule]</p>
 <p>✅ <strong>Expected Student Responses</strong></p>
 <ul>
-  <li>Students explain how evidence clarified a larger pattern.</li>
-</ul>
-
-<p><strong>🌍 Transcendent Thinking</strong></p>
-<ul>
-  <li><strong>Say:</strong> [Create a prompt asking why this matters in the real world or future, consistent with the lesson.]</li>
-</ul>
-<p>✅ <strong>Expected Student Responses</strong></p>
-<ul>
-  <li>Students connect learning to real-world decisions or global systems.</li>
+  [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses as <li> items]
 </ul>
 
 <p><strong>⏳ Spaced Retrieval</strong></p>
-<ul>
-  <li><strong>Say:</strong> [Clean ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay by removing metadata and "Say:" prefixes; output only the core instruction.]</li>
-</ul>
+<p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay using metadata migration and Single Say Rule]</p>
 <p>✅ <strong>Expected Student Responses</strong></p>
 <ul>
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses as <li> items]
@@ -513,22 +495,21 @@ SECTION 8: STUDENT PRACTICE
 ==================================================
 
 SECTION HEADING (MUST):
-<h3><span>🖊Student Practice</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">🖋️ Student Practice</span></h3>
 
-Render StudentPractice plain text into HTML using this REQUIRED structure and order (do not reorder; do not add tasks; do not add emojis):
-- Teacher Notes paragraph
-- Task 1 (DOK 2) directions
-- Expected Student Responses (as <ul> with 3–4 <li>)
-- Task 2 (DOK 3) directions
-- Expected Student Responses (as <ul> with 3–4 <li>)
-- Task 3 (DOK 3) directions + required elements
-- Expected Student Responses (as <ul> with 3–4 <li>)
-- Reflection at end
+<p>Teacher Notes: This practice helps students extend the lesson by applying inquiry skills to a new situation outside class. Students will continue building the habits of noticing patterns, explaining choices with evidence, and considering how design changes affect results. The tasks also connect learning to real-world problem solving, showing that investigation and revision are useful beyond a single classroom activity.</p>
 
-Expected Student Responses blocks MUST:
-<p><strong>✅Expected Student Responses</strong></p>
+- For each task in StudentPractice.Tasks:
+<p><strong>{task.TaskTitle}:</strong> {task.Instruction}</p>
+<p><strong>Success Criteria</strong></p>
 <ul>
-  <li>...</li>
+  [Render {task.SuccessCriteria} as <li> items]
+</ul>
+
+<p><strong>Reflection:</strong></p>
+<p>[Clean and render StudentPractice.Reflection.Instruction]</p>
+<ul>
+  [Render StudentPractice.Reflection.Prompts as <li> items]
 </ul>
 
 Reflection MUST be:
@@ -1096,75 +1077,83 @@ INPUT JSON:
       },
       "ReviewAndSpacedRetrieval": {
         "type": "object",
-        "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text.",
+        "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Correct Common Misconceptions block 3. Essential Question Connection 4. Transcendent Thinking section 5. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
+        "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers section containing active recall, misconception corrections, connections to unit goals, and spaced retrieval of prior learning.",
         "properties": {
-          "Materials": {
-            "type": "array",
-            "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
-            "items": {
-              "type": "string"
-            }
-          },
           "InstructionsForTeachers": {
             "type": "object",
-            "description": "",
+            "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
             "properties": {
               "ActiveRecall": {
                 "type": "object",
-                "description": "",
+                "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the investigation.",
                 "properties": {
                   "Question": {
                     "type": "string",
-                    "description": ""
+                    "description": "A specific teacher script (starting with 'Say:') that prompts students to reflect on today's investigation and what it revealed about the system."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "",
-                    "items": {
-                      "type": "string"
-                    }
+                    "description": "3-4 examples of high-quality student responses showing clear use of evidence.",
+                    "items": { "type": "string" }
                   }
                 },
-                "required": [
-                  "Question",
-                  "ExpectedStudentResponses"
-                ],
+                "required": ["Question", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "CorrectCommonMisconceptions": {
+                "type": "array",
+                "description": "Identify 2-3 common misconceptions likely to arise for this specific topic and provide correction scripts.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Misconception": { "type": "string", "description": "Describe the misconception clearly in one sentence (e.g., 'Students may think that...')." },
+                    "TeacherResponse": { "type": "string", "description": "A teacher script (starting with 'Teacher Response:') and prompt (starting with 'Say:') to guide students back to the correct understanding using investigation evidence." }
+                  },
+                  "required": ["Misconception", "TeacherResponse"],
+                  "additionalProperties": false
+                }
+              },
+              "EssentialQuestionConnection": {
+                "type": "object",
+                "description": "Help students connect today's specific evidence to the broader unit essential questions.",
+                "properties": {
+                  "Question": {
+                    "type": "string",
+                    "description": "A teacher script (starting with 'Say:') that links today's findings to one of the unit's essential questions."
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "description": "2-3 examples of how students justify the connection using evidence.",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["Question", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
               "SpacedRetrieval": {
                 "type": "object",
-                "description": "Must include a clear reference to specific prior lesson next to the Spaced Retrieval title and note it like this: '(Draws from Unit 3, Lesson 2.)'  Must use active recall question connecting past and current concepts. Must not require students using notes or resources to answer.",
+                "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
                 "properties": {
                   "TeacherSay": {
                     "type": "string",
-                    "description": ""
+                    "description": "A teacher script (starting with 'Say:') that explicitly connects a concept from a prior lesson to today's work. Must include the meta-reference (e.g., '(Draws from Unit 1, Lesson 2.)') directly in the text."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "",
-                    "items": {
-                      "type": "string"
-                    }
+                    "description": "2-3 examples of expected responses.",
+                    "items": { "type": "string" }
                   }
                 },
-                "required": [
-                  "TeacherSay",
-                  "ExpectedStudentResponses"
-                ],
+                "required": ["TeacherSay", "ExpectedStudentResponses"],
                 "additionalProperties": false
               }
             },
-            "required": [
-              "ActiveRecall",
-              "SpacedRetrieval"
-            ],
+            "required": ["ActiveRecall", "CorrectCommonMisconceptions", "EssentialQuestionConnection", "SpacedRetrieval"],
             "additionalProperties": false
           }
         },
-        "required": [
-          "Materials",
-          "InstructionsForTeachers"
-        ],
+        "required": ["InstructionsForTeachers"],
         "additionalProperties": false
       },
       "FormativeAssessment": {
@@ -1172,8 +1161,36 @@ INPUT JSON:
         "description": "Full 'Formative Assessment' section as plain text. Must follow this structure: A teacher-facing introduction paragraph briefly stating purpose and how to implement. 4 required question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', etc. covering DOK levels 1-4. For each prompt: - Question that tests understanding at stated DOK level - Header 'Expected Student Responses' (without checkmarks/emojis) - 1-2 complete sentence responses showing mastery End with short paragraph naming specific formative assessment strategy to use (e.g.,'Exit Ticket','Think-Pair-Share'). Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit instead of flying off into space?' Expected Student Responses 'Because their forward motion and the Sun's gravity work together to create a stable orbit.' [Continue with Prompts 2-4 following same structure]"
       },
       "StudentPractice": {
-        "type": "string",
-        "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'"
+        "type": "object",
+        "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+        "properties": {
+          "Tasks": {
+            "type": "array",
+            "description": "Generate 3 tasks covering DOK levels 2 and 3.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TaskTitle": { "type": "string", "description": "e.g., 'Task 1 (DOK 2)'" },
+                "Instruction": { "type": "string", "description": "Clear step-by-step student directions for the task." },
+                "SuccessCriteria": { "type": "array", "description": "4-5 specific, evidence-based bullet points showing what mastery looks like for this task. CRITICAL: Every criterion MUST start with an action verb (e.g., 'Describes', 'Explains', 'Uses').", "items": { "type": "string" } }
+              },
+              "required": ["TaskTitle", "Instruction", "SuccessCriteria"],
+              "additionalProperties": false
+            }
+          },
+          "Reflection": {
+            "type": "object",
+            "description": "End with self-regulation or transcendent thinking reflections.",
+            "properties": {
+              "Instruction": { "type": "string", "description": "Instruction for the reflection section (e.g., 'Write 2–3 sentences responding to one prompt:')." },
+              "Prompts": { "type": "array", "description": "4-5 specific reflection prompts connecting today's inquiry to real life, future tools, or personal learning.", "items": { "type": "string" } }
+            },
+            "required": ["Instruction", "Prompts"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["Tasks", "Reflection"],
+        "additionalProperties": false
       }
     },
     "required": [

@@ -421,53 +421,35 @@ PRAVILA ZA OBRADU SADRŽAJA:
 
 RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni izbaci <li>Nema</li>):
 
-<h3><span style="color: rgb(115, 191, 39);">Ponavljanje i prisećanje uz vremenske razmake (5 min)</span></h3>
+<h3><span style="color: rgb(145, 56, 230);">Ponavljanje i prisećanje uz vremenske razmake (5 min)</span></h3>
 
-<p>📚 <strong>Materijali</strong></p>
-<ul>
-  [Izlistaj stavke iz ReviewAndSpacedRetrieval.Materials ili <li>Nema</li>]
-</ul>
-
-<p><strong>Napomene za nastavnika:</strong> [Napiši kratak pedagoški kontekst o aktivnom prisećanju i dugoročnom zadržavanju informacija na osnovu cilja lekcije, koristeći SAMO ideje prisutne u ulaznoj sekciji.]</p>
+<p>Napomene za nastavnika: Ova strategija jača zadržavanje informacija kroz aktivno prisećanje i povezuje današnje istraživanje šadufa sa ključnim naučnim idejama o polugama i mehaničkoj prednosti. Transcedentna refleksija pomaže učenicima da prepoznaju kako jednostavne mašine poput poluga omogućavaju ljudima da efikasno rešavaju probleme u stvarnom svetu, kako u starom Egiptu, tako i danas. Ovo potvrđuje da promena varijabli kao što su dužina kraka ili protivteg utiče na silu, napor i efikasnost u sistemu. </p>
 
 <h3>📋 Instrukcije za nastavnike</h3>
 
 <p><strong>Aktivno prisećanje</strong></p>
-<ul>
-  <li><strong>Recite:</strong> [Izvuci i očisti ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question]</li>
-</ul>
+<p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question koristeći Pravilo jednog „Recite“]</p>
 <p>✅ <strong>Očekivani odgovori učenika</strong></p>
 <ul>
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
 <p><strong>Ispravljanje čestih pogrešnih uverenja</strong></p>
+- Za svaku stavku u ReviewAndSpacedRetrieval.InstructionsForTeachers.CorrectCommonMisconceptions:
+<p>{item.Misconception}</p>
 <ul>
-  <li>[Navedi sažet scenario za ispravljanje uobičajenih grešaka koristeći SAMO ono što se pojavljuje u ulaznoj sekciji; ako ništa nije eksplicitno, minimalno rezimiraj bez dodavanja novog sadržaja.]</li>
+  <li>{item.TeacherResponse}</li>
 </ul>
 
 <p><strong>💭 Veza sa ključnim pitanjem</strong></p>
-<ul>
-  <li><strong>Recite:</strong> [Kreiraj podsticaj koji povezuje današnje dokaze sa velikim pitanjem unit-a koristeći samo priloženi kontekst Ključnih pitanja unit-a ako su prisutna, u suprotnom neka bude generički i sadržajno neutralno.]</li>
-</ul>
+<p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question koristeći Pravilo jednog „Recite“]</p>
 <p>✅ <strong>Očekivani odgovori učenika</strong></p>
 <ul>
-  <li>Učenici objašnjavaju kako su dokazi razjasnili širi obrazac.</li>
-</ul>
-
-<p><strong>🌍 Transcendentno razmišljanje</strong></p>
-<ul>
-  <li><strong>Recite:</strong> [Kreiraj podsticaj pitajući zašto je ovo važno u stvarnom svetu ili budućnosti, u skladu sa lekcijom.]</li>
-</ul>
-<p>✅ <strong>Očekivani odgovori učenika</strong></p>
-<ul>
-  <li>Učenici povezuju naučeno sa odlukama u stvarnom svetu ili globalnim sistemima.</li>
+  [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
 <p><strong>⏳ Prisećanje uz vremenske razmake</strong></p>
-<ul>
-  <li><strong>Recite:</strong> [Očisti ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay uklanjanjem metapodataka i prefiksa „Say:“; izbaci samo srž instrukcije.]</li>
-</ul>
+<p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay koristeći migraciju metapodataka i Pravilo jednog „Recite“]</p>
 <p>✅ <strong>Očekivani odgovori učenika</strong></p>
 <ul>
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses kao <li> stavke]
@@ -513,28 +495,22 @@ Iz običnog teksta FormativeAssessment-a, izvuci i renderuj podsticaje (Prompts)
 SEKCIJA 8: VEŽBA ZA UČENIKE
 ==================================================
 
-NASLOV SEKCIJE (MORA):
-<h3><span>🖊 Vežba za učenike</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">🖋️ Vežba za učenike</span></h3>
 
-Renderuj običan tekst StudentPractice-a u HTML koristeći ovu OBAVEZNU strukturu i redosled (nemoj menjati redosled; nemoj dodavati zadatke; nemoj dodavati emojije):
-- Pasus sa napomenama za nastavnika (Teacher Notes)
-- Uputstva za Zadatak 1 (DOK 2)
-- Očekivani odgovori učenika (kao <ul> sa 3–4 <li>)
-- Uputstva za Zadatak 2 (DOK 3)
-- Očekivani odgovori učenika (kao <ul> sa 3–4 <li>)
-- Uputstva za Zadatak 3 (DOK 3) + zahtevani elementi
-- Očekivani odgovori učenika (kao <ul> sa 3–4 <li>)
-- Refleksija na kraju
+<p>Napomene za nastavnika: Ova vežba pomaže učenicima da prošire lekciju primenom veština istraživanja na novu situaciju van časa. Učenici će nastaviti da grade navike primećivanja obrazaca, objašnjavanja izbora dokazima i razmatranja kako promene u dizajnu utiču na rezultate. Zadaci takođe povezuju učenje sa rešavanjem problema u stvarnom svetu, pokazujući da su istraživanje i revizija korisni izvan jedne aktivnosti u učionici.</p>
 
-Blokovi za očekivane odgovore učenika MORAJU biti:
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+- Za svaki zadatak u StudentPractice.Tasks:
+<p><strong>{task.TaskTitle}:</strong> {task.Instruction}</p>
+<p><strong>Kriterijumi uspeha</strong></p>
 <ul>
-  <li>...</li>
+  [Renderuj {task.SuccessCriteria} kao <li> stavke]
 </ul>
 
-Refleksija MORA biti:
 <p><strong>Refleksija:</strong></p>
-<p>Jedan podsticaj za refleksiju.</p>
+<p>[Očisti i renderuj StudentPractice.Reflection.Instruction]</p>
+<ul>
+  [Renderuj StudentPractice.Reflection.Prompts kao <li> stavke]
+</ul>
 
 FINALNO PRAVILO ZA OUTPUT:
 Vrati SAMO kombinovani HTML za sve sekcije po redu. Bez dodatnog omotačkog teksta.`,
@@ -1102,75 +1078,82 @@ ULAZNI JSON:
       },
       "ReviewAndSpacedRetrieval": {
         "type": "object",
-        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake' kao običan tekst. Ova 5-minutna aktivnost mora uključivati ovim tačnim redosledom: 1. Lista materijala (često nisu potrebni) 2. Pasus sa napomenama za nastavnika koji objašnjava: - Kako ova strategija ponavljanja poboljšava zadržavanje informacija - Veza sa prethodnim konceptima učenja - Kako transcendentna refleksija produbljuje razumevanje 3. Instrukcije za nastavnike koje sadrže: - Podsticaj za aktivno prisećanje koristeći deljenje u paru/grupi - Očekivani odgovori učenika (2-3 primera sa nabrajanjem) 4. Blok za ispravljanje čestih pogrešnih uverenja sa: - Primerima izjava o pogrešnim uverenjima - Skriptovima za odgovore nastavnika koji adresiraju svaku 5. Veza sa suštinskim pitanjem uključujući: - Podsticaj nastavnika koji povezuje sa pitanjem unit-a - Očekivani odgovori učenika (2-3 primera) 6. Sekcija Transcendentno razmišljanje sa: - Podsticajem za primenu u stvarnom svetu - Instrukcijom za vreme za razmišljanje - Očekivani odgovori učenika (2-3 primera) 7. Komponenta Prisećanje uz vremenske razmake koja sadrži: - Jasnu referencu na specifičnu prethodnu lekciju - Pitanje koje povezuje prošle + trenutne koncepte - Detaljne kriterijume uspeha / očekivane odgovore Sve sekcije moraju koristiti 'Recite:' izjave za podsticaje nastavnika i jasno obeležene 'Očekivane odgovore učenika' koji pokazuju 2-3 uzorka odgovora. Vratiti kao običan tekst.",
+        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake'. Ova 5-minutna aktivnost mora uključivati: 1. Sekcija Instrukcije za nastavnike koja sadrži aktivno prisećanje, ispravljanje pogrešnih uverenja, povezivanje sa ciljevima unit-a i prisećanje na prethodno naučeno.",
         "properties": {
-          "Materials": {
-            "type": "array",
-            "description": "Potrebni fizički predmeti za ovu vođenu aktivnost (npr. 'Loptice od stiropora, kanap, markeri') formatirani kao lista",
-            "items": {
-              "type": "string"
-            }
-          },
           "InstructionsForTeachers": {
             "type": "object",
-            "description": "",
+            "description": "Uputstva korak-po-korak za nastavnika za petominutnu sesiju ponavljanja i prisećanja.",
             "properties": {
               "ActiveRecall": {
                 "type": "object",
-                "description": "",
+                "description": "Podstaknite učenike da izvuku ključna saznanja iz današnje lekcije koristeći isključivo dokaze iz istraživanja.",
                 "properties": {
                   "Question": {
                     "type": "string",
-                    "description": ""
+                    "description": "Specifičan scenario za nastavnika (počinje sa 'Recite:') koji podstiče učenike da razmisle o današnjem istraživanju i onome što je ono otkrilo o sistemu."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "",
-                    "items": {
-                      "type": "string"
-                    }
+                    "description": "3-4 primera visokokvalitetnih odgovora učenika koji pokazuju jasnu upotrebu dokaza.",
+                    "items": { "type": "string" }
                   }
                 },
-                "required": [
-                  "Question",
-                  "ExpectedStudentResponses"
-                ],
+                "required": ["Question", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "CorrectCommonMisconceptions": {
+                "type": "array",
+                "description": "Identifikujte 2-3 česta pogrešna uverenja koja se verovatno mogu javiti za ovu specifičnu temu i navedite skripte za njihovu ispravku.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Misconception": { "type": "string", "description": "Opišite pogrešno uverenje jasno u jednoj rečenici (npr. 'Učenici mogu misliti da...')." },
+                    "TeacherResponse": { "type": "string", "description": "Scenario za nastavnika (počinje sa 'Reakcija nastavnika:') i podsticaj (počinje sa 'Recite:') za vođenje učenika nazad do ispravnog razumevanja koristeći dokaze iz istraživanja." }
+                  },
+                  "required": ["Misconception", "TeacherResponse"],
+                  "additionalProperties": false
+                }
+              },
+              "EssentialQuestionConnection": {
+                "type": "object",
+                "description": "Pomozite učenicima da povežu današnje specifične dokaze sa širim ključnim pitanjima unit-a.",
+                "properties": {
+                  "Question": {
+                    "type": "string",
+                    "description": "Scenario za nastavnika (počinje sa 'Recite:') koji povezuje današnja saznanja sa jednim od ključnih pitanja unit-a."
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "description": "2-3 primera kako učenici opravdavaju vezu koristeći dokaze.",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["Question", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
               "SpacedRetrieval": {
                 "type": "object",
-                "description": "Mora uključiti jasnu referencu na specifičnu prethodnu lekciju pored naslova Prisećanje uz vremenske razmake i naznačiti to ovako: '(Draws from Unit 3, Lesson 2.)' Mora koristiti pitanje za aktivno prisećanje koje povezuje prošle i trenutne koncepte. Ne sme zahtevati od učenika korišćenje beleški ili resursa za odgovor.",
+                "description": "Ponovo prođite kroz koncept iz prethodnog unit-a ili lekcije kako biste ojačali kumulativno zadržavanje znanja.",
                 "properties": {
                   "TeacherSay": {
                     "type": "string",
-                    "description": ""
+                    "description": "Scenario za nastavnika (počinje sa 'Recite:') koji eksplicitno povezuje koncept iz prethodne lekcije sa današnjim radom. Mora uključiti meta-referencu (npr. '(Vodi poreklo iz Unit 1, Lekcije 2.)') direktno u tekst."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "",
-                    "items": {
-                      "type": "string"
-                    }
+                    "description": "2-3 primera očekivanih odgovora.",
+                    "items": { "type": "string" }
                   }
                 },
-                "required": [
-                  "TeacherSay",
-                  "ExpectedStudentResponses"
-                ],
+                "required": ["TeacherSay", "ExpectedStudentResponses"],
                 "additionalProperties": false
               }
             },
-            "required": [
-              "ActiveRecall",
-              "SpacedRetrieval"
-            ],
+            "required": ["ActiveRecall", "CorrectCommonMisconceptions", "EssentialQuestionConnection", "SpacedRetrieval"],
             "additionalProperties": false
           }
         },
-        "required": [
-          "Materials",
-          "InstructionsForTeachers"
-        ],
+        "required": ["InstructionsForTeachers"],
         "additionalProperties": false
       },
       "FormativeAssessment": {
@@ -1178,8 +1161,36 @@ ULAZNI JSON:
         "description": "Kompletna sekcija 'Formativno ocenjivanje' kao običan tekst. Mora pratiti ovu strukturu: Pasus uvoda namenjen nastavniku koji ukratko navodi svrhu i način primene. 4 zahtevana podsticaja (pitanja) obeležena sa 'Podsticaj 1 (DOK 1):', 'Podsticaj 2 (DOK 2):', itd. pokrivajući DOK nivoe 1-4. Za svaki podsticaj: - Pitanje koje testira razumevanje na navedenom DOK nivou - Zaglavlje 'Očekivani odgovori učenika' (bez simbola štikliranja/emojija) - 1-2 odgovora u formi cele rečenice koji pokazuju postignuće Završi kratkim pasusom koji imenuje specifičnu strategiju formativnog ocenjivanja koja se koristi (npr. 'Izlazni listić', 'Misli-Upari-Podeli'). Primer formata: Podsticaj 1 (DOK 1): 'Zašto planete ostaju u orbiti umesto da odlete u svemir?' Očekivani odgovori učenika 'Zato što njihovo kretanje unapred i Sunčeva gravitacija rade zajedno kako bi stvorili stabilnu orbitu.' [Nastaviti sa Podsticajima 2-4 prateći istu strukturu]"
       },
       "StudentPractice": {
-        "type": "string",
-        "description": "Kompletna sekcija 'Vežba za učenike' kao običan tekst. Ovo je domaći zadatak / vežba van časa. Prati TAČAN format za odgovor: Napomene za nastavnika: [1 pasus koji objašnjava kako zadaci učvršćuju učenje + grade veze sa stvarnim svetom] (DOK 2) [Prvi zadatak sa jasnim uputstvima za učenike] Očekivani odgovori učenika [3-4 stavke koje pokazuju postignuće] (DOK 3) [Drugi zadatak koji zahteva razmišljanje višeg reda] Očekivani odgovori učenika [3-4 stavke koje pokazuju analizu/primenu] (DOK 3) [Treći zadatak koji povezuje sa širim konceptima] Mora uključiti: [3+ specifična elementa koja učenici treba da adresiraju] Očekivani odgovori učenika [3-4 stavke koje pokazuju sintezu/evaluaciju] Refleksija: Završi jednim podsticajem za samoregulaciju ili transcendentno razmišljanje, kao što su: 'Koji dokaz današnjeg naučnog koncepta možeš pronaći u svom domu ili komšiluku?', 'Kako ti ono što si danas naučio/la pomaže da vidiš svet drugačije?', 'Sa kojim izazovima si se suočio/la radeći ovo kod kuće, i kako si ih prevazišao/la?', ili 'Kako bi ovaj koncept mogao uticati na našu zajednicu ili buduća otkrića?'"
+        "type": "object",
+        "description": "Kompletna sekcija 'Vežba za učenike' (domaći zadatak / vežba van časa).",
+        "properties": {
+          "Tasks": {
+            "type": "array",
+            "description": "Generišite 3 zadatka koji pokrivaju DOK nivoe 2 i 3.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TaskTitle": { "type": "string", "description": "npr., 'Zadatak 1 (DOK 2)'" },
+                "Instruction": { "type": "string", "description": "Jasna uputstva korak-po-korak za učenika za dati zadatak." },
+                "SuccessCriteria": { "type": "array", "description": "4-5 specifičnih stavki zasnovanih na dokazima koje pokazuju kako izgleda uspešno usvojen koncept za ovaj zadatak. KRITIČNO: Svaki kriterijum MORA početi glagolom (npr. 'Opisuje', 'Objašnjava', 'Koristi').", "items": { "type": "string" } }
+              },
+              "required": ["TaskTitle", "Instruction", "SuccessCriteria"],
+              "additionalProperties": false
+            }
+          },
+          "Reflection": {
+            "type": "object",
+            "description": "Završite sa refleksijama za samoregulaciju ili transcendentno razmišljanje.",
+            "properties": {
+              "Instruction": { "type": "string", "description": "Uputstvo za sekciju refleksije (npr. 'Napišite 2–3 rečenice odgovarajući na jedan podsticaj:')." },
+              "Prompts": { "type": "array", "description": "4-5 specifičnih podsticaja za refleksiju koji povezuju današnje istraživanje sa stvarnim životom, budućim alatima ili ličnim učenjem.", "items": { "type": "string" } }
+            },
+            "required": ["Instruction", "Prompts"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["Tasks", "Reflection"],
+        "additionalProperties": false
       }
     },
     "required": [
