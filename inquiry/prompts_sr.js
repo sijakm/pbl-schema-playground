@@ -945,7 +945,7 @@ ULAZNI JSON:
                           "item": { "type": "string", "description": "Glavna instrukcija ili naslov liste." },
                           "subItems": { "type": "array", "description": "Opcioni meci (bullet points) ili specifični primeri povezani sa stavkom.", "items": { "type": "string" } }
                         },
-                        "required": ["item"],
+                        "required": ["item", "subItems"],
                         "additionalProperties": false
                       }
                     }

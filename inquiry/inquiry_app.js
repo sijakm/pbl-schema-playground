@@ -486,8 +486,20 @@
 
       const tJoin0 = nowMs();
       log("[5/5] Joining final HTML…");
-      const separator = '<hr style="border: none; border-top: 8px solid #f0f0f0; margin: 60px 0; border-radius: 4px;">';
-      const finalHtml = [unitHtml, separator, ...lessonHtmls].join("\n");
+
+      const langEl = $("languageSelect");
+      const lang = langEl ? langEl.value : "en";
+      const lessonLabel = lang === "sr" ? "Lekcija" : "Lesson";
+      const noteLabel = lang === "sr" ? "ovo će biti sadržaj unutar box-a na našoj platformi" : "this will be the content inside the box on our platform";
+
+      const formattedLessons = lessonHtmls.map((html, i) => {
+        return `
+<p><strong>${lessonLabel} ${i + 1} (${noteLabel})</strong></p>
+${html}`;
+      });
+
+      const finalHtml = [unitHtml, ...formattedLessons].join("\n");
+      
       if (els.finalHtml()) els.finalHtml().value = finalHtml;
       if (els.htmlPreview()) els.htmlPreview().srcdoc = finalHtml;
       timings.join_final_ms = nowMs() - tJoin0;
