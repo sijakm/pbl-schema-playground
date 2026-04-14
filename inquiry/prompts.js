@@ -384,29 +384,22 @@ SECTION 5: DISCUSSION PHASE
   - Render each item from DiscussionPhase.Materials as a <li>. If empty, output <li>None</li>.
 </ul>
 
-<p><strong>📋Instructions for Teachers</strong></p>
+<p><strong>📋 Instructions for Teachers</strong></p>
+<p>{DiscussionPhase.InstructionsForTeachers.OpeningScript}</p>
+- For each move in DiscussionPhase.InstructionsForTeachers.FacilitationMoves, render as <p>:
+<p>{move}</p>
+
+<p><strong>Prompt with questions such as:</strong></p>
 <ul>
-  <li>Say: Prompt students to move beyond restating findings and begin explaining why their new understanding matters.</li>
-  <li>Facilitate partner or small-group discussion focused on applying learning to broader situations or future contexts.</li>
-  <li>Use prompts that encourage students to extend their reasoning into real-world or future-oriented scenarios.</li>
-  <li>Guide discussion with questions that push application, such as how this understanding could inform decisions or solve problems.</li>
-  <li>Support meaning-making by helping students generate their own examples rather than providing examples for them.</li>
-  <li>Circulate to listen, ask follow-up questions, and prompt students to justify ideas using evidence from the investigation.</li>
+  - For each question in DiscussionPhase.InstructionsForTeachers.ProbingQuestions, render as <li>.
 </ul>
 
-<p><strong>✅Expected Student Responses</strong></p>
-<ul>
-  <li>Students describe how their understanding could apply beyond the immediate investigation.</li>
-  <li>Students connect findings to real-world decisions, future scenarios, or broader ideas.</li>
-  <li>Students explain why the learning matters using evidence from their work.</li>
-  <li>Students propose implications or consequences based on their new understanding.</li>
-</ul>
+<p><strong>🌍 <span style="color: rgb(145, 56, 230);">Transcendent Thinking</span></strong></p>
+<p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
-<p><strong>🌍Transcendent Thinking</strong></p>
+<p><strong>✅ Expected Student Responses</strong></p>
 <ul>
-  <li>Say: Invite students to reflect on how this understanding connects to larger purposes, future challenges, or meaningful real-world applications.</li>
-  <li>Prompt students to write or share one sentence explaining why this learning matters beyond the classroom.</li>
-  <li>Expected responses highlight long-term impact, relevance to future decisions, or connections to larger systems or ideas.</li>
+  - For each response in DiscussionPhase.ExpectedStudentResponses, render as <li>.
 </ul>
 
 ==================================================
@@ -1066,24 +1059,38 @@ INPUT JSON:
           "Materials": {
             "type": "array",
             "description": "List of required materials (e.g. visual aids, markers, etc.)",
-            "items": {
-              "type": "string"
-            }
+            "items": { "type": "string" }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "The model must generate a paragraph that instructs teachers on how to facilitate a discussion phase in which students move beyond simply reporting findings and begin exploring the broader significance, applications, and implications of their learning. The paragraph must direct teachers to prompt students to connect their investigation results to real-world situations, future scenarios, or larger conceptual ideas. It should require the model to include guidance for partner or group discussion, teacher-led questioning that encourages students to extend and apply their reasoning, and facilitation moves that support students in generating their own examples rather than relying on teacher-provided ones. The schema must also require the model to output a set of expected student responses illustrating how learners might apply their understanding to authentic or future-oriented contexts."
+            "type": "object",
+            "properties": {
+              "OpeningScript": { "type": "string", "description": "A 'Say:' statement to prompt students to think about the broader implications of their evidence beyond the classroom." },
+              "FacilitationMoves": { "type": "array", "description": "2-3 pedagogical moves to encourage students to discuss with partners/groups and generate their own examples of real-world impact.", "items": { "type": "string" } },
+              "ProbingQuestions": { "type": "array", "description": "3-4 specific questions to connect the investigation results to everyday life, community issues, or system redesign.", "items": { "type": "string" } }
+            },
+            "required": ["OpeningScript", "FacilitationMoves", "ProbingQuestions"],
+            "additionalProperties": false
           },
           "TranscendentThinking": {
-            "type": "string",
-            "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding"
+            "type": "object",
+            "properties": {
+              "Question": { "type": "string", "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus." }
+            },
+            "required": ["Question"],
+            "additionalProperties": false
+          },
+          "ExpectedStudentResponses": {
+            "type": "array",
+            "description": "4-5 responses illustrating how students might apply their understanding to authentic, real-world contexts or future-oriented problem solving.",
+            "items": { "type": "string" }
           }
         },
         "required": [
           "Purpose",
           "Materials",
           "InstructionsForTeachers",
-          "TranscendentThinking"
+          "TranscendentThinking",
+          "ExpectedStudentResponses"
         ],
         "additionalProperties": false
       },

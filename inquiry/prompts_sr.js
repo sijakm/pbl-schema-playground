@@ -386,28 +386,21 @@ SEKCIJA 5: FAZA DISKUSIJE
 </ul>
 
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
+<p>{DiscussionPhase.InstructionsForTeachers.OpeningScript}</p>
+- Za svaki potez u DiscussionPhase.InstructionsForTeachers.FacilitationMoves, renderuj kao <p>:
+<p>{potez}</p>
+
+<p><strong>Podstaknite pitanjima kao što su:</strong></p>
 <ul>
-  <li>Recite: Podstaknite učenike da odu dalje od pukog ponavljanja saznanja i počnu da objašnjavaju zašto je njihovo novo razumevanje važno.</li>
-  <li>Olakšajte diskusiju u paru ili maloj grupi fokusiranu na primenu naučenog na šire situacije ili buduće kontekste.</li>
-  <li>Koristite podsticaje koji podstiču učenike da prošire svoje rezonovanje na scenarije iz stvarnog sveta ili one orijentisane ka budućnosti.</li>
-  <li>Vodite diskusiju pitanjima koja podstiču primenu, kao što je kako bi ovo razumevanje moglo informisati odluke ili rešiti probleme.</li>
-  <li>Podržite pronalaženje smisla pomažući učenicima da generišu sopstvene primere umesto da im vi dajete primere.</li>
-  <li>Cirkulišite da biste slušali, postavljali propratna pitanja i podsticali učenike da opravdaju ideje koristeći dokaze iz istraživanja.</li>
+  - Za svako pitanje u DiscussionPhase.InstructionsForTeachers.ProbingQuestions, renderuj kao <li>.
 </ul>
+
+<p><strong>🌍 <span style="color: rgb(145, 56, 230);">Transcendentno razmišljanje</span></strong></p>
+<p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
 <p><strong>✅ Očekivani odgovori učenika</strong></p>
 <ul>
-  <li>Učenici opisuju kako bi se njihovo razumevanje moglo primeniti van neposrednog istraživanja.</li>
-  <li>Učenici povezuju saznanja sa odlukama u stvarnom svetu, budućim scenarijima ili širim idejama.</li>
-  <li>Učenici objašnjavaju zašto je naučeno važno koristeći dokaze iz svog rada.</li>
-  <li>Učenici predlažu implikacije ili posledice na osnovu svog novog razumevanja.</li>
-</ul>
-
-<p><strong>🌍 Transcendentno razmišljanje</strong></p>
-<ul>
-  <li>Recite: Pozovite učenike da razmisle o tome kako se ovo razumevanje povezuje sa višim ciljevima, budućim izazovima ili smislenim primenama u stvarnom svetu.</li>
-  <li>Podstaknite učenike da napišu ili podele jednu rečenicu objašnjavajući zašto je ovo naučeno važno van učionice.</li>
-  <li>Očekivani odgovori ističu dugoročni uticaj, relevantnost za buduće odluke ili veze sa većim sistemima ili idejama.</li>
+  - Za svaki odgovor u DiscussionPhase.ExpectedStudentResponses, renderuj kao <li>.
 </ul>
 
 ==================================================
@@ -1075,19 +1068,35 @@ ULAZNI JSON:
             }
           },
           "InstructionsForTeachers": {
-            "type": "string",
-            "description": "Model mora generisati pasus koji instruiše nastavnike kako da olakšaju fazu diskusije u kojoj učenici idu dalje od jednostavnog izveštavanja o saznanjima i počinju da istražuju širi značaj, primene i implikacije svog učenja. Pasus mora usmeriti nastavnike da podstaknu učenike da povežu rezultate svog istraživanja sa situacijama iz stvarnog sveta, budućim scenarijima ili većim konceptualnim idejama. Treba da zahteva od modela da uključi uputstva za diskusiju u paru ili grupi, postavljanje pitanja od strane nastavnika koje podstiče učenike da prošire i primene svoje rezonovanje, i poteze za facilitaciju koji podržavaju učenike u generisanju sopstvenih primera umesto da se oslanjaju na one koje daje nastavnik. Šema takođe mora zahtevati od modela da izbaci set očekivanih odgovora učenika koji ilustruju kako bi učenici mogli da primene svoje razumevanje na autentične kontekste ili one orijentisane ka budućnosti."
+            "type": "object",
+            "properties": {
+              "OpeningScript": { "type": "string", "description": "Uvodna 'Recite:' izjava za podsticanje učenika da razmišljaju o širim implikacijama svojih dokaza izvan učionice." },
+              "FacilitationMoves": { "type": "array", "description": "2-3 pedagoška poteza da se podstaknu učenici na diskusiju sa partnerima/grupama i generisanje sopstvenih primera uticaja u stvarnom svetu.", "items": { "type": "string" } },
+              "ProbingQuestions": { "type": "array", "description": "3-4 specifična pitanja za povezivanje rezultata istraživanja sa svakodnevnim životom, problemima zajednice ili redizajnom sistema.", "items": { "type": "string" } }
+            },
+            "required": ["OpeningScript", "FacilitationMoves", "ProbingQuestions"],
+            "additionalProperties": false
           },
           "TranscendentThinking": {
-            "type": "string",
-            "description": "Pitanja o primeni u stvarnom svetu koja povezuju naučeno sa svrhom/značenjem/velikim idejama, sa očekivanim odgovorima učenika koji pokazuju dublje razumevanje"
+            "type": "object",
+            "properties": {
+              "Question": { "type": "string", "description": "Generišite jedno pitanje za transcendentno razmišljanje koje zahteva od učenika da primene učenje izvan sebe i škole u kontekstima stvarnog sveta (zajednice, globalni izazovi). Fokusirajte se na to zašto je učenje važno na široj skali (bezbednost, održivost, inovacije, itd.). Izbegavajte isključivo lični/školski fokus." }
+            },
+            "required": ["Question"],
+            "additionalProperties": false
+          },
+          "ExpectedStudentResponses": {
+            "type": "array",
+            "description": "4-5 odgovora koji ilustruju kako bi učenici mogli da primene svoje razumevanje na autentične kontekste stvarnog sveta ili rešavanje problema orijentisano na budućnost.",
+            "items": { "type": "string" }
           }
         },
         "required": [
           "Purpose",
           "Materials",
           "InstructionsForTeachers",
-          "TranscendentThinking"
+          "TranscendentThinking",
+          "ExpectedStudentResponses"
         ],
         "additionalProperties": false
       },
