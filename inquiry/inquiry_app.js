@@ -120,17 +120,17 @@
     schemaEditor = new window.SchemaEditor({
       container: $("schemaEditorContainer"),
       tabs: [
-        { 
-          id: "perLesson", 
-          label: "Per Lesson", 
-          schema: getPrompts().PER_LESSON_SCHEMA, 
+        {
+          id: "perLesson",
+          label: "Per Lesson",
+          schema: getPrompts().PER_LESSON_SCHEMA,
           template: getPrompts().PER_LESSON_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedUnit", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
         },
-        { 
-          id: "step0", 
-          label: "Unit Outline (Step 0)", 
-          schema: getPrompts().STEP0_SCHEMA, 
+        {
+          id: "step0",
+          label: "Unit Outline (Step 0)",
+          schema: getPrompts().STEP0_SCHEMA,
           template: getPrompts().STEP0_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "AttachedLesson", "NumberOfItems"]
         }
@@ -255,7 +255,7 @@
     };
   }
 
-  async function withRetry(taskFn, label, timeoutMs = 180000, maxRetries = 2) {
+  async function withRetry(taskFn, label, timeoutMs = 80000, maxRetries = 2) {
     let lastError;
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       const controller = new AbortController();
@@ -303,7 +303,7 @@
       HTML_LESSON_PROMPT_TEMPLATE
     } = pmpts;
 
-    const HARDCODED_PASSWORD = ""; 
+    const HARDCODED_PASSWORD = "";
     const apiKey = HARDCODED_PASSWORD || els.apiKey()?.value?.trim() || "";
     const endpoint = (els.endpoint()?.value?.trim() || DEFAULT_ENDPOINT).trim();
     const model = els.model()?.value || "gpt-5.4-mini";
@@ -499,7 +499,7 @@ ${html}`;
       });
 
       const finalHtml = [unitHtml, ...formattedLessons].join("\n");
-      
+
       if (els.finalHtml()) els.finalHtml().value = finalHtml;
       if (els.htmlPreview()) els.htmlPreview().srcdoc = finalHtml;
       timings.join_final_ms = nowMs() - tJoin0;
