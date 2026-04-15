@@ -108,6 +108,11 @@ Prvo renderuj ključna pitanja i usklađene standarde:
   - Renderuj svaku stavku iz StandardsAligned kao <li>.
 </ul>
 
+<h3><span>🔤 Ključni rečnik</span></h3>
+<ul>
+  - Renderuj svaku stavku iz KeyVocabulary kao <li>.
+</ul>
+
 ==================================================
 SEKCIJA 0: PROCENA PRETHODNOG ZNANJA (USLOVNO)
 ==================================================
@@ -156,33 +161,33 @@ SEKCIJA 1: FAZA ORIJENTACIJE – DEFINISANJE PROBLEMA
 
 <p><strong>📋 Instrukcije za nastavnike</strong></p>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Angažovanje – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</span></strong></p>
+<p><strong>Angažovanje – Uvedite fenomen na način koji budi radoznalost bez davanja objašnjenja.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Povezivanje – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</span></strong></p>
+<p><strong>Povezivanje – Pomozite učenicima da povežu svoja zapažanja sa širom misterijom koja će biti osnova istraživanja.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions}</li>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, renderuj kao <li>.
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Aktivacija – Prebacite učenike na zajedničko pronalaženje smisla.</span></strong></p>
+<p><strong>Aktivacija – Prebacite učenike na zajedničko pronalaženje smisla.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Ispitivanje – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</span></strong></p>
+<p><strong>Ispitivanje – Podstaknite produbljivanje razmišljanja podstičući učenike da ispitaju pretpostavke.</strong></p>
 <p><strong>Recite:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   <li><strong>Podstaknite pitanjima kao što su:</strong> {OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions}</li>
   - Za svaki potez u OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves, renderuj kao <li>.
@@ -206,7 +211,7 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 
 <p><strong>Vođenje generisanja pitanja – Uvedite istraživanje podsticanjem radoznalosti, a ne izlaganjem sadržaja.</strong></p>
 <p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.PromptingOptions}</li>
@@ -214,7 +219,7 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 
 <p><strong>Identifikacija istraživačkog pitanja – Pomozite učenicima da zajednički odluče koje pitanje je najkorisnije za istraživanje.</strong></p>
 <p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.PromptingOptions}</li>
@@ -222,7 +227,7 @@ SEKCIJA 2: FAZA KONCEPTUALIZACIJE – ISTRAŽIVAČKO PITANJE + PLAN AKCIJE
 
 <p><strong>Kreiranje plana akcije – Podržite učenike u dizajniranju sopstvenog istraživanja umesto da im date gotov plan.</strong></p>
 <p><strong>Recite:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez u ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.PromptingOptions}</li>
@@ -245,7 +250,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 
 <p><strong>Pokretanje istraživanja – Uvedite zadatak bez objašnjavanja sadržaja.</strong></p>
 <p><strong>Recite:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez u InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.PromptingOptions}</li>
@@ -253,7 +258,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 
 <p><strong>Očekivanja za saradnju – Predstavite zadatak kao međuzavistan rad u kojem svaki učenik doprinosi zajedničkoj analizi.</strong></p>
 <p><strong>Recite:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.Prompt}</p>
-<p><strong>Facilitatorski koraci:</strong></p>
+<p>Facilitatorski koraci:</p>
 <ul>
   - Za svaki potez/očekivanje u InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.FacilitationMoves, renderuj kao <li>.
   <li><strong>Podstaknite pitanjima kao što su:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.PromptingOptions}</li>
@@ -276,14 +281,14 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaki podsticaj u InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Collaboration, renderuj kao <li>.
 </ul>
 
-<p><strong>❗ <span style="color: rgb(145, 56, 230);">Česta pogrešna uverenja</span></strong></p>
+<p><strong>⚠️ Česta pogrešna uverenja</strong></p>
 - Za svaku stavku u InvestigationPhase.AnticipatedMisconceptions:
 <p>{item.Misconception} (Osigurajte da se ovde NE koristi boldovanje/strong tagovi)</p>
 <ul>
   <li>{item.TeacherResponse} (Osigurajte da se ovde NE koristi boldovanje/strong tagovi)</li>
 </ul>
 
-<p><strong>🪜 <span style="color: rgb(145, 56, 230);">Diferencijacija</span></strong></p>
+<p><strong>🪜 Diferencijacija</strong></p>
 
 <p><strong>Učenici kojima je jezik strani:</strong></p>
 - Za svaku strategiju u InvestigationPhase.Differentiation.LanguageLearners.Strategies:
@@ -305,12 +310,12 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 - Za svaku strategiju u InvestigationPhase.Differentiation.GoDeeper.Strategies:
 <p>{strategija}</p>
 
-<p><strong>Pitanje za napredno razmišljanje:</strong></p>
+<p>Pitanje za napredno razmišljanje:</p>
 <ul>
   <li>Recite: "{InvestigationPhase.Differentiation.GoDeeper.AdvancedQuestion}"</li>
 </ul>
 
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   - Za svaki odgovor u InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, renderuj kao <li>.
 </ul>
@@ -333,7 +338,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
 
 <p><strong>✔ <span style="color: rgb(145, 56, 230);">Brze provere</span></strong></p>
 <p>{InvestigationPhase.QuickCheck.Question}</p>
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   - Za svaki odgovor u InvestigationPhase.QuickCheck.ExpectedResponses, renderuj kao <li>.
 </ul>
@@ -366,7 +371,7 @@ SEKCIJA 4: FAZA ZAKLJUČKA
 <p>{ConclusionPhase.InstructionsForTeachers.CollaborationInstruction}</p>
 <p><em>{ConclusionPhase.InstructionsForTeachers.Guardrail}</em></p>
 
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   - Za svaki odgovor u ConclusionPhase.ExpectedStudentResponses, renderuj kao <li>.
 </ul>
@@ -397,7 +402,7 @@ SEKCIJA 5: FAZA DISKUSIJE
 <p><strong>🌍 <span style="color: rgb(145, 56, 230);">Transcendentno razmišljanje</span></strong></p>
 <p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   - Za svaki odgovor u DiscussionPhase.ExpectedStudentResponses, renderuj kao <li>.
 </ul>
@@ -420,20 +425,20 @@ PRAVILA ZA OBRADU SADRŽAJA:
 
 RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni izbaci <li>Nema</li>):
 
-<h3><span style="color: rgb(145, 56, 230);">Ponavljanje i prisećanje uz vremenske razmake (5 min)</span></h3>
+<p><strong>🧠 <span style="color: rgb(145, 56, 230);">Ponavljanje i prisećanje uz vremenske razmake (5 min)</span></strong></p>
 
-<p>Napomene za nastavnika: Ova strategija jača zadržavanje informacija kroz aktivno prisećanje i povezuje današnje istraživanje šadufa sa ključnim naučnim idejama o polugama i mehaničkoj prednosti. Transcedentna refleksija pomaže učenicima da prepoznaju kako jednostavne mašine poput poluga omogućavaju ljudima da efikasno rešavaju probleme u stvarnom svetu, kako u starom Egiptu, tako i danas. Ovo potvrđuje da promena varijabli kao što su dužina kraka ili protivteg utiče na silu, napor i efikasnost u sistemu. </p>
+<p><strong>Napomene za nastavnika:</strong> Ova strategija jača zadržavanje informacija kroz aktivno prisećanje i povezuje današnje istraživanje šadufa sa ključnim naučnim idejama o polugama i mehaničkoj prednosti. Transcedentna refleksija pomaže učenicima da prepoznaju kako jednostavne mašine poput poluga omogućavaju ljudima da efikasno rešavaju probleme u stvarnom svetu, kako u starom Egiptu, tako i danas. Ovo potvrđuje da promena varijabli kao što su dužina kraka ili protivteg utiče na silu, napor i efikasnost u sistemu. </p>
 
 <h3>📋 Instrukcije za nastavnike</h3>
 
-<p><strong>Aktivno prisećanje</strong></p>
+<p><strong>🔁 Aktivno prisećanje</strong></p>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question koristeći Pravilo jednog „Recite“]</p>
-<p>✅ <strong>Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
-<p><strong>Ispravljanje čestih pogrešnih uverenja</strong></p>
+<p><strong>⚠️ Česta pogrešna uverenja</strong></p>
 - Za svaku stavku u ReviewAndSpacedRetrieval.InstructionsForTeachers.CorrectCommonMisconceptions:
 <p>{item.Misconception}</p>
 <ul>
@@ -442,14 +447,14 @@ RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni 
 
 <p><strong>💭 Veza sa ključnim pitanjem</strong></p>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question koristeći Pravilo jednog „Recite“]</p>
-<p>✅ <strong>Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
 <p><strong>⏳ Prisećanje uz vremenske razmake</strong></p>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay koristeći migraciju metapodataka i Pravilo jednog „Recite“]</p>
-<p>✅ <strong>Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses kao <li> stavke]
 </ul>
@@ -464,28 +469,28 @@ Iz običnog teksta FormativeAssessment-a, izvuci i renderuj podsticaje (Prompts)
 
 <p><strong>Podsticaj 1 (DOK 1):</strong></p>
 <p>{Pitanje za podsticaj 1}</p>
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   <li>{1–2 očekivana odgovora}</li>
 </ul>
 
 <p><strong>Podsticaj 2 (DOK 2):</strong></p>
 <p>{Pitanje za podsticaj 2}</p>
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   <li>{1–2 očekivana odgovora}</li>
 </ul>
 
 <p><strong>Podsticaj 3 (DOK 3):</strong></p>
 <p>{Pitanje za podsticaj 3}</p>
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   <li>{1–2 očekivana odgovora}</li>
 </ul>
 
 <p><strong>Podsticaj 4 (DOK 4):</strong></p>
 <p>{Pitanje za podsticaj 4}</p>
-<p><strong>✅ Očekivani odgovori učenika</strong></p>
+<p>✅ Očekivani odgovori učenika</p>
 <ul>
   <li>{1–2 očekivana odgovora}</li>
 </ul>
@@ -496,16 +501,16 @@ SEKCIJA 8: VEŽBA ZA UČENIKE
 
 <h3><span style="color: rgb(115, 191, 39);">🖋️ Vežba za učenike</span></h3>
 
-<p>Napomene za nastavnika: Ova vežba pomaže učenicima da prošire lekciju primenom veština istraživanja na novu situaciju van časa. Učenici će nastaviti da grade navike primećivanja obrazaca, objašnjavanja izbora dokazima i razmatranja kako promene u dizajnu utiču na rezultate. Zadaci takođe povezuju učenje sa rešavanjem problema u stvarnom svetu, pokazujući da su istraživanje i revizija korisni izvan jedne aktivnosti u učionici.</p>
+<p><strong>Napomene za nastavnika:</strong> Ova vežba pomaže učenicima da prošire lekciju primenom veština istraživanja na novu situaciju van časa. Učenici će nastaviti da grade navike primećivanja obrazaca, objašnjavanja izbora dokazima i razmatranja kako promene u dizajnu utiču na rezultate. Zadaci takođe povezuju učenje sa rešavanjem problema u stvarnom svetu, pokazujući da su istraživanje i revizija korisni izvan jedne aktivnosti u učionici.</p>
 
 - Za svaki zadatak u StudentPractice.Tasks:
 <p><strong>{task.TaskTitle}:</strong> {task.Instruction}</p>
-<p><strong>Kriterijumi uspeha</strong></p>
+<p>Kriterijumi uspeha</p>
 <ul>
   [Renderuj {task.SuccessCriteria} kao <li> stavke]
 </ul>
 
-<p><strong>Refleksija:</strong></p>
+<p><strong>🔎 Refleksija:</strong></p>
 <p>[Očisti i renderuj StudentPractice.Reflection.Instruction]</p>
 <ul>
   [Renderuj StudentPractice.Reflection.Prompts kao <li> stavke]
@@ -667,7 +672,7 @@ ULAZNI JSON:
     "properties": {
       "AssessPriorKnowledge": {
         "type": "string",
-        "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju nastavne oblasti, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajena pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru nastavne oblasti. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
+        "description": "Kompletna sekcija 'Procena prethodnog znanja' kao običan tekst (ukupno 150-250 reči). SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI PRAZAN STRING za ovo polje. Za Lekciju 1, struktura mora uključivati: 1. Uključi ovu sekciju samo u prvu lekciju nastavne oblasti, odmah nakon Ciljeva učenja učenika. 2. Osiguraj korišćenje DOK 1-3 podsticaja. 3. Uključi preduslovne veštine potrebne za ciljeve učenja učenika. 4. Odaberi jedan modalitet sa ove liste i potpuno ga razvij: postavljanje pitanja, K-W-L (Napomena: ako izabereš K-W-L, L polje znači 'What I Learned' / 'Šta sam naučio', a ne šta možemo da naučimo, i popunjava se NAKON procesa učenja), vizuelni prikazi, konceptualne mape, reflektivno pisanje, vodiči za predviđanje, ocenjivanje rečnika. 5. Početni podsticaj nastavnika sa izjavom 'Recite:' koja uvodi odabrani modalitet i objašnjava kako će učenici izneti trenutno razumevanje. 6. Jasna uputstva i šablon/struktura za odabrani modalitet. 7. Sekcija 'Očekivani odgovori učenika' koja pokazuje predviđene odgovore ili uobičajena pogrešna uverenja za odabrani modalitet. 8. Završni podsticaj nastavnika 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje u okviru nastavne oblasti. 9. Nakon potpunog razvoja jednog modaliteta, navedi 2 kratke alternativne opcije koje bi nastavnik mogao da izabere."
       },
       "EssentialQuestions": {
         "type": "array",
@@ -676,7 +681,7 @@ ULAZNI JSON:
       },
       "StudentLearningObjectives": {
         "type": "array",
-        "description": "Navedite samo specifične ciljeve učenja učenika za ovu lekciju, izvedene iz ciljeva na nivou nastavne oblasti. Svaki cilj treba da bude merljiv i da uključuje DOK oznaku.",
+        "description": "Odaberite od reči do reči specifične ciljeve učenja učenika za ovu lekciju iz ciljeva na nivou nastavne oblasti koji su navedeni u promptu. NE SMEJU se izmišljati novi ciljevi. Uvek ponovo iskoristite postojeće ciljeve učenja iz Koraka 0 (UnitDescription.StudentLearningObjectives).",
         "items": { "type": "string" }
       },
       "StandardsAligned": {
@@ -685,6 +690,11 @@ ULAZNI JSON:
         "items": {
           "type": "string"
         }
+      },
+      "KeyVocabulary": {
+        "type": "array",
+        "description": "Odaberite od reči do reči specifičan ključni rečnik za ovu lekciju iz ključnog rečnika na nivou nastavne oblasti. NE SMEJU se izmišljati nove reči. Uvek ponovo iskoristite tačne definicije iz Koraka 0 (UnitDescription.KeyVocabulary).",
+        "items": { "type": "string" }
       },
       "OrientationPhase": {
         "type": "object",
@@ -837,8 +847,8 @@ ULAZNI JSON:
               "LaunchInvestigation": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "Kreirajte skripte (koje počinju sa 'Recite:') za uvođenje zbunjujućeg scenarija ili modela. Uključite instrukciju za 'Prikazivanje modela, scenarija, demonstracije ili kratke priče koja uključuje grešku, neefikasnost ili neočekivani rezultat' kako biste podstakli radoznalost." },
-                  "FacilitationMoves": { "type": "array", "description": "Generišite 2-3 poteza za vođenje pokretanja. Uključite omogućavanje vremena učenicima za posmatranje pre reagovanja, podsticanje više interpretacija i naglašavanje da može postojati više validnih ideja.", "items": { "type": "string" } },
+                  "Prompt": { "type": "string", "description": "Kreirajte instrukcije za nastavnika za uvođenje zbunjujućeg scenarija. Prvo, u uglastim zagradama napišite akciju, npr. [Prikazati model, scenario, demonstraciju ili kratku priču koja uključuje grešku, neefikasnost ili neočekivani rezultat da podstaknete radoznalost], a tek onda obezbedite konverzacijsku skriptu koja počinje sa 'Recite:'." },
+                  "FacilitationMoves": { "type": "array", "description": "Generišite 2-3 poteza za vođenje pokretanja. Jasno definišite same instrukcijske akcije bez dodavanja 'Recite:' na početak. Uključite omogućavanje vremena učenicima za posmatranje pre reagovanja, podsticanje više interpretacija i naglašavanje da može postojati više validnih ideja.", "items": { "type": "string" } },
                   "PromptingOptions": { "type": "string", "description": "Generišite 2-3 specifična podsticaja kako biste pomogli učenicima da uoče važne ili neočekivane karakteristike, generišu moguća objašnjenja i opravdaju razmišljanje dokazima." }
                 },
                 "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
@@ -847,8 +857,8 @@ ULAZNI JSON:
               "CollaborationExpectations": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "Kreirajte scenario ('Recite:') za postavljanje zadatka kao međuzavisnog rada i naglasite zajedničku odgovornost. Uključite instrukcije za korišćenje početaka rečenica (npr. 'Mislim... zato što...') i struktura za participaciju kao što su žetoni za razgovor." },
-                  "FacilitationMoves": { "type": "array", "description": "Navedite 3-5 specifičnih poteza ili ponašanja učenika koja treba pratiti tokom grupnog rada (npr. identifikovanje obrazaca, beleženje u zajedničke tabele podataka, upoređivanje interpretacija). Osigurajte da su fokusirani na to da svi učenici doprinose posmatranju i doterivanju ideja.", "items": { "type": "string" } },
+                  "Prompt": { "type": "string", "description": "Kreirajte govornu skriptu (koja počinje sa 'Recite:') za postavljanje zadatka kao međuzavisnog rada i naglasite zajedničku odgovornost. Uključite instrukcije za učenike da koriste početke rečenica (npr. 'Mislim... zato što...') i strukture za participaciju kao što su žetoni za razgovor." },
+                  "FacilitationMoves": { "type": "array", "description": "Navedite 3-5 specifičnih poteza ili ponašanja učenika koja treba pratiti tokom grupnog rada (npr. identifikovanje obrazaca, beleženje u zajedničke tabele). Nemojte stavljati 'Recite:' pre ovih akcija. Osigurajte da su fokusirani na to da svi učenici doprinose posmatranju i doterivanju ideja.", "items": { "type": "string" } },
                   "PromptingOptions": { "type": "string", "description": "Navedite 2-3 podsticaja kako biste ohrabrili učenike da dele zapažanja, upoređuju interpretacije, opravdavaju tvrdnje dokazima i zajednički revidiraju ideje." }
                 },
                 "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
@@ -1204,7 +1214,8 @@ ULAZNI JSON:
       "StudentPractice",
       "EssentialQuestions",
       "StudentLearningObjectives",
-      "StandardsAligned"
+      "StandardsAligned",
+      "KeyVocabulary"
     ],
     "additionalProperties": false,
     "x-removablePaths": {

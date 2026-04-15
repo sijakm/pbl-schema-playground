@@ -108,6 +108,11 @@ First render essential questions and standards aligned:
   - Render each item from StandardsAligned as a <li>.
 </ul>
 
+<h3>🔤 Key Vocabulary</h3>
+<ul>
+  - Render each item from KeyVocabulary as a <li>.
+</ul>
+
 ==================================================
 SECTION 0: ASSESS PRIOR KNOWLEDGE (CONDITIONAL)
 ==================================================
@@ -156,33 +161,33 @@ SECTION 1: ORIENTATION PHASE – DEFINE THE PROBLEM
 
 <p><strong>📋Instructions for Teachers</strong></p>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</span></strong></p>
+<p><strong>Engage – Introduce the phenomenon in a way that sparks curiosity without explaining it.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Engage.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move in OrientationPhase.InstructionsForTeachers.Engage.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Engage.PromptingOptions}</li>
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Connect – Help students link their observations to the broader mystery that will anchor the investigation.</span></strong></p>
+<p><strong>Connect – Help students link their observations to the broader mystery that will anchor the investigation.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Connect.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Connect.PromptingOptions}</li>
   - For each move in OrientationPhase.InstructionsForTeachers.Connect.FacilitationMoves, render as <li>.
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Activate – Shift students into collaborative sensemaking.</span></strong></p>
+<p><strong>Activate – Shift students into collaborative sensemaking.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Activate.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move in OrientationPhase.InstructionsForTeachers.Activate.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Activate.PromptingOptions}</li>
 </ul>
 
-<p><strong><span style="color: rgb(145, 56, 230);">Probe – Encourage refinement of thinking by pushing students to examine assumptions.</span></strong></p>
+<p><strong>Probe – Encourage refinement of thinking by pushing students to examine assumptions.</strong></p>
 <p><strong>Say:</strong> {OrientationPhase.InstructionsForTeachers.Probe.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   <li><strong>Prompt with questions such as:</strong> {OrientationPhase.InstructionsForTeachers.Probe.PromptingOptions}</li>
   - For each move in OrientationPhase.InstructionsForTeachers.Probe.FacilitationMoves, render as <li>.
@@ -206,7 +211,7 @@ SECTION 2: CONCEPTUALIZATION PHASE – RESEARCH QUESTION + ACTION PLAN
 
 <p><strong>Guide Question Generation – Introduce the inquiry by prompting curiosity, not delivering content.</strong></p>
 <p><strong>Say:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move in ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {ConceptualizationPhase.InstructionsForTeachers.GuideQuestionGeneration.PromptingOptions}</li>
@@ -214,7 +219,7 @@ SECTION 2: CONCEPTUALIZATION PHASE – RESEARCH QUESTION + ACTION PLAN
 
 <p><strong>Identify Research Question – Help students collaboratively decide which question is most useful for investigation.</strong></p>
 <p><strong>Say:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move in ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {ConceptualizationPhase.InstructionsForTeachers.IdentifyResearchQuestion.PromptingOptions}</li>
@@ -222,7 +227,7 @@ SECTION 2: CONCEPTUALIZATION PHASE – RESEARCH QUESTION + ACTION PLAN
 
 <p><strong>Create an Action Plan – Support students in designing their own investigation rather than giving them the plan.</strong></p>
 <p><strong>Say:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move in ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {ConceptualizationPhase.InstructionsForTeachers.CreateAnActionPlan.PromptingOptions}</li>
@@ -245,7 +250,7 @@ SECTION 3: INVESTIGATION PHASE
 
 <p><strong>Launch the Investigation – Introduce the task without explaining content.</strong></p>
 <p><strong>Say:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move in InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {InvestigationPhase.InstructionsForTeachers.LaunchInvestigation.PromptingOptions}</li>
@@ -253,7 +258,7 @@ SECTION 3: INVESTIGATION PHASE
 
 <p><strong>Collaboration Expectations – Frame the task as interdependent—each student contributes to shared analysis.</strong></p>
 <p><strong>Say:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.Prompt}</p>
-<p><strong>Facilitation Moves:</strong></p>
+<p>Facilitation Moves:</p>
 <ul>
   - For each move/expectation in InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.FacilitationMoves, render as <li>.
   <li><strong>Prompt with questions such as:</strong> {InvestigationPhase.InstructionsForTeachers.CollaborationExpectations.PromptingOptions}</li>
@@ -276,14 +281,14 @@ SECTION 3: INVESTIGATION PHASE
   - For each move in InvestigationPhase.InstructionsForTeachers.CirculationPrompts.Collaboration, render as <li>.
 </ul>
 
-<p><strong>❗ <span style="color: rgb(145, 56, 230);">Anticipated Misconceptions</span></strong></p>
+<p><strong>⚠️ Anticipated Misconceptions</strong></p>
 - For each item in InvestigationPhase.AnticipatedMisconceptions:
 <p>{item.Misconception} (Ensure NO bolding/strong tags are used here)</p>
 <ul>
   <li>{item.TeacherResponse} (Ensure NO bolding/strong tags are used here)</li>
 </ul>
 
-<p><strong>🪜 <span style="color: rgb(145, 56, 230);">Differentiation</span></strong></p>
+<p><strong>🪜 Differentiation</strong></p>
 
 <p><strong>Language Learners:</strong></p>
 - For each strategy in InvestigationPhase.Differentiation.LanguageLearners.Strategies:
@@ -305,12 +310,12 @@ SECTION 3: INVESTIGATION PHASE
 - For each strategy in InvestigationPhase.Differentiation.GoDeeper.Strategies:
 <p>{strategy}</p>
 
-<p><strong>Advanced Thinking Question:</strong></p>
+<p>Advanced Thinking Question:</p>
 <ul>
   <li>Say: "{InvestigationPhase.Differentiation.GoDeeper.AdvancedQuestion}"</li>
 </ul>
 
-<p><strong>✅ Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   - For each response in InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, render as <li>.
 </ul>
@@ -333,7 +338,7 @@ SECTION 3: INVESTIGATION PHASE
 
 <p><strong>✔ <span style="color: rgb(145, 56, 230);">Quick Checks</span></strong></p>
 <p>{InvestigationPhase.QuickCheck.Question}</p>
-<p><strong>✅ Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   - For each response in InvestigationPhase.QuickCheck.ExpectedResponses, render as <li>.
 </ul>
@@ -366,7 +371,7 @@ SECTION 4: CONCLUSION PHASE
 <p>{ConclusionPhase.InstructionsForTeachers.CollaborationInstruction}</p>
 <p><em>{ConclusionPhase.InstructionsForTeachers.Guardrail}</em></p>
 
-<p><strong>✅ Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   - For each response in ConclusionPhase.ExpectedStudentResponses, render as <li>.
 </ul>
@@ -397,7 +402,7 @@ SECTION 5: DISCUSSION PHASE
 <p><strong>🌍 <span style="color: rgb(145, 56, 230);">Transcendent Thinking</span></strong></p>
 <p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
-<p><strong>✅ Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   - For each response in DiscussionPhase.ExpectedStudentResponses, render as <li>.
 </ul>
@@ -420,20 +425,20 @@ CONTENT PROCESSING RULES:
 
 RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty output <li>None</li>):
 
-<h3><span style="color: rgb(145, 56, 230);">Review & Spaced Retrieval (5 min)</span></h3>
+<p><strong>🧠 <span style="color: rgb(145, 56, 230);">Review & Spaced Retrieval (5 min)</span></strong></p>
 
-<p>Teacher Notes: This strategy strengthens retention through active recall and connects today’s investigation of the shaduf to core science ideas about levers and mechanical advantage. The transcendent reflection helps students recognize how simple machines like levers allow people to solve real-world problems efficiently, both in ancient Egypt and today. It reinforces that changing variables such as arm length or counterweight affects force, effort, and efficiency in a system. </p>
+<p><strong>Teacher Notes:</strong> This strategy strengthens retention through active recall and connects today’s investigation of the shaduf to core science ideas about levers and mechanical advantage. The transcendent reflection helps students recognize how simple machines like levers allow people to solve real-world problems efficiently, both in ancient Egypt and today. It reinforces that changing variables such as arm length or counterweight affects force, effort, and efficiency in a system. </p>
 
 <h3>📋 Instructions for Teachers</h3>
 
-<p><strong>Active Recall</strong></p>
+<p><strong>🔁 Active Recall</strong></p>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question using Single Say Rule]</p>
-<p>✅ <strong>Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses as <li> items]
 </ul>
 
-<p><strong>Correct Common Misconceptions</strong></p>
+<p><strong>⚠️ Anticipated Misconceptions</strong></p>
 - For each item in ReviewAndSpacedRetrieval.InstructionsForTeachers.CorrectCommonMisconceptions:
 <p>{item.Misconception}</p>
 <ul>
@@ -442,14 +447,14 @@ RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty ou
 
 <p><strong>💭 Essential Question Connection</strong></p>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question using Single Say Rule]</p>
-<p>✅ <strong>Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses as <li> items]
 </ul>
 
 <p><strong>⏳ Spaced Retrieval</strong></p>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay using metadata migration and Single Say Rule]</p>
-<p>✅ <strong>Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses as <li> items]
 </ul>
@@ -464,28 +469,28 @@ From the FormativeAssessment plain text, extract and render Prompts 1–4 in thi
 
 <p><strong>Prompt 1 (DOK 1):</strong></p>
 <p>{Prompt 1 question}</p>
-<p><strong>✅Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   <li>{1–2 expected responses}</li>
 </ul>
 
 <p><strong>Prompt 2 (DOK 2):</strong></p>
 <p>{Prompt 2 question}</p>
-<p><strong>✅Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   <li>{1–2 expected responses}</li>
 </ul>
 
 <p><strong>Prompt 3 (DOK 3):</strong></p>
 <p>{Prompt 3 question}</p>
-<p><strong>✅Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   <li>{1–2 expected responses}</li>
 </ul>
 
 <p><strong>Prompt 4 (DOK 4):</strong></p>
 <p>{Prompt 4 question}</p>
-<p><strong>✅Expected Student Responses</strong></p>
+<p>✅ Expected Student Responses</p>
 <ul>
   <li>{1–2 expected responses}</li>
 </ul>
@@ -497,24 +502,20 @@ SECTION 8: STUDENT PRACTICE
 SECTION HEADING (MUST):
 <h3><span style="color: rgb(115, 191, 39);">🖋️ Student Practice</span></h3>
 
-<p>Teacher Notes: This practice helps students extend the lesson by applying inquiry skills to a new situation outside class. Students will continue building the habits of noticing patterns, explaining choices with evidence, and considering how design changes affect results. The tasks also connect learning to real-world problem solving, showing that investigation and revision are useful beyond a single classroom activity.</p>
+<p><strong>Teacher Notes:</strong> This practice helps students extend the lesson by applying inquiry skills to a new situation outside class. Students will continue building the habits of noticing patterns, explaining choices with evidence, and considering how design changes affect results. The tasks also connect learning to real-world problem solving, showing that investigation and revision are useful beyond a single classroom activity.</p>
 
 - For each task in StudentPractice.Tasks:
 <p><strong>{task.TaskTitle}:</strong> {task.Instruction}</p>
-<p><strong>Success Criteria</strong></p>
+<p>Success Criteria</p>
 <ul>
   [Render {task.SuccessCriteria} as <li> items]
 </ul>
 
-<p><strong>Reflection:</strong></p>
+<p><strong>🔎 Reflection:</strong></p>
 <p>[Clean and render StudentPractice.Reflection.Instruction]</p>
 <ul>
   [Render StudentPractice.Reflection.Prompts as <li> items]
 </ul>
-
-Reflection MUST be:
-<p><strong>Reflection:</strong></p>
-<p>One reflective prompt.</p>
 
 FINAL OUTPUT RULE:
 Return ONLY the combined HTML for all sections in order. No extra wrapper text.`,
@@ -671,7 +672,7 @@ INPUT JSON:
     "properties": {
       "AssessPriorKnowledge": {
         "type": "string",
-        "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
+        "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L (Note: if K-W-L is chosen, ensure the structure explicitly is K: 'What I Know', W: 'What I Want to Know', and L: 'What I Learned' which is to be filled out AFTER the learning process), visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
       },
       "EssentialQuestions": {
         "type": "array",
@@ -680,12 +681,17 @@ INPUT JSON:
       },
       "StudentLearningObjectives": {
         "type": "array",
-        "description": "List only the specific student learning objectives for this lesson, derived from the unit-level objectives. Each objective should be measurable and include a DOK label.",
+        "description": "Select verbatim the specific student learning objectives for this lesson from the unit-level objectives provided in the prompt. Do NOT invent new objectives. You must reuse the exact wording from the Step 0 UnitDescription.StudentLearningObjectives.",
         "items": { "type": "string" }
       },
       "StandardsAligned": {
         "type": "array",
         "description": "List only the unique educational standards addressed in this specific lesson. Each standard must include standard code and description and must be exactly the same used in the Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+        "items": { "type": "string" }
+      },
+      "KeyVocabulary": {
+        "type": "array",
+        "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
         "items": { "type": "string" }
       },
       "OrientationPhase": {
@@ -839,8 +845,8 @@ INPUT JSON:
               "LaunchInvestigation": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "Create teacher scripts (starting with 'Say:') to introduce a puzzling scenario or model. Include an instruction to 'Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result' to spark curiosity." },
-                  "FacilitationMoves": { "type": "array", "description": "Generate 2-3 moves to guide the launch. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.", "items": { "type": "string" } },
+                  "Prompt": { "type": "string", "description": "Create teacher instructions to introduce a puzzling scenario or model. First provide a bracketed action like [Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result to spark curiosity], then provide the conversational script starting with 'Say:'." },
+                  "FacilitationMoves": { "type": "array", "description": "Generate 2-3 moves to guide the launch. State the instructional actions clearly without prefixing them with 'Say:'. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.", "items": { "type": "string" } },
                   "PromptingOptions": { "type": "string", "description": "Generate 2-3 specific prompts to help students notice important or unexpected features, generate possible explanations, and justify thinking with evidence." }
                 },
                 "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
@@ -849,8 +855,8 @@ INPUT JSON:
               "CollaborationExpectations": {
                 "type": "object",
                 "properties": {
-                  "Prompt": { "type": "string", "description": "Create a script ('Say:') to frame the task as interdependent and emphasize shared responsibility. Include instructions to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips." },
-                  "FacilitationMoves": { "type": "array", "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Ensure they focus on all students contributing to observing and refining ideas.", "items": { "type": "string" } },
+                  "Prompt": { "type": "string", "description": "Create a spoken script (starting with 'Say:') to frame the task as interdependent and emphasize shared responsibility. Include instructions for students to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips." },
+                  "FacilitationMoves": { "type": "array", "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Do not prefix these actions with 'Say:'. Ensure they focus on all students contributing to observing and refining ideas.", "items": { "type": "string" } },
                   "PromptingOptions": { "type": "string", "description": "Provide 2-3 prompts to encourage students to share observations, compare interpretations, justify claims with evidence, and collaboratively revise ideas." }
                 },
                 "required": ["Prompt", "FacilitationMoves", "PromptingOptions"],
@@ -1205,7 +1211,8 @@ INPUT JSON:
       "StudentPractice",
       "EssentialQuestions",
       "StudentLearningObjectives",
-      "StandardsAligned"
+      "StandardsAligned",
+      "KeyVocabulary"
     ],
     "additionalProperties": false,
     "x-removablePaths": {
