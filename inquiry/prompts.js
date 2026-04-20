@@ -436,13 +436,6 @@ RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty ou
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses as <li> items]
 </ul>
 
-<p><strong>⚠️ Anticipated Misconceptions</strong></p>
-- For each item in ReviewAndSpacedRetrieval.InstructionsForTeachers.CorrectCommonMisconceptions:
-<p>{item.Misconception}</p>
-<ul>
-  <li>{item.TeacherResponse}</li>
-</ul>
-
 <h3><span>💭 Essential Question Connection</span></h3>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question using Single Say Rule]</p>
 <p>✅ Expected Student Responses</p>
@@ -1081,7 +1074,7 @@ INPUT JSON:
       },
       "ReviewAndSpacedRetrieval": {
         "type": "object",
-        "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Correct Common Misconceptions block 3. Essential Question Connection 4. Transcendent Thinking section 5. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
+        "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Transcendent Thinking section 4. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
         "properties": {
           "InstructionsForTeachers": {
             "type": "object",
@@ -1103,19 +1096,6 @@ INPUT JSON:
                 },
                 "required": ["Question", "ExpectedStudentResponses"],
                 "additionalProperties": false
-              },
-              "CorrectCommonMisconceptions": {
-                "type": "array",
-                "description": "Identify 2-3 common misconceptions likely to arise for this specific topic and provide correction scripts.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "Misconception": { "type": "string", "description": "Describe the misconception clearly in one sentence (e.g., 'Students may think that...')." },
-                    "TeacherResponse": { "type": "string", "description": "A teacher script (starting with 'Teacher Response:') and prompt (starting with 'Say:') to guide students back to the correct understanding using investigation evidence." }
-                  },
-                  "required": ["Misconception", "TeacherResponse"],
-                  "additionalProperties": false
-                }
               },
               "EssentialQuestionConnection": {
                 "type": "object",
@@ -1152,7 +1132,7 @@ INPUT JSON:
                 "additionalProperties": false
               }
             },
-            "required": ["ActiveRecall", "CorrectCommonMisconceptions", "EssentialQuestionConnection", "SpacedRetrieval"],
+            "required": ["ActiveRecall", "EssentialQuestionConnection", "SpacedRetrieval"],
             "additionalProperties": false
           }
         },

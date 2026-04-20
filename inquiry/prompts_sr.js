@@ -436,13 +436,6 @@ RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni 
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
-<p><strong>⚠️ Česta pogrešna uverenja</strong></p>
-- Za svaku stavku u ReviewAndSpacedRetrieval.InstructionsForTeachers.CorrectCommonMisconceptions:
-<p>{item.Misconception}</p>
-<ul>
-  <li>{item.TeacherResponse}</li>
-</ul>
-
 <h3><span>💭 Veza sa ključnim pitanjem</span></h3>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question koristeći Pravilo jednog „Recite“]</p>
 <p>✅ Očekivani odgovori učenika</p>
@@ -1085,7 +1078,7 @@ ULAZNI JSON:
       },
       "ReviewAndSpacedRetrieval": {
         "type": "object",
-        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake'. Ova 5-minutna aktivnost mora uključivati: 1. Sekcija Instrukcije za nastavnike koja sadrži aktivno prisećanje, ispravljanje pogrešnih uverenja, povezivanje sa ciljevima nastavne oblasti i prisećanje na prethodno naučeno.",
+        "description": "Kompletna sekcija 'Ponavljanje i prisećanje uz vremenske razmake'. Ova 5-minutna aktivnost mora uključivati: 1. Sekcija Instrukcije za nastavnike koja sadrži aktivno prisećanje, povezivanje sa ciljevima nastavne oblasti i prisećanje na prethodno naučeno.",
         "properties": {
           "InstructionsForTeachers": {
             "type": "object",
@@ -1107,19 +1100,6 @@ ULAZNI JSON:
                 },
                 "required": ["Question", "ExpectedStudentResponses"],
                 "additionalProperties": false
-              },
-              "CorrectCommonMisconceptions": {
-                "type": "array",
-                "description": "Identifikujte 2-3 česta pogrešna uverenja koja se verovatno mogu javiti za ovu specifičnu temu i navedite skripte za njihovu ispravku.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "Misconception": { "type": "string", "description": "Opišite pogrešno uverenje jasno u jednoj rečenici (npr. 'Učenici mogu misliti da...')." },
-                    "TeacherResponse": { "type": "string", "description": "Scenario za nastavnika (počinje sa 'Reakcija nastavnika:') i podsticaj (počinje sa 'Recite:') za vođenje učenika nazad do ispravnog razumevanja koristeći dokaze iz istraživanja." }
-                  },
-                  "required": ["Misconception", "TeacherResponse"],
-                  "additionalProperties": false
-                }
               },
               "EssentialQuestionConnection": {
                 "type": "object",
@@ -1156,7 +1136,7 @@ ULAZNI JSON:
                 "additionalProperties": false
               }
             },
-            "required": ["ActiveRecall", "CorrectCommonMisconceptions", "EssentialQuestionConnection", "SpacedRetrieval"],
+            "required": ["ActiveRecall", "EssentialQuestionConnection", "SpacedRetrieval"],
             "additionalProperties": false
           }
         },
