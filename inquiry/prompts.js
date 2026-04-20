@@ -288,7 +288,7 @@ SECTION 3: INVESTIGATION PHASE
   <li>{item.TeacherResponse} (Ensure NO bolding/strong tags are used here)</li>
 </ul>
 
-<p><strong>🪜 Differentiation</strong></p>
+<h3><span>🪜 Differentiation</span></h3>
 
 <p><strong>Language Learners:</strong></p>
 - For each strategy in InvestigationPhase.Differentiation.LanguageLearners.Strategies:
@@ -425,7 +425,7 @@ CONTENT PROCESSING RULES:
 
 RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty output <li>None</li>):
 
-<p><strong>🧠 <span style="color: rgb(145, 56, 230);">Review & Spaced Retrieval (5 min)</span></strong></p>
+<h3><span>🧠 Review & Spaced Retrieval (5 min)</span></h3>
 
 <p><strong>Teacher Notes:</strong> This strategy strengthens retention through active recall and connects today’s investigation of the shaduf to core science ideas about levers and mechanical advantage. The transcendent reflection helps students recognize how simple machines like levers allow people to solve real-world problems efficiently, both in ancient Egypt and today. It reinforces that changing variables such as arm length or counterweight affects force, effort, and efficiency in a system. </p>
 

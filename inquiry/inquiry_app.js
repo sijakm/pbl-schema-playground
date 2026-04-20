@@ -490,11 +490,11 @@
       const langEl = $("languageSelect");
       const lang = langEl ? langEl.value : "en";
       const lessonLabel = lang === "sr" ? "Lekcija" : "Lesson";
-      const noteLabel = lang === "sr" ? "ovo će biti sadržaj unutar box-a na našoj platformi" : "this will be the content inside the box on our platform";
 
       const formattedLessons = lessonHtmls.map((html, i) => {
         return `
-<p><strong>${lessonLabel} ${i + 1} (${noteLabel})</strong></p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 40px 0;">
+<h2>${lessonLabel} ${i + 1}</h2>
 ${html}`;
       });
 

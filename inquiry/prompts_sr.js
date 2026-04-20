@@ -288,7 +288,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   <li>{item.TeacherResponse} (Osigurajte da se ovde NE koristi boldovanje/strong tagovi)</li>
 </ul>
 
-<p><strong>🪜 Diferencijacija</strong></p>
+<h3><span>🪜 Diferencijacija</span></h3>
 
 <p><strong>Učenici kojima je jezik strani:</strong></p>
 - Za svaku strategiju u InvestigationPhase.Differentiation.LanguageLearners.Strategies:
@@ -425,7 +425,7 @@ PRAVILA ZA OBRADU SADRŽAJA:
 
 RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni izbaci <li>Nema</li>):
 
-<p><strong>🧠 <span style="color: rgb(145, 56, 230);">Ponavljanje i prisećanje uz vremenske razmake (5 min)</span></strong></p>
+<h3><span>🧠 Ponavljanje i prisećanje uz vremenske razmake (5 min)</span></h3>
 
 <p><strong>Napomene za nastavnika:</strong> Ova strategija jača zadržavanje informacija kroz aktivno prisećanje i povezuje današnje istraživanje šadufa sa ključnim naučnim idejama o polugama i mehaničkoj prednosti. Transcedentna refleksija pomaže učenicima da prepoznaju kako jednostavne mašine poput poluga omogućavaju ljudima da efikasno rešavaju probleme u stvarnom svetu, kako u starom Egiptu, tako i danas. Ovo potvrđuje da promena varijabli kao što su dužina kraka ili protivteg utiče na silu, napor i efikasnost u sistemu. </p>
 
