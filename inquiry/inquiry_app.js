@@ -34,6 +34,7 @@
     runChainBtn: () => $("runChainBtn"),
     cancelBtn: () => $("cancelBtn"),
     downloadPromptsBtn: () => $("downloadPromptsBtn"),
+    downloadHtmlBtn: () => $("downloadHtmlBtn"),
     status: () => $("status"),
 
     log: () => $("log"),
@@ -571,7 +572,31 @@ ${html}`;
       setTimeout(() => save(contentSR, "inquiry_prompts_sr.zip"), 500);
       log("[OK] Prompts downloaded.");
     } catch (err) {
-      log("[error] Failed to download: " + err.message);
+      log("[error] Failed to download prompts: " + err.message);
+    }
+  }
+ 
+  async function downloadHtml() {
+    try {
+      const html = els.finalHtml()?.value;
+      if (!html) {
+        alert("No HTML to download. Please run the chain first.");
+        return;
+      }
+      const unitName = els.name()?.value?.trim() || "unit";
+      const fileName = `${unitName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_inquiry.html`;
+      
+      const blob = new Blob([html], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.body.appendChild(document.createElement("a"));
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      log("[OK] Final HTML downloaded.");
+    } catch (err) {
+      log("[error] Failed to download HTML: " + err.message);
     }
   }
 
@@ -580,9 +605,11 @@ ${html}`;
     const runBtn = els.runChainBtn();
     const cancelBtn = els.cancelBtn();
     const downloadBtn = els.downloadPromptsBtn();
+    const downloadHtmlBtn = els.downloadHtmlBtn();
     if (runBtn) runBtn.addEventListener("click", runChain);
     if (cancelBtn) cancelBtn.addEventListener("click", cancel);
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
+    if (downloadHtmlBtn) downloadHtmlBtn.addEventListener("click", downloadHtml);
 
     initSchemaEditor();
   }
@@ -594,6 +621,7 @@ ${html}`;
   window.runChain = runChain;
   window.cancel = cancel;
   window.downloadPrompts = downloadPrompts;
+  window.downloadHtml = downloadHtml;
   window.getPrompts = getPrompts;
 
 })();
