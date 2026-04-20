@@ -320,7 +320,7 @@ SECTION 3: INVESTIGATION PHASE
   - For each response in InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, render as <li>.
 </ul>
 
-<p><strong>🤝 Accommodations & Modifications</strong></p>
+<h3><span>🤝 Accommodations & Modifications</span></h3>
 
 <p><strong>General Supports:</strong></p>
 <ul>
@@ -336,7 +336,7 @@ SECTION 3: INVESTIGATION PHASE
   - For each subItem in entry.subItems, render as <li>.
 </ul>
 
-<p><strong>✔ Quick Check</strong></p>
+<h3><span>✔ Quick Check</span></h3>
 <p>{InvestigationPhase.QuickCheck.Question}</p>
 <p>✅ Expected Student Responses</p>
 <ul>
@@ -399,7 +399,7 @@ SECTION 5: DISCUSSION PHASE
   - For each question in DiscussionPhase.InstructionsForTeachers.ProbingQuestions, render as <li>.
 </ul>
 
-<p><strong>🌍 Transcendent Thinking</strong></p>
+<h3><span>🌍 Transcendent Thinking</span></h3>
 <p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
 <p>✅ Expected Student Responses</p>

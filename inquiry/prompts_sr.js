@@ -320,7 +320,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaki odgovor u InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, renderuj kao <li>.
 </ul>
 
-<p><strong>🤝 Prilagođavanja i modifikacije</strong></p>
+<h3><span>🤝 Prilagođavanja i modifikacije</span></h3>
 
 <p><strong>Opšta podrška:</strong></p>
 <ul>
@@ -336,7 +336,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaku podstavku u unos.subItems, renderuj kao <li>.
 </ul>
 
-<p><strong>✔ Brza provera</strong></p>
+<h3><span>✔ Brza provera</span></h3>
 <p>{InvestigationPhase.QuickCheck.Question}</p>
 <p>✅ Očekivani odgovori učenika</p>
 <ul>
@@ -399,7 +399,7 @@ SEKCIJA 5: FAZA DISKUSIJE
   - Za svako pitanje u DiscussionPhase.InstructionsForTeachers.ProbingQuestions, renderuj kao <li>.
 </ul>
 
-<p><strong>🌍 Transcendentno razmišljanje</strong></p>
+<h3><span>🌍 Transcendentno razmišljanje</span></h3>
 <p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
 <p>✅ Očekivani odgovori učenika</p>
