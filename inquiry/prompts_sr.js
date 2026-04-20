@@ -320,7 +320,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaki odgovor u InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, renderuj kao <li>.
 </ul>
 
-<p><strong>🤝 <span style="color: rgb(145, 56, 230);">Prilagođavanja i modifikacije</span></strong></p>
+<p><strong>🤝 Prilagođavanja i modifikacije</strong></p>
 
 <p><strong>Opšta podrška:</strong></p>
 <ul>
@@ -336,7 +336,7 @@ SEKCIJA 3: FAZA ISTRAŽIVANJA
   - Za svaku podstavku u unos.subItems, renderuj kao <li>.
 </ul>
 
-<p><strong>✔ <span style="color: rgb(145, 56, 230);">Brze provere</span></strong></p>
+<p><strong>✔ Brza provera</strong></p>
 <p>{InvestigationPhase.QuickCheck.Question}</p>
 <p>✅ Očekivani odgovori učenika</p>
 <ul>
@@ -399,7 +399,7 @@ SEKCIJA 5: FAZA DISKUSIJE
   - Za svako pitanje u DiscussionPhase.InstructionsForTeachers.ProbingQuestions, renderuj kao <li>.
 </ul>
 
-<p><strong>🌍 <span style="color: rgb(145, 56, 230);">Transcendentno razmišljanje</span></strong></p>
+<p><strong>🌍 Transcendentno razmišljanje</strong></p>
 <p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
 <p>✅ Očekivani odgovori učenika</p>
@@ -429,9 +429,7 @@ RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni 
 
 <p><strong>Napomene za nastavnika:</strong> Ova strategija jača zadržavanje informacija kroz aktivno prisećanje i povezuje današnje istraživanje šadufa sa ključnim naučnim idejama o polugama i mehaničkoj prednosti. Transcedentna refleksija pomaže učenicima da prepoznaju kako jednostavne mašine poput poluga omogućavaju ljudima da efikasno rešavaju probleme u stvarnom svetu, kako u starom Egiptu, tako i danas. Ovo potvrđuje da promena varijabli kao što su dužina kraka ili protivteg utiče na silu, napor i efikasnost u sistemu. </p>
 
-<h3>📋 Instrukcije za nastavnike</h3>
-
-<p><strong>🔁 Aktivno prisećanje</strong></p>
+<h3><span>🔁 Aktivno prisećanje</span></h3>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question koristeći Pravilo jednog „Recite“]</p>
 <p>✅ Očekivani odgovori učenika</p>
 <ul>
@@ -445,14 +443,14 @@ RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni 
   <li>{item.TeacherResponse}</li>
 </ul>
 
-<p><strong>💭 Veza sa ključnim pitanjem</strong></p>
+<h3><span>💭 Veza sa ključnim pitanjem</span></h3>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question koristeći Pravilo jednog „Recite“]</p>
 <p>✅ Očekivani odgovori učenika</p>
 <ul>
   [Renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses kao <li> stavke]
 </ul>
 
-<p><strong>⏳ Prisećanje uz vremenske razmake</strong></p>
+<h3><span>⏳ Prisećanje uz vremenske razmake</span></h3>
 <p>[Očisti i renderuj ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay koristeći migraciju metapodataka i Pravilo jednog „Recite“]</p>
 <p>✅ Očekivani odgovori učenika</p>
 <ul>
@@ -463,7 +461,7 @@ RENDERUJ OVU STRUKTURU TAČNO (popuni mesta iz JSON-a; ako su Materijali prazni 
 SEKCIJA 7: FORMATIVNO OCENJIVANJE
 ==================================================
 
-<h3><span>✅ Formativno ocenjivanje</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">✅ Formativno ocenjivanje (5 min)</span></h3>
 
 Iz običnog teksta FormativeAssessment-a, izvuci i renderuj podsticaje (Prompts) 1–4 u ovoj tačnoj strukturi (nemoj izmišljati podsticaje; izvuci iz teksta; očisti formatiranje):
 
@@ -1179,7 +1177,7 @@ ULAZNI JSON:
             "items": {
               "type": "object",
               "properties": {
-                "TaskTitle": { "type": "string", "description": "npr., 'Zadatak 1 (DOK 2)'" },
+                "TaskTitle": { "type": "string", "description": "npr., '1. (DOK 2)'" },
                 "Instruction": { "type": "string", "description": "Jasna uputstva korak-po-korak za učenika za dati zadatak." },
                 "SuccessCriteria": { "type": "array", "description": "4-5 specifičnih stavki zasnovanih na dokazima koje pokazuju kako izgleda uspešno usvojen koncept za ovaj zadatak. KRITIČNO: Svaki kriterijum MORA početi glagolom (npr. 'Opisuje', 'Objašnjava', 'Koristi').", "items": { "type": "string" } }
               },

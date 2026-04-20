@@ -320,7 +320,7 @@ SECTION 3: INVESTIGATION PHASE
   - For each response in InvestigationPhase.Differentiation.GoDeeper.ExpectedResponses, render as <li>.
 </ul>
 
-<p><strong>🤝 <span style="color: rgb(145, 56, 230);">Accommodations & Modifications</span></strong></p>
+<p><strong>🤝 Accommodations & Modifications</strong></p>
 
 <p><strong>General Supports:</strong></p>
 <ul>
@@ -336,7 +336,7 @@ SECTION 3: INVESTIGATION PHASE
   - For each subItem in entry.subItems, render as <li>.
 </ul>
 
-<p><strong>✔ <span style="color: rgb(145, 56, 230);">Quick Checks</span></strong></p>
+<p><strong>✔ Quick Check</strong></p>
 <p>{InvestigationPhase.QuickCheck.Question}</p>
 <p>✅ Expected Student Responses</p>
 <ul>
@@ -399,7 +399,7 @@ SECTION 5: DISCUSSION PHASE
   - For each question in DiscussionPhase.InstructionsForTeachers.ProbingQuestions, render as <li>.
 </ul>
 
-<p><strong>🌍 <span style="color: rgb(145, 56, 230);">Transcendent Thinking</span></strong></p>
+<p><strong>🌍 Transcendent Thinking</strong></p>
 <p>{DiscussionPhase.TranscendentThinking.Question}</p>
 
 <p>✅ Expected Student Responses</p>
@@ -429,9 +429,7 @@ RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty ou
 
 <p><strong>Teacher Notes:</strong> This strategy strengthens retention through active recall and connects today’s investigation of the shaduf to core science ideas about levers and mechanical advantage. The transcendent reflection helps students recognize how simple machines like levers allow people to solve real-world problems efficiently, both in ancient Egypt and today. It reinforces that changing variables such as arm length or counterweight affects force, effort, and efficiency in a system. </p>
 
-<h3>📋 Instructions for Teachers</h3>
-
-<p><strong>🔁 Active Recall</strong></p>
+<h3><span>🔁 Active Recall</span></h3>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question using Single Say Rule]</p>
 <p>✅ Expected Student Responses</p>
 <ul>
@@ -445,14 +443,14 @@ RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty ou
   <li>{item.TeacherResponse}</li>
 </ul>
 
-<p><strong>💭 Essential Question Connection</strong></p>
+<h3><span>💭 Essential Question Connection</span></h3>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question using Single Say Rule]</p>
 <p>✅ Expected Student Responses</p>
 <ul>
   [Render ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses as <li> items]
 </ul>
 
-<p><strong>⏳ Spaced Retrieval</strong></p>
+<h3><span>⏳ Spaced Retrieval</span></h3>
 <p>[Clean and render ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay using metadata migration and Single Say Rule]</p>
 <p>✅ Expected Student Responses</p>
 <ul>
@@ -463,7 +461,7 @@ RENDER THIS SKELETON EXACTLY (fill placeholders from JSON; if Materials empty ou
 SECTION 7: FORMATIVE ASSESSMENT
 ==================================================
 
-<h3><span>✅Formative Assessment</span></h3>
+<h3><span style="color: rgb(115, 191, 39);">✅Formative Assessment (5 min)</span></h3>
 
 From the FormativeAssessment plain text, extract and render Prompts 1–4 in this exact structure (do not invent prompts; extract from text; clean formatting):
 
@@ -1084,7 +1082,6 @@ INPUT JSON:
       "ReviewAndSpacedRetrieval": {
         "type": "object",
         "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Correct Common Misconceptions block 3. Essential Question Connection 4. Transcendent Thinking section 5. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
-        "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers section containing active recall, misconception corrections, connections to unit goals, and spaced retrieval of prior learning.",
         "properties": {
           "InstructionsForTeachers": {
             "type": "object",
@@ -1176,7 +1173,7 @@ INPUT JSON:
             "items": {
               "type": "object",
               "properties": {
-                "TaskTitle": { "type": "string", "description": "e.g., 'Task 1 (DOK 2)'" },
+                "TaskTitle": { "type": "string", "description": "e.g., '1. (DOK 2)'" },
                 "Instruction": { "type": "string", "description": "Clear step-by-step student directions for the task." },
                 "SuccessCriteria": { "type": "array", "description": "4-5 specific, evidence-based bullet points showing what mastery looks like for this task. CRITICAL: Every criterion MUST start with an action verb (e.g., 'Describes', 'Explains', 'Uses').", "items": { "type": "string" } }
               },
