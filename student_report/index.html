@@ -269,8 +269,8 @@
 
       <label for="languageSelect">Jezik / Language</label>
       <select id="languageSelect">
-        <option value="en">English</option>
-        <option value="sr" selected>Srpski</option>
+        <option value="en" selected>English</option>
+        <option value="sr">Srpski</option>
       </select>
 
       <label for="modelSelect">OpenAI Model</label>
@@ -306,30 +306,25 @@ Output requirements:
         <h3>Student Info & System</h3>
         <label for="studentSelector">Load Demo Student</label>
         <select id="studentSelector"
-          style="background:#eef2ff; border-color:#6366f1; font-weight:bold; margin-bottom: 24px;">
+          style="background:#eef2ff; border-color:#6366f1; font-weight:bold; margin-bottom: 24px;" disabled>
           <option value="1">1. Jordan Smith (Test Student)</option>
         </select>
 
         <label for="studentInfo">Student Information</label>
         <input id="studentInfo" type="text"
-          value="Jordan Smith | #12345 | Course: Algebra II | Semester: Spring 2026" />
+          value="Jordan Smith | #12345 | Course: Algebra II | Semester: Spring 2026" readonly />
 
         <label for="gradingSystem">Grading System Context</label>
-        <textarea id="gradingSystem" style="height: 180px;"></textarea>
+        <textarea id="gradingSystem" style="height: 180px;" readonly></textarea>
 
         <label for="attendanceData">Attendance Record</label>
-        <textarea id="attendanceData" style="height: 180px;">Total: 26 Sessions
-Present: 23
-Excused Absence (Medical): 1
-Unexcused Absence: 1
-Late: 2
-Recent Notes: Missed 2 sessions in early Feb.</textarea>
+        <textarea id="attendanceData" style="height: 180px;" readonly></textarea>
       </div>
 
       <div>
         <h3>Performance Details</h3>
         <label for="gradesData">Grades & Teacher Comments</label>
-        <textarea id="gradesData" style="height: 340px;">FORMATIVE ASSESSMENTS:
+        <textarea id="gradesData" style="height: 340px;" readonly>FORMATIVE ASSESSMENTS:
 - Factoring Trinomials: 85%
 - Functions and Domain: 92%
 - Quadratic Equations: 88%
