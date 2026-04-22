@@ -97,15 +97,13 @@ Zahtevi za izlaz:
       studentInfo: "STUDENT INFORMATION:",
       gradingSystem: "GRADING SYSTEM CONTEXT:",
       attendanceData: "ATTENDANCE RECORD:",
-      gradesData: "GRADES:",
-      qualitativeData: "TEACHER COMMENTS, ASSESSMENT ANSWERS & TRENDS:"
+      gradesData: "GRADES & TEACHER COMMENTS:"
     },
     sr: {
       studentInfo: "INFORMACIJE O UČENIKU:",
       gradingSystem: "KONTEKST SISTEMA OCENJIVANJA:",
       attendanceData: "EVIDENCIJA PRISUSTVA:",
-      gradesData: "OCENE:",
-      qualitativeData: "KOMENTARI NASTAVNIKA, ODGOVORI NA PROVERAMA I TRENDOVI:"
+      gradesData: "OCENE I KOMENTARI NASTAVNIKA:"
     }
   };
 
@@ -239,7 +237,6 @@ Zahtevi za izlaz:
     const gradingSystem = document.getElementById("gradingSystem").value;
     const gradesData = document.getElementById("gradesData").value.trim();
     const attendanceData = document.getElementById("attendanceData").value.trim();
-    const qualitativeData = document.getElementById("qualitativeData").value.trim();
 
     if (!studentInfo || !gradesData) {
       alert("Please enter at least Student Info and Grades.");
@@ -261,15 +258,13 @@ Zahtevi za izlaz:
         `${headers.studentInfo}\n{{$StudentInfo}}\n\n` +
         `${headers.gradingSystem}\n{{$GradingSystem}}\n\n` +
         `${headers.attendanceData}\n{{$AttendanceData}}\n\n` +
-        `${headers.gradesData}\n{{$GradesData}}\n\n` +
-        `${headers.qualitativeData}\n{{$QualitativeData}}`;
+        `${headers.gradesData}\n{{$GradesData}}`;
 
       const prompt = fillTemplate(dynamicTemplate, { 
         StudentInfo: studentInfo,
         GradingSystem: gradingSystem,
         GradesData: gradesData,
-        AttendanceData: attendanceData,
-        QualitativeData: qualitativeData
+        AttendanceData: attendanceData
       });
       logLine("[Cleo] Requesting feedback...");
       
@@ -308,85 +303,31 @@ Zahtevi za izlaz:
   const studentSelector = document.getElementById("studentSelector");
   const gradingSystem = document.getElementById("gradingSystem");
 
-  const gradeTranslationMap = {
-    // [1-5]: 5 is best. [1-6]: 1 is best.
-    "A+": { "1-5": "5", "1-6": "1" },
-    "A":  { "1-5": "5", "1-6": "1" },
-    "A-": { "1-5": "5", "1-6": "2" },
-    "B+": { "1-5": "4", "1-6": "2" },
-    "B":  { "1-5": "4", "1-6": "2" },
-    "B-": { "1-5": "4", "1-6": "3" },
-    "C+": { "1-5": "3", "1-6": "3" },
-    "C":  { "1-5": "3", "1-6": "3" },
-    "C-": { "1-5": "3", "1-6": "4" },
-    "D+": { "1-5": "2", "1-6": "4" },
-    "D":  { "1-5": "2", "1-6": "4" },
-    "D-": { "1-5": "2", "1-6": "5" },
-    "F":  { "1-5": "1", "1-6": "6" },
-  };
-
   function updateMockData() {
     if (!studentSelector || !window.STUDENT_DB_SIMULATION) return;
     
-    const studentId = parseInt(studentSelector.value, 10);
-    const selectedSystem = gradingSystem ? gradingSystem.value : "";
-    const isBalkans = selectedSystem.includes("1-5");
-    const isGermany = selectedSystem.includes("1-6");
-
     const db = window.STUDENT_DB_SIMULATION;
+    const studentId = parseInt(studentSelector.value, 10);
     const student = db.students.find(s => s.id === studentId);
     if (!student) return;
-
-    const grades = db.grades.filter(g => g.student_id === studentId);
-    const attendance = db.attendance.filter(a => a.student_id === studentId);
 
     // Populate Info
     document.getElementById("studentInfo").value = `${student.name} | #${student.id} | Course: ${student.course} | Semester: ${student.semester}`;
 
-    // Populate Attendance
-    const attSummary = attendance.reduce((acc, curr) => {
-      acc[curr.status] = (acc[curr.status] || 0) + 1;
-      return acc;
-    }, {});
-    
-    let attText = `Total Records: ${attendance.length}\n`;
-    for (const [status, count] of Object.entries(attSummary)) {
-      attText += `${status}: ${count}\n`;
+    // Populate JSON data
+    if (db.course_data) {
+      document.getElementById("gradingSystem").value = JSON.stringify(db.course_data, null, 2);
     }
-    attText += `\nAttendance Log:\n`;
-    attendance.forEach(a => {
-       attText += `- ${a.date} (${a.status})\n`;
-    });
-    document.getElementById("attendanceData").value = attText.trim();
-
-    // Populate Grades with Translation
-    let gradeText = "";
-    grades.forEach(g => {
-      let displayGrade = g.grade;
-      if (isBalkans && gradeTranslationMap[g.grade]) {
-        displayGrade = gradeTranslationMap[g.grade]["1-5"];
-      } else if (isGermany && gradeTranslationMap[g.grade]) {
-        displayGrade = gradeTranslationMap[g.grade]["1-6"];
-      }
-      gradeText += `[${g.date}] ${g.topic} (${g.type}) - Grade: ${displayGrade}\n`;
-    });
-    document.getElementById("gradesData").value = gradeText.trim();
-
-    // Populate Qualitative
-    let qualText = "TEACHER COMMENTS:\n";
-    grades.forEach(g => {
-      if (g.teacher_comment) {
-         qualText += `- (${g.topic}): "${g.teacher_comment}"\n`;
-      }
-    });
-    document.getElementById("qualitativeData").value = qualText.trim();
+    if (db.attendance) {
+      document.getElementById("attendanceData").value = JSON.stringify(db.attendance, null, 2);
+    }
+    if (db.gradebook) {
+      document.getElementById("gradesData").value = JSON.stringify(db.gradebook, null, 2);
+    }
   }
 
   if (studentSelector && window.STUDENT_DB_SIMULATION) {
     studentSelector.addEventListener("change", updateMockData);
-    if (gradingSystem) {
-      gradingSystem.addEventListener("change", updateMockData);
-    }
     // Trigger change to load the first student automatically on boot
     updateMockData();
   }
@@ -399,16 +340,7 @@ Zahtevi za izlaz:
       if (basePrompt && PROMPT_INSTRUCTIONS[lang]) {
         basePrompt.value = PROMPT_INSTRUCTIONS[lang];
       }
-      
-      const gs = document.getElementById("gradingSystem");
-      if (gs) {
-        if (lang === "sr") {
-          gs.value = "1-5 (Balkans/Eastern Europe: 5 is best)";
-        } else {
-          gs.value = "A-F (USA/UK: A is best)";
-        }
-        updateMockData();
-      }
+      updateMockData();
     });
 
     // Initialize UI based on current language

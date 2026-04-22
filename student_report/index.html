@@ -307,24 +307,15 @@ Output requirements:
         <label for="studentSelector">Load Demo Student</label>
         <select id="studentSelector"
           style="background:#eef2ff; border-color:#6366f1; font-weight:bold; margin-bottom: 24px;">
-          <option value="1">1. Jordan Smith (Perfect Grades, Perfect Attendance)</option>
-          <option value="2">2. Emma Johnson (Catastrophic Grades, Catastrophic Attendance)</option>
-          <option value="3">3. Liam Williams (Great Grades, Bad Attendance)</option>
-          <option value="4">4. Olivia Brown (Bad Grades, Perfect Attendance)</option>
-          <option value="5">5. Noah Martinez (Failing to Perfect - Immense Turnaround)</option>
+          <option value="1">1. Jordan Smith (Test Student)</option>
         </select>
 
         <label for="studentInfo">Student Information</label>
         <input id="studentInfo" type="text"
           value="Jordan Smith | #12345 | Course: Algebra II | Semester: Spring 2026" />
 
-        <label for="gradingSystem">Grading System</label>
-        <select id="gradingSystem">
-          <option value="A-F (USA/UK: A is best)" selected>A-F (USA/UK: A is best, F is failing)</option>
-          <option value="1-5 (Balkans/Eastern Europe: 5 is best)">1-5 (Balkans/Eastern Europe: 5 is best, 1 is failing)
-          </option>
-          <option value="1-6 (Germany/Austria: 1 is best)">1-6 (Germany/Austria: 1 is best, 6 is failing)</option>
-        </select>
+        <label for="gradingSystem">Grading System Context</label>
+        <textarea id="gradingSystem" style="height: 180px;"></textarea>
 
         <label for="attendanceData">Attendance Record</label>
         <textarea id="attendanceData" style="height: 180px;">Total: 26 Sessions
@@ -337,8 +328,8 @@ Recent Notes: Missed 2 sessions in early Feb.</textarea>
 
       <div>
         <h3>Performance Details</h3>
-        <label for="gradesData">Grades</label>
-        <textarea id="gradesData" style="height: 180px;">FORMATIVE ASSESSMENTS:
+        <label for="gradesData">Grades & Teacher Comments</label>
+        <textarea id="gradesData" style="height: 340px;">FORMATIVE ASSESSMENTS:
 - Factoring Trinomials: 85%
 - Functions and Domain: 92%
 - Quadratic Equations: 88%
@@ -348,22 +339,14 @@ SUMMATIVE ASSESSMENTS:
 - Midterm: 88% (B+)
 - Unit 1 Quiz: 85% (B)
 - Unit 2 Quiz: 92% (A-)
-- Unit 3 Quiz: 75% (C)</textarea>
-      </div>
-    </div>
+- Unit 3 Quiz: 75% (C)
 
-    <div class="row card">
-      <label for="qualitativeData">Teacher Comments, Assessment Answers & Trends</label>
-      <textarea id="qualitativeData"
-        style="height: 140px;">TEACHER COMMENTS:
+TEACHER COMMENTS:
 "Good progress, missed one steps in decomposition."
 "Shows mastery of the quadratic formula."
 "A few errors in finding the vertex, but generally sound."
-
-ASSESSMENT ANSWERS:
-[Unit 3 Quiz]: Jordan's Answer: "x+2 = log(150), so x = log(150) - 2. Final answer: -0.824" (Correct, took very long to solve).
-
-TRENDS: Very high engagement but steady outline since intro to Logarithms in Feb. Homework usually 100% complete, but recent assignments were 60% complete.</textarea>
+</textarea>
+      </div>
     </div>
 
     <div class="row">
