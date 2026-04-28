@@ -96,7 +96,7 @@
     }
 
     function fillTemplate(tpl, vars) {
-        return tpl.replace(/\{([A-Za-z0-9_]+)\}/g, (match, key) => {
+        return tpl.replace(/\{\{?\$?([A-Za-z0-9_]+)\}\}?/g, (match, key) => {
             const v = vars[key];
             return v === undefined || v === null ? match : String(v);
         });

@@ -97,7 +97,7 @@
   }
 
   function fillTemplate(tpl, vars) {
-    return tpl.replace(/\{\{\{?\$?([A-Za-z0-9_]+)\}\}\}?/g, (match, key) => {
+    return tpl.replace(/\{\{?\$?([A-Za-z0-9_]+)\}\}?/g, (match, key) => {
       const v = vars[key];
       return v === undefined || v === null ? match : String(v);
     });
@@ -361,12 +361,17 @@
         });
 
         const data = JSON.parse(resultText);
+        
+        if (!data.hints || !Array.isArray(data.hints) || data.hints.length === 0) {
+            throw new Error("AI response did not contain any hints.");
+        }
+
         const fetchedHints = data.hints[0];
         
         q.hintsArray = [
-            fetchedHints.initial_hint,
-            fetchedHints.follow_up_hint,
-            fetchedHints.reteach_hint
+            fetchedHints.initial_hint || "No hint provided.",
+            fetchedHints.follow_up_hint || "No follow-up hint provided.",
+            fetchedHints.reteach_hint || "No reteach hint provided."
         ];
         q.revealedCount = 1;
         q.currentViewIdx = 0;

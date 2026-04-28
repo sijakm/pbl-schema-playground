@@ -6,13 +6,13 @@ Nagoveštaji moraju pratiti pedagošku progresiju od šireg koncepta ka dubljem 
 
 Strogo se pridržavajte detaljnih uputstava i zahteva za dužinom teksta koji su definisani u JSON šemi.
 
-Kontekst lekcije: {lesson_context}
-Naziv lekcije: {lesson_name}
-Opis lekcije: {lesson_description}
-Predmet: {subject}
-Nivo/Razred: {grade_level}
-Podaci o pitanju: {question_data}
-Jezik odgovora: {response_language}`,
+Kontekst lekcije: {{$lesson_context}}
+Naziv lekcije: {{$lesson_name}}
+Opis lekcije: {{$lesson_description}}
+Predmet: {{$subject}}
+Nivo/Razred: {{$grade_level}}
+Podaci o pitanju: {{$question_data}}
+Jezik odgovora: {{$response_language}}`,
         HINTS_SCHEMA: {
             "title": "HintsResponse",
             "type": "object",
@@ -61,13 +61,13 @@ The hints must follow a pedagogical progression from a broad concept to a deeper
 
 Strictly adhere to the detailed instructions and character length requirements defined in the JSON schema.
 
-Lesson Context: {lesson_context}
-Lesson Name: {lesson_name}
-Lesson Description: {lesson_description}
-Subject: {subject}
-Grade Level: {grade_level}
-Question Data: {question_data}
-Response Language: {response_language}`,
+Lesson Context: {{$lesson_context}}
+Lesson Name: {{$lesson_name}}
+Lesson Description: {{$lesson_description}}
+Subject: {{$subject}}
+Grade Level: {{$grade_level}}
+Question Data: {{$question_data}}
+Response Language: {{$response_language}}`,
         HINTS_SCHEMA: {
             "title": "HintsResponse",
             "type": "object",
