@@ -144,6 +144,10 @@ MAPPING RULES:
 - <h3>💭 Essential Questions</h3> (if available, UL list from EssentialQuestions)
 - <h3>🎯 Student Learning Objectives</h3> (UL list from StudentLearningObjectives)
 - <h3>📏 Standards Aligned</h3> (UL list or paragraphs from StandardsAligned)
+- <h3>🔤 Key Vocabulary</h3>
+<ul>
+  - Render each item from KeyVocabulary as a <li>.
+</ul>
 
 ASSESS PRIOR KNOWLEDGE:
 - Start with this exact heading:
@@ -204,9 +208,9 @@ Purpose needs to be word for word as in the JSON
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+  - <h4>✅ Quick Check</h4> <p>{QuickCheck}</p>
   - <h4>🪜 Differentiation</h4> <p>{Differentiation}</p>
   - <h4>🤝 Accommodations & Modifications</h4> <p>{AccommodationsAndModifications}</p>
-  - <h4>✅ Quick Check</h4> <p>{QuickCheck}</p>
 
 - <h3><span style="color: rgb(115, 191, 39);">Analyze (5 min)</span></h3>
   - <p><strong>Purpose:</strong> {Purpose}</p>
@@ -217,7 +221,6 @@ Purpose needs to be word for word as in the JSON
   - <p><strong>Purpose:</strong> {Purpose}</p>
   - <h4>📚 Materials</h4> <ul>{Materials}</ul>
   - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
-  - <h4>🌍 Transcendent Thinking</h4> <p>{TranscendentThinking}</p>
 
 CLOSING SECTIONS:
 - <h3>⏳ Review & Spaced Retrieval (5 min)</h3>
@@ -225,7 +228,7 @@ CLOSING SECTIONS:
 - <h3>✅ Formative Assessment</h3>
   - (Format text from FormativeAssessment, separating the prompts and expected responses clearly)
 - <h3>🖊 Student Practice</h3>
-  - (Format text from StudentPractice ensuring tasks and expected responses are structured cleanly)`,
+  - (Format text from StudentPractice ensuring items and expected responses are structured cleanly)`,
   UNIT_COMMON_HTML_PROMPT_TEMPLATE: `You will receive ONE JSON object that strictly follows the UnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
                    
 INPUT FORMAT
@@ -384,6 +387,11 @@ GLOBAL RULES
         "type": "string",
         "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'"
       },
+      "KeyVocabulary": {
+        "type": "array",
+        "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
+        "items": { "type": "string" }
+      },
       "AssessPriorKnowledge": {
         "type": "string",
         "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit, placed immediately after the Student Learning Objectives. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement that introduces the chosen modality and explains how students will surface current understanding. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section showing anticipated answers or common misconceptions for the chosen modality. 8. Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation. 9. After fully developing one modality, provide 2 brief alternate options a teacher could choose."
@@ -520,6 +528,15 @@ GLOBAL RULES
                 "items": { "type": "string" },
                 "description": "Step-by-step teacher instructions to organize the experiment, give directions, and circulate."
               },
+              "QuickCheck": {
+                "type": "object",
+                "properties": {
+                  "Question": { "type": "string" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Question", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
               "Differentiation": {
                 "type": "object",
                 "properties": {
@@ -539,18 +556,9 @@ GLOBAL RULES
                 },
                 "required": ["GeneralSupports", "IndividualSupports"],
                 "additionalProperties": false
-              },
-              "QuickCheck": {
-                "type": "object",
-                "properties": {
-                  "Question": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                },
-                "required": ["Question", "ExpectedStudentResponses"],
-                "additionalProperties": false
               }
             },
-            "required": ["Instructions", "Differentiation", "AccommodationsAndModifications", "QuickCheck"],
+            "required": ["Instructions", "QuickCheck", "Differentiation", "AccommodationsAndModifications"],
             "additionalProperties": false
           }
         },
@@ -618,18 +626,9 @@ GLOBAL RULES
                 "type": "array",
                 "items": { "type": "string" },
                 "description": "Expected ideas shared by students."
-              },
-              "TranscendentThinking": {
-                "type": "object",
-                "properties": {
-                  "Prompt": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                },
-                "required": ["Prompt", "ExpectedStudentResponses"],
-                "additionalProperties": false
               }
             },
-            "required": ["Instructions", "ExpectedStudentResponses", "TranscendentThinking"],
+            "required": ["Instructions", "ExpectedStudentResponses"],
             "additionalProperties": false
           }
         },
@@ -638,7 +637,7 @@ GLOBAL RULES
       },
       "ReviewAndSpacedRetrieval": {
         "type": "string",
-        "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Materials List (often none needed) 2. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 3. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 4. Correct Common Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 5. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 6. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 7. Spaced Retrieval component containing:  Clear reference to specific prior lesson. Example (Draws from Unit 3, Lesson 2.  Must use active recall question connecting past + current concepts. Must not require students using notes or resources to answer. - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text."
+        "description": "Full 'Review & Spaced Retrieval' section as plain text. This 5-minute activity must include in this exact order: 1. Teacher Notes paragraph that explains: - How this review strategy enhances retention - Connection to prior learning concepts - How transcendent reflection deepens understanding 2. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 3. Anticipated Misconceptions block with: - Sample misconception statements - Teacher response scripts addressing each 4. Essential Question Connection including: - Teacher prompt linking to unit question - Expected Student Responses (2-3 examples) 5. Transcendent Thinking section with: - Real-world application prompt - Think time instruction - Expected Student Responses (2-3 examples) 6. Spaced Retrieval component containing: Clear reference to specific prior lesson. Example (Draws from Unit 3, Lesson 2). Must use active recall question connecting past + current concepts. Must not require students using notes or resources to answer. - Detailed success criteria / expected responses. All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers. Return as plain text."
       },
       "FormativeAssessment": {
         "type": "string",
@@ -646,13 +645,14 @@ GLOBAL RULES
       },
       "StudentPractice": {
         "type": "string",
-        "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the tasks reinforce learning + build real-world connections] (DOK 2) [First task with clear student directions] Expected Student Responses [3-4 bullet points showing mastery] (DOK 3) [Second task requiring higher-order thinking] Expected Student Responses [3-4 bullet points showing analysis/application] (DOK 3) [Third task connecting to broader concepts] Must include: [3+ specific elements students need to address] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'"
+        "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice. Follow this EXACT format for the response: Teacher Notes: [1 paragraph explaining how the practice reinforces learning + build real-world connections] 1. (DOK 2) [First set of directions] Expected Student Responses [3-4 bullet points showing mastery] 2. (DOK 3) [Second set of directions] ✅Expected Student Responses [3-4 bullet points showing analysis/application] 3. (DOK 3) [Third set of directions] Expected Student Responses [3-4 bullet points showing synthesis/evaluation] Reflection: End with one self-regulation or transcendent thinking reflection, such as: 'What evidence of today's science concept can you find in your home or neighborhood?', 'How does what you learned today help you see the world differently?', 'What challenges did you face doing this at home, and how did you overcome them?', or 'How might this concept impact our community or future discoveries?'"
       }
     },
     "required": [
       "EssentialQuestions",
       "StudentLearningObjectives",
       "StandardsAligned",
+      "KeyVocabulary",
       "AssessPriorKnowledge",
       "Question",
       "Research",
