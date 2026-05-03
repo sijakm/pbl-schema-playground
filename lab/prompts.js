@@ -119,9 +119,8 @@ Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. 
 
 GLOBAL RULES
     - Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
-    - Allowed tags: <p>, <h1>, <h2>, <h3>, 
-    - (wrapped inside <p>), <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-    - Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h4>, etc.).
+    - Allowed tags: <p>, <h1>, <h2>, <h3>, <h4>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
+    - Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h5>, etc.).
     - HTML should be well-indented and easy to read.
     - In any <ol> or <ul>, ONLY use <li> elements as direct children. Never place <p>, <span>, <ul>, <ol>, or any other tag as a child of a list.
     - Do NOT invent new instructional content; use only what exists in the JSON fields.
@@ -241,8 +240,8 @@ Treat everything after the line “UNIT PLAN JSON:” as the exact JSON object. 
 
 GLOBAL RULES
     -  Output ONLY valid HTML (no markdown, no backticks, no prose explanation).
-    -  Allowed tags: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-    -  Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h4>, etc.).
+    -  Allowed tags: <p>, <h1>, <h2>, <h3>, <h4>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
+    -  Do NOT use any other tags (no <main>, <section>, <header>, <div>, <h5>, etc.).
     -  HTML should be well-indented and easy to read.
     -  In any <ol> or <ul>, ONLY use <li> elements as direct children. Never place <p>, <span>, <ul>, <ol>, or any other tag as a child of a list.
     -  Do NOT invent new instructional content; use only what exists in the JSON fields.

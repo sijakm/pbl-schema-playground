@@ -118,8 +118,8 @@ Tretiraj sve nakon linije "UNIT PLAN JSON:" kao tačan JSON objekat. NEMOJ ga ob
 
 GLOBALNA PRAVILA
     - Izbaci SAMO validan HTML (bez markdowna, bez bek-tikova, bez tekstualnih objašnjenja).
-    - Dozvoljeni tagovi: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-    - NEMOJ koristiti nijedan drugi tag (bez <main>, <section>, <header>, <div>, <h4>, itd.).
+    - Dozvoljeni tagovi: <p>, <h1>, <h2>, <h3>, <h4>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
+    - NEMOJ koristiti nijedan drugi tag (bez <main>, <section>, <header>, <div>, <h5>, itd.).
     - HTML treba da bude dobro uvučen i lak za čitanje.
     - U bilo kom <ol> ili <ul>, SAMO koristi <li> elemente kao direktnu decu. Nikada nemoj stavljati <p>, <span>, <ul>, <ol> ili bilo koji drugi tag kao dete liste.
     - NEMOJ izmišljati novi instruktivni sadržaj; koristi samo ono što postoji u JSON poljima.
@@ -239,8 +239,8 @@ Tretiraj sve nakon linije "UNIT PLAN JSON:" kao tačan JSON objekat. NEMOJ obja�
 
 GLOBALNA PRAVILA
     -  Izbaci SAMO validan HTML (bez markdowna, bez bek-tikova, bez tekstualnih objašnjenja).
-    -  Dozvoljeni tagovi: <p>, <h1>, <h2>, <h3>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
-    -  NEMOJ koristiti nijedan drugi tag (bez <main>, <section>, <header>, <div>, <h4>, itd.).
+    -  Dozvoljeni tagovi: <p>, <h1>, <h2>, <h3>, <h4>, <strong>, <em>, <u>, <s>, <sup>, <sub>, <span>, <ol>, <ul>, <li>, <a>, <img>.
+    -  NEMOJ koristiti nijedan drugi tag (bez <main>, <section>, <header>, <div>, <h5>, itd.).
     -  HTML treba da bude dobro uvučen i lak za čitanje.
     -  U bilo kom <ol> ili <ul>, SAMO koristi <li> elemente kao direktnu decu. Nikada nemoj stavljati <p>, <span>, <ul>, <ol> ili bilo koji drugi tag kao dete liste.
     -  NEMOJ izmišljati novi instruktivni sadržaj; koristi samo ono što postoji u JSON poljima.
