@@ -4,6 +4,12 @@
   // ---- Defaults ----
   const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
 
+  // ---- Prompt templates and schemas moved to prompts.js ----
+  function getPrompts() {
+    const langEl = $("languageSelect");
+    const lang = langEl ? langEl.value : "en";
+    return lang === "sr" ? window.labPromptsSR : window.labPrompts;
+  }
   // ---- Shared Helpers Aliases ----
   const { $, nowMs, fmtMs, logLine, setStatus, fillTemplate } = window.utils;
 
@@ -117,15 +123,15 @@
         { 
           id: "perLesson", 
           label: "Per Lesson", 
-          schema: window.labPrompts.PER_LESSON_SCHEMA, 
-          template: window.labPrompts.PER_LESSON_PROMPT_TEMPLATE,
+          schema: getPrompts().PER_LESSON_SCHEMA, 
+          template: getPrompts().PER_LESSON_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
         },
         { 
           id: "step0", 
           label: "Unit Outline (Step 0)", 
-          schema: window.labPrompts.STEP0_SCHEMA, 
-          template: window.labPrompts.STEP0_PROMPT_TEMPLATE,
+          schema: getPrompts().STEP0_SCHEMA, 
+          template: getPrompts().STEP0_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
         }
       ],
@@ -257,7 +263,7 @@
   }
 
   async function runChain() {
-    const prompts = window.labPrompts;
+    const prompts = getPrompts();
     
     // Fallbacks just in case schemaEditor isn't ready
     const STEP0_PROMPT_TEMPLATE = (window.schemaEditor && window.schemaEditor.getModifiedTemplate("step0")) || prompts.STEP0_PROMPT_TEMPLATE;
@@ -468,7 +474,7 @@
       alert("JSZip not found!"); return;
     }
     const zip = new JSZip();
-    const p = window.labPrompts;
+    const p = getPrompts();
     const vars = buildVarsFromUi();
 
     zip.file("1_step0_outline_prompt.txt", window.utils.fillTemplate(p.STEP0_PROMPT_TEMPLATE, vars));
@@ -494,6 +500,31 @@
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
 
     initSchemaEditor();
+
+    const langSel = document.getElementById("languageSelect");
+    if (langSel) {
+      langSel.addEventListener("change", () => {
+        if (window.schemaEditor) {
+          const p = getPrompts();
+          window.schemaEditor.updateData([
+            { 
+              id: "perLesson", 
+              label: "Per Lesson", 
+              schema: p.PER_LESSON_SCHEMA, 
+              template: p.PER_LESSON_PROMPT_TEMPLATE,
+              requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
+            },
+            { 
+              id: "step0", 
+              label: "Unit Outline (Step 0)", 
+              schema: p.STEP0_SCHEMA, 
+              template: p.STEP0_PROMPT_TEMPLATE,
+              requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
+            }
+          ], window.schemaEditor.activeTabId);
+        }
+      });
+    }
   }
 
   if (document.readyState === "loading") {

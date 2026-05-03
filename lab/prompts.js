@@ -249,25 +249,25 @@ GLOBAL RULES
     -  Preserve the logical order implied by the schema.
 
 - At the top:
-    - <h1>Unit Plan Overview</h1>
+    - <h2><strong>{{{UnitTitle}}}</strong></h2>
     - <p>{{{UnitDescription.Description}}}</p>
 - Then add a new line with:
-    <h1>Unit Overview</h1>
+    <h3><span>Unit Overview</span></h3>
 
 - Essential Questions:
-    - <h2>💭 Essential Questions</h2>
+    - <h3><span>💭 Essential Questions</span></h3>
     - <ul> with each item from UnitDescription.EssentialQuestions as <li>.
 
 - Student Learning Objectives:
-    - <h2>🎯 Student Learning Objectives</h2>
+    - <h3><span>🎯 Student Learning Objectives</span></h3>
     - <ul> with each item from UnitDescription.StudentLearningObjectives as <li>.
 
 - Standards:
-    - <h2>📏 Standards Aligned</h2>
+    - <h3><span>📏 Standards Aligned</span></h3>
     - <ul> with each string from UnitDescription.StandardsAligned as <li>.
 
 - Key Vocabulary:
-    - <h2>🔤 Key Vocabulary</h2>
+    - <h3><span>🔤 Key Vocabulary</span></h3>
     - <ul> with each string from UnitDescription.KeyVocabulary as <li>.`,
 
   STEP0_SCHEMA: {
