@@ -12,7 +12,7 @@ Opis lekcije: {{$lesson_description}}
 Predmet: {{$subject}}
 Nivo/Razred: {{$grade_level}}
 Podaci o pitanju: {{$question_data}}
-Jezik odgovora: {{$response_language}}`,
+Jezik odgovora: Srpski`,
         HINTS_SCHEMA: {
             "title": "HintsResponse",
             "type": "object",
@@ -66,8 +66,7 @@ Lesson Name: {{$lesson_name}}
 Lesson Description: {{$lesson_description}}
 Subject: {{$subject}}
 Grade Level: {{$grade_level}}
-Question Data: {{$question_data}}
-Response Language: {{$response_language}}`,
+Question Data: {{$question_data}}`,
         HINTS_SCHEMA: {
             "title": "HintsResponse",
             "type": "object",

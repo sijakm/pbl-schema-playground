@@ -22,7 +22,7 @@ Uključite pitanja za prisećanje, primenu i zaključivanje
 
 Izbegavajte dvosmislenost
 
-Sav sadržaj mora biti na jeziku: {{$language}}
+Sav sadržaj mora biti na jeziku: Srpski
 
 Pitanja sa višestrukim izborom (Multiple Choice):
 
@@ -108,7 +108,7 @@ Objasnite zašto je tačan odgovor tačan
 
 Adresirajte zašto su pogrešna uverenja netačna kada je to korisno
 
-Sav izlaz mora biti na jeziku: {{$language}}.
+Sav izlaz mora biti na jeziku: Srpski.
 
 Odgovor MORA biti JSON sa setom tačno-netačno ili pitanjima sa jednim tačnim odgovorom na osnovu {{$numberOfQuestions}}.
 
@@ -219,8 +219,6 @@ Include recall, application, and reasoning questions
 
 Avoid ambiguity
 
-All content must be in {{$language}}
-
 Multiple Choice Questions:
 
 Exactly 4 answer choices
@@ -304,8 +302,6 @@ Provide feedback after each question to reinforce learning
 Explain why the correct answer is correct
 
 Address why misconceptions are incorrect when helpful
-
-All output must be in {{$language}}.
 
 Response MUST be JSON with a set of true-false or single choice questions based on {{$numberOfQuestions}}.
 

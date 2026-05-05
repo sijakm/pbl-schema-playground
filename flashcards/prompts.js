@@ -17,7 +17,7 @@ Ovi osnovni koncepti i rečnik treba da vode kreiranje kartica za učenje.
 3. Generisanje kartica za učenje:
 Kreirajte tačno {{$numberOfFlashcards}} kartica za učenje na osnovu identifikovanih koncepata i rečnika iz sadržaja lekcije.
 Svaka kartica za učenje treba da ima prednju stranu (pitanje ili termin) i zadnju stranu (odgovor ili definicija).
-Osigurajte da je sadržaj kartica tačan, sažet, direktno relevantan za lekciju i generisan na jeziku: {{$language}}.
+Osigurajte da je sadržaj kartica tačan, sažet, direktno relevantan za lekciju i generisan na jeziku: Srpski.
 Varirajte tipove pitanja ili upita na prednjoj strani kako biste podstakli različite vrste razmišljanja i prisećanja.
 Samo jedan koncept ili reč treba da se traži po kartici.
 Osigurajte da je korišćeni jezik prikladan za navedeni nivo/razred.
@@ -28,7 +28,7 @@ Osigurajte da su kartice kulturološki osetljive i inkluzivne.
 Struktuirajte svaku karticu za učenje kao JSON objekat sa ključevima "front" i "back".
 Sav izlaz mora biti jedan JSON objekat sa nizom pod ključem "flashcards", u skladu sa priloženom šemom.
 
-VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generisane kartice za učenje u navedenom JSON formatu. Osigurajte da je JSON čist, dobro struktuiran i da sadrži samo neophodne informacije, bez dodatnog formatiranja poput markdown-a ili navodnika. Izlaz treba da bude jedan JSON objekat sa nizom "flashcards", sa brojem kartica koji odgovara ulaznom parametru. Jezik kartica za učenje treba da bude {{$language}}.`,
+VAŽNO: Nije potrebno dodatno objašnjenje, odgovor treba samo da sadrži generisane kartice za učenje u navedenom JSON formatu. Osigurajte da je JSON čist, dobro struktuiran i da sadrži samo neophodne informacije, bez dodatnog formatiranja poput markdown-a ili navodnika. Izlaz treba da bude jedan JSON objekat sa nizom "flashcards", sa brojem kartica koji odgovara ulaznom parametru. Jezik kartica za učenje treba da bude Srpski.`,
         FLASHCARD_SCHEMA: {
             "title": "FlashcardResponse",
             "type": "object",
@@ -74,10 +74,6 @@ These core concepts and vocabulary should be used to guide the creation of flash
 3. Generate Flashcards:
 Create exactly {{$numberOfFlashcards}} flashcards based on the core concepts and vocabulary identified from the lesson content.
 Each flashcard should have a front side (question or term) and a back side (answer or definition).
-Ensure that the content of the flashcards is accurate, concise, directly relevant to the lesson and generated in {{$language}} language.
-Vary the types of questions or prompts on the front side to encourage different types of thinking and recall.
-Only one concept or vocabulary should be asked at a time.
-Make sure the language used is appropriate for the specified grade level.
 Ensure that the flashcards collectively cover all the core concepts and vocabulary identified in step 2, prioritizing the most important concepts if the number of flashcards is limited.
 Ensure flash cards are culturally sensitive and inclusive.
 
@@ -85,7 +81,7 @@ Ensure flash cards are culturally sensitive and inclusive.
 Structure each flashcard as a JSON object with "front" and "back" keys.
 The entire output must be a single JSON object with a "flashcards" array containing these objects, matching the provided schema.
 
-IMPORTANT: No additional explanation is needed, response should just contain the generated flashcards in the specified JSON format. Ensure the JSON is clean, well-structured, and only contains necessary information, without additional formatting like markdown or quotes. The output should be a single JSON object with a "flashcards" array, with the number of flashcards matching the input parameter. The language of the flashcards should be {{$language}}.`,
+IMPORTANT: No additional explanation is needed, response should just contain the generated flashcards in the specified JSON format. Ensure the JSON is clean, well-structured, and only contains necessary information, without additional formatting like markdown or quotes. The output should be a single JSON object with a "flashcards" array, with the number of flashcards matching the input parameter.`,
         FLASHCARD_SCHEMA: {
             "title": "FlashcardResponse",
             "type": "object",
