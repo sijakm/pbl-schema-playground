@@ -474,14 +474,22 @@
       alert("JSZip not found!"); return;
     }
     const zip = new JSZip();
-    const p = getPrompts();
-    const vars = buildVarsFromUi();
 
-    zip.file("1_step0_outline_prompt.txt", window.utils.fillTemplate(p.STEP0_PROMPT_TEMPLATE, vars));
-    zip.file("2_step0_schema.json", JSON.stringify(p.STEP0_SCHEMA, null, 2));
-    zip.file("3_per_lesson_plan_prompt.txt", window.utils.fillTemplate(p.PER_LESSON_PROMPT_TEMPLATE, vars));
-    zip.file("4_per_lesson_schema.json", JSON.stringify(p.PER_LESSON_SCHEMA, null, 2));
-    zip.file("5_html_rendering_prompt.txt", p.HTML_LESSON_PROMPT_TEMPLATE);
+    const addPromptsToZip = (folderName, p) => {
+      const folder = zip.folder(folderName);
+      folder.file("1_step0_outline_prompt.txt", p.STEP0_PROMPT_TEMPLATE);
+      folder.file("2_step0_schema.json", JSON.stringify(p.STEP0_SCHEMA, null, 2));
+      folder.file("3_per_lesson_plan_prompt.txt", p.PER_LESSON_PROMPT_TEMPLATE);
+      folder.file("4_per_lesson_schema.json", JSON.stringify(p.PER_LESSON_SCHEMA, null, 2));
+      folder.file("5_html_rendering_prompt.txt", p.HTML_LESSON_PROMPT_TEMPLATE);
+    };
+
+    if (window.labPrompts) {
+      addPromptsToZip("English", window.labPrompts);
+    }
+    if (window.labPromptsSR) {
+      addPromptsToZip("Serbian", window.labPromptsSR);
+    }
 
     const content = await zip.generateAsync({ type: "blob" });
     const url = URL.createObjectURL(content);
