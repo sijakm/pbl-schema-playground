@@ -1,4 +1,4 @@
-window.promptsSR_Cyrl = {
+window.promptsSR_CYRL = {
   STEP0_PROMPT_TEMPLATE: `
 Креирај нацрт јединице и структуру лекције користећи информације испод. НЕМОЈ писати пуне планове лекција.
                     

@@ -726,7 +726,7 @@ JSON DE ENTRADA:
                 "type": "object",
                 "properties": {
                   "Prompt": { "type": "string", "description": "Desarrolle una instrucción dirigida por el docente ('Diga:') para facilitar el debate en parejas o en grupo que genere ideas, explicaciones o soluciones específicas utilizando la información y las limitaciones disponibles. Fomente la comparación y el razonamiento." },
-                  "PromptingOptions": { "type": "string", "description": "Enumere 2-3 consignas para animar a los estudiantes a proponer ideas, explicar el razonamiento, considerar enfoques alternativos y evaluar qué partes de su pensamiento son las más sólidas o las más inciertas.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Enumere 2-3 consignas para animar a los estudiantes a proponer ideas, explicar el razonamiento, considerar enfoques alternativos y evaluar qué partes de su pensamiento son las más sólidas o las más inciertas." },
                   "FacilitationMoves": { "type": "array", "description": "Describa 2-3 acciones de circulación para escuchar el razonamiento, instar a la claridad/justificación y resaltar los diversos enfoques sin evaluar cuál es el correcto.", "items": { "type": "string" } }
                 },
                 "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],

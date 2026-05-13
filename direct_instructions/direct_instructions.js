@@ -70,6 +70,18 @@
 
   let schemaEditor; // Initialized in initSchemaEditor
 
+  function getPromptsByLang() {
+    const lang = document.getElementById('languageSelect')?.value || 'en';
+    switch (lang) {
+      case 'sr': return window.promptsSR;
+      case 'sr_cyrl': return window.promptsSR_CYRL;
+      case 'ru': return window.promptsRU;
+      case 'id': return window.promptsID;
+      case 'es': return window.promptsES;
+      default: return window.promptsEN;
+    }
+  }
+
   function initSchemaEditor() {
     if (!window.SchemaEditor) {
       console.warn("SchemaEditor class not found! Retrying in 50ms...");
@@ -83,15 +95,15 @@
         { 
           id: "perLesson", 
           label: "Per Lesson", 
-          schema: (document.getElementById('languageSelect')?.value === 'sr' ? window.promptsSR : window.promptsEN).PER_LESSON_SCHEMA, 
-          template: (document.getElementById('languageSelect')?.value === 'sr' ? window.promptsSR : window.promptsEN).PER_LESSON_PROMPT_TEMPLATE,
+          schema: getPromptsByLang().PER_LESSON_SCHEMA, 
+          template: getPromptsByLang().PER_LESSON_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
         },
         { 
           id: "step0", 
           label: "Unit Outline (Step 0)", 
-          schema: (document.getElementById('languageSelect')?.value === 'sr' ? window.promptsSR : window.promptsEN).STEP0_SCHEMA, 
-          template: (document.getElementById('languageSelect')?.value === 'sr' ? window.promptsSR : window.promptsEN).STEP0_PROMPT_TEMPLATE,
+          schema: getPromptsByLang().STEP0_SCHEMA, 
+          template: getPromptsByLang().STEP0_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
         }
       ],
@@ -294,8 +306,7 @@
   async function runChain() {
     if (isRunning) return;
 
-    const lang = document.getElementById('languageSelect')?.value || 'sr';
-    const prompts = lang === 'sr' ? window.promptsSR : window.promptsEN;
+    const prompts = getPromptsByLang();
     const {
       UNIT_COMMON_HTML_PROMPT_TEMPLATE,
       HTML_LESSON_PROMPT_TEMPLATE

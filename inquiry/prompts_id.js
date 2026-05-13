@@ -726,7 +726,7 @@ JSON INPUT:
                 "type": "object",
                 "properties": {
                   "Prompt": { "type": "string", "description": "Kembangkan instruksi yang dipimpin guru ('Katakan:') untuk memfasilitasi diskusi pasangan atau kelompok yang menghasilkan ide, penjelasan, atau solusi khusus menggunakan informasi dan kendala yang tersedia. Dorong perbandingan dan penalaran." },
-                  "PromptingOptions": { "type": "string", "description": "Daftar 2-3 prompt untuk mendorong siswa mengusulkan ide, menjelaskan penalaran, mempertimbangkan pendekatan alternatif, dan mengevaluasi bagian mana dari pemikiran mereka yang paling kuat atau paling tidak pasti.", "items": { "type": "string" } },
+                  "PromptingOptions": { "type": "string", "description": "Daftar 2-3 prompt untuk mendorong siswa mengusulkan ide, menjelaskan penalaran, mempertimbangkan pendekatan alternatif, dan mengevaluasi bagian mana dari pemikiran mereka yang paling kuat atau paling tidak pasti." },
                   "FacilitationMoves": { "type": "array", "description": "Deskripsikan 2-3 langkah berkeliling untuk mendengarkan penalaran, mendesak kejelasan/justifikasi, and menonjolkan berbagai pendekatan tanpa mengevaluasi mana yang benar.", "items": { "type": "string" } }
                 },
                 "required": ["Prompt", "PromptingOptions", "FacilitationMoves"],
