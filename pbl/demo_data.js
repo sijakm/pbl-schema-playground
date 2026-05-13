@@ -136,5 +136,57 @@ x Word-to-word dictionary*
     "Standards": "MS-ESS1-2 Razvija i koristi model da opiše ulogu gravitacije u kretanju unutar galaksija i solarnog sistema.",
     "LearningPlans": "Marija Valdez: Obezbediti delimično unapred označenu mapu orbite i okvire rečenica za objašnjenja.\nJakob Garou: Dozvoliti pretvaranje govora u tekst za rezonovanje i označavanje.\nAva Lund: Obezbediti dvojezične nalepnice za planete i vizuelni dijagram toka koji pokazuje Sunce → Planete → Meseci.",
     "ResponseLanguage": "Serbian"
+  },
+  "sr_cyrl": {
+    "Subject": "Наука о Земљи и свемиру (Гравитација и орбите)",
+    "Name": "„Гравитација на делу: Моделирање кретања у нашем соларном систему“",
+    "UserPrompt": "Ученици ће истраживати како гравитација утиче на кретање у соларном систему и креирати модел који објашњава и предвиђа орбитално кретање. Финални производ треба да буде јасан модел (физички и/или дигитални) уз кратко објашњење за публику из заједнице, користећи доказе из запажања и једноставне податке. Нагласити осмишљавање, моделирање и комуникацију.",
+    "GradeLevel": "1. разред средње школе",
+    "NumberOfDays": "10",
+    "Location": "Нови Сад, Петроварадинска тврдјава, Србија",
+    "MediaContext": "Кратки НАСА видео снимци гравитације/орбите, слике соларног система, учионички реквизити (канап/лоптице), једноставне симулације орбита (базиране на претраживачу), хамер папир, научне свеске ученика.",
+    "AttachedUnit": "",
+    "Standards": "MS-ESS1-2 Развија и користи модел да опише улогу гравитације у кретању унутар галаксија и соларног система.",
+    "LearningPlans": "Марија Валдез: Обезбедити делимично унапред означену мапу орбите и оквире реченица за објашњења.\nЈакоб Гароу: Дозволити претварање говора у текст за резоновање и означавање.\nАва Лунд: Обезбедити двојезичне налепнице за планете и визуелни дијаграм тока који показује Сунце → Планете → Месеци.",
+    "ResponseLanguage": "Serbian"
+  },
+  "ru": {
+    "Subject": "Химия",
+    "Name": "Вещество и его взаимодействия",
+    "UserPrompt": "Химические реакции и свойства вещества",
+    "GradeLevel": "10 класс",
+    "NumberOfDays": "15",
+    "Location": "Школьная лаборатория",
+    "MediaContext": "Нет",
+    "AttachedUnit": "Нет",
+    "Standards": "NGSS HS-PS1-1",
+    "LearningPlans": "Нет",
+    "ResponseLanguage": "Russian"
+  },
+  "id": {
+    "Subject": "Kimia",
+    "Name": "Materi dan interaksinya",
+    "UserPrompt": "Reaksi kimia dan sifat-sifat materi",
+    "GradeLevel": "Kelas 10",
+    "NumberOfDays": "15",
+    "Location": "Laboratorium Sains",
+    "MediaContext": "Tidak ada",
+    "AttachedUnit": "Tidak ada",
+    "Standards": "NGSS HS-PS1-1",
+    "LearningPlans": "Tidak ada",
+    "ResponseLanguage": "Indonesian"
+  },
+  "es": {
+    "Subject": "Química",
+    "Name": "La materia y sus interacciones",
+    "UserPrompt": "Reacciones químicas y propiedades de la materia",
+    "GradeLevel": "10.º grado",
+    "NumberOfDays": "15",
+    "Location": "Laboratorio de Ciencias",
+    "MediaContext": "Ninguno",
+    "AttachedUnit": "Ninguna",
+    "Standards": "NGSS HS-PS1-1",
+    "LearningPlans": "Ninguno",
+    "ResponseLanguage": "Spanish"
   }
 };

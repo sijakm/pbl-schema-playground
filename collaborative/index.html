@@ -296,7 +296,11 @@
     <label for="languageSelect">Jezik / Language</label>
     <select id="languageSelect" style="width:100%; padding:10px; font-size:13px; margin-bottom:12px;">
       <option value="en" selected>English</option>
-      <option value="sr">Srpski</option>
+      <option value="sr">Srpski (Latinica)</option>
+      <option value="sr_cyrl">Српски (Ћирилица)</option>
+      <option value="ru">Русский</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="es">Español</option>
     </select>
 
     <label for="modelSelect">OpenAI Model</label>
@@ -586,6 +590,10 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="prompts_collaborative.js"></script>
   <script src="prompts_collaborative_sr.js"></script>
+  <script src="prompts_collaborative_sr_cyrl.js"></script>
+  <script src="prompts_collaborative_ru.js"></script>
+  <script src="prompts_collaborative_id.js"></script>
+  <script src="prompts_collaborative_es.js"></script>
   
   <script>
     const defaults = {
@@ -608,6 +616,46 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
         learningPlans: "Ime učenika: Maria Valdez\nPlan: Obezbedite delimično unapred označene atomske modele i okvire rečenica za opise strukture.\n\nIme učenika: Jacob Garrow\nPlan: Dozvolite funkciju govora u tekst za objašnjavanje strukturnih razlika.\n\nIme učenika: Ava Lund\nPlan: Obezbedite dvojezične grafikone atomskih simbola i vizuelne mape za molekule obeležene bojom.",
         mediaContext: "Modeli molekula (kuglice i štapići), tabele periodnog sistema, slike kristalnih struktura (npr. so, dijamant), interaktivni onlajn alati za izgradnju molekula (poput PhET-a), učenički naučni dnevnici.",
         attachedUnit: "Nije obezbeđen tekst priložene jedinice."
+      },
+      sr_cyrl: {
+        subject: "Физичке науке (Молекули и структуре)",
+        name: "Градивни блокови: Моделирање атомског састава",
+        gradeLevel: "Основна школа (6-8. разред)",
+        standards: "MS-PS1-1 Развити моделе за описивање атомског састава једноставних молекула и проширених структура.",
+        userPrompt: "Ученици ће развијати и користити моделе да опишу атомски састав једноставних молекула и проширених структура. Они ће разликовати молекуле и проширене структуре (попут кристала) и разумети како распоред атома утиче на својства. Нагласите физичко моделирање и структурно закључивање.",
+        learningPlans: "Име ученика: Maria Valdez\nПлан: Обезбедите делимично унапред означене атомске моделе и оквире реченица за описе структуре.\n\nИме ученика: Jacob Garrow\nПлан: Дозволите функцију говора у текст за објашњавање структурних разлика.\n\nИме ученика: Ava Lund\nПлан: Обезбедите двојезичне графиконе атомских симбола и визуелне мапе за молекуле обележене бојом.",
+        mediaContext: "Модели молекула (куглице и штапићи), табеле периодичног система, слике кристалне структуре (нпр. со, дијамант), интерактивни онлајн алати за изградњу молекула (попут PhET-а), ученички научни дневници.",
+        attachedUnit: "Није обезбеђен текст приложене јединице."
+      },
+      ru: {
+        subject: "Естественные науки (Молекулы и структуры)",
+        name: "Строительные блоки: Моделирование атомного состава",
+        gradeLevel: "Средняя школа (6-8 классы)",
+        standards: "MS-PS1-1 Разработка моделей для описания атомного состава простых молекул и расширенных структур.",
+        userPrompt: "Учащиеся будут разрабатывать и использовать модели для описания атомного состава простых молекул и расширенных структур. Они будут различать молекулы и расширенные структуры (такие как кристаллы) и понимать, как расположение атомов влияет на свойства. Сделайте упор на физическое моделирование и структурное мышление.",
+        learningPlans: "Имя учащегося: Мария Вальдес\nПлан: Предоставьте частично предварительно размеченные атомные модели и речевые клише для описания структуры.\n\nИмя учащегося: Джейкоб Гэрроу\nПлан: Разрешите функцию преобразования речи в текст для объяснения структурных различий.\n\nИмя учащегося: Ава Лунд\nПлан: Предоставьте двуязычные таблицы атомных символов и визуальные карты для молекул с цветовой кодировкой.",
+        mediaContext: "Модели молекул (шарики и стержни), таблицы периодической системы, изображения кристаллических структур (например, соль, алмаз), интерактивные онлайн-инструменты для построения молекул (такие как PhET), научные дневники учащихся.",
+        attachedUnit: "Текст приложенного модуля не предоставлен."
+      },
+      id: {
+        subject: "Sains Fisik (Molekul dan Struktur)",
+        name: "Blok Bangunan: Memodelkan Komposisi Atom",
+        gradeLevel: "Sekolah Menengah (Kelas 6-8)",
+        standards: "MS-PS1-1 Mengembangkan model untuk mendeskripsikan komposisi atom dari molekul sederhana dan struktur yang diperluas.",
+        userPrompt: "Siswa akan mengembangkan dan menggunakan model untuk mendeskripsikan komposisi atom dari molekul sederhana dan struktur yang diperluas. Mereka akan membedakan antara molekul dan struktur yang diperluas (seperti kristal) dan memahami bagaimana susunan atom mempengaruhi sifat-sifatnya. Tekankan pada pemodelan fisik dan penalaran struktural.",
+        learningPlans: "Nama Siswa: Maria Valdez\nPlan: Sediakan model atom yang sebagian sudah diberi label dan kerangka kalimat untuk deskripsi struktur.\n\nNama Siswa: Jacob Garrow\nPlan: Izinkan fungsi speech-to-text untuk menjelaskan perbedaan struktur.\n\nNama Siswa: Ava Lund\nPlan: Sediakan bagan simbol atom dwibahasa dan peta visual untuk molekul yang diberi kode warna.",
+        mediaContext: "Model molekul (bola dan tongkat), tabel periodik, gambar struktur kristal (misalnya garam, berlian), alat pembangun molekul online interaktif (seperti PhET), jurnal sains siswa.",
+        attachedUnit: "Teks unit terlampir tidak disediakan."
+      },
+      es: {
+        subject: "Ciencias Físicas (Moléculas y estructuras)",
+        name: "Bloques de construcción: Modelado de la composición atómica",
+        gradeLevel: "Escuela secundaria (grados 6-8)",
+        standards: "MS-PS1-1 Desarrollar modelos para describir la composición atómica de moléculas simples y estructuras extendidas.",
+        userPrompt: "Los estudiantes desarrollarán y usarán modelos para describir la composición atómica de moléculas simples y estructuras extendidas. Diferenciarán entre moléculas y estructuras extendidas (como los cristales) y comprenderán cómo la disposición de los átomos afecta las propiedades. Enfatice el modelado físico y el razonamiento estructural.",
+        learningPlans: "Nombre del estudiante: Maria Valdez\nPlan: Proporcione modelos atómicos parcialmente pre-etiquetados y marcos de oraciones para las descripciones de las estructuras.\n\nNombre del estudiante: Jacob Garrow\nPlan: Permita la función de voz a texto para explicar las diferencias estructurales.\n\nNombre del estudiante: Ava Lund\nPlan: Proporcione tablas bilingües de símbolos atómicos y mapas visuales para moléculas codificadas por colores.",
+        mediaContext: "Modelos moleculares (bolas y varillas), tablas periódicas, imágenes de estructuras cristalinas (p. ej., sal, diamante), herramientas interactivas de construcción de moléculas en línea (como PhET), diarios científicos de los estudiantes.",
+        attachedUnit: "No se proporcionó el texto de la unidad adjunta."
       }
     };
 
@@ -626,7 +674,15 @@ Reflection & Share (5 min): What made some canal systems more efficient? Assessm
         
         // Re-init SchemaEditor if it exists
         if (window.schemaEditor) {
-          const p = lang === "en" ? window.promptsEN : window.promptsSR;
+          let p;
+          switch(lang) {
+            case "sr": p = window.promptsSR; break;
+            case "sr_cyrl": p = window.promptsSR_Cyrl; break;
+            case "ru": p = window.promptsRU; break;
+            case "id": p = window.promptsID; break;
+            case "es": p = window.promptsES; break;
+            default: p = window.promptsEN;
+          }
           window.schemaEditor.updateData([
             { 
               id: "perLesson", 

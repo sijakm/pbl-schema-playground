@@ -101,6 +101,17 @@
 
   let schemaEditor; // Initialized in initSchemaEditor
 
+  function getPromptsByLang(lang) {
+    switch (lang) {
+      case "sr": return window.promptsSR;
+      case "sr_cyrl": return window.promptsSR_Cyrl;
+      case "ru": return window.promptsRU;
+      case "id": return window.promptsID;
+      case "es": return window.promptsES;
+      default: return window.promptsEN;
+    }
+  }
+
   function initSchemaEditor() {
     if (!window.SchemaEditor) {
       console.warn("SchemaEditor class not found! Retrying in 100ms...");
@@ -108,21 +119,24 @@
       return;
     }
 
+    const lang = $("languageSelect")?.value || "en";
+    const p = getPromptsByLang(lang);
+
     schemaEditor = new window.SchemaEditor({
       container: $("schemaEditorContainer"),
       tabs: [
         { 
           id: "perLesson", 
           label: "Per Lesson", 
-          schema: ($("languageSelect")?.value === "en" ? window.promptsEN : window.promptsSR).PER_LESSON_SCHEMA, 
-          template: ($("languageSelect")?.value === "en" ? window.promptsEN : window.promptsSR).PER_LESSON_PROMPT_TEMPLATE,
+          schema: p.PER_LESSON_SCHEMA, 
+          template: p.PER_LESSON_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
         },
         { 
           id: "step0", 
           label: "Unit Outline (Step 0)", 
-          schema: ($("languageSelect")?.value === "en" ? window.promptsEN : window.promptsSR).STEP0_SCHEMA, 
-          template: ($("languageSelect")?.value === "en" ? window.promptsEN : window.promptsSR).STEP0_PROMPT_TEMPLATE,
+          schema: p.STEP0_SCHEMA, 
+          template: p.STEP0_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
         }
       ],
@@ -311,8 +325,14 @@
 
     try {
       // ---- Get Active Prompts ----
-      const lang = document.getElementById("languageSelect")?.value || "sr";
-      const basePrompts = lang === "en" ? window.promptsEN : window.promptsSR;
+      const lang = $("languageSelect")?.value || "sr";
+      const basePrompts = getPromptsByLang(lang);
+      
+      console.log(`[DEBUG] Selected Language: ${lang}`);
+      // Find the specific line the user is complaining about in the template
+      const templateLine = basePrompts.HTML_LESSON_PROMPT_TEMPLATE?.split("\n").find(l => l.includes("💡")) || "NOT FOUND";
+      console.log(`[DEBUG] Template Lightbulb Line: ${templateLine.trim()}`);
+      console.log(`[DEBUG] Using Template Prefix: ${basePrompts.HTML_LESSON_PROMPT_TEMPLATE?.substring(0, 50)}...`);
 
       // ---- Step 0: outline ----
       const t0 = nowMs();
@@ -488,46 +508,44 @@
         return;
       }
 
-      const zipEN = new JSZip();
-      const zipSR = new JSZip();
+      const langs = ["en", "sr", "sr_cyrl", "ru", "id", "es"];
+      const labels = {
+        en: "English",
+        sr: "Serbian_Latin",
+        sr_cyrl: "Serbian_Cyrillic",
+        ru: "Russian",
+        id: "Indonesian",
+        es: "Spanish"
+      };
 
-      // window.promptsEN and window.promptsSR are defined in prompts_collaborative.js / prompts_collaborative_sr.js
-      const pEN = window.promptsEN || {};
-      const pSR = window.promptsSR || {};
+      for (const lang of langs) {
+        const zip = new JSZip();
+        const p = getPromptsByLang(lang);
+        
+        if (!p) continue;
 
-      const addFiles = (zip, obj) => {
-        for (const [key, value] of Object.entries(obj)) {
+        for (const [key, value] of Object.entries(p)) {
           if (typeof value === "object" && value !== null) {
             zip.file(`${key}.json`, JSON.stringify(value, null, 2));
           } else if (typeof value === "string") {
             zip.file(`${key}.txt`, value);
           }
         }
-      };
 
-      addFiles(zipEN, pEN);
-      addFiles(zipSR, pSR);
-
-      const contentEN = await zipEN.generateAsync({ type: "blob" });
-      const contentSR = await zipSR.generateAsync({ type: "blob" });
-
-      const saveZip = (blob, filename) => {
-        const url = URL.createObjectURL(blob);
+        const content = await zip.generateAsync({ type: "blob" });
+        const url = URL.createObjectURL(content);
         const link = document.createElement("a");
         link.href = url;
-        link.download = filename;
+        link.download = `collaborative_prompts_${labels[lang]}.zip`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      };
+        
+        // Brief delay between downloads to avoid browser blocking
+        await new Promise(r => setTimeout(r, 300));
+      }
 
-      saveZip(contentEN, "collaborative_prompts_en.zip");
-      setTimeout(() => {
-        saveZip(contentSR, "collaborative_prompts_sr.zip");
-      }, 500);
-
-      log("[OK] Prompts downloaded successfully.");
+      log("[OK] All prompts downloaded successfully.");
     } catch (err) {
       log("[error] Failed to download prompts: " + err.message);
       console.error(err);

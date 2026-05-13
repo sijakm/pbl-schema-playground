@@ -486,8 +486,12 @@
       <div>
         <label for="languageSelect">Application Language</label>
         <select id="languageSelect" onchange="changeLanguage()">
-          <option value="en" selected>English / Engleski</option>
-          <option value="sr">Serbian / Srpski</option>
+          <option value="en" selected>English</option>
+          <option value="sr">Srpski (Latinica)</option>
+          <option value="sr_cyrl">Српски (Ћирилица)</option>
+          <option value="ru">Русский</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="es">Español</option>
         </select>
       </div>
       <div>
@@ -749,6 +753,10 @@ x Word-to-word dictionary*
   <script src="demo_data.js"></script>
   <script src="prompts.js"></script>
   <script src="prompts_sr.js"></script>
+  <script src="prompts_sr_cyrl.js"></script>
+  <script src="prompts_ru.js"></script>
+  <script src="prompts_id.js"></script>
+  <script src="prompts_es.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="../shared/schema-editor.js"></script>
   <script src="app.js"></script>
@@ -759,13 +767,17 @@ x Word-to-word dictionary*
       console.log("Language changed to:", lang);
 
       // Update the global configuration used by app.js
-      window.currentPblPrompts = (lang === "sr") ? window.pblPrompts_sr : window.pblPrompts_en;
+      window.currentPblPrompts = window["pblPrompts_" + lang];
+      if (!window.currentPblPrompts) {
+        console.error("Prompts for language not found:", lang);
+        window.currentPblPrompts = window.pblPrompts_en;
+      }
       window.resetAppSchema();
 
       // Re-initialize Schema Editor with new language defaults
       if (window.schemaEditor) {
         window.schemaEditor.updateData([
-          { id: "main", label: "Schema", schema: window.currentPblPrompts.SCHEMA }
+          { id: "main", label: "Schema", schema: window.currentPblPrompts.pblResponseSchema }
         ]);
       }
 

@@ -266,6 +266,7 @@ Zahtevi za izlaz:
         GradesData: gradesData,
         AttendanceData: attendanceData
       });
+      console.log("--- FINAL PROMPT ---\n", prompt);
       logLine("[Cleo] Requesting feedback...");
       
       const HARDCODED_PASSWORD = ""; // Enter password here while working locally

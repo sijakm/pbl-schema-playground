@@ -7,8 +7,9 @@
   // ---- Prompt templates and schemas moved to prompts.js ----
   function getPrompts() {
     const langEl = $("languageSelect");
-    const lang = langEl ? langEl.value : "en";
-    return lang === "sr" ? window.promptsSR : window.promptsEN;
+    const lang = (langEl ? langEl.value : "en").toUpperCase().replace("-", "_");
+    const key = "prompts" + lang;
+    return window[key] || window.promptsEN;
   }
   // ---- Shared Helpers Aliases ----
   const { $, nowMs, fmtMs, logLine, setStatus, fillTemplate } = window.utils;

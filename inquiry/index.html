@@ -315,10 +315,13 @@
     <input id="endpoint" type="text" value="https://fancy-sun-80f1.sijakmilan.workers.dev"
       style="width:100%; padding:10px; font-size:13px; display:none;" />
 
-    <label for="languageSelect">Jezik / Language</label>
     <select id="languageSelect" style="width:100%; padding:10px; font-size:13px; margin-bottom:12px;">
       <option value="en" selected>English</option>
-      <option value="sr">Srpski</option>
+      <option value="sr">Srpski (Latinica)</option>
+      <option value="sr_cyrl">Српски (Ћирилица)</option>
+      <option value="ru">Русский</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="es">Español</option>
     </select>
 
     <label for="modelSelect">OpenAI Model</label>
@@ -859,6 +862,502 @@ Testiranje (5 min): Sipajte vodu i merite koliko vremena je potrebno da stigne d
 
 Refleksija i deljenje (5 min): Šta je neke sisteme kanala učinilo efikasnijim? Ocenjivanje: Označena skica modela + podaci o protoku.`,
         attachedUnit: "Nije obezbeđen tekst priložene jedinice."
+      },
+      sr_cyrl: {
+        subject: "Наука",
+        name: "Инжењерство и иновације у старом Египту",
+        gradeLevel: "8",
+        classDuration: "45",
+        numberOfLessons: "3",
+        standards: `SC.8.N.1.1: Дефинисање проблема, спровођење истраживања, коришћење одговарајућих референтних материјала и извештавање, приказивање и аргументовање налаза истраживања ради доношења закључака.
+SC.8.P.8.4: Класификација и упоређивање супстанци на основу физичких својстава.
+SC.8.P.9.2: Разликовање физичких и хемијских промена.
+SC.8.E.5.12: Сумирање ефеката истраживања свемира на економију и културу Флориде.
+SS.8.A.1.2: Анализа графикона, мапа, фотографија и временских линија; утврђивање узрока и последице.`,
+        userPrompt: "Користите прва три дана дељеног материјала да креирате 3 лекције које су усклађене са тим материјалом. Морате користити исте циљеве који се налазе у приложеном материјалу.",
+        learningPlans: `Име ученика: Abigail Nguyen 
+План: Прилагођавања и модификације 
+Инструкција 
+x Речник реч по реч 
+x Екрани у боји, промена фонта, промена величине текста, итд. 
+x Задаци који се читају наглас 
+x Преформулисање и поједностављивање упутстава 
+x Остало: Оквири и почеци реченица 
+  
+Окружење и поставка 
+x Близина наставника, беле/интерактивне табле, графикони, постери, итд. 
+  
+Формативно оцењивање 
+x Читање ставки и избора наглас (не тестови читања) 
+x Речник реч по реч 
+x Екрани у боји, промена фонта, промена величине текста, итд. 
+  
+Сумативно оцењивање 
+x Читање ставки и избора наглас (не тестови читања) 
+x Речник реч по реч* 
+  
+*Није дозвољено на WIDA ACCESS 
+  
+Име ученика: Charles Alvarez 
+План: Прилагођавања и модификације 
+Претходно подучавање или поновно подучавање кључног речника или концепта 
+Честа и приватна провера разумевања 
+Подела задатака на мање кораке којима се може управљати 
+Синтеза говора у текст за задатке писања 
+  
+Прилагођавања и модификације оцењивања 
+Дозволити усмене одговоре уместо писмених 
+Поновно читање испитних питања или упутстава наглас 
+  
+Име ученика: Emily Carter 
+План: Прилагођавања и модификације 
+  
+Инструкција 
+x Речник реч по реч 
+x Екрани у боји, промена фонта, промена величине текста, итд. 
+x Задаци који се читају наглас 
+x Преформулисање и поједностављивање упутстава 
+x Остало: Оквири и почеци реченица 
+  
+Окружење и поставка 
+x Близина наставника, беле/интерактивне табле, графикони, постери, итд. 
+  
+Формативно оцењивање 
+x Читање ставки и избора наглас (не тестови читања) 
+x Речник реч по реч 
+x Екрани у боји, промена фонта, промена величине текста, итд. 
+  
+Сумативно оцењивање 
+x Читање ставки и избора наглас (не тестови читања) 
+x Речник реч по реч* 
+  
+*Није дозвољено на WIDA ACCESS`,
+        mediaContext: `Наука: Наука о инжењерству и иновацијама — Инжењерство и иновације у старом Египту Предмет:  
+ 
+Наука Разред: Осми (Grade 8)  
+ 
+Трајање: 5 школских часова (по 45 минута)  
+ 
+Стандарди ● SC.8.N.1.1 – Научно истраживање: дефинисање проблема, спровођење истраживања, анализа и евалуација резултата. ● SC.8.P.8.4 – Класификација/упоређивање супстанци на основу физичких својстава. ● SC.8.P.9.2 – Разликовање физичких наспрам хемијских промена. ● SC.8.E.5.12 – Сумирање ефеката истраживања свемира на економију и културу Флориде. ● SS.8.A.1.2 – Анализа графикона, мапа, фотографија и временских линија; утврђивање узрока и последице.  
+ 
+Циљеви ● Разумети како су Египћани конструисали алате и системе за управљање водом и градњу. ● Конструисати и тестирати моделе (шадуфе, пирамиде, канале за наводњавање, једноставне машине). ● Анализирати стабилност, дистрибуцију силе и механичку предност. ● Упоредити алате и машине на основу ефикасности. ● Применити принципе физичке науке и инжењерства на историјске иновације. ● Дизајнирати оригиналне проналаске инспирисане древним техникама и оправдати научно закључивање.  
+ 
+Дан 1: Инжењерство вода – Изазов са шадуфом  
+ 
+Материјали: ● Дрвени типлови, канап, лењири ● Мале пластичне кофе или чаше ● Посуде за воду ● Тајмери, мерне чаше ● Фасцикле за прикупљање података ● Пројектор или паметна табла за визуелне приказе  
+ 
+Потицај - Изазов пустињске воде (15 минута): ● Ученицима се представља сценарио: „Ваше село мора да подигне воду из бунара дубоког 20 стопа да би преживело. Можете користити само древне алате. Шта ћете дизајнирати?“ ● Разговор о свакодневном ослањању на Нил и домишљатости иза раног инжењерства вода.  
+ 
+Увод (15 минута): ● Пружање основних информација о древним египатским системима наводњавања и шадуфу – уређају заснованом на полузи који се користи за подизање воде из Нила. ● Приказивање видео снимака са PBS Learning Media: Engineering Egypt или National Geographic: Nile River.  
+ 
+Директна инструкција и демонстрација (15 минута): ● Објашњење механике полуга (ослонац, терет, напор) и како се примењују на шадуф. Увођење варијабли као што су дужина крака и величина противтега.  
+ 
+Практична активност: Изградња и тестирање шадуфа (30 минута) ● У тимовима ученици конструишу једноставан шадуф користећи обезбеђене материјале. ● Свака група тестира колико воде може да подигне, колико високо и колико брзо. ● Ученици бележе податке о ефикасности подизања и врше прилагођавања ради оптимизације перформанси.  
+ 
+Затварање и рефлексија (15 минута) Дискусија у одељењу: ● Који су избори дизајна учинили шадуф ефикаснијим? ● Како једноставне машине помажу у решавању проблема из стварног света? ● Увођење концепта механичке предности.  
+ 
+Оцењивање Ученици попуњавају означени дијаграм обележавајући све компоненте полуге у свом дизајну и објашњавају коју је улогу имала механичка предност.  
+ 
+Дан 2: Физика пирамида – Зашто трају  
+ 
+Материјали: ● Пенасти или дрвени блокови (троуглови, квадрати, пирамиде) ● Угломери и лењири ● Шаблони дијаграма сила ● Слике пирамида и илустрације конструкције ● Хамер папир или беле табле за цртање ● Материјали за градњу (нпр. коцке шећера, картон, глина за моделирање) 
+ 
+ Потицај (10 минута): Тест стабилности облика ● Користећи блокове, ученици граде куле користећи различите облике – троуглове, квадрате, пирамиде. ● Затим примењују притисак да тестирају стабилност и бележе који се облик показао као најбољи.  
+ 
+Увод (10 минута): ● Приказивање слика и теорија о изградњи пирамида са TED-Ed: Pyramid Engineering и Smithsonian музеја. ● Разговор о томе зашто је облик пирамиде опстао миленијумима. Директна инструкција (10 минута): Преглед кључних научних термина: сила, гравитација, расподела оптерећења и центар масе. Увођење дијаграма сила и начина на који се притисак распршује у троугластим наспрам правоугаоних облика.  
+ 
+Практична активност (45 минута): Изградња и анализа пирамида: ● Ученици граде мале моделе пирамида користећи различите материјале и технике дизајна. ● Цртају и обележавају дијаграме сила који показују како се тежина распоређује кроз структуру. ● Упоређују облике пирамида са другим нестабилним структурама.  
+ 
+Затварање и рефлексија (15 минута): ● Дискусија: Зашто је облик пирамиде преживео природне силе? ● Како геометрија и материјали утичу на архитектонску издржљивост? ● Које модерне структуре преузимају елементе из древног дизајна?  
+ 
+Оцењивање: ● Ученици пишу кратко научно објашњење одговарајући на питање: „Зашто су пирамиде одолеле зубу времена?“ ● Одговори морају користити најмање 3 научна термина уведена у лекцији.  
+ 
+Дан 3: Иновација наводњавања – Инжењерство протока воде  
+ 
+Материјали: ● Алуминијумска фолија, песак, пластичне посуде ● Бокали за воду или капаљке ● Лењири, тајмери ● Фасцикле и евиденције о каналима  
+ 
+Потицај (5 мин): ● Слика пољопривредног земљишта поред реке Нил. ● Питајте: „Како бисте допремили воду из реке до својих усева без пумпи?“  
+ 
+Мини-лекција (10 мин): ● Увођење канала, басена и устава. ● Приказивање дијаграма египатског наводњавања.  
+ 
+Лабораторија дизајна (20 мин): У тимовима ученици праве мреже канала у посудама користећи фолију и песак.  
+ 
+Тестирање (5 мин): Сипајте воду и мерите колико времена је потребно да стигне до краја. Забележите губитак воде, време путовања.  
+ 
+Рефлексија и дељење (5 мин): Шта је неке системе канала учинило ефикаснијим? Оцењивање: Означена скица модела + подаци о протоку.`,
+        attachedUnit: "Није обезбеђен текст приложене јединице."
+      },
+      ru: {
+        subject: "Наука",
+        name: "Инженерное дело и инновации в Древнем Египте",
+        gradeLevel: "8",
+        classDuration: "45",
+        numberOfLessons: "3",
+        standards: `SC.8.N.1.1: Определение проблемы, проведение исследований, использование соответствующих справочных материалов, а также отчетность, отображение и аргументация результатов исследования для формулирования выводов.
+SC.8.P.8.4: Классификация и сравнение веществ на основе физических свойств.
+SC.8.P.9.2: Различие между физическими и химическими изменениями.
+SC.8.E.5.12: Обобщение влияния освоения космоса на экономику и культуру Флориды.
+SS.8.A.1.2: Анализ диаграмм, графиков, карт, фотографий и временных шкал; определение причинно-следственных связей.`,
+        userPrompt: "Используйте первые три дня из предоставленных материалов, чтобы создать 3 урока, соответствующих этим материалам. Вы должны использовать те же цели, которые указаны в приложенных материалах.",
+        learningPlans: `Имя учащегося: Эбигейл Нгуен
+План: Поддержка и модификации
+Инструкции
+x Словарик «слово в слово»
+x Цветные экраны, смена шрифта, размера текста и т. д.
+x Чтение заданий вслух
+x Переформулирование и упрощение инструкций
+x Другое: Шаблоны и заготовки предложений
+ 
+Окружение и обстановка
+x Близость к учителю, белой/интерактивной доске, плакатам и т. д.
+ 
+Формирующее оценивание
+x Чтение вопросов и вариантов ответов вслух (не для тестов по чтению)
+x Словарик «слово в слово»
+x Цветные экраны, смена шрифта, размера текста и т. д.
+ 
+Итоговое оценивание
+x Чтение вопросов и вариантов ответов вслух (не для тестов по чтению)
+x Словарик «слово в слово»*
+ 
+* Не разрешено для WIDA ACCESS
+ 
+Имя учащегося: Чарльз Альварес
+План: Поддержка и модификации
+Предварительное или повторное изучение ключевой лексики или концепций
+Частая и конфиденциальная проверка понимания
+Разбиение задач на более мелкие, выполнимые шаги
+Преобразование речи в текст для письменных заданий
+ 
+Поддержка и модификации при оценивании
+Разрешение устных ответов вместо письменных
+Повторное чтение экзаменационных вопросов или инструкций вслух
+ 
+Имя учащегося: Эмили Картер
+План: Поддержка и модификации
+ 
+Инструкции
+x Словарик «слово в слово»
+x Цветные экраны, смена шрифта, размера текста и т. д.
+x Чтение заданий вслух
+x Переформулирование и упрощение инструкций
+x Другое: Шаблоны и заготовки предложений
+ 
+Окружение и обстановка
+x Близость к учителю, белой/интерактивной доске, плакатам и т. д.
+ 
+Формирующее оценивание
+x Чтение вопросов и вариантов ответов вслух (не для тестов по чтению)
+x Словарик «слово в слово»
+x Цветные экраны, смена шрифта, размера текста и т. д.
+ 
+Итоговое оценивание
+x Чтение вопросов и вариантов ответов вслух (не для тестов по чтению)
+x Словарик «слово в слово»*
+ 
+* Не разрешено для WIDA ACCESS`,
+        mediaContext: `Наука: Инженерное дело и инновации — Инженерное дело и инновации в Древнем Египте Предмет:
+ 
+Наука Уровень класса: Средняя школа (8 класс)
+ 
+Продолжительность: 5 учебных периодов (по 45 минут каждый)
+ 
+Стандарты ● SC.8.N.1.1 – Научное исследование: определение проблемы, проведение исследований, анализ и оценка результатов. ● SC.8.P.8.4 – Классификация/сравнение веществ на основе физических свойств. ● SC.8.P.9.2 – Различие физических и химических изменений. ● SC.8.E.5.12 – Обобщение влияния освоения космоса на экономику и культуру Флориды. ● SS.8.A.1.2 – Анализ диаграмм, графиков, карт, фотографий и временных шкал; определение причинно-следственных связей.
+ 
+Цели ● Понять, как египтяне проектировали инструменты и системы для управления водными ресурсами и строительства. ● Конструировать и тестировать модели (шадуфы, пирамиды, ирригационные каналы, простые механизмы). ● Анализировать стабильность, распределение сил и механическое преимущество. ● Сравнивать инструменты и механизмы на основе эффективности. ● Применять принципы физики и инженерного дела к историческим инновациям. ● Разрабатывать оригинальные изобретения, вдохновленные древними техниками, и обосновывать научные рассуждения.
+ 
+День 1: Водная инженерия – Вызов шадуфа
+ 
+Материалы: ● Деревянные шканты, бечевка, линейки ● Маленькие пластиковые ведра или стаканчики ● Емкости с водой ● Таймеры, мерные стаканчики ● Планшеты для сбора данных ● Проектор или интерактивная доска для визуализации
+ 
+Крючок - Вызов пустынной воды (15 минут): ● Учащимся предлагается сценарий: «Ваша деревня должна поднять воду из колодца глубиной 20 футов, чтобы выжить. Вы можете использовать только древние инструменты. Что вы спроектируете?» ● Обсуждение ежедневной зависимости от Нила и изобретательности ранней водной инженерии.
+ 
+Введение (15 минут): ● Предоставление информации о древнеегипетских ирригационных системах и шадуфе — устройстве на основе рычага, используемом для подъема воды из Нила. ● Показ видеоклипов из PBS Learning Media: Engineering Egypt или National Geographic: Nile River.
+ 
+Прямое инструктирование и демонстрация (15 минут): ● Объяснение механики рычагов (точка опоры, нагрузка, усилие) и того, как они применяются к шадуфу. Введение переменных, таких как длина рычага и размер противовеса.
+ 
+Практическая деятельность: Сборка и тестирование шадуфа (30 минут) ● В командах учащиеся собирают простой шадуф из предоставленных материалов. ● Каждая группа проверяет, сколько воды они могут поднять, как высоко и как быстро. ● Учащиеся записывают данные об эффективности подъема и вносят коррективы для оптимизации производительности.
+ 
+Заключение и рефлексия (15 минут) Обсуждение в классе: ● Какие проектные решения сделали шадуф более эффективным? ● Как простые механизмы помогают решать реальные проблемы? ● Введение понятия механического преимущества.
+ 
+Оценивание Учащиеся заполняют аннотированную схему, отмечая все компоненты рычага в своем проекте, и объясняют роль механического преимущества.
+ 
+День 2: Физика пирамид – Почему они стоят вечно
+ 
+Материалы: ● Пенопластовые или деревянные блоки (треугольники, квадраты, пирамиды) ● Транспортиры и линейки ● Шаблоны диаграмм сил ● Изображения пирамид и иллюстрации строительства ● Плакатная бумага или доски для рисования ● Строительные материалы (например, кубики сахара, картон, пластилин)
+ 
+ Крючок (10 минут): Тест на устойчивость форм ● Используя блоки, учащиеся строят башни из различных форм — треугольников, квадратов, пирамид. ● Затем они прикладывают давление, чтобы проверить устойчивость, и записывают, какая форма держится лучше всего.
+ 
+Введение (10 минут): ● Показ изображений и теорий строительства пирамид из TED-Ed: Pyramid Engineering и Смитсоновского музея. ● Обсуждение того, почему форма пирамиды сохраняется на протяжении тысячелетий. Прямое инструктирование (10 минут): Обзор ключевых научных терминов: сила, гравитация, распределение нагрузки и центр масс. Введение диаграмм сил и того, как давление рассеивается в треугольных формах по сравнению с прямоугольными.
+ 
+Практическая деятельность (45 минут): Сборка и анализ пирамид: ● Учащиеся строят небольшие модели пирамид, используя различные материалы и методы проектирования. ● Они рисуют и помечают диаграммы сил, показывая, как вес распределяется по структуре. ● Сравнение пирамидальных форм с другими неустойчивыми структурами.
+ 
+Заключение и рефлексия (15 минут): ● Обсуждение: Почему форма пирамиды выдержала воздействие природных сил? ● Как геометрия и материалы влияют на архитектурную долговечность? ● Какие современные сооружения заимствованы из древнего дизайна?
+ 
+Оценивание: ● Учащиеся пишут краткое научное объяснение, отвечая на вопрос: «Почему пирамиды выдержали испытание временем?» ● Ответы должны содержать как минимум 3 научных термина, введенных на уроке.
+ 
+День 3: Ирригационные инновации – Инженерия водного потока
+ 
+Материалы: ● Алюминиевая фольга, песок, пластиковые подносы ● Кувшины с водой или пипетки ● Линейки, таймеры ● Планшеты и журналы данных о каналах
+ 
+Крючок (5 мин): ● Изображение сельскохозяйственных угодий у реки Нил. ● Вопрос: «Как бы вы доставили воду из реки к своим посевам без насосов?»
+ 
+Мини-урок (10 мин): ● Знакомство с каналами, бассейнами и шлюзами. ● Показ схем египетской ирригации.
+ 
+Проектная лаборатория (20 мин): В командах учащиеся создают сети каналов в подносах, используя фольгу и песок.
+ 
+Тестирование (5 мин): Налейте воду и засеките время, за которое она дойдет до конца. Запишите потери воды и время прохождения.
+ 
+Рефлексия и обмен опытом (5 мин): Что сделало некоторые системы каналов более эффективными? Оценивание: Аннотированный эскиз модели + данные о потоке.`,
+        attachedUnit: "Текст приложенного модуля не предоставлен."
+      },
+      id: {
+        subject: "Sains",
+        name: "Teknik & Inovasi di Mesir Kuno",
+        gradeLevel: "8",
+        classDuration: "45",
+        numberOfLessons: "3",
+        standards: `SC.8.N.1.1: Menentukan masalah, melakukan penyelidikan, menggunakan bahan referensi yang tepat, dan melaporkan, menampilkan, serta memperdebatkan temuan penyelidikan untuk menarik kesimpulan.
+SC.8.P.8.4: Mengklasifikasikan dan membandingkan zat berdasarkan sifat fisisnya.
+SC.8.P.9.2: Membedakan antara perubahan fisis dan kimia.
+SC.8.E.5.12: Merangkum dampak eksplorasi ruang angkasa terhadap ekonomi dan budaya Florida.
+SS.8.A.1.2: Menganalisis bagan, grafik, peta, foto, dan lini masa; menentukan sebab dan akibat.`,
+        userPrompt: "Gunakan tiga hari pertama dari media yang dibagikan untuk membuat 3 pelajaran yang selaras dengan media tersebut. Anda harus menggunakan tujuan yang sama dengan yang ada di media yang terlampir.",
+        learningPlans: `Nama Siswa: Abigail Nguyen
+Rencana: Akomodasi & Modifikasi
+Instruksi
+x Kamus kata-demi-kata
+x Layar berwarna, mengubah font, mengubah ukuran teks, dll
+x Membacakan tugas dengan lantang
+x Pengubahan kata dan penyederhanaan instruksi
+x Lainnya: Kerangka dan awal kalimat
+ 
+Lingkungan & Pengaturan
+x Kedekatan dengan guru, papan tulis/interaktif, bagan, poster, dll
+ 
+Asesmen Formatif
+x Membacakan item dan pilihan dengan lantang (bukan tes membaca)
+x Kamus kata-demi-kata
+x Layar berwarna, mengubah font, mengubah ukuran teks, dll
+ 
+Asesmen Sumatif
+x Membacakan item dan pilihan dengan lantang (bukan tes membaca)
+x Kamus kata-demi-kata*
+ 
+*Tidak diperbolehkan pada WIDA ACCESS
+ 
+Nama Siswa: Charles Alvarez
+Rencana: Akomodasi & Modifikasi
+Mengajarkan lebih dulu atau mengajarkan kembali kosakata atau konsep kunci
+Memeriksa pemahaman secara sering dan pribadi
+Memecah tugas menjadi langkah-langkah kecil yang dapat dikelola
+Speech-to-text untuk tugas menulis
+ 
+Akomodasi & Modifikasi Asesmen
+Izinkan tanggapan lisan daripada tertulis
+Bacakan kembali pertanyaan atau petunjuk tes dengan lantang
+ 
+Nama Siswa: Emily Carter
+Rencana: Akomodasi & Modifikasi
+ 
+Instruksi
+x Kamus kata-demi-kata
+x Layar berwarna, mengubah font, mengubah ukuran teks, dll
+x Membacakan tugas dengan lantang
+x Pengubahan kata dan penyederhanaan instruksi
+x Lainnya: Kerangka dan awal kalimat
+ 
+Lingkungan & Pengaturan
+x Kedekatan dengan guru, papan tulis/interaktif, bagan, poster, dll
+ 
+Asesmen Formatif
+x Membacakan item dan pilihan dengan lantang (bukan tes membaca)
+x Kamus kata-demi-kata
+x Layar berwarna, mengubah font, mengubah ukuran teks, dll
+ 
+Asesmen Sumatif
+x Membacakan item dan pilihan dengan lantang (bukan tes membaca)
+x Kamus kata-demi-kata*
+ 
+*Tidak diperbolehkan pada WIDA ACCESS`,
+        mediaContext: `Sains: Teknik dan Inovasi Sains — Teknik dan Inovasi di Mesir Kuno Subjek:
+ 
+Sains Tingkat Kelas: Sekolah Menengah Pertama (Kelas 8)
+ 
+Durasi: 5 jam pelajaran (masing-masing 45 menit)
+ 
+Standar ● SC.8.N.1.1 – Penyelidikan ilmiah: menentukan masalah, melakukan penyelidikan, menganalisis dan mengevaluasi hasil. ● SC.8.P.8.4 – Mengklasifikasikan/membandingkan zat berdasarkan sifat fisisnya. ● SC.8.P.9.2 – Membedakan perubahan fisis vs. kimia. ● SC.8.E.5.12 – Merangkum dampak eksplorasi ruang angkasa terhadap ekonomi dan budaya Florida. ● SS.8.A.1.2 – Menganalisis bagan, grafik, peta, foto, dan lini masa; menentukan sebab dan akibat.
+ 
+Tujuan ● Memahami bagaimana orang Mesir merekayasa alat dan sistem untuk mengelola air dan konstruksi. ● Membangun dan menguji model (shaduf, piramida, saluran irigasi, mesin sederhana). ● Menganalisis stabilitas, distribusi gaya, dan keuntungan mekanis. ● Membandingkan alat dan mesin berdasarkan efisiensi. ● Menerapkan prinsip sains fisik dan teknik pada inovasi historis. ● Merancang penemuan orisinal yang terinspirasi oleh teknik kuno dan menjustifikasi penalaran ilmiah.
+ 
+Hari 1: Teknik Air – Tantangan Shaduf
+ 
+Materi: ● Batang kayu, tali, penggaris ● Ember plastik kecil atau cangkir ● Wadah air ● Timer, gelas ukur ● Clipboard untuk pengumpulan data ● Proyektor atau papan tulis pintar untuk visual
+ 
+Hook - Tantangan Air Gurun (15 menit): ● Siswa diperkenalkan dengan skenario: “Desa Anda harus mengangkat air dari sumur sedalam 20 kaki untuk bertahan hidup. Anda hanya dapat menggunakan alat kuno. Apa yang akan Anda rancang?” ● Diskusikan ketergantungan harian pada Sungai Nil dan kecerdikan di balik teknik air awal.
+ 
+Pendahuluan (15 menit): ● Memberikan latar belakang sistem irigasi Mesir kuno dan shaduf—perangkat berbasis tuas yang digunakan untuk menaikkan air dari Sungai Nil. ● Menampilkan klip video dari PBS Learning Media: Engineering Egypt atau National Geographic: Nile River.
+ 
+Instruksi Langsung & Demonstrasi (15 menit): ● Menjelaskan mekanika tuas (titik tumpu, beban, gaya) dan bagaimana penerapannya pada shaduf. Memperkenalkan variabel seperti panjang lengan dan ukuran penyeimbang.
+ 
+Aktivitas Praktis: Membangun & Menguji Shaduf (30 menit) ● Dalam tim, siswa membangun shaduf sederhana menggunakan materi yang disediakan. ● Setiap kelompok menguji seberapa banyak air yang dapat mereka angkat, seberapa tinggi, dan seberapa cepat. ● Siswa mencatat data efisiensi angkat dan melakukan penyesuaian untuk mengoptimalkan kinerja.
+ 
+Penutup dan Refleksi (15 menit) Diskusi kelas: ● Pilihan desain apa yang membuat shaduf lebih efisien? ● Bagaimana mesin sederhana membantu memecahkan masalah dunia nyata? ● Memperkenalkan konsep keuntungan mekanis.
+ 
+Asesmen Siswa melengkapi diagram beranotasi yang memberi label pada semua komponen tuas dalam desain mereka dan menjelaskan bagaimana keuntungan mekanis berperan.
+ 
+Hari 2: Fisika Piramida – Mengapa Mereka Bertahan
+ 
+Materi: ● Blok busa atau kayu (segitiga, persegi, piramida) ● Busur derajat dan penggaris ● Templat diagram gaya ● Gambar piramida dan ilustrasi konstruksi ● Kertas poster atau papan tulis untuk menggambar ● Bahan bangunan (misalnya, kubus gula, karton, tanah liat pemodelan)
+ 
+ Hook (10 menit): Tes Stabilitas Bentuk ● Menggunakan blok, siswa membangun menara menggunakan bentuk yang berbeda—segitiga, persegi, piramida. ● Kemudian, mereka memberikan tekanan untuk menguji stabilitas dan mencatat bentuk mana yang paling tahan.
+ 
+Pendahuluan (10 menit): ● Menampilkan gambar dan teori tentang konstruksi piramida dari TED-Ed: Pyramid Engineering dan Museum Smithsonian. ● Diskusikan mengapa bentuk piramida telah bertahan selama ribuan tahun. Instruksi Langsung (10 menit): Tinjau istilah sains kunci: gaya, gravitasi, distribusi beban, dan pusat massa. Perkenalkan diagram gaya dan bagaimana tekanan menyebar pada bentuk segitiga vs. persegi panjang.
+ 
+Aktivitas Praktis (45 menit): Membangun & Menganalisis Piramida: ● Siswa membangun model piramida kecil menggunakan berbagai bahan dan teknik desain. ● Mereka menggambar dan melabeli diagram gaya yang menunjukkan bagaimana berat didistribusikan melalui struktur. ● Bandingkan bentuk piramida dengan struktur tidak stabil lainnya.
+ 
+Penutup dan Refleksi (15 menit): ● Diskusikan: Mengapa bentuk piramida mampu bertahan dari kekuatan alam? ● Bagaimana geometri dan bahan memengaruhi ketahanan arsitektur? ● Struktur modern apa yang meminjam dari desain kuno?
+ 
+Asesmen: ● Siswa menulis penjelasan ilmiah singkat yang menjawab: “Mengapa piramida mampu bertahan dalam ujian waktu?” ● Jawaban harus menggunakan setidaknya 3 istilah kosakata sains yang diperkenalkan dalam pelajaran.
+ 
+Hari 3: Inovasi Irigasi – Teknik Aliran Air
+ 
+Materi: ● Aluminium foil, pasir, baki plastik ● Teko air atau penetes ● Penggaris, timer ● Clipboard dan log data saluran
+ 
+Hook (5 menit): ● Gambar lahan pertanian Sungai Nil. ● Tanya: "Bagaimana Anda akan mengalirkan air dari sungai ke tanaman Anda tanpa pompa?"
+ 
+Mini-Lesson (10 menit): ● Perkenalkan saluran, bak, dan pintu air. ● Tampilkan diagram irigasi Mesir.
+ 
+Design Lab (20 menit): Dalam tim, siswa membentuk jaringan saluran dalam baki menggunakan foil dan pasir.
+ 
+Pengujian (5 menit): Tuangkan air dan catat waktu yang dibutuhkan untuk mencapai ujung. Catat kehilangan air, waktu perjalanan.
+ 
+Refleksi & Berbagi (5 menit): Apa yang membuat beberapa sistem saluran lebih efisien? Asesmen: Sketsa model beranotasi + data aliran.`,
+        attachedUnit: "Teks unit terlampir tidak disediakan."
+      },
+      es: {
+        subject: "Ciencias",
+        name: "Ingeniería e Innovación en el Antiguo Egipto",
+        gradeLevel: "8",
+        classDuration: "45",
+        numberOfLessons: "3",
+        standards: `SC.8.N.1.1: Definir un problema, realizar investigaciones, utilizar materiales de referencia apropiados e informar, mostrar y argumentar los hallazgos de una investigación para sacar conclusiones.
+SC.8.P.8.4: Clasificar y comparar sustancias basadas en propiedades físicas.
+SC.8.P.9.2: Distinguir entre cambios físicos y químicos.
+SC.8.E.5.12: Resumir los efectos de la exploración espacial en la economía y la cultura de Florida.
+SS.8.A.1.2: Analizar tablas, gráficos, mapas, fotografías y líneas de tiempo; determinar causa y efecto.`,
+        userPrompt: "Utilice los tres primeros días de los medios compartidos para crear 3 lecciones que se alineen con los medios. Debe utilizar los mismos objetivos que están en los medios adjuntos.",
+        learningPlans: `Nombre del estudiante: Abigail Nguyen
+Plan: Adaptaciones y modificaciones
+Instrucción
+x Diccionario palabra por palabra
+x Pantallas de colores, cambio de fuente, cambio de tamaño de texto, etc.
+x Lectura de tareas en voz alta
+x Reformulación y simplificación de instrucciones
+x Otro: Marcos y apoyos para oraciones
+ 
+Entorno y entorno
+x Proximidad al docente, pizarra blanca/interactiva, tablas, carteles, etc.
+ 
+Evaluaciones formativas
+x Lectura de ítems y opciones en voz alta (no pruebas de lectura)
+x Diccionario palabra por palabra
+x Pantallas de colores, cambio de fuente, cambio de tamaño de texto, etc.
+ 
+Evaluaciones sumativas
+x Lectura de ítems y opciones en voz alta (no pruebas de lectura)
+x Diccionario palabra por palabra*
+ 
+*No permitido en WIDA ACCESS
+ 
+Nombre del estudiante: Charles Alvarez
+Plan: Adaptaciones y modificaciones
+Pre-enseñar o volver a enseñar vocabulario o conceptos clave
+Verificar la comprensión con frecuencia y en privado
+Dividir las tareas en pasos pequeños y manejables
+Dictado por voz para tareas de escritura
+ 
+Adaptaciones y modificaciones de la evaluación
+Permitir respuestas orales en lugar de escritas
+Volver a leer las preguntas o instrucciones de la prueba en voz alta
+ 
+Nombre del estudiante: Emily Carter
+Plan: Adaptaciones y modificaciones
+ 
+Instrucción
+x Diccionario palabra por palabra
+x Pantallas de colores, cambio de fuente, cambio de tamaño de texto, etc.
+x Lectura de tareas en voz alta
+x Reformulación y simplificación de instrucciones
+x Otro: Marcos y apoyos para oraciones
+ 
+Entorno y entorno
+x Proximidad al docente, pizarra blanca/interactiva, tablas, carteles, etc.
+ 
+Evaluaciones formativas
+x Lectura de ítems y opciones en voz alta (no pruebas de lectura)
+x Diccionario palabra por palabra
+x Pantallas de colores, cambio de fuente, cambio de tamaño de texto, etc.
+ 
+Evaluaciones sumativas
+x Lectura de ítems y opciones en voz alta (no pruebas de lectura)
+x Diccionario palabra por palabra*
+ 
+*No permitido en WIDA ACCESS`,
+        mediaContext: `Ciencias: Ingeniería e Innovación en Ciencias — Ingeniería e Innovación en el Antiguo Egipto Materia:
+ 
+Ciencias Nivel de grado: Escuela intermedia (Grado 8)
+ 
+Duración: 5 períodos de clase (45 minutos cada uno)
+ 
+Estándares ● SC.8.N.1.1 – Indagación científica: definir un problema, realizar investigaciones, analizar y evaluar resultados. ● SC.8.P.8.4 – Clasificar/comparar sustancias basadas en propiedades físicas. ● SC.8.P.9.2 – Distinguir cambios físicos frente a químicos. ● SC.8.E.5.12 – Resumir los efectos de la exploración espacial en la economía y la cultura de Florida. ● SS.8.A.1.2 – Analizar tablas, gráficos, mapas, fotografías y líneas de tiempo; determinar causa y efecto.
+ 
+Objetivos ● Comprender cómo los egipcios diseñaron herramientas y sistemas para gestionar el agua y la construcción. ● Construir y probar modelos (shadufs, pirámides, canales de riego, máquinas simples). ● Analizar la estabilidad, la distribución de fuerzas y la ventaja mecánica. ● Comparar herramientas y máquinas en función de su eficiencia. ● Aplicar principios de ciencias físicas e ingeniería a la innovación histórica. ● Diseñar inventos originales inspirados en técnicas antiguas y justificar el razonamiento científico.
+ 
+Día 1: Ingeniería del agua – El desafío del Shaduf
+ 
+Materiales: ● Tacos de madera, cuerda, reglas ● Cubetas o vasos de plástico pequeños ● Contenedores de agua ● Cronómetros, tazas de medir ● Tablas con sujetapapeles para la recolección de datos ● Proyector o pizarra inteligente para elementos visuales
+ 
+Hook - Desafío del agua en el desierto (15 minutos): ● Se presenta a los estudiantes un escenario: "Su aldea debe extraer agua de un pozo de 20 pies de profundidad para sobrevivir. Solo pueden usar herramientas antiguas. ¿Qué diseñarán?". ● Discutir la dependencia diaria del Nilo y el ingenio detrás de la ingeniería del agua temprana.
+ 
+Introducción (15 minutos): ● Proporcionar antecedentes sobre los sistemas de riego del antiguo Egipto y el shaduf, un dispositivo basado en palancas que se utiliza para elevar el agua del Nilo. ● Mostrar videoclips de PBS Learning Media: Engineering Egypt o National Geographic: Nile River.
+ 
+Instrucción directa y demostración (15 minutos): ● Explicar la mecánica de las palancas (punto de apoyo, carga, esfuerzo) y cómo se aplican al shaduf. Introducir variables como la longitud del brazo y el tamaño del contrapeso.
+ 
+Actividad práctica: Construir y probar un Shaduf (30 minutos) ● En equipos, los estudiantes construyen un shaduf simple utilizando los materiales proporcionados. ● Cada grupo prueba cuánta agua pueden levantar, a qué altura y con qué rapidez. ● Los estudiantes registran datos sobre la eficiencia de elevación y realizan ajustes para optimizar el rendimiento.
+ 
+Cierre y reflexión (15 minutos) Discusión en clase: ● ¿Qué opciones de diseño hicieron que el shaduf fuera más eficiente? ● ¿Cómo ayudan las máquinas simples a resolver problemas del mundo real? ● Introducir el concepto de ventaja mecánica.
+ 
+Evaluación Los estudiantes completan un diagrama anotado etiquetando todos los componentes de la palanca en su diseño y explican cómo influyó la ventaja mecánica.
+ 
+Día 2: Física de las pirámides – Por qué perduran
+ 
+Materiales: ● Bloques de espuma o madera (triángulos, cuadrados, pirámides) ● Transportadores y reglas ● Plantillas de diagramas de fuerza ● Imágenes de pirámides e ilustraciones de construcción ● Papel de póster o pizarras blancas para dibujar ● Materiales de construcción (por ejemplo, terrones de azúcar, cartón, plastilina)
+ 
+ Hook (10 minutos): Prueba de estabilidad de forma ● Usando bloques, los estudiantes construyen torres usando diferentes formas: triángulos, cuadrados, pirámides. ● Luego, aplican presión para probar la estabilidad y registran qué forma resiste mejor.
+ 
+Introducción (10 minutos): ● Mostrar imágenes y teorías sobre la construcción de pirámides de TED-Ed: Pyramid Engineering y el Museo Smithsonian. ● Discutir por qué la forma piramidal ha perdurado durante milenios. Instrucción directa (10 minutos): Revisar términos científicos clave: fuerza, gravedad, distribución de carga y centro de masa. Introducir diagramas de fuerza y cómo se dispersa la presión en formas triangulares frente a rectangulares.
+ 
+Actividad práctica (45 minutos): Construir y analizar pirámides: ● Los estudiantes construyen pequeños modelos de pirámides utilizando diferentes materiales y técnicas de diseño. ● Dibujan y etiquetan diagramas de fuerza que muestran cómo se distribuye el peso a través de la estructura. ● Comparar formas piramidales con otras estructuras inestables.
+ 
+Cierre y reflexión (15 minutos): ● Discutir: ¿Por qué la forma piramidal sobrevivió a las fuerzas naturales? ● ¿Cómo afectan la geometría y los materiales a la resistencia arquitectónica? ● ¿Qué estructuras modernas toman prestado del diseño antiguo?
+ 
+Evaluación: ● Los estudiantes escriben una breve explicación científica respondiendo: "¿Por qué las pirámides han resistido la prueba del tiempo?". ● Las respuestas deben usar al menos 3 términos de vocabulario científico introducidos en la lección.
+ 
+Día 3: Innovación en el riego – Ingeniería del flujo de agua
+ 
+Materiales: ● Papel de aluminio, arena, bandejas de plástico ● Jarras de agua o goteros ● Reglas, cronómetros ● Tablas con sujetapapeles y registros de datos de canales
+ 
+Hook (5 min): ● Imagen de tierras de cultivo del río Nilo. ● Preguntar: "¿Cómo llevarías el agua del río a tus cultivos sin bombas?"
+ 
+Minilección (10 min): ● Introducir canales, cuencas y compuertas. ● Mostrar diagramas del riego egipcio.
+ 
+Laboratorio de diseño (20 min): En equipos, los estudiantes esculpen redes de canales en bandejas usando papel de aluminio y arena.
+ 
+Pruebas (5 min): Verter agua y cronometrar cuánto tiempo tarda en llegar al final. Registrar la pérdida de agua y el tiempo de viaje.
+ 
+Reflexión y puesta en común (5 min): ¿Qué hizo que algunos sistemas de canales fueran más eficientes? Evaluación: Boceto del modelo anotado + datos de flujo.`,
+        attachedUnit: "No se proporcionó texto de la unidad adjunta."
       }
     };
 
@@ -908,6 +1407,10 @@ Refleksija i deljenje (5 min): Šta je neke sisteme kanala učinilo efikasnijim?
   <script src="../shared/schema-editor.js"></script>
   <script src="prompts.js"></script>
   <script src="prompts_sr.js"></script>
+  <script src="prompts_sr_cyrl.js"></script>
+  <script src="prompts_ru.js"></script>
+  <script src="prompts_id.js"></script>
+  <script src="prompts_es.js"></script>
   <script src="inquiry_app.js"></script>
 </body>
 
