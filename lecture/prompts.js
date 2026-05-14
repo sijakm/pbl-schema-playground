@@ -97,7 +97,7 @@ IMPORTANT CONTENT RULES:
 - Include brief, high-level connections to other relevant DCIs where appropriate, but keep the lesson centered on modeling and structure–property reasoning (no deep math, no balancing equations unless explicitly required by standards).
 - Ensure all parts of the lesson reflect the Lesson Scope/Boundaries provided in the unit context; avoid introducing new major concepts that belong to other lessons.
 - EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
-- AssessPriorKnowledge: ONLY if LessonNumber == 1, write 150–250 words and follow the required structure in the schema description. If LessonNumber != 1, return "" (empty string).
+- AssessPriorKnowledge: ONLY if LessonNumber == 1, populate the object as defined in the schema. If LessonNumber != 1, return {} (empty object).
 - Lab Phases (Question, Research, Hypothesize, Experiment, Analyze, Share): Follow the specific instructional requirements and "Purpose:" strings for each phase as defined in the JSON schema.
 - Experiment.AccommodationsAndModifications must include general supports followed by individual support for each student provided in {{$LearningPlans}}.
 - StudentPractice MUST include a TeacherNotes paragraph starting with 'These tasks reinforce today’s learning about ____ by ______.', a list of 2-3 tasks with DOK 2-4 and success criteria, and interleaving if the subject is math.
@@ -147,85 +147,106 @@ MAPPING RULES:
 
 ASSESS PRIOR KNOWLEDGE:
 - Start with this exact heading:
-<h3>💡 Assess Prior Knowledge</h3>
-- Immediately after the heading, ALWAYS render this Purpose text exactly as written:
-<p><strong>Purpose:</strong> Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. When students recall what they already believe or remember about materials, particles, or chemical changes, they activate existing neural pathways. This “elaborative encoding” makes it easier for the brain to connect new chemistry concepts to what is already known, strengthening long-term retention. This activity helps you uncover accurate ideas, partial ideas, and misconceptions that will become powerful anchors for learning throughout the project.</p>
-- Render a teacher-facing "Say:" section.
-- Even if the input text does NOT explicitly contain "Say:"
-- Synthesize or rephrase existing content into 1-2 clear teacher talk paragraphs
-- Begin with:
-<p><strong>Say:</strong></p>
-- Follow with one or more <p> elements
-- Any student tasks, prompts, statements, or instructions:
-- Render as <ol> or <ul>
-- Each item MUST be a single <li>
-- NO <p> or other tags inside <li>
-- When expected or model student responses appear:
-- Render this EXACT label:
-<p>✅ Expected Student Responses</p>
-- Then render all expected responses as a <ul> with <li> only
-- NO nested lists
-- NO <p> inside <li>
-- If alternate options or variations appear:
-- Render:
-<p><strong>Alternate Options:</strong></p>
-- Then a <ul> with brief <li> items
-
-DO NOT:
-- Use any tags not listed
-- Nest lists
-- Skip the Purpose section
-- Invent new instructional content, but use all provided ideas
+- <h3>💡 Assess Prior Knowledge</h3>
+  - <p><strong>Teacher Note:</strong> {TeacherNote}</p>
+  - <p><strong>Say:</strong> “{SayIntroduction}”</p>
+  - <p>Project or read the following statements one at a time:</p>
+  - <ul>{StatementsToProject}</ul> (each item as <li>“Statement”</li>)
+  - <p><strong>Say:</strong> “{SayInstructions}”</p>
+  - <h4>✅ Expected Student Responses</h4>
+  - <ul>{ExpectedStudentResponses}</ul> (each item as <li>“Statement” → Response</li>)
+  - <p><strong>Say:</strong> “{SayConclusion}”</p>
+  - <p>{ActionConclusion}</p>
+  - <h4>Alternate Options</h4>
+  - <ul>{AlternateOptions}</ul> (each item as <li><strong>OptionName:</strong> Description</li>)
 
 
-- <h3><span style="color: rgb(115, 191, 39);">Question</span> (5 min)</h3>
-Purpose needs to be word for word as in the JSON
-  - <p><strong>Purpose:</strong> {Purpose}</p>
-  then render (with emojis if available in html tags)
-  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
-  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
-  - <p>✅ <strong>Expected Student Responses</strong></p> <ul>{ExpectedStudentResponses}</ul>
-  - <p><strong>Final Investigation Question:</strong> {FinalInvestigationQuestion}</p>
 
-  // i need Research (5 min) in green color
-- <h3><span style="color: rgb(115, 191, 39);">Research (5 min)</span></h3>
-  - <p><strong>Purpose:</strong> {Purpose}</p>
-  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
-  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
-  - <h4>❗️ Anticipated Misconceptions</h4> (Iterate AnticipatedMisconceptions: <p><strong>Misconception:</strong> {Misconception}</p> <p><strong>Teacher Response:</strong> {TeacherResponse}</p>)
+- <h3><span style="color: rgb(115, 191, 39);">Objective</span> {Duration}</h3>
+  - <p><strong>📚 Materials</strong></p> <ul>{Materials}</ul> (each item as <li>)
+  - <p><strong>📋 Instructions for Teachers</strong></p> <ol>{InstructionsForTeachers}</ol> (each item as <li>)
 
-- <h3><span style="color: rgb(115, 191, 39);">Hypothesize (5 min)</span></h3>
-  - <p><strong>Purpose:</strong> {Purpose}</p>
-  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
-  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
-  - <p>✅ <strong>Expected Student Responses</strong></p> <ul>{ExpectedStudentResponses}</ul>
+- <h3><span style="color: rgb(115, 191, 39);">Content Delivery & Interactive Activities</span> {Duration}</h3>
+  - <p><strong>📚 Materials</strong></p>
+    - <p><strong>Teacher Only Materials:</strong></p> <ul>{TeacherOnlyMaterials}</ul> (each item as <li>)
+    - <p><strong>Student Materials:</strong></p> <ul>{StudentMaterials}</ul> (each item as <li>)
+  - <p><strong>📋 Instructions for Teachers</strong></p>
+    - <p><strong>Hook</strong></p> <ul>{Hook}</ul> (each item as <li>)
+    - <p><strong>Vocabulary</strong></p> <ul>{Vocabulary}</ul> (each item as <li>)
+    - <p><strong>Clarify Objective</strong></p> <ul>{ClarifyObjective}</ul> (each item as <li>)
+    - <p><strong>New Concepts & Knowledge</strong></p> <ul>{NewConceptsAndKnowledge}</ul> (each item as <li>)
+    - <p><strong>⚡ Attention Reset & Interactive Activity (1-3 minutes)</strong></p>
+      - <p>{StandardParagraph}</p>
+      - <p><strong>Directions:</strong></p> <ul>{Directions}</ul> (each item as <li>)
+      - <p><strong>Why this works:</strong></p> <ul>{WhyThisWorks}</ul> (each item as <li>)
+    - <p><strong>Continue Instruction After Activity</strong></p> <ul>{ContinueInstruction}</ul> (each item as <li>)
+- <p><strong>⚠️ Anticipated Misconceptions</strong></p>
+      - Iterate over AnticipatedMisconceptions:
+        <p>{Misconception} (Ensure NO bolding/strong tags are used here)</p>
+        <ul><li>{TeacherResponse} (Ensure NO bolding/strong tags are used here)</li></ul>
+    - <p><strong>Connect</strong></p>
+      - <p><strong>Essential Question:</strong> {EssentialQuestionVerbatim}</p>
+      - <p><strong>Teacher Script:</strong> {TeacherScript}</p>
+      - <p><strong>Prompts & Expected Responses:</strong></p> <ul>{PromptsAndExpectedResponses}</ul> (each item as <li>)
 
-- <h3><span style="color: rgb(115, 191, 39);">Experiment (20 min)</span></h3>
-  - <p><strong>Purpose:</strong> {Purpose}</p>
-  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
-  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
-  - <h4>🪜 Differentiation</h4> <p>{Differentiation}</p>
-  - <h4>🤝 Accommodations & Modifications</h4> <p>{AccommodationsAndModifications}</p>
-  - <h4>✅ Quick Check</h4> <p>{QuickCheck}</p>
+- <h3><span>⏳ Spaced Retrieval</span></h3>
+  - <p>{Prompt}</p>
+  - <p>✅ Expected Student Responses</p>
+  - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
 
-- <h3><span style="color: rgb(115, 191, 39);">Analyze (5 min)</span></h3>
-  - <p><strong>Purpose:</strong> {Purpose}</p>
-  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
-  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
+- <h3><span>✔ Quick Check</span></h3>
+  - <p><strong>Strategy Alignment:</strong> {StrategyAlignment}</p>
+  - <p>{Prompt}</p>
+  - <p>✅ Expected Student Responses</p>
+  - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
 
-- <h3><span style="color: rgb(115, 191, 39);">Share (5 min)</span></h3>
-  - <p><strong>Purpose:</strong> {Purpose}</p>
-  - <h4>📚 Materials</h4> <ul>{Materials}</ul>
-  - <h4>📋 Instructions for Teachers</h4> <p>{InstructionsForTeachers}</p>
-  - <h4>🌍 Transcendent Thinking</h4> <p>{TranscendentThinking}</p>
+- <h3><span>🪜 Differentiation</span></h3>
+  - <p><strong>Language Learners:</strong></p> <ul>{LanguageLearners}</ul> (each item as <li>)
+  - <p><strong>Students in Need of Additional Scaffolding:</strong></p> <ul>{StudentsInNeedOfAdditionalScaffolding}</ul> (each item as <li>)
+  - <p><strong>Go Deeper:</strong></p> <ul>{GoDeeper}</ul> (each item as <li>)
 
-CLOSING SECTIONS:
-- <h3>⏳ Review & Spaced Retrieval (5 min)</h3>
-  - (Format text from ReviewAndSpacedRetrieval ensuring headings like Teacher Notes, Active Recall, Misconceptions, Transcendent Thinking are bolded and easily readable)
-- <h3>✅ Formative Assessment</h3>
-  - (Format text from FormativeAssessment, separating the prompts and expected responses clearly)
-- <h3>🖊 Student Practice</h3>
-  - (Format text from StudentPractice ensuring tasks and expected responses are structured cleanly)`,
+- <h3><span>🤝 Accommodations & Modifications</span></h3>
+  - <p><strong>General Supports:</strong></p> <ul>{GeneralSupports}</ul> (each item as <li>)
+  - <p><strong>Individualized Supports:</strong></p> <ul>{IndividualizedSupports}</ul> (each item as <li>, ensure student names are styled with red font: <strong><span style="color: rgb(240, 56, 40);">Name:</span></strong>)
+
+- <h3><span style="color: rgb(115, 191, 39);">Q & A and Discussion</span> {Duration}</h3>
+  - <p><strong>📚 Materials</strong></p> <ul>{Materials}</ul> (each item as <li>)
+  - <p><strong>📋 Instructions for Teachers</strong></p>
+    - <p>1. {InviteStudentQuestions.Instruction}</p>
+    - <ul>{InviteStudentQuestions.Questions}</ul> (each item as <li>)
+    - <p>2. {FollowUpAction}</p>
+
+- <h3><span style="color: rgb(115, 191, 39);">Conclusion</span> {Duration}</h3>
+  - <p>1. Closing</p>
+  - <p>🌍<strong>Transcendent Thinking</strong></p>
+  - <ol>{Closing.TranscendentThinking.Instructions}</ol> (each item as <li>)
+  - <p>✅ Expected Student Responses</p>
+  - <ul>{Closing.TranscendentThinking.ExpectedStudentResponses}</ul> (each item as <li>)
+  - <p>2. {BuildCuriosity}</p>
+
+- <h3><span style="color: rgb(115, 191, 39);">✅Formative Assessment (5 min)</span></h3>
+  - From the FormativeAssessment plain text, extract and render Prompts 1–4 in this exact structure (do not invent prompts; extract from text; clean formatting):
+    - <p><strong>Prompt 1 (DOK 1):</strong></p>
+    - <p>{Prompt 1 question}</p>
+    - <p>✅ Expected Student Responses</p> <ul><li>{1–2 expected responses}</li></ul>
+    - <p><strong>Prompt 2 (DOK 2):</strong></p>
+    - <p>{Prompt 2 question}</p>
+    - <p>✅ Expected Student Responses</p> <ul><li>{1–2 expected responses}</li></ul>
+    - <p><strong>Prompt 3 (DOK 3):</strong></p>
+    - <p>{Prompt 3 question}</p>
+    - <p>✅ Expected Student Responses</p> <ul><li>{1–2 expected responses}</li></ul>
+    - <p><strong>Prompt 4 (DOK 4):</strong></p>
+    - <p>{Prompt 4 question}</p>
+    - <p>✅ Expected Student Responses</p> <ul><li>{1–2 expected responses}</li></ul>
+
+- <h3><span style="color: rgb(115, 191, 39);">🖋️ Student Practice</span></h3>
+  - <p><strong>Teacher Notes:</strong> {StudentPractice.TeacherNotes}</p>
+  - For each task in StudentPractice.Tasks:
+    - <p>{task.TaskTitle} {task.Instruction}</p>
+    - <p>✅ Expected Student Responses</p>
+    - <ul>{task.ExpectedStudentResponses}</ul> (each item as <li>)
+  - <p><strong>{StudentPractice.Reflection.Instruction}</strong></p>
+  - <ul>{StudentPractice.Reflection.Prompts}</ul> (each item as <li>)`,
   UNIT_COMMON_HTML_PROMPT_TEMPLATE: `You will receive ONE JSON object that strictly follows the UnitPlanResponse schema (already validated on my side). Your job is to transform this JSON into clean, readable HTML that a teacher can use directly in class.
                    
 INPUT FORMAT
@@ -386,16 +407,36 @@ GLOBAL RULES
         "description": "Full 'Standards Aligned' section as plain text for this lesson."
       },
       "AssessPriorKnowledge": {
-        "type": "string",
-        "description": "Full 'Assess Prior Knowledge' section as plain text (150-250 words total). ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an EMPTY STRING for this field."
+        "type": "object",
+        "description": "ONLY if LessonNumber == 1, populate this object. If LessonNumber != 1, return an empty object.",
+        "properties": {
+          "TeacherNote": { "type": "string", "description": "Explanation of the neuroscience/pedagogy behind prior knowledge activation." },
+          "SayIntroduction": { "type": "string", "description": "What the teacher says to introduce the activity." },
+          "StatementsToProject": { "type": "array", "items": { "type": "string" }, "description": "List of statements to project or read, containing both accurate ideas and common misconceptions." },
+          "SayInstructions": { "type": "string", "description": "What the teacher says to instruct students on what to do with the statements." },
+          "ExpectedStudentResponses": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Expected student responses/markings for each statement."
+          },
+          "SayConclusion": { "type": "string", "description": "What the teacher says to wrap up." },
+          "ActionConclusion": { "type": "string", "description": "Teacher action to conclude (e.g., drawing a diagram)." },
+          "AlternateOptions": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of alternate options for the activity."
+          }
+        },
+        "required": ["TeacherNote", "SayIntroduction", "StatementsToProject", "SayInstructions", "ExpectedStudentResponses", "SayConclusion", "ActionConclusion", "AlternateOptions"],
+        "additionalProperties": false
       },
       "Objective": {
         "type": "object",
-        "description": "Block for introducing objectives.",
+        "description": "Create an Objective section that clearly states the student learning goals for the lesson.",
         "properties": {
           "Duration": { "type": "string", "description": "Time estimate (e.g. '(2-3 min)')" },
           "Materials": { "type": "array", "items": { "type": "string" } },
-          "InstructionsForTeachers": { "type": "array", "items": { "type": "string" }, "description": "Teacher instructions, actions, and 'Say:' prompts to communicate the goals and why they matter." }
+          "InstructionsForTeachers": { "type": "array", "items": { "type": "string" }, "description": "Must include: 1) Explain learning goals using direct teacher-facing script (e.g., Say: '...') in clear, student-friendly language. 2) Ask students to record objectives in their notebooks. 3) Briefly tell the teacher how to connect objectives to students' real-life experiences." }
         },
         "required": ["Duration", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
@@ -417,92 +458,93 @@ GLOBAL RULES
           "InstructionsForTeachers": {
             "type": "object",
             "properties": {
-              "Hook": { "type": "array", "items": { "type": "string" }, "description": "Hook statements including 'Say:'" },
-              "Vocabulary": { "type": "array", "items": { "type": "string" }, "description": "Teacher script for defining terms" },
-              "ClarifyObjective": { "type": "array", "items": { "type": "string" } },
-              "NewConceptsAndKnowledge": { "type": "array", "items": { "type": "string" }, "description": "Teacher lecture with scripts" },
+              "Hook": { "type": "array", "items": { "type": "string" }, "description": "Write a dramatic, high-engagement hook delivered through teacher script. Should be surprising, curiosity-building, and tied to the main concept." },
+              "Vocabulary": { "type": "array", "items": { "type": "string" }, "description": "List essential vocabulary terms. Provide teacher script for defining each term." },
+              "ClarifyObjective": { "type": "array", "items": { "type": "string" }, "description": "Clarify today's student learning objective for this specific lesson sharing script for teacher." },
+              "NewConceptsAndKnowledge": { "type": "array", "items": { "type": "string" }, "description": "Write a detailed teacher lecture with scripts (Say: “…”). Include step-by-step what teacher says, does, and may demonstrate. Break down complex ideas, provide examples/analogies, make explicit connections to prior knowledge." },
               "AttentionReset": {
                 "type": "object",
+                "description": "Insert the standard attention-reset paragraph exactly as written: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
                 "properties": {
-                  "WhyThisWorks": { "type": "array", "items": { "type": "string" } },
-                  "Directions": { "type": "array", "items": { "type": "string" } }
+                  "StandardParagraph": { "type": "string", "description": "Must be exactly: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'" },
+                  "Directions": { "type": "array", "items": { "type": "string" }, "description": "Provide directions for the activity, including teacher script and what students & teacher need to do." },
+                  "WhyThisWorks": { "type": "array", "items": { "type": "string" }, "description": "Explain in bullets why activity works for re-engagement, resetting cognitive focus, reinforcing concepts and purposeful preview. E.g. 'Standing + rotating resets attention.'" }
                 },
-                "required": ["WhyThisWorks", "Directions"],
+                "required": ["StandardParagraph", "Directions", "WhyThisWorks"],
                 "additionalProperties": false
               },
-              "ContinueInstruction": { "type": "array", "items": { "type": "string" } },
+              "ContinueInstruction": { "type": "array", "items": { "type": "string" }, "description": "Detailed teacher lecture with scripts (Say: “…”). Break down complex ideas, provide examples/analogies, to intrigue, foreshadow future learning, extend key ideas." },
               "AnticipatedMisconceptions": {
                 "type": "array",
+                "description": "List anticipated common student misconceptions to ensure teacher is ready.",
                 "items": {
                   "type": "object",
                   "properties": {
                     "Misconception": { "type": "string" },
-                    "TeacherResponse": { "type": "string" }
+                    "TeacherResponse": { "type": "string", "description": "How to effectively respond to potential student misunderstanding and guide to accurate understanding." }
                   },
                   "required": ["Misconception", "TeacherResponse"],
                   "additionalProperties": false
                 }
               },
-              "Connect": { "type": "array", "items": { "type": "string" } },
-              "EssentialQuestion": {
-                "type": "object",
+              "Connect": { 
+                "type": "object", 
+                "description": "Relate to a purpose. Connect to one of the essential questions.",
                 "properties": {
-                  "Prompt": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                  "EssentialQuestionVerbatim": { "type": "string", "description": "Use the provided essential question verbatim." },
+                  "TeacherScript": { "type": "string", "description": "Provide teacher a way to connect this to the essential question." },
+                  "PromptsAndExpectedResponses": { "type": "array", "items": { "type": "string" }, "description": "Prompts + deep expected student responses that use reasoning or evidence." }
                 },
-                "required": ["Prompt", "ExpectedStudentResponses"],
+                "required": ["EssentialQuestionVerbatim", "TeacherScript", "PromptsAndExpectedResponses"],
                 "additionalProperties": false
               },
               "SpacedRetrieval": {
                 "type": "object",
+                "description": "Spaced retrieval practice connecting to a prior lesson.",
                 "properties": {
-                  "Prompt": { "type": "string" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                  "Prompt": { "type": "string", "description": "Teacher script starting with 'Say: ...'" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "List of expected responses." }
                 },
                 "required": ["Prompt", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
               "QuickCheck": {
                 "type": "object",
+                "description": "Quick checks for understanding with teacher prompt and expected student answers.",
                 "properties": {
-                  "Prompt": { "type": "string" },
+                  "Prompt": { "type": "string", "description": "Short prompt that all students answer to check all students' understanding." },
+                  "StrategyAlignment": { "type": "string", "description": "E.g. Thumbs Up/Down for True/False, Exit Ticket, Polling, Visual Responses, Whiteboard Responses" },
                   "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
                 },
-                "required": ["Prompt", "ExpectedStudentResponses"],
+                "required": ["Prompt", "StrategyAlignment", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
               "Differentiation": {
                 "type": "object",
+                "description": "Differentiate instruction (how to teach, not simplify materials). Vary complexity and depth, promote active engagement/language. Realistic for classroom.",
                 "properties": {
                   "LanguageLearners": { "type": "array", "items": { "type": "string" } },
-                  "AdditionalScaffolding": { "type": "array", "items": { "type": "string" } },
-                  "GoDeeper": {
-                    "type": "object",
-                    "properties": {
-                      "Tasks": { "type": "array", "items": { "type": "string" } },
-                      "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                    },
-                    "required": ["Tasks", "ExpectedStudentResponses"],
-                    "additionalProperties": false
-                  }
+                  "StudentsInNeedOfAdditionalScaffolding": { "type": "array", "items": { "type": "string" } },
+                  "GoDeeper": { "type": "array", "items": { "type": "string" } }
                 },
-                "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+                "required": ["LanguageLearners", "StudentsInNeedOfAdditionalScaffolding", "GoDeeper"],
                 "additionalProperties": false
               },
               "AccommodationsAndModifications": {
                 "type": "object",
+                "description": "List all students with learning plans in red font. Group students with shared supports. Focus on access.",
                 "properties": {
-                  "GeneralSupports": { "type": "array", "items": { "type": "string" } },
-                  "IndividualSupports": { "type": "array", "items": { "type": "string" } }
+                  "GeneralSupports": { "type": "array", "items": { "type": "string" }, "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions)." },
+                  "IndividualizedSupports": { "type": "array", "items": { "type": "string" }, "description": "Specific accommodations and modifications for named students with formal plans. List names in RED font." }
                 },
-                "required": ["GeneralSupports", "IndividualSupports"],
+                "required": ["GeneralSupports", "IndividualizedSupports"],
                 "additionalProperties": false
               }
             },
             "required": [
               "Hook", "Vocabulary", "ClarifyObjective", "NewConceptsAndKnowledge", "AttentionReset",
-              "ContinueInstruction", "AnticipatedMisconceptions", "Connect", "EssentialQuestion",
-              "SpacedRetrieval", "QuickCheck", "Differentiation", "AccommodationsAndModifications"
+              "ContinueInstruction", "AnticipatedMisconceptions", "Connect", "SpacedRetrieval",
+              "QuickCheck", "Differentiation", "AccommodationsAndModifications"
             ],
             "additionalProperties": false
           }
@@ -512,11 +554,30 @@ GLOBAL RULES
       },
       "QAndAAndDiscussion": {
         "type": "object",
-        "description": "Block for Q&A.",
+        "description": "Block for Q&A and Discussion.",
         "properties": {
-          "Duration": { "type": "string" },
+          "Duration": { "type": "string", "description": "Time estimate (e.g. '(5 min)')" },
           "Materials": { "type": "array", "items": { "type": "string" } },
-          "InstructionsForTeachers": { "type": "array", "items": { "type": "string" }, "description": "Teacher questions and directions." }
+          "InstructionsForTeachers": {
+            "type": "object",
+            "properties": {
+              "InviteStudentQuestions": {
+                "type": "object",
+                "properties": {
+                  "Instruction": { "type": "string", "description": "e.g. 'Invite student questions:'" },
+                  "Questions": { "type": "array", "items": { "type": "string" }, "description": "List of specific questions to ask students." }
+                },
+                "required": ["Instruction", "Questions"],
+                "additionalProperties": false
+              },
+              "FollowUpAction": {
+                "type": "string",
+                "description": "e.g. 'Add questions to chart and review as needed or incorporate into future lessons.'"
+              }
+            },
+            "required": ["InviteStudentQuestions", "FollowUpAction"],
+            "additionalProperties": false
+          }
         },
         "required": ["Duration", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
@@ -525,28 +586,66 @@ GLOBAL RULES
         "type": "object",
         "description": "Block for Conclusion.",
         "properties": {
-          "Duration": { "type": "string" },
-          "TranscendentThinking": {
+          "Duration": { "type": "string", "description": "Time estimate (e.g. '(5 min)')" },
+          "Closing": {
             "type": "object",
             "properties": {
-              "Prompt": { "type": "array", "items": { "type": "string" } },
-              "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } },
-              "BuildCuriosity": { "type": "string" }
+              "TranscendentThinking": {
+                "type": "object",
+                "properties": {
+                  "Instructions": { "type": "array", "items": { "type": "string" }, "description": "Steps such as 'Say ...', 'Give 20-30 seconds...', 'Then say...'" },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["Instructions", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              }
             },
-            "required": ["Prompt", "ExpectedStudentResponses", "BuildCuriosity"],
+            "required": ["TranscendentThinking"],
             "additionalProperties": false
-          }
+          },
+          "BuildCuriosity": { "type": "string", "description": "e.g. 'Build Curiosity: Say \"...\"'" }
         },
-        "required": ["Duration", "TranscendentThinking"],
+        "required": ["Duration", "Closing", "BuildCuriosity"],
         "additionalProperties": false
       },
       "FormativeAssessment": {
         "type": "string",
-        "description": "Full 'Formative Assessment' section as plain text."
+        "description": "Full 'Formative Assessment' section as plain text. Must follow this structure: A teacher-facing introduction paragraph briefly stating purpose and how to implement. 4 required question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', etc. covering DOK levels 1-4. For each prompt: - Question that tests understanding at stated DOK level - Header 'Expected Student Responses' (without checkmarks/emojis) - 1-2 complete sentence responses showing mastery End with short paragraph naming specific formative assessment strategy to use (e.g.,'Exit Ticket','Think-Pair-Share'). Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit instead of flying off into space?' Expected Student Responses 'Because their forward motion and the Sun's gravity work together to create a stable orbit.' [Continue with Prompts 2-4 following same structure]"
       },
       "StudentPractice": {
-        "type": "string",
-        "description": "Full 'Student Practice' section as plain text. This is homework / out-of-class practice."
+        "type": "object",
+        "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+        "properties": {
+          "TeacherNotes": {
+            "type": "string",
+            "description": "Must follow this template exactly, filling in the bracketed part: 'These homework tasks reinforce today's learning about [insert lesson concepts] by asking students to observe real-world patterns and explain them using the concepts introduced in class. By applying classroom ideas independently, students strengthen long-term retention and build the ability to transfer scientific thinking to everyday experiences.'"
+          },
+          "Tasks": {
+            "type": "array",
+            "description": "Generate 3 tasks covering DOK levels 2 and 3.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TaskTitle": { "type": "string", "description": "e.g., '1. (DOK 2)'" },
+                "Instruction": { "type": "string", "description": "Clear step-by-step student directions for the task." },
+                "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Expected student responses. DO NOT include checkmarks/emojis." }
+              },
+              "required": ["TaskTitle", "Instruction", "ExpectedStudentResponses"],
+              "additionalProperties": false
+            }
+          },
+          "Reflection": {
+            "type": "object",
+            "properties": {
+              "Instruction": { "type": "string", "description": "e.g., '4. Reflection: Write 2-3 sentences responding to one prompt:'" },
+              "Prompts": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["Instruction", "Prompts"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["TeacherNotes", "Tasks", "Reflection"],
+        "additionalProperties": false
       }
     },
     "required": [
