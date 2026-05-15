@@ -148,11 +148,13 @@ MAPPING RULES:
 
 SECTION 0: ASSESS PRIOR KNOWLEDGE (CONDITIONAL)
 ==================================================
-CONDITION: Render this section ONLY if the current lesson is Lesson 1. For all other lessons, skip this section entirely.
-CRITICAL: If AssessPriorKnowledge contains placeholders like "N/A", "none", or empty arrays, OMIT the entire section. Do NOT render labels or headings.
+CONDITION: Render this section ONLY if the current lesson is Lesson 1. For all other lessons, skip this entire section (render NOTHING, not even headings).
 
-HARD STRUCTURE (MUST FOLLOW EXACTLY):
+CRITICAL CHECK: Before rendering ANY HTML for this section, look at the AssessPriorKnowledge object.
+- If AssessPriorKnowledge is {} (empty object), OR if SayIntroduction is "", null, " ", or "N/A", STOP HERE. Render NOTHING.
+- For all other lessons (Lesson 2, 3, etc.), you MUST skip this entire section regardless of content.
 
+IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains real content:
 <h3>💡 Assess Prior Knowledge</h3>
 <p><strong>Teacher Note:</strong> Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.</p>
   - <p><strong>Say:</strong> “{SayIntroduction}”</p>
