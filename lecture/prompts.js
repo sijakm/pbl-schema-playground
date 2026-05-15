@@ -97,7 +97,7 @@ IMPORTANT CONTENT RULES:
 - Include brief, high-level connections to other relevant DCIs where appropriate, but keep the lesson centered on modeling and structure–property reasoning (no deep math, no balancing equations unless explicitly required by standards).
 - Ensure all parts of the lesson reflect the Lesson Scope/Boundaries provided in the unit context; avoid introducing new major concepts that belong to other lessons.
 - EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
-- AssessPriorKnowledge: ONLY if LessonNumber == 1, populate the object as defined in the schema. If LessonNumber != 1, return {} (empty object).
+- AssessPriorKnowledge: ONLY if LessonNumber == 1, populate the object as defined in the schema. For ALL OTHER LESSONS, you MUST return an empty object {} with NO keys inside. DO NOT use placeholders like "N/A", "none", or empty arrays.
 - Lab Phases (Question, Research, Hypothesize, Experiment, Analyze, Share): Follow the specific instructional requirements and "Purpose:" strings for each phase as defined in the JSON schema.
 - Experiment.AccommodationsAndModifications must include general supports followed by individual support for each student provided in {{$LearningPlans}}.
 - StudentPractice MUST include a TeacherNotes paragraph starting with 'These tasks reinforce today’s learning about ____ by ______.', a list of 2-3 tasks with DOK 2-4 and success criteria, and interleaving if the subject is math.
@@ -134,39 +134,46 @@ GLOBAL RULES
         - First: <p>✅ Expected Student Responses</p> (no bullets on this line)
         - Then a <ul> or <ol> list containing the responses (one response per <li>).
     - Whenever you render a Quick Check:
-        - Use this exact header: <p><strong>✔Quick Check</strong></p>
-        - Render the question or task immediately following the header as a paragraph that tasks EVERY student to show their understanding (not just one student in a verbal check).
+        - Use this exact header: <h3><span>✔ Quick Check</span></h3>
+        - Include the strategy alignment and then the prompt (question/task) in quotes.
         - Use the global ✅Expected Student Responses pattern for the answers.
     - Use emojis if they exist in following mapping rules.
 
 MAPPING RULES:
 
 - <h3>💭 Essential Questions</h3> (if available, UL list from EssentialQuestions)
+- <h3>🔤 Key Vocabulary</h3> (UL list from KeyVocabulary)
 - <h3>🎯 Student Learning Objectives</h3> (UL list from StudentLearningObjectives)
 - <h3>📏 Standards Aligned</h3> (UL list or paragraphs from StandardsAligned)
 
-ASSESS PRIOR KNOWLEDGE:
-- Start with this exact heading:
-- <h3>💡 Assess Prior Knowledge</h3>
-  - <p><strong>Teacher Note:</strong> {TeacherNote}</p>
+SECTION 0: ASSESS PRIOR KNOWLEDGE (CONDITIONAL)
+==================================================
+CONDITION: Render this section ONLY if the current lesson is Lesson 1. For all other lessons, skip this section entirely.
+CRITICAL: If AssessPriorKnowledge contains placeholders like "N/A", "none", or empty arrays, OMIT the entire section. Do NOT render labels or headings.
+
+HARD STRUCTURE (MUST FOLLOW EXACTLY):
+
+<h3>💡 Assess Prior Knowledge</h3>
+<p><strong>Teacher Note:</strong> Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.</p>
   - <p><strong>Say:</strong> “{SayIntroduction}”</p>
   - <p>Project or read the following statements one at a time:</p>
   - <ul>{StatementsToProject}</ul> (each item as <li>“Statement”</li>)
   - <p><strong>Say:</strong> “{SayInstructions}”</p>
-  - <h4>✅ Expected Student Responses</h4>
+  - <p><strong>✅ Expected Student Responses</strong></p>
   - <ul>{ExpectedStudentResponses}</ul> (each item as <li>“Statement” → Response</li>)
   - <p><strong>Say:</strong> “{SayConclusion}”</p>
   - <p>{ActionConclusion}</p>
-  - <h4>Alternate Options</h4>
+  - <p><strong>Alternate Options</strong></p>
   - <ul>{AlternateOptions}</ul> (each item as <li><strong>OptionName:</strong> Description</li>)
+- If the current lesson is NOT Lesson 1, skip this entire section (render NOTHING for AssessPriorKnowledge).
 
 
 
-- <h3><span style="color: rgb(115, 191, 39);">Objective</span> {Duration}</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Objective {Duration}</span></h3>
   - <p><strong>📚 Materials</strong></p> <ul>{Materials}</ul> (each item as <li>)
   - <p><strong>📋 Instructions for Teachers</strong></p> <ol>{InstructionsForTeachers}</ol> (each item as <li>)
 
-- <h3><span style="color: rgb(115, 191, 39);">Content Delivery & Interactive Activities</span> {Duration}</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Content Delivery & Interactive Activities {Duration}</span></h3>
   - <p><strong>📚 Materials</strong></p>
     - <p><strong>Teacher Only Materials:</strong></p> <ul>{TeacherOnlyMaterials}</ul> (each item as <li>)
     - <p><strong>Student Materials:</strong></p> <ul>{StudentMaterials}</ul> (each item as <li>)
@@ -184,10 +191,14 @@ ASSESS PRIOR KNOWLEDGE:
       - Iterate over AnticipatedMisconceptions:
         <p>{Misconception} (Ensure NO bolding/strong tags are used here)</p>
         <ul><li>{TeacherResponse} (Ensure NO bolding/strong tags are used here)</li></ul>
-    - <p><strong>Connect</strong></p>
-      - <p><strong>Essential Question:</strong> {EssentialQuestionVerbatim}</p>
-      - <p><strong>Teacher Script:</strong> {TeacherScript}</p>
-      - <p><strong>Prompts & Expected Responses:</strong></p> <ul>{PromptsAndExpectedResponses}</ul> (each item as <li>)
+    - <p><strong>🔗 Connect</strong></p>
+      - <p>{RelateToPurpose}</p> (Render as a list of paragraphs or a UL/OL if it's multiple items, but keep it flat)
+      - <p><strong>💭 Essential Question:</strong> {EssentialQuestionVerbatim}</p>
+      - <p><strong>Say:</strong> “{ConnectToEQ.Say}”</p>
+      - <p><strong>Prompts:</strong></p>
+      - <ul>{ConnectToEQ.Prompts}</ul> (each item as <li>)
+      - <p>✅ Expected Student Responses</p>
+      - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
 
 - <h3><span>⏳ Spaced Retrieval</span></h3>
   - <p>{Prompt}</p>
@@ -196,27 +207,30 @@ ASSESS PRIOR KNOWLEDGE:
 
 - <h3><span>✔ Quick Check</span></h3>
   - <p><strong>Strategy Alignment:</strong> {StrategyAlignment}</p>
-  - <p>{Prompt}</p>
+  - <p>"{Prompt}"</p>
   - <p>✅ Expected Student Responses</p>
   - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
 
 - <h3><span>🪜 Differentiation</span></h3>
-  - <p><strong>Language Learners:</strong></p> <ul>{LanguageLearners}</ul> (each item as <li>)
-  - <p><strong>Students in Need of Additional Scaffolding:</strong></p> <ul>{StudentsInNeedOfAdditionalScaffolding}</ul> (each item as <li>)
-  - <p><strong>Go Deeper:</strong></p> <ul>{GoDeeper}</ul> (each item as <li>)
+  - <p><strong>Language Learners</strong></p> <ul>{LanguageLearners}</ul> (each item as <li>)
+  - <p><strong>Students in Need of Additional Scaffolding</strong></p> <ul>{StudentsInNeedOfAdditionalScaffolding}</ul> (each item as <li>)
+  - <p><strong>Go Deeper</strong></p>
+    - <ul>{GoDeeper.Challenges}</ul> (each item as <li>)
+    - <p>✅ Expected Student Responses</p>
+    - <ul>{GoDeeper.ExpectedStudentResponses}</ul> (each item as <li>)
 
 - <h3><span>🤝 Accommodations & Modifications</span></h3>
   - <p><strong>General Supports:</strong></p> <ul>{GeneralSupports}</ul> (each item as <li>)
   - <p><strong>Individualized Supports:</strong></p> <ul>{IndividualizedSupports}</ul> (each item as <li>, ensure student names are styled with red font: <strong><span style="color: rgb(240, 56, 40);">Name:</span></strong>)
 
-- <h3><span style="color: rgb(115, 191, 39);">Q & A and Discussion</span> {Duration}</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Q & A and Discussion {Duration}</span></h3>
   - <p><strong>📚 Materials</strong></p> <ul>{Materials}</ul> (each item as <li>)
   - <p><strong>📋 Instructions for Teachers</strong></p>
     - <p>1. {InviteStudentQuestions.Instruction}</p>
     - <ul>{InviteStudentQuestions.Questions}</ul> (each item as <li>)
     - <p>2. {FollowUpAction}</p>
 
-- <h3><span style="color: rgb(115, 191, 39);">Conclusion</span> {Duration}</h3>
+- <h3><span style="color: rgb(115, 191, 39);">Conclusion {Duration}</span></h3>
   - <p>1. Closing</p>
   - <p>🌍<strong>Transcendent Thinking</strong></p>
   - <ol>{Closing.TranscendentThinking.Instructions}</ol> (each item as <li>)
@@ -408,9 +422,8 @@ GLOBAL RULES
       },
       "AssessPriorKnowledge": {
         "type": "object",
-        "description": "ONLY if LessonNumber == 1, populate this object. If LessonNumber != 1, return an empty object.",
+        "description": "Full 'Assess Prior Knowledge' section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an empty object {} with NO properties. Do NOT use 'N/A' or placeholders. For Lesson 1, structure must include:",
         "properties": {
-          "TeacherNote": { "type": "string", "description": "Explanation of the neuroscience/pedagogy behind prior knowledge activation." },
           "SayIntroduction": { "type": "string", "description": "What the teacher says to introduce the activity." },
           "StatementsToProject": { "type": "array", "items": { "type": "string" }, "description": "List of statements to project or read, containing both accurate ideas and common misconceptions." },
           "SayInstructions": { "type": "string", "description": "What the teacher says to instruct students on what to do with the statements." },
@@ -427,7 +440,7 @@ GLOBAL RULES
             "description": "List of alternate options for the activity."
           }
         },
-        "required": ["TeacherNote", "SayIntroduction", "StatementsToProject", "SayInstructions", "ExpectedStudentResponses", "SayConclusion", "ActionConclusion", "AlternateOptions"],
+        "required": ["SayIntroduction", "StatementsToProject", "SayInstructions", "ExpectedStudentResponses", "SayConclusion", "ActionConclusion", "AlternateOptions"],
         "additionalProperties": false
       },
       "Objective": {
@@ -487,15 +500,28 @@ GLOBAL RULES
                   "additionalProperties": false
                 }
               },
-              "Connect": { 
-                "type": "object", 
+              "Connect": {
+                "type": "object",
                 "description": "Relate to a purpose. Connect to one of the essential questions.",
                 "properties": {
+                  "RelateToPurpose": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "1-2 steps to relate the lesson to a broader purpose or real-world data (e.g., '1. Show the daylight chart...', '2. Explain why...')."
+                  },
                   "EssentialQuestionVerbatim": { "type": "string", "description": "Use the provided essential question verbatim." },
-                  "TeacherScript": { "type": "string", "description": "Provide teacher a way to connect this to the essential question." },
-                  "PromptsAndExpectedResponses": { "type": "array", "items": { "type": "string" }, "description": "Prompts + deep expected student responses that use reasoning or evidence." }
+                  "ConnectToEQ": {
+                    "type": "object",
+                    "properties": {
+                      "Say": { "type": "string", "description": "Teacher script connecting the previous activity to the Essential Question." },
+                      "Prompts": { "type": "array", "items": { "type": "string" }, "description": "Specific prompts/questions for students." }
+                    },
+                    "required": ["Say", "Prompts"],
+                    "additionalProperties": false
+                  },
+                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Deep expected student responses that use reasoning or evidence." }
                 },
-                "required": ["EssentialQuestionVerbatim", "TeacherScript", "PromptsAndExpectedResponses"],
+                "required": ["RelateToPurpose", "EssentialQuestionVerbatim", "ConnectToEQ", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
               "SpacedRetrieval": {
@@ -525,7 +551,15 @@ GLOBAL RULES
                 "properties": {
                   "LanguageLearners": { "type": "array", "items": { "type": "string" } },
                   "StudentsInNeedOfAdditionalScaffolding": { "type": "array", "items": { "type": "string" } },
-                  "GoDeeper": { "type": "array", "items": { "type": "string" } }
+                  "GoDeeper": {
+                    "type": "object",
+                    "properties": {
+                      "Challenges": { "type": "array", "items": { "type": "string" } },
+                      "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
+                    },
+                    "required": ["Challenges", "ExpectedStudentResponses"],
+                    "additionalProperties": false
+                  }
                 },
                 "required": ["LanguageLearners", "StudentsInNeedOfAdditionalScaffolding", "GoDeeper"],
                 "additionalProperties": false
