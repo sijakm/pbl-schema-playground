@@ -172,6 +172,7 @@ IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains re
 
 
 - <h3><span style="color: rgb(115, 191, 39);">Objective {Duration}</span></h3>
+  - <p><strong>Purpose:</strong> Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.</p>
   - <p><strong>📚 Materials</strong></p> <ul>{Materials}</ul> (each item as <li>)
   - <p><strong>📋 Instructions for Teachers</strong></p> <ol>{InstructionsForTeachers}</ol> (each item as <li>)
 
@@ -193,23 +194,12 @@ IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains re
       - Iterate over AnticipatedMisconceptions:
         <p>{Misconception} (Ensure NO bolding/strong tags are used here)</p>
         <ul><li>{TeacherResponse} (Ensure NO bolding/strong tags are used here)</li></ul>
-    - <p><strong>🔗 Connect</strong></p>
-      - <p>{RelateToPurpose}</p> (Render as a list of paragraphs or a UL/OL if it's multiple items, but keep it flat)
-      - <p><strong>💭 Essential Question:</strong> {EssentialQuestionVerbatim}</p>
-      - <p><strong>Say:</strong> “{ConnectToEQ.Say}”</p>
-      - <p><strong>Prompts:</strong></p>
-      - <ul>{ConnectToEQ.Prompts}</ul> (each item as <li>)
-      - <p>✅ Expected Student Responses</p>
-      - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
-
-- <h3><span>⏳ Spaced Retrieval</span></h3>
-  - <p>{Prompt}</p>
-  - <p>✅ Expected Student Responses</p>
-  - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
-
-- <h3><span>✔ Quick Check</span></h3>
-  - <p><strong>Strategy Alignment:</strong> {StrategyAlignment}</p>
-  - <p>"{Prompt}"</p>
+- <h3><span style="color: rgb(115, 191, 39);">Connect (3 min)</span></h3>
+  - <p>{RelateToPurpose}</p> (Render as a list of paragraphs or a UL/OL if it's multiple items, but keep it flat)
+  - <p><strong>💭 Essential Question:</strong> {EssentialQuestionVerbatim}</p>
+  - <p><strong>Say:</strong> “{ConnectToEQ.Say}”</p>
+  - <p><strong>Prompts:</strong></p>
+  - <ul>{ConnectToEQ.Prompts}</ul> (each item as <li>)
   - <p>✅ Expected Student Responses</p>
   - <ul>{ExpectedStudentResponses}</ul> (each item as <li>)
 
@@ -225,20 +215,37 @@ IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains re
   - <p><strong>General Supports:</strong></p> <ul>{GeneralSupports}</ul> (each item as <li>)
   - <p><strong>Individualized Supports:</strong></p> <ul>{IndividualizedSupports}</ul> (each item as <li>, ensure student names are styled with red font: <strong><span style="color: rgb(240, 56, 40);">Name:</span></strong>)
 
+- <h3><span style="color: rgb(115, 191, 39);">🧠 Review & Spaced Retrieval (5 min)</span></h3>
+  - <p><strong>Teacher Notes:</strong> [Generate a brief teacher note paragraph explaining how this active recall review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay. Connect it to the specific learning from today's lesson, and include a brief transcendent reflection that helps students see the broader real-world application/meaning of these concepts.]</p>
+  - <h3><span>🔁 Active Recall</span></h3>
+  - <p><strong>Say:</strong> “{ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.Question}”</p> (Ensure every teacher prompt starts with exactly one Say. If the JSON already contains "Say:", remove it before wrapping.)
+  - <p>✅ Expected Student Responses</p>
+  - <ul>{ReviewAndSpacedRetrieval.InstructionsForTeachers.ActiveRecall.ExpectedStudentResponses}</ul> (each item as <li>)
+  - <h3><span>💭 Essential Question Connection</span></h3>
+  - <p><strong>Say:</strong> “{ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.Question}”</p> (Ensure every teacher prompt starts with exactly one Say. If the JSON already contains "Say:", remove it before wrapping.)
+  - <p>✅ Expected Student Responses</p>
+  - <ul>{ReviewAndSpacedRetrieval.InstructionsForTeachers.EssentialQuestionConnection.ExpectedStudentResponses}</ul> (each item as <li>)
+  - <h3><span>⌛ Spaced Retrieval</span></h3>
+  - <p>{ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.TeacherSay}</p> (Ensure every teacher prompt starts with exactly one Say. If the JSON already contains "Say:", remove it before wrapping. Move any "(Draws from...)" metadata in the text to be clearly styled at the start of the prompt)
+  - <p>✅ Expected Student Responses</p>
+  - <ul>{ReviewAndSpacedRetrieval.InstructionsForTeachers.SpacedRetrieval.ExpectedStudentResponses}</ul> (each item as <li>)
+
 - <h3><span style="color: rgb(115, 191, 39);">Q & A and Discussion {Duration}</span></h3>
-  - <p><strong>📚 Materials</strong></p> <ul>{Materials}</ul> (each item as <li>)
   - <p><strong>📋 Instructions for Teachers</strong></p>
-    - <p>1. {InviteStudentQuestions.Instruction}</p>
-    - <ul>{InviteStudentQuestions.Questions}</ul> (each item as <li>)
-    - <p>2. {FollowUpAction}</p>
+    - <p>1. {QAndAAndDiscussion.InstructionsForTeachers.Step1_Invite}</p> (Ensure every teacher prompt starts with exactly one Say. If the JSON already contains "Say:", remove it before wrapping.)
+    - <p>2. Ask:</p>
+    - <ul>{QAndAAndDiscussion.InstructionsForTeachers.Step2_AskQuestions}</ul> (each item as <li>)
+    - <p>3. {QAndAAndDiscussion.InstructionsForTeachers.Step3_Capture}</p> (Ensure all teacher prompts like 'Say:' or 'Record:' within the text are styled cleanly.)
+    - <p>4. {QAndAAndDiscussion.InstructionsForTeachers.Step4_Answer}</p> (Ensure all teacher prompts like 'Say:' or 'Address:' within the text are styled cleanly.)
+  - <p>Note for Teacher:</p>
+  - <ul>
+      <li>Answer questions that connect directly to today’s objective</li>
+      <li>“Park” deeper or future-focused questions by circling or starring them</li>
+      <li>Revisit parked questions in upcoming lessons to show continuity of learning</li>
+    </ul>
 
 - <h3><span style="color: rgb(115, 191, 39);">Conclusion {Duration}</span></h3>
-  - <p>1. Closing</p>
-  - <p>🌍<strong>Transcendent Thinking</strong></p>
-  - <ol>{Closing.TranscendentThinking.Instructions}</ol> (each item as <li>)
-  - <p>✅ Expected Student Responses</p>
-  - <ul>{Closing.TranscendentThinking.ExpectedStudentResponses}</ul> (each item as <li>)
-  - <p>2. {BuildCuriosity}</p>
+  - <p>{Conclusion.BuildCuriosity}</p> (Ensure every teacher prompt starts with exactly one Say. If the JSON already contains "Say:", remove it before wrapping.)
 
 - <h3><span style="color: rgb(115, 191, 39);">✅Formative Assessment (5 min)</span></h3>
   - From the FormativeAssessment plain text, extract and render Prompts 1–4 in this exact structure (do not invent prompts; extract from text; clean formatting):
@@ -526,27 +533,6 @@ GLOBAL RULES
                 "required": ["RelateToPurpose", "EssentialQuestionVerbatim", "ConnectToEQ", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
-              "SpacedRetrieval": {
-                "type": "object",
-                "description": "Spaced retrieval practice connecting to a prior lesson.",
-                "properties": {
-                  "Prompt": { "type": "string", "description": "Teacher script starting with 'Say: ...'" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "List of expected responses." }
-                },
-                "required": ["Prompt", "ExpectedStudentResponses"],
-                "additionalProperties": false
-              },
-              "QuickCheck": {
-                "type": "object",
-                "description": "Quick checks for understanding with teacher prompt and expected student answers.",
-                "properties": {
-                  "Prompt": { "type": "string", "description": "Short prompt that all students answer to check all students' understanding." },
-                  "StrategyAlignment": { "type": "string", "description": "E.g. Thumbs Up/Down for True/False, Exit Ticket, Polling, Visual Responses, Whiteboard Responses" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                },
-                "required": ["Prompt", "StrategyAlignment", "ExpectedStudentResponses"],
-                "additionalProperties": false
-              },
               "Differentiation": {
                 "type": "object",
                 "description": "Differentiate instruction (how to teach, not simplify materials). Vary complexity and depth, promote active engagement/language. Realistic for classroom.",
@@ -579,8 +565,8 @@ GLOBAL RULES
             },
             "required": [
               "Hook", "Vocabulary", "ClarifyObjective", "NewConceptsAndKnowledge", "AttentionReset",
-              "ContinueInstruction", "AnticipatedMisconceptions", "Connect", "SpacedRetrieval",
-              "QuickCheck", "Differentiation", "AccommodationsAndModifications"
+              "ContinueInstruction", "AnticipatedMisconceptions", "Connect",
+              "Differentiation", "AccommodationsAndModifications"
             ],
             "additionalProperties": false
           }
@@ -588,60 +574,118 @@ GLOBAL RULES
         "required": ["Duration", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
+      "ReviewAndSpacedRetrieval": {
+        "type": "object",
+        "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must use 'Say:' statements for teacher prompts and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
+        "properties": {
+          "InstructionsForTeachers": {
+            "type": "object",
+            "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
+            "properties": {
+              "ActiveRecall": {
+                "type": "object",
+                "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the lecture/activities.",
+                "properties": {
+                  "Question": {
+                    "type": "string",
+                    "description": "A specific teacher script (starting with 'Say:') that prompts students to reflect on today's lesson and what it revealed."
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "description": "3-4 examples of high-quality student responses showing clear understanding.",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["Question", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "EssentialQuestionConnection": {
+                "type": "object",
+                "description": "Help students connect today's specific concept to the broader unit essential questions.",
+                "properties": {
+                  "Question": {
+                    "type": "string",
+                    "description": "A teacher script (starting with 'Say:') that links today's findings to one of the unit's essential questions."
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "description": "2-3 examples of how students justify the connection.",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["Question", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              },
+              "SpacedRetrieval": {
+                "type": "object",
+                "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
+                "properties": {
+                  "TeacherSay": {
+                    "type": "string",
+                    "description": "A teacher script (starting with 'Say:') that explicitly connects a concept from a prior lesson to today's work. Must include the meta-reference (e.g., '(Draws from Unit 1, Lesson 2.)') directly in the text."
+                  },
+                  "ExpectedStudentResponses": {
+                    "type": "array",
+                    "description": "2-3 examples of expected responses.",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["TeacherSay", "ExpectedStudentResponses"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["ActiveRecall", "EssentialQuestionConnection", "SpacedRetrieval"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["InstructionsForTeachers"],
+        "additionalProperties": false
+      },
       "QAndAAndDiscussion": {
         "type": "object",
         "description": "Block for Q&A and Discussion.",
         "properties": {
           "Duration": { "type": "string", "description": "Time estimate (e.g. '(5 min)')" },
-          "Materials": { "type": "array", "items": { "type": "string" } },
           "InstructionsForTeachers": {
             "type": "object",
+            "description": "Teacher guidance for the Q&A and Discussion session.",
             "properties": {
-              "InviteStudentQuestions": {
-                "type": "object",
-                "properties": {
-                  "Instruction": { "type": "string", "description": "e.g. 'Invite student questions:'" },
-                  "Questions": { "type": "array", "items": { "type": "string" }, "description": "List of specific questions to ask students." }
-                },
-                "required": ["Instruction", "Questions"],
-                "additionalProperties": false
-              },
-              "FollowUpAction": {
+              "Step1_Invite": {
                 "type": "string",
-                "description": "e.g. 'Add questions to chart and review as needed or incorporate into future lessons.'"
+                "description": "Invite student questions, starting with 'Say:' (e.g. 'Say: “Now is your chance to think about what we learned and identify anything that still feels important to explore.”')"
+              },
+              "Step2_AskQuestions": {
+                "type": "array",
+                "description": "3–4 teacher questions that connect to today's lesson, avoiding the words 'confused' or 'don't understand' but still revealing uncertainty.",
+                "items": { "type": "string" }
+              },
+              "Step3_Capture": {
+                "type": "string",
+                "description": "Directions to capture questions including 'Say:', 'Record:', and another 'Say:' statement (e.g., 'Say: “If you have a question, that means you are thinking deeply. Let’s capture those ideas.” Record: Write student questions on a chart titled “Questions We Still Have.” Say: “We will keep adding to this chart throughout the unit. Some questions we may answer today, and others we will investigate in future lessons.”')"
+              },
+              "Step4_Answer": {
+                "type": "string",
+                "description": "Directions to answer questions including 'Say:', 'Address:', and another 'Say:' statement (e.g., 'Say: “Let’s look at our questions. Which ones can we answer using what we learned today?” Address a few questions using student responses and evidence. Say: “Some of these questions will help guide what we learn next. Scientists don’t answer everything at once—they keep building understanding over time.”')"
               }
             },
-            "required": ["InviteStudentQuestions", "FollowUpAction"],
+            "required": ["Step1_Invite", "Step2_AskQuestions", "Step3_Capture", "Step4_Answer"],
             "additionalProperties": false
           }
         },
-        "required": ["Duration", "Materials", "InstructionsForTeachers"],
+        "required": ["Duration", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "Conclusion": {
         "type": "object",
         "description": "Block for Conclusion.",
         "properties": {
-          "Duration": { "type": "string", "description": "Time estimate (e.g. '(5 min)')" },
-          "Closing": {
-            "type": "object",
-            "properties": {
-              "TranscendentThinking": {
-                "type": "object",
-                "properties": {
-                  "Instructions": { "type": "array", "items": { "type": "string" }, "description": "Steps such as 'Say ...', 'Give 20-30 seconds...', 'Then say...'" },
-                  "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" } }
-                },
-                "required": ["Instructions", "ExpectedStudentResponses"],
-                "additionalProperties": false
-              }
-            },
-            "required": ["TranscendentThinking"],
-            "additionalProperties": false
-          },
-          "BuildCuriosity": { "type": "string", "description": "e.g. 'Build Curiosity: Say \"...\"'" }
+          "Duration": { "type": "string", "description": "Time estimate (e.g. '(1 min)')" },
+          "BuildCuriosity": {
+            "type": "string",
+            "description": "A curiosity-building preview of the next lesson that creates suspense, starting with 'Say:'. Must be at least 3–4 sentences long (or longer if it makes sense to build deeper curiosity)."
+          }
         },
-        "required": ["Duration", "Closing", "BuildCuriosity"],
+        "required": ["Duration", "BuildCuriosity"],
         "additionalProperties": false
       },
       "FormativeAssessment": {
@@ -692,6 +736,7 @@ GLOBAL RULES
       "AssessPriorKnowledge",
       "Objective",
       "ContentDeliveryAndInteractiveActivities",
+      "ReviewAndSpacedRetrieval",
       "QAndAAndDiscussion",
       "Conclusion",
       "FormativeAssessment",
