@@ -1,4 +1,6 @@
 (() => {
+  "use strict";
+
 /**
  * Prompt Template for Student Report Feedback
  * Cleo: AI Assistant for generating feedback.
@@ -43,7 +45,7 @@ const STUDENT_REPORT_SCHEMA = {
     additionalProperties: false
 };
 
-window.studentReportPromptsRu = {
+window.studentReportPromptsRU = {
     STUDENT_REPORT_PROMPT_TEMPLATE,
     STUDENT_REPORT_SCHEMA
 };

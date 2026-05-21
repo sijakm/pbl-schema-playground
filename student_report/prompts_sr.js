@@ -1,9 +1,12 @@
+(() => {
+  "use strict";
+
 /**
  * Prompt Šablon za Izveštaj o Učeniku (Povratna Informacija)
  * Cleo: AI asistent za generisanje povratnih informacija.
  */
 
-const STUDENT_REPORT_PROMPT_TEMPLATE_SR = `
+const STUDENT_REPORT_PROMPT_TEMPLATE = `
 Generišite povratnu informaciju od najviše 300 karaktera koristeći priložene podatke. (Koristićete ove informacije – ocene i komentare nastavnika na proverama, odgovore učenika, prisustvo.)
 
 Povratna informacija treba da:
@@ -30,7 +33,7 @@ OCENE I KOMENTARI NASTAVNIKA:
 {{$GradesData}}
 `;
 
-const STUDENT_REPORT_SCHEMA_SR = {
+const STUDENT_REPORT_SCHEMA = {
   type: "object",
   properties: {
     feedback: {
@@ -43,6 +46,8 @@ const STUDENT_REPORT_SCHEMA_SR = {
 };
 
 window.studentReportPromptsSR = {
-  STUDENT_REPORT_PROMPT_TEMPLATE_SR,
-  STUDENT_REPORT_SCHEMA_SR
+  STUDENT_REPORT_PROMPT_TEMPLATE,
+  STUDENT_REPORT_SCHEMA
 };
+
+})();

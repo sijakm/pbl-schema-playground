@@ -344,17 +344,19 @@ Persyaratan output:
       const HARDCODED_PASSWORD = ""; // Enter password here while working locally
       const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey")?.value?.trim() || "";
 
-      let schemaObj = typeof STUDENT_REPORT_SCHEMA !== 'undefined' ? STUDENT_REPORT_SCHEMA : null;
-      if (currentLang === "sr" && typeof STUDENT_REPORT_SCHEMA_SR !== 'undefined') {
-        schemaObj = STUDENT_REPORT_SCHEMA_SR;
-      } else if (currentLang === "sr_cyrl" && window.studentReportPromptsSRCyrl && window.studentReportPromptsSRCyrl.STUDENT_REPORT_SCHEMA_SR) {
-        schemaObj = window.studentReportPromptsSRCyrl.STUDENT_REPORT_SCHEMA_SR;
-      } else if (currentLang === "es" && window.studentReportPromptsEs && window.studentReportPromptsEs.STUDENT_REPORT_SCHEMA) {
-        schemaObj = window.studentReportPromptsEs.STUDENT_REPORT_SCHEMA;
-      } else if (currentLang === "id" && window.studentReportPromptsId && window.studentReportPromptsId.STUDENT_REPORT_SCHEMA) {
-        schemaObj = window.studentReportPromptsId.STUDENT_REPORT_SCHEMA;
-      } else if (currentLang === "ru" && window.studentReportPromptsRu && window.studentReportPromptsRu.STUDENT_REPORT_SCHEMA) {
-        schemaObj = window.studentReportPromptsRu.STUDENT_REPORT_SCHEMA;
+      let schemaObj = null;
+      if (currentLang === "en" && window.studentReportPromptsEN) {
+        schemaObj = window.studentReportPromptsEN.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "sr" && window.studentReportPromptsSR) {
+        schemaObj = window.studentReportPromptsSR.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "sr_cyrl" && window.studentReportPromptsSR_CYRL) {
+        schemaObj = window.studentReportPromptsSR_CYRL.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "es" && window.studentReportPromptsES) {
+        schemaObj = window.studentReportPromptsES.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "id" && window.studentReportPromptsID) {
+        schemaObj = window.studentReportPromptsID.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "ru" && window.studentReportPromptsRU) {
+        schemaObj = window.studentReportPromptsRU.STUDENT_REPORT_SCHEMA;
       }
 
       const responseText = await callResponsesApiStream({
@@ -449,10 +451,10 @@ Persyaratan output:
 
       const pEN = window.studentReportPromptsEN || {};
       const pSR = window.studentReportPromptsSR || {};
-      const pSRCyrl = window.studentReportPromptsSRCyrl || {};
-      const pES = window.studentReportPromptsEs || {};
-      const pID = window.studentReportPromptsId || {};
-      const pRU = window.studentReportPromptsRu || {};
+      const pSRCyrl = window.studentReportPromptsSR_CYRL || {};
+      const pES = window.studentReportPromptsES || {};
+      const pID = window.studentReportPromptsID || {};
+      const pRU = window.studentReportPromptsRU || {};
 
       const addFiles = (zip, obj) => {
         for (const [key, value] of Object.entries(obj)) {
