@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Prevodilac Promptova</title>
+    <script src="../config.local.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .settings-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        .settings-col {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+        }
+        label {
+            font-weight: bold;
+            color: #444;
+            font-size: 14px;
+        }
+        input[type="password"], input[type="text"], select {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .editor-container {
+            display: flex;
+            gap: 20px;
+        }
+        .editor-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        textarea {
+            width: 100%;
+            height: 350px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 15px;
+            box-sizing: border-box;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #99c2ff;
+            cursor: not-allowed;
+        }
+        .copy-btn {
+            background-color: #28a745;
+            padding: 10px 20px;
+            font-size: 15px;
+        }
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        .status {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+        }
+        .text-error {
+            color: #dc3545;
+        }
+        .text-success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI Prevodilac Promptova</h1>
+    <div class="subtitle">Zadržava {{$Placeholdere}} netaknutim, prevodi ostatak teksta koristeći API.</div>
+
+    <div class="container">
+        <div class="settings-row">
+            <div class="settings-col">
+                <label for="apiKey">Šifra (iz config.local.js):</label>
+                <input type="password" id="apiKey" placeholder="Unesite šifru...">
+            </div>
+            <div class="settings-col">
+                <label for="targetLang">Ciljni jezik:</label>
+                <select id="targetLang">
+                    <option value="Serbian (Srpski)">Srpski</option>
+                    <option value="Serbian Cyrillic (Srpski Ćirilica)">Srpski (Ćirilica)</option>
+                    <option value="Spanish (Español)">Španski</option>
+                    <option value="Russian (Русский)">Ruski</option>
+                    <option value="Indonesian (Bahasa Indonesia)">Indonežanski (Bahasa)</option>
+                </select>
+            </div>
+            <div class="settings-col">
+                <label for="model">Model:</label>
+                <select id="model">
+                    <option value="gpt-5.4-mini">gpt-5.4-mini</option>
+                    <option value="gpt-5.4">gpt-5.4</option>
+                    <option value="gpt-5.4-nano">gpt-5.4-nano</option>
+                    <option value="gpt-4o">gpt-4o</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="editor-col">
+                <label for="inputText">Originalni tekst (Engleski):</label>
+                <textarea id="inputText" placeholder="Unesite prompt na engleskom..."></textarea>
+            </div>
+            <div class="editor-col">
+                <label for="outputText">Prevedeni tekst:</label>
+                <textarea id="outputText" placeholder="Prevod će se pojaviti ovde..." readonly></textarea>
+            </div>
+        </div>
+
+        <div class="actions">
+            <div class="status" id="status">Spremno.</div>
+            <div>
+                <button id="translateBtn" onclick="translateText()">Prevedi</button>
+                <button class="copy-btn" onclick="copyToClipboard()" id="copyBtn">Kopiraj</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
+
+        // Restore API key from localStorage or config.local.js
+        window.addEventListener('DOMContentLoaded', () => {
+            const configKey = window.LOCAL_CONFIG?.apiKey;
+            const savedKey = localStorage.getItem('ai_translator_api_key');
+            if (configKey) {
+                document.getElementById('apiKey').value = configKey;
+            } else if (savedKey) {
+                document.getElementById('apiKey').value = savedKey;
+            }
+        });
+
+        // Save API key when changed
+        document.getElementById('apiKey').addEventListener('input', (e) => {
+            localStorage.setItem('ai_translator_api_key', e.target.value);
+        });
+
+        // Synchronized scrolling for textareas
+        const inputArea = document.getElementById('inputText');
+        const outputArea = document.getElementById('outputText');
+        
+        let isSyncingLeftScroll = false;
+        let isSyncingRightScroll = false;
+
+        inputArea.addEventListener('scroll', function() {
+            if (!isSyncingLeftScroll) {
+                isSyncingRightScroll = true;
+                const percentage = this.scrollTop / (this.scrollHeight - this.clientHeight);
+                outputArea.scrollTop = percentage * (outputArea.scrollHeight - outputArea.clientHeight);
+            }
+            isSyncingLeftScroll = false;
+        });
+
+        outputArea.addEventListener('scroll', function() {
+            if (!isSyncingRightScroll) {
+                isSyncingLeftScroll = true;
+                const percentage = this.scrollTop / (this.scrollHeight - this.clientHeight);
+                inputArea.scrollTop = percentage * (inputArea.scrollHeight - inputArea.clientHeight);
+            }
+            isSyncingRightScroll = false;
+        });
+
+        function parseSseLines(text) {
+            const events = [];
+            let rest = text;
+            while (true) {
+                const idx = rest.indexOf("\n\n");
+                if (idx === -1) break;
+                const chunk = rest.slice(0, idx);
+                rest = rest.slice(idx + 2);
+                const lines = chunk.split("\n");
+                for (const ln of lines) {
+                    const m = ln.match(/^data:\s?(.*)$/);
+                    if (m) events.push(m[1]);
+                }
+            }
+            return { events, rest };
+        }
+
+        async function callResponsesApiStream({ endpoint, apiKey, model, prompt }) {
+            const headers = { "Content-Type": "application/json" };
+            if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
+            const body = {
+                model,
+                stream: true,
+                input: [{ role: "user", content: prompt }]
+            };
+
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            });
+
+            if (!res.ok) {
+                const errText = await res.text().catch(() => "");
+                throw new Error(`HTTP ${res.status} ${res.statusText}${errText ? '\n'+errText : ""}`);
+            }
+            if (!res.body) throw new Error("No response body");
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let buffer = "";
+            let finalText = "";
+            let streamClosed = false;
+
+            const outputText = document.getElementById('outputText');
+
+            try {
+                while (!streamClosed) {
+                    const { value, done } = await reader.read();
+                    if (done) {
+                        streamClosed = true;
+                        break;
+                    }
+                    buffer += decoder.decode(value, { stream: true });
+                    const parsed = parseSseLines(buffer);
+                    buffer = parsed.rest;
+                    
+                    for (const raw of parsed.events) {
+                        if (raw === "[DONE]") {
+                            streamClosed = true;
+                            break;
+                        }
+                        let evt;
+                        try {
+                            evt = JSON.parse(raw);
+                        } catch (e) { continue; }
+                        
+                        if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+                            finalText += evt.delta;
+                            outputText.value = finalText;
+                            outputText.scrollTop = outputText.scrollHeight; // Auto-scroll
+                        }
+                        // Support for standard OpenAI format just in case the worker passes it through
+                        else if (evt.choices && evt.choices[0] && evt.choices[0].delta && evt.choices[0].delta.content) {
+                            finalText += evt.choices[0].delta.content;
+                            outputText.value = finalText;
+                            outputText.scrollTop = outputText.scrollHeight;
+                        }
+                    }
+                }
+            } finally {
+                reader.releaseLock();
+            }
+            return finalText;
+        }
+
+        async function translateText() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const targetLang = document.getElementById('targetLang').value.trim();
+            const inputText = document.getElementById('inputText').value.trim();
+            const model = document.getElementById('model').value;
+            const statusEl = document.getElementById('status');
+            const translateBtn = document.getElementById('translateBtn');
+
+            if (!apiKey) {
+                alert("Unesite API ključ.");
+                return;
+            }
+            if (!inputText) {
+                alert("Unesite tekst za prevođenje.");
+                return;
+            }
+
+            const prompt = `You are a professional translator. Translate the following text into ${targetLang}.
+
+IMPORTANT RULES:
+1. Translate ALL text and instructions into ${targetLang}, including words inside quotes (e.g., if the text says "Each question MUST begin with either 'How' or 'Why'", you must translate 'How' and 'Why' into ${targetLang} as well). This text is for students, so every single word must be translated.
+2. EXCEPTIONS:
+   - Do NOT translate, modify, or change the capitalization of ANY text enclosed in {{$ and }}. For example, {{$StudentInfo}} MUST remain exactly {{$StudentInfo}}.
+   - Do NOT translate or transliterate highly technical acronyms or terms (e.g., "HTML", "JSON", "URL", "API", "1-based"). Keep them exactly as they are in original English/Latin script (e.g. NEVER write "ХТМЛ").
+3. Maintain the original formatting, line breaks, and spacing.
+4. Output ONLY the translated text. Do not add any introductory or concluding remarks.
+
+TEXT TO TRANSLATE:
+${inputText}`;
+
+            statusEl.textContent = "Prevođenje u toku...";
+            statusEl.className = "status";
+            translateBtn.disabled = true;
+            document.getElementById('outputText').value = "";
+
+            try {
+                await callResponsesApiStream({
+                    endpoint: DEFAULT_ENDPOINT,
+                    apiKey,
+                    model,
+                    prompt
+                });
+                statusEl.textContent = "Prevod završen uspešno!";
+                statusEl.className = "status text-success";
+            } catch (err) {
+                console.error(err);
+                statusEl.textContent = "Greška: " + err.message;
+                statusEl.className = "status text-error";
+            } finally {
+                translateBtn.disabled = false;
+            }
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            if (!outputText.value) return;
+            
+            outputText.select();
+            document.execCommand('copy');
+            
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = 'Kopirano!';
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

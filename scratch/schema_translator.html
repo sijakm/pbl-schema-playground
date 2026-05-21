@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Schema Prevodilac</title>
+    <script src="../config.local.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .settings-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        .settings-col {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+        }
+        label {
+            font-weight: bold;
+            color: #444;
+            font-size: 14px;
+        }
+        input[type="password"], select {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .editor-container {
+            display: flex;
+            gap: 20px;
+        }
+        .editor-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: monospace;
+            line-height: 1.5;
+            background-color: #fafafa;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button:disabled {
+            background-color: #85d697;
+            cursor: not-allowed;
+        }
+        .copy-btn {
+            background-color: #007bff;
+            padding: 10px 20px;
+            font-size: 15px;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 20px;
+            margin-top: 5px;
+            display: none;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #28a745;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .status {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-top: 5px;
+        }
+        .text-error {
+            color: #dc3545;
+        }
+        .text-success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JSON Schema Prevodilac</h1>
+    <div class="subtitle">Traži isključivo "description" polja (ne i "Description") i redom ih prevodi, čuvajući JSON strukturu.</div>
+
+    <div class="container">
+        <div class="settings-row">
+            <div class="settings-col">
+                <label for="apiKey">Šifra (iz config.local.js):</label>
+                <input type="password" id="apiKey" placeholder="Unesite šifru...">
+            </div>
+            <div class="settings-col">
+                <label for="targetLang">Ciljni jezik:</label>
+                <select id="targetLang">
+                    <option value="Serbian (Srpski)">Srpski (Latinica)</option>
+                    <option value="Serbian Cyrillic (Srpski Ćirilica)">Srpski (Ćirilica)</option>
+                    <option value="Spanish (Español)">Španski</option>
+                    <option value="Russian (Русский)">Ruski</option>
+                    <option value="Indonesian (Bahasa Indonesia)">Indonežanski (Bahasa)</option>
+                </select>
+            </div>
+            <div class="settings-col">
+                <label for="model">Model:</label>
+                <select id="model">
+                    <option value="gpt-5.4-mini">gpt-5.4-mini</option>
+                    <option value="gpt-5.4">gpt-5.4</option>
+                    <option value="gpt-5.4-nano">gpt-5.4-nano</option>
+                    <option value="gpt-4o">gpt-4o</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="editor-col">
+                <label for="inputText">Originalna Schema (JS Objekat ili JSON):</label>
+                <textarea id="inputText" placeholder="Nalepite JSON ili JS objekat ovde...
+Primer:
+{
+  type: 'object',
+  properties: {
+    Description: {
+      type: 'string',
+      description: 'Ovo polje će biti prevedeno'
+    }
+  }
+}"></textarea>
+            </div>
+            <div class="editor-col">
+                <label for="outputText">Prevedena Schema (JSON format):</label>
+                <textarea id="outputText" placeholder="Rezultat..." readonly></textarea>
+            </div>
+        </div>
+
+        <div class="progress-bar-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="status" id="status">Spremno.</div>
+
+        <div class="actions">
+            <button id="translateBtn" onclick="translateSchema()">Započni prevođenje</button>
+            <button class="copy-btn" onclick="copyToClipboard()" id="copyBtn">Kopiraj JSON</button>
+        </div>
+    </div>
+
+    <script>
+        const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const configKey = window.LOCAL_CONFIG?.apiKey;
+            const savedKey = localStorage.getItem('ai_translator_api_key');
+            if (configKey) {
+                document.getElementById('apiKey').value = configKey;
+            } else if (savedKey) {
+                document.getElementById('apiKey').value = savedKey;
+            }
+        });
+
+        document.getElementById('apiKey').addEventListener('input', (e) => {
+            localStorage.setItem('ai_translator_api_key', e.target.value);
+        });
+
+        // Synchronized scrolling for textareas
+        const inputArea = document.getElementById('inputText');
+        const outputArea = document.getElementById('outputText');
+        
+        let isSyncingLeftScroll = false;
+        let isSyncingRightScroll = false;
+
+        inputArea.addEventListener('scroll', function() {
+            if (!isSyncingLeftScroll) {
+                isSyncingRightScroll = true;
+                const percentage = this.scrollTop / (this.scrollHeight - this.clientHeight);
+                outputArea.scrollTop = percentage * (outputArea.scrollHeight - outputArea.clientHeight);
+            }
+            isSyncingLeftScroll = false;
+        });
+
+        outputArea.addEventListener('scroll', function() {
+            if (!isSyncingRightScroll) {
+                isSyncingLeftScroll = true;
+                const percentage = this.scrollTop / (this.scrollHeight - this.clientHeight);
+                inputArea.scrollTop = percentage * (inputArea.scrollHeight - inputArea.clientHeight);
+            }
+            isSyncingRightScroll = false;
+        });
+
+        function parseSseLines(text) {
+            const events = [];
+            let rest = text;
+            while (true) {
+                const idx = rest.indexOf("\n\n");
+                if (idx === -1) break;
+                const chunk = rest.slice(0, idx);
+                rest = rest.slice(idx + 2);
+                const lines = chunk.split("\n");
+                for (const ln of lines) {
+                    const m = ln.match(/^data:\s?(.*)$/);
+                    if (m) events.push(m[1]);
+                }
+            }
+            return { events, rest };
+        }
+
+        async function callResponsesApiStream({ endpoint, apiKey, model, prompt }) {
+            const headers = { "Content-Type": "application/json" };
+            if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
+            const body = {
+                model,
+                stream: true,
+                input: [{ role: "user", content: prompt }]
+            };
+
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            });
+
+            if (!res.ok) {
+                const errText = await res.text().catch(() => "");
+                throw new Error(`HTTP ${res.status} ${res.statusText}${errText ? '\n'+errText : ""}`);
+            }
+            if (!res.body) throw new Error("No response body");
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let buffer = "";
+            let finalText = "";
+            let streamClosed = false;
+
+            try {
+                while (!streamClosed) {
+                    const { value, done } = await reader.read();
+                    if (done) {
+                        streamClosed = true;
+                        break;
+                    }
+                    buffer += decoder.decode(value, { stream: true });
+                    const parsed = parseSseLines(buffer);
+                    buffer = parsed.rest;
+                    
+                    for (const raw of parsed.events) {
+                        if (raw === "[DONE]") {
+                            streamClosed = true;
+                            break;
+                        }
+                        let evt;
+                        try {
+                            evt = JSON.parse(raw);
+                        } catch (e) { continue; }
+                        
+                        if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+                            finalText += evt.delta;
+                        } else if (evt.choices && evt.choices[0] && evt.choices[0].delta && evt.choices[0].delta.content) {
+                            finalText += evt.choices[0].delta.content;
+                        }
+                    }
+                }
+            } finally {
+                reader.releaseLock();
+            }
+            return finalText;
+        }
+
+        function findDescriptionFields(obj, tasks) {
+            if (Array.isArray(obj)) {
+                for (let i = 0; i < obj.length; i++) {
+                    findDescriptionFields(obj[i], tasks);
+                }
+            } else if (obj !== null && typeof obj === 'object') {
+                for (let key in obj) {
+                    // Strictly match lowercase 'description' and ensure value is string
+                    if (key === 'description' && typeof obj[key] === 'string') {
+                        // Skip empty strings
+                        if (obj[key].trim() !== "") {
+                            tasks.push({ parent: obj, key: key, originalText: obj[key] });
+                        }
+                    }
+                    findDescriptionFields(obj[key], tasks);
+                }
+            }
+        }
+
+        async function translateSchema() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const targetLang = document.getElementById('targetLang').value.trim();
+            let inputText = document.getElementById('inputText').value.trim();
+            const model = document.getElementById('model').value;
+            const statusEl = document.getElementById('status');
+            const translateBtn = document.getElementById('translateBtn');
+            const outputText = document.getElementById('outputText');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+
+            if (!apiKey) {
+                alert("Unesite šifru.");
+                return;
+            }
+            if (!inputText) {
+                alert("Unesite JSON/JS objekat.");
+                return;
+            }
+
+            statusEl.className = "status";
+            translateBtn.disabled = true;
+            outputText.value = "";
+            progressContainer.style.display = "block";
+            progressBar.style.width = "0%";
+
+            let parsedObj;
+            try {
+                // If the user pastes something like "const MY_SCHEMA = { ... };"
+                if (inputText.startsWith('const ') || inputText.startsWith('let ') || inputText.startsWith('var ')) {
+                    inputText = inputText.replace(/^(const|let|var)\s+[A-Za-z0-9_]+\s*=\s*/, '');
+                    if (inputText.endsWith(';')) inputText = inputText.slice(0, -1);
+                }
+                
+                // Use new Function to parse JS object (much more forgiving than JSON.parse)
+                parsedObj = new Function("return " + inputText)();
+            } catch (err) {
+                console.error(err);
+                statusEl.textContent = "Greška: Ne mogu da parsiram unos. Proverite da li je validan JSON ili JS objekat.";
+                statusEl.className = "status text-error";
+                translateBtn.disabled = false;
+                progressContainer.style.display = "none";
+                return;
+            }
+
+            const tasks = [];
+            findDescriptionFields(parsedObj, tasks);
+
+            if (tasks.length === 0) {
+                statusEl.textContent = "Nije pronađeno nijedno 'description' polje.";
+                translateBtn.disabled = false;
+                progressContainer.style.display = "none";
+                outputText.value = JSON.stringify(parsedObj, null, 2);
+                return;
+            }
+
+            statusEl.textContent = `Pronađeno ${tasks.length} 'description' polja. Počinjem prevođenje (jedno po jedno)...`;
+
+            try {
+                for (let i = 0; i < tasks.length; i++) {
+                    const task = tasks[i];
+                    
+                    statusEl.textContent = `Prevođenje: ${i + 1} od ${tasks.length}...`;
+                    progressBar.style.width = `${((i) / tasks.length) * 100}%`;
+
+                    const prompt = `You are a professional translator. Translate the following text into ${targetLang}.
+
+IMPORTANT RULES:
+1. Translate ALL text into ${targetLang}, including words inside quotes.
+2. EXCEPTIONS: Do NOT translate highly technical terms or concepts that make more sense to remain in English for the purpose of JSON Schema structural instructions (for example: "1-based", "0-based", "DOK", "array", etc.). Keep them exactly as they are in the original text.
+3. Output ONLY the translated text. Do not add quotes, formatting, or introductory remarks.
+
+TEXT TO TRANSLATE:
+${task.originalText}`;
+
+                    const translatedText = await callResponsesApiStream({
+                        endpoint: DEFAULT_ENDPOINT,
+                        apiKey,
+                        model,
+                        prompt
+                    });
+
+                    // Update the object
+                    task.parent[task.key] = translatedText.trim();
+
+                    // Live preview
+                    outputText.value = JSON.stringify(parsedObj, null, 2);
+                    outputText.scrollTop = outputText.scrollHeight;
+                }
+
+                progressBar.style.width = `100%`;
+                statusEl.textContent = `Prevod završen uspešno! Prevedeno ${tasks.length} opisa.`;
+                statusEl.className = "status text-success";
+                
+                // Final output
+                outputText.value = JSON.stringify(parsedObj, null, 2);
+            } catch (err) {
+                console.error(err);
+                statusEl.textContent = "Greška: " + err.message;
+                statusEl.className = "status text-error";
+            } finally {
+                translateBtn.disabled = false;
+            }
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            if (!outputText.value) return;
+            
+            outputText.select();
+            document.execCommand('copy');
+            
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = 'Kopirano!';
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

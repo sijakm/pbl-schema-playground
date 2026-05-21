@@ -89,7 +89,55 @@ Povratna informacija treba da:
 Zahtevi za izlaz:
 - BEZ HTML formatiranja.
 - Isključivo običan tekst.
-- Strogo ograničenje od 300 karaktera.`
+- Strogo ograničenje od 300 karaktera.`,
+    sr_cyrl: `Направите повратну информацију од највише 300 карактера користећи дате податке. (Користићете ове информације – оцене и коментаре наставника о проценама, одговоре ученика на проценама, присуство.)
+
+Повратна информација треба да:
+-Буде написана као да се обраћа ученику.  
+- Сумира опште ангажовање и трендове у извођењу (нпр. стабилан напредак, недавна побољшања или пад).
+- Истакне једну снагу или област успеха специфичну за курс.
+- Идентификује једну област за напредак или даје конкретан савет за побољшање или наставак успеха.
+
+Захтеви за излаз:
+- НИКАКВО ХТМЛ форматирање.
+- Само обичан текст.
+- Строго ограничење од 300 карактера.`,
+    es: `Genera un informe de retroalimentación con no más de 300 caracteres utilizando los datos proporcionados. (Utilizarás esta información: calificaciones y comentarios del profesor sobre las evaluaciones, respuestas de los alumnos a las evaluaciones, asistencia.)
+
+La retroalimentación debe:
+-Escribirse como si hablaras directamente al alumno.  
+- Resumir la participación general y las tendencias de rendimiento (por ejemplo, progreso constante, mejora reciente o declive).
+- Destacar un punto fuerte o un área de éxito específica del curso.
+- Identificar un área de crecimiento o dar consejos prácticos para la mejora o el éxito continuo.
+
+Requisitos de salida:
+- Sin formato HTML.
+- Solo texto plano.
+- Límite estricto de 300 caracteres.`,
+    id: `Buat umpan balik dengan tidak lebih dari 300 karakter menggunakan data yang disediakan. (Anda akan menggunakan informasi ini – nilai dan komentar guru pada penilaian, jawaban penilaian siswa, kehadiran.)
+
+Umpan balik harus:
+- Ditulis seolah-olah berbicara kepada siswa.  
+- Merangkum keterlibatan keseluruhan dan tren kinerja (mis., kemajuan yang stabil, peningkatan terbaru, atau penurunan).
+- Menyoroti satu kekuatan atau area keberhasilan yang spesifik untuk mata pelajaran tersebut.
+- Mengidentifikasi satu area untuk berkembang atau memberikan saran yang dapat ditindaklanjuti untuk perbaikan atau keberhasilan berkelanjutan.
+
+Persyaratan output:
+- TANPA pemformatan HTML.
+- Hanya teks biasa.
+- Batas ketat 300 karakter.`,
+    ru: `Напишите отзыв объемом не более 300 символов, используя предоставленные данные. (Вы будете использовать эту информацию — оценки и комментарии учителя по оценкам, ответы ученика на оценки, посещаемость.)
+
+Отзыв должен:
+- Быть написан в форме обращения к ученику.  
+- Отражать общую успеваемость и тенденции успеваемости (например, устойчивый прогресс, недавнее улучшение или снижение).
+- Выделить одну сильную сторону или область успеха, специфичную для курса.
+- Определить одну область роста или дать действенный совет для улучшения или дальнейшего успеха.
+
+Требования к выводу:
+- Без HTML форматирования.
+- Только обычный текст.
+- Строгое ограничение в 300 символов.`
   };
 
   const PROMPT_HEADERS = {
@@ -104,6 +152,30 @@ Zahtevi za izlaz:
       gradingSystem: "KONTEKST SISTEMA OCENJIVANJA:",
       attendanceData: "EVIDENCIJA PRISUSTVA:",
       gradesData: "OCENE I KOMENTARI NASTAVNIKA:"
+    },
+    sr_cyrl: {
+      studentInfo: "ИНФОРМАЦИЈЕ О УЧЕНИКУ:",
+      gradingSystem: "КОНТЕКСТ СИСТЕМА ОЦЕЊИВАЊА:",
+      attendanceData: "ЕВИДЕНЦИЈА ПРИСУСТВА:",
+      gradesData: "ОЦЕНЕ И КОМЕНТАРИ НАСТАВНИКА:"
+    },
+    es: {
+      studentInfo: "INFORMACIÓN DEL ALUMNO:",
+      gradingSystem: "CONTEXTO DEL SISTEMA DE CALIFICACIÓN:",
+      attendanceData: "REGISTRO DE ASISTENCIA:",
+      gradesData: "CALIFICACIONES Y COMENTARIOS DEL PROFESOR:"
+    },
+    id: {
+      studentInfo: "INFORMASI SISWA:",
+      gradingSystem: "KONTEKS SISTEM PENILAIAN:",
+      attendanceData: "REKAMAN KEHADIRAN:",
+      gradesData: "NILAI & KOMENTAR GURU:"
+    },
+    ru: {
+      studentInfo: "ИНФОРМАЦИЯ ОБ УЧЕНИКЕ:",
+      gradingSystem: "КОНТЕКСТ СИСТЕМЫ ОЦЕНИВАНИЯ:",
+      attendanceData: "ЗАПИСЬ О ПОСЕЩАЕМОСТИ:",
+      gradesData: "ОЦЕНКИ И КОММЕНТАРИИ УЧИТЕЛЯ:"
     }
   };
 
@@ -272,9 +344,18 @@ Zahtevi za izlaz:
       const HARDCODED_PASSWORD = ""; // Enter password here while working locally
       const apiKey = HARDCODED_PASSWORD || document.getElementById("apiKey")?.value?.trim() || "";
 
-      const schemaObj = (currentLang === "sr" && typeof STUDENT_REPORT_SCHEMA_SR !== 'undefined') 
-        ? STUDENT_REPORT_SCHEMA_SR 
-        : STUDENT_REPORT_SCHEMA;
+      let schemaObj = typeof STUDENT_REPORT_SCHEMA !== 'undefined' ? STUDENT_REPORT_SCHEMA : null;
+      if (currentLang === "sr" && typeof STUDENT_REPORT_SCHEMA_SR !== 'undefined') {
+        schemaObj = STUDENT_REPORT_SCHEMA_SR;
+      } else if (currentLang === "sr_cyrl" && window.studentReportPromptsSRCyrl && window.studentReportPromptsSRCyrl.STUDENT_REPORT_SCHEMA_SR) {
+        schemaObj = window.studentReportPromptsSRCyrl.STUDENT_REPORT_SCHEMA_SR;
+      } else if (currentLang === "es" && window.studentReportPromptsEs && window.studentReportPromptsEs.STUDENT_REPORT_SCHEMA) {
+        schemaObj = window.studentReportPromptsEs.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "id" && window.studentReportPromptsId && window.studentReportPromptsId.STUDENT_REPORT_SCHEMA) {
+        schemaObj = window.studentReportPromptsId.STUDENT_REPORT_SCHEMA;
+      } else if (currentLang === "ru" && window.studentReportPromptsRu && window.studentReportPromptsRu.STUDENT_REPORT_SCHEMA) {
+        schemaObj = window.studentReportPromptsRu.STUDENT_REPORT_SCHEMA;
+      }
 
       const responseText = await callResponsesApiStream({
         endpoint: DEFAULT_ENDPOINT,
@@ -361,9 +442,17 @@ Zahtevi za izlaz:
 
       const zipEN = new JSZip();
       const zipSR = new JSZip();
+      const zipSRCyrl = new JSZip();
+      const zipES = new JSZip();
+      const zipID = new JSZip();
+      const zipRU = new JSZip();
 
       const pEN = window.studentReportPromptsEN || {};
       const pSR = window.studentReportPromptsSR || {};
+      const pSRCyrl = window.studentReportPromptsSRCyrl || {};
+      const pES = window.studentReportPromptsEs || {};
+      const pID = window.studentReportPromptsId || {};
+      const pRU = window.studentReportPromptsRu || {};
 
       const addFiles = (zip, obj) => {
         for (const [key, value] of Object.entries(obj)) {
@@ -377,9 +466,10 @@ Zahtevi za izlaz:
 
       addFiles(zipEN, pEN);
       addFiles(zipSR, pSR);
-
-      const contentEN = await zipEN.generateAsync({ type: "blob" });
-      const contentSR = await zipSR.generateAsync({ type: "blob" });
+      addFiles(zipSRCyrl, pSRCyrl);
+      addFiles(zipES, pES);
+      addFiles(zipID, pID);
+      addFiles(zipRU, pRU);
 
       const saveZip = (blob, filename) => {
         const url = URL.createObjectURL(blob);
@@ -392,10 +482,12 @@ Zahtevi za izlaz:
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       };
 
-      saveZip(contentEN, "student_report_prompts_en.zip");
-      setTimeout(() => {
-        saveZip(contentSR, "student_report_prompts_sr.zip");
-      }, 500);
+      zipEN.generateAsync({ type: "blob" }).then(b => saveZip(b, "student_report_prompts_en.zip"));
+      setTimeout(() => zipSR.generateAsync({ type: "blob" }).then(b => saveZip(b, "student_report_prompts_sr.zip")), 200);
+      setTimeout(() => zipSRCyrl.generateAsync({ type: "blob" }).then(b => saveZip(b, "student_report_prompts_sr_cyrl.zip")), 400);
+      setTimeout(() => zipES.generateAsync({ type: "blob" }).then(b => saveZip(b, "student_report_prompts_es.zip")), 600);
+      setTimeout(() => zipID.generateAsync({ type: "blob" }).then(b => saveZip(b, "student_report_prompts_id.zip")), 800);
+      setTimeout(() => zipRU.generateAsync({ type: "blob" }).then(b => saveZip(b, "student_report_prompts_ru.zip")), 1000);
 
       logLine("[OK] Prompts downloaded successfully.");
     } catch (err) {

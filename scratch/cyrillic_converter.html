@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Latinica u Ćirilicu Konvertor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 16px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            align-self: center;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .copy-btn {
+            background-color: #28a745;
+            align-self: flex-end;
+            padding: 8px 12px;
+            font-size: 14px;
+            margin-top: -10px;
+        }
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Konvertor: Latinica ➡️ Ćirilica</h1>
+    <div class="container">
+        <label for="inputText">Unesite tekst na latinici:</label>
+        <textarea id="inputText" placeholder="Unesite tekst ovde..."></textarea>
+        
+        <button onclick="convert()">Konvertuj</button>
+        
+        <label for="outputText">Rezultat na ćirilici:</label>
+        <textarea id="outputText" readonly placeholder="Ovde će se pojaviti konvertovan tekst..."></textarea>
+        
+        <button class="copy-btn" onclick="copyToClipboard()" id="copyBtn">Kopiraj rezultat</button>
+    </div>
+
+    <script>
+        const srToCyrl = {
+            // Digraphs
+            "lj": "љ", "Lj": "Љ", "LJ": "Љ",
+            "nj": "њ", "Nj": "Њ", "NJ": "Њ",
+            "dž": "џ", "Dž": "Џ", "DŽ": "Џ",
+            "dj": "ђ", "Dj": "Ђ", "DJ": "Ђ", // Often used for Đ
+            
+            // Single characters
+            "a": "а", "b": "б", "v": "в", "g": "г", "d": "д", "đ": "ђ", "e": "е", "ž": "ж", "z": "з", "i": "и", "j": "ј", "k": "к", "l": "л", "m": "м", "n": "н", "o": "о", "p": "п", "r": "р", "s": "с", "t": "т", "ć": "ћ", "u": "у", "f": "ф", "h": "х", "c": "ц", "č": "ч", "š": "ш",
+            "A": "А", "B": "Б", "V": "В", "G": "Г", "D": "Д", "Đ": "Ђ", "E": "Е", "Ž": "Ж", "Z": "З", "I": "И", "J": "Ј", "K": "К", "L": "Л", "M": "М", "N": "Н", "O": "О", "P": "П", "R": "Р", "S": "С", "T": "Т", "Ć": "Ћ", "U": "У", "F": "Ф", "H": "Х", "C": "Ц", "Č": "Ч", "Š": "Ш"
+        };
+
+        function transliterate(text) {
+            // Delimo tekst po placeholderima koji počinju sa {{$ i završavaju se sa }}
+            // Ovo osigurava da se placeholderi (npr. {{$StudentInfo}}) ne konvertuju u ćirilicu
+            const parts = text.split(/(\{\{\$.*?\}\})/g);
+            let result = "";
+            
+            for (let j = 0; j < parts.length; j++) {
+                let part = parts[j];
+                
+                // Neparni indeksi u rezultatu .split() sa hvatanjem odgovaraju placeholderima
+                if (j % 2 === 1) {
+                    result += part; // Placeholder ostaje netaknut
+                } else {
+                    // Konvertujemo ostatak teksta
+                    let res = "";
+                    let i = 0;
+                    while (i < part.length) {
+                        let char2 = part.substring(i, i + 2);
+                        let char1 = part.substring(i, i + 1);
+                        if (srToCyrl[char2]) {
+                            res += srToCyrl[char2];
+                            i += 2;
+                        } else if (srToCyrl[char1]) {
+                            res += srToCyrl[char1];
+                            i += 1;
+                        } else {
+                            res += char1;
+                            i += 1;
+                        }
+                    }
+                    result += res;
+                }
+            }
+            return result;
+        }
+
+        function convert() {
+            const inputText = document.getElementById('inputText').value;
+            const outputText = transliterate(inputText);
+            document.getElementById('outputText').value = outputText;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = 'Kopirano!';
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
