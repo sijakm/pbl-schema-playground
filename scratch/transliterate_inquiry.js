@@ -24,7 +24,8 @@ function transliterate(text) {
 }
 
 const fs = require('fs');
-const content = fs.readFileSync('/Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/inquiry/prompts_sr.js', 'utf8');
+let content = fs.readFileSync('/Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/inquiry/prompts_sr.js', 'utf8');
+content = content.replace('window.promptsSR = {', 'window.promptsSR_CYRL = {');
 
 // We need to be careful NOT to transliterate keys or placeholders.
 // A simple approach is to transliterate everything and then fix placeholders and keys.
@@ -37,7 +38,6 @@ const content = fs.readFileSync('/Users/milansijak/Desktop/pegs_playground/pbl-s
 let cyrlContent = transliterate(content);
 
 // Fix keys and standard parts
-cyrlContent = cyrlContent.replace(/window\.promptsСР = \{/g, 'window.promptsSR_CYRL = {');
 cyrlContent = cyrlContent.replace(/\{\{\$.*?\}\}/g, (match) => {
     // Revert placeholders
     return match.replace(/а/g, 'a').replace(/б/g, 'b').replace(/в/g, 'v').replace(/г/g, 'g').replace(/д/g, 'd').replace(/ђ/g, 'đ').replace(/е/g, 'e').replace(/ж/g, 'ž').replace(/з/g, 'z').replace(/и/g, 'i').replace(/ј/g, 'j').replace(/к/g, 'k').replace(/л/g, 'l').replace(/љ/g, 'lj').replace(/м/g, 'm').replace(/н/g, 'n').replace(/њ/g, 'nj').replace(/о/g, 'o').replace(/п/g, 'p').replace(/р/g, 'r').replace(/с/g, 's').replace(/т/g, 't').replace(/ћ/g, 'ć').replace(/у/g, 'u').replace(/ф/g, 'f').replace(/х/g, 'h').replace(/ц/g, 'c').replace(/ч/g, 'č').replace(/џ/g, 'dž').replace(/ш/g, 'š')
@@ -46,6 +46,7 @@ cyrlContent = cyrlContent.replace(/\{\{\$.*?\}\}/g, (match) => {
 
 // Fix common technical terms/keys
 const keysToFix = [
+    "window.promptsSR_CYRL",
     "STEP0_PROMPT_TEMPLATE", "PER_LESSON_PROMPT_TEMPLATE", "HTML_LESSON_PROMPT_TEMPLATE", "UNIT_COMMON_HTML_PROMPT_TEMPLATE",
     "STEP0_SCHEMA", "PER_LESSON_SCHEMA", "UnitPlanResponse", "InquiryUnitPlanResponse", "UnitDescription", "Description",
     "EssentialQuestions", "StudentLearningObjectives", "StandardsAligned", "KeyVocabulary", "Lessons", "lessonNumber",
@@ -61,8 +62,11 @@ const keysToFix = [
     "EssentialQuestionConnection", "SpacedRetrieval", "TeacherSay", "FormativeAssessment", "StudentPractice", "Tasks", "TaskTitle",
     "Instruction", "SuccessCriteria", "Reflection", "Prompts", "UnitTitle", "UnitCommonJson", "LessonInquiryJson",
     "title", "type", "object", "properties", "array", "string", "integer", "items", "minItems", "maxItems", "required",
-    "additionalProperties", "x-removablePaths"
+    "additionalProperties", "x-removablePaths", "description", "false", "true", "null", "SpacedLearningAndRetrieval"
 ];
+
+// Sort keys in descending order of length to avoid prefix matching issues
+keysToFix.sort((a, b) => b.length - a.length);
 
 keysToFix.forEach(key => {
     const cyrlKey = transliterate(key);

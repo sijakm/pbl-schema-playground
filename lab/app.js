@@ -8,7 +8,12 @@
   function getPrompts() {
     const langEl = $("languageSelect");
     const lang = langEl ? langEl.value : "en";
-    return lang === "sr" ? window.labPromptsSR : window.labPrompts;
+    if (lang === "sr") return window.labPromptsSR;
+    if (lang === "sr_cyrl") return window.labPromptsSR_CYRL;
+    if (lang === "es") return window.labPromptsES;
+    if (lang === "ru") return window.labPromptsRU;
+    if (lang === "id") return window.labPromptsID;
+    return window.labPrompts;
   }
   // ---- Shared Helpers Aliases ----
   const { $, nowMs, fmtMs, logLine, setStatus, fillTemplate } = window.utils;
@@ -488,7 +493,19 @@
       addPromptsToZip("English", window.labPrompts);
     }
     if (window.labPromptsSR) {
-      addPromptsToZip("Serbian", window.labPromptsSR);
+      addPromptsToZip("Serbian_Latin", window.labPromptsSR);
+    }
+    if (window.labPromptsSR_CYRL) {
+      addPromptsToZip("Serbian_Cyrillic", window.labPromptsSR_CYRL);
+    }
+    if (window.labPromptsES) {
+      addPromptsToZip("Spanish", window.labPromptsES);
+    }
+    if (window.labPromptsRU) {
+      addPromptsToZip("Russian", window.labPromptsRU);
+    }
+    if (window.labPromptsID) {
+      addPromptsToZip("Indonesian", window.labPromptsID);
     }
 
     const content = await zip.generateAsync({ type: "blob" });
