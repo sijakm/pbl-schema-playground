@@ -6,7 +6,7 @@ const srToCyrl = {
   "lj": "љ", "Lj": "Љ", "LJ": "Љ",
   "nj": "њ", "Nj": "Њ", "NJ": "Њ",
   "dž": "џ", "Dž": "Џ", "DŽ": "Џ",
-  
+
   "a": "а", "b": "б", "v": "в", "g": "г", "d": "д", "đ": "ђ", "e": "е", "ž": "ж", "z": "з", "i": "и", "j": "ј", "k": "к", "l": "л", "m": "м", "n": "н", "o": "о", "p": "п", "r": "р", "s": "с", "t": "т", "ć": "ћ", "u": "у", "f": "ф", "h": "х", "c": "ц", "č": "ч", "š": "ш",
   "A": "А", "B": "Б", "V": "В", "G": "Г", "D": "Д", "Đ": "Ђ", "E": "Е", "Ž": "Ж", "Z": "З", "I": "И", "J": "Ј", "K": "К", "L": "Л", "M": "М", "N": "Н", "O": "О", "P": "П", "R": "Р", "S": "С", "T": "Т", "Ć": "Ћ", "U": "У", "F": "Ф", "H": "Х", "C": "Ц", "Č": "Ч", "Š": "Ш"
 };
@@ -64,12 +64,12 @@ function hasCyrillic(str) {
 
 function transliterateText(text) {
   let cyrl = transliterate(text);
-  
+
   // Revert placeholders like {{$Subject}}
   cyrl = cyrl.replace(/\{\{\$.*?\}\}/g, (match) => {
     return revertCyrillic(match);
   });
-  
+
   // Revert placeholders like {Purpose}
   cyrl = cyrl.replace(/\{[A-Za-z0-9_.]+\}/g, (match) => {
     return revertCyrillic(match);
@@ -81,7 +81,7 @@ function transliterateText(text) {
     const regex = new RegExp(cyrlKey, 'g');
     cyrl = cyrl.replace(regex, key);
   });
-  
+
   return cyrl;
 }
 
@@ -91,23 +91,23 @@ function processFile(filePath) {
     console.error(`File not found: ${absolutePath}`);
     return;
   }
-  
+
   const content = fs.readFileSync(absolutePath, 'utf8');
   const lines = content.split('\n');
-  
+
   let inStep0Schema = false;
   let inPerLessonSchema = false;
   let modifiedCount = 0;
-  
+
   // Match lines like: "description": "value"
   // Group 1: key prefix + opening quote
   // Group 2: string value
   // Group 3: closing quote + trailing punctuation (like comma)
   const descRegex = /^(\s*"description"\s*:\s*")([\s\S]*?)("\s*,?\s*)$/;
-  
+
   const updatedLines = lines.map((line, index) => {
     const lineNum = index + 1;
-    
+
     // Track if we are inside the schemas
     if (line.includes('STEP0_SCHEMA:')) {
       inStep0Schema = true;
@@ -116,18 +116,18 @@ function processFile(filePath) {
       inPerLessonSchema = true;
       inStep0Schema = false;
     }
-    
+
     // Check for end of schemas or other boundaries if needed
     // In this file, schemas are near the end. STEP0_SCHEMA ends, then PER_LESSON_SCHEMA starts.
     // The main object closes at the very end.
-    
+
     if (inStep0Schema || inPerLessonSchema) {
       const match = line.match(descRegex);
       if (match) {
         const prefix = match[1];
         const val = match[2];
         const suffix = match[3];
-        
+
         if (hasCyrillic(val)) {
           console.log(`Line ${lineNum}: Already in Cyrillic. Leaving unchanged.`);
           return line;
@@ -137,7 +137,7 @@ function processFile(filePath) {
             console.log(`Line ${lineNum}: Empty description. Leaving unchanged.`);
             return line;
           }
-          
+
           const transliterated = transliterateText(val);
           console.log(`Line ${lineNum}: Transliterating Latin to Cyrillic.`);
           console.log(`  Before: "${val}"`);
@@ -147,10 +147,10 @@ function processFile(filePath) {
         }
       }
     }
-    
+
     return line;
   });
-  
+
   if (modifiedCount > 0) {
     fs.writeFileSync(absolutePath, updatedLines.join('\n'), 'utf8');
     console.log(`Successfully updated ${modifiedCount} description(s) in ${filePath}.`);
@@ -159,7 +159,14 @@ function processFile(filePath) {
   }
 }
 
-// Run the script on lab/prompts_sr_cyrl.js
-const targetFile = path.join(__dirname, '../lab/prompts_sr_cyrl.js');
+// Run the script on the provided file path
+const targetFileArg = process.argv[2];
+if (!targetFileArg) {
+  console.error('Molim te prosledi putanju do fajla kao argument.');
+  console.error('Primer: node scratch/transliterate_schema_descriptions.js lab/prompts_sr_cyrl.js');
+  process.exit(1);
+}
+
+const targetFile = path.resolve(process.cwd(), targetFileArg);
 console.log(`Processing file: ${targetFile}`);
 processFile(targetFile);
