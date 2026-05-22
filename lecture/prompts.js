@@ -141,17 +141,20 @@ GLOBAL RULES
 
 MAPPING RULES:
 
+FIRST, always generate these 4 introductory sections if the data is available in the JSON:
 - <h3>💭 Essential Questions</h3> (if available, UL list from EssentialQuestions)
 - <h3>🔤 Key Vocabulary</h3> (UL list from KeyVocabulary)
 - <h3>🎯 Student Learning Objectives</h3> (UL list from StudentLearningObjectives)
-- <h3>📏 Standards Aligned</h3> (UL list or paragraphs from StandardsAligned)
+- <h3>📏 Standards Aligned</h3> (UL list from StandardsAligned. Even though the input is a single string, parse the standards and render them as a bulleted list <ul><li>...</li></ul>)
+
+THEN, proceed to SECTION 0:
 
 SECTION 0: ASSESS PRIOR KNOWLEDGE (CONDITIONAL)
 ==================================================
 CONDITION: Render this section ONLY if the current lesson is Lesson 1. For all other lessons, skip this entire section (render NOTHING, not even headings).
 
 CRITICAL CHECK: Before rendering ANY HTML for this section, look at the AssessPriorKnowledge object.
-- If AssessPriorKnowledge is {} (empty object), OR if SayIntroduction is "", null, " ", or "N/A", STOP HERE. Render NOTHING.
+- If AssessPriorKnowledge is {} (empty object), OR if SayIntroduction is "", null, " ", or "N/A", SKIP THIS SECTION AND PROCEED TO THE NEXT ONE. Do NOT stop the overall generation.
 - For all other lessons (Lesson 2, 3, etc.), you MUST skip this entire section regardless of content.
 
 IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains real content:
@@ -415,7 +418,7 @@ GLOBAL RULES
       },
       "KeyVocabulary": {
         "type": "array",
-        "description": "List of vocabulary terms with definitions. (e.g. 'Solar System – The Sun and all...').",
+        "description": "List of vocabulary terms with definitions. (e.g. 'Solar System – The Sun and all...'). ONLY include terms that are actively used in this specific lesson.",
         "items": { "type": "string" }
       },
       "StudentLearningObjectives": {
@@ -427,11 +430,11 @@ GLOBAL RULES
       },
       "StandardsAligned": {
         "type": "string",
-        "description": "Full 'Standards Aligned' section as plain text for this lesson."
+        "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'"
       },
       "AssessPriorKnowledge": {
         "type": "object",
-        "description": "Full 'Assess Prior Knowledge' section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN an empty object {} with NO properties. Do NOT use 'N/A' or placeholders. For Lesson 1, structure must include:",
+        "description": "Full 'Assess Prior Knowledge' section. CRITICAL: Look at the 'lessonNumber' in the Attached Lesson Content. IF this is Lesson 1, populate this object fully. IF this is Lesson 2, 3, or any other lesson, YOU MUST RETURN AN EMPTY OBJECT {} with NO properties. Do not populate this for any lesson other than Lesson 1. For Lesson 1, structure must include:",
         "properties": {
           "SayIntroduction": { "type": "string", "description": "What the teacher says to introduce the activity." },
           "StatementsToProject": { "type": "array", "items": { "type": "string" }, "description": "List of statements to project or read, containing both accurate ideas and common misconceptions." },
