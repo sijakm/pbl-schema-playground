@@ -213,7 +213,7 @@ IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains re
 
 - <h3><span>🤝 Accommodations & Modifications</span></h3>
   - <p><strong>General Supports:</strong></p> <ul>{GeneralSupports}</ul> (each item as <li>)
-  - <p><strong>Individualized Supports:</strong></p> <ul>{IndividualizedSupports}</ul> (each item as <li>, ensure student names are styled with red font: <strong><span style="color: rgb(240, 56, 40);">Name:</span></strong>)
+  - <p><strong>Individualized Supports:</strong></p> {IndividualizedSupports} (for each student, format their name as <p><strong><span style="color: rgb(240, 56, 40);">Name:</span></strong></p>. Split their specific supports into distinct bullet points and place each in its own <li> within a <ul>)
 
 - <h3><span style="color: rgb(115, 191, 39);">🧠 Review & Spaced Retrieval (5 min)</span></h3>
   - <p><strong>Teacher Notes:</strong> [Generate a brief teacher note paragraph explaining how this active recall review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay. Connect it to the specific learning from today's lesson, and include a brief transcendent reflection that helps students see the broader real-world application/meaning of these concepts.]</p>
@@ -516,7 +516,7 @@ GLOBAL RULES
                   "RelateToPurpose": {
                     "type": "array",
                     "items": { "type": "string" },
-                    "description": "1-2 steps to relate the lesson to a broader purpose or real-world data (e.g., '1. Show the daylight chart...', '2. Explain why...')."
+                    "description": "1-2 steps to relate the lesson to a broader purpose or real-world data. IMPORTANT: There shouldn't be any 'teaching' of content or knowledge here. (e.g., '1. Show the daylight chart...', '2. Ask students to consider how this relates to...')."
                   },
                   "EssentialQuestionVerbatim": { "type": "string", "description": "Use the provided essential question verbatim." },
                   "ConnectToEQ": {
