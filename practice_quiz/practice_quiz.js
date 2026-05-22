@@ -324,7 +324,7 @@
     const hLabels = {
         en: { working: "Working on Hint 1" },
         sr: { working: "Pripremam nagoveštaj 1" }
-    }[currentLang];
+    }[currentLang] || { working: "Working on Hint 1" };
 
     container.innerHTML = `
       <div class="loading-hint">
@@ -347,7 +347,7 @@
             subject: els.subject().value,
             grade_level: els.gradeLevel().value,
             question_data: JSON.stringify([ { question: q.question, options: q.answers, rationale: q.rationale } ]),
-            response_language: currentLang === 'sr' ? 'Serbian' : 'English'
+            response_language: currentLang
         };
 
         const finalPrompt = fillTemplate(hintsPromptTemplate, vars);
@@ -396,7 +396,7 @@
     const hLabels = {
         en: { working: `Working on Hint ${nextIdx}` },
         sr: { working: `Pripremam nagoveštaj ${nextIdx}` }
-    }[currentLang];
+    }[currentLang] || { working: `Working on Hint ${nextIdx}` };
 
     // Show loading state for next hint
     const currentContent = container.querySelector(".hint-text-body");
@@ -437,7 +437,7 @@
     const labels = {
         en: { hint: "Hint", max: "max 3", newHint: "New Hint" },
         sr: { hint: "Nagoveštaj", max: "maks. 3", newHint: "Novi nagoveštaj" }
-    }[currentLang];
+    }[currentLang] || { hint: "Hint", max: "max 3", newHint: "New Hint" };
 
     const currentHintText = q.hintsArray[q.currentViewIdx];
 
