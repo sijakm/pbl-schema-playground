@@ -100,6 +100,7 @@ IMPORTANT CONTENT RULES:
 - AssessPriorKnowledge: ONLY if LessonNumber == 1, populate the object as defined in the schema. For ALL OTHER LESSONS, you MUST return an empty object {} with NO keys inside. DO NOT use placeholders like "N/A", "none", or empty arrays.
 - Lab Phases (Question, Research, Hypothesize, Experiment, Analyze, Share): Follow the specific instructional requirements and "Purpose:" strings for each phase as defined in the JSON schema.
 - Experiment.AccommodationsAndModifications must include general supports followed by individual support for each student provided in {{$LearningPlans}}.
+- When suggesting "sentence frames" or "sentence starters" anywhere in the lesson plan (especially in Individualized Supports), you MUST provide the actual, specific sentence stems tailored to the lesson content so the teacher can use them directly.
 - StudentPractice MUST include a TeacherNotes paragraph starting with 'These tasks reinforce today’s learning about ____ by ______.', a list of 2-3 tasks with DOK 2-4 and success criteria, and interleaving if the subject is math.
 
 OUTPUT REQUIREMENTS:
@@ -198,7 +199,6 @@ IF (and only if) current lesson is Lesson 1 AND AssessPriorKnowledge contains re
         <p>{Misconception} (Ensure NO bolding/strong tags are used here)</p>
         <ul><li>{TeacherResponse} (Ensure NO bolding/strong tags are used here)</li></ul>
 - <h3><span style="color: rgb(115, 191, 39);">Connect (3 min)</span></h3>
-  - <p>{RelateToPurpose}</p> (Render as a list of paragraphs or a UL/OL if it's multiple items, but keep it flat)
   - <p><strong>💭 Essential Question:</strong> {EssentialQuestionVerbatim}</p>
   - <p><strong>Say:</strong> “{ConnectToEQ.Say}”</p>
   - <p><strong>Prompts:</strong></p>
@@ -484,7 +484,7 @@ GLOBAL RULES
             "type": "object",
             "properties": {
               "Hook": { "type": "array", "items": { "type": "string" }, "description": "Write a dramatic, high-engagement hook delivered through teacher script. Should be surprising, curiosity-building, and tied to the main concept." },
-              "Vocabulary": { "type": "array", "items": { "type": "string" }, "description": "List essential vocabulary terms. Provide teacher script for defining each term." },
+              "Vocabulary": { "type": "array", "items": { "type": "string" }, "description": "List essential vocabulary terms. Provide teacher script for defining each term formatted strictly as: '[Term] - Say: \"[Definition/Script]\"'. Example: 'Lever - Say: \"A lever is a simple machine...\"'." },
               "ClarifyObjective": { "type": "array", "items": { "type": "string" }, "description": "Clarify today's student learning objective for this specific lesson sharing script for teacher." },
               "NewConceptsAndKnowledge": { "type": "array", "items": { "type": "string" }, "description": "Write a detailed teacher lecture with scripts (Say: “…”). Include step-by-step what teacher says, does, and may demonstrate. Break down complex ideas, provide examples/analogies, make explicit connections to prior knowledge." },
               "AttentionReset": {
@@ -516,11 +516,6 @@ GLOBAL RULES
                 "type": "object",
                 "description": "Relate to a purpose. Connect to one of the essential questions.",
                 "properties": {
-                  "RelateToPurpose": {
-                    "type": "array",
-                    "items": { "type": "string" },
-                    "description": "1-2 steps to relate the lesson to a broader purpose or real-world data. IMPORTANT: There shouldn't be any 'teaching' of content or knowledge here. (e.g., '1. Show the daylight chart...', '2. Ask students to consider how this relates to...')."
-                  },
                   "EssentialQuestionVerbatim": { "type": "string", "description": "Use the provided essential question verbatim." },
                   "ConnectToEQ": {
                     "type": "object",
@@ -533,7 +528,7 @@ GLOBAL RULES
                   },
                   "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Deep expected student responses that use reasoning or evidence." }
                 },
-                "required": ["RelateToPurpose", "EssentialQuestionVerbatim", "ConnectToEQ", "ExpectedStudentResponses"],
+                "required": ["EssentialQuestionVerbatim", "ConnectToEQ", "ExpectedStudentResponses"],
                 "additionalProperties": false
               },
               "Differentiation": {
@@ -560,7 +555,7 @@ GLOBAL RULES
                 "description": "List all students with learning plans in red font. Group students with shared supports. Focus on access.",
                 "properties": {
                   "GeneralSupports": { "type": "array", "items": { "type": "string" }, "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions)." },
-                  "IndividualizedSupports": { "type": "array", "items": { "type": "string" }, "description": "Specific accommodations and modifications for named students with formal plans. List names in RED font." }
+                  "IndividualizedSupports": { "type": "array", "items": { "type": "string" }, "description": "Specific accommodations and modifications for named students with formal plans. List names in RED font. If a student requires sentence frames/starters, you MUST provide the actual concrete sentence stems/frames tailored to this lesson's content." }
                 },
                 "required": ["GeneralSupports", "IndividualizedSupports"],
                 "additionalProperties": false
