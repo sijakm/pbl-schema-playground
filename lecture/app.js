@@ -4,6 +4,17 @@
   // ---- Defaults ----
   const DEFAULT_ENDPOINT = "https://fancy-sun-80f1.sijakmilan.workers.dev";
 
+  function getPrompts() {
+    const langEl = $("languageSelect");
+    const lang = langEl ? langEl.value : "en";
+    if (lang === "sr") return window.labPromptsSR;
+    if (lang === "sr_cyrl") return window.labPromptsSR_CYRL;
+    if (lang === "es") return window.labPromptsES;
+    if (lang === "ru") return window.labPromptsRU;
+    if (lang === "id") return window.labPromptsID;
+    return window.labPrompts;
+  }
+
   // ---- Shared Helpers Aliases ----
   const { $, nowMs, fmtMs, logLine, setStatus, fillTemplate } = window.utils;
 
@@ -117,15 +128,15 @@
         { 
           id: "perLesson", 
           label: "Per Lesson", 
-          schema: window.labPrompts.PER_LESSON_SCHEMA, 
-          template: window.labPrompts.PER_LESSON_PROMPT_TEMPLATE,
+          schema: getPrompts().PER_LESSON_SCHEMA, 
+          template: getPrompts().PER_LESSON_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
         },
         { 
           id: "step0", 
           label: "Unit Outline (Step 0)", 
-          schema: window.labPrompts.STEP0_SCHEMA, 
-          template: window.labPrompts.STEP0_PROMPT_TEMPLATE,
+          schema: getPrompts().STEP0_SCHEMA, 
+          template: getPrompts().STEP0_PROMPT_TEMPLATE,
           requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
         }
       ],
@@ -275,7 +286,7 @@
   async function runChain() {
     if (isRunning) return;
 
-    const prompts = window.labPrompts;
+    const prompts = getPrompts();
     const {
       STEP0_SCHEMA,
       UNIT_COMMON_HTML_PROMPT_TEMPLATE,
@@ -494,23 +505,42 @@
         return;
       }
 
-      const zipEN = new JSZip();
-      const zipSR = new JSZip();
+      const zip = new JSZip();
 
-      // window.promptsEN and window.promptsSR are defined in prompts.js / prompts_sr.js
-      const pLab = window.labPrompts || {};
-      const addFiles = (zip, obj) => {
-        for (const [key, value] of Object.entries(obj)) {
-          if (typeof value === "object" && value !== null) {
-            zip.file(`${key}.json`, JSON.stringify(value, null, 2));
-          } else if (typeof value === "string") {
-            zip.file(`${key}.txt`, value);
-          }
-        }
+      const addPromptsToZip = (folderName, p) => {
+        const folder = zip.folder(folderName);
+        folder.file("1_step0_outline_prompt.txt", p.STEP0_PROMPT_TEMPLATE);
+        folder.file("2_step0_schema.json", JSON.stringify(p.STEP0_SCHEMA, null, 2));
+        folder.file("3_per_lesson_plan_prompt.txt", p.PER_LESSON_PROMPT_TEMPLATE);
+        folder.file("4_per_lesson_schema.json", JSON.stringify(p.PER_LESSON_SCHEMA, null, 2));
+        folder.file("5_html_rendering_prompt.txt", p.HTML_LESSON_PROMPT_TEMPLATE);
       };
-      addFiles(zipEN, pLab);
-      const contentLab = await zipEN.generateAsync({ type: "blob" });
-      saveZip(contentLab, "lab_prompts.zip");
+
+      if (window.labPrompts) {
+        addPromptsToZip("English", window.labPrompts);
+      }
+      if (window.labPromptsSR) {
+        addPromptsToZip("Serbian_Latin", window.labPromptsSR);
+      }
+      if (window.labPromptsSR_CYRL) {
+        addPromptsToZip("Serbian_Cyrillic", window.labPromptsSR_CYRL);
+      }
+      if (window.labPromptsES) {
+        addPromptsToZip("Spanish", window.labPromptsES);
+      }
+      if (window.labPromptsRU) {
+        addPromptsToZip("Russian", window.labPromptsRU);
+      }
+      if (window.labPromptsID) {
+        addPromptsToZip("Indonesian", window.labPromptsID);
+      }
+
+      const content = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(content);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "lecture_prompts.zip";
+      a.click();
 
       log("[OK] Prompts downloaded successfully.");
     } catch (err) {
@@ -528,6 +558,31 @@
     if (downloadBtn) downloadBtn.addEventListener("click", downloadPrompts);
 
     initSchemaEditor();
+
+    const langSel = document.getElementById("languageSelect");
+    if (langSel) {
+      langSel.addEventListener("change", () => {
+        if (window.schemaEditor) {
+          const p = getPrompts();
+          window.schemaEditor.updateData([
+            { 
+              id: "perLesson", 
+              label: "Per Lesson", 
+              schema: p.PER_LESSON_SCHEMA, 
+              template: p.PER_LESSON_PROMPT_TEMPLATE,
+              requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "MediaContext", "ParentUnitData", "Standards", "AttachedLesson", "UnitEssentialQuestions", "LearningPlans"]
+            },
+            { 
+              id: "step0", 
+              label: "Unit Outline (Step 0)", 
+              schema: p.STEP0_SCHEMA, 
+              template: p.STEP0_PROMPT_TEMPLATE,
+              requiredVariables: ["Subject", "Name", "UserPrompt", "GradeLevel", "ClassDuration", "Standards", "LearningPlans", "MediaContext", "AttachedUnit", "NumberOfItems"]
+            }
+          ], window.schemaEditor.activeTabId);
+        }
+      });
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onReady);
