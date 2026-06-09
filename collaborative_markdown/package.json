@@ -1,0 +1,23 @@
+{
+  "name": "collaborative_markdown",
+  "version": "1.0.0",
+  "main": "collaborative.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@gravity-ui/components": "^4.20.2",
+    "@gravity-ui/markdown-editor": "^15.40.0",
+    "@gravity-ui/uikit": "^7.41.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.16"
+  }
+}
