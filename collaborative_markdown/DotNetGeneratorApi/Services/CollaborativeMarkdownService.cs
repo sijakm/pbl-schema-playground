@@ -41,15 +41,15 @@ public class CollaborativeMarkdownService
         }
     }
 
-    public string GenerateMarkdown(string unitTitle, string step0Json, List<string> lessonJsons)
+    public string GenerateMarkdown(string unitTitle, string step0Json, List<string> lessonJsons, string language = "en")
     {
         var sb = new StringBuilder();
-        sb.Append(GenerateStep0Markdown(unitTitle, step0Json));
-        sb.Append(GenerateLessonsMarkdown(lessonJsons));
+        sb.Append(GenerateStep0Markdown(unitTitle, step0Json, language));
+        sb.Append(GenerateLessonsMarkdown(lessonJsons, language));
         return sb.ToString();
     }
 
-    public string GenerateStep0Markdown(string unitTitle, string step0Json)
+    public string GenerateStep0Markdown(string unitTitle, string step0Json, string language = "en")
     {
         var sb = new StringBuilder();
 
@@ -65,10 +65,13 @@ public class CollaborativeMarkdownService
 
                 var schemaObj = JObject.Parse(_step0Schema);
                 var schema = new JsonSchema(schemaObj);
-                var localizer = new DummyLocalizer();
+                var localizer = new JsonLocalizer(language);
                 var cache = new Dictionary<string, string>();
 
                 string formatted = schema.FormatJson(JObject.Parse(step0Json), localizer, cache);
+                Console.WriteLine("\n=== REZULTAT POSLE KOLEGINOG KODA (STEP 0) ===");
+                Console.WriteLine(formatted);
+                Console.WriteLine("==============================================\n");
                 sb.AppendLine(formatted);
             }
             catch (Exception ex)
@@ -82,13 +85,13 @@ public class CollaborativeMarkdownService
         return sb.ToString();
     }
 
-    public string GenerateLessonsMarkdown(List<string> lessonJsons)
+    public string GenerateLessonsMarkdown(List<string> lessonJsons, string language = "en")
     {
         var sb = new StringBuilder();
 
         if (lessonJsons != null && lessonJsons.Count > 0)
         {
-            var localizer = new DummyLocalizer();
+            var localizer = new JsonLocalizer(language);
             var cache = new Dictionary<string, string>();
 
             try
@@ -117,6 +120,9 @@ public class CollaborativeMarkdownService
                     var lessonData = JObject.Parse(lessonJsons[i]);
 
                     string formatted = schema.FormatJson(lessonData, localizer, cache);
+                    Console.WriteLine($"\n=== REZULTAT POSLE KOLEGINOG KODA (LEKCIJA {i + 1}) ===");
+                    Console.WriteLine(formatted);
+                    Console.WriteLine("===================================================\n");
                     sb.AppendLine(formatted);
                 }
                 catch (Exception ex)
@@ -132,9 +138,63 @@ public class CollaborativeMarkdownService
     }
 }
 
-public class DummyLocalizer : IStringLocalizer
+public class JsonLocalizer : IStringLocalizer
 {
-    public LocalizedString this[string name] => new LocalizedString(name, AddSpaces(name));
+    private readonly JObject _translations;
+    private readonly string _language;
+
+    public JsonLocalizer(string language)
+    {
+        _language = language ?? "en";
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "translations.json");
+        if (!File.Exists(path))
+        {
+            path = Path.Combine(AppContext.BaseDirectory, "translations.json");
+        }
+        
+        if (File.Exists(path))
+        {
+            _translations = JObject.Parse(File.ReadAllText(path));
+        }
+        else
+        {
+            _translations = new JObject();
+        }
+    }
+
+    public LocalizedString this[string name]
+    {
+        get
+        {
+            string translated = null;
+            if (_translations.TryGetValue(_language, out var langToken) && langToken is JObject langObj)
+            {
+                if (langObj.TryGetValue(name, out var val))
+                {
+                    translated = val.ToString();
+                }
+            }
+
+            if (translated == null && _language != "en")
+            {
+                if (_translations.TryGetValue("en", out var enToken) && enToken is JObject enObj)
+                {
+                    if (enObj.TryGetValue(name, out var val))
+                    {
+                        translated = val.ToString();
+                    }
+                }
+            }
+
+            if (translated == null)
+            {
+                translated = AddSpaces(name);
+            }
+
+            return new LocalizedString(name, translated);
+        }
+    }
+
     public LocalizedString this[string name, params object[] arguments] => this[name];
     public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures) => [];
     

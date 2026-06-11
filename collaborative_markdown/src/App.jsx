@@ -89,6 +89,7 @@ export default function App() {
   const [model, setModel] = useState("gpt-5.4-mini");
   const [statusMsg, setStatusMsg] = useState("");
   const [isRunning, setIsRunning] = useState(false);
+  const [language, setLanguage] = useState("en");
   
   const [subject, setSubject] = useState("Science");
   const [name, setName] = useState("Engineering & Innovation in Ancient Egypt");
@@ -158,7 +159,8 @@ export default function App() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               UnitTitle: name,
-              Step0Json: JSON.stringify(step0Obj, null, 2)
+              Step0Json: JSON.stringify(step0Obj, null, 2),
+              Language: language
             })
           });
           if (resStep0.ok) {
@@ -218,7 +220,8 @@ export default function App() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2))
+            LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2)),
+            Language: language
           })
         });
         
@@ -307,7 +310,15 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '12px', alignItems: 'center' }}>
+        <Select value={[language]} onUpdate={v => setLanguage(v[0])} width={180}>
+          <Select.Option value="en">English</Select.Option>
+          <Select.Option value="sr-Latn">Srpska latinica</Select.Option>
+          <Select.Option value="sr-Cyrl">Srpska ćirilica</Select.Option>
+          <Select.Option value="id">Bahasa Indonesia</Select.Option>
+          <Select.Option value="es">Español</Select.Option>
+          <Select.Option value="ru">Русский</Select.Option>
+        </Select>
         <Button view="action" size="l" onClick={handleRunChain} loading={isRunning}>Run Chain</Button>
         <Button view="outlined-danger" size="l" disabled={!isRunning}>Cancel</Button>
         <span style={{ alignSelf: 'center', color: '#6e6e73' }}>{statusMsg}</span>

@@ -387,7 +387,8 @@
         const reqBody = {
           UnitTitle: unitTitle,
           Step0Json: JSON.stringify(step0Obj, null, 2),
-          LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2))
+          LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2)),
+          Language: "en"
         };
         const res = await fetch("http://localhost:5200/api/generate", {
           method: "POST",

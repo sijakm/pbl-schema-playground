@@ -306,7 +306,7 @@ public partial class JsonSchema(JObject jsonSchema) : JObject(jsonSchema)
     /// <returns>The formatted string representation of the JArray.</returns>
     private string FormatArray(JArray? value, JObject schema)
     {
-        if (value is null)
+        if (value is null || value.Count == 0)
             return string.Empty;
 
         JToken? itemSchema = schema["items"];

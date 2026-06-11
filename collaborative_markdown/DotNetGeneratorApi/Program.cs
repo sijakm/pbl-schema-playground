@@ -23,21 +23,21 @@ app.UseCors("AllowAll");
 app.MapPost("/api/generate", (GenerateRequest request) =>
 {
     var generator = new CollaborativeMarkdownService();
-    var result = generator.GenerateMarkdown(request.UnitTitle, request.Step0Json, request.LessonJsons);
+    var result = generator.GenerateMarkdown(request.UnitTitle, request.Step0Json, request.LessonJsons, request.Language);
     return Results.Ok(new { markdown = result });
 });
 
 app.MapPost("/api/generate/step0", (GenerateStep0Request request) =>
 {
     var generator = new CollaborativeMarkdownService();
-    var result = generator.GenerateStep0Markdown(request.UnitTitle, request.Step0Json);
+    var result = generator.GenerateStep0Markdown(request.UnitTitle, request.Step0Json, request.Language);
     return Results.Ok(new { markdown = result });
 });
 
 app.MapPost("/api/generate/lessons", (GenerateLessonsRequest request) =>
 {
     var generator = new CollaborativeMarkdownService();
-    var result = generator.GenerateLessonsMarkdown(request.LessonJsons);
+    var result = generator.GenerateLessonsMarkdown(request.LessonJsons, request.Language);
     return Results.Ok(new { markdown = result });
 });
 

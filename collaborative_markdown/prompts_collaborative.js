@@ -256,7 +256,7 @@ OUTPUT REQUIREMENTS:
             "description": "Short descriptive title for the lesson. Do NOT include emojis here."
           },
           "EssentialQuestions": {
-            "x-format": "{cache.EssentialQuestions}",
+            "x-format": "### 💭 {loc.EssentialQuestions}\n\n{cache.EssentialQuestions}",
             "type": "array",
             "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
             "items": {
@@ -291,7 +291,7 @@ OUTPUT REQUIREMENTS:
             }
           },
           "AssessPriorKnowledge": {
-            "x-format": "## {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
+            "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
             "type": "object",
             "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN NULL or OMIT this field. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions.",
             "properties": {
@@ -331,7 +331,7 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           },
           "Instruction": {
-            "x-format": "### {fg:green}[{loc.Instruction}]\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.AnticipatedMisconceptions}\n\n{value.TranscendentThinking}\n\n{value.QuickCheck}",
+            "x-format": "### {green}({loc.Instruction})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.AnticipatedMisconceptions}\n\n{value.TranscendentThinking}\n\n{value.QuickCheck}",
             "type": "object",
             "description": "Collaborative lesson's 'Instruction' section (equivalent to Direct Presentation).",
             "properties": {
@@ -340,6 +340,7 @@ OUTPUT REQUIREMENTS:
                 "type": "array",
                 "description": "Materials list.",
                 "items": {
+                  "x-format": "- {value}",
                   "type": "string"
                 }
               },
@@ -348,7 +349,7 @@ OUTPUT REQUIREMENTS:
                 "type": "array",
                 "description": "Teacher script organized into sequential steps. These steps must collectively act as a thorough guide to help the teacher deliver new content. It must include how to introduce the new subject content (hooks, guiding questions, transitions), and content/script for the teacher to teach directly (definitions, examples, key points, explanations). Instructions should be thorough and include all new learning for the lesson with explanations for how to teach it. Be precise. Do NOT use all-caps headers for sections and do NOT include time markers.",
                 "items": {
-                  "x-format": "{index}. {value.Instruction}\n\n{value.ExpectedStudentResponses}",
+                  "x-format": "\n\n**{index}.** {value.Instruction}\n\n{value.ExpectedStudentResponses}",
                   "type": "object",
                   "properties": {
                     "Instruction": {
@@ -356,11 +357,11 @@ OUTPUT REQUIREMENTS:
                       "description": "The teacher action, e.g. Say: '...', Do: '...', Ask: '...'"
                     },
                     "ExpectedStudentResponses": {
-                      "x-format": "\t✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                      "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}",
                       "type": "array",
                       "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
                       "items": {
-                        "x-format": "\t- {value}",
+                        "x-format": "  - {value}",
                         "type": "string"
                       }
                     }
@@ -377,7 +378,7 @@ OUTPUT REQUIREMENTS:
                 "type": "array",
                 "description": "List of common misconceptions and exact correction language for addressing each one.",
                 "items": {
-                  "x-format": "{index}. {value.Misconception}\n\t- {value.Correction}",
+                  "x-format": "\n\n**{index}.** {value.Misconception}\n  - {value.Correction}",
                   "type": "object",
                   "properties": {
                     "Misconception": {
@@ -455,7 +456,7 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           },
           "GroupStructureAndRoles": {
-            "x-format": "### {fg:green}[{loc.GroupStructureAndRoles} \\(3–4 min\\)]\n\n{loc.DetermineThePurpose}\n\n{value.GroupSize}\n\n📋 {loc.InstructionsForTeachers}\n{value.TeacherSay}\n\n{value.Roles}\n\n{value.Rotation}",
+            "x-format": "### {green}({loc.GroupStructureAndRoles})\n\n{loc.DetermineThePurpose}\n\n{value.GroupSize}\n\n**📋 {loc.InstructionsForTeachers}**\n{value.TeacherSay}\n\n{value.Roles}\n\n{value.Rotation}",
             "type": "object",
             "description": "Group size, teacher script, defined roles, and rotation.",
             "properties": {
@@ -517,7 +518,7 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           },
           "CollaborationGuidelines": {
-            "x-format": "### {fg:green}[{loc.CollaborationGuidelines} \\(5 min\\)]\n\n{loc.CollaborationGuidelinesIntro}\n\n{items}",
+            "x-format": "### {green}({loc.CollaborationGuidelines})\n\n{loc.CollaborationGuidelinesIntro}\n\n{items}",
             "type": "array",
             "description": "Prompts to help groups create their own collaboration norms.",
             "items": {
@@ -526,7 +527,7 @@ OUTPUT REQUIREMENTS:
             }
           },
           "CollaborativeActivities": {
-            "x-format": "### {fg:green}[{loc.CollaborativeActivities} \\(25 min\\)]\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n**🪜 {loc.Differentiation}**\n{value.Differentiation}\n\n**🤝 {loc.AccommodationsAndModifications}**\n{value.AccommodationsAndModifications}",
+            "x-format": "### {green}({loc.CollaborativeActivities})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
             "type": "object",
             "description": "Interdependent group work (collaborative replacement for Guided Practice). Teacher-facing, highly structured, and designed so students cannot complete the task alone. Must include: (a) clear interdependence (jigsaw, consensus-building, gallery walk, structured problem-solving challenge, or similar), (b) explicit timing for each phase (e.g., '8 minutes discussion, 2 minutes prepare response'), (c) scripted teacher facilitation using 'Say:' statements throughout, (d) a shared group product (claim, model, chart, solution set, gallery artifact, etc.), (e) circulation prompts with expected student responses, (f) at least one ALL-student response check (whiteboards, quick write, polling, thumbs, etc.) with expected responses, (g) quick check question + expected responses, (h) Differentiation in three tiers focused on instruction (not accommodations), and (i) AccommodationsAndModifications separated into General supports and IndividualSupport exactly matching the provided students/plans. Ensure cultural relevance and inclusion by inviting multiple perspectives and ensuring equitable participation.",
             "properties": {
@@ -540,31 +541,54 @@ OUTPUT REQUIREMENTS:
                 }
               },
               "InstructionsForTeachers": {
-                "x-format": "📋 {loc.InstructionsForTeachers}\n\n{items}",
+                "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}",
                 "type": "array",
-                "description": "Teacher-facing script for the 25-minute collaborative activity. MUST be concise and fit within the timeframe (aim for 6-10 total numbered steps). Circulation prompts must be integrated as single tasks (e.g., 'Circulation Prompt: ...').",
+                "description": "Teacher script for the collaborative activity (aim for 6-8 numbered steps). Ensure one step is explicitly 'Circulation Prompts:' which includes specific questions to ask groups as they work.",
                 "items": {
-                  "x-format": "{value.Instruction}\n\n{value.ExpectedStudentResponses}",
+                  "x-format": "\n\n**{index}.** {value.Instruction}{value.CirculationPrompts}{value.ExpectedStudentResponses}",
                   "type": "object",
                   "properties": {
                     "Instruction": {
                       "type": "string",
-                      "description": "The specific teacher action, starting with 'Say: ', 'Do: ', or 'Circulation Prompt: '."
+                      "description": "The specific teacher action, starting with 'Say: ', 'Do: ', or exactly 'Circulation Prompts:'."
+                    },
+                    "CirculationPrompts": {
+                      "x-format": "\n{items}",
+                      "type": "array",
+                      "description": "ONLY populate this if the Instruction is 'Circulation Prompts:'. List specific questions to ask groups while circulating. OMIT this property if not applicable.",
+                      "items": {
+                        "x-format": "   - {value.Prompt}{value.ExpectedStudentResponses}",
+                        "type": "object",
+                        "properties": {
+                          "Prompt": {
+                            "type": "string",
+                            "description": "The question to ask the group."
+                          },
+                          "ExpectedStudentResponses": {
+                            "x-format": "\n     ✅ {loc.ExpectedStudentResponses}\n{items}",
+                            "type": "array",
+                            "description": "Expected answers to this specific circulation prompt. OMIT this property if none.",
+                            "items": {
+                              "x-format": "       - {value}",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": ["Prompt", "ExpectedStudentResponses"],
+                        "additionalProperties": false
+                      }
                     },
                     "ExpectedStudentResponses": {
-                      "x-format": "\t✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                      "x-format": "\n   ✅ {loc.ExpectedStudentResponses}\n{items}",
                       "type": "array",
-                      "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                      "description": "Anticipated answers if the Instruction was a direct question to the class. OMIT this property if not applicable.",
                       "items": {
-                        "x-format": "\t- {value}",
+                        "x-format": "     - {value}",
                         "type": "string"
                       }
                     }
                   },
-                  "required": [
-                    "Instruction",
-                    "ExpectedStudentResponses"
-                  ],
+                  "required": ["Instruction", "CirculationPrompts", "ExpectedStudentResponses"],
                   "additionalProperties": false
                 }
               },
@@ -574,7 +598,7 @@ OUTPUT REQUIREMENTS:
                 "description": "Labeled with three clearly labeled tiers: Language Learners, Students in Need of Additional Scaffolding, Go Deeper. Requirements: The content must differentiate instruction, not provide accommodations or modifications (those are addressed elsewhere). Strategies should focus on how to teach, not how to simplify materials. Activities should vary in complexity and depth, aligned to the same learning objectives. Each tier must promote active engagement, language development, and conceptual understanding. Use clear, teacher-facing language and make supports realistic for classroom use.",
                 "properties": {
                   "LanguageLearners": {
-                    "x-format": "{loc.LanguageLearners}\n\n{value.Strategies}\n\t{value.ExpectedStudentResponses}",
+                    "x-format": "{loc.LanguageLearners}\n\n{value.Strategies}",
                     "type": "object",
                     "properties": {
                       "Strategies": {
@@ -583,26 +607,16 @@ OUTPUT REQUIREMENTS:
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "2-3 concrete teaching moves."
-                      },
-                      "ExpectedStudentResponses": {
-                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
-                        "type": "array",
-                        "items": {
-                          "x-format": "\t- {value}",
-                          "type": "string"
-                        },
-                        "description": "Expected student responses showing what success looks like. Return empty array if not applicable."
+                        "description": "Provide 2-3 concrete teaching strategies for language learners. Examples: providing specific visuals (e.g., 'Planet Fact Sheet'), using sentence frames (e.g., 'This is placed here because...'), or asking students to gesture/point before explaining verbally. Focus on active engagement and language development."
                       }
                     },
                     "required": [
-                      "Strategies",
-                      "ExpectedStudentResponses"
+                      "Strategies"
                     ],
                     "additionalProperties": false
                   },
                   "AdditionalScaffolding": {
-                    "x-format": "{loc.StudentsInNeedOfAdditionalScaffolding}\n\n{value.Strategies}\n{value.ExpectedStudentResponses}",
+                    "x-format": "{loc.StudentsInNeedOfAdditionalScaffolding}\n\n{value.Strategies}",
                     "type": "object",
                     "properties": {
                       "Strategies": {
@@ -611,26 +625,16 @@ OUTPUT REQUIREMENTS:
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "2-3 concrete teaching moves."
-                      },
-                      "ExpectedStudentResponses": {
-                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
-                        "type": "array",
-                        "items": {
-                          "x-format": "- {value}",
-                          "type": "string"
-                        },
-                        "description": "Expected student responses showing what success looks like. Return empty array if not applicable."
+                        "description": "Provide 2-3 concrete teaching strategies for scaffolding. Examples: providing pre-drawn organizers/templates, using a simplified checklist with specific guiding questions, or modeling a think-aloud process (e.g., 'Watch how I match...'). Focus on how to teach and vary complexity without simplifying materials."
                       }
                     },
                     "required": [
-                      "Strategies",
-                      "ExpectedStudentResponses"
+                      "Strategies"
                     ],
                     "additionalProperties": false
                   },
                   "GoDeeper": {
-                    "x-format": "{loc.GoDeeper}\n\n{value.Strategies}\n{value.ExpectedStudentResponses}",
+                    "x-format": "{loc.GoDeeper}\n\n{value.Strategies}",
                     "type": "object",
                     "properties": {
                       "Strategies": {
@@ -639,21 +643,11 @@ OUTPUT REQUIREMENTS:
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "1-2 extension tasks."
-                      },
-                      "ExpectedStudentResponses": {
-                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
-                        "type": "array",
-                        "items": {
-                          "x-format": "- {value}",
-                          "type": "string"
-                        },
-                        "description": "Expected student responses showing what success looks like. Return empty array if not applicable."
+                        "description": "Provide 1-2 extension tasks that deepen conceptual understanding. Include specific challenges (e.g., 'Adjust spacing to show...') or higher-order questions (e.g., 'How would you model... accurately?'). Must align to the same learning objectives."
                       }
                     },
                     "required": [
-                      "Strategies",
-                      "ExpectedStudentResponses"
+                      "Strategies"
                     ],
                     "additionalProperties": false
                   }
@@ -671,9 +665,9 @@ OUTPUT REQUIREMENTS:
                 "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
                 "properties": {
                   "General": {
-                    "x-format": "- {value}",
                     "type": "array",
                     "items": {
+                      "x-format": "- {value}",
                       "type": "string"
                     },
                     "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
@@ -683,7 +677,7 @@ OUTPUT REQUIREMENTS:
                     "type": "array",
                     "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
                     "items": {
-                      "x-format": "**{value.StudentName}**\n\n- {loc.PlanProvided}: {value.PlanProvided}\n- {loc.PlanImplementation}\n{value.PlanImplementation}",
+                      "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                       "type": "object",
                       "properties": {
                         "StudentName": {
@@ -691,13 +685,17 @@ OUTPUT REQUIREMENTS:
                           "description": "First and last name of the individual student receiving these supports."
                         },
                         "PlanProvided": {
-                          "type": "string",
-                          "description": "The exact formal plan provided for this student in the prompt."
-                        },
-                        "PlanImplementation": {
-                          "x-format": "- {value}",
                           "type": "array",
                           "items": {
+                            "x-format": "- {value}",
+                            "type": "string"
+                          },
+                          "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        },
+                        "PlanImplementation": {
+                          "type": "array",
+                          "items": {
+                            "x-format": "- {value}",
                             "type": "string"
                           },
                           "description": "Concrete tools/stems/visuals/organizers for this task."
@@ -728,12 +726,12 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           },
           "ReflectionOnGroupDynamics": {
-            "x-format": "### {fg:green}[{loc.ReflectionOnGroupDynamics} \\(5 min\\)]\n\n{value.DebriefPrompt}\n\n{value.TeacherFacilitationOptions}\n\n{value.ClosingPrompt}",
+            "x-format": "### {green}({loc.ReflectionOnGroupDynamics})\n\n{value.DebriefPrompt}\n\n{value.TeacherFacilitationOptions}\n\n{value.ClosingPrompt}",
             "type": "object",
             "description": "Students evaluate how well the group worked together. MUST contain exactly 3 segments in order: a debrief prompt, facilitation options, and a closing prompt linking to norms.",
             "properties": {
               "DebriefPrompt": {
-                "x-format": "1. {value.Say}\n\n{value.ExpectedStudentResponses}",
+                "x-format": "**1.** {value.Say}\n\n{value.ExpectedStudentResponses}",
                 "type": "object",
                 "description": "A short debrief prompt for students after collaboration.",
                 "properties": {
@@ -745,6 +743,7 @@ OUTPUT REQUIREMENTS:
                     "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
                     "type": "array",
                     "items": {
+                      "x-format": "- {value}",
                       "type": "string"
                     },
                     "description": "Expected student answers (2-3 examples)."
@@ -757,7 +756,7 @@ OUTPUT REQUIREMENTS:
                 "additionalProperties": false
               },
               "TeacherFacilitationOptions": {
-                "x-format": "2. {loc.TeacherFacilitationOptions}\n\n{items}",
+                "x-format": "**2.** {loc.TeacherFacilitationOptions}\n\n{items}",
                 "type": "array",
                 "items": {
                   "x-format": "- {value}",
@@ -766,7 +765,7 @@ OUTPUT REQUIREMENTS:
                 "description": "Exactly 3 teacher facilitation moves to choose from (e.g., Quick-write exit slip, 1-5 group collaboration rating, 2-minute whole-group share). Just the options, no expected responses."
               },
               "ClosingPrompt": {
-                "x-format": "3. {value}",
+                "x-format": "**3.** {value}",
                 "type": "string",
                 "description": "A final teacher prompt linking reflections back to the collaboration guidelines. e.g., 'Say: \"Which of your norms helped the most today?\"'"
               }
@@ -779,7 +778,7 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           },
           "ReviewAndSpacedRetrieval": {
-            "x-format": "### {fg:green}[{loc.ReviewAndSpacedRetrieval} \\(5 min\\)]\n\n📚 **{loc.Materials}**\n\n{value.Materials}\n\n{value.TeacherNotes}\n\n📋 **{loc.InstructionsForTeachers}**\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}",
+            "x-format": "### {green}({loc.ReviewAndSpacedRetrieval})\n\n{value.Materials}\n\n{value.TeacherNotes}\n\n📋 **{loc.InstructionsForTeachers}**\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}",
             "type": "object",
             "description": "Full 'Review & Spaced Retrieval' section.",
             "properties": {
@@ -832,7 +831,7 @@ OUTPUT REQUIREMENTS:
                 "additionalProperties": false
               },
               "EssentialQuestionConnection": {
-                "x-format": "🔗 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+                "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
                 "type": "object",
                 "description": "Teacher prompt linking to unit question.",
                 "properties": {
@@ -917,7 +916,7 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           },
           "FormativeAssessment": {
-            "x-format": "### ✅ {fg:green}[{loc.FormativeAssessment}]\n\n{items}",
+            "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
             "type": "array",
             "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
             "items": {
@@ -953,7 +952,7 @@ OUTPUT REQUIREMENTS:
             "maxItems": 4
           },
           "StudentPractice": {
-            "x-format": "### 🖊️ {fg:green}[{loc.StudentPractice}]\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
+            "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
             "type": "object",
             "description": "Homework/out-of-class practice.",
             "properties": {
@@ -967,7 +966,7 @@ OUTPUT REQUIREMENTS:
                 "type": "array",
                 "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
                 "items": {
-                  "x-format": "{value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
+                  "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
                   "type": "object",
                   "properties": {
                     "TaskDescription": {
