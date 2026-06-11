@@ -389,7 +389,7 @@
           Step0Json: JSON.stringify(step0Obj, null, 2),
           LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2))
         };
-        const res = await fetch("http://localhost:5179/api/generate", {
+        const res = await fetch("http://localhost:5200/api/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(reqBody)

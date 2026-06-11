@@ -26,3 +26,6 @@
 /Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/collaborative_markdown/DotNetGeneratorApi/obj/Debug/net9.0/DotNetGeneratorApi.pdb
 /Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/collaborative_markdown/DotNetGeneratorApi/obj/Debug/net9.0/DotNetGeneratorApi.genruntimeconfig.cache
 /Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/collaborative_markdown/DotNetGeneratorApi/obj/Debug/net9.0/ref/DotNetGeneratorApi.dll
+/Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/collaborative_markdown/DotNetGeneratorApi/obj/Debug/net9.0/DotNetGeneratorApi.csproj.AssemblyReference.cache
+/Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/collaborative_markdown/DotNetGeneratorApi/bin/Debug/net9.0/Newtonsoft.Json.dll
+/Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/collaborative_markdown/DotNetGeneratorApi/obj/Debug/net9.0/DotNetGe.8445D5EE.Up2Date
