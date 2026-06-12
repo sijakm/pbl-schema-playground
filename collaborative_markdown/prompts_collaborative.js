@@ -920,7 +920,7 @@ OUTPUT REQUIREMENTS:
             "type": "array",
             "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
             "items": {
-              "x-format": "{value.PromptLabel}: {value.Question}\n\n{value.ExpectedStudentResponses}",
+              "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
               "type": "object",
               "properties": {
                 "PromptLabel": {

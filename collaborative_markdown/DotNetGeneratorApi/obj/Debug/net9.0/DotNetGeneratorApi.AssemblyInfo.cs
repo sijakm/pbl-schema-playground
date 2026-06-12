@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotNetGeneratorApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+861a226ec732ebbf389172230dc7210efb51229b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df58aa76061b46b4d1762b56309a7697810f5dea")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotNetGeneratorApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotNetGeneratorApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

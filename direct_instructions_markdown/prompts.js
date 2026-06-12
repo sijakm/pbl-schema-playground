@@ -127,22 +127,29 @@ OUTPUT REQUIREMENTS:
                         "maxItems": 3,
                         "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
                         "items": {
-                            "type": "string"
-                        }
+                            "type": "string",
+                            "x-format": "- {value}"
+                        },
+                        "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+                        "x-cache": true
                     },
                     "StudentLearningObjectives": {
                         "type": "array",
                         "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
                         "items": {
-                            "type": "string"
-                        }
+                            "type": "string",
+                            "x-format": "- {value}"
+                        },
+                        "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}"
                     },
                     "StandardsAligned": {
                         "type": "array",
                         "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
                         "items": {
-                            "type": "string"
-                        }
+                            "type": "string",
+                            "x-format": "- {value}"
+                        },
+                        "x-format": "### 📏{loc.StandardsAligned}\n\n{items}"
                     }
                 },
                 "required": [
@@ -178,7 +185,8 @@ OUTPUT REQUIREMENTS:
                         "lessonOutline"
                     ],
                     "additionalProperties": false
-                }
+                },
+                "x-format": false
             }
         },
         "required": [
@@ -207,28 +215,35 @@ OUTPUT REQUIREMENTS:
                         "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "x-format": "### 💭 {loc.EssentialQuestions}\n\n{cache.EssentialQuestions}"
                     },
                     "KeyVocabulary": {
                         "type": "array",
                         "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
                         "items": {
-                            "type": "string"
-                        }
+                            "type": "string",
+                            "x-format": "{index}. {value}"
+                        },
+                        "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}"
                     },
                     "StudentLearningObjectives": {
                         "type": "array",
                         "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
                         "items": {
-                            "type": "string"
-                        }
+                            "type": "string",
+                            "x-format": "- {value}\n"
+                        },
+                        "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}"
                     },
                     "StandardsAligned": {
                         "type": "array",
                         "description": "Full 'Standards Aligned' section for this lesson as a list. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
                         "items": {
-                            "type": "string"
-                        }
+                            "type": "string",
+                            "x-format": "- {value}"
+                        },
+                        "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}"
                     },
                     "AssessPriorKnowledge": {
                         "type": "object",
@@ -237,22 +252,38 @@ OUTPUT REQUIREMENTS:
                             "ActivityInstructions": {
                                 "type": "array",
                                 "description": "Sequential steps (e.g. 'Say: ...', 'Project or read...') to start the activity.",
-                                "items": { "type": "string" }
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "- {value}"
+                                },
+                                "x-format": "{items}"
                             },
                             "ExpectedStudentResponses": {
                                 "type": "array",
                                 "description": "Anticipated answers or common misconceptions for the chosen modality.",
-                                "items": { "type": "string" }
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "  - {value}"
+                                },
+                                "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                             },
                             "ClosingTeacherPrompt": {
                                 "type": "array",
                                 "description": "Closing teacher steps and prompts that validate student thinking and preview unit investigation.",
-                                "items": { "type": "string" }
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "- {value}"
+                                },
+                                "x-format": "{items}"
                             },
                             "AlternateOptions": {
                                 "type": "array",
                                 "description": "2 brief alternate options a teacher could choose.",
-                                "items": { "type": "string" }
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "{index}. {value}"
+                                },
+                                "x-format": "**{loc.AlternateOptions}**\n\n{items}"
                             }
                         },
                         "required": [
@@ -261,7 +292,8 @@ OUTPUT REQUIREMENTS:
                             "ClosingTeacherPrompt",
                             "AlternateOptions"
                         ],
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}"
                     },
                     "DirectPresentation": {
                         "type": "object",
@@ -270,7 +302,11 @@ OUTPUT REQUIREMENTS:
                             "Materials": {
                                 "type": "array",
                                 "description": "List of required materials (e.g. visual aids, markers, etc.)",
-                                "items": { "type": "string" }
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "- {value}"
+                                },
+                                "x-format": "**📚 {loc.Materials}**\n\n{items}"
                             },
                             "InstructionsForTeachers": {
                                 "type": "array",
@@ -285,12 +321,21 @@ OUTPUT REQUIREMENTS:
                                         "ExpectedStudentResponses": {
                                             "type": "array",
                                             "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
-                                            "items": { "type": "string" }
+                                            "items": {
+                                                "type": "string",
+                                                "x-format": "  - {value}"
+                                            },
+                                            "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                         }
                                     },
-                                    "required": ["Instruction", "ExpectedStudentResponses"],
-                                    "additionalProperties": false
-                                }
+                                    "required": [
+                                        "Instruction",
+                                        "ExpectedStudentResponses"
+                                    ],
+                                    "additionalProperties": false,
+                                    "x-format": "\n\n**{index}.** {value.Instruction}\n\n{value.ExpectedStudentResponses}"
+                                },
+                                "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}"
                             },
                             "AnticipatedMisconceptions": {
                                 "type": "array",
@@ -307,37 +352,63 @@ OUTPUT REQUIREMENTS:
                                             "description": "The correction language starting with 'Say: '."
                                         }
                                     },
-                                    "required": ["Misconception", "Correction"],
-                                    "additionalProperties": false
-                                }
+                                    "required": [
+                                        "Misconception",
+                                        "Correction"
+                                    ],
+                                    "additionalProperties": false,
+                                    "x-format": "\n\n**{index}.** {value.Misconception}\n  - {value.Correction}"
+                                },
+                                "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}"
                             },
                             "TranscendentThinking": {
                                 "type": "object",
                                 "description": "Real-world application question connecting learning to purpose/meaning/big ideas.",
                                 "properties": {
-                                    "Question": { "type": "string" },
+                                    "Question": {
+                                        "type": "string"
+                                    },
                                     "ExpectedStudentResponses": {
                                         "type": "array",
                                         "description": "Expected student responses showing deeper understanding.",
-                                        "items": { "type": "string" }
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                     }
                                 },
-                                "required": ["Question", "ExpectedStudentResponses"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Question",
+                                    "ExpectedStudentResponses"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "### 🌍 {loc.TranscendentThinking}\n\n{value.Question}\n\n{value.ExpectedStudentResponses}"
                             },
                             "QuickCheck": {
                                 "type": "object",
                                 "description": "A final check of understanding for a student learning objective already declared in the lesson. This MUST be an individual task for EVERY student to complete.",
                                 "properties": {
-                                    "Question": { "type": "string", "description": "e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'" },
+                                    "Question": {
+                                        "type": "string",
+                                        "description": "e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'"
+                                    },
                                     "ExpectedStudentResponses": {
                                         "type": "array",
                                         "description": "2-3 specific expected student responses.",
-                                        "items": { "type": "string" }
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                     }
                                 },
-                                "required": ["Question", "ExpectedStudentResponses"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Question",
+                                    "ExpectedStudentResponses"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**{loc.QuickCheck}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}"
                             }
                         },
                         "required": [
@@ -347,7 +418,8 @@ OUTPUT REQUIREMENTS:
                             "TranscendentThinking",
                             "QuickCheck"
                         ],
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "x-format": "### {green}({loc.DirectPresentation})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.AnticipatedMisconceptions}\n\n{value.TranscendentThinking}\n\n{value.QuickCheck}"
                     },
                     "GuidedPractice": {
                         "type": "object",
@@ -357,8 +429,10 @@ OUTPUT REQUIREMENTS:
                                 "type": "array",
                                 "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
                                 "items": {
-                                    "type": "string"
-                                }
+                                    "type": "string",
+                                    "x-format": "- {value}"
+                                },
+                                "x-format": "**📚 {loc.Materials}**\n\n{items}"
                             },
                             "InstructionsForTeachers": {
                                 "type": "array",
@@ -373,85 +447,125 @@ OUTPUT REQUIREMENTS:
                                         "ExpectedStudentResponses": {
                                             "type": "array",
                                             "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
-                                            "items": { "type": "string" }
+                                            "items": {
+                                                "type": "string",
+                                                "x-format": "  - {value}"
+                                            },
+                                            "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                         }
                                     },
-                                    "required": ["Instruction", "ExpectedStudentResponses"],
-                                    "additionalProperties": false
-                                }
+                                    "required": [
+                                        "Instruction",
+                                        "ExpectedStudentResponses"
+                                    ],
+                                    "additionalProperties": false,
+                                    "x-format": "\n\n**{index}.** {value.Instruction}\n\n{value.ExpectedStudentResponses}"
+                                },
+                                "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}"
                             },
                             "QuickCheck": {
                                 "type": "object",
                                 "description": "Final comprehension check question for the guided practice.",
                                 "properties": {
-                                    "Question": { "type": "string" },
+                                    "Question": {
+                                        "type": "string"
+                                    },
                                     "ExpectedStudentResponses": {
                                         "type": "array",
                                         "description": "2-3 expected student responses.",
-                                        "items": { "type": "string" }
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                     }
                                 },
-                                "required": ["Question", "ExpectedStudentResponses"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Question",
+                                    "ExpectedStudentResponses"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**{loc.QuickCheck}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}"
                             },
                             "Differentiation": {
                                 "type": "object",
-                                "description": "Three-part differentiation strategies including: (1) Language Learners support, (2) Additional Scaffolding support, (3) Go Deeper extensions.",
+                                "description": "Labeled with three clearly labeled tiers: Language Learners, Students in Need of Additional Scaffolding, Go Deeper. Requirements: The content must differentiate instruction, not provide accommodations or modifications (those are addressed elsewhere). Strategies should focus on how to teach, not how to simplify materials. Activities should vary in complexity and depth, aligned to the same learning objectives. Each tier must promote active engagement, language development, and conceptual understanding. Use clear, teacher-facing language and make supports realistic for classroom use.",
                                 "properties": {
                                     "LanguageLearners": {
                                         "type": "object",
                                         "properties": {
                                             "Strategies": {
                                                 "type": "array",
-                                                "items": { "type": "string" },
-                                                "description": "2-3 strategies for language learners."
-                                            },
-                                            "ExpectedStudentResponses": {
-                                                "type": "array",
-                                                "items": { "type": "string" },
-                                                "description": "Expected student responses showing what success looks like. Return empty array if not applicable."
+                                                "items": {
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
+                                                },
+                                                "description": "Provide 2-3 concrete teaching strategies for language learners. Examples: providing specific visuals (e.g., 'Planet Fact Sheet'), using sentence frames (e.g., 'This is placed here because...'), or asking students to gesture/point before explaining verbally. Focus on active engagement and language development.",
+                                                "x-format": "{items}"
                                             }
                                         },
-                                        "required": ["Strategies", "ExpectedStudentResponses"],
-                                        "additionalProperties": false
+                                        "required": [
+                                            "Strategies"
+                                        ],
+                                        "additionalProperties": false,
+                                        "x-format": "{loc.LanguageLearners}\n\n{value.Strategies}"
                                     },
                                     "AdditionalScaffolding": {
                                         "type": "object",
                                         "properties": {
                                             "Strategies": {
                                                 "type": "array",
-                                                "items": { "type": "string" },
-                                                "description": "2-3 strategies for students needing more scaffolding."
-                                            },
-                                            "ExpectedStudentResponses": {
-                                                "type": "array",
-                                                "items": { "type": "string" },
-                                                "description": "Expected student responses showing what success looks like. Return empty array if not applicable."
+                                                "items": {
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
+                                                },
+                                                "description": "Provide 2-3 concrete teaching strategies for scaffolding. Examples: providing pre-drawn organizers/templates, using a simplified checklist with specific guiding questions, or modeling a think-aloud process (e.g., 'Watch how I match...'). Focus on how to teach and vary complexity without simplifying materials.",
+                                                "x-format": "{items}"
                                             }
                                         },
-                                        "required": ["Strategies", "ExpectedStudentResponses"],
-                                        "additionalProperties": false
+                                        "required": [
+                                            "Strategies"
+                                        ],
+                                        "additionalProperties": false,
+                                        "x-format": "{loc.StudentsInNeedOfAdditionalScaffolding}\n\n{value.Strategies}"
                                     },
                                     "GoDeeper": {
                                         "type": "object",
                                         "properties": {
                                             "Strategies": {
                                                 "type": "array",
-                                                "items": { "type": "string" },
-                                                "description": "1-2 extension tasks."
+                                                "items": {
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
+                                                },
+                                                "description": "Provide 1-2 extension tasks that deepen conceptual understanding. Include specific challenges (e.g., 'Adjust spacing to show...') or higher-order questions (e.g., 'How would you model... accurately?'). Must align to the same learning objectives.",
+                                                "x-format": "{items}"
                                             },
                                             "ExpectedStudentResponses": {
                                                 "type": "array",
-                                                "items": { "type": "string" },
-                                                "description": "Expected student responses showing what success looks like. Return empty array if not applicable."
+                                                "items": {
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
+                                                },
+                                                "description": "Expected student responses showing what success looks like. Return empty array if not applicable.",
+                                                "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                             }
                                         },
-                                        "required": ["Strategies", "ExpectedStudentResponses"],
-                                        "additionalProperties": false
+                                        "required": [
+                                            "Strategies",
+                                            "ExpectedStudentResponses"
+                                        ],
+                                        "additionalProperties": false,
+                                        "x-format": "{loc.GoDeeper}\n\n{value.Strategies}\n\n{value.ExpectedStudentResponses}"
                                     }
                                 },
-                                "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
-                                "additionalProperties": false
+                                "required": [
+                                    "LanguageLearners",
+                                    "AdditionalScaffolding",
+                                    "GoDeeper"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}"
                             },
                             "AccommodationsAndModifications": {
                                 "type": "object",
@@ -459,8 +573,12 @@ OUTPUT REQUIREMENTS:
                                 "properties": {
                                     "General": {
                                         "type": "array",
-                                        "items": { "type": "string" },
-                                        "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points.",
+                                        "x-format": "{items}"
                                     },
                                     "IndividualSupport": {
                                         "type": "array",
@@ -473,25 +591,40 @@ OUTPUT REQUIREMENTS:
                                                     "description": "First and last name of the individual student receiving these supports."
                                                 },
                                                 "PlanProvided": {
-                                                    "type": "string",
-                                                    "description": "The exact formal plan provided for this student in the prompt."
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "x-format": "- {value}"
+                                                    },
+                                                    "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
                                                 },
                                                 "PlanImplementation": {
                                                     "type": "array",
-                                                    "items": { "type": "string" },
-                                                    "description": "Concrete tools/stems/visuals/organizers for this task."
+                                                    "items": {
+                                                        "type": "string",
+                                                        "x-format": "- {value}"
+                                                    },
+                                                    "description": "Concrete tools/stems/visuals/organizers for this task.",
+                                                    "x-format": "{items}"
                                                 }
                                             },
-                                            "required": ["StudentName", "PlanProvided", "PlanImplementation"],
-                                            "additionalProperties": false
-                                        }
+                                            "required": [
+                                                "StudentName",
+                                                "PlanProvided",
+                                                "PlanImplementation"
+                                            ],
+                                            "additionalProperties": false,
+                                            "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}"
+                                        },
+                                        "x-format": "{items}"
                                     }
                                 },
                                 "required": [
                                     "General",
                                     "IndividualSupport"
                                 ],
-                                "additionalProperties": false
+                                "additionalProperties": false,
+                                "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}"
                             }
                         },
                         "required": [
@@ -501,7 +634,8 @@ OUTPUT REQUIREMENTS:
                             "Differentiation",
                             "AccommodationsAndModifications"
                         ],
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "x-format": "### {green}({loc.GuidedPractice})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.QuickCheck}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}"
                     },
                     "IndependentPractice": {
                         "type": "object",
@@ -509,8 +643,12 @@ OUTPUT REQUIREMENTS:
                         "properties": {
                             "Materials": {
                                 "type": "array",
-                                "items": { "type": "string" },
-                                "description": "Required materials."
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "- {value}"
+                                },
+                                "description": "Required materials.",
+                                "x-format": "**📚 {loc.Materials}**\n\n{items}"
                             },
                             "Purpose": {
                                 "type": "string",
@@ -522,24 +660,52 @@ OUTPUT REQUIREMENTS:
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "TaskName": { "type": "string" },
-                                        "DOKLevel": { "type": "string", "description": "e.g., 'DOK 3' or 'DOK 3-4'" },
-                                        "TeacherNotes": { "type": "string", "description": "Explanation connecting task to presentation/goals." },
-                                        "Instruction": { "type": "string", "description": "The specific instruction or 'Say:' statement." },
+                                        "TaskName": {
+                                            "type": "string"
+                                        },
+                                        "DOKLevel": {
+                                            "type": "string",
+                                            "description": "e.g., 'DOK 3' or 'DOK 3-4'"
+                                        },
+                                        "TeacherNotes": {
+                                            "type": "string",
+                                            "description": "Explanation connecting task to presentation/goals."
+                                        },
+                                        "Instruction": {
+                                            "type": "string",
+                                            "description": "The specific instruction or 'Say:' statement."
+                                        },
                                         "ExpectedStudentResponses": {
                                             "type": "array",
-                                            "items": { "type": "string" },
-                                            "description": "Sample answers."
+                                            "items": {
+                                                "type": "string",
+                                                "x-format": "  - {value}"
+                                            },
+                                            "description": "Sample answers.",
+                                            "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                                         },
                                         "SuccessCriteria": {
                                             "type": "array",
-                                            "items": { "type": "string" },
-                                            "description": "2-4 elements showing mastery."
+                                            "items": {
+                                                "type": "string",
+                                                "x-format": "  - {value}"
+                                            },
+                                            "description": "2-4 elements showing mastery.",
+                                            "x-format": "- {loc.SuccessCriteria}\n\n{items}"
                                         }
                                     },
-                                    "required": ["TaskName", "DOKLevel", "TeacherNotes", "Instruction", "ExpectedStudentResponses", "SuccessCriteria"],
-                                    "additionalProperties": false
-                                }
+                                    "required": [
+                                        "TaskName",
+                                        "DOKLevel",
+                                        "TeacherNotes",
+                                        "Instruction",
+                                        "ExpectedStudentResponses",
+                                        "SuccessCriteria"
+                                    ],
+                                    "additionalProperties": false,
+                                    "x-format": "\n\n**{loc.Task} {index}:** {value.TaskName} ({value.DOKLevel})\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.Instruction}\n\n{value.ExpectedStudentResponses}\n\n{value.SuccessCriteria}"
+                                },
+                                "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}"
                             },
                             "Reflection": {
                                 "type": "array",
@@ -547,30 +713,62 @@ OUTPUT REQUIREMENTS:
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "Question": { "type": "string" },
-                                        "ReflectionType": { "type": "string", "description": "e.g., 'Self-Regulation' or 'Transcendence'" }
+                                        "Question": {
+                                            "type": "string"
+                                        },
+                                        "ReflectionType": {
+                                            "type": "string",
+                                            "description": "e.g., 'Self-Regulation' or 'Transcendence'"
+                                        }
                                     },
-                                    "required": ["Question", "ReflectionType"],
-                                    "additionalProperties": false
-                                }
+                                    "required": [
+                                        "Question",
+                                        "ReflectionType"
+                                    ],
+                                    "additionalProperties": false,
+                                    "x-format": "- **{value.ReflectionType}:** {value.Question}"
+                                },
+                                "x-format": "**{loc.Reflection}**\n\n{items}"
                             },
                             "EarlyFinishers": {
                                 "type": "object",
                                 "properties": {
-                                    "Prompt": { "type": "string", "description": "The early finisher task prompt/description." },
+                                    "Prompt": {
+                                        "type": "string",
+                                        "description": "The early finisher task prompt/description."
+                                    },
                                     "Requirements": {
                                         "type": "array",
-                                        "items": { "type": "string" },
-                                        "description": "Specific elements students must address."
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Specific elements students must address.",
+                                        "x-format": "{items}"
                                     },
-                                    "Justification": { "type": "string", "description": "Concluding sentence about using accurate principles." }
+                                    "Justification": {
+                                        "type": "string",
+                                        "description": "Concluding sentence about using accurate principles."
+                                    }
                                 },
-                                "required": ["Prompt", "Requirements", "Justification"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Prompt",
+                                    "Requirements",
+                                    "Justification"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**{loc.EarlyFinishers}**\n\n**{loc.Prompt}:** {value.Prompt}\n\n**{loc.Requirements}:**\n{value.Requirements}\n\n**{loc.Justification}:** {value.Justification}"
                             }
                         },
-                        "required": ["Materials", "Purpose", "InstructionsForTeachers", "Reflection", "EarlyFinishers"],
-                        "additionalProperties": false
+                        "required": [
+                            "Materials",
+                            "Purpose",
+                            "InstructionsForTeachers",
+                            "Reflection",
+                            "EarlyFinishers"
+                        ],
+                        "additionalProperties": false,
+                        "x-format": "### {green}({loc.IndependentPractice})\n\n{value.Materials}\n\n**{loc.Purpose}:** {value.Purpose}\n\n{value.InstructionsForTeachers}\n\n{value.Reflection}\n\n{value.EarlyFinishers}"
                     },
                     "ReviewAndSpacedRetrieval": {
                         "type": "object",
@@ -578,114 +776,251 @@ OUTPUT REQUIREMENTS:
                         "properties": {
                             "Materials": {
                                 "type": "array",
-                                "items": { "type": "string" },
-                                "description": "Required materials (often none needed)."
+                                "items": {
+                                    "type": "string",
+                                    "x-format": "- {value}"
+                                },
+                                "description": "Required materials (often none needed).",
+                                "x-format": "**📚 {loc.Materials}**\n\n{items}"
                             },
-                            "TeacherNotes": { 
+                            "TeacherNotes": {
                                 "type": "string",
-                                "description": "Teacher Notes paragraph that explains: How this review strategy enhances retention, connection to prior learning concepts, and how transcendent reflection deepens understanding." 
+                                "description": "Teacher Notes paragraph that explains: How this review strategy enhances retention, connection to prior learning concepts, and how transcendent reflection deepens understanding.",
+                                "x-format": "**{loc.TeacherNotes}:** {value}"
                             },
                             "ActiveRecall": {
                                 "type": "object",
                                 "description": "Instructions for Teachers containing Active Recall prompt.",
                                 "properties": {
-                                    "Instruction": { "type": "string", "description": "Active Recall prompt using partner/group sharing. Must use a 'Say:' statement." },
-                                    "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Expected Student Responses (2-3 bulleted examples)." },
+                                    "Instruction": {
+                                        "type": "string",
+                                        "description": "Active Recall prompt using partner/group sharing. Must use a 'Say:' statement."
+                                    },
+                                    "ExpectedStudentResponses": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Expected Student Responses (2-3 bulleted examples).",
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
+                                    },
                                     "CorrectCommonMisconceptions": {
                                         "type": "array",
-                                        "items": { "type": "string" },
-                                        "description": "Sample misconception statements and teacher response scripts addressing each (e.g. 'If a student says X, respond Y')."
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Sample misconception statements and teacher response scripts addressing each (e.g. 'If a student says X, respond Y').",
+                                        "x-format": "**{loc.CorrectCommonMisconceptions}**\n\n{items}"
                                     }
                                 },
-                                "required": ["Instruction", "ExpectedStudentResponses", "CorrectCommonMisconceptions"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Instruction",
+                                    "ExpectedStudentResponses",
+                                    "CorrectCommonMisconceptions"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**{loc.ActiveRecall}**\n\n{value.Instruction}\n\n{value.ExpectedStudentResponses}\n\n{value.CorrectCommonMisconceptions}"
                             },
                             "EssentialQuestionConnection": {
                                 "type": "object",
                                 "description": "Connection to the unit's essential question.",
                                 "properties": {
-                                    "Question": { "type": "string", "description": "Teacher prompt linking to unit question. Must use a 'Say:' statement." },
-                                    "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Expected Student Responses (2-3 examples)." }
+                                    "Question": {
+                                        "type": "string",
+                                        "description": "Teacher prompt linking to unit question. Must use a 'Say:' statement."
+                                    },
+                                    "ExpectedStudentResponses": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Expected Student Responses (2-3 examples).",
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
+                                    }
                                 },
-                                "required": ["Question", "ExpectedStudentResponses"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Question",
+                                    "ExpectedStudentResponses"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**💭 {loc.EssentialQuestionConnection}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}"
                             },
                             "TranscendentThinking": {
                                 "type": "object",
                                 "description": "Reflection on real-world application or broader impact.",
                                 "properties": {
-                                    "Question": { "type": "string", "description": "Real-world application prompt. Must include a think time instruction (e.g., 'Take 30 seconds to think silently, then share:') and use a 'Say:' statement." },
-                                    "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Expected Student Responses (2-3 examples)." }
+                                    "Question": {
+                                        "type": "string",
+                                        "description": "Real-world application prompt. Must include a think time instruction (e.g., 'Take 30 seconds to think silently, then share:') and use a 'Say:' statement."
+                                    },
+                                    "ExpectedStudentResponses": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Expected Student Responses (2-3 examples).",
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
+                                    }
                                 },
-                                "required": ["Question", "ExpectedStudentResponses"],
-                                "additionalProperties": false
+                                "required": [
+                                    "Question",
+                                    "ExpectedStudentResponses"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "### 🌍 {loc.TranscendentThinking}\n\n{value.Question}\n\n{value.ExpectedStudentResponses}"
                             },
                             "SpacedRetrieval": {
                                 "type": "object",
                                 "description": "Recall of specific prior learning concepts.",
                                 "properties": {
-                                    "HeaderTitle": { "type": "string", "description": "Clear reference to specific prior lesson (e.g., 'Spaced Retrieval (Draws from Unit 2, Lesson 3)')." },
-                                    "Instruction": { "type": "string", "description": "Question connecting past and current concepts. Must use a 'Say:' statement." },
-                                    "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "Detailed success criteria or expected student responses (2-3 examples)." }
+                                    "HeaderTitle": {
+                                        "type": "string",
+                                        "description": "Clear reference to specific prior lesson (e.g., 'Spaced Retrieval (Draws from Unit 2, Lesson 3)')."
+                                    },
+                                    "Instruction": {
+                                        "type": "string",
+                                        "description": "Question connecting past and current concepts. Must use a 'Say:' statement."
+                                    },
+                                    "ExpectedStudentResponses": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "x-format": "- {value}"
+                                        },
+                                        "description": "Detailed success criteria or expected student responses (2-3 examples).",
+                                        "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
+                                    }
                                 },
-                                "required": ["HeaderTitle", "Instruction", "ExpectedStudentResponses"],
-                                "additionalProperties": false
+                                "required": [
+                                    "HeaderTitle",
+                                    "Instruction",
+                                    "ExpectedStudentResponses"
+                                ],
+                                "additionalProperties": false,
+                                "x-format": "**⏳ {value.HeaderTitle}**\n\n{value.Instruction}\n\n{value.ExpectedStudentResponses}"
                             }
                         },
-                        "required": ["Materials", "TeacherNotes", "ActiveRecall", "EssentialQuestionConnection", "TranscendentThinking", "SpacedRetrieval"],
-                        "additionalProperties": false
+                        "required": [
+                            "Materials",
+                            "TeacherNotes",
+                            "ActiveRecall",
+                            "EssentialQuestionConnection",
+                            "TranscendentThinking",
+                            "SpacedRetrieval"
+                        ],
+                        "additionalProperties": false,
+                        "x-format": "### {green}({loc.ReviewAndSpacedRetrieval})\n\n{value.Materials}\n\n{value.TeacherNotes}\n\n📋 **{loc.InstructionsForTeachers}**\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}"
                     },
                     "FormativeAssessment": {
+                        "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
                         "type": "array",
                         "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
                         "items": {
+                            "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
                             "type": "object",
                             "properties": {
-                                "PromptName": { "type": "string", "description": "e.g., 'Prompt 1 (DOK 1)'" },
-                                "Question": { "type": "string", "description": "The exact question text that tests understanding at the stated DOK level. e.g., 'Why do planets stay in orbit instead of flying off into space?'" },
-                                "ExpectedStudentResponses": { "type": "array", "items": { "type": "string" }, "description": "1-2 sample responses showing mastery (wrapped in quotes)." }
+                                "PromptLabel": {
+                                    "type": "string",
+                                    "description": "e.g., 'Prompt 1 (DOK 1)'"
+                                },
+                                "Question": {
+                                    "type": "string",
+                                    "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+                                },
+                                "ExpectedStudentResponses": {
+                                    "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                                    "type": "array",
+                                    "items": {
+                                        "x-format": "- {value}",
+                                        "type": "string"
+                                    },
+                                    "description": "1-2 sample responses showing mastery (wrapped in quotes)."
+                                }
                             },
-                            "required": ["PromptName", "Question", "ExpectedStudentResponses"],
+                            "required": [
+                                "PromptLabel",
+                                "Question",
+                                "ExpectedStudentResponses"
+                            ],
                             "additionalProperties": false
                         },
                         "minItems": 4,
                         "maxItems": 4
                     },
                     "StudentPractice": {
+                        "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
                         "type": "object",
-                        "description": "Structured Student Practice section.",
+                        "description": "Homework/out-of-class practice.",
                         "properties": {
                             "TeacherNotes": {
+                                "x-format": "**{loc.TeacherNotes}:** {value}",
                                 "type": "string",
-                                "description": "Short explanation of the practice goals, e.g., 'These tasks reinforce today's learning...'"
+                                "description": "Short explanation of the practice goals, e.g., 'These tasks reinforce today's learning about [topic] by asking students to observe real-world patterns and explain them using the concepts introduced in class...'"
                             },
                             "PracticeTasks": {
+                                "x-format": "{items}",
                                 "type": "array",
                                 "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
                                 "items": {
+                                    "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
                                     "type": "object",
                                     "properties": {
-                                        "TaskDescription": { "type": "string", "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'" },
-                                        "SuccessCriteria": { "type": "array", "items": { "type": "string" }, "description": "Criteria defining what a successful student product must include." }
+                                        "TaskDescription": {
+                                            "type": "string",
+                                            "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'"
+                                        },
+                                        "ExpectedStudentResponses": {
+                                            "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                                            "type": "array",
+                                            "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                            }
+                                        }
                                     },
-                                    "required": ["TaskDescription", "SuccessCriteria"],
+                                    "required": [
+                                        "TaskDescription",
+                                        "ExpectedStudentResponses"
+                                    ],
                                     "additionalProperties": false
                                 },
                                 "minItems": 3,
                                 "maxItems": 3
                             },
                             "Reflection": {
+                                "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
                                 "type": "object",
                                 "description": "A reflection task for the students.",
                                 "properties": {
-                                    "Prompt": { "type": "string", "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'" },
-                                    "ReflectionOptions": { "type": "array", "items": { "type": "string" }, "description": "Exactly 4 reflection question options in quotes." }
+                                    "Prompt": {
+                                        "type": "string",
+                                        "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'"
+                                    },
+                                    "ReflectionOptions": {
+                                        "type": "array",
+                                        "items": {
+                                            "x-format": "- {value}",
+                                            "type": "string"
+                                        },
+                                        "description": "Exactly 4 reflection question options in quotes."
+                                    }
                                 },
-                                "required": ["Prompt", "ReflectionOptions"],
+                                "required": [
+                                    "Prompt",
+                                    "ReflectionOptions"
+                                ],
                                 "additionalProperties": false
                             }
                         },
-                        "required": ["TeacherNotes", "PracticeTasks", "Reflection"],
+                        "required": [
+                            "TeacherNotes",
+                            "PracticeTasks",
+                            "Reflection"
+                        ],
                         "additionalProperties": false
                     }
                 },

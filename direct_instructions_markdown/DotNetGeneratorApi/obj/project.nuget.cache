@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "S8QTGSRDnvk=",
+  "dgSpecHash": "8T+6faDxA+U=",
   "success": true,
   "projectFilePath": "/Users/milansijak/Desktop/pegs_playground/pbl-schema-playground/direct_instructions_markdown/DotNetGeneratorApi/DotNetGeneratorApi.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/milansijak/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
