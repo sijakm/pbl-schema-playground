@@ -1,0 +1,6 @@
+@SharedGeneratorApi_HostAddress = http://localhost:5047
+
+GET {{SharedGeneratorApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

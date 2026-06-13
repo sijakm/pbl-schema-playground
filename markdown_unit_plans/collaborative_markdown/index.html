@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Collaborative Playground (React)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="prompts_collaborative.js"></script>
+  <script>
+    const defaults = {
+      en: {
+        subject: "Science",
+        name: "Engineering & Innovation in Ancient Egypt"
+      }
+    };
+  </script>
+  <!-- We assume the shared folder is still there, but during dev it might need path tweaks based on how Vite serves it -->
+  <!-- We'll keep them as relative paths, though Vite might complain if they're outside root. -->
+  <script src="../../config.local.js"></script>
+  <script src="../../shared/local-config-loader.js"></script>
+  <script src="../../shared/utils.js"></script>
+  <script src="../../shared/token-manager.js"></script>
+  <script src="../../shared/api-client.js"></script>
+  <script src="../../shared/schema-editor.js"></script>
+  
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
