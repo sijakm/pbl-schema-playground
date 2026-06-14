@@ -376,6 +376,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
             "properties": {
               "LaunchInvestigation": {
                 "type": "object",
+                "x-format": "**{loc.LaunchTheInvestigationTitle}**\n\n**{loc.Say}:** {value.Prompt}\n\n{loc.FacilitationMovesLabel}\n\n{value.FacilitationMoves}\n- **{loc.PromptWithQuestionsSuchAs}:** {value.PromptingOptions}",
                 "properties": {
                   "Prompt": { "type": "string", "description": "Create teacher instructions to introduce a puzzling scenario or model. First provide a bracketed action like [Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result to spark curiosity], then provide the conversational script (do NOT include the 'Say:' prefix)." },
                   "FacilitationMoves": { "type": "array", "description": "Generate 2-3 moves to guide the launch. State the instructional actions clearly without prefixing them with 'Say:'. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.", "items": { "x-format": "- {value}", "type": "string" } },
@@ -386,6 +387,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
               },
               "CollaborationExpectations": {
                 "type": "object",
+                "x-format": "**{loc.CollaborationExpectationsTitle}**\n\n**{loc.Say}:** {value.Prompt}\n\n{loc.FacilitationMovesLabel}\n\n{value.FacilitationMoves}\n- **{loc.PromptWithQuestionsSuchAs}:** {value.PromptingOptions}",
                 "properties": {
                   "Prompt": { "type": "string", "description": "Create a spoken script (do NOT include the 'Say:' prefix) to frame the task as interdependent and emphasize shared responsibility. Include instructions for students to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips." },
                   "FacilitationMoves": { "type": "array", "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Do not prefix these actions with 'Say:'. Ensure they focus on all students contributing to observing and refining ideas.", "items": { "x-format": "- {value}", "type": "string" } },
@@ -396,6 +398,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
               },
               "CirculationPrompts": {
                 "type": "object",
+                "x-format": "**{loc.CirculationPromptsTitle}**\n\n**{loc.ConceptualPromptsTitle}**\n\n{value.Conceptual}\n\n**{loc.ReasoningPromptsTitle}**\n\n{value.Reasoning}\n\n**{loc.CollaborationPromptsTitle}**\n\n{value.Collaboration}",
                 "description": "Specific prompts to be used by the teacher while circulating between groups.",
                 "properties": {
                   "Conceptual": { "type": "array", "description": "2-3 prompts focusing on key scientific or lesson concepts (e.g., 'What evidence shows this is working?').", "items": { "x-format": "- {value}", "type": "string" } },
@@ -411,9 +414,11 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
           },
           "AnticipatedMisconceptions": {
             "type": "array",
+            "x-format": "### ⚠️ {loc.AnticipatedMisconceptions}{items}",
             "description": "Generate 2-3 common student misconceptions likely to arise during this lesson. Each item must focus on a specific misunderstanding and a teacher response script.",
             "items": {
               "type": "object",
+              "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
               "properties": {
                 "Misconception": { "type": "string", "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags." },
                 "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags." }
@@ -424,9 +429,11 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
           },
           "Differentiation": {
             "type": "object",
+            "x-format": "### 🪜 {loc.Differentiation}\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
             "properties": {
               "LanguageLearners": {
                 "type": "object",
+                "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
                 "properties": {
                   "Strategies": { "type": "array", "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas.", "items": { "x-format": "- {value}", "type": "string" } },
                   "SentenceStarters": { "type": "array", "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson.", "items": { "x-format": "- {value}", "type": "string" } }
@@ -436,6 +443,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
               },
               "AdditionalScaffolding": {
                 "type": "object",
+                "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}:**\n\n{value.Strategies}\n\nOffer a step-by-step checklist to guide the investigation:\n\n{value.Checklist}",
                 "properties": {
                   "Strategies": { "type": "array", "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task.", "items": { "x-format": "- {value}", "type": "string" } },
                   "Checklist": { "type": "array", "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation.", "items": { "x-format": "- {value}", "type": "string" } }
@@ -445,6 +453,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
               },
               "GoDeeper": {
                 "type": "object",
+                "x-format": "**{loc.GoDeeper}:**\n\n{value.Strategies}\n\n{loc.AdvancedThinkingQuestionTitle}:\n\n- {loc.Say}: \"{value.AdvancedQuestion}\"\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedResponses}",
                 "properties": {
                   "Strategies": { "type": "array", "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence.", "items": { "x-format": "- {value}", "type": "string" } },
                   "AdvancedQuestion": { "type": "string", "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding." },
@@ -458,40 +467,51 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
             "additionalProperties": false
           },
           "AccommodationsAndModifications": {
+            "x-format": "### 🤝 {loc.AccommodationsAndModifications}\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
             "type": "object",
-            "description": "General accommodations for the class plus individual student support plans. The model must use ONLY the student names and plans provided in the prompt.",
+            "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
             "properties": {
               "General": {
-                "type": "string",
-                "description": "General classroom supports and modifications that apply to most or all students during this activity."
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                },
+                "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
               },
               "IndividualSupport": {
+                "x-format": "{items}",
                 "type": "array",
-                "description": "List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt.",
+                "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
                 "items": {
+                  "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                   "type": "object",
                   "properties": {
                     "StudentName": {
                       "type": "string",
-                      "description": "Full name of the student exactly as provided in the prompt."
+                      "description": "First and last name of the individual student receiving these supports."
                     },
-                    "Plan": {
+                    "PlanProvided": {
                       "type": "array",
-                      "description": "A mix of instructions and sub-lists. Each entry has a 'item' (as a paragraph) and optional 'subItems' (as bullets) for when a task needs to be broken down logically.",
                       "items": {
-                        "type": "object",
-                        "properties": {
-                          "item": { "type": "string", "description": "The main instruction or list header." },
-                          "subItems": { "type": "array", "description": "Optional bulleted steps or specific examples linked to the item.", "items": { "x-format": "- {value}", "type": "string" } }
-                        },
-                        "required": ["item", "subItems"],
-                        "additionalProperties": false
-                      }
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    },
+                    "PlanImplementation": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "Concrete tools/stems/visuals/organizers for this task."
                     }
                   },
                   "required": [
                     "StudentName",
-                    "Plan"
+                    "PlanProvided",
+                    "PlanImplementation"
                   ],
                   "additionalProperties": false
                 }
@@ -505,6 +525,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
           },
           "QuickCheck": {
             "type": "object",
+            "x-format": "### ✔ {loc.QuickCheck}\n\n{value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedResponses}",
             "properties": {
               "Question": { "type": "string", "description": "Generate one specific question (do NOT include the 'Say:' prefix) to check for student understanding during or at the end of the investigation." },
               "ExpectedResponses": { "type": "array", "description": "Generate 3-4 expected student responses that show mastery of the lesson concept.", "items": { "x-format": "- {value}", "type": "string" } }
@@ -524,7 +545,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
         "additionalProperties": false
       },
       "ConclusionPhase": {
-        "x-format": "### {green}({loc.ConclusionPhase})\n\n{loc.ConclusionPhasePurpose}\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
+        "x-format": "### {green}({loc.ConclusionPhase})\n\n{loc.ConclusionPhasePurpose}\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
         "type": "object",
         "description": "",
         "properties": {
@@ -536,9 +557,10 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
           },
           "InstructionsForTeachers": {
             "type": "object",
+            "x-format": "{value.OpeningScript}\n\n{value.FacilitationMoves}\n\n**{loc.PromptWithQuestionsSuchAs}:**\n\n{value.ProbingQuestions}\n\n{value.WritingPrompt}\n\n{value.CollaborationInstruction}\n\n*{value.Guardrail}*",
             "properties": {
               "OpeningScript": { "type": "string", "description": "A statement (do NOT include the 'Say:' prefix) to bring students back to the research question and surfacing emerging ideas about how the design works." },
-              "FacilitationMoves": { "type": "array", "description": "2-3 pedagogical moves to give students time to review data, identify patterns, and compare results through discussion.", "items": { "x-format": "- {value}", "type": "string" } },
+              "FacilitationMoves": { "type": "array", "description": "2-3 pedagogical moves to give students time to review data, identify patterns, and compare results through discussion.", "items": { "x-format": "{value}\n\n", "type": "string" } },
               "ProbingQuestions": { "type": "array", "description": "3-4 specific questions to push students to explain patterns, justify decisions with evidence, and describe cause-and-effect relationships.", "items": { "x-format": "- {value}", "type": "string" } },
               "WritingPrompt": { "type": "string", "description": "A statement (do NOT include the 'Say:' prefix) outlining what their written explanation must include (content-specific components) and a reminder to use data as evidence." },
               "CollaborationInstruction": { "type": "string", "description": "Instruction for students to write independently then share with a partner or group to refine their reasoning." },
@@ -561,7 +583,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
         "additionalProperties": false
       },
       "DiscussionPhase": {
-        "x-format": "### {green}({loc.DiscussionPhase})\n\n{loc.DiscussionPhasePurpose}\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
+        "x-format": "### {green}({loc.DiscussionPhase})\n\n{loc.DiscussionPhasePurpose}\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}\n\n**🌍 {loc.TranscendentThinking}:**\n\n{value.TranscendentThinking}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
         "type": "object",
         "properties": {
           "Materials": {
@@ -572,9 +594,10 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
           },
           "InstructionsForTeachers": {
             "type": "object",
+            "x-format": "**{loc.Say}:** {value.OpeningScript}\n\n{value.FacilitationMoves}\n\n**{loc.PromptWithQuestionsSuchAs}:**\n\n{value.ProbingQuestions}",
             "properties": {
               "OpeningScript": { "type": "string", "description": "A statement (do NOT include the 'Say:' prefix) to prompt students to think about the broader implications of their evidence beyond the classroom." },
-              "FacilitationMoves": { "type": "array", "description": "2-3 pedagogical moves to encourage students to discuss with partners/groups and generate their own examples of real-world impact.", "items": { "x-format": "- {value}", "type": "string" } },
+              "FacilitationMoves": { "type": "array", "description": "2-3 pedagogical moves to encourage students to discuss with partners/groups and generate their own examples of real-world impact.", "items": { "x-format": "{value}\n\n", "type": "string" } },
               "ProbingQuestions": { "type": "array", "description": "3-4 specific questions to connect the investigation results to everyday life, community issues, or system redesign.", "items": { "x-format": "- {value}", "type": "string" } }
             },
             "required": ["OpeningScript", "FacilitationMoves", "ProbingQuestions"],
@@ -582,6 +605,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
           },
           "TranscendentThinking": {
             "type": "object",
+            "x-format": "{value.Question}",
             "properties": {
               "Question": { "type": "string", "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus." }
             },
@@ -603,16 +627,18 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
         "additionalProperties": false
       },
       "ReviewAndSpacedRetrieval": {
-        "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n{value.TeacherNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
+        "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n{loc.ReviewAndSpacedRetrievalNotes}\n\n{value.InstructionsForTeachers}",
         "type": "object",
         "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Transcendent Thinking section 4. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must provide direct teacher prompts without the 'Say:' prefix and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
         "properties": {
           "InstructionsForTeachers": {
             "type": "object",
+            "x-format": "{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
             "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
             "properties": {
               "ActiveRecall": {
                 "type": "object",
+                "x-format": "### 🔁 {loc.ActiveRecall}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
                 "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the investigation.",
                 "properties": {
                   "Question": {
@@ -630,6 +656,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
               },
               "EssentialQuestionConnection": {
                 "type": "object",
+                "x-format": "### 💭 {loc.EssentialQuestionConnection}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
                 "description": "Help students connect today's specific evidence to the broader unit essential questions.",
                 "properties": {
                   "Question": {
@@ -647,6 +674,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
               },
               "SpacedRetrieval": {
                 "type": "object",
+                "x-format": "### ⏳ {loc.SpacedRetrieval}\n\n**{loc.Say}:** {value.TeacherSay}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
                 "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
                 "properties": {
                   "TeacherSay": {
@@ -671,12 +699,43 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
         "additionalProperties": false
       },
       "FormativeAssessment": {
-        "x-format": "### ✅ {loc.FormativeAssessment}\n\n{value}",
-        "type": "string",
-        "description": "Full 'Formative Assessment' section as plain text. Must follow this structure: A teacher-facing introduction paragraph briefly stating purpose and how to implement. 4 required question prompts labeled 'Prompt 1 (DOK 1):', 'Prompt 2 (DOK 2):', etc. covering DOK levels 1-4. For each prompt: - Question that tests understanding at stated DOK level - Header 'Expected Student Responses' (without checkmarks/emojis) - 1-2 complete sentence responses showing mastery End with short paragraph naming specific formative assessment strategy to use (e.g.,'Exit Ticket','Think-Pair-Share'). Example format: Prompt 1 (DOK 1): 'Why do planets stay in orbit instead of flying off into space?' Expected Student Responses 'Because their forward motion and the Sun's gravity work together to create a stable orbit.' [Continue with Prompts 2-4 following same structure]"
+        "x-format": "### ✅ {loc.FormativeAssessment}\n\n{items}",
+        "type": "array",
+        "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+        "items": {
+          "x-format": "\n\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "properties": {
+            "PromptLabel": {
+              "type": "string",
+              "description": "e.g., 'Prompt 1 (DOK 1)'"
+            },
+            "Question": {
+              "type": "string",
+              "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "1-2 sample responses showing mastery."
+            }
+          },
+          "required": [
+            "PromptLabel",
+            "Question",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 4,
+        "maxItems": 4
       },
       "StudentPractice": {
-        "x-format": "### 🖋️ {loc.StudentPractice}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.Tasks}\n\n**🔎 {loc.Reflection}:**\n\n{value.Reflection}",
+        "x-format": "### 🖋️ {loc.StudentPractice}\n\n**{loc.TeacherNotes}:** {loc.StudentPracticeNotes}\n\n{value.Tasks}\n\n**🔎 {loc.Reflection}:**\n\n{value.Reflection}",
         "type": "object",
         "description": "Full 'Student Practice' section for homework / out-of-class practice.",
         "properties": {
@@ -685,6 +744,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
             "description": "Generate 3 tasks covering DOK levels 2 and 3.",
             "items": {
               "type": "object",
+              "x-format": "\n\n**{value.TaskTitle}**\n\n{value.Instruction}\n\n{value.SuccessCriteria}",
               "properties": {
                 "TaskTitle": { "type": "string", "description": "e.g., '1. (DOK 2)'" },
                 "Instruction": { "type": "string", "description": "Clear step-by-step student directions for the task." },
