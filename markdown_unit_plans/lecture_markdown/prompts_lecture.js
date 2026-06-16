@@ -147,23 +147,13 @@ OUTPUT REQUIREMENTS:
               "x-format": "- {value}",
               "type": "string"
             }
-          },
-          "KeyVocabulary": {
-            "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
-            "type": "array",
-            "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
-            "items": {
-              "x-format": "- {value}",
-              "type": "string"
-            }
           }
         },
         "required": [
           "Description",
           "EssentialQuestions",
           "StudentLearningObjectives",
-          "StandardsAligned",
-          "KeyVocabulary"
+          "StandardsAligned"
         ],
         "additionalProperties": false
       },
@@ -253,7 +243,7 @@ OUTPUT REQUIREMENTS:
         }
       },
       "AssessPriorKnowledge": {
-        "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n**Say:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**Say:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**Say:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
+        "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**Say:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**Say:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**Say:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
         "type": "object",
         "description": "Full 'Assess Prior Knowledge' section. CRITICAL: Look at the 'lessonNumber' in the Attached Lesson Content. IF this is Lesson 1, populate this object fully. IF this is Lesson 2, 3, or any other lesson, YOU MUST RETURN AN EMPTY OBJECT {} with NO properties. Do not populate this for any lesson other than Lesson 1.",
         "properties": {
@@ -297,224 +287,289 @@ OUTPUT REQUIREMENTS:
           "InstructionsForTeachers": { 
             "x-format": "{items}",
             "type": "array", 
-            "items": { "x-format": "- {value}", "type": "string" }, 
-            "description": "Must include: 1) Explain learning goals using direct teacher-facing script (e.g., Say: '...') in clear, student-friendly language. 2) Ask students to record objectives in their notebooks. 3) Briefly tell the teacher how to connect objectives to students' real-life experiences." 
+            "items": {
+              "type": "object",
+              "x-format": "\n\n**{index}.** {value.Step}\n{value.Bullets}",
+              "properties": {
+                "Step": {
+                  "type": "string",
+                  "description": "Teacher step or script."
+                },
+                "Bullets": {
+                  "x-format": "{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "Optional list of bullet points for this step. For the first step, include the actual learning objectives here."
+                }
+              },
+              "required": ["Step", "Bullets"],
+              "additionalProperties": false
+            },
+            "description": "Must include: 1) Explain learning goals using direct teacher-facing script (e.g., Say: '...') and put the actual objectives in the Bullets array. 2) Ask students to record objectives in their notebooks. 3) Briefly tell the teacher how to connect objectives to students' real-life experiences." 
           }
         },
         "required": ["Duration", "Materials", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "ContentDeliveryAndInteractiveActivities": {
-        "x-format": "### {green}({loc.ContentDeliveryAndInteractiveActivities} {value.Duration})\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
+        "x-format": "### {green}({loc.ContentDeliveryAndInteractiveActivities} {value.Duration})\n\n**1. {loc.Hook}** {value.Hook}\n\n**2. {loc.Vocabulary}**\n\n{value.Vocabulary.Bullets}\n\n{value.Vocabulary.ConclusionSay}\n\n**3. {loc.NewConceptsAndKnowledge}**\n\n{value.NewConceptsAndKnowledge}\n\n### ⚡ {loc.AttentionReset}\n\n**{loc.Purpose}:** {value.AttentionReset.StandardParagraph}\n\n{value.AttentionReset.Directions}\n\n{loc.WhyThisWorks}:\n\n{value.AttentionReset.WhyThisWorks}\n\n### {loc.ContinueInstructionAfterActivity}\n\n{value.ContinueInstruction}\n\n### ⚠️ {loc.AnticipatedMisconceptions}\n\n{value.AnticipatedMisconceptions}\n\n{value.Connect}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
         "type": "object",
         "description": "Block for content delivery.",
         "properties": {
           "Duration": { "type": "string", "description": "Time estimate (e.g. '(30 min)')" },
-          "Materials": {
-            "x-format": "**{loc.TeacherOnlyMaterials}:**\n{value.TeacherOnlyMaterials}\n\n**{loc.StudentMaterials}:**\n{value.StudentMaterials}",
+          "Hook": { "x-format": "{items}", "type": "array", "items": { "x-format": "{value}\n\n", "type": "string" }, "description": "Write a dramatic, high-engagement hook delivered through teacher script. Should be surprising, curiosity-building, and tied to the main concept." },
+          "Vocabulary": {
             "type": "object",
             "properties": {
-              "TeacherOnlyMaterials": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } },
-              "StudentMaterials": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
+              "Bullets": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "List essential vocabulary terms. Provide teacher script for defining each term formatted strictly as: '[Term] - Say: \"[Definition/Script]\"'. Example: 'Lever - Say: \"A lever is a simple machine...\"'." },
+              "ConclusionSay": { "type": "string", "description": "A concluding 'Say: ' statement to transition." }
             },
-            "required": ["TeacherOnlyMaterials", "StudentMaterials"],
+            "required": ["Bullets", "ConclusionSay"],
             "additionalProperties": false
           },
-          "InstructionsForTeachers": {
-            "x-format": "**{loc.Hook}:**\n{value.Hook}\n\n**{loc.Vocabulary}:**\n{value.Vocabulary}\n\n**{loc.ClarifyObjective}:**\n{value.ClarifyObjective}\n\n**{loc.NewConceptsAndKnowledge}:**\n{value.NewConceptsAndKnowledge}\n\n**⚡ {loc.AttentionReset} (1-3 {loc.Minutes}):**\n{value.AttentionReset}\n\n**{loc.ContinueInstructionAfterActivity}:**\n{value.ContinueInstruction}\n\n**⚠️ {loc.AnticipatedMisconceptions}:**\n{value.AnticipatedMisconceptions}\n\n{value.Connect}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
+          "NewConceptsAndKnowledge": { "x-format": "{items}", "type": "array", "items": { "x-format": "{value}\n\n", "type": "string" }, "description": "Write a detailed teacher lecture with scripts (Say: “…”). Include step-by-step what teacher says, does, and may demonstrate. Break down complex ideas, provide examples/analogies, make explicit connections to prior knowledge." },
+          "AttentionReset": {
             "type": "object",
+            "description": "Insert the standard attention-reset paragraph exactly as written: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
             "properties": {
-              "Hook": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Write a dramatic, high-engagement hook delivered through teacher script. Should be surprising, curiosity-building, and tied to the main concept." },
-              "Vocabulary": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "List essential vocabulary terms. Provide teacher script for defining each term formatted strictly as: '[Term] - Say: \"[Definition/Script]\"'. Example: 'Lever - Say: \"A lever is a simple machine...\"'." },
-              "ClarifyObjective": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Clarify today's student learning objective for this specific lesson sharing script for teacher." },
-              "NewConceptsAndKnowledge": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Write a detailed teacher lecture with scripts (Say: “…”). Include step-by-step what teacher says, does, and may demonstrate. Break down complex ideas, provide examples/analogies, make explicit connections to prior knowledge." },
-              "AttentionReset": {
-                "x-format": "{value.StandardParagraph}\n\n**{loc.Directions}:**\n{value.Directions}\n\n**{loc.WhyThisWorks}:**\n{value.WhyThisWorks}",
-                "type": "object",
-                "description": "Insert the standard attention-reset paragraph exactly as written: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
-                "properties": {
-                  "StandardParagraph": { "type": "string", "description": "Must be exactly: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'" },
-                  "Directions": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Provide directions for the activity, including teacher script and what students & teacher need to do." },
-                  "WhyThisWorks": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Explain in bullets why activity works for re-engagement, resetting cognitive focus, reinforcing concepts and purposeful preview. E.g. 'Standing + rotating resets attention.'" }
-                },
-                "required": ["StandardParagraph", "Directions", "WhyThisWorks"],
-                "additionalProperties": false
+              "StandardParagraph": { "type": "string", "description": "Must be exactly: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (word for word)'" },
+              "Directions": { "x-format": "{items}", "type": "array", "items": { "x-format": "{index}. {value}", "type": "string" }, "description": "Provide directions for the activity, including teacher script and what students & teacher need to do." },
+              "WhyThisWorks": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Explain in bullets why activity works for re-engagement, resetting cognitive focus, reinforcing concepts and purposeful preview. E.g. 'Standing + movement resets attention.'" }
+            },
+            "required": ["StandardParagraph", "Directions", "WhyThisWorks"],
+            "additionalProperties": false
+          },
+          "ContinueInstruction": { "x-format": "{items}", "type": "array", "items": { "x-format": "{index}. {value}\n\n", "type": "string" }, "description": "Numbered steps to continue instruction with teacher scripts (Say: “…”). Break down complex ideas, provide examples/analogies, to intrigue, foreshadow future learning, extend key ideas." },
+          "AnticipatedMisconceptions": {
+            "x-format": "{items}",
+            "type": "array",
+            "description": "List anticipated common student misconceptions to ensure teacher is ready.",
+            "items": {
+              "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+              "type": "object",
+              "properties": {
+                "Misconception": { "type": "string", "description": "e.g., 'Students may think a bigger lever always works better.'" },
+                "TeacherResponse": { "type": "string", "description": "How to effectively respond to potential student misunderstanding and guide to accurate understanding." }
               },
-              "ContinueInstruction": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Detailed teacher lecture with scripts (Say: “…”). Break down complex ideas, provide examples/analogies, to intrigue, foreshadow future learning, extend key ideas." },
-              "AnticipatedMisconceptions": {
+              "required": ["Misconception", "TeacherResponse"],
+              "additionalProperties": false
+            }
+          },
+          "Connect": {
+            "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. Say: \"{value.Step1Say}\"\n\n2. Say: \"{value.Step2Say}\"\n\n3. Prompt:\n\n{value.Step3Prompts}\n\n4. Whole-group share: Say: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
+            "type": "object",
+            "description": "Relate to a purpose. Connect to one of the essential questions.",
+            "properties": {
+              "Duration": { "type": "string", "description": "e.g., '(3 min)'" },
+              "Step1Say": { "type": "string", "description": "Teacher script connecting the previous activity to a bigger idea." },
+              "Step2Say": { "type": "string", "description": "Teacher script asking students to turn and talk to a partner." },
+              "Step3Prompts": {
                 "x-format": "{items}",
                 "type": "array",
-                "description": "List anticipated common student misconceptions to ensure teacher is ready.",
+                "items": { "x-format": "- \"{value}\"", "type": "string" },
+                "description": "Specific questions for the prompt (e.g., 'Why was the shaduf important...', 'What evidence shows...')."
+              },
+              "Step4Say": { "type": "string", "description": "Teacher script for whole-group share (e.g., 'Let's hear a few ideas...')." },
+              "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Deep expected student responses that use reasoning or evidence." }
+            },
+            "required": ["Duration", "Step1Say", "Step2Say", "Step3Prompts", "Step4Say", "ExpectedStudentResponses"],
+            "additionalProperties": false
+          },
+          "Differentiation": {
+            "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+            "type": "object",
+            "description": "Differentiate instruction (how to teach, not simplify materials). Vary complexity and depth, promote active engagement/language. Realistic for classroom.",
+            "properties": {
+              "LanguageLearners": {
+                "x-format": "**{loc.LanguageLearners}**\n\n{items}",
+                "type": "array",
                 "items": {
-                  "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
-                  "type": "object",
-                  "properties": {
-                    "Misconception": { "type": "string" },
-                    "TeacherResponse": { "type": "string", "description": "How to effectively respond to potential student misunderstanding and guide to accurate understanding." }
-                  },
-                  "required": ["Misconception", "TeacherResponse"],
-                  "additionalProperties": false
+                  "x-format": "- {value}",
+                  "type": "string"
                 }
               },
-              "Connect": {
-                "x-format": "### {green}({loc.Connect} (3 min))\n\n**💭 {loc.EssentialQuestionConnection}:** {value.EssentialQuestionVerbatim}\n\n**Say:** \"{value.ConnectToEQ.Say}\"\n\n**{loc.Prompts}:**\n{value.ConnectToEQ.Prompts}\n\n✅ **{loc.ExpectedStudentResponses}**\n{value.ExpectedStudentResponses}",
+              "AdditionalScaffolding": {
+                "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}**\n\n{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                }
+              },
+              "GoDeeper": {
+                "x-format": "**{loc.GoDeeper}**\n\n{value.Challenges}\n\n{value.ExpectedStudentResponses}",
                 "type": "object",
-                "description": "Relate to a purpose. Connect to one of the essential questions.",
                 "properties": {
-                  "EssentialQuestionVerbatim": { "type": "string", "description": "Use the provided essential question verbatim." },
-                  "ConnectToEQ": {
-                    "type": "object",
-                    "properties": {
-                      "Say": { "type": "string", "description": "Teacher script connecting the previous activity to the Essential Question." },
-                      "Prompts": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Specific prompts/questions for students." }
-                    },
-                    "required": ["Say", "Prompts"],
-                    "additionalProperties": false
+                  "Challenges": {
+                    "type": "array",
+                    "items": {
+                      "x-format": "- {value}",
+                      "type": "string"
+                    }
                   },
-                  "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Deep expected student responses that use reasoning or evidence." }
-                },
-                "required": ["EssentialQuestionVerbatim", "ConnectToEQ", "ExpectedStudentResponses"],
-                "additionalProperties": false
-              },
-              "Differentiation": {
-                "x-format": "### 🪜 {loc.Differentiation}\n\n**{loc.LanguageLearners}**\n{value.LanguageLearners}\n\n**{loc.StudentsInNeedOfAdditionalScaffolding}**\n{value.StudentsInNeedOfAdditionalScaffolding}\n\n**{loc.GoDeeper}**\n{value.GoDeeper.Challenges}\n\n✅ **{loc.ExpectedStudentResponses}**\n{value.GoDeeper.ExpectedStudentResponses}",
-                "type": "object",
-                "description": "Differentiate instruction (how to teach, not simplify materials). Vary complexity and depth, promote active engagement/language. Realistic for classroom.",
-                "properties": {
-                  "LanguageLearners": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } },
-                  "StudentsInNeedOfAdditionalScaffolding": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } },
-                  "GoDeeper": {
-                    "type": "object",
-                    "properties": {
-                      "Challenges": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } },
-                      "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
-                    },
-                    "required": ["Challenges", "ExpectedStudentResponses"],
-                    "additionalProperties": false
-                  }
-                },
-                "required": ["LanguageLearners", "StudentsInNeedOfAdditionalScaffolding", "GoDeeper"],
-                "additionalProperties": false
-              },
-              "AccommodationsAndModifications": {
-                "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
-                "type": "object",
-                "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
-                "properties": {
-                  "General": {
+                  "ExpectedStudentResponses": {
+                    "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
                     "type": "array",
                     "items": {
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
-                  },
-                  "IndividualSupport": {
-                    "x-format": "{items}",
-                    "type": "array",
-                    "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
-                    "items": {
-                      "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
-                      "type": "object",
-                      "properties": {
-                        "StudentName": {
-                          "type": "string",
-                          "description": "First and last name of the individual student receiving these supports."
-                        },
-                        "PlanProvided": {
-                          "type": "array",
-                          "items": {
-                            "x-format": "- {value}",
-                            "type": "string"
-                          },
-                          "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
-                        },
-                        "PlanImplementation": {
-                          "type": "array",
-                          "items": {
-                            "x-format": "- {value}",
-                            "type": "string"
-                          },
-                          "description": "Concrete tools/stems/visuals/organizers for this task."
-                        }
-                      },
-                      "required": [
-                        "StudentName",
-                        "PlanProvided",
-                        "PlanImplementation"
-                      ],
-                      "additionalProperties": false
-                    }
+                    "description": "For Go Deeper responses."
                   }
                 },
-                "required": [
-                  "General",
-                  "IndividualSupport"
-                ],
+                "required": ["Challenges", "ExpectedStudentResponses"],
                 "additionalProperties": false
               }
             },
+            "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+            "additionalProperties": false
+          },
+          "AccommodationsAndModifications": {
+            "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+            "type": "object",
+            "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+            "properties": {
+              "General": {
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                },
+                "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+              },
+              "IndividualSupport": {
+                "x-format": "{items}",
+                "type": "array",
+                "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                "items": {
+                  "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                  "type": "object",
+                  "properties": {
+                    "StudentName": {
+                      "type": "string",
+                      "description": "First and last name of the individual student receiving these supports."
+                    },
+                    "PlanProvided": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    },
+                    "PlanImplementation": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "Concrete tools/stems/visuals/organizers for this task."
+                    }
+                  },
+                  "required": [
+                    "StudentName",
+                    "PlanProvided",
+                    "PlanImplementation"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
             "required": [
-              "Hook", "Vocabulary", "ClarifyObjective", "NewConceptsAndKnowledge", "AttentionReset",
-              "ContinueInstruction", "AnticipatedMisconceptions", "Connect",
-              "Differentiation", "AccommodationsAndModifications"
+              "General",
+              "IndividualSupport"
             ],
             "additionalProperties": false
           }
         },
-        "required": ["Duration", "Materials", "InstructionsForTeachers"],
+        "required": [
+          "Duration", "Hook", "Vocabulary", "NewConceptsAndKnowledge", "AttentionReset",
+          "ContinueInstruction", "AnticipatedMisconceptions", "Connect",
+          "Differentiation", "AccommodationsAndModifications"
+        ],
         "additionalProperties": false
       },
       "ReviewAndSpacedRetrieval": {
-        "x-format": "### {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalNotes}\n\n📋 **{loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
+        "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
         "type": "object",
         "description": "Full 'Review & Spaced Retrieval' section.",
         "properties": {
-          "InstructionsForTeachers": {
-            "x-format": "**{loc.ActiveRecall}**\n\n**Say:** \"{value.ActiveRecall.Question}\"\n\n✅ {loc.ExpectedStudentResponses}\n{value.ActiveRecall.ExpectedStudentResponses}\n\n**💭 {loc.EssentialQuestionConnection}**\n\n**Say:** \"{value.EssentialQuestionConnection.Question}\"\n\n✅ {loc.ExpectedStudentResponses}\n{value.EssentialQuestionConnection.ExpectedStudentResponses}\n\n**⏳ {loc.SpacedRetrieval}**\n\n**Say:** \"{value.SpacedRetrieval.TeacherSay}\"\n\n✅ {loc.ExpectedStudentResponses}\n{value.SpacedRetrieval.ExpectedStudentResponses}",
+          "ActiveRecall": {
+            "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
             "type": "object",
-            "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
+            "description": "Asking students to recall NEW learning from TODAY'S lesson.",
             "properties": {
-              "ActiveRecall": {
-                "type": "object",
-                "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the lecture/activities.",
-                "properties": {
-                  "Question": { "type": "string" },
-                  "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
-                },
-                "required": ["Question", "ExpectedStudentResponses"],
-                "additionalProperties": false
+              "Say": {
+                "type": "string",
+                "description": "The teacher prompt starting with 'Say: '."
               },
-              "EssentialQuestionConnection": {
-                "type": "object",
-                "description": "Help students connect today's specific concept to the broader unit essential questions.",
-                "properties": {
-                  "Question": { "type": "string" },
-                  "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
-                },
-                "required": ["Question", "ExpectedStudentResponses"],
-                "additionalProperties": false
-              },
-              "SpacedRetrieval": {
-                "type": "object",
-                "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
-                "properties": {
-                  "TeacherSay": { "type": "string" },
-                  "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
-                },
-                "required": ["TeacherSay", "ExpectedStudentResponses"],
-                "additionalProperties": false
+              "ExpectedStudentResponses": {
+                "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                }
               }
             },
-            "required": ["ActiveRecall", "EssentialQuestionConnection", "SpacedRetrieval"],
+            "required": ["Say", "ExpectedStudentResponses"],
+            "additionalProperties": false
+          },
+          "EssentialQuestionConnection": {
+            "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+            "type": "object",
+            "description": "Teacher prompt linking to unit question.",
+            "properties": {
+              "Say": {
+                "type": "string",
+                "description": "The teacher prompt starting with 'Say: '."
+              },
+              "ExpectedStudentResponses": {
+                "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["Say", "ExpectedStudentResponses"],
+            "additionalProperties": false
+          },
+          "SpacedRetrieval": {
+            "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
+            "type": "object",
+            "description": "Recall from a specific prior lesson/unit.",
+            "properties": {
+              "PriorLearningContext": {
+                "type": "string",
+                "description": "Context sentence like 'Earlier in this lesson, students learned...'"
+              },
+              "Say": {
+                "type": "string",
+                "description": "The teacher prompt starting with 'Say: '."
+              },
+              "ExpectedStudentResponses": {
+                "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["PriorLearningContext", "Say", "ExpectedStudentResponses"],
             "additionalProperties": false
           }
         },
-        "required": ["InstructionsForTeachers"],
+        "required": ["ActiveRecall", "EssentialQuestionConnection", "SpacedRetrieval"],
         "additionalProperties": false
       },
       "QAndAAndDiscussion": {
-        "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. {value.InstructionsForTeachers.Step1_Invite}\n\n2. Ask:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n\n3. {value.InstructionsForTeachers.Step3_Capture}\n\n4. {value.InstructionsForTeachers.Step4_Answer}\n\n**Note for Teacher:**\n- Answer questions that connect directly to today's objective\n- \"Park\" deeper or future-focused questions by circling or starring them\n- Revisit parked questions in upcoming lessons to show continuity of learning",
+        "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. Say: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. Ask:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. Say: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" Record: {value.InstructionsForTeachers.Step3_CaptureRecord} Say:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. Say: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} Say: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
         "type": "object",
         "description": "Block for Q&A and Discussion.",
         "properties": {
@@ -523,12 +578,16 @@ OUTPUT REQUIREMENTS:
             "type": "object",
             "description": "Teacher guidance for the Q&A and Discussion session.",
             "properties": {
-              "Step1_Invite": { "type": "string" },
-              "Step2_AskQuestions": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } },
-              "Step3_Capture": { "type": "string" },
-              "Step4_Answer": { "type": "string" }
+              "Step1_InviteSay": { "type": "string", "description": "e.g., 'Now is your chance to think about what we learned...'" },
+              "Step2_AskQuestions": { "x-format": "{items}", "type": "array", "items": { "x-format": "   - \"{value}\"", "type": "string" }, "description": "3-4 questions to ask students." },
+              "Step3_CaptureSay1": { "type": "string", "description": "e.g., 'If you have a question, that means you are thinking deeply...'" },
+              "Step3_CaptureRecord": { "type": "string", "description": "e.g., 'Write student questions on a chart titled Questions We Still Have.'" },
+              "Step3_CaptureSay2": { "type": "string", "description": "e.g., 'We will keep adding to this chart throughout the unit...'" },
+              "Step4_AnswerSay1": { "type": "string", "description": "e.g., 'Let's look at our questions. Which ones can we answer using what we learned today?'" },
+              "Step4_AnswerAddress": { "type": "string", "description": "e.g., 'Address a few questions using student responses and evidence.'" },
+              "Step4_AnswerSay2": { "type": "string", "description": "e.g., 'Some of these questions will help guide what we learn next...'" }
             },
-            "required": ["Step1_Invite", "Step2_AskQuestions", "Step3_Capture", "Step4_Answer"],
+            "required": ["Step1_InviteSay", "Step2_AskQuestions", "Step3_CaptureSay1", "Step3_CaptureRecord", "Step3_CaptureSay2", "Step4_AnswerSay1", "Step4_AnswerAddress", "Step4_AnswerSay2"],
             "additionalProperties": false
           }
         },
@@ -570,34 +629,61 @@ OUTPUT REQUIREMENTS:
         "maxItems": 4
       },
       "StudentPractice": {
-        "x-format": "### 🖋️ {green}({loc.StudentPractice})\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.Tasks}\n\n**{value.Reflection.Instruction}**\n\n{value.Reflection.Prompts}",
+        "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**Teacher Notes:** {value.TeacherNotes}\n\n{value.Tasks}\n\n🔎 **{loc.Reflection}:** {value.Reflection.Prompt}\n\n{value.Reflection.ReflectionOptions}",
         "type": "object",
         "description": "Full 'Student Practice' section for homework / out-of-class practice.",
         "properties": {
-          "TeacherNotes": { "type": "string" },
+          "TeacherNotes": { 
+             "type": "string",
+             "description": "Notes explaining how the tasks reinforce today's learning and strengthen long-term retention."
+          },
           "Tasks": {
             "x-format": "{items}",
             "type": "array",
-            "description": "Generate 3 tasks covering DOK levels 2 and 3.",
+            "description": "Generate 4 practice tasks covering DOK levels 2, 3, and 4.",
             "items": {
-              "x-format": "\n\n**{index}.** {value.TaskTitle} {value.Instruction}\n\n✅ {loc.ExpectedStudentResponses}\n{value.ExpectedStudentResponses}",
+              "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{loc.SuccessCriteria}\n\n{value.SuccessCriteria}",
               "type": "object",
               "properties": {
-                "TaskTitle": { "type": "string" },
-                "Instruction": { "type": "string" },
-                "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
+                "TaskDescription": {
+                  "type": "string",
+                  "description": "e.g., '(DOK 2) Draw a shaduf and label...'"
+                },
+                "SuccessCriteria": {
+                  "x-format": "{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "3 success criteria bullet points."
+                }
               },
-              "required": ["TaskTitle", "Instruction", "ExpectedStudentResponses"],
+              "required": ["TaskDescription", "SuccessCriteria"],
               "additionalProperties": false
-            }
+            },
+            "minItems": 4,
+            "maxItems": 4
           },
           "Reflection": {
             "type": "object",
+            "description": "A reflection task for the students.",
             "properties": {
-              "Instruction": { "type": "string" },
-              "Prompts": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" } }
+              "Prompt": {
+                "type": "string",
+                "description": "e.g., 'Write 2-3 sentences responding to one prompt:'"
+              },
+              "ReflectionOptions": {
+                "x-format": "{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                },
+                "description": "3-4 reflection question options."
+              }
             },
-            "required": ["Instruction", "Prompts"],
+            "required": ["Prompt", "ReflectionOptions"],
             "additionalProperties": false
           }
         },

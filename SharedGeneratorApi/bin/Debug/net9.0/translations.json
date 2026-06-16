@@ -107,10 +107,12 @@
     "ContinueInstructionAfterActivity": " Continue Instruction After Activity",
     "Connect": " Connect",
     "Prompts": " Prompts",
-    "QAndAAndDiscussion": " Q And A And Discussion",
+    "QAndAAndDiscussion": "Q & A and Discussion",
     "Conclusion": " Conclusion",
     "ReviewAndSpacedRetrievalLabNotes": "**Teacher Notes:** This review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay, which helps move information into long-term memory. It connects to prior learning from the direct presentation and guided practice, when students identified the fulcrum, effort, and load and discussed how evidence shows whether a design is efficient. A brief transcendent reflection helps students see that engineering is not just about one model; it is about using reasoning to solve real problems in different places and times.",
-    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning."
+    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning.",
+    "AssessPriorKnowledgeLectureTeacherNote": "**Teacher Note:** Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.",
+    "NoteForTeacherQA": "**Note for Teacher:**\n- Answer questions that connect directly to today's objective\n- \"Park\" deeper or future-focused questions by circling or starring them\n- Revisit parked questions in upcoming lessons to show continuity of learning"
   },
   "sr-Latn": {
     "EssentialQuestions": "Suštinska pitanja",
@@ -220,10 +222,12 @@
     "ContinueInstructionAfterActivity": " Continue Instruction After Activity",
     "Connect": " Connect",
     "Prompts": " Prompts",
-    "QAndAAndDiscussion": " Q And A And Discussion",
+    "QAndAAndDiscussion": "Pitanja i diskusija",
     "Conclusion": " Conclusion",
     "ReviewAndSpacedRetrievalLabNotes": "**Teacher Notes:** This review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay, which helps move information into long-term memory. It connects to prior learning from the direct presentation and guided practice, when students identified the fulcrum, effort, and load and discussed how evidence shows whether a design is efficient. A brief transcendent reflection helps students see that engineering is not just about one model; it is about using reasoning to solve real problems in different places and times.",
-    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning."
+    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning.",
+    "AssessPriorKnowledgeLectureTeacherNote": "**Teacher Note:** Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.",
+    "NoteForTeacherQA": "**Napomena za nastavnika:**\n- Odgovorite na pitanja koja se direktno odnose na današnji cilj\n- \"Parkirajte\" dublja pitanja ili ona usmerena na budućnost tako što ćete ih zaokružiti ili označiti zvezdicom\n- Vratite se na parkirana pitanja u narednim lekcijama kako biste pokazali kontinuitet učenja"
   },
   "sr-Cyrl": {
     "EssentialQuestions": "Суштинска питања",
@@ -333,10 +337,12 @@
     "ContinueInstructionAfterActivity": " Continue Instruction After Activity",
     "Connect": " Connect",
     "Prompts": " Prompts",
-    "QAndAAndDiscussion": " Q And A And Discussion",
+    "QAndAAndDiscussion": "Питања и дискусија",
     "Conclusion": " Conclusion",
     "ReviewAndSpacedRetrievalLabNotes": "**Teacher Notes:** This review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay, which helps move information into long-term memory. It connects to prior learning from the direct presentation and guided practice, when students identified the fulcrum, effort, and load and discussed how evidence shows whether a design is efficient. A brief transcendent reflection helps students see that engineering is not just about one model; it is about using reasoning to solve real problems in different places and times.",
-    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning."
+    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning.",
+    "AssessPriorKnowledgeLectureTeacherNote": "**Teacher Note:** Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.",
+    "NoteForTeacherQA": "**Напомена за наставника:**\n- Одговорите на питања која се директно односе на данашњи циљ\n- \"Паркирајте\" дубља питања или она усмерена на будућност тако што ћете их заокружити или означити звездицом\n- Вратите се на паркирана питања у наредним лекцијама како бисте показали континуитет учења"
   },
   "id": {
     "EssentialQuestions": "Pertanyaan Esensial",
@@ -446,10 +452,12 @@
     "ContinueInstructionAfterActivity": " Continue Instruction After Activity",
     "Connect": " Connect",
     "Prompts": " Prompts",
-    "QAndAAndDiscussion": " Q And A And Discussion",
+    "QAndAAndDiscussion": "Tanya Jawab dan Diskusi",
     "Conclusion": " Conclusion",
     "ReviewAndSpacedRetrievalLabNotes": "**Teacher Notes:** This review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay, which helps move information into long-term memory. It connects to prior learning from the direct presentation and guided practice, when students identified the fulcrum, effort, and load and discussed how evidence shows whether a design is efficient. A brief transcendent reflection helps students see that engineering is not just about one model; it is about using reasoning to solve real problems in different places and times.",
-    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning."
+    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning.",
+    "AssessPriorKnowledgeLectureTeacherNote": "**Teacher Note:** Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.",
+    "NoteForTeacherQA": "**Catatan untuk Guru:**\n- Jawablah pertanyaan yang berkaitan langsung dengan tujuan hari ini\n- \"Parkirkan\" pertanyaan yang lebih dalam atau berfokus pada masa depan dengan melingkari atau menandainya dengan bintang\n- Tinjau kembali pertanyaan yang diparkir pada pelajaran mendatang untuk menunjukkan kesinambungan pembelajaran"
   },
   "es": {
     "EssentialQuestions": "Preguntas Esenciales",
@@ -559,10 +567,12 @@
     "ContinueInstructionAfterActivity": " Continue Instruction After Activity",
     "Connect": " Connect",
     "Prompts": " Prompts",
-    "QAndAAndDiscussion": " Q And A And Discussion",
+    "QAndAAndDiscussion": "Preguntas y discusión",
     "Conclusion": " Conclusion",
     "ReviewAndSpacedRetrievalLabNotes": "**Teacher Notes:** This review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay, which helps move information into long-term memory. It connects to prior learning from the direct presentation and guided practice, when students identified the fulcrum, effort, and load and discussed how evidence shows whether a design is efficient. A brief transcendent reflection helps students see that engineering is not just about one model; it is about using reasoning to solve real problems in different places and times.",
-    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning."
+    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning.",
+    "AssessPriorKnowledgeLectureTeacherNote": "**Teacher Note:** Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention.",
+    "NoteForTeacherQA": "**Nota para el maestro:**\n- Responda las preguntas que se conectan directamente con el objetivo de hoy\n- \"Estacione\" preguntas más profundas o enfocadas en el futuro circulándolas o marcándolas con una estrella\n- Revise las preguntas estacionadas en próximas lecciones para mostrar la continuidad del aprendizaje"
   },
   "ru": {
     "EssentialQuestions": "Ключевые вопросы",
@@ -672,9 +682,10 @@
     "ContinueInstructionAfterActivity": " Continue Instruction After Activity",
     "Connect": " Connect",
     "Prompts": " Prompts",
-    "QAndAAndDiscussion": " Q And A And Discussion",
+    "QAndAAndDiscussion": "Вопросы и обсуждение",
     "Conclusion": " Conclusion",
     "ReviewAndSpacedRetrievalLabNotes": "**Teacher Notes:** This review strategy strengthens retention by asking students to retrieve key ideas from the lesson after a short delay, which helps move information into long-term memory. It connects to prior learning from the direct presentation and guided practice, when students identified the fulcrum, effort, and load and discussed how evidence shows whether a design is efficient. A brief transcendent reflection helps students see that engineering is not just about one model; it is about using reasoning to solve real problems in different places and times.",
-    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning."
+    "StudentPracticeLabNotes": "**Teacher Notes:** These tasks reinforce today’s learning about defining an engineering problem and testing a shaduf model by asking students to label lever parts, compare trial evidence, and justify revisions. Together, the tasks strengthen long-term retention because students repeatedly use the same core ideas in different ways: identifying parts, interpreting data, and defending a design choice with scientific reasoning.",
+    "AssessPriorKnowledgeLectureTeacherNote": "**Teacher Note:** Activating students’ prior knowledge isn’t just a warm-up—it’s neuroscience in action. This process activates existing neural pathways, making it easier for the brain to attach new information to what is already known. This technique, called elaborative encoding, helps students move knowledge into long-term memory faster and more effectively, improving both understanding and retention."
   }
 }
