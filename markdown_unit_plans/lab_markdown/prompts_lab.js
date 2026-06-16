@@ -883,10 +883,14 @@ OUTPUT REQUIREMENTS:
         "maxItems": 4
       },
       "StudentPractice": {
-        "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{loc.StudentPracticeLabNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
+        "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
         "type": "object",
         "description": "Homework/out-of-class practice.",
         "properties": {
+          "TeacherNotes": {
+            "type": "string",
+            "description": "Teacher notes explaining how these practice tasks reinforce today's learning and strengthen long-term retention."
+          },
           "PracticeTasks": {
             "x-format": "{items}",
             "type": "array",
@@ -942,7 +946,7 @@ OUTPUT REQUIREMENTS:
             "additionalProperties": false
           }
         },
-        "required": ["PracticeTasks", "Reflection"],
+        "required": ["TeacherNotes", "PracticeTasks", "Reflection"],
         "additionalProperties": false
       }
     },
