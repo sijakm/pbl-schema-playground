@@ -627,10 +627,14 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
         "additionalProperties": false
       },
       "ReviewAndSpacedRetrieval": {
-        "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n{loc.ReviewAndSpacedRetrievalNotes}\n\n{value.InstructionsForTeachers}",
+        "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.InstructionsForTeachers}",
         "type": "object",
         "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Transcendent Thinking section 4. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must provide direct teacher prompts without the 'Say:' prefix and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
         "properties": {
+          "TeacherNotes": {
+            "type": "string",
+            "description": "Teacher notes explaining how this review strategy strengthens retention through active recall and connects the investigation to core science ideas."
+          },
           "InstructionsForTeachers": {
             "type": "object",
             "x-format": "{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
@@ -683,7 +687,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "2-3 examples of expected responses.",
+                    "description": "1-2 examples of high-quality student responses showing clear recall of evidence from prior learning.",
                     "items": { "x-format": "- {value}", "type": "string" }
                   }
                 },
@@ -695,7 +699,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
             "additionalProperties": false
           }
         },
-        "required": ["InstructionsForTeachers"],
+        "required": ["TeacherNotes", "InstructionsForTeachers"],
         "additionalProperties": false
       },
       "FormativeAssessment": {
