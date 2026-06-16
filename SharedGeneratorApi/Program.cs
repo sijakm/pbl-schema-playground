@@ -24,6 +24,8 @@ app.UseCors("AllowAll");
 var collaborativeService = new MarkdownGeneratorService("prompts_collaborative.js");
 var directService = new MarkdownGeneratorService("prompts.js");
 var inquiryService = new MarkdownGeneratorService("prompts_inquiry.js");
+var labService = new MarkdownGeneratorService("prompts_lab.js");
+var lectureService = new MarkdownGeneratorService("prompts_lecture.js");
 
 // === Collaborative Markdown Endpoints ===
 app.MapPost("/api/collaborative/generate", (SharedGeneratorApi.Models.Collaborative.GenerateRequest request) =>
@@ -79,6 +81,44 @@ app.MapPost("/api/inquiry/generate/step0", (SharedGeneratorApi.Models.Inquiry.Ge
 app.MapPost("/api/inquiry/generate/lessons", (SharedGeneratorApi.Models.Inquiry.GenerateLessonsRequest request) =>
 {
     var result = inquiryService.GenerateLessonsMarkdown(request.LessonJsons, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+// === Lab Markdown Endpoints ===
+app.MapPost("/api/lab/generate", (SharedGeneratorApi.Models.Lab.GenerateRequest request) =>
+{
+    var result = labService.GenerateMarkdown(request.UnitTitle, request.Step0Json, request.LessonJsons, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+app.MapPost("/api/lab/generate/step0", (SharedGeneratorApi.Models.Lab.GenerateStep0Request request) =>
+{
+    var result = labService.GenerateStep0Markdown(request.UnitTitle, request.Step0Json, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+app.MapPost("/api/lab/generate/lessons", (SharedGeneratorApi.Models.Lab.GenerateLessonsRequest request) =>
+{
+    var result = labService.GenerateLessonsMarkdown(request.LessonJsons, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+// === Lecture Markdown Endpoints ===
+app.MapPost("/api/lecture/generate", (SharedGeneratorApi.Models.Lecture.GenerateRequest request) =>
+{
+    var result = lectureService.GenerateMarkdown(request.UnitTitle, request.Step0Json, request.LessonJsons, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+app.MapPost("/api/lecture/generate/step0", (SharedGeneratorApi.Models.Lecture.GenerateStep0Request request) =>
+{
+    var result = lectureService.GenerateStep0Markdown(request.UnitTitle, request.Step0Json, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+app.MapPost("/api/lecture/generate/lessons", (SharedGeneratorApi.Models.Lecture.GenerateLessonsRequest request) =>
+{
+    var result = lectureService.GenerateLessonsMarkdown(request.LessonJsons, request.Language);
     return Results.Ok(new { markdown = result });
 });
 

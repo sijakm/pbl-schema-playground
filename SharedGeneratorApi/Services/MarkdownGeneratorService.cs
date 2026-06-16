@@ -20,9 +20,13 @@ public class MarkdownGeneratorService
             Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "collaborative_markdown", schemaJsFileName),
             Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "direct_instructions_markdown", schemaJsFileName),
             Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "inquiry_markdown", schemaJsFileName),
+            Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "lab_markdown", schemaJsFileName),
+            Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "lecture_markdown", schemaJsFileName),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "collaborative_markdown", schemaJsFileName),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "direct_instructions_markdown", schemaJsFileName),
-            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "inquiry_markdown", schemaJsFileName)
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "inquiry_markdown", schemaJsFileName),
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "lab_markdown", schemaJsFileName),
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "lecture_markdown", schemaJsFileName)
         };
 
         string jsPath = null;
