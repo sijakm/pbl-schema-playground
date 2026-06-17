@@ -249,14 +249,14 @@ export default function App() {
             <label>Standards</label>
             <TextArea value={standards} onUpdate={setStandards} minRows={3} />
           </div>
-          <div>
-            <label>Student Learning Plans</label>
-            <TextArea value={learningPlans} onUpdate={setLearningPlans} minRows={3} />
-          </div>
-          <div>
-            <label>Media / Resources</label>
-            <TextArea value={mediaContext} onUpdate={setMediaContext} minRows={3} />
-          </div>
+          <details>
+            <summary style={{ cursor: 'pointer', marginBottom: '8px', userSelect: 'none' }}>Student Learning Plans</summary>
+            <TextArea value={learningPlans} onUpdate={setLearningPlans} minRows={3} maxRows={15} />
+          </details>
+          <details>
+            <summary style={{ cursor: 'pointer', marginBottom: '8px', userSelect: 'none' }}>Media / Resources</summary>
+            <TextArea value={mediaContext} onUpdate={setMediaContext} minRows={3} maxRows={15} />
+          </details>
           <div>
             <label>Attached Unit Content</label>
             <TextArea value={attachedUnit} onUpdate={setAttachedUnit} minRows={3} />
