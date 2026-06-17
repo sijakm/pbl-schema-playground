@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SharedGeneratorApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+033bdb9ffa2027ff122274ed28d1ac6f7cd1792b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c49e78e93621bded716cef66c80640cc3c60205a")]
 [assembly: System.Reflection.AssemblyProductAttribute("SharedGeneratorApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SharedGeneratorApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -26,6 +26,7 @@ var directService = new MarkdownGeneratorService("prompts.js");
 var inquiryService = new MarkdownGeneratorService("prompts_inquiry.js");
 var labService = new MarkdownGeneratorService("prompts_lab.js");
 var lectureService = new MarkdownGeneratorService("prompts_lecture.js");
+var pblService = new MarkdownGeneratorService("prompts_pbl.js");
 
 // === Collaborative Markdown Endpoints ===
 app.MapPost("/api/collaborative/generate", (SharedGeneratorApi.Models.Collaborative.GenerateRequest request) =>
@@ -119,6 +120,14 @@ app.MapPost("/api/lecture/generate/step0", (SharedGeneratorApi.Models.Lecture.Ge
 app.MapPost("/api/lecture/generate/lessons", (SharedGeneratorApi.Models.Lecture.GenerateLessonsRequest request) =>
 {
     var result = lectureService.GenerateLessonsMarkdown(request.LessonJsons, request.Language);
+    return Results.Ok(new { markdown = result });
+});
+
+// === Pbl Markdown Endpoints ===
+app.MapPost("/api/pbl/generate", (SharedGeneratorApi.Models.Pbl.GenerateRequest request) =>
+{
+    // GenerateMarkdown expects step0Json, we will pass PblJson as step0Json and null for lessons
+    var result = pblService.GenerateMarkdown(request.UnitTitle, request.PblJson, null, request.Language);
     return Results.Ok(new { markdown = result });
 });
 

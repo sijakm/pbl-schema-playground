@@ -22,11 +22,13 @@ public class MarkdownGeneratorService
             Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "inquiry_markdown", schemaJsFileName),
             Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "lab_markdown", schemaJsFileName),
             Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "lecture_markdown", schemaJsFileName),
+            Path.Combine(Directory.GetCurrentDirectory(), "..", "markdown_unit_plans", "pbl_markdown", schemaJsFileName),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "collaborative_markdown", schemaJsFileName),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "direct_instructions_markdown", schemaJsFileName),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "inquiry_markdown", schemaJsFileName),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "lab_markdown", schemaJsFileName),
-            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "lecture_markdown", schemaJsFileName)
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "lecture_markdown", schemaJsFileName),
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "markdown_unit_plans", "pbl_markdown", schemaJsFileName)
         };
 
         string jsPath = null;
@@ -45,11 +47,20 @@ public class MarkdownGeneratorService
             int step0Start = jsContent.IndexOf("STEP0_SCHEMA:") + "STEP0_SCHEMA:".Length;
             int perLessonStart = jsContent.IndexOf("PER_LESSON_SCHEMA:");
             
-            _step0Schema = jsContent.Substring(step0Start, perLessonStart - step0Start).Trim().TrimEnd(',');
-            
-            int perLessonStart2 = perLessonStart + "PER_LESSON_SCHEMA:".Length;
-            int end = jsContent.LastIndexOf("};");
-            _lessonSchema = jsContent.Substring(perLessonStart2, end - perLessonStart2).Trim();
+            if (perLessonStart != -1)
+            {
+                _step0Schema = jsContent.Substring(step0Start, perLessonStart - step0Start).Trim().TrimEnd(',');
+                
+                int perLessonStart2 = perLessonStart + "PER_LESSON_SCHEMA:".Length;
+                int end = jsContent.LastIndexOf("};");
+                _lessonSchema = jsContent.Substring(perLessonStart2, end - perLessonStart2).Trim();
+            }
+            else
+            {
+                int end = jsContent.LastIndexOf("};");
+                _step0Schema = jsContent.Substring(step0Start, end - step0Start).Trim().TrimEnd(',');
+                _lessonSchema = "{}";
+            }
         }
         else
         {
