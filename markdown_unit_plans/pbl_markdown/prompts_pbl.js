@@ -107,7 +107,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                         },
                         "UnitOverview": {
                             "type": "object",
-                            "x-format": "### {green}({loc.UnitTask})\n\n**{loc.Purpose}:** {loc.UnitTaskPurposeValue}\n\n**{loc.Title}: {value.TaskStatementTitle}**\n\n{value.LetterGreeting}\n\n{value.LetterBody}\n\n{value.LetterSignOff}\n\n{value.LetterSender}\n\n**{loc.Mission}:** {value.Mission}\n\n**{loc.ProjectContextAndStakeholders}:** {value.ProjectContextAndStakeholders}\n\n### {green}({loc.DrivingQuestion})\n\n{value.DrivingQuestion}\n\n### {green}({loc.TheDeliverable})\n\n{value.FinalDeliverableRequirements}\n\n{value.ClosingCallToAction}",
+                            "x-format": "### {green}({loc.UnitTask})\n\n**{loc.PurposeLabel}** {loc.UnitTaskPurposeValue}\n\n**{loc.Title}: {value.TaskStatementTitle}**\n\n{value.LetterGreeting}\n\n{value.LetterBody}\n\n{value.LetterSignOff}\n\n{value.LetterSender}\n\n**{loc.Mission}:** {value.Mission}\n\n**{loc.ProjectContextAndStakeholders}:** {value.ProjectContextAndStakeholders}\n\n### {green}({loc.DrivingQuestion})\n\n**{loc.PurposeLabel}** {loc.DrivingQuestionPurposeValue}\n\n{value.DrivingQuestion}\n\n### {green}({loc.TheDeliverable})\n\n{value.FinalDeliverableRequirements}\n\n{value.ClosingCallToAction}",
                             "additionalProperties": false,
                             "required": [
                                 "TaskStatementTitle",
@@ -137,15 +137,15 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                         "x-format": "{value}\n\n",
                                         "type": "string"
                                     },
-                                    "description": "The main paragraphs of the student-facing launch message (3-5 paragraphs) written like a credible local organization or person. Must include a clear connection to the problem, the driving question, the deliverable requirements, and an inspiring call to action. Urgent, meaningful, authentic. Do NOT include the title, greeting, or sign-off here."
+                                    "description": "The main paragraphs of the student-facing launch message (3-5 paragraphs) written like a credible local organization or person. Must include a clear connection to the problem, the driving question, the deliverable requirements, and an inspiring call to action. Urgent, meaningful, authentic. Do NOT include the title, greeting, sign-off phrase (e.g. 'Sincerely,'), or sender name here. Only include the body paragraphs."
                                 },
                                 "LetterSignOff": {
                                     "type": "string",
-                                    "description": "The sign-off phrase for the message (e.g., 'Sincerely,')."
+                                    "description": "The sign-off phrase for the message (e.g., 'Sincerely,'). Just provide the sign-off phrase, nothing else."
                                 },
                                 "LetterSender": {
                                     "type": "string",
-                                    "description": "The name of the credible local organization or person sending the message (e.g., 'Coconut Creek STEM Innovation Team')."
+                                    "description": "The name of the credible local organization or person sending the message (e.g., 'Coconut Creek STEM Innovation Team'). Do NOT include the sign-off (e.g., 'Sincerely') here."
                                 },
                                 "DrivingQuestion": {
                                     "type": "string",
@@ -177,7 +177,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                         },
                         "DesiredOutcomes": {
                             "type": "object",
-                            "x-format": "### 📏{green}({loc.StandardsAligned})\n\n{value.StandardsAligned}\n\n### 💭{green}({loc.BigIdeasAndEssentialQuestionsAmp})\n\n**{loc.Purpose}:** {loc.BigIdeasPurpose}\n\n{value.BigIdeasAndEssentialQuestions}\n\n### 🎯{green}({loc.LearningObjectives})\n\n🎯**{loc.StudentsWillUnderstandThatLabel}**\n\n{value.LearningObjectives.StudentsWillUnderstandThat}\n\n🎯**{loc.StudentsWillKnowThatLabel}**\n\n{value.LearningObjectives.StudentsWillKnowThat}\n\n🎯**{loc.StudentsWillBeAbleToLabel}**\n\n{value.LearningObjectives.StudentsWillBeAbleTo}",
+                            "x-format": "### 📏{green}({loc.StandardsAligned})\n\n{value.StandardsAligned}\n\n### 💭{green}({loc.BigIdeasAndEssentialQuestionsAmp})\n\n**{loc.Purpose}:** {loc.BigIdeasPurpose}\n\n{value.BigIdeasAndEssentialQuestions}\n\n### 🎯{green}({loc.LearningObjectives})\n\n{value.LearningObjectives}",
                             "additionalProperties": false,
                             "required": [
                                 "StandardsAligned",
@@ -223,6 +223,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                 },
                                 "LearningObjectives": {
                                     "type": "object",
+                                    "x-format": "🎯**{loc.StudentsWillUnderstandThatLabel}**\n\n{value.StudentsWillUnderstandThat}\n\n🎯**{loc.StudentsWillKnowThatLabel}**\n\n{value.StudentsWillKnowThat}\n\n🎯**{loc.StudentsWillBeAbleToLabel}**\n\n{value.StudentsWillBeAbleTo}",
                                     "additionalProperties": false,
                                     "required": [
                                         "StudentsWillUnderstandThat",
@@ -236,9 +237,9 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                             "minItems": 2,
                                             "items": {
                                                 "type": "string",
-                                                "x-format": "{index}. {value}"
+                                                "x-format": "- {value}"
                                             },
-                                            "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, explain how or why something works rather than just what it is, are written as full declarative sentences beginning with a verb, and are each labeled with an appropriate Depth of Knowledge level, emphasizing ideas students can transfer to new situations, future units, and real-world decision making. Do NOT include any numbering or bullet points at the beginning of your strings."
+                                            "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, and explain how or why something works rather than just what it is. Write the objectives as direct continuations of the phrase 'Students will understand that...'. Do NOT repeat the phrase 'Students will understand that', and do NOT start with verbs like 'Explain that' or 'Describe that' (e.g., just write 'engineering designs improve when...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
                                         },
                                         "StudentsWillKnowThat": {
                                             "type": "array",
@@ -246,9 +247,9 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                             "minItems": 2,
                                             "items": {
                                                 "type": "string",
-                                                "x-format": "{index}. {value}"
+                                                "x-format": "- {value}"
                                             },
-                                            "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, include an appropriate DOK label typically at level 1 or 2, and complete the stem Students will know that while beginning with a verb. Do NOT include any numbering or bullet points at the beginning of your strings."
+                                            "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, and include an appropriate DOK label typically at level 1 or 2. Write the objectives as direct continuations of the phrase 'Students will know that...'. Do NOT repeat the phrase 'Students will know that', and do NOT start with verbs like 'Identify that' or 'Define' (e.g., just write 'a lever has an effort arm...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
                                         },
                                         "StudentsWillBeAbleTo": {
                                             "type": "array",
@@ -256,9 +257,9 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                             "minItems": 2,
                                             "items": {
                                                 "type": "string",
-                                                "x-format": "{index}. {value}"
+                                                "x-format": "- {value}"
                                             },
-                                            "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do, such as analyze, compare, design, model, solve, justify, create, interpret, investigate, or communicate; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; include an appropriate DOK level between 2 and 4; and complete the stem Students will be able to while beginning with a verb. Do NOT include any numbering or bullet points at the beginning of your strings."
+                                            "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; and include an appropriate DOK level between 2 and 4. Write the objectives as direct continuations of the phrase 'Students will be able to...'. Begin directly with a measurable action verb (e.g., analyze, compare, design, model, solve). Do NOT repeat the prefix 'Students will be able to'. DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
                                         }
                                     }
                                 }
@@ -658,21 +659,17 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                         },
                         "TeacherGuidancePhase1": {
                             "type": "object",
-                            "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase1}\n\n### {value.Phase1_Title}\n\n**Focus Statement**\n{value.Phase1_FocusStatement}\n\n**Collaborative Activities**\n{value.Phase1_CollaborativeActivities}\n\n**Guiding Questions**\n{value.Phase1_GuidingQuestions}\n\n**🪜 Differentiation**\n- **Language Learners:** {value.Phase1_Differentiation_LanguageLearners}\n- **Scaffolding:** {value.Phase1_Differentiation_Scaffolding}\n- **Go Deeper:** {value.Phase1_Differentiation_GoDeeper}\n\n**🤝 Accommodations & Modifications**\n- **General Support:** {value.Phase1_Accommodations_General}\n- **Individual Support:**\n{value.Phase1_Accommodations_IndividualSupport}\n\n**❗ Anticipated Misconceptions**\n{value.Phase1_AnticipatedMisconceptions}\n\n**🌍 Transcendent Thinking**\n{value.Phase1_TranscendentThinkingPrompts}\n\n**✔ Quick Checks**\n{value.Phase1_QuickChecks}\n\n**⏳ Spaced Retrieval**\n{value.Phase1_SpacedRetrieval}\n\n**🖊 Student Practice**\n{value.Phase1_StudentPractice_TeacherNotes}\n{value.Phase1_StudentPractice_Tasks}\n\n**🔎 Reflection**\n{value.Phase1_ReflectionPrompt.Introduction}\n{value.Phase1_ReflectionPrompt.Prompts}",
+                            "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase1}\n\n### {green}({loc.Phase1Title})\n\n**Focus Statement**\n{value.Phase1_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase1_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase1_GuidingQuestions}\n\n{value.Phase1_Differentiation}\n\n{value.Phase1_AccommodationsAndModifications}\n\n{value.Phase1_AnticipatedMisconceptions}\n\n{value.Phase1_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase1_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase1_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase1_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase1_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase1_ReflectionPrompt.Introduction}\n{value.Phase1_ReflectionPrompt.Prompts}",
                             "additionalProperties": false,
                             "description": "First phase of teacher guidance",
                             "required": [
-                                "Phase1_Title",
                                 "Phase1_FocusStatement",
                                 "Phase1_CollaborativeActivities",
                                 "Phase1_GuidingQuestions",
-                                "Phase1_Differentiation_LanguageLearners",
-                                "Phase1_Differentiation_Scaffolding",
-                                "Phase1_Differentiation_GoDeeper",
-                                "Phase1_Accommodations_General",
-                                "Phase1_Accommodations_IndividualSupport",
+                                "Phase1_Differentiation",
+                                "Phase1_AccommodationsAndModifications",
                                 "Phase1_AnticipatedMisconceptions",
-                                "Phase1_TranscendentThinkingPrompts",
+                                "Phase1_TranscendentThinking",
                                 "Phase1_QuickChecks",
                                 "Phase1_SpacedRetrieval",
                                 "Phase1_StudentPractice_TeacherNotes",
@@ -681,10 +678,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                 "Phase1_ReflectionPrompt"
                             ],
                             "properties": {
-                                "Phase1_Title": {
-                                    "type": "string",
-                                    "description": "MUST be exactly: 'Phase 1 - Launch'."
-                                },
+                                
                                 "Phase1_FocusStatement": {
                                     "type": "string",
                                     "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit's Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question."
@@ -696,6 +690,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
+                                        "x-format": "\n\n**{value.ActivityTitle}**\n- **{loc.StudentExperience}:** {value.StudentExperience}\n- **{loc.TeacherRole}:** {value.TeacherRoleMoves}\n- **{loc.ArtifactsOfLearning}:**\n{value.ArtifactsOfLearning}",
                                         "required": [
                                             "ActivityTitle",
                                             "StudentExperience",
@@ -713,7 +708,8 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                                 "type": "array",
                                                 "minItems": 2,
                                                 "items": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "x-format": "  - {value}"
                                                 }
                                             },
                                             "TeacherRoleMoves": {
@@ -726,167 +722,237 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "type": "array",
                                     "minItems": 4,
                                     "items": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "x-format": "{index}. {value}"
                                     }
                                 },
-                                "Phase1_Differentiation_LanguageLearners": {
-                                    "type": "string",
-                                    "description": "Instructional strategies designed specifically to support language development and conceptual understanding for language learners, using visual supports, structured language scaffolds, and opportunities for meaningful academic talk. Focus on how content is taught, not on modifying learning expectations."
-                                },
-                                "Phase1_Differentiation_Scaffolding": {
-                                    "type": "string",
-                                    "description": "Teaching strategies that provide additional instructional scaffolding for students who need structured support, while maintaining the same learning objectives. Supports should increase access to reasoning and engagement through guided practice, visual organization, and gradual release of responsibility."
-                                },
-                                "Phase1_Differentiation_GoDeeper": {
-                                    "type": "string",
-                                    "description": "Instructional extensions that deepen thinking for students ready for greater challenge by increasing conceptual complexity, abstraction, and reasoning demands, while remaining aligned to the same core learning goals."
-                                },
-                                "Phase1_Accommodations_General": {
-                                    "type": "string",
-                                    "description": "General classroom supports and modifications that apply to most or all students during this activity."
-                                },
-                                "Phase1_Accommodations_IndividualSupport": {
-                                    "type": "array",
-                                    "minItems": 0,
-                                    "description": "List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt.",
-                                    "items": {
+                                "Phase1_Differentiation": {
+                                    "type": "object",
+                                    "x-format": "### {violet}(🪜 {loc.Differentiation})\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+                                    "properties": {
+                                      "LanguageLearners": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
+                                        "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "SentenceStarters": { "type": "array", "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "SentenceStarters"],
+                                        "additionalProperties": false
+                                      },
+                                      "AdditionalScaffolding": {
+                                        "type": "object",
+                                        "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}:**\n\n{value.Strategies}\n\nOffer a step-by-step checklist to guide the investigation:\n\n{value.Checklist}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "Checklist": { "type": "array", "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "Checklist"],
+                                        "additionalProperties": false
+                                      },
+                                      "GoDeeper": {
+                                        "type": "object",
+                                        "x-format": "**{loc.GoDeeper}:**\n\n{value.Strategies}\n\n{loc.AdvancedThinkingQuestionTitle}:\n\n- {loc.Say}: \"{value.AdvancedQuestion}\"\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedResponses}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "AdvancedQuestion": { "type": "string", "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding." },
+                                          "ExpectedResponses": { "type": "array", "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "AdvancedQuestion", "ExpectedResponses"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+                                    "additionalProperties": false
+                                },
+                                "Phase1_AccommodationsAndModifications": {
+                                    "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+                                    "type": "object",
+                                    "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+                                    "properties": {
+                                      "General": {
+                                        "type": "array",
+                                        "items": {
+                                          "x-format": "- {value}",
+                                          "type": "string"
+                                        },
+                                        "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                                      },
+                                      "IndividualSupport": {
+                                        "x-format": "{items}",
+                                        "type": "array",
+                                        "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                                        "items": {
+                                          "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                                          "type": "object",
+                                          "properties": {
+                                            "StudentName": {
+                                              "type": "string",
+                                              "description": "First and last name of the individual student receiving these supports."
+                                            },
+                                            "PlanProvided": {
+                                              "type": "array",
+                                              "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                              },
+                                              "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                                            },
+                                            "PlanImplementation": {
+                                              "type": "array",
+                                              "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                              },
+                                              "description": "Concrete tools/stems/visuals/organizers for this task."
+                                            }
+                                          },
+                                          "required": [
                                             "StudentName",
                                             "PlanProvided",
                                             "PlanImplementation"
-                                        ],
-                                        "properties": {
-                                            "StudentName": {
-                                                "type": "string",
-                                                "description": "Full name of the student exactly as provided in the prompt."
-                                            },
-                                            "PlanProvided": {
-                                                "type": "string"
-                                            },
-                                            "PlanImplementation": {
-                                                "type": "string",
-                                                "description": "Short description of the individualized accommodation or modification for this student."
-                                            }
+                                          ],
+                                          "additionalProperties": false
                                         }
-                                    }
+                                      }
+                                    },
+                                    "required": [
+                                      "General",
+                                      "IndividualSupport"
+                                    ],
+                                    "additionalProperties": false
                                 },
                                 "Phase1_AnticipatedMisconceptions": {
                                     "type": "array",
-                                    "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
-                                    "minItems": 2,
+                                    "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
+                                    "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
                                     "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Misconception",
-                                            "CorrectionLanguage"
-                                        ],
-                                        "properties": {
-                                            "Misconception": {
-                                                "type": "string",
-                                                "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
-                                            },
-                                            "CorrectionLanguage": {
-                                                "type": "string",
-                                                "description": "Specific teacher language or instructional moves-such as probing questions, prompts, or examples-that help students examine their thinking and move toward accurate understanding without directly giving the answer."
-                                            }
-                                        }
+                                      "type": "object",
+                                      "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+                                      "properties": {
+                                        "Misconception": { "type": "string", "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags." },
+                                        "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags." }
+                                      },
+                                      "required": ["Misconception", "TeacherResponse"],
+                                      "additionalProperties": false
                                     }
                                 },
-                                "Phase1_TranscendentThinkingPrompts": {
-                                    "type": "array",
-                                    "minItems": 1,
-                                    "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding",
-                                    "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Prompt",
-                                            "ExpectedStudentResponses"
-                                        ],
-                                        "properties": {
-                                            "Prompt": {
-                                                "type": "string"
-                                            },
-                                            "ExpectedStudentResponses": {
-                                                "type": "array",
-                                                "minItems": 2,
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
+                                "Phase1_TranscendentThinking": {
+                                    "type": "object",
+                                    "x-format": "### {violet}(🌍 {loc.TranscendentThinking})\n\n{value.Question}",
+                                    "properties": {
+                                      "Question": { "type": "string", "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus." }
+                                    },
+                                    "required": ["Question"],
+                                    "additionalProperties": false
                                 },
                                 "Phase1_QuickChecks": {
-                                    "type": "array",
-                                    "minItems": 3,
-                                    "maxItems": 3,
+                                    "type": "object",
+                                    "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
                                     "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
-                                    "items": {
+                                    "properties": {
+                                      "BeginningOfPhase": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Timing",
-                                            "Prompt",
-                                            "SuccessCriteriaOrExpectedResponses"
-                                        ],
                                         "properties": {
-                                            "Timing": {
-                                                "type": "string",
-                                                "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
-                                            },
-                                            "Prompt": {
-                                                "type": "string"
-                                            },
-                                            "SuccessCriteriaOrExpectedResponses": {
-                                                "type": "array",
-                                                "minItems": 2,
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      },
+                                      "MidPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      },
+                                      "EndOfPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["BeginningOfPhase", "MidPhase", "EndOfPhase"],
+                                    "additionalProperties": false
                                 },
                                 "Phase1_SpacedRetrieval": {
-                                    "type": "array",
-                                    "minItems": 3,
-                                    "maxItems": 3,
+                                    "type": "object",
+                                    "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
                                     "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
-                                    "items": {
+                                    "properties": {
+                                      "BeginningOfPhase": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Timing",
-                                            "DrawsFrom",
-                                            "Question",
-                                            "DOK",
-                                            "ExpectedResponseOrSuccessCriteria"
-                                        ],
                                         "properties": {
-                                            "Timing": {
-                                                "type": "string",
-                                                "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
-                                            },
-                                            "DrawsFrom": {
-                                                "type": "string"
-                                            },
-                                            "Question": {
-                                                "type": "string"
-                                            },
-                                            "DOK": {
-                                                "type": "integer",
-                                                "minimum": 1,
-                                                "maximum": 4
-                                            },
-                                            "ExpectedResponseOrSuccessCriteria": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      },
+                                      "MidPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      },
+                                      "EndOfPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["BeginningOfPhase", "MidPhase", "EndOfPhase"],
+                                    "additionalProperties": false
                                 },
                                 "Phase1_StudentPractice_TeacherNotes": {
                                     "type": "string",
@@ -900,6 +966,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
+                                        "x-format": "**{value.DOK}**\n{value.StudentDirections}\n\n**{loc.SuccessCriteria}:**\n{value.SuccessCriteria}",
                                         "required": [
                                             "DOK",
                                             "StudentDirections",
@@ -916,7 +983,8 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                             "SuccessCriteria": {
                                                 "type": "array",
                                                 "items": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
                                                 }
                                             }
                                         }
@@ -948,21 +1016,17 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                         },
                         "TeacherGuidancePhase2": {
                             "type": "object",
-                            "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase2}\n\n### {value.Phase2_Title}\n\n**Focus Statement**\n{value.Phase2_FocusStatement}\n\n**Collaborative Activities**\n{value.Phase2_CollaborativeActivities}\n\n**Guiding Questions**\n{value.Phase2_GuidingQuestions}\n\n**🪜 Differentiation**\n- **Language Learners:** {value.Phase2_Differentiation_LanguageLearners}\n- **Scaffolding:** {value.Phase2_Differentiation_Scaffolding}\n- **Go Deeper:** {value.Phase2_Differentiation_GoDeeper}\n\n**🤝 Accommodations & Modifications**\n- **General Support:** {value.Phase2_Accommodations_General}\n- **Individual Support:**\n{value.Phase2_Accommodations_IndividualSupport}\n\n**❗ Anticipated Misconceptions**\n{value.Phase2_AnticipatedMisconceptions}\n\n**🌍 Transcendent Thinking**\n{value.Phase2_TranscendentThinkingPrompts}\n\n**✔ Quick Checks**\n{value.Phase2_QuickChecks}\n\n**⏳ Spaced Retrieval**\n{value.Phase2_SpacedRetrieval}\n\n**🖊 Student Practice**\n{value.Phase2_StudentPractice_TeacherNotes}\n{value.Phase2_StudentPractice_Tasks}\n\n**🔎 Reflection**\n{value.Phase2_ReflectionPrompt.Introduction}\n{value.Phase2_ReflectionPrompt.Prompts}",
+                            "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase2}\n\n### {green}({loc.Phase2Title})\n\n**Focus Statement**\n{value.Phase2_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase2_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase2_GuidingQuestions}\n\n{value.Phase2_Differentiation}\n\n{value.Phase2_AccommodationsAndModifications}\n\n{value.Phase2_AnticipatedMisconceptions}\n\n{value.Phase2_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase2_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase2_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase2_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase2_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase2_ReflectionPrompt.Introduction}\n{value.Phase2_ReflectionPrompt.Prompts}",
                             "additionalProperties": false,
                             "description": "Second phase of teacher guidance",
                             "required": [
-                                "Phase2_Title",
                                 "Phase2_FocusStatement",
                                 "Phase2_CollaborativeActivities",
                                 "Phase2_GuidingQuestions",
-                                "Phase2_Differentiation_LanguageLearners",
-                                "Phase2_Differentiation_Scaffolding",
-                                "Phase2_Differentiation_GoDeeper",
-                                "Phase2_Accommodations_General",
-                                "Phase2_Accommodations_IndividualSupport",
+                                "Phase2_Differentiation",
+                                "Phase2_AccommodationsAndModifications",
                                 "Phase2_AnticipatedMisconceptions",
-                                "Phase2_TranscendentThinkingPrompts",
+                                "Phase2_TranscendentThinking",
                                 "Phase2_QuickChecks",
                                 "Phase2_SpacedRetrieval",
                                 "Phase2_StudentPractice_TeacherNotes",
@@ -971,10 +1035,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                 "Phase2_ReflectionPrompt"
                             ],
                             "properties": {
-                                "Phase2_Title": {
-                                    "type": "string",
-                                    "description": "MUST be exactly: 'Phase 2 - Exploration, Investigation, and Development; Refinement'."
-                                },
+                                
                                 "Phase2_FocusStatement": {
                                     "type": "string",
                                     "description": "Write a 1-3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit's Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user."
@@ -986,6 +1047,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
+                                        "x-format": "\n\n**{value.ActivityTitle}**\n- **{loc.StudentExperience}:** {value.StudentExperience}\n- **{loc.TeacherRole}:** {value.TeacherRoleMoves}\n- **{loc.ArtifactsOfLearning}:**\n{value.ArtifactsOfLearning}",
                                         "required": [
                                             "ActivityTitle",
                                             "StudentExperience",
@@ -1003,7 +1065,8 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                                 "type": "array",
                                                 "minItems": 2,
                                                 "items": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "x-format": "  - {value}"
                                                 }
                                             },
                                             "TeacherRoleMoves": {
@@ -1016,167 +1079,237 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "type": "array",
                                     "minItems": 4,
                                     "items": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "x-format": "{index}. {value}"
                                     }
                                 },
-                                "Phase2_Differentiation_LanguageLearners": {
-                                    "type": "string",
-                                    "description": "Instructional strategies designed specifically to support language development and conceptual understanding for language learners, using visual supports, structured language scaffolds, and opportunities for meaningful academic talk. Focus on how content is taught, not on modifying learning expectations."
-                                },
-                                "Phase2_Differentiation_Scaffolding": {
-                                    "type": "string",
-                                    "description": "Teaching strategies that provide additional instructional scaffolding for students who need structured support, while maintaining the same learning objectives. Supports should increase access to reasoning and engagement through guided practice, visual organization, and gradual release of responsibility."
-                                },
-                                "Phase2_Differentiation_GoDeeper": {
-                                    "type": "string",
-                                    "description": "Instructional extensions that deepen thinking for students ready for greater challenge by increasing conceptual complexity, abstraction, and reasoning demands, while remaining aligned to the same core learning goals."
-                                },
-                                "Phase2_Accommodations_General": {
-                                    "type": "string",
-                                    "description": "General classroom supports and modifications that apply to most or all students during this activity."
-                                },
-                                "Phase2_Accommodations_IndividualSupport": {
-                                    "type": "array",
-                                    "minItems": 0,
-                                    "description": "List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt.",
-                                    "items": {
+                                "Phase2_Differentiation": {
+                                    "type": "object",
+                                    "x-format": "### {violet}(🪜 {loc.Differentiation})\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+                                    "properties": {
+                                      "LanguageLearners": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
+                                        "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "SentenceStarters": { "type": "array", "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "SentenceStarters"],
+                                        "additionalProperties": false
+                                      },
+                                      "AdditionalScaffolding": {
+                                        "type": "object",
+                                        "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}:**\n\n{value.Strategies}\n\nOffer a step-by-step checklist to guide the investigation:\n\n{value.Checklist}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "Checklist": { "type": "array", "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "Checklist"],
+                                        "additionalProperties": false
+                                      },
+                                      "GoDeeper": {
+                                        "type": "object",
+                                        "x-format": "**{loc.GoDeeper}:**\n\n{value.Strategies}\n\n{loc.AdvancedThinkingQuestionTitle}:\n\n- {loc.Say}: \"{value.AdvancedQuestion}\"\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedResponses}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "AdvancedQuestion": { "type": "string", "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding." },
+                                          "ExpectedResponses": { "type": "array", "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "AdvancedQuestion", "ExpectedResponses"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+                                    "additionalProperties": false
+                                },
+                                "Phase2_AccommodationsAndModifications": {
+                                    "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+                                    "type": "object",
+                                    "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+                                    "properties": {
+                                      "General": {
+                                        "type": "array",
+                                        "items": {
+                                          "x-format": "- {value}",
+                                          "type": "string"
+                                        },
+                                        "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                                      },
+                                      "IndividualSupport": {
+                                        "x-format": "{items}",
+                                        "type": "array",
+                                        "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                                        "items": {
+                                          "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                                          "type": "object",
+                                          "properties": {
+                                            "StudentName": {
+                                              "type": "string",
+                                              "description": "First and last name of the individual student receiving these supports."
+                                            },
+                                            "PlanProvided": {
+                                              "type": "array",
+                                              "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                              },
+                                              "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                                            },
+                                            "PlanImplementation": {
+                                              "type": "array",
+                                              "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                              },
+                                              "description": "Concrete tools/stems/visuals/organizers for this task."
+                                            }
+                                          },
+                                          "required": [
                                             "StudentName",
                                             "PlanProvided",
                                             "PlanImplementation"
-                                        ],
-                                        "properties": {
-                                            "StudentName": {
-                                                "type": "string",
-                                                "description": "Full name of the student exactly as provided in the prompt."
-                                            },
-                                            "PlanProvided": {
-                                                "type": "string"
-                                            },
-                                            "PlanImplementation": {
-                                                "type": "string",
-                                                "description": "Short description of the individualized accommodation or modification for this student."
-                                            }
+                                          ],
+                                          "additionalProperties": false
                                         }
-                                    }
+                                      }
+                                    },
+                                    "required": [
+                                      "General",
+                                      "IndividualSupport"
+                                    ],
+                                    "additionalProperties": false
                                 },
                                 "Phase2_AnticipatedMisconceptions": {
                                     "type": "array",
-                                    "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
-                                    "minItems": 2,
+                                    "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
+                                    "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
                                     "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Misconception",
-                                            "CorrectionLanguage"
-                                        ],
-                                        "properties": {
-                                            "Misconception": {
-                                                "type": "string",
-                                                "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
-                                            },
-                                            "CorrectionLanguage": {
-                                                "type": "string",
-                                                "description": "Specific teacher language or instructional moves-such as probing questions, prompts, or examples-that help students examine their thinking and move toward accurate understanding without directly giving the answer."
-                                            }
-                                        }
+                                      "type": "object",
+                                      "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+                                      "properties": {
+                                        "Misconception": { "type": "string", "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags." },
+                                        "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags." }
+                                      },
+                                      "required": ["Misconception", "TeacherResponse"],
+                                      "additionalProperties": false
                                     }
                                 },
-                                "Phase2_TranscendentThinkingPrompts": {
-                                    "type": "array",
-                                    "minItems": 1,
-                                    "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding",
-                                    "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Prompt",
-                                            "ExpectedStudentResponses"
-                                        ],
-                                        "properties": {
-                                            "Prompt": {
-                                                "type": "string"
-                                            },
-                                            "ExpectedStudentResponses": {
-                                                "type": "array",
-                                                "minItems": 2,
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
+                                "Phase2_TranscendentThinking": {
+                                    "type": "object",
+                                    "x-format": "### {violet}(🌍 {loc.TranscendentThinking})\n\n{value.Question}",
+                                    "properties": {
+                                      "Question": { "type": "string", "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus." }
+                                    },
+                                    "required": ["Question"],
+                                    "additionalProperties": false
                                 },
                                 "Phase2_QuickChecks": {
-                                    "type": "array",
-                                    "minItems": 3,
-                                    "maxItems": 3,
+                                    "type": "object",
+                                    "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
                                     "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
-                                    "items": {
+                                    "properties": {
+                                      "BeginningOfPhase": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Timing",
-                                            "Prompt",
-                                            "SuccessCriteriaOrExpectedResponses"
-                                        ],
                                         "properties": {
-                                            "Timing": {
-                                                "type": "string",
-                                                "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
-                                            },
-                                            "Prompt": {
-                                                "type": "string"
-                                            },
-                                            "SuccessCriteriaOrExpectedResponses": {
-                                                "type": "array",
-                                                "minItems": 2,
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      },
+                                      "MidPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      },
+                                      "EndOfPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["BeginningOfPhase", "MidPhase", "EndOfPhase"],
+                                    "additionalProperties": false
                                 },
                                 "Phase2_SpacedRetrieval": {
-                                    "type": "array",
-                                    "minItems": 3,
-                                    "maxItems": 3,
+                                    "type": "object",
+                                    "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
                                     "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
-                                    "items": {
+                                    "properties": {
+                                      "BeginningOfPhase": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Timing",
-                                            "DrawsFrom",
-                                            "Question",
-                                            "DOK",
-                                            "ExpectedResponseOrSuccessCriteria"
-                                        ],
                                         "properties": {
-                                            "Timing": {
-                                                "type": "string",
-                                                "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
-                                            },
-                                            "DrawsFrom": {
-                                                "type": "string"
-                                            },
-                                            "Question": {
-                                                "type": "string"
-                                            },
-                                            "DOK": {
-                                                "type": "integer",
-                                                "minimum": 1,
-                                                "maximum": 4
-                                            },
-                                            "ExpectedResponseOrSuccessCriteria": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      },
+                                      "MidPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      },
+                                      "EndOfPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["BeginningOfPhase", "MidPhase", "EndOfPhase"],
+                                    "additionalProperties": false
                                 },
                                 "Phase2_StudentPractice_TeacherNotes": {
                                     "type": "string",
@@ -1190,6 +1323,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
+                                        "x-format": "**{value.DOK}**\n{value.StudentDirections}\n\n**{loc.SuccessCriteria}:**\n{value.SuccessCriteria}",
                                         "required": [
                                             "DOK",
                                             "StudentDirections",
@@ -1206,7 +1340,8 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                             "SuccessCriteria": {
                                                 "type": "array",
                                                 "items": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
                                                 }
                                             }
                                         }
@@ -1238,33 +1373,26 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                         },
                         "TeacherGuidancePhase3": {
                             "type": "object",
-                            "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase3}\n\n### {value.Phase3_Title}\n\n**Focus Statement**\n{value.Phase3_FocusStatement}\n\n**Collaborative Activities**\n{value.Phase3_CollaborativeActivities}\n\n**Guiding Questions**\n{value.Phase3_GuidingQuestions}\n\n**🪜 Differentiation**\n- **Language Learners:** {value.Phase3_Differentiation_LanguageLearners}\n- **Scaffolding:** {value.Phase3_Differentiation_Scaffolding}\n- **Go Deeper:** {value.Phase3_Differentiation_GoDeeper}\n\n**🤝 Accommodations & Modifications**\n- **General Support:** {value.Phase3_Accommodations_General}\n- **Individual Support:**\n{value.Phase3_Accommodations_IndividualSupport}\n\n**❗ Anticipated Misconceptions**\n{value.Phase3_AnticipatedMisconceptions}\n\n**🌍 Transcendent Thinking**\n{value.Phase3_TranscendentThinkingPrompts}\n\n**✔ Quick Checks**\n{value.Phase3_QuickChecks}\n\n**⏳ Spaced Retrieval**\n{value.Phase3_SpacedRetrieval}\n\n**🖊 Student Practice**\n{value.Phase3_StudentPractice_TeacherNotes}\n{value.Phase3_StudentPractice_Tasks}\n\n**🔎 Reflection**\n{value.Phase3_ReflectionPrompt.Introduction}\n{value.Phase3_ReflectionPrompt.Prompts}",
+                            "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase3}\n\n### {green}({loc.Phase3Title})\n\n**Focus Statement**\n{value.Phase3_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase3_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase3_GuidingQuestions}\n\n{value.Phase3_Differentiation}\n\n{value.Phase3_AccommodationsAndModifications}\n\n{value.Phase3_AnticipatedMisconceptions}\n\n{value.Phase3_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase3_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase3_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase3_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase3_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase3_ReflectionPrompt.Introduction}\n{value.Phase3_ReflectionPrompt.Prompts}",
                             "additionalProperties": false,
                             "description": "Third phase of teacher guidance",
                             "required": [
                                 "Phase3_FocusStatement",
                                 "Phase3_CollaborativeActivities",
                                 "Phase3_GuidingQuestions",
-                                "Phase3_Differentiation_LanguageLearners",
-                                "Phase3_Differentiation_Scaffolding",
-                                "Phase3_Differentiation_GoDeeper",
-                                "Phase3_Accommodations_General",
-                                "Phase3_Accommodations_IndividualSupport",
+                                "Phase3_Differentiation",
+                                "Phase3_AccommodationsAndModifications",
                                 "Phase3_AnticipatedMisconceptions",
-                                "Phase3_TranscendentThinkingPrompts",
+                                "Phase3_TranscendentThinking",
                                 "Phase3_QuickChecks",
                                 "Phase3_SpacedRetrieval",
                                 "Phase3_StudentPractice_TeacherNotes",
                                 "Phase3_StudentPractice_Tasks",
                                 "Phase3_StudentPractice_InterleavingIfMath",
-                                "Phase3_ReflectionPrompt",
-                                "Phase3_Title"
+                                "Phase3_ReflectionPrompt"
                             ],
                             "properties": {
-                                "Phase3_Title": {
-                                    "type": "string",
-                                    "description": "MUST be exactly: 'Phase 3 - Development; Refinement, Culmination, and Reflection'."
-                                },
+                                
                                 "Phase3_FocusStatement": {
                                     "type": "string",
                                     "description": "Generate a 2-4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project's authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning."
@@ -1276,6 +1404,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
+                                        "x-format": "\n\n**{value.ActivityTitle}**\n- **{loc.StudentExperience}:** {value.StudentExperience}\n- **{loc.TeacherRole}:** {value.TeacherRoleMoves}\n- **{loc.ArtifactsOfLearning}:**\n{value.ArtifactsOfLearning}",
                                         "required": [
                                             "ActivityTitle",
                                             "StudentExperience",
@@ -1293,7 +1422,8 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                                 "type": "array",
                                                 "minItems": 2,
                                                 "items": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "x-format": "  - {value}"
                                                 }
                                             },
                                             "TeacherRoleMoves": {
@@ -1306,167 +1436,237 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "type": "array",
                                     "minItems": 4,
                                     "items": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "x-format": "{index}. {value}"
                                     }
                                 },
-                                "Phase3_Differentiation_LanguageLearners": {
-                                    "type": "string",
-                                    "description": "Instructional strategies designed specifically to support language development and conceptual understanding for language learners, using visual supports, structured language scaffolds, and opportunities for meaningful academic talk. Focus on how content is taught, not on modifying learning expectations."
-                                },
-                                "Phase3_Differentiation_Scaffolding": {
-                                    "type": "string",
-                                    "description": "Teaching strategies that provide additional instructional scaffolding for students who need structured support, while maintaining the same learning objectives. Supports should increase access to reasoning and engagement through guided practice, visual organization, and gradual release of responsibility."
-                                },
-                                "Phase3_Differentiation_GoDeeper": {
-                                    "type": "string",
-                                    "description": "Instructional extensions that deepen thinking for students ready for greater challenge by increasing conceptual complexity, abstraction, and reasoning demands, while remaining aligned to the same core learning goals."
-                                },
-                                "Phase3_Accommodations_General": {
-                                    "type": "string",
-                                    "description": "General classroom supports and modifications that apply to most or all students during this activity."
-                                },
-                                "Phase3_Accommodations_IndividualSupport": {
-                                    "type": "array",
-                                    "minItems": 0,
-                                    "description": "List of specific student accommodations. Each entry MUST use the student names and plans exactly as provided in the prompt.",
-                                    "items": {
+                                "Phase3_Differentiation": {
+                                    "type": "object",
+                                    "x-format": "### {violet}(🪜 {loc.Differentiation})\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+                                    "properties": {
+                                      "LanguageLearners": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
+                                        "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "SentenceStarters": { "type": "array", "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "SentenceStarters"],
+                                        "additionalProperties": false
+                                      },
+                                      "AdditionalScaffolding": {
+                                        "type": "object",
+                                        "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}:**\n\n{value.Strategies}\n\nOffer a step-by-step checklist to guide the investigation:\n\n{value.Checklist}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "Checklist": { "type": "array", "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "Checklist"],
+                                        "additionalProperties": false
+                                      },
+                                      "GoDeeper": {
+                                        "type": "object",
+                                        "x-format": "**{loc.GoDeeper}:**\n\n{value.Strategies}\n\n{loc.AdvancedThinkingQuestionTitle}:\n\n- {loc.Say}: \"{value.AdvancedQuestion}\"\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedResponses}",
+                                        "properties": {
+                                          "Strategies": { "type": "array", "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } },
+                                          "AdvancedQuestion": { "type": "string", "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding." },
+                                          "ExpectedResponses": { "type": "array", "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.", "items": { "x-format": "- {value}", "type": "string" } }
+                                        },
+                                        "required": ["Strategies", "AdvancedQuestion", "ExpectedResponses"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["LanguageLearners", "AdditionalScaffolding", "GoDeeper"],
+                                    "additionalProperties": false
+                                },
+                                "Phase3_AccommodationsAndModifications": {
+                                    "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+                                    "type": "object",
+                                    "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+                                    "properties": {
+                                      "General": {
+                                        "type": "array",
+                                        "items": {
+                                          "x-format": "- {value}",
+                                          "type": "string"
+                                        },
+                                        "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                                      },
+                                      "IndividualSupport": {
+                                        "x-format": "{items}",
+                                        "type": "array",
+                                        "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                                        "items": {
+                                          "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                                          "type": "object",
+                                          "properties": {
+                                            "StudentName": {
+                                              "type": "string",
+                                              "description": "First and last name of the individual student receiving these supports."
+                                            },
+                                            "PlanProvided": {
+                                              "type": "array",
+                                              "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                              },
+                                              "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                                            },
+                                            "PlanImplementation": {
+                                              "type": "array",
+                                              "items": {
+                                                "x-format": "- {value}",
+                                                "type": "string"
+                                              },
+                                              "description": "Concrete tools/stems/visuals/organizers for this task."
+                                            }
+                                          },
+                                          "required": [
                                             "StudentName",
                                             "PlanProvided",
                                             "PlanImplementation"
-                                        ],
-                                        "properties": {
-                                            "StudentName": {
-                                                "type": "string",
-                                                "description": "Full name of the student exactly as provided in the prompt."
-                                            },
-                                            "PlanProvided": {
-                                                "type": "string"
-                                            },
-                                            "PlanImplementation": {
-                                                "type": "string",
-                                                "description": "Short description of the individualized accommodation or modification for this student."
-                                            }
+                                          ],
+                                          "additionalProperties": false
                                         }
-                                    }
+                                      }
+                                    },
+                                    "required": [
+                                      "General",
+                                      "IndividualSupport"
+                                    ],
+                                    "additionalProperties": false
                                 },
                                 "Phase3_AnticipatedMisconceptions": {
                                     "type": "array",
-                                    "description": "A list of common student misconceptions likely to arise during this phase of instruction, paired with clear teacher-facing correction language that models how to respond in the moment to guide students toward accurate conceptual understanding.",
-                                    "minItems": 2,
+                                    "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
+                                    "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
                                     "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Misconception",
-                                            "CorrectionLanguage"
-                                        ],
-                                        "properties": {
-                                            "Misconception": {
-                                                "type": "string",
-                                                "description": "A concise description of a common or predictable misunderstanding students may have about the concepts addressed in this phase."
-                                            },
-                                            "CorrectionLanguage": {
-                                                "type": "string",
-                                                "description": "Specific teacher language or instructional moves-such as probing questions, prompts, or examples-that help students examine their thinking and move toward accurate understanding without directly giving the answer."
-                                            }
-                                        }
+                                      "type": "object",
+                                      "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+                                      "properties": {
+                                        "Misconception": { "type": "string", "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags." },
+                                        "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags." }
+                                      },
+                                      "required": ["Misconception", "TeacherResponse"],
+                                      "additionalProperties": false
                                     }
                                 },
-                                "Phase3_TranscendentThinkingPrompts": {
-                                    "type": "array",
-                                    "minItems": 1,
-                                    "description": "Real-world application questions connecting learning to purpose/meaning/big ideas, with expected student responses showing deeper understanding",
-                                    "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Prompt",
-                                            "ExpectedStudentResponses"
-                                        ],
-                                        "properties": {
-                                            "Prompt": {
-                                                "type": "string"
-                                            },
-                                            "ExpectedStudentResponses": {
-                                                "type": "array",
-                                                "minItems": 2,
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
+                                "Phase3_TranscendentThinking": {
+                                    "type": "object",
+                                    "x-format": "### {violet}(🌍 {loc.TranscendentThinking})\n\n{value.Question}",
+                                    "properties": {
+                                      "Question": { "type": "string", "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus." }
+                                    },
+                                    "required": ["Question"],
+                                    "additionalProperties": false
                                 },
                                 "Phase3_QuickChecks": {
-                                    "type": "array",
-                                    "minItems": 3,
-                                    "maxItems": 3,
+                                    "type": "object",
+                                    "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
                                     "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
-                                    "items": {
+                                    "properties": {
+                                      "BeginningOfPhase": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Timing",
-                                            "Prompt",
-                                            "SuccessCriteriaOrExpectedResponses"
-                                        ],
                                         "properties": {
-                                            "Timing": {
-                                                "type": "string",
-                                                "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
-                                            },
-                                            "Prompt": {
-                                                "type": "string"
-                                            },
-                                            "SuccessCriteriaOrExpectedResponses": {
-                                                "type": "array",
-                                                "minItems": 2,
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      },
+                                      "MidPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      },
+                                      "EndOfPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Prompt": { "type": "string" },
+                                          "SuccessCriteriaOrExpectedResponses": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["Prompt", "SuccessCriteriaOrExpectedResponses"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["BeginningOfPhase", "MidPhase", "EndOfPhase"],
+                                    "additionalProperties": false
                                 },
                                 "Phase3_SpacedRetrieval": {
-                                    "type": "array",
-                                    "minItems": 3,
-                                    "maxItems": 3,
+                                    "type": "object",
+                                    "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
                                     "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
-                                    "items": {
+                                    "properties": {
+                                      "BeginningOfPhase": {
                                         "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                            "Timing",
-                                            "DrawsFrom",
-                                            "Question",
-                                            "DOK",
-                                            "ExpectedResponseOrSuccessCriteria"
-                                        ],
                                         "properties": {
-                                            "Timing": {
-                                                "type": "string",
-                                                "description": "Use: 'Beginning of Phase' or 'Mid-Phase' or 'End of Phase'."
-                                            },
-                                            "DrawsFrom": {
-                                                "type": "string"
-                                            },
-                                            "Question": {
-                                                "type": "string"
-                                            },
-                                            "DOK": {
-                                                "type": "integer",
-                                                "minimum": 1,
-                                                "maximum": 4
-                                            },
-                                            "ExpectedResponseOrSuccessCriteria": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      },
+                                      "MidPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      },
+                                      "EndOfPhase": {
+                                        "type": "object",
+                                        "properties": {
+                                          "DrawsFrom": { "type": "string" },
+                                          "Question": { "type": "string" },
+                                          "DOK": { "type": "integer", "minimum": 1, "maximum": 4 },
+                                          "ExpectedResponseOrSuccessCriteria": {
+                                            "type": "array",
+                                            "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                                            "minItems": 2,
+                                            "items": { "type": "string", "x-format": "- {value}" }
+                                          }
+                                        },
+                                        "required": ["DrawsFrom", "Question", "DOK", "ExpectedResponseOrSuccessCriteria"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "required": ["BeginningOfPhase", "MidPhase", "EndOfPhase"],
+                                    "additionalProperties": false
                                 },
                                 "Phase3_StudentPractice_TeacherNotes": {
                                     "type": "string",
@@ -1480,6 +1680,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
+                                        "x-format": "**{value.DOK}**\n{value.StudentDirections}\n\n**{loc.SuccessCriteria}:**\n{value.SuccessCriteria}",
                                         "required": [
                                             "DOK",
                                             "StudentDirections",
@@ -1496,7 +1697,8 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                             "SuccessCriteria": {
                                                 "type": "array",
                                                 "items": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "x-format": "- {value}"
                                                 }
                                             }
                                         }
