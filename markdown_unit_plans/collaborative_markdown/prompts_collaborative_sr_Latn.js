@@ -1,4 +1,4 @@
-window.promptssrLatn = {
+window.prompts_collaborative_sr_Latn = {
   STEP0_PROMPT_TEMPLATE: `Kreirajte pregled jedinice i strukturu časa koristeći informacije ispod. NE pišite kompletne planove časova.
                     
 Na osnovu predmeta jedinice, obrazovnih standarda, opisa/instrukcije jedinice, razreda, trajanja školskog časa (u minutima) i traženog broja časova, generišite JSON odgovor koji uključuje koherentan UnitDescription i nenadovezujuću listu lekcijskih „kontejnera“.

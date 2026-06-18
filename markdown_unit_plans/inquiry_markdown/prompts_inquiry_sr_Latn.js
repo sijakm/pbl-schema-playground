@@ -1,4 +1,4 @@
-window.promptssrLatn = {
+window.prompts_inquiry_sr_Latn = {
   STEP0_PROMPT_TEMPLATE: `Kreirajte SAMO nacrt INKVAJRI jedinice (Korak 0) koristeći informacije u nastavku. Ne kreirajte kompletan plan jedinice i ne pišite potpune planove časova.
 
 MORATE izvesti validan JSON koji tačno odgovara datoj JSON šemi: UnitPlanResponse. Ne uključujte nikakve dodatne ključeve. Koristite kompaktno JSON formatiranje (bez dodatnih praznih redova ili razmaka između JSON svojstava). Bez HTML-a. Bez emodžija. Običan tekst unutar string polja.

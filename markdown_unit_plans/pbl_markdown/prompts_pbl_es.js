@@ -1,4 +1,4 @@
-window.pblPrompts_enes = {
+window.prompts_pbl_es = {
   STEP0_PROMPT_TEMPLATE: `Crea un plan de unidad y lecciones basadas en proyectos utilizando la información a continuación:  
 Asignatura de la unidad:
 {{$Subject}}

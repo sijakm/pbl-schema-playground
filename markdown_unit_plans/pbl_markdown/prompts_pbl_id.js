@@ -1,4 +1,4 @@
-window.pblPrompts_enid = {
+window.prompts_pbl_id = {
   STEP0_PROMPT_TEMPLATE: `Buatlah rencana unit dan pelajaran berbasis proyek menggunakan informasi di bawah ini:  
 Mata Pelajaran Unit:
 {{$Subject}}

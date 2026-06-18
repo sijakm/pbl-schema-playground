@@ -1,4 +1,4 @@
-window.labPromptsEN = {
+window.prompts_lab = {
   STEP0_PROMPT_TEMPLATE: `
 Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
                     

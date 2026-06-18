@@ -1,4 +1,4 @@
-window.promptsid = {
+window.prompts_collaborative_id = {
   STEP0_PROMPT_TEMPLATE: `Buat kerangka unit dan struktur pelajaran menggunakan informasi di bawah ini. Jangan menulis rencana pelajaran lengkap.
                     
 Berdasarkan Unit Subject, standar pendidikan, Unit Description/Instruction, Grade Level, Duration of class period (minutes), dan Number of Lessons yang diminta, hasilkan respons JSON yang mencakup UnitDescription yang koheren dan daftar "container" pelajaran yang tidak saling tumpang tindih.

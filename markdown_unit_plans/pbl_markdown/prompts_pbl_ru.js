@@ -1,4 +1,4 @@
-window.pblPrompts_enru = {
+window.prompts_pbl_ru = {
   STEP0_PROMPT_TEMPLATE: `Создайте план модуля и уроки на основе проектного обучения, используя информацию ниже:  
 Предмет модуля:
 {{$Subject}}

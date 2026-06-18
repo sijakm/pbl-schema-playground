@@ -1,4 +1,4 @@
-window.labPromptsid = {
+window.prompts_lab_id = {
   STEP0_PROMPT_TEMPLATE: `Buatlah garis besar unit dan struktur pelajaran menggunakan info di bawah ini. Jangan menulis rencana pelajaran lengkap.
                     
 Berdasarkan Unit Subject, educational standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), dan Number of Lessons yang diminta, hasilkan respons JSON yang mencakup UnitDescription yang koheren dan daftar "containers" pelajaran yang tidak saling tumpang tindih.

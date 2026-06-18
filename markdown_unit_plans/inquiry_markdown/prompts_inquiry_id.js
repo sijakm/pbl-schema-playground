@@ -1,4 +1,4 @@
-window.promptsid = {
+window.prompts_inquiry_id = {
   STEP0_PROMPT_TEMPLATE: `Buat HANYA kerangka unit INKUIRI (Langkah 0) menggunakan informasi di bawah ini. Jangan buat rencana unit lengkap dan jangan tulis rencana pelajaran lengkap.
 
 Anda HARUS menghasilkan JSON valid yang sesuai dengan skema JSON yang disediakan secara persis: UnitPlanResponse. Jangan sertakan kunci tambahan apa pun. Gunakan format JSON ringkas (tanpa baris kosong tambahan atau spasi berlebih di antara properti JSON). Tanpa HTML. Tanpa emoji. Teks biasa di dalam field string.

@@ -1,4 +1,4 @@
-window.pblPrompts_ensrCyrl = {
+window.prompts_pbl_sr_Cyrl = {
   STEP0_PROMPT_TEMPLATE: `Направите план јединице и лекције засноване на пројекту користећи информације испод:  
 Предмет јединице:
 {{$Subject}}

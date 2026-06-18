@@ -1,4 +1,4 @@
-window.promptses = {
+window.prompts_inquiry_es = {
   STEP0_PROMPT_TEMPLATE: `Crea SOLAMENTE el esquema de la unidad de INDAGACIÓN (Paso 0) usando la información de abajo. NO crees un plan de unidad completo y NO escribas planes de lección completos.
 
 DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado: UnitPlanResponse. No incluyas claves अतिरिक्त. Usa formato JSON compacto (sin líneas en blanco extra ni espacios en blanco entre propiedades JSON). Sin HTML. Sin emojis. Texto plano dentro de los campos de cadena.

@@ -1,4 +1,4 @@
-window.pblPrompts_ensrLatn = {
+window.prompts_pbl_sr_Latn = {
   STEP0_PROMPT_TEMPLATE: `Kreirajte plan jedinice i časove zasnovane na projektu koristeći informacije ispod:  
 Predmet jedinice:
 {{$Subject}}

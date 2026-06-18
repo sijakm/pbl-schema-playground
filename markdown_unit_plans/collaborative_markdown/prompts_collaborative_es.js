@@ -1,4 +1,4 @@
-window.promptses = {
+window.prompts_collaborative_es = {
   STEP0_PROMPT_TEMPLATE: `Crea el esquema de la unidad y la estructura de las lecciones usando la información de abajo. NO escribas planes completos de lección.
                     
 Basándote en el tema de la unidad, los estándares educativos, la descripción/instrucción de la unidad, el nivel de grado, la duración del periodo de clase (minutos) y el número solicitado de lecciones, genera una respuesta JSON que incluya una UnitDescription coherente y una lista no superpuesta de “contenedores” de lecciones.
