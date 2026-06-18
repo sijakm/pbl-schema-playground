@@ -112,7 +112,7 @@ ZAHTEVI ZA IZLAZ:
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Opis jedinice kao jedna koherentna pasusna celina u običnom tekstu (4–5 celih rečenica) napisana prirodnim glasom nastavnika koji možete direktno reći učenicima. Bez HTML-a, bez emodžija, bez nabrajanja. Mora teći razgovorno, ali pratiti ovu strukturu (bez naslova): (1) uvodna rečenica koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica „U ovoj jedinici ćete...” o ishodima ovladavanja, (3) rečenica „Učvrstićete svoje veštine u...” o misaonim/analitičkim sposobnostima, (4) rečenica „Ovo se povezuje sa...” o značaju u stvarnom svetu, (5) rečenica „Razumevanje ovoga je važno zato što...” o širem značaju ili dugoročnom uticaju."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
@@ -120,7 +120,7 @@ ZAHTEVI ZA IZLAZ:
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Kreirajte suštinska pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. Ne pominjite nikakve termine specifične za predmet, procese, vokabular ili primere. Pitanja moraju biti otvorena, prenosiva kroz sve discipline i nemoguća za odgovor bez učenja sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, a ne na sadržaj predmeta.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -129,7 +129,7 @@ ZAHTEVI ZA IZLAZ:
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Ceo odeljak 'Student Learning Objectives' za celu ovu jedinicu. Svaka stavka liste mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se DOK oznakom u zagradama",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -138,7 +138,7 @@ ZAHTEVI ZA IZLAZ:
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Navedite sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. Ne dodajte standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora da sadrži kod standarda i opis, npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec da bi se opisali ciklični obrasci mesečevih mena, pomračenja i godišnjih doba.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -156,21 +156,21 @@ ZAHTEVI ZA IZLAZ:
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Lista kontejnera lekcija za ovu jedinicu (samo okvirno). Svaka stavka mora biti nepreklapajuća i jasno ograničena tako da sadržaj lekcije ne ponavlja sadržaj drugih lekcija.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Redni broj lekcije. Na osnovu 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Kratak naslov lekcije kao običan tekst."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 rečenice koje opisuju obim lekcije, fokus i granice kako bi se sprečilo preklapanje sa drugim lekcijama."
           }
         },
         "required": [
@@ -203,7 +203,7 @@ ZAHTEVI ZA IZLAZ:
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the essential questions that are generated in unit level in same order.",
+      "description": "Samo nalepite sva suštinska pitanja koja su generisana na nivou jedinice, istim redosledom.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -212,7 +212,7 @@ ZAHTEVI ZA IZLAZ:
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "List of vocabulary terms with definitions. (e.g. 'Solar System – The Sun and all...'). ONLY include terms that are actively used in this specific lesson.",
+      "description": "Lista vokabularskih pojmova sa definicijama. (npr. 'Solarni sistem – Sunce i sve...'). Uključite SAMO termine koji se aktivno koriste u ovoj konkretnoj lekciji.",
       "items": {
         "x-format": "{index}. {value}",
         "type": "string"
@@ -221,7 +221,7 @@ ZAHTEVI ZA IZLAZ:
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses.",
+      "description": "Ceo odeljak 'Student Learning Objectives' kao običan tekst. Svaka stavka mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se DOK oznakom u zagradama.",
       "minItems": 2,
       "maxItems": 3,
       "items": {
@@ -232,7 +232,7 @@ ZAHTEVI ZA IZLAZ:
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Ceo odeljak 'Standards Aligned' kao običan tekst za ovu lekciju. Svaki standard mora da sadrži kod standarda i opis, a kod i opis moraju biti potpuno isti kao u Jedinici. npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec da bi se opisali ciklični obrasci mesečevih mena, pomračenja i godišnjih doba.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -241,11 +241,11 @@ ZAHTEVI ZA IZLAZ:
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**Say:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**Say:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**Say:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Full 'Assess Prior Knowledge' section. CRITICAL: Look at the 'lessonNumber' in the Attached Lesson Content. IF this is Lesson 1, populate this object fully. IF this is Lesson 2, 3, or any other lesson, YOU MUST RETURN AN EMPTY OBJECT {} with NO properties. Do not populate this for any lesson other than Lesson 1.",
+      "description": "Ceo odeljak 'Assess Prior Knowledge'. KRITIČNO: Pogledajte 'lessonNumber' u priloženom sadržaju lekcije. AKO je ovo Lekcija 1, popunite ovaj objekat u potpunosti. AKO je ovo Lekcija 2, 3 ili bilo koja druga lekcija, MORATE V RATITI PRAZAN OBJEKAT {} BEZ IKAKVIH SVOJSTAVA. Ne popunjavajte ovo za bilo koju lekciju osim Lekcije 1.",
       "properties": {
         "SayIntroduction": {
           "type": "string",
-          "description": "What the teacher says to introduce the activity."
+          "description": "Šta nastavnik kaže da uvede aktivnost."
         },
         "StatementsToProject": {
           "x-format": "{items}",
@@ -254,11 +254,11 @@ ZAHTEVI ZA IZLAZ:
             "x-format": "- {value}",
             "type": "string"
           },
-          "description": "List of statements to project or read, containing both accurate ideas and common misconceptions."
+          "description": "Lista izjava koje treba projektovati ili pročitati, koje sadrže i tačne ideje i uobičajene zablude."
         },
         "SayInstructions": {
           "type": "string",
-          "description": "What the teacher says to instruct students on what to do with the statements."
+          "description": "Šta nastavnik kaže da uputi učenike šta da rade sa izjavama."
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -267,15 +267,15 @@ ZAHTEVI ZA IZLAZ:
             "x-format": "- {value}",
             "type": "string"
           },
-          "description": "Expected student responses/markings for each statement."
+          "description": "Očekivani odgovori učenika/označavanja za svaku izjavu."
         },
         "SayConclusion": {
           "type": "string",
-          "description": "What the teacher says to wrap up."
+          "description": "Šta nastavnik kaže da zaokruži."
         },
         "ActionConclusion": {
           "type": "string",
-          "description": "Teacher action to conclude (e.g., drawing a diagram)."
+          "description": "Akcija nastavnika za završetak (npr. crtanje dijagrama)."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -284,7 +284,7 @@ ZAHTEVI ZA IZLAZ:
             "x-format": "- {value}",
             "type": "string"
           },
-          "description": "List of alternate options for the activity."
+          "description": "Lista alternativnih opcija za aktivnost."
         }
       },
       "required": [
@@ -301,11 +301,11 @@ ZAHTEVI ZA IZLAZ:
     "Objective": {
       "x-format": "### {green}({loc.Objective} {value.Duration})\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Create an Objective section that clearly states the student learning goals for the lesson.",
+      "description": "Kreirajte odeljak Cilj koji jasno navodi ciljeve učenja učenika za lekciju.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(2-3 min)')"
+          "description": "Procena vremena (npr. '(2-3 min)')"
         },
         "Materials": {
           "x-format": "{items}",
@@ -324,7 +324,7 @@ ZAHTEVI ZA IZLAZ:
             "properties": {
               "Step": {
                 "type": "string",
-                "description": "Teacher step or script."
+                "description": "Korak nastavnika ili skripta."
               },
               "Bullets": {
                 "x-format": "{items}",
@@ -333,7 +333,7 @@ ZAHTEVI ZA IZLAZ:
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "Optional list of bullet points for this step. For the first step, include the actual learning objectives here."
+                "description": "Opcionalna lista tačaka za ovaj korak. Za prvi korak, ovde uključite stvarne ciljeve učenja."
               }
             },
             "required": [
@@ -342,7 +342,7 @@ ZAHTEVI ZA IZLAZ:
             ],
             "additionalProperties": false
           },
-          "description": "Must include: 1) Explain learning goals using direct teacher-facing script (e.g., Say: '...') and put the actual objectives in the Bullets array. 2) Ask students to record objectives in their notebooks. 3) Briefly tell the teacher how to connect objectives to students' real-life experiences."
+          "description": "Mora da uključuje: 1) Objasnite ciljeve učenja koristeći direktnu skriptu namenjenu nastavniku (npr. Recite: '...') i stavite stvarne ciljeve u Bullets niz. 2) Zamolite učenike da zapišu ciljeve u svoje sveske. 3) Ukratko recite nastavniku kako da poveže ciljeve sa stvarnim životnim iskustvima učenika."
         }
       },
       "required": [
@@ -355,11 +355,11 @@ ZAHTEVI ZA IZLAZ:
     "ContentDeliveryAndInteractiveActivities": {
       "x-format": "### {green}({loc.ContentDeliveryAndInteractiveActivities} {value.Duration})\n\n**1. {loc.Hook}** {value.Hook}\n\n**2. {loc.Vocabulary}**\n\n{value.Vocabulary.Bullets}\n\n{value.Vocabulary.ConclusionSay}\n\n**3. {loc.NewConceptsAndKnowledge}**\n\n{value.NewConceptsAndKnowledge}\n\n### ⚡ {loc.AttentionReset}\n\n**{loc.Purpose}:** {value.AttentionReset.StandardParagraph}\n\n{value.AttentionReset.Directions}\n\n{loc.WhyThisWorks}:\n\n{value.AttentionReset.WhyThisWorks}\n\n### {loc.ContinueInstructionAfterActivity}\n\n{value.ContinueInstruction}\n\n### ⚠️ {loc.AnticipatedMisconceptions}\n\n{value.AnticipatedMisconceptions}\n\n{value.Connect}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
       "type": "object",
-      "description": "Block for content delivery.",
+      "description": "Blok za izlaganje sadržaja.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(30 min)')"
+          "description": "Procena vremena (npr. '(30 min)')"
         },
         "Hook": {
           "x-format": "{items}",
@@ -368,7 +368,7 @@ ZAHTEVI ZA IZLAZ:
             "x-format": "{value}\n\n",
             "type": "string"
           },
-          "description": "Write a dramatic, high-engagement hook delivered through teacher script. Should be surprising, curiosity-building, and tied to the main concept."
+          "description": "Napišite dramatičan, snažan uvodni sadržaj koji privlači pažnju i izgovara se kroz nastavničku skriptu. Treba da bude iznenađujuć, da budi radoznalost i da bude povezan sa glavnim konceptom."
         },
         "Vocabulary": {
           "type": "object",
@@ -380,11 +380,11 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "List essential vocabulary terms. Provide teacher script for defining each term formatted strictly as: '[Term] - Say: \"[Definition/Script]\"'. Example: 'Lever - Say: \"A lever is a simple machine...\"'."
+              "description": "Navedite osnovne vokabularne termine. Za svaki termin obezbedite nastavničku skriptu za definisanje u striktno sledećem formatu: '[Termin] - Recite: \"[Definicija/Skripta]\"'. Primer: 'Poluga - Recite: \"Poluga je jednostavna mašina...\"'."
             },
             "ConclusionSay": {
               "type": "string",
-              "description": "A concluding 'Say: ' statement to transition."
+              "description": "Završna izjava tipa 'Recite: ' za prelaz."
             }
           },
           "required": [
@@ -400,15 +400,15 @@ ZAHTEVI ZA IZLAZ:
             "x-format": "{value}\n\n",
             "type": "string"
           },
-          "description": "Write a detailed teacher lecture with scripts (Say: “…”). Include step-by-step what teacher says, does, and may demonstrate. Break down complex ideas, provide examples/analogies, make explicit connections to prior knowledge."
+          "description": "Napišite detaljno predavanje nastavnika sa skriptama (Recite: “…”). Uključite korak po korak šta nastavnik kaže, radi i eventualno demonstrira. Raščlanite složene ideje, navedite primere/analogije, i uspostavite eksplicitne veze sa prethodnim znanjem."
         },
         "AttentionReset": {
           "type": "object",
-          "description": "Insert the standard attention-reset paragraph exactly as written: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
+          "description": "Umetnite standardni pasus za ponovno usmeravanje pažnje tačno onako kako je napisan: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
           "properties": {
             "StandardParagraph": {
               "type": "string",
-              "description": "Must be exactly: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (word for word)'"
+              "description": "Mora biti tačno: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (word for word)'"
             },
             "Directions": {
               "x-format": "{items}",
@@ -417,7 +417,7 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "{index}. {value}",
                 "type": "string"
               },
-              "description": "Provide directions for the activity, including teacher script and what students & teacher need to do."
+              "description": "Obezbedite uputstva za aktivnost, uključujući nastavničku skriptu i šta učenici i nastavnik treba da rade."
             },
             "WhyThisWorks": {
               "x-format": "{items}",
@@ -426,7 +426,7 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Explain in bullets why activity works for re-engagement, resetting cognitive focus, reinforcing concepts and purposeful preview. E.g. 'Standing + movement resets attention.'"
+              "description": "Objasnite u tačkama zašto aktivnost funkcioniše za ponovno angažovanje, resetovanje kognitivnog fokusa, jačanje koncepata i svrhoviti pregled unapred. Npr. 'Stajanje + kretanje resetuje pažnju.'"
             }
           },
           "required": [
@@ -443,23 +443,23 @@ ZAHTEVI ZA IZLAZ:
             "x-format": "{index}. {value}\n\n",
             "type": "string"
           },
-          "description": "Numbered steps to continue instruction with teacher scripts (Say: “…”). Break down complex ideas, provide examples/analogies, to intrigue, foreshadow future learning, extend key ideas."
+          "description": "Navedite korake sa brojevima za nastavak nastave sa nastavničkim skriptama (Recite: “…”). Raščlanite složene ideje, navedite primere/analogije, da biste zaintrigirali, nagovestili buduće učenje i proširili ključne ideje."
         },
         "AnticipatedMisconceptions": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List anticipated common student misconceptions to ensure teacher is ready.",
+          "description": "Navedite očekivane česte zablude učenika kako bi nastavnik bio spreman.",
           "items": {
             "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "e.g., 'Students may think a bigger lever always works better.'"
+                "description": "npr. 'Učenici mogu misliti da uvek veća poluga bolje funkcioniše.'"
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "How to effectively respond to potential student misunderstanding and guide to accurate understanding."
+                "description": "Kako efikasno odgovoriti na moguće nerazumevanje učenika i usmeriti ih ka tačnom razumevanju."
               }
             },
             "required": [
@@ -472,19 +472,19 @@ ZAHTEVI ZA IZLAZ:
         "Connect": {
           "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. Say: \"{value.Step1Say}\"\n\n2. Say: \"{value.Step2Say}\"\n\n3. Prompt:\n\n{value.Step3Prompts}\n\n4. Whole-group share: Say: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Relate to a purpose. Connect to one of the essential questions.",
+          "description": "Povežite sa svrhom. Povežite sa jednim od ključnih pitanja.",
           "properties": {
             "Duration": {
               "type": "string",
-              "description": "e.g., '(3 min)'"
+              "description": "npr. „(3 min)“"
             },
             "Step1Say": {
               "type": "string",
-              "description": "Teacher script connecting the previous activity to a bigger idea."
+              "description": "Skripta za nastavnika koja povezuje prethodnu aktivnost sa širom idejom."
             },
             "Step2Say": {
               "type": "string",
-              "description": "Teacher script asking students to turn and talk to a partner."
+              "description": "Skripta za nastavnika koja traži od učenika da se okrenu i razgovaraju sa partnerom."
             },
             "Step3Prompts": {
               "x-format": "{items}",
@@ -493,11 +493,11 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "- \"{value}\"",
                 "type": "string"
               },
-              "description": "Specific questions for the prompt (e.g., 'Why was the shaduf important...', 'What evidence shows...')."
+              "description": "Određena pitanja za prompt (npr. „Zašto je šaduf bio važan...“, „Koji dokaz pokazuje...“)."
             },
             "Step4Say": {
               "type": "string",
-              "description": "Teacher script for whole-group share (e.g., 'Let's hear a few ideas...')."
+              "description": "Skripta za nastavnika za deljenje u celom odeljenju (npr. „Hajde da čujemo nekoliko ideja...“)."
             },
             "ExpectedStudentResponses": {
               "x-format": "{items}",
@@ -506,7 +506,7 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Deep expected student responses that use reasoning or evidence."
+              "description": "Duboki očekivani odgovori učenika koji koriste rasuđivanje ili dokaze."
             }
           },
           "required": [
@@ -522,7 +522,7 @@ ZAHTEVI ZA IZLAZ:
         "Differentiation": {
           "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
           "type": "object",
-          "description": "Differentiate instruction (how to teach, not simplify materials). Vary complexity and depth, promote active engagement/language. Realistic for classroom.",
+          "description": "Diferenciraj nastavu (kako predavati, a ne pojednostavljivati materijale). Varirajte složenost i dubinu, podstičite aktivno angažovanje/jezik. Realistično za učionicu.",
           "properties": {
             "LanguageLearners": {
               "x-format": "**{loc.LanguageLearners}**\n\n{items}",
@@ -558,7 +558,7 @@ ZAHTEVI ZA IZLAZ:
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "For Go Deeper responses."
+                  "description": "Za odgovore za „Idi dublje“."
                 }
               },
               "required": [
@@ -578,7 +578,7 @@ ZAHTEVI ZA IZLAZ:
         "AccommodationsAndModifications": {
           "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
           "type": "object",
-          "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+          "description": "Ovaj odeljak mora da sadrži dve vrste podrške: Opštu podršku i Individualizovanu podršku. Fokusirajte se na pristup, a ne na smanjivanje rigoroznosti.",
           "properties": {
             "General": {
               "type": "array",
@@ -586,19 +586,19 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+              "description": "Nestrudent-specifične strategije koje poboljšavaju pristup za sve učenike (npr. vizuali, unapred popunjene beleške, digitalni rečnik, podeljena uputstva na manje celina). Navedite 2-4 stavke u obliku nabrajanja."
             },
             "IndividualSupport": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+              "description": "Specifične prilagodbe i modifikacije za imenovane učenike sa formalnim planovima. Navedite SVAKOG učenika pojedinačno; NE grupišite učenike zajedno. Podrške za svakog učenika treba da budu lako pregledna lista.",
               "items": {
                 "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                 "type": "object",
                 "properties": {
                   "StudentName": {
                     "type": "string",
-                    "description": "First and last name of the individual student receiving these supports."
+                    "description": "Ime i prezime pojedinačnog učenika koji prima ove podrške."
                   },
                   "PlanProvided": {
                     "type": "array",
@@ -606,7 +606,7 @@ ZAHTEVI ZA IZLAZ:
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    "description": "Formalni plan naveden za ovog učenika u promptu. Razložite plan u jasnu listu. Možete parafrazirati radi boljeg formatiranja, ali NE izostavljajte niti dodajte bilo kakve informacije."
                   },
                   "PlanImplementation": {
                     "type": "array",
@@ -614,7 +614,7 @@ ZAHTEVI ZA IZLAZ:
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Concrete tools/stems/visuals/organizers for this task."
+                    "description": "Konkretnim alatima/podsetnicima/vizualima/organizatorima za ovaj zadatak."
                   }
                 },
                 "required": [
@@ -650,16 +650,16 @@ ZAHTEVI ZA IZLAZ:
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section.",
+      "description": "Pun odeljak „Pregled i razmaknuto prisećanje“.",
       "properties": {
         "ActiveRecall": {
           "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Asking students to recall NEW learning from TODAY'S lesson.",
+          "description": "Traženje od učenika da se prisete NOVOG učenja sa ČASOVA OD DANAS.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Prompt za nastavnika koji počinje sa „Recite: “."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -679,11 +679,11 @@ ZAHTEVI ZA IZLAZ:
         "EssentialQuestionConnection": {
           "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Teacher prompt linking to unit question.",
+          "description": "Prompt za nastavnika koji povezuje sa pitanjem jedinice.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Prompt za nastavnika koji počinje sa „Recite: “."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -703,15 +703,15 @@ ZAHTEVI ZA IZLAZ:
         "SpacedRetrieval": {
           "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Recall from a specific prior lesson/unit.",
+          "description": "Prisjećanje iz određene prethodne lekcije/jedinice.",
           "properties": {
             "PriorLearningContext": {
               "type": "string",
-              "description": "Context sentence like 'Earlier in this lesson, students learned...'"
+              "description": "Kontekstualna rečenica poput „Ranije u ovom času, učenici su naučili...“"
             },
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Nastavnikov podsticaj koji počinje sa „Recite: “."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
@@ -740,19 +740,19 @@ ZAHTEVI ZA IZLAZ:
     "QAndAAndDiscussion": {
       "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. Say: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. Ask:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. Say: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" Record: {value.InstructionsForTeachers.Step3_CaptureRecord} Say:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. Say: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} Say: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
       "type": "object",
-      "description": "Block for Q&A and Discussion.",
+      "description": "Blok za pitanja i odgovore i diskusiju.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(5 min)')"
+          "description": "Procena vremena (npr. „(5 min)“)"
         },
         "InstructionsForTeachers": {
           "type": "object",
-          "description": "Teacher guidance for the Q&A and Discussion session.",
+          "description": "Uputstvo za nastavnika za sesiju pitanja i odgovora i diskusije.",
           "properties": {
             "Step1_InviteSay": {
               "type": "string",
-              "description": "e.g., 'Now is your chance to think about what we learned...'"
+              "description": "npr. „Sada je vaša prilika da razmislite o tome šta smo naučili...“"
             },
             "Step2_AskQuestions": {
               "x-format": "{items}",
@@ -761,31 +761,31 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "   - \"{value}\"",
                 "type": "string"
               },
-              "description": "3-4 questions to ask students."
+              "description": "3-4 pitanja koja treba postaviti učenicima."
             },
             "Step3_CaptureSay1": {
               "type": "string",
-              "description": "e.g., 'If you have a question, that means you are thinking deeply...'"
+              "description": "npr. „Ako imate pitanje, to znači da duboko razmišljate...“"
             },
             "Step3_CaptureRecord": {
               "type": "string",
-              "description": "e.g., 'Write student questions on a chart titled Questions We Still Have.'"
+              "description": "npr. „Zapišite pitanja učenika na tablu pod naslovom Pitanja koja još imamo.“"
             },
             "Step3_CaptureSay2": {
               "type": "string",
-              "description": "e.g., 'We will keep adding to this chart throughout the unit...'"
+              "description": "npr. „Nastavićemo da dopunjavamo ovu tablu tokom cele nastavne jedinice...“"
             },
             "Step4_AnswerSay1": {
               "type": "string",
-              "description": "e.g., 'Let's look at our questions. Which ones can we answer using what we learned today?'"
+              "description": "npr. „Pogledajmo naša pitanja. Na koja možemo da odgovorimo koristeći ono što smo danas naučili?“"
             },
             "Step4_AnswerAddress": {
               "type": "string",
-              "description": "e.g., 'Address a few questions using student responses and evidence.'"
+              "description": "npr. „Obradite nekoliko pitanja koristeći odgovore učenika i dokaze.“"
             },
             "Step4_AnswerSay2": {
               "type": "string",
-              "description": "e.g., 'Some of these questions will help guide what we learn next...'"
+              "description": "npr. „Neka od ovih pitanja pomoći će da usmerimo ono što ćemo sledeće učiti...“"
             }
           },
           "required": [
@@ -810,11 +810,11 @@ ZAHTEVI ZA IZLAZ:
     "Conclusion": {
       "x-format": "### {green}({loc.Conclusion} {value.Duration})\n\n{value.BuildCuriosity}",
       "type": "object",
-      "description": "Block for Conclusion.",
+      "description": "Blok za zaključak.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(1 min)')"
+          "description": "Procena vremena (npr. „(1 min)“)"
         },
         "BuildCuriosity": {
           "type": "string"
@@ -829,18 +829,18 @@ ZAHTEVI ZA IZLAZ:
     "FormativeAssessment": {
       "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
       "type": "array",
-      "description": "Extract and generate EXACTLY 4 Formative Assessment prompts covering DOK 1-4. For each prompt, include the PromptLabel, Question, and ExpectedStudentResponses.",
+      "description": "Izvucite i generišite TAČNO 4 formativna zadatka za proveru znanja koji pokrivaju DOK 1-4. Za svaki zadatak uključite PromptLabel, Question i ExpectedStudentResponses.",
       "items": {
         "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n{value.ExpectedStudentResponses}\n",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "npr. „Zadatak 1 (DOK 1)“"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text."
+            "description": "Tačan tekst pitanja."
           },
           "ExpectedStudentResponses": {
             "x-format": "{items}",
@@ -849,7 +849,7 @@ ZAHTEVI ZA IZLAZ:
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1-2 primer odgovora koji pokazuju savladanost."
           }
         },
         "required": [
@@ -865,23 +865,23 @@ ZAHTEVI ZA IZLAZ:
     "StudentPractice": {
       "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**Teacher Notes:** {value.TeacherNotes}\n\n{value.Tasks}\n\n🔎 **{loc.Reflection}:** {value.Reflection.Prompt}\n\n{value.Reflection.ReflectionOptions}",
       "type": "object",
-      "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+      "description": "Kompletan odeljak „Vežba učenika“ za domaći zadatak / vežbu van časa.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Notes explaining how the tasks reinforce today's learning and strengthen long-term retention."
+          "description": "Napomene koje objašnjavaju kako zadaci učvršćuju današnje učenje i jačaju dugoročno pamćenje."
         },
         "Tasks": {
           "x-format": "{items}",
           "type": "array",
-          "description": "Generate 4 practice tasks covering DOK levels 2, 3, and 4.",
+          "description": "Generiši 4 zadatka za vežbu koji pokrivaju nivoe DOK 2, 3 i 4.",
           "items": {
             "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{loc.SuccessCriteria}\n\n{value.SuccessCriteria}",
             "type": "object",
             "properties": {
               "TaskDescription": {
                 "type": "string",
-                "description": "e.g., '(DOK 2) Draw a shaduf and label...'"
+                "description": "npr., '(DOK 2) Nacrtaj šaduf i označi...'"
               },
               "SuccessCriteria": {
                 "x-format": "{items}",
@@ -890,7 +890,7 @@ ZAHTEVI ZA IZLAZ:
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "3 success criteria bullet points."
+                "description": "3 stavke sa kriterijumima uspeha."
               }
             },
             "required": [
@@ -904,11 +904,11 @@ ZAHTEVI ZA IZLAZ:
         },
         "Reflection": {
           "type": "object",
-          "description": "A reflection task for the students.",
+          "description": "Zadatak za refleksiju za učenike.",
           "properties": {
             "Prompt": {
               "type": "string",
-              "description": "e.g., 'Write 2-3 sentences responding to one prompt:'"
+              "description": "npr., 'Napiši 2-3 rečenice kao odgovor na jedan podsticaj:'"
             },
             "ReflectionOptions": {
               "x-format": "{items}",
@@ -917,7 +917,7 @@ ZAHTEVI ZA IZLAZ:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "3-4 reflection question options."
+              "description": "3-4 opcije za pitanje za refleksiju."
             }
           },
           "required": [

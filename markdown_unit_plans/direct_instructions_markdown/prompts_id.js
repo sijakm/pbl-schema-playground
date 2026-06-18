@@ -114,13 +114,13 @@ PERSYARATAN OUTPUT:
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Deskripsi unit sebagai satu paragraf teks biasa yang utuh (4–5 kalimat lengkap) ditulis dengan suara guru yang alami yang bisa Anda ucapkan langsung kepada siswa. Tanpa HTML, tanpa emoji, tanpa poin-poin. Harus mengalir secara percakapan tetapi mengikuti struktur ini (tanpa judul): (1) kalimat pembuka yang memancing rasa ingin tahu atau membuat kontras yang mengejutkan, (2) kalimat 'Dalam unit ini, Anda akan...' tentang hasil penguasaan, (3) kalimat 'Anda akan memperkuat keterampilan Anda dalam...' tentang kemampuan berpikir/analisis, (4) kalimat 'Ini terhubung dengan...' tentang relevansi di dunia nyata, (5) kalimat 'Memahami hal ini penting karena...' tentang signifikansi yang lebih luas atau dampak jangka panjang."
         },
         "EssentialQuestions": {
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Buat pertanyaan esensial yang hanya berfokus pada konsep-konsep luas dan universal seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran. Jangan menyebut istilah, proses, kosakata, atau contoh yang spesifik pada mata pelajaran apa pun. Pertanyaan harus bersifat terbuka, dapat ditransfer lintas semua disiplin, dan mustahil dijawab hanya dengan mempelajari isi pelajaran atau unit. Fokus hanya pada gagasan besar, bukan materi pelajaran.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -130,7 +130,7 @@ PERSYARATAN OUTPUT:
         },
         "StudentLearningObjectives": {
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Bagian 'Student Learning Objectives' lengkap untuk seluruh unit ini. Setiap butir daftar harus menjadi tujuan yang jelas dan terukur yang dimulai dengan kata kerja yang terukur dan diakhiri dengan label DOK dalam tanda kurung",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -139,7 +139,7 @@ PERSYARATAN OUTPUT:
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Daftarkan semua standar pendidikan unik yang digunakan di mana pun dalam unit ini dan pelajarannya. Jangan menambahkan standar yang tidak muncul dalam konten unit. Setiap standar harus mencakup kode standar dan deskripsi, misalnya 'MS-ESS1-1: Kembangkan dan gunakan model sistem Bumi–matahari–bulan untuk menggambarkan pola siklus fase bulan, gerhana, dan musim.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -157,21 +157,21 @@ PERSYARATAN OUTPUT:
     },
     "Lessons": {
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Daftar kontainer pelajaran untuk unit ini (hanya kerangka). Setiap item harus tidak tumpang tindih dan dibatasi dengan jelas sehingga konten pelajaran tidak berulang antarpelajaran.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Nomor urut sebuah pelajaran. Berbasis 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Judul singkat pelajaran sebagai teks biasa."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 kalimat yang mendeskripsikan cakupan, fokus, dan batasan pelajaran untuk mencegah tumpang tindih dengan pelajaran lain."
           }
         },
         "required": [
@@ -207,7 +207,7 @@ PERSYARATAN OUTPUT:
       "properties": {
         "EssentialQuestions": {
           "type": "array",
-          "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Tempelkan semua pertanyaan esensial tingkat unit dalam urutan yang sama jika disediakan. Jika tidak disediakan, buat tepat 3 pertanyaan konseptual yang hanya berfokus pada konsep-konsep luas dan universal seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran. Jangan menyebut istilah, proses, kosakata, atau contoh yang spesifik pada mata pelajaran apa pun. Pertanyaan harus bersifat terbuka, dapat ditransfer lintas semua disiplin, dan mustahil dijawab hanya dengan mempelajari isi pelajaran atau unit. Fokus hanya pada gagasan besar, bukan materi pelajaran.",
           "items": {
             "type": "string"
           },
@@ -215,7 +215,7 @@ PERSYARATAN OUTPUT:
         },
         "KeyVocabulary": {
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Bagian 'Key Vocabulary' lengkap sebagai daftar string. Setiap string harus berupa satu istilah dengan definisi yang dipisahkan dengan tanda pisah/hyphen. Contoh: 'Gravitasi - Gaya yang menarik benda-benda satu sama lain'. Semua definisi harus singkat, sesuai usia, dan berhubungan langsung dengan konten pelajaran.",
           "items": {
             "type": "string",
             "x-format": "{index}. {value}"
@@ -224,7 +224,7 @@ PERSYARATAN OUTPUT:
         },
         "StudentLearningObjectives": {
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+          "description": "Bagian 'Student Learning Objectives' lengkap sebagai teks biasa. Setiap butir harus menjadi tujuan yang jelas dan terukur yang dimulai dengan kata kerja yang terukur dan diakhiri dengan label DOK dalam tanda kurung, misalnya 'Memodelkan bagaimana rotasi Bumi pada porosnya menyebabkan siang dan malam (DOK 2).'.",
           "items": {
             "type": "string",
             "x-format": "- {value}\n"
@@ -233,7 +233,7 @@ PERSYARATAN OUTPUT:
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "Full 'Standards Aligned' section for this lesson as a list. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+          "description": "Bagian 'Standards Aligned' lengkap untuk pelajaran ini sebagai daftar. Setiap standar harus mencakup kode standar dan deskripsi, dan kode serta deskripsi harus persis sama dengan yang digunakan dalam Unit. Misalnya 'MS-ESS1-1: Kembangkan dan gunakan model sistem Bumi–matahari–bulan untuk menggambarkan pola siklus fase bulan, gerhana, dan musim.'",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -242,11 +242,11 @@ PERSYARATAN OUTPUT:
         },
         "AssessPriorKnowledge": {
           "type": "object",
-          "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN EMPTY ARRAYS for all fields. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions. 1. Ensure DOK 1-3 prompts are used. 2. Include prerequisite skills. 3. Pick one modality and fully develop it. 4. Provide initial teacher prompts, instructions, expected responses, closing prompts, and 2 alternate options.",
+          "description": "Bagian Assess Prior Knowledge. HANYA Pelajaran 1 yang harus berisi blok terperinci; SEMUA PELAJARAN LAIN HARUS MENGEMBALIKAN ARRAY KOSONG untuk semua field. Untuk Pelajaran 1, struktur harus mencakup ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, dan AlternateOptions. 1. Pastikan prompt DOK 1-3 digunakan. 2. Sertakan keterampilan prasyarat. 3. Pilih satu modalitas dan kembangkan sepenuhnya. 4. Sediakan prompt guru awal, instruksi, respons siswa yang diharapkan, prompt penutup, dan 2 opsi alternatif.",
           "properties": {
             "ActivityInstructions": {
               "type": "array",
-              "description": "Sequential steps (e.g. 'Say: ...', 'Project or read...') to start the activity.",
+              "description": "Langkah-langkah berurutan (misalnya 'Katakan: ...', 'Proyeksikan atau bacakan...') untuk memulai aktivitas.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -255,7 +255,7 @@ PERSYARATAN OUTPUT:
             },
             "ExpectedStudentResponses": {
               "type": "array",
-              "description": "Anticipated answers or common misconceptions for the chosen modality.",
+              "description": "Jawaban yang diantisipasi atau kesalahpahaman umum untuk modalitas yang dipilih.",
               "items": {
                 "type": "string",
                 "x-format": "  - {value}"
@@ -264,7 +264,7 @@ PERSYARATAN OUTPUT:
             },
             "ClosingTeacherPrompt": {
               "type": "array",
-              "description": "Closing teacher steps and prompts that validate student thinking and preview unit investigation.",
+              "description": "Langkah dan prompt penutup guru yang memvalidasi pemikiran siswa dan mempersiapkan penyelidikan unit.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -273,7 +273,7 @@ PERSYARATAN OUTPUT:
             },
             "AlternateOptions": {
               "type": "array",
-              "description": "2 brief alternate options a teacher could choose.",
+              "description": "2 opsi alternatif singkat yang dapat dipilih guru.",
               "items": {
                 "type": "string",
                 "x-format": "{index}. {value}"
@@ -292,11 +292,11 @@ PERSYARATAN OUTPUT:
         },
         "DirectPresentation": {
           "type": "object",
-          "description": "Full 'Direct Presentation' section. This is the FIRST in-class activity and should last NO LONGER THAN 10 minutes.",
+          "description": "Bagian 'Direct Presentation' lengkap. Ini adalah aktivitas pertama di kelas dan harus berlangsung TIDAK LEBIH dari 10 menit.",
           "properties": {
             "Materials": {
               "type": "array",
-              "description": "List of required materials (e.g. visual aids, markers, etc.)",
+              "description": "Daftar bahan yang diperlukan (misalnya alat bantu visual, spidol, dll.)",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -305,17 +305,17 @@ PERSYARATAN OUTPUT:
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Teacher script organized into sequential steps following this EXACT sequence: (1) HOOK (1-2 min), (2) INTRODUCTION (1-2 min), (3) DIRECT TEACHING (4-5 min), and (4) GUIDED ENGAGEMENT (2-3 min). Do NOT include the headers in the strings. Each step must include teacher talk (Say:/Ask:), teacher actions (Do:/Write:/Draw/Show:), and if applicable, expected student responses.",
+              "description": "Skrip guru yang diorganisir ke dalam langkah-langkah berurutan mengikuti urutan TEPAT ini: (1) HOOK (1-2 menit), (2) INTRODUCTION (1-2 menit), (3) DIRECT TEACHING (4-5 menit), dan (4) GUIDED ENGAGEMENT (2-3 menit). Jangan menyertakan judul bagian dalam string. Setiap langkah harus mencakup ujaran guru (Katakan:/Tanyakan:), tindakan guru (Lakukan:/Tulis:/Gambar:/Tampilkan:), dan jika ada, respons siswa yang diharapkan.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific teacher action, starting with 'Say: ', 'Do: ', etc."
+                    "description": "Aksi guru yang spesifik, dimulai dengan 'Say: ', 'Do: ', dll."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                    "description": "Jawaban yang diantisipasi jika instruksinya berupa pertanyaan. Kembalikan array kosong jika tidak berlaku.",
                     "items": {
                       "type": "string",
                       "x-format": "  - {value}"
@@ -334,17 +334,17 @@ PERSYARATAN OUTPUT:
             },
             "AnticipatedMisconceptions": {
               "type": "array",
-              "description": "List of common misconceptions and exact correction language for addressing each one.",
+              "description": "Daftar miskonsepsi umum dan bahasa koreksi yang tepat untuk menangani masing-masing.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "The misconception description."
+                    "description": "Deskripsi miskonsepsi."
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "The correction language starting with 'Say: '."
+                    "description": "Bahasa koreksi yang dimulai dengan 'Say: '."
                   }
                 },
                 "required": [
@@ -358,14 +358,14 @@ PERSYARATAN OUTPUT:
             },
             "TranscendentThinking": {
               "type": "object",
-              "description": "Real-world application question connecting learning to purpose/meaning/big ideas.",
+              "description": "Pertanyaan aplikasi dunia nyata yang menghubungkan pembelajaran dengan tujuan/makna/gagasan besar.",
               "properties": {
                 "Question": {
                   "type": "string"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "Expected student responses showing deeper understanding.",
+                  "description": "Respons siswa yang diharapkan yang menunjukkan pemahaman yang lebih mendalam.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -382,15 +382,15 @@ PERSYARATAN OUTPUT:
             },
             "QuickCheck": {
               "type": "object",
-              "description": "A final check of understanding for a student learning objective already declared in the lesson. This MUST be an individual task for EVERY student to complete.",
+              "description": "Pemeriksaan akhir pemahaman untuk siswa yang mempelajari tujuan pembelajaran yang sudah dinyatakan dalam pelajaran. Ini HARUS menjadi tugas individual untuk SETIAP siswa untuk diselesaikan.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'"
+                  "description": "mis., 'Luangkan 2 menit untuk membuat sketsa X di buku catatanmu' atau 'Di selembar kertas coret-coret, jelaskan mengapa Y...'"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 specific expected student responses.",
+                  "description": "2-3 respons siswa yang diharapkan secara spesifik.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -418,11 +418,11 @@ PERSYARATAN OUTPUT:
         },
         "GuidedPractice": {
           "type": "object",
-          "description": "Structured Guided Practice section with separate fields for materials, instructions, differentiation, and optional accommodations.",
+          "description": "Bagian Latihan Terbimbing terstruktur dengan bidang terpisah untuk materi, instruksi, diferensiasi, dan akomodasi opsional.",
           "properties": {
             "Materials": {
               "type": "array",
-              "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
+              "description": "Benda fisik yang diperlukan untuk aktivitas latihan terbimbing ini (mis., 'bola styrofoam, tali, spidol') diformat sebagai daftar",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -431,17 +431,17 @@ PERSYARATAN OUTPUT:
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Teacher script organized into sequential steps. Each step should combine teacher actions and script. End with prompts for circulation.",
+              "description": "Naskah guru yang diorganisasi ke dalam langkah-langkah berurutan. Setiap langkah harus menggabungkan tindakan guru dan naskah. Akhiri dengan petunjuk untuk berkeliling.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific teacher action, starting with 'Say: ', 'Do: ', etc."
+                    "description": "Aksi guru yang spesifik, dimulai dengan 'Say: ', 'Do: ', dll."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                    "description": "Jawaban yang diantisipasi jika instruksinya berupa pertanyaan. Kembalikan array kosong jika tidak berlaku.",
                     "items": {
                       "type": "string",
                       "x-format": "  - {value}"
@@ -460,14 +460,14 @@ PERSYARATAN OUTPUT:
             },
             "QuickCheck": {
               "type": "object",
-              "description": "Final comprehension check question for the guided practice.",
+              "description": "Pertanyaan pemeriksaan pemahaman akhir untuk latihan terbimbing.",
               "properties": {
                 "Question": {
                   "type": "string"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 expected student responses.",
+                  "description": "2-3 respons siswa yang diharapkan.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -484,7 +484,7 @@ PERSYARATAN OUTPUT:
             },
             "Differentiation": {
               "type": "object",
-              "description": "Labeled with three clearly labeled tiers: Language Learners, Students in Need of Additional Scaffolding, Go Deeper. Requirements: The content must differentiate instruction, not provide accommodations or modifications (those are addressed elsewhere). Strategies should focus on how to teach, not how to simplify materials. Activities should vary in complexity and depth, aligned to the same learning objectives. Each tier must promote active engagement, language development, and conceptual understanding. Use clear, teacher-facing language and make supports realistic for classroom use.",
+              "description": "Diberi label dengan tiga tingkat yang diberi label jelas: Pembelajar Bahasa, Siswa yang Memerlukan Dukungan Tambahan, Lebih Mendalam. Persyaratan: Konten harus membedakan pengajaran, bukan menyediakan akomodasi atau modifikasi (itu ditangani di tempat lain). Strategi harus berfokus pada cara mengajar, bukan pada cara menyederhanakan materi. Kegiatan harus bervariasi dalam kompleksitas dan kedalaman, selaras dengan tujuan pembelajaran yang sama. Setiap tingkat harus mendorong keterlibatan aktif, pengembangan bahasa, dan pemahaman konseptual. Gunakan bahasa yang jelas, berorientasi pada guru, dan buat dukungan yang realistis untuk penggunaan di kelas.",
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
@@ -495,7 +495,7 @@ PERSYARATAN OUTPUT:
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 2-3 concrete teaching strategies for language learners. Examples: providing specific visuals (e.g., 'Planet Fact Sheet'), using sentence frames (e.g., 'This is placed here because...'), or asking students to gesture/point before explaining verbally. Focus on active engagement and language development.",
+                      "description": "Berikan 2-3 strategi pengajaran konkret untuk pembelajar bahasa. Contoh: menyediakan visual spesifik (mis., 'Lembar Fakta Planet'), menggunakan bingkai kalimat (mis., 'Ini ditempatkan di sini karena...'), atau meminta siswa memberi isyarat/menunjuk sebelum menjelaskan secara lisan. Fokus pada keterlibatan aktif dan pengembangan bahasa.",
                       "x-format": "{items}"
                     }
                   },
@@ -514,7 +514,7 @@ PERSYARATAN OUTPUT:
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 2-3 concrete teaching strategies for scaffolding. Examples: providing pre-drawn organizers/templates, using a simplified checklist with specific guiding questions, or modeling a think-aloud process (e.g., 'Watch how I match...'). Focus on how to teach and vary complexity without simplifying materials.",
+                      "description": "Berikan 2-3 strategi pengajaran konkret untuk dukungan bertahap. Contoh: menyediakan organizer/template yang sudah digambar sebelumnya, menggunakan daftar periksa sederhana dengan pertanyaan panduan spesifik, atau memodelkan proses berpikir keras (mis., 'Perhatikan bagaimana saya mencocokkan...'). Fokus pada cara mengajar dan memvariasikan kompleksitas tanpa menyederhanakan materi.",
                       "x-format": "{items}"
                     }
                   },
@@ -533,7 +533,7 @@ PERSYARATAN OUTPUT:
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 1-2 extension tasks that deepen conceptual understanding. Include specific challenges (e.g., 'Adjust spacing to show...') or higher-order questions (e.g., 'How would you model... accurately?'). Must align to the same learning objectives.",
+                      "description": "Berikan 1-2 tugas pengayaan yang memperdalam pemahaman konseptual. Sertakan tantangan spesifik (misalnya, 'Sesuaikan jarak untuk menunjukkan...') atau pertanyaan tingkat tinggi (misalnya, 'Bagaimana Anda akan memodelkan... secara akurat?'). Harus selaras dengan tujuan pembelajaran yang sama.",
                       "x-format": "{items}"
                     },
                     "ExpectedStudentResponses": {
@@ -542,7 +542,7 @@ PERSYARATAN OUTPUT:
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Expected student responses showing what success looks like. Return empty array if not applicable.",
+                      "description": "Respons siswa yang diharapkan yang menunjukkan seperti apa keberhasilan. Kembalikan array kosong jika tidak berlaku.",
                       "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                     }
                   },
@@ -564,7 +564,7 @@ PERSYARATAN OUTPUT:
             },
             "AccommodationsAndModifications": {
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Bagian ini harus mencakup dua jenis dukungan: Dukungan Umum dan Dukungan Individual. Fokus pada akses, bukan menurunkan tingkat rigor.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -572,18 +572,18 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points.",
+                  "description": "Strategi non-spesifik untuk siswa yang meningkatkan akses bagi semua peserta didik (misalnya, visual, catatan yang sudah diisi sebagian, glosarium digital, instruksi yang dipecah). Berikan 2-4 poin bullet.",
                   "x-format": "{items}"
                 },
                 "IndividualSupport": {
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Akomodasi dan modifikasi spesifik untuk siswa yang disebutkan namanya dengan rencana formal. Cantumkan SETIAP siswa secara individual; JANGAN mengelompokkan siswa bersama. Dukungan untuk setiap siswa harus berupa daftar yang mudah dipindai.",
                   "items": {
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Nama depan dan nama belakang siswa individu yang menerima dukungan ini."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -591,7 +591,7 @@ PERSYARATAN OUTPUT:
                           "type": "string",
                           "x-format": "- {value}"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Rencana formal yang disediakan untuk siswa ini dalam prompt. Uraikan rencana tersebut menjadi daftar yang jelas. Anda boleh memparafrasekannya untuk memperbaiki format, tetapi JANGAN menghilangkan atau menambahkan informasi apa pun."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -599,7 +599,7 @@ PERSYARATAN OUTPUT:
                           "type": "string",
                           "x-format": "- {value}"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task.",
+                        "description": "Alat/kerangka kalimat/visual/pengorganisasi yang konkret untuk tugas ini.",
                         "x-format": "{items}"
                       }
                     },
@@ -634,7 +634,7 @@ PERSYARATAN OUTPUT:
         },
         "IndependentPractice": {
           "type": "object",
-          "description": "Structured Independent Practice section.",
+          "description": "Bagian Latihan Mandiri Terstruktur.",
           "properties": {
             "Materials": {
               "type": "array",
@@ -642,16 +642,16 @@ PERSYARATAN OUTPUT:
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Required materials.",
+              "description": "Bahan yang diperlukan.",
               "x-format": "**📚 {loc.Materials}**\n\n{items}"
             },
             "Purpose": {
               "type": "string",
-              "description": "Purpose of the independent practice."
+              "description": "Tujuan dari latihan mandiri."
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Sequential tasks for independent practice.",
+              "description": "Tugas berurutan untuk latihan mandiri.",
               "items": {
                 "type": "object",
                 "properties": {
@@ -660,15 +660,15 @@ PERSYARATAN OUTPUT:
                   },
                   "DOKLevel": {
                     "type": "string",
-                    "description": "e.g., 'DOK 3' or 'DOK 3-4'"
+                    "description": "misalnya, 'DOK 3' atau 'DOK 3-4'"
                   },
                   "TeacherNotes": {
                     "type": "string",
-                    "description": "Explanation connecting task to presentation/goals."
+                    "description": "Penjelasan yang menghubungkan tugas dengan presentasi/tujuan."
                   },
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific instruction or 'Say:' statement."
+                    "description": "Instruksi spesifik atau pernyataan 'Katakan:'."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -676,7 +676,7 @@ PERSYARATAN OUTPUT:
                       "type": "string",
                       "x-format": "  - {value}"
                     },
-                    "description": "Sample answers.",
+                    "description": "Contoh jawaban.",
                     "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                   },
                   "SuccessCriteria": {
@@ -685,7 +685,7 @@ PERSYARATAN OUTPUT:
                       "type": "string",
                       "x-format": "  - {value}"
                     },
-                    "description": "2-4 elements showing mastery.",
+                    "description": "2-4 elemen yang menunjukkan penguasaan.",
                     "x-format": "- {loc.SuccessCriteria}\n\n{items}"
                   }
                 },
@@ -704,7 +704,7 @@ PERSYARATAN OUTPUT:
             },
             "Reflection": {
               "type": "array",
-              "description": "Self-regulation and transcendence questions.",
+              "description": "Pertanyaan regulasi diri dan transendensi.",
               "items": {
                 "type": "object",
                 "properties": {
@@ -713,7 +713,7 @@ PERSYARATAN OUTPUT:
                   },
                   "ReflectionType": {
                     "type": "string",
-                    "description": "e.g., 'Self-Regulation' or 'Transcendence'"
+                    "description": "misalnya, 'Regulasi Diri' atau 'Transendensi'"
                   }
                 },
                 "required": [
@@ -730,7 +730,7 @@ PERSYARATAN OUTPUT:
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "The early finisher task prompt/description."
+                  "description": "Prompt/deskripsi tugas untuk siswa yang selesai lebih awal."
                 },
                 "Requirements": {
                   "type": "array",
@@ -738,12 +738,12 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Specific elements students must address.",
+                  "description": "Elemen spesifik yang harus dibahas siswa.",
                   "x-format": "{items}"
                 },
                 "Justification": {
                   "type": "string",
-                  "description": "Concluding sentence about using accurate principles."
+                  "description": "Kalimat penutup tentang penggunaan prinsip yang akurat."
                 }
               },
               "required": [
@@ -767,7 +767,7 @@ PERSYARATAN OUTPUT:
         },
         "ReviewAndSpacedRetrieval": {
           "type": "object",
-          "description": "Structured Review & Spaced Retrieval section. This 5-minute activity reinforces prior concepts and connects them to current learning.",
+          "description": "Bagian Tinjauan Terstruktur & Penarikan Kembali Berjarak. Aktivitas 5 menit ini memperkuat konsep sebelumnya dan menghubungkannya dengan pembelajaran saat ini.",
           "properties": {
             "Materials": {
               "type": "array",
@@ -775,21 +775,21 @@ PERSYARATAN OUTPUT:
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Required materials (often none needed).",
+              "description": "Bahan yang diperlukan (sering kali tidak diperlukan apa pun).",
               "x-format": "**📚 {loc.Materials}**\n\n{items}"
             },
             "TeacherNotes": {
               "type": "string",
-              "description": "Teacher Notes paragraph that explains: How this review strategy enhances retention, connection to prior learning concepts, and how transcendent reflection deepens understanding.",
+              "description": "Paragraf Catatan Guru yang menjelaskan: Bagaimana strategi tinjauan ini meningkatkan retensi, menghubungkan dengan konsep pembelajaran sebelumnya, dan bagaimana refleksi transenden memperdalam pemahaman.",
               "x-format": "**{loc.TeacherNotes}:** {value}"
             },
             "ActiveRecall": {
               "type": "object",
-              "description": "Instructions for Teachers containing Active Recall prompt.",
+              "description": "Instruksi untuk Guru yang berisi prompt Active Recall.",
               "properties": {
                 "Instruction": {
                   "type": "string",
-                  "description": "Active Recall prompt using partner/group sharing. Must use a 'Say:' statement."
+                  "description": "Prompt Active Recall menggunakan berbagi dengan pasangan/kelompok. Harus menggunakan pernyataan 'Say:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -797,7 +797,7 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 bulleted examples).",
+                  "description": "Respons Siswa yang Diharapkan (2-3 contoh berpoin).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 },
                 "CorrectCommonMisconceptions": {
@@ -806,7 +806,7 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Sample misconception statements and teacher response scripts addressing each (e.g. 'If a student says X, respond Y').",
+                  "description": "Pernyataan miskonsepsi contoh dan skrip respons guru yang menangani masing-masing (misalnya, 'Jika seorang siswa mengatakan X, tanggapi Y').",
                   "x-format": "**{loc.CorrectCommonMisconceptions}**\n\n{items}"
                 }
               },
@@ -820,11 +820,11 @@ PERSYARATAN OUTPUT:
             },
             "EssentialQuestionConnection": {
               "type": "object",
-              "description": "Connection to the unit's essential question.",
+              "description": "Kaitan dengan pertanyaan esensial unit.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Teacher prompt linking to unit question. Must use a 'Say:' statement."
+                  "description": "Prompt guru yang menghubungkan dengan pertanyaan unit. Harus menggunakan pernyataan 'Say:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -832,7 +832,7 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 examples).",
+                  "description": "Respons Siswa yang Diharapkan (2-3 contoh).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -845,11 +845,11 @@ PERSYARATAN OUTPUT:
             },
             "TranscendentThinking": {
               "type": "object",
-              "description": "Reflection on real-world application or broader impact.",
+              "description": "Refleksi tentang penerapan di dunia nyata atau dampak yang lebih luas.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Real-world application prompt. Must include a think time instruction (e.g., 'Take 30 seconds to think silently, then share:') and use a 'Say:' statement."
+                  "description": "Prompt penerapan di dunia nyata. Harus menyertakan instruksi waktu berpikir (misalnya, 'Luangkan 30 detik untuk berpikir dalam diam, lalu bagikan:') dan menggunakan pernyataan 'Say:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -857,7 +857,7 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 examples).",
+                  "description": "Respons Siswa yang Diharapkan (2-3 contoh).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -870,15 +870,15 @@ PERSYARATAN OUTPUT:
             },
             "SpacedRetrieval": {
               "type": "object",
-              "description": "Recall of specific prior learning concepts.",
+              "description": "Mengingat kembali konsep pembelajaran sebelumnya yang spesifik.",
               "properties": {
                 "HeaderTitle": {
                   "type": "string",
-                  "description": "Clear reference to specific prior lesson (e.g., 'Spaced Retrieval (Draws from Unit 2, Lesson 3)')."
+                  "description": "Rujukan yang jelas ke pelajaran sebelumnya yang spesifik (misalnya, 'Penarikan Kembali Berjarak (Bersumber dari Unit 2, Pelajaran 3)')."
                 },
                 "Instruction": {
                   "type": "string",
-                  "description": "Question connecting past and current concepts. Must use a 'Say:' statement."
+                  "description": "Pertanyaan yang menghubungkan konsep masa lalu dan saat ini. Harus menggunakan pernyataan 'Say:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -886,7 +886,7 @@ PERSYARATAN OUTPUT:
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Detailed success criteria or expected student responses (2-3 examples).",
+                  "description": "Kriteria keberhasilan terperinci atau respons siswa yang diharapkan (2-3 contoh).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -913,18 +913,18 @@ PERSYARATAN OUTPUT:
         "FormativeAssessment": {
           "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
           "type": "array",
-          "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+          "description": "Tepat 4 prompt Penilaian Formatif, masing-masing untuk satu tingkat DOK.",
           "items": {
             "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
             "type": "object",
             "properties": {
               "PromptLabel": {
                 "type": "string",
-                "description": "e.g., 'Prompt 1 (DOK 1)'"
+                "description": "misalnya, 'Prompt 1 (DOK 1)'"
               },
               "Question": {
                 "type": "string",
-                "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+                "description": "teks pertanyaan yang tepat, misalnya, 'Mengapa planet tetap berada di orbit alih-alih terlempar ke luar angkasa?'"
               },
               "ExpectedStudentResponses": {
                 "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -933,7 +933,7 @@ PERSYARATAN OUTPUT:
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "1-2 sample responses showing mastery (wrapped in quotes)."
+                "description": "1-2 contoh respons yang menunjukkan penguasaan (dibungkus dalam tanda kutip)."
               }
             },
             "required": [
@@ -949,24 +949,24 @@ PERSYARATAN OUTPUT:
         "StudentPractice": {
           "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
           "type": "object",
-          "description": "Homework/out-of-class practice.",
+          "description": "Latihan PR/di luar kelas.",
           "properties": {
             "TeacherNotes": {
               "x-format": "**{loc.TeacherNotes}:** {value}",
               "type": "string",
-              "description": "Short explanation of the practice goals, e.g., 'These tasks reinforce today's learning about [topic] by asking students to observe real-world patterns and explain them using the concepts introduced in class...'"
+              "description": "Penjelasan singkat tentang tujuan latihan, misalnya, 'Tugas-tugas ini memperkuat pembelajaran hari ini tentang [topik] dengan meminta siswa mengamati pola di dunia nyata dan menjelaskannya menggunakan konsep yang diperkenalkan di kelas...'"
             },
             "PracticeTasks": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
+              "description": "Tepat 3 tugas latihan (DOK 2 atau DOK 3).",
               "items": {
                 "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
                 "type": "object",
                 "properties": {
                   "TaskDescription": {
                     "type": "string",
-                    "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'"
+                    "description": "misalnya, '(DOK 2) Malam ini, pergilah ke luar dan tulis 3-4 kalimat...'"
                   },
                   "ExpectedStudentResponses": {
                     "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -989,11 +989,11 @@ PERSYARATAN OUTPUT:
             "Reflection": {
               "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
               "type": "object",
-              "description": "A reflection task for the students.",
+              "description": "Sebuah tugas refleksi untuk para siswa.",
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'"
+                  "description": "misalnya, 'Refleksi: Tulis 2-3 kalimat menanggapi salah satu prompt:'"
                 },
                 "ReflectionOptions": {
                   "type": "array",
@@ -1001,7 +1001,7 @@ PERSYARATAN OUTPUT:
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Exactly 4 reflection question options in quotes."
+                  "description": "Tepat 4 opsi pertanyaan refleksi dalam tanda kutip."
                 }
               },
               "required": [

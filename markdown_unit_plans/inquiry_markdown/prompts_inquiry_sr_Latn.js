@@ -79,14 +79,14 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Opis jedinice kao jedan koherentan odlomak u običnom tekstu (4–5 potpunih rečenica) napisan prirodnim glasom nastavnika koji možete direktno reći učenicima. Bez HTML-a, bez emodžija, bez nabrajanja. Mora da teče razgovorno, ali da prati ovu strukturu (bez naslova): (1) uvodna rečenica koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica „U ovoj jedinici ćete...” o ishodima ovladavanja, (3) rečenica „Ojačaćete svoje veštine u...” o veštinama mišljenja/analize, (4) rečenica „Ovo se povezuje sa...” o značaju u stvarnom svetu, (5) rečenica „Razumevanje ovoga je važno zato što...” o širem značaju ili dugoročnom uticaju."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Kreirajte suštinska pitanja koja se fokusiraju isključivo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. Nemojte pominjati bilo kakve termine, procese, vokabular ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguće ih je odgovoriti učenjem sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, ne na sadržaj predmeta.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -95,7 +95,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Potpuna sekcija 'Ciljevi učenja učenika' za celu ovu jedinicu. Svaka stavka liste mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se oznakom DOK u zagradama",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -104,7 +104,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Navedite sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. Nemojte dodavati standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora da sadrži kod standarda i opis, npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.'",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -113,7 +113,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "KeyVocabulary": {
           "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Potpuna sekcija 'Ključni vokabular' kao lista stringova. Svaki string treba da bude jedan termin sa definicijom odvojenom crticom/kosanom crtom. Primer: 'Gravitacija - Sila koja privlači objekte jedne ka drugima'. Sve definicije moraju biti kratke, prilagođene uzrastu i direktno povezane sa sadržajem lekcije.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -132,21 +132,21 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Lista kontejnera za lekcije za ovu jedinicu (samo pregled). Svaka stavka mora biti nepokrivajuća i jasno obuhvaćena tako da se sadržaj lekcije ne ponavlja kroz lekcije.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Redni broj lekcije. Na osnovu 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Kratak naslov lekcije kao običan tekst."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 rečenice koje opisuju obuhvat lekcije, fokus i granice kako bi se sprečilo preklapanje sa drugim lekcijama."
           }
         },
         "required": [
@@ -180,16 +180,16 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "AssessPriorKnowledge": {
       "x-format": "### 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN NULL or OMIT this field. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions.",
+      "description": "Sekcija Procena predznanja. SAMO Lekcija 1 treba da sadrži detaljan blok; SVE DRUGE LEKCIJE MORAJU VRATITI NULL ili izostaviti ovo polje. Za Lekciju 1, struktura mora da uključuje ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt i AlternateOptions.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we build...\"'"
+          "description": "Jasna uputstva i šablon/struktura za izabrani modalitet. Npr. 'Recite: \"Pre nego što počnemo da gradimo...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
           "type": "array",
-          "description": "Anticipated answers or common misconceptions for the chosen modality.",
+          "description": "Predviđeni odgovori ili uobičajene zablude za izabrani modalitet.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -197,12 +197,12 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Closing teacher prompt (do NOT include the 'Say:' prefix) that validates student thinking and previews unit investigation."
+          "description": "Završni nastavnički podsticaj (nemojte uključivati prefiks 'Recite:') koji potvrđuje razmišljanje učenika i najavljuje istraživanje jedinice."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
           "type": "array",
-          "description": "2 brief alternate options a teacher could choose.",
+          "description": "Dve kratke alternativne opcije koje nastavnik može da izabere.",
           "items": {
             "x-format": "{index}. {value}",
             "type": "string"
@@ -220,7 +220,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+      "description": "Samo nalepite sva suštinska pitanja na nivou jedinice istim redosledom ako su data. Ako nisu data, generišite tačno 3 konceptualna pitanja koja se fokusiraju isključivo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. Nemojte pominjati bilo kakve termine, procese, vokabular ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguće ih je odgovoriti učenjem sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, ne na sadržaj predmeta.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -229,7 +229,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
+      "description": "Izaberite doslovno ključni vokabular za ovu lekciju iz vokabulara na nivou jedinice koji je dat u promptu. Nemojte izmišljati nove reči. Morate ponovo koristiti tačan tekst iz Step 0 UnitDescription.KeyVocabulary.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -238,7 +238,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the specific student learning objectives for this lesson from the unit-level objectives provided in the prompt. Do NOT invent new objectives. You must reuse the exact wording from the Step 0 UnitDescription.StudentLearningObjectives.",
+      "description": "Izaberite doslovno specifične ciljeve učenja učenika za ovu lekciju iz ciljeva na nivou jedinice koji su dati u promptu. Nemojte izmišljati nove ciljeve. Morate ponovo koristiti tačan tekst iz Step 0 UnitDescription.StudentLearningObjectives.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -247,7 +247,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "List only the unique educational standards addressed in this specific lesson. Each standard must include standard code and description and must be exactly the same used in the Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Navedite samo jedinstvene obrazovne standarde obrađene u ovoj konkretnoj lekciji. Svaki standard mora da sadrži kod standarda i opis i mora biti potpuno isti kao u jedinici. npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -260,7 +260,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista potrebnih materijala (npr. vizuelna pomagala, markeri itd.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -275,11 +275,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script to introduce the phenomenon. Ensure it focuses on sparking curiosity without giving scientific explanations."
+                  "description": "Kreirajte skript za uvođenje fenomena. Pobrinite se da se fokusira na podsticanje radoznalosti bez davanja naučnih objašnjenja."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 specific pedagogical moves that guide silent observation and partner sharing. Include scripts (do NOT include the 'Say:' prefix, e.g., 'Take 30 seconds to look silently...'). Focus on capturing and organizing student observations into meaningful categories and encouraging multiple perspectives.",
+                  "description": "Generišite 2-3 konkretna pedagoška poteza koji usmeravaju tiho posmatranje i deljenje u paru. Uključite skripte (nemojte uključivati prefiks „Say:“, npr. „Take 30 seconds to look silently...“). Fokusirajte se na hvatanje i organizovanje zapažanja učenika u smislenе kategorije i podsticanje više perspektiva.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -287,7 +287,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts as a single string to help students identify details, notice patterns, and surface initial wonderings. Encourage students to explain why certain details feel important and to build on or contrast each other’s observations."
+                  "description": "Generišite 2-3 konkretna podsticaja kao jedan string koji će pomoći učenicima da identifikuju detalje, uoče obrasce i iznesu početna pitanja. Podstaknite učenike da objasne zašto određeni detalji deluju važni i da nadograđuju ili suprotstavljaju zapažanja jedni drugih."
                 }
               },
               "required": [
@@ -303,15 +303,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a specific teacher script (do NOT include the 'Say:' prefix) that helps students turn their observations of the phenomenon into research questions or problems while clustering ideas into key themes."
+                  "description": "Kreirajte konkretnu nastavničku skriptu (nemojte uključivati prefiks „Say:“) koja pomaže učenicima da svoje opservacije fenomena pretvore u istraživačka pitanja ili probleme, dok grupišu ideje u ključne teme."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 specific prompts to help students connect observations to underlying challenges, justify thinking with evidence, and prioritize which ideas are most worth investigating."
+                  "description": "Obezbedite 2-3 konkretna podsticaja koji će pomoći učenicima da povežu zapažanja sa temeljnim izazovima, opravdaju razmišljanje dokazima i odrede koje ideje najviše vrede istražiti."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Suggest 2-3 moves to support students in refining and grouping their ideas, while pressing them to explain their reasoning. Include instructions to record and highlight recurring questions without answering them.",
+                  "description": "Predložite 2-3 poteza za podršku učenicima u preciziranju i grupisanju njihovih ideja, uz insistiranje da objasne svoje obrazloženje. Uključite uputstva da se ponavljajuća pitanja zabeleže i istaknu bez odgovaranja na njih.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -331,15 +331,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Develop a teacher-led instruction (do NOT include the 'Say:' prefix) to facilitate partner or group discussion that generates specific ideas, explanations, or solutions using available information and constraints. Encourage comparison and reasoning."
+                  "description": "Razvijte instrukciju koju vodi nastavnik (nemojte uključivati prefiks „Say:“) kako biste olakšali diskusiju u paru ili grupi koja generiše konkretne ideje, objašnjenja ili rešenja koristeći dostupne informacije i ograničenja. Podstaknite poređenje i obrazlaganje."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "List 2-3 prompts to encourage students to propose ideas, explain reasoning, consider alternative approaches, and evaluate which parts of their thinking are strongest or most uncertain."
+                  "description": "Navedite 2-3 podsticaja koji će ohrabriti učenike da predlažu ideje, objašnjavaju obrazloženje, razmatraju alternativne pristupe i procenjuju koji su delovi njihovog razmišljanja najjači ili najsigurniji."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Describe 2-3 circulation moves to listen for reasoning, press for clarity/justification, and highlight diverse approaches without evaluating which is correct.",
+                  "description": "Opišite 2-3 poteza kretanja kroz razred koji će slušati obrazloženje, insistirati na jasnoći/opravdanju i istaknuti različite pristupe bez procenjivanja koji je tačan.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -359,15 +359,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script to push students to refine and test their ideas by examining assumptions, considering different conditions, and identifying key factors of this lesson."
+                  "description": "Kreirajte skriptu koja podstiče učenike da preciziraju i testiraju svoje ideje ispitivanjem pretpostavki, razmatranjem različitih uslova i identifikovanjem ključnih faktora ove lekcije."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Suggest 2-3 specific prompts to test ideas against new conditions, identify weaknesses, and revise thinking using evidence for this lesson's phenomena."
+                  "description": "Predložite 2-3 konkretna podsticaja da se ideje testiraju u odnosu na nove uslove, identifikuju slabosti i revidira razmišljanje koristeći dokaze za fenomene ove lekcije."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Provide 2-3 specific moves to encourage students to revisit and revise their initial ideas based on evidence and justify changes in their thinking.",
+                  "description": "Obezbedite 2-3 konkretna poteza koji će podstaći učenike da se vrate svojim početnim idejama i revidiraju ih na osnovu dokaza, kao i da opravdaju promene u svom razmišljanju.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -375,7 +375,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "Closing": {
                   "type": "string",
-                  "description": "A final instruction to push students to test and revise their ideas, consider long-term effects and changing conditions, and use evidence from observations to strengthen or challenge their thinking."
+                  "description": "Završna instrukcija koja podstiče učenike da testiraju i revidiraju svoje ideje, razmotre dugoročne efekte i promenljive uslove, i koriste dokaze iz opservacija da ojačaju ili ospore svoje razmišljanje."
                 }
               },
               "required": [
@@ -410,7 +410,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista potrebnih materijala (npr. vizuelna pomagala, markeri itd.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -425,11 +425,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a teacher script (do NOT include the 'Say:' prefix) to introduce the question brainstorming session. Focus on moving from individual to partner sharing to expand ideas."
+                  "description": "Kreirajte nastavničku skriptu (nemojte uključivati prefiks „Say:“) za uvođenje sesije generisanja pitanja. Fokusirajte se na prelazak od individualnog razmišljanja ka deljenju u paru kako bi se ideje proširile."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 specific moves to support student generation of questions. Include providing think time, capturing all questions publicly, and encouraging students to refine, combine, or expand questions without judgmental evaluation.",
+                  "description": "Generišite 2-3 konkretna poteza za podršku generisanju pitanja kod učenika. Uključite vreme za razmišljanje, javno beleženje svih pitanja i podsticanje učenika da preciziraju, kombinuju ili prošire pitanja bez evaluacije zasnovane na procenjivanju.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -437,7 +437,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts to help students surface curiosities, identify what they want to understand, and focus on key aspects of the system or design."
+                  "description": "Generišite 2-3 konkretna podsticaja koji će pomoći učenicima da iznesu radoznalost, identifikuju šta žele da razumeju i usmere se na ključne aspekte sistema ili dizajna."
                 }
               },
               "required": [
@@ -453,11 +453,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script (do NOT include the 'Say:' prefix) to guide students in selecting a question that would help them learn the most from a testable model."
+                  "description": "Kreirajte skriptu (nemojte uključivati prefiks „Say:“) koja vodi učenike u odabiru pitanja koje bi im najviše pomoglo da uče iz testabilnog modela."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Suggest 2-3 moves to guide students in sorting questions into themes and comparing ideas based on testability. Include moves to support students in refining broad questions into clear investigations by identifying variables.",
+                  "description": "Predložite 2-3 poteza koji će usmeriti učenike u razvrstavanje pitanja u teme i poređenje ideja na osnovu testabilnosti. Uključite poteze koji podržavaju učenike da široka pitanja preciziraju u jasna istraživanja identifikovanjem varijabli.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -465,7 +465,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 prompts to help students evaluate questions based on testability, clarity, focus on variables, and potential to generate useful evidence."
+                  "description": "Generišite 2-3 podsticaja koji će pomoći učenicima da procene pitanja na osnovu testabilnosti, jasnoće, usmerenosti na varijable i potencijala da generišu korisne dokaze."
                 }
               },
               "required": [
@@ -481,11 +481,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script (do NOT include the 'Say:' prefix) to prompt students to define what they will observe, change, and collect as evidence."
+                  "description": "Kreirajte scenario (nemojte uključiti prefiks 'Say:') da podstaknete učenike da definišu šta će posmatrati, šta će menjati i šta će prikupljati kao dokaz."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Describe 2-3 moves to support students in designing an investigation plan and identifying variables. Include moves to press students to make plans specific and testable, and ensure they have a clear way to determine success.",
+                  "description": "Opišite 2-3 koraka za podršku učenicima u osmišljavanju plana istraživanja i identifikovanju varijabli. Uključite korake koji podstiču učenike da planove učine preciznim i proverljivim, i obezbedite da imaju jasan način da utvrde uspeh.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -493,7 +493,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 specific prompts to help students clarify what they will change, keep the same, and how they will compare results."
+                  "description": "Dajte 2-3 konkretna podsticaja da pomognete učenicima da razjasne šta će menjati, šta će zadržati isto i kako će uporediti rezultate."
                 }
               },
               "required": [
@@ -526,7 +526,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Spisak potrebnih materijala (npr. vizuelna pomagala, markeri itd.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -541,11 +541,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create teacher instructions to introduce a puzzling scenario or model. First provide a bracketed action like [Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result to spark curiosity], then provide the conversational script (do NOT include the 'Say:' prefix)."
+                  "description": "Kreirajte nastavnikova uputstva za uvođenje zbunjujuće situacije ili modela. Prvo navedite radnju u zagradama kao [Prikažite model, situaciju, demonstraciju ili kratku priču koja uključuje manu, neefikasnost ili neočekivan rezultat kako biste podstakli radoznalost], a zatim navedite razgovorni scenario (nemojte uključiti prefiks 'Say:')."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 moves to guide the launch. State the instructional actions clearly without prefixing them with 'Say:'. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.",
+                  "description": "Generišite 2-3 koraka za vođenje uvoda. Jasno navedite nastavne radnje bez prefiksiranja sa 'Say:'. Uključite davanje učenicima vremena da posmatraju pre delovanja, podsticanje višestrukih tumačenja i naglašavanje da može postojati više validnih ideja.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -553,7 +553,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts to help students notice important or unexpected features, generate possible explanations, and justify thinking with evidence."
+                  "description": "Generišite 2-3 konkretna podsticaja da pomognete učenicima da uoče važne ili neočekivane osobine, generišu moguća objašnjenja i opravdaju razmišljanje dokazima."
                 }
               },
               "required": [
@@ -569,11 +569,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a spoken script (do NOT include the 'Say:' prefix) to frame the task as interdependent and emphasize shared responsibility. Include instructions for students to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips."
+                  "description": "Kreirajte izgovoreni scenario (nemojte uključiti prefiks 'Say:') da zadatak postavite kao međuzavisan i naglasite zajedničku odgovornost. Uključite uputstva za učenike da koriste početke rečenica (npr. 'Mislim... zato što...') i strukture učešća kao što su žetoni za govor."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Do not prefix these actions with 'Say:'. Ensure they focus on all students contributing to observing and refining ideas.",
+                  "description": "Navedite 3-5 konkretnih koraka ili ponašanja učenika koja treba pratiti tokom rada u grupi (npr. prepoznavanje obrazaca, beleženje u zajedničkim tabelama podataka, upoređivanje tumačenja). Nemojte prefiksirati ove radnje sa 'Say:'. Pobrinite se da budu usmerene na to da svi učenici doprinose posmatranju i dorađivanju ideja.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -581,7 +581,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 prompts to encourage students to share observations, compare interpretations, justify claims with evidence, and collaboratively revise ideas."
+                  "description": "Dajte 2-3 podsticaja da ohrabrite učenike da podele zapažanja, uporede tumačenja, opravdaju tvrdnje dokazima i zajednički revidiraju ideje."
                 }
               },
               "required": [
@@ -594,11 +594,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
             "CirculationPrompts": {
               "type": "object",
               "x-format": "**{loc.CirculationPromptsTitle}**\n\n**{loc.ConceptualPromptsTitle}**\n\n{value.Conceptual}\n\n**{loc.ReasoningPromptsTitle}**\n\n{value.Reasoning}\n\n**{loc.CollaborationPromptsTitle}**\n\n{value.Collaboration}",
-              "description": "Specific prompts to be used by the teacher while circulating between groups.",
+              "description": "Konkretni podsticaji koje će nastavnik koristiti dok se kreće između grupa.",
               "properties": {
                 "Conceptual": {
                   "type": "array",
-                  "description": "2-3 prompts focusing on key scientific or lesson concepts (e.g., 'What evidence shows this is working?').",
+                  "description": "2-3 podsticaja usmerena na ključne naučne ili nastavne koncepte (npr. 'Koji dokaz pokazuje da ovo funkcioniše?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -606,7 +606,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "Reasoning": {
                   "type": "array",
-                  "description": "2-3 prompts to press for justification and logic (e.g., 'How does this trial change your thinking?').",
+                  "description": "2-3 podsticaja za insistiranje na opravdanju i logici (npr. 'Kako ovaj pokušaj menja vaše mišljenje?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -614,7 +614,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "Collaboration": {
                   "type": "array",
-                  "description": "2-3 prompts to ensure all voices are included (e.g., 'Who has not contributed yet?').",
+                  "description": "2-3 podsticaja da se obezbedi uključivanje svih glasova (npr. 'Ko još nije doprineo?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -639,18 +639,18 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "AnticipatedMisconceptions": {
           "type": "array",
           "x-format": "### ⚠️ {loc.AnticipatedMisconceptions}{items}",
-          "description": "Generate 2-3 common student misconceptions likely to arise during this lesson. Each item must focus on a specific misunderstanding and a teacher response script.",
+          "description": "Generišite 2-3 uobičajene zablude učenika koje će verovatno nastati tokom ove lekcije. Svaka stavka mora da se fokusira na specifično pogrešno shvatanje i skriptu odgovora nastavnika.",
           "items": {
             "type": "object",
             "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                "description": "Opišite zabludu u 1 rečenici, počevši sa 'Students may think...'. NE koristite podebljavanje niti jake oznake."
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                "description": "Jasna skripta odgovora za nastavnika (počinje sa 'Teacher Response: ') koja pokazuje kako odgovoriti u tom trenutku sa konkretnim podsticajem (nemojte uključiti prefiks 'Say:'). NE koristite podebljavanje niti jake oznake."
               }
             },
             "required": [
@@ -670,7 +670,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas.",
+                  "description": "Generišite 2-3 podrške specifične za lekciju (vizuali, banke reči, geste) kako biste učenicima koji uče jezik pomogli da pristupe idejama i izraze ih.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -678,7 +678,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "SentenceStarters": {
                   "type": "array",
-                  "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson.",
+                  "description": "Generišite 3-4 početka rečenica koji pomažu učenicima da opišu, objasne i komuniciraju svoje razmišljanje za ovu konkretnu lekciju.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -697,7 +697,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task.",
+                  "description": "Generišite 2-3 koraka podrške po koracima (strukturirani alati, modelirani primeri, razmišljanje naglas) i tačno uputstvo kako biste pomogli učenicima da završe zadatak.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -705,7 +705,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "Checklist": {
                   "type": "array",
-                  "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation.",
+                  "description": "Generišite 3-4 kontrolna pitanja koja će usmeravati učenike da razumeju smisao svog učenja tokom istraživanja.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -724,7 +724,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence.",
+                  "description": "Generišite 2-3 proširenja koja povećavaju složenost (specifični izazovi, prepoznavanje obrazaca) kako biste pomogli učenicima da prodube ili poboljšaju svoje razmišljanje koristeći dokaze.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -732,11 +732,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                  "description": "Generišite jedan složen podsticaj (ne uključujte prefiks 'Say:')/pitanje koje će podstaći dublje konceptualno razumevanje."
                 },
                 "ExpectedResponses": {
                   "type": "array",
-                  "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question.",
+                  "description": "Generišite 3-4 konkretna primera visokokvalitetnih odgovora učenika na napredno pitanje.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -761,7 +761,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "AccommodationsAndModifications": {
           "x-format": "### 🤝 {loc.AccommodationsAndModifications}\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
           "type": "object",
-          "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+          "description": "Ovaj odeljak mora da uključuje dve vrste podrške: Opšta podrška i Individualizovana podrška. Fokusirajte se na pristup, a ne na smanjenje rigoroznosti.",
           "properties": {
             "General": {
               "type": "array",
@@ -769,19 +769,19 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+              "description": "Strategije koje nisu specifične za učenika i koje poboljšavaju pristup za sve učenike (npr. vizuali, unapred popunjene beleške, digitalni rečnik, podeljena uputstva na manje celine). Navedite 2-4 stavke u listi."
             },
             "IndividualSupport": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+              "description": "Specifična prilagođavanja i modifikacije za imenovane učenike sa formalnim planovima. Navedite SVAKOG učenika pojedinačno; ne grupišite učenike zajedno. Podrška za svakog učenika treba da bude u listi koja se lako pregledava.",
               "items": {
                 "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                 "type": "object",
                 "properties": {
                   "StudentName": {
                     "type": "string",
-                    "description": "First and last name of the individual student receiving these supports."
+                    "description": "Ime i prezime pojedinačnog učenika koji prima ovu podršku."
                   },
                   "PlanProvided": {
                     "type": "array",
@@ -789,7 +789,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    "description": "Formalni plan naveden za ovog učenika u zadatku. Pretvorite plan u jasnu listu. Možete parafrazirati da biste poboljšali formatiranje, ali nemojte izostaviti niti dodati bilo koju informaciju."
                   },
                   "PlanImplementation": {
                     "type": "array",
@@ -797,7 +797,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Concrete tools/stems/visuals/organizers for this task."
+                    "description": "Konkretni alati/polazne rečenice/vizuali/organizatori za ovaj zadatak."
                   }
                 },
                 "required": [
@@ -821,11 +821,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generate one specific question (do NOT include the 'Say:' prefix) to check for student understanding during or at the end of the investigation."
+              "description": "Generišite jedno konkretno pitanje (ne uključujte prefiks 'Say:') za proveru razumevanja učenika tokom ili na kraju istraživanja."
             },
             "ExpectedResponses": {
               "type": "array",
-              "description": "Generate 3-4 expected student responses that show mastery of the lesson concept.",
+              "description": "Generišite 3-4 očekivana odgovora učenika koji pokazuju savladanost koncepta lekcije.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -857,7 +857,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Spisak potrebnih materijala (npr. vizuelna pomagala, markeri, itd.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -869,11 +869,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) to bring students back to the research question and surfacing emerging ideas about how the design works."
+              "description": "Izjava (ne uključujte prefiks 'Say:') koja će učenike vratiti na istraživačko pitanje i izneti na videlo nove ideje o tome kako dizajn funkcioniše."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagogical moves to give students time to review data, identify patterns, and compare results through discussion.",
+              "description": "2-3 pedagoška poteza koji će učenicima dati vremena da pregledaju podatke, identifikuju obrasce i uporede rezultate kroz diskusiju.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -881,7 +881,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 specific questions to push students to explain patterns, justify decisions with evidence, and describe cause-and-effect relationships.",
+              "description": "3-4 konkretna pitanja koja će podstaći učenike da objasne obrasce, obrazlože odluke dokazima i opišu uzročno-posledične odnose.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -889,15 +889,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) outlining what their written explanation must include (content-specific components) and a reminder to use data as evidence."
+              "description": "Izjava (ne uključujte prefiks 'Say:') koja navodi šta njihov pisani odgovor mora da sadrži (sadržinski specifične komponente) i podsetnik da koriste podatke kao dokaz."
             },
             "CollaborationInstruction": {
               "type": "string",
-              "description": "Instruction for students to write independently then share with a partner or group to refine their reasoning."
+              "description": "Uputstvo za učenike da prvo rade samostalno, a zatim podele sa partnerom ili grupom kako bi unapredili svoje obrazloženje."
             },
             "Guardrail": {
               "type": "string",
-              "description": "A firm reminder that the teacher should NOT provide the scientific explanation, but instead press students to point to data."
+              "description": "Podsetnik da nastavnik NE treba da pruži naučno objašnjenje, već da podstakne učenike da ukažu na podatke."
             }
           },
           "required": [
@@ -912,7 +912,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "3-4 responses that directly answer the research question using evidence and cause-and-effect reasoning (e.g., 'when we changed ___, ___ happened').",
+          "description": "3-4 odgovora koji direktno odgovaraju na istraživačko pitanje koristeći dokaze i rezonovanje uzroka i posledice (npr. „kada smo promenili ___, desilo se ___”).",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -933,7 +933,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Spisak potrebnog materijala (npr. vizuelna pomagala, markeri itd.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -945,11 +945,11 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) to prompt students to think about the broader implications of their evidence beyond the classroom."
+              "description": "Izjava (ne uključujte prefiks „Say:”) koja podstiče učenike da razmisle o širim implikacijama svojih dokaza van učionice."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagogical moves to encourage students to discuss with partners/groups and generate their own examples of real-world impact.",
+              "description": "2-3 pedagoška poteza za podsticanje učenika da razgovaraju sa partnerima/grupama i osmisle sopstvene primere uticaja na stvarni svet.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -957,7 +957,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 specific questions to connect the investigation results to everyday life, community issues, or system redesign.",
+              "description": "3-4 konkretna pitanja koja povezuju rezultate istraživanja sa svakodnevnim životom, problemima u zajednici ili redizajnom sistema.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -977,7 +977,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+              "description": "Generišite 1 pitanje transcendentalnog mišljenja koje zahteva od učenika da primene učenje izvan sebe na realne kontekste (zajednice, globalni izazovi). Fokusirajte se na to zašto je učenje važno na velikoj skali (bezbednost, održivost, inovacije itd.). Izbegavajte fokus samo na ličnom/školskom nivou."
             }
           },
           "required": [
@@ -987,7 +987,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "4-5 responses illustrating how students might apply their understanding to authentic, real-world contexts or future-oriented problem solving.",
+          "description": "4-5 odgovora koji ilustruju kako učenici mogu primeniti svoje razumevanje u autentičnim, stvarnim kontekstima ili u rešavanju problema usmerenih na budućnost.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -1005,29 +1005,29 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Transcendent Thinking section 4. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must provide direct teacher prompts without the 'Say:' prefix and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
+      "description": "Potpuna sekcija „Review & Spaced Retrieval“. Ova aktivnost od 5 minuta mora da uključuje: 1. Uputstva za nastavnike koja sadrže: - prompt za aktivno prisećanje uz deljenje sa partnerom/grupom - očekivane odgovore učenika (2-3 primera u bullet listi) 2. Povezivanje sa suštinskim pitanjem 3. Deo o transcendentalnom mišljenju 4. Komponentu razmaknutog prisećanja koja sadrži: - jasno upućivanje na konkretan prethodni čas - pitanje koje povezuje prošle + sadašnje koncepte - detaljne kriterijume uspeha / očekivane odgovore Sve sekcije moraju sadržati direktne nastavničke upute bez prefiksa „Say:” i jasno označene „Expected Student Responses” sa 2-3 primera odgovora.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Teacher notes explaining how this review strategy strengthens retention through active recall and connects the investigation to core science ideas."
+          "description": "Napomene za nastavnika koje objašnjavaju kako ova strategija za pregled jača pamćenje kroz aktivno prisećanje i povezuje istraživanje sa ključnim naučnim idejama."
         },
         "InstructionsForTeachers": {
           "type": "object",
           "x-format": "{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
-          "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
+          "description": "Korak-po-korak uputstva za nastavnika za 5-minutnu sesiju pregleda i razmaknutog prisećanja.",
           "properties": {
             "ActiveRecall": {
               "type": "object",
               "x-format": "### 🔁 {loc.ActiveRecall}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the investigation.",
+              "description": "Podstaknite učenike da se prisete ključnog učenja sa današnjeg časa koristeći samo dokaze iz istraživanja.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "A specific teacher script (do NOT include the 'Say:' prefix) that prompts students to reflect on today's investigation and what it revealed about the system."
+                  "description": "Specifičan nastavnički tekst (ne uključujte prefiks „Say:”) koji podstiče učenike da razmisle o današnjem istraživanju i o tome šta je ono otkrilo o sistemu."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "3-4 examples of high-quality student responses showing clear use of evidence.",
+                  "description": "3-4 primera kvalitetnih odgovora učenika koji jasno koriste dokaze.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1043,15 +1043,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
             "EssentialQuestionConnection": {
               "type": "object",
               "x-format": "### 💭 {loc.EssentialQuestionConnection}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Help students connect today's specific evidence to the broader unit essential questions.",
+              "description": "Pomozite učenicima da povežu današnje konkretne dokaze sa širim suštinskim pitanjima jedinice.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "A teacher script (do NOT include the 'Say:' prefix) that links today's findings to one of the unit's essential questions."
+                  "description": "Nastavnički tekst (ne uključujte prefiks „Say:”) koji povezuje današnje nalaze sa jednim od suštinskih pitanja jedinice."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 examples of how students justify the connection using evidence.",
+                  "description": "2-3 primera kako učenici opravdavaju tu vezu koristeći dokaze.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1067,15 +1067,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
             "SpacedRetrieval": {
               "type": "object",
               "x-format": "### ⏳ {loc.SpacedRetrieval}\n\n**{loc.Say}:** {value.TeacherSay}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
+              "description": "Ponovo obradite koncept iz prethodne jedinice ili časa kako biste ojačali kumulativno pamćenje.",
               "properties": {
                 "TeacherSay": {
                   "type": "string",
-                  "description": "A teacher script (do NOT include the 'Say:' prefix) that explicitly connects a concept from a prior lesson to today's work. Must include the meta-reference (e.g., '(Draws from Unit 1, Lesson 2.)') directly in the text."
+                  "description": "Nastavnički tekst (ne uključujte prefiks „Say:”) koji eksplicitno povezuje koncept iz prethodnog časa sa današnjim radom. Mora da sadrži meta-referencu (npr. „(Preuzeto iz Jedinice 1, Časa 2.)”) direktno u tekstu."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "1-2 examples of high-quality student responses showing clear recall of evidence from prior learning.",
+                  "description": "1-2 primera kvalitetnih odgovora učenika koji jasno pokazuju prisećanje dokaza iz prethodnog učenja.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1106,18 +1106,18 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "FormativeAssessment": {
       "x-format": "### ✅ {loc.FormativeAssessment}\n\n{items}",
       "type": "array",
-      "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+      "description": "Tačno 4 podsticaja za formativnu procenu, po jedan za svaki DOK nivo.",
       "items": {
         "x-format": "\n\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "npr. „Podsticaj 1 (DOK 1)“"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+            "description": "Tačan tekst pitanja, npr. „Zašto planete ostaju u orbiti umesto da odlete u svemir?“"
           },
           "ExpectedStudentResponses": {
             "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -1126,7 +1126,7 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1–2 primera odgovora koji pokazuju savladanost."
           }
         },
         "required": [
@@ -1142,26 +1142,26 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
     "StudentPractice": {
       "x-format": "### 🖋️ {loc.StudentPractice}\n\n**{loc.TeacherNotes}:** {loc.StudentPracticeNotes}\n\n{value.Tasks}\n\n**🔎 {loc.Reflection}:**\n\n{value.Reflection}",
       "type": "object",
-      "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+      "description": "Kompletna sekcija „Učenikova vežba“ za domaći zadatak / vežbu van časa.",
       "properties": {
         "Tasks": {
           "type": "array",
-          "description": "Generate 3 tasks covering DOK levels 2 and 3.",
+          "description": "Generišite 3 zadatka koji pokrivaju DOK nivoe 2 i 3.",
           "items": {
             "type": "object",
             "x-format": "\n\n**{value.TaskTitle}**\n\n{value.Instruction}\n\n{value.SuccessCriteria}",
             "properties": {
               "TaskTitle": {
                 "type": "string",
-                "description": "e.g., '1. (DOK 2)'"
+                "description": "npr. „1. (DOK 2)“"
               },
               "Instruction": {
                 "type": "string",
-                "description": "Clear step-by-step student directions for the task."
+                "description": "Jasna, korak-po-korak uputstva za učenike za zadatak."
               },
               "SuccessCriteria": {
                 "type": "array",
-                "description": "4-5 specific, evidence-based bullet points showing what mastery looks like for this task. CRITICAL: Every criterion MUST start with an action verb (e.g., 'Describes', 'Explains', 'Uses').",
+                "description": "4–5 konkretnih, dokazima potkrepljenih stavki u vidu nabrajanja koje pokazuju kako izgleda savladanost za ovaj zadatak. KRITIČNO: Svaki kriterijum MORA počinjati glagolom radnje (npr. „Opisuje“, „Objašnjava“, „Koristi“).",
                 "items": {
                   "x-format": "- {value}",
                   "type": "string"
@@ -1178,15 +1178,15 @@ Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
         },
         "Reflection": {
           "type": "object",
-          "description": "End with self-regulation or transcendent thinking reflections.",
+          "description": "Završite refleksijama o samoregulaciji ili transcendentnom razmišljanju.",
           "properties": {
             "Instruction": {
               "type": "string",
-              "description": "Instruction for the reflection section (e.g., 'Write 2–3 sentences responding to one prompt:')."
+              "description": "Uputstvo za sekciju refleksije (npr. „Napišite 2–3 rečenice odgovarajući na jedan podsticaj:“)."
             },
             "Prompts": {
               "type": "array",
-              "description": "4-5 specific reflection prompts connecting today's inquiry to real life, future tools, or personal learning.",
+              "description": "4–5 konkretnih podsticaja za refleksiju koji povezuju današnje istraživanje sa stvarnim životom, budućim alatima ili ličnim učenjem.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"

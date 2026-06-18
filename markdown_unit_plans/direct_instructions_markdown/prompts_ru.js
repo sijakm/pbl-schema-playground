@@ -115,13 +115,13 @@ window.promptsru = {
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Описание раздела как один цельный абзац простого текста (4–5 полных предложений), написанный естественным голосом учителя, который вы могли бы сказать ученикам напрямую. Без HTML, без эмодзи, без маркеров. Текст должен звучать разговорно, но следовать этой структуре (без заголовков): (1) предложение-завязка, которое пробуждает любопытство или создает удивительный контраст, (2) предложение «В этом разделе вы будете...» о результатах освоения, (3) предложение «Вы укрепите свои навыки в...» о навыках мышления/анализа, (4) предложение «Это связано с...» о практической значимости, (5) предложение «Понимание этого важно, потому что...» о более широком значении или долгосрочном влиянии."
         },
         "EssentialQuestions": {
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Создайте ключевые вопросы, которые сосредоточены только на широких, универсальных концепциях, таких как изменения, доказательства, закономерности, взаимосвязи, системы или рассуждение. Не упоминайте какие-либо предметные термины, процессы, лексику или примеры. Вопросы должны быть открытыми, переносимыми между всеми дисциплинами и невозможными для ответа только на основе изучения материала урока или раздела. Сосредоточьтесь только на больших идеях, а не на содержании предмета.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -131,7 +131,7 @@ window.promptsru = {
         },
         "StudentLearningObjectives": {
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Полный раздел «Учебные цели учащихся» для всего этого раздела. Каждый пункт списка должен быть четкой, измеримой целью, начинающейся с измеримого глагола и заканчивающейся меткой DOK в скобках",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -140,7 +140,7 @@ window.promptsru = {
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Перечислите все уникальные образовательные стандарты, используемые где-либо в этом разделе и его уроках. Не добавляйте стандарты, которые не встречаются в содержании раздела. Каждый стандарт должен включать код стандарта и описание, например, 'MS-ESS1-1: Разработать и использовать модель системы Земля–Солнце–Луна, чтобы описать циклические закономерности фаз Луны, затмений и времен года.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -158,21 +158,21 @@ window.promptsru = {
     },
     "Lessons": {
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Список контейнеров уроков для этого раздела (только план). Каждый элемент должен не пересекаться с другими и быть четко ограничен, чтобы содержание уроков не повторялось между уроками.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Порядковый номер урока. На основе 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Краткое название урока в виде простого текста."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 предложения, описывающие объем, фокус и границы урока, чтобы избежать пересечения с другими уроками."
           }
         },
         "required": [
@@ -208,7 +208,7 @@ window.promptsru = {
       "properties": {
         "EssentialQuestions": {
           "type": "array",
-          "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Просто вставьте все ключевые вопросы раздела в том же порядке, если они предоставлены. Если нет, сгенерируйте ровно 3 концептуальных вопроса, которые сосредоточены только на широких, универсальных концепциях, таких как изменения, доказательства, закономерности, взаимосвязи, системы или рассуждение. Не упоминайте какие-либо предметные термины, процессы, лексику или примеры. Вопросы должны быть открытыми, переносимыми между всеми дисциплинами и невозможными для ответа только на основе изучения материала урока или раздела. Сосредоточьтесь только на больших идеях, а не на содержании предмета.",
           "items": {
             "type": "string"
           },
@@ -216,7 +216,7 @@ window.promptsru = {
         },
         "KeyVocabulary": {
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Полный раздел «Ключевая лексика» в виде списка строк. Каждая строка должна содержать один термин с определением, разделенным тире/дефисом. Пример: 'Гравитация - Сила, которая притягивает объекты друг к другу'. Все определения должны быть короткими, соответствующими возрасту учащихся и напрямую связанными с содержанием урока.",
           "items": {
             "type": "string",
             "x-format": "{index}. {value}"
@@ -225,7 +225,7 @@ window.promptsru = {
         },
         "StudentLearningObjectives": {
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+          "description": "Полный раздел «Учебные цели учащихся» в виде простого текста. Каждый пункт должен быть четкой, измеримой целью, начинающейся с измеримого глагола и заканчивающейся меткой DOK в скобках, например, 'Моделировать, как вращение Земли вокруг своей оси вызывает день и ночь (DOK 2).'.",
           "items": {
             "type": "string",
             "x-format": "- {value}\n"
@@ -234,7 +234,7 @@ window.promptsru = {
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "Full 'Standards Aligned' section for this lesson as a list. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+          "description": "Полный раздел «Стандарты в соответствии» для этого урока в виде списка. Каждый стандарт должен включать код стандарта и описание, причем код и описание должны быть точно такими же, как в разделе «Раздел». Например, 'MS-ESS1-1: Разработать и использовать модель системы Земля–Солнце–Луна, чтобы описать циклические закономерности фаз Луны, затмений и времен года.'.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -243,11 +243,11 @@ window.promptsru = {
         },
         "AssessPriorKnowledge": {
           "type": "object",
-          "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN EMPTY ARRAYS for all fields. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions. 1. Ensure DOK 1-3 prompts are used. 2. Include prerequisite skills. 3. Pick one modality and fully develop it. 4. Provide initial teacher prompts, instructions, expected responses, closing prompts, and 2 alternate options.",
+          "description": "Раздел оценки предварительных знаний. ТОЛЬКО УРОК 1 должен содержать подробный блок; ВСЕ ОСТАЛЬНЫЕ УРОКИ ДОЛЖНЫ ВОЗВРАЩАТЬ ПУСТЫЕ МАССИВЫ для всех полей. Для Урока 1 структура должна включать ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt и AlternateOptions. 1. Используйте подсказки DOK 1–3. 2. Включите базовые навыки. 3. Выберите один формат и полностью его разработайте. 4. Предоставьте начальные подсказки учителя, инструкции, ожидаемые ответы, заключительные подсказки и 2 альтернативных варианта.",
           "properties": {
             "ActivityInstructions": {
               "type": "array",
-              "description": "Sequential steps (e.g. 'Say: ...', 'Project or read...') to start the activity.",
+              "description": "Последовательные шаги (например, 'Скажите: ...', 'Покажите или прочитайте...') для начала активности.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -256,7 +256,7 @@ window.promptsru = {
             },
             "ExpectedStudentResponses": {
               "type": "array",
-              "description": "Anticipated answers or common misconceptions for the chosen modality.",
+              "description": "Предполагаемые ответы или распространенные заблуждения для выбранного формата.",
               "items": {
                 "type": "string",
                 "x-format": "  - {value}"
@@ -265,7 +265,7 @@ window.promptsru = {
             },
             "ClosingTeacherPrompt": {
               "type": "array",
-              "description": "Closing teacher steps and prompts that validate student thinking and preview unit investigation.",
+              "description": "Заключительные действия и подсказки учителя, которые подтверждают мышление учащихся и предваряют исследование раздела.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -274,7 +274,7 @@ window.promptsru = {
             },
             "AlternateOptions": {
               "type": "array",
-              "description": "2 brief alternate options a teacher could choose.",
+              "description": "2 кратких альтернативных варианта, которые учитель может выбрать.",
               "items": {
                 "type": "string",
                 "x-format": "{index}. {value}"
@@ -293,11 +293,11 @@ window.promptsru = {
         },
         "DirectPresentation": {
           "type": "object",
-          "description": "Full 'Direct Presentation' section. This is the FIRST in-class activity and should last NO LONGER THAN 10 minutes.",
+          "description": "Полный раздел «Прямое изложение». Это ПЕРВАЯ очная активность, и она должна длиться НЕ БОЛЕЕ 10 минут.",
           "properties": {
             "Materials": {
               "type": "array",
-              "description": "List of required materials (e.g. visual aids, markers, etc.)",
+              "description": "Список необходимых материалов (например, наглядные пособия, маркеры и т. д.)",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -306,17 +306,17 @@ window.promptsru = {
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Teacher script organized into sequential steps following this EXACT sequence: (1) HOOK (1-2 min), (2) INTRODUCTION (1-2 min), (3) DIRECT TEACHING (4-5 min), and (4) GUIDED ENGAGEMENT (2-3 min). Do NOT include the headers in the strings. Each step must include teacher talk (Say:/Ask:), teacher actions (Do:/Write:/Draw/Show:), and if applicable, expected student responses.",
+              "description": "Сценарий учителя, организованный в последовательные шаги по ЭТОЙ ТОЧНОЙ последовательности: (1) ЗАЦЕПКА (1–2 мин), (2) ВВЕДЕНИЕ (1–2 мин), (3) ПРЯМОЕ ОБУЧЕНИЕ (4–5 мин) и (4) РУКОВОДИМОЕ ВОВЛЕЧЕНИЕ (2–3 мин). Не включайте заголовки в строки. Каждый шаг должен включать речь учителя (Say:/Ask:), действия учителя (Do:/Write:/Draw/Show:) и, если применимо, ожидаемые ответы учащихся.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific teacher action, starting with 'Say: ', 'Do: ', etc."
+                    "description": "Конкретное действие учителя, начиная с «Say: », «Do: » и т. д."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                    "description": "Предполагаемые ответы, если инструкция была вопросом. Верните пустой массив, если не применимо.",
                     "items": {
                       "type": "string",
                       "x-format": "  - {value}"
@@ -335,17 +335,17 @@ window.promptsru = {
             },
             "AnticipatedMisconceptions": {
               "type": "array",
-              "description": "List of common misconceptions and exact correction language for addressing each one.",
+              "description": "Список распространённых заблуждений и точные формулировки исправления для устранения каждого из них.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "The misconception description."
+                    "description": "Описание заблуждения."
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "The correction language starting with 'Say: '."
+                    "description": "Формулировка исправления, начинающаяся с «Say: »."
                   }
                 },
                 "required": [
@@ -359,14 +359,14 @@ window.promptsru = {
             },
             "TranscendentThinking": {
               "type": "object",
-              "description": "Real-world application question connecting learning to purpose/meaning/big ideas.",
+              "description": "Вопрос о применении в реальной жизни, связывающий обучение с целью/смыслом/большими идеями.",
               "properties": {
                 "Question": {
                   "type": "string"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "Expected student responses showing deeper understanding.",
+                  "description": "Ожидаемые ответы учащихся, показывающие более глубокое понимание.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -383,15 +383,15 @@ window.promptsru = {
             },
             "QuickCheck": {
               "type": "object",
-              "description": "A final check of understanding for a student learning objective already declared in the lesson. This MUST be an individual task for EVERY student to complete.",
+              "description": "Итоговая проверка понимания для учащегося, чья учебная цель уже объявлена в уроке. Это ДОЛЖНО быть индивидуальным заданием, которое КАЖДЫЙ учащийся должен выполнить.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'"
+                  "description": "например, «Потратьте 2 минуты, чтобы набросать X в своей тетради» или «На черновике объясните, почему Y...»"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 specific expected student responses.",
+                  "description": "2-3 конкретных ожидаемых ответа учащихся.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -419,11 +419,11 @@ window.promptsru = {
         },
         "GuidedPractice": {
           "type": "object",
-          "description": "Structured Guided Practice section with separate fields for materials, instructions, differentiation, and optional accommodations.",
+          "description": "Раздел структурированной совместной практики с отдельными полями для материалов, инструкций, дифференциации и необязательных приспособлений.",
           "properties": {
             "Materials": {
               "type": "array",
-              "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
+              "description": "Необходимые физические предметы, нужные для этого задания совместной практики (например, «шарики из пенопласта, нить, маркеры»), оформленные в виде списка",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -432,17 +432,17 @@ window.promptsru = {
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Teacher script organized into sequential steps. Each step should combine teacher actions and script. End with prompts for circulation.",
+              "description": "Сценарий учителя, организованный в последовательные шаги. Каждый шаг должен сочетать действия учителя и реплики. Завершайте подсказками для обхода класса.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific teacher action, starting with 'Say: ', 'Do: ', etc."
+                    "description": "Конкретное действие учителя, начиная с «Say: », «Do: » и т. д."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                    "description": "Предполагаемые ответы, если инструкция была вопросом. Верните пустой массив, если не применимо.",
                     "items": {
                       "type": "string",
                       "x-format": "  - {value}"
@@ -461,14 +461,14 @@ window.promptsru = {
             },
             "QuickCheck": {
               "type": "object",
-              "description": "Final comprehension check question for the guided practice.",
+              "description": "Заключительный вопрос для проверки понимания в рамках совместной практики.",
               "properties": {
                 "Question": {
                   "type": "string"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 expected student responses.",
+                  "description": "2-3 ожидаемых ответа учащихся.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -485,7 +485,7 @@ window.promptsru = {
             },
             "Differentiation": {
               "type": "object",
-              "description": "Labeled with three clearly labeled tiers: Language Learners, Students in Need of Additional Scaffolding, Go Deeper. Requirements: The content must differentiate instruction, not provide accommodations or modifications (those are addressed elsewhere). Strategies should focus on how to teach, not how to simplify materials. Activities should vary in complexity and depth, aligned to the same learning objectives. Each tier must promote active engagement, language development, and conceptual understanding. Use clear, teacher-facing language and make supports realistic for classroom use.",
+              "description": "Обозначено тремя чётко подписанными уровнями: Изучающие английский язык, Учащиеся, нуждающиеся в дополнительной поддержке, Идите глубже. Требования: Содержание должно дифференцировать обучение, а не предоставлять приспособления или модификации (они рассматриваются в другом месте). Стратегии должны быть сосредоточены на том, как обучать, а не на том, как упрощать материалы. Деятельность должна различаться по сложности и глубине и быть согласованной с теми же целями обучения. Каждый уровень должен поощрять активное вовлечение, развитие языка и концептуальное понимание. Используйте ясный, ориентированный на учителя язык и делайте поддержку реалистичной для использования в классе.",
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
@@ -496,7 +496,7 @@ window.promptsru = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 2-3 concrete teaching strategies for language learners. Examples: providing specific visuals (e.g., 'Planet Fact Sheet'), using sentence frames (e.g., 'This is placed here because...'), or asking students to gesture/point before explaining verbally. Focus on active engagement and language development.",
+                      "description": "Предоставьте 2-3 конкретные стратегии преподавания для изучающих язык. Примеры: предоставление определённых визуальных материалов (например, «Лист фактов о планете»), использование речевых шаблонов (например, «Это помещено здесь, потому что...»), или просьба к учащимся сначала показать жестом/указать, прежде чем объяснять устно. Сосредоточьтесь на активном вовлечении и развитии языка.",
                       "x-format": "{items}"
                     }
                   },
@@ -515,7 +515,7 @@ window.promptsru = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 2-3 concrete teaching strategies for scaffolding. Examples: providing pre-drawn organizers/templates, using a simplified checklist with specific guiding questions, or modeling a think-aloud process (e.g., 'Watch how I match...'). Focus on how to teach and vary complexity without simplifying materials.",
+                      "description": "Предоставьте 2-3 конкретные стратегии преподавания для поддержки. Примеры: предоставление заранее нарисованных органайзеров/шаблонов, использование упрощённого чек-листа с конкретными наводящими вопросами или моделирование процесса «think-aloud» (например, «Посмотрите, как я сопоставляю...»). Сосредоточьтесь на том, как обучать, и варьируйте сложность без упрощения материалов.",
                       "x-format": "{items}"
                     }
                   },
@@ -534,7 +534,7 @@ window.promptsru = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 1-2 extension tasks that deepen conceptual understanding. Include specific challenges (e.g., 'Adjust spacing to show...') or higher-order questions (e.g., 'How would you model... accurately?'). Must align to the same learning objectives.",
+                      "description": "Предложите 1–2 дополнительных задания, которые углубляют концептуальное понимание. Включите конкретные вызовы (например, «Отрегулируйте расстояние, чтобы показать...») или вопросы более высокого порядка (например, «Как бы вы смоделировали... точно?»). Должны соответствовать тем же целям обучения.",
                       "x-format": "{items}"
                     },
                     "ExpectedStudentResponses": {
@@ -543,7 +543,7 @@ window.promptsru = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Expected student responses showing what success looks like. Return empty array if not applicable.",
+                      "description": "Ожидаемые ответы учащихся, показывающие, как выглядит успех. Верните пустой массив, если это неприменимо.",
                       "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                     }
                   },
@@ -565,7 +565,7 @@ window.promptsru = {
             },
             "AccommodationsAndModifications": {
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Этот раздел должен включать два типа поддержки: Общая поддержка и Индивидуализированная поддержка. Сосредоточьтесь на доступности, а не на снижении требований.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -573,18 +573,18 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points.",
+                  "description": "Неспецифичные для отдельных учащихся стратегии, которые улучшают доступ для всех учащихся (например, визуальные материалы, заранее заполненные заметки, цифровой глоссарий, инструкции, разбитые на части). Предоставьте 2–4 пункта списка.",
                   "x-format": "{items}"
                 },
                 "IndividualSupport": {
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Конкретные приспособления и модификации для названных учащихся с официальными планами. Укажите КАЖДОГО учащегося отдельно; НЕ объединяйте учащихся вместе. Поддержка для каждого учащегося должна быть в виде легко просматриваемого списка.",
                   "items": {
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Имя и фамилия отдельного учащегося, получающего эту поддержку."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -592,7 +592,7 @@ window.promptsru = {
                           "type": "string",
                           "x-format": "- {value}"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Официальный план, предоставленный для этого учащегося в подсказке. Разбейте план на понятный список. Вы можете перефразировать его, чтобы улучшить форматирование, но НЕ упускайте и не добавляйте никакой информации."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -600,7 +600,7 @@ window.promptsru = {
                           "type": "string",
                           "x-format": "- {value}"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task.",
+                        "description": "Конкретные инструменты/начальные фразы/визуальные материалы/организаторы для этого задания.",
                         "x-format": "{items}"
                       }
                     },
@@ -635,7 +635,7 @@ window.promptsru = {
         },
         "IndependentPractice": {
           "type": "object",
-          "description": "Structured Independent Practice section.",
+          "description": "Раздел структурированной самостоятельной практики.",
           "properties": {
             "Materials": {
               "type": "array",
@@ -643,16 +643,16 @@ window.promptsru = {
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Required materials.",
+              "description": "Необходимые материалы.",
               "x-format": "**📚 {loc.Materials}**\n\n{items}"
             },
             "Purpose": {
               "type": "string",
-              "description": "Purpose of the independent practice."
+              "description": "Цель самостоятельной практики."
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Sequential tasks for independent practice.",
+              "description": "Последовательные задания для самостоятельной практики.",
               "items": {
                 "type": "object",
                 "properties": {
@@ -661,15 +661,15 @@ window.promptsru = {
                   },
                   "DOKLevel": {
                     "type": "string",
-                    "description": "e.g., 'DOK 3' or 'DOK 3-4'"
+                    "description": "например, «DOK 3» или «DOK 3–4»"
                   },
                   "TeacherNotes": {
                     "type": "string",
-                    "description": "Explanation connecting task to presentation/goals."
+                    "description": "Объяснение, связывающее задание с презентацией/целями."
                   },
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific instruction or 'Say:' statement."
+                    "description": "Конкретная инструкция или формулировка «Скажи:»."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -677,7 +677,7 @@ window.promptsru = {
                       "type": "string",
                       "x-format": "  - {value}"
                     },
-                    "description": "Sample answers.",
+                    "description": "Примеры ответов.",
                     "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                   },
                   "SuccessCriteria": {
@@ -686,7 +686,7 @@ window.promptsru = {
                       "type": "string",
                       "x-format": "  - {value}"
                     },
-                    "description": "2-4 elements showing mastery.",
+                    "description": "2–4 элемента, показывающие овладение материалом.",
                     "x-format": "- {loc.SuccessCriteria}\n\n{items}"
                   }
                 },
@@ -705,7 +705,7 @@ window.promptsru = {
             },
             "Reflection": {
               "type": "array",
-              "description": "Self-regulation and transcendence questions.",
+              "description": "Вопросы на саморегуляцию и трансценденцию.",
               "items": {
                 "type": "object",
                 "properties": {
@@ -714,7 +714,7 @@ window.promptsru = {
                   },
                   "ReflectionType": {
                     "type": "string",
-                    "description": "e.g., 'Self-Regulation' or 'Transcendence'"
+                    "description": "например, «Саморегуляция» или «Трансценденция»"
                   }
                 },
                 "required": [
@@ -731,7 +731,7 @@ window.promptsru = {
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "The early finisher task prompt/description."
+                  "description": "Задание/описание для учащихся, завершающих раньше других."
                 },
                 "Requirements": {
                   "type": "array",
@@ -739,12 +739,12 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Specific elements students must address.",
+                  "description": "Конкретные элементы, которые учащиеся должны затронуть.",
                   "x-format": "{items}"
                 },
                 "Justification": {
                   "type": "string",
-                  "description": "Concluding sentence about using accurate principles."
+                  "description": "Заключительное предложение о применении точных принципов."
                 }
               },
               "required": [
@@ -768,7 +768,7 @@ window.promptsru = {
         },
         "ReviewAndSpacedRetrieval": {
           "type": "object",
-          "description": "Structured Review & Spaced Retrieval section. This 5-minute activity reinforces prior concepts and connects them to current learning.",
+          "description": "Раздел «Структурированный обзор и интервальное извлечение из памяти». Это 5-минутное задание закрепляет ранее изученные понятия и связывает их с текущим обучением.",
           "properties": {
             "Materials": {
               "type": "array",
@@ -776,21 +776,21 @@ window.promptsru = {
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Required materials (often none needed).",
+              "description": "Необходимые материалы (часто не требуются).",
               "x-format": "**📚 {loc.Materials}**\n\n{items}"
             },
             "TeacherNotes": {
               "type": "string",
-              "description": "Teacher Notes paragraph that explains: How this review strategy enhances retention, connection to prior learning concepts, and how transcendent reflection deepens understanding.",
+              "description": "Абзац «Заметки для учителя», в котором объясняется: как эта стратегия повторения улучшает запоминание, связь с ранее изученными понятиями и как трансцендентная рефлексия углубляет понимание.",
               "x-format": "**{loc.TeacherNotes}:** {value}"
             },
             "ActiveRecall": {
               "type": "object",
-              "description": "Instructions for Teachers containing Active Recall prompt.",
+              "description": "Инструкции для учителей, содержащие подсказку для активного припоминания.",
               "properties": {
                 "Instruction": {
                   "type": "string",
-                  "description": "Active Recall prompt using partner/group sharing. Must use a 'Say:' statement."
+                  "description": "Подсказка для активного припоминания с использованием обмена в паре/группе. Должно использовать утверждение «Скажите:»."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -798,7 +798,7 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 bulleted examples).",
+                  "description": "Ожидаемые ответы учащихся (2–3 примера в виде маркеров).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 },
                 "CorrectCommonMisconceptions": {
@@ -807,7 +807,7 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Sample misconception statements and teacher response scripts addressing each (e.g. 'If a student says X, respond Y').",
+                  "description": "Примеры возможных заблуждений и сценарии ответа учителя, адресующие каждое из них (например, «Если учащийся говорит X, ответьте Y»).",
                   "x-format": "**{loc.CorrectCommonMisconceptions}**\n\n{items}"
                 }
               },
@@ -821,11 +821,11 @@ window.promptsru = {
             },
             "EssentialQuestionConnection": {
               "type": "object",
-              "description": "Connection to the unit's essential question.",
+              "description": "Связь с ключевым вопросом модуля.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Teacher prompt linking to unit question. Must use a 'Say:' statement."
+                  "description": "Подсказка учителя, связывающая с вопросом модуля. Должно использовать утверждение «Скажите:»."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -833,7 +833,7 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 examples).",
+                  "description": "Ожидаемые ответы учащихся (2–3 примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -846,11 +846,11 @@ window.promptsru = {
             },
             "TranscendentThinking": {
               "type": "object",
-              "description": "Reflection on real-world application or broader impact.",
+              "description": "Рефлексия о применении в реальном мире или более широком влиянии.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Real-world application prompt. Must include a think time instruction (e.g., 'Take 30 seconds to think silently, then share:') and use a 'Say:' statement."
+                  "description": "Подсказка о применении в реальном мире. Должна включать указание времени на обдумывание (например, «Потратьте 30 секунд на молчаливое обдумывание, затем поделитесь:») и использовать утверждение «Скажите:»."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -858,7 +858,7 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 examples).",
+                  "description": "Ожидаемые ответы учащихся (2–3 примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -871,15 +871,15 @@ window.promptsru = {
             },
             "SpacedRetrieval": {
               "type": "object",
-              "description": "Recall of specific prior learning concepts.",
+              "description": "Воспроизведение конкретных ранее изученных понятий.",
               "properties": {
                 "HeaderTitle": {
                   "type": "string",
-                  "description": "Clear reference to specific prior lesson (e.g., 'Spaced Retrieval (Draws from Unit 2, Lesson 3)')."
+                  "description": "Чёткая ссылка на конкретный предыдущий урок (например, «Интервальное извлечение из памяти (основано на Модуле 2, Урок 3)»)."
                 },
                 "Instruction": {
                   "type": "string",
-                  "description": "Question connecting past and current concepts. Must use a 'Say:' statement."
+                  "description": "Вопрос, связывающий прошлые и текущие понятия. Должно использовать утверждение «Скажите:»."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -887,7 +887,7 @@ window.promptsru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Detailed success criteria or expected student responses (2-3 examples).",
+                  "description": "Подробные критерии успеха или ожидаемые ответы учащихся (2–3 примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -914,18 +914,18 @@ window.promptsru = {
         "FormativeAssessment": {
           "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
           "type": "array",
-          "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+          "description": "Точно 4 формирующих оценочных вопроса, по одному для каждого уровня DOK.",
           "items": {
             "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
             "type": "object",
             "properties": {
               "PromptLabel": {
                 "type": "string",
-                "description": "e.g., 'Prompt 1 (DOK 1)'"
+                "description": "например, 'Подсказка 1 (DOK 1)'"
               },
               "Question": {
                 "type": "string",
-                "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+                "description": "Точный текст вопроса, например, 'Почему планеты остаются на орбите вместо того, чтобы улетать в космос?'"
               },
               "ExpectedStudentResponses": {
                 "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -934,7 +934,7 @@ window.promptsru = {
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "1-2 sample responses showing mastery (wrapped in quotes)."
+                "description": "1-2 примера ответов, демонстрирующих владение материалом (в кавычках)."
               }
             },
             "required": [
@@ -950,24 +950,24 @@ window.promptsru = {
         "StudentPractice": {
           "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
           "type": "object",
-          "description": "Homework/out-of-class practice.",
+          "description": "Домашняя / внеурочная практика.",
           "properties": {
             "TeacherNotes": {
               "x-format": "**{loc.TeacherNotes}:** {value}",
               "type": "string",
-              "description": "Short explanation of the practice goals, e.g., 'These tasks reinforce today's learning about [topic] by asking students to observe real-world patterns and explain them using the concepts introduced in class...'"
+              "description": "Краткое объяснение целей практики, например, 'Эти задания закрепляют сегодняшнее изучение [topic], предлагая учащимся наблюдать закономерности в реальном мире и объяснять их с помощью понятий, представленных на уроке...'"
             },
             "PracticeTasks": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
+              "description": "Ровно 3 практических задания (DOK 2 или DOK 3).",
               "items": {
                 "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
                 "type": "object",
                 "properties": {
                   "TaskDescription": {
                     "type": "string",
-                    "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'"
+                    "description": "например, '(DOK 2) Сегодня вечером выйдите на улицу и напишите 3-4 предложения...'"
                   },
                   "ExpectedStudentResponses": {
                     "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -990,11 +990,11 @@ window.promptsru = {
             "Reflection": {
               "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
               "type": "object",
-              "description": "A reflection task for the students.",
+              "description": "Задание на рефлексию для учащихся.",
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'"
+                  "description": "например, 'Рефлексия: Напишите 2-3 предложения, отвечая на один из вопросов:'"
                 },
                 "ReflectionOptions": {
                   "type": "array",
@@ -1002,7 +1002,7 @@ window.promptsru = {
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Exactly 4 reflection question options in quotes."
+                  "description": "Ровно 4 варианта вопросов для рефлексии в кавычках."
                 }
               },
               "required": [

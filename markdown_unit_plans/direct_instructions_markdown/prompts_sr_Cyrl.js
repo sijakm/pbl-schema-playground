@@ -115,13 +115,13 @@ window.promptssrCyrl = {
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Опис јединице као један повезан пасус у обичном тексту (4–5 потпуних реченица) написан природним гласом наставника који бисте могли директно да кажете ученицима. Без HTML-а, без емоџија, без набрајања ставки. Мора да тече разговорно, али да прати ову структуру (без наслова): (1) уводна реченица која буди радозналост или ствара изненађујући контраст, (2) реченица „У овој јединици ћете...” о исходима савладавања, (3) реченица „Унапредићете своје вештине у...” о начинима размишљања/анализе, (4) реченица „Ово је повезано са...” о значају у стварном свету, (5) реченица „Разумевање овога је важно зато што...” о ширем значају или дугорочном утицају."
         },
         "EssentialQuestions": {
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Креирајте суштинска питања која се фокусирају само на широке, универзалне појмове као што су промена, докази, обрасци, односи, системи или резоновање. Не помињите никакве појмове специфичне за предмет, процесе, вокабулар или примере. Питања морају бити отвореног типа, преносива кроз све дисциплине и немогућа за одговорити само учењем садржаја лекције или јединице. Фокусирајте се само на велике идеје, а не на садржај предмета.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -131,7 +131,7 @@ window.promptssrCyrl = {
         },
         "StudentLearningObjectives": {
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Потпуни одељак „Циљеви учења ученика” за целу ову јединицу. Свака ставка у листи мора бити јасан, мерљив циљ који почиње мерљивим глаголом и завршава се DOK ознаком у заградама",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -140,7 +140,7 @@ window.promptssrCyrl = {
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Наведите све јединствене образовне стандарде који се користе било где у овој јединици и њеним лекцијама. Не додајте стандарде који се не појављују у садржају јединице. Сваки стандард мора да садржи код стандарда и опис, нпр. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -158,21 +158,21 @@ window.promptssrCyrl = {
     },
     "Lessons": {
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Листа контејнера лекција за ову јединицу (само оквирно). Свака ставка мора бити не преклапајућа и јасно ограничена тако да садржај лекције не понавља садржај других лекција.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Редни број лекције. Засновано на 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Кратак наслов лекције као обичан текст."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 реченице које описују обим лекције, фокус и границе како би се спречило преклапање са другим лекцијама."
           }
         },
         "required": [
@@ -208,7 +208,7 @@ window.promptssrCyrl = {
       "properties": {
         "EssentialQuestions": {
           "type": "array",
-          "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Само налепите сва суштинска питања на нивоу јединице истим редоследом ако су наведена. Ако нису наведена, генеришите тачно 3 концептуална питања која се фокусирају само на широке, универзалне појмове као што су промена, докази, обрасци, односи, системи или резоновање. Не помињите никакве појмове специфичне за предмет, процесе, вокабулар или примере. Питања морају бити отвореног типа, преносива кроз све дисциплине и немогућа за одговорити само учењем садржаја лекције или јединице. Фокусирајте се само на велике идеје, а не на садржај предмета.",
           "items": {
             "type": "string"
           },
@@ -216,7 +216,7 @@ window.promptssrCyrl = {
         },
         "KeyVocabulary": {
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Потпуни одељак „Кључни појмови” као листа стрингова. Сваки стринг треба да буде један појам са дефиницијом одвојеном цртом/цртицом. Пример: 'Gravity - The force that pulls objects toward each other'. Све дефиниције морају бити кратке, примерене узрасту и директно повезане са садржајем лекције.",
           "items": {
             "type": "string",
             "x-format": "{index}. {value}"
@@ -225,7 +225,7 @@ window.promptssrCyrl = {
         },
         "StudentLearningObjectives": {
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+          "description": "Потпуни одељак „Циљеви учења ученика” као обичан текст. Свака ставка мора бити јасан, мерљив циљ који почиње мерљивим глаголом и завршава се DOK ознаком у заградама, нпр. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
           "items": {
             "type": "string",
             "x-format": "- {value}\n"
@@ -234,7 +234,7 @@ window.promptssrCyrl = {
         },
         "StandardsAligned": {
           "type": "array",
-          "description": "Full 'Standards Aligned' section for this lesson as a list. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+          "description": "Потпуни одељак „Усклађено са стандардима” за ову лекцију као листа. Сваки стандард мора да садржи код стандарда и опис, а код и опис морају бити потпуно исти као што су коришћени у јединици. нпр. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
           "items": {
             "type": "string",
             "x-format": "- {value}"
@@ -243,11 +243,11 @@ window.promptssrCyrl = {
         },
         "AssessPriorKnowledge": {
           "type": "object",
-          "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN EMPTY ARRAYS for all fields. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions. 1. Ensure DOK 1-3 prompts are used. 2. Include prerequisite skills. 3. Pick one modality and fully develop it. 4. Provide initial teacher prompts, instructions, expected responses, closing prompts, and 2 alternate options.",
+          "description": "Одељак за процену претходног знања. САМО Лекција 1 треба да садржи детаљан блок; СВЕ ОСТАЛЕ ЛЕКЦИЈЕ МОРАЈУ ВРАТИТИ ПРАЗНЕ НИЗОВЕ за сва поља. За Лекцију 1, структура мора да укључује ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt и AlternateOptions. 1. Осигурајте да се користе DOK 1-3 питања. 2. Укључите предусловне вештине. 3. Изаберите једну модалност и у потпуности је развијте. 4. Наведите почетне наставничке подстицаје, инструкције, очекиване одговоре, завршне подстицаје и 2 алтернативне опције.",
           "properties": {
             "ActivityInstructions": {
               "type": "array",
-              "description": "Sequential steps (e.g. 'Say: ...', 'Project or read...') to start the activity.",
+              "description": "Секвенцијални кораци (нпр. 'Реците: ...', 'Пројектујте или прочитајте...') за започињање активности.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -256,7 +256,7 @@ window.promptssrCyrl = {
             },
             "ExpectedStudentResponses": {
               "type": "array",
-              "description": "Anticipated answers or common misconceptions for the chosen modality.",
+              "description": "Очекивани одговори ученика или уобичајене заблуде за изабрану модалност.",
               "items": {
                 "type": "string",
                 "x-format": "  - {value}"
@@ -265,7 +265,7 @@ window.promptssrCyrl = {
             },
             "ClosingTeacherPrompt": {
               "type": "array",
-              "description": "Closing teacher steps and prompts that validate student thinking and preview unit investigation.",
+              "description": "Завршни наставнички кораци и подстицаји који потврђују размишљање ученика и најављују истраживање јединице.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -274,7 +274,7 @@ window.promptssrCyrl = {
             },
             "AlternateOptions": {
               "type": "array",
-              "description": "2 brief alternate options a teacher could choose.",
+              "description": "2 кратке алтернативне опције које би наставник могао да изабере.",
               "items": {
                 "type": "string",
                 "x-format": "{index}. {value}"
@@ -293,11 +293,11 @@ window.promptssrCyrl = {
         },
         "DirectPresentation": {
           "type": "object",
-          "description": "Full 'Direct Presentation' section. This is the FIRST in-class activity and should last NO LONGER THAN 10 minutes.",
+          "description": "Потпуни одељак „Директно излагање”. Ово је ПРВА активност у учионици и не сме трајати ДУЖЕ од 10 минута.",
           "properties": {
             "Materials": {
               "type": "array",
-              "description": "List of required materials (e.g. visual aids, markers, etc.)",
+              "description": "Листа неопходних материјала (нпр. визуелна помагала, маркери, итд.)",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -306,17 +306,17 @@ window.promptssrCyrl = {
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Teacher script organized into sequential steps following this EXACT sequence: (1) HOOK (1-2 min), (2) INTRODUCTION (1-2 min), (3) DIRECT TEACHING (4-5 min), and (4) GUIDED ENGAGEMENT (2-3 min). Do NOT include the headers in the strings. Each step must include teacher talk (Say:/Ask:), teacher actions (Do:/Write:/Draw/Show:), and if applicable, expected student responses.",
+              "description": "Наставнички сценарио организован у секвенцијалним корацима који прате ову ТАЧНУ секвенцу: (1) ПОЧЕТАК (1-2 мин), (2) УВОД (1-2 мин), (3) ДИРЕКТНО ПОУЧАВАЊЕ (4-5 мин), и (4) ВОЂЕНО УКЉУЧИВАЊЕ (2-3 мин). Не укључујте наслове у стринговима. Сваки корак мора да садржи наставнички говор (Реците:/Питајте:), наставничке радње (Урадите:/Напишите:/Нацртајте:/Прикажите:), и ако је применљиво, очекиване одговоре ученика.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific teacher action, starting with 'Say: ', 'Do: ', etc."
+                    "description": "Одређена наставничка радња, која почиње са „Реци: “, „Уради: “, итд."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                    "description": "Очекивани одговори ако је упутство било питање. Вратите празну листу ако није применљиво.",
                     "items": {
                       "type": "string",
                       "x-format": "  - {value}"
@@ -335,17 +335,17 @@ window.promptssrCyrl = {
             },
             "AnticipatedMisconceptions": {
               "type": "array",
-              "description": "List of common misconceptions and exact correction language for addressing each one.",
+              "description": "Листа уобичајених заблуда и тачног корективног језика за адресирање сваке од њих.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "The misconception description."
+                    "description": "Опис заблуде."
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "The correction language starting with 'Say: '."
+                    "description": "Корективни језик који почиње са „Реци: “."
                   }
                 },
                 "required": [
@@ -359,14 +359,14 @@ window.promptssrCyrl = {
             },
             "TranscendentThinking": {
               "type": "object",
-              "description": "Real-world application question connecting learning to purpose/meaning/big ideas.",
+              "description": "Питање за примену у стварном свету које повезује учење са сврхом/значењем/великим идејама.",
               "properties": {
                 "Question": {
                   "type": "string"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "Expected student responses showing deeper understanding.",
+                  "description": "Очекивани одговори ученика који показују дубље разумевање.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -383,15 +383,15 @@ window.promptssrCyrl = {
             },
             "QuickCheck": {
               "type": "object",
-              "description": "A final check of understanding for a student learning objective already declared in the lesson. This MUST be an individual task for EVERY student to complete.",
+              "description": "Завршна провера разумевања за ученика који учи већ наведени исход учења. Ово МОРА бити индивидуални задатак који сваки ученик мора да заврши.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "e.g., 'Take 2 minutes to sketch X in your notebook' or 'On a scratchpad, explain why Y...'"
+                  "description": "нпр. „Узми 2 минута да скицираш X у свесци“ или „На папирићу, објасни зашто Y...“"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 specific expected student responses.",
+                  "description": "2-3 конкретна очекивана одговора ученика.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -419,11 +419,11 @@ window.promptssrCyrl = {
         },
         "GuidedPractice": {
           "type": "object",
-          "description": "Structured Guided Practice section with separate fields for materials, instructions, differentiation, and optional accommodations.",
+          "description": "Структурисани одељак за вођену вежбу са одвојеним пољима за материјале, упутства, диференцијацију и опционалне прилагодбе.",
           "properties": {
             "Materials": {
               "type": "array",
-              "description": "Required physical items needed for this guided practice activity (e.g., 'Styrofoam balls, string, markers') formatted as a list",
+              "description": "Потребни физички предмети за ову активност вођене вежбе (нпр. „стиропорне кугле, канап, маркери“) форматирани као листа",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -432,17 +432,17 @@ window.promptssrCyrl = {
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Teacher script organized into sequential steps. Each step should combine teacher actions and script. End with prompts for circulation.",
+              "description": "Наставников сценарио организован у узастопне кораке. Сваки корак треба да комбинује наставникове радње и сценарио. Завршите са подстицајима за обилазак и праћење рада.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific teacher action, starting with 'Say: ', 'Do: ', etc."
+                    "description": "Одређена наставничка радња, која почиње са „Реци: “, „Уради: “, итд."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
-                    "description": "Anticipated answers if the instruction was a question. Return an empty array if not applicable.",
+                    "description": "Очекивани одговори ако је упутство било питање. Вратите празну листу ако није применљиво.",
                     "items": {
                       "type": "string",
                       "x-format": "  - {value}"
@@ -461,14 +461,14 @@ window.promptssrCyrl = {
             },
             "QuickCheck": {
               "type": "object",
-              "description": "Final comprehension check question for the guided practice.",
+              "description": "Питање за завршну проверу разумевања за вођену вежбу.",
               "properties": {
                 "Question": {
                   "type": "string"
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 expected student responses.",
+                  "description": "2-3 очекивана одговора ученика.",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}"
@@ -485,7 +485,7 @@ window.promptssrCyrl = {
             },
             "Differentiation": {
               "type": "object",
-              "description": "Labeled with three clearly labeled tiers: Language Learners, Students in Need of Additional Scaffolding, Go Deeper. Requirements: The content must differentiate instruction, not provide accommodations or modifications (those are addressed elsewhere). Strategies should focus on how to teach, not how to simplify materials. Activities should vary in complexity and depth, aligned to the same learning objectives. Each tier must promote active engagement, language development, and conceptual understanding. Use clear, teacher-facing language and make supports realistic for classroom use.",
+              "description": "Означено са три јасно означена нивоа: Ученик у учењу језика, Ученици којима је потребна додатна подршка у усвајању, Идите даље. Захтеви: Садржај мора да диференцира наставу, а не да пружа прилагођавања или модификације (то је обрађено на другом месту). Стратегије треба да буду усмерене на то како подучавати, а не како поједноставити материјале. Активности треба да варирају по сложености и дубини, усклађене са истим циљевима учења. Сваки ниво мора да подстиче активно ангажовање, развој језика и концептуално разумевање. Користите јасан језик усмерен на наставника и учините подршке реалистичним за употребу у учионици.",
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
@@ -496,7 +496,7 @@ window.promptssrCyrl = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 2-3 concrete teaching strategies for language learners. Examples: providing specific visuals (e.g., 'Planet Fact Sheet'), using sentence frames (e.g., 'This is placed here because...'), or asking students to gesture/point before explaining verbally. Focus on active engagement and language development.",
+                      "description": "Пружите 2-3 конкретне наставне стратегије за ученике у учењу језика. Примери: пружање специфичних визуелних материјала (нпр. „Лист чињеница о планети“), употреба оквира за реченице (нпр. „Ово је постављено овде зато што...“), или тражење од ученика да гестикулирају/покажу пре него што усмено објасне. Фокусирајте се на активно ангажовање и развој језика.",
                       "x-format": "{items}"
                     }
                   },
@@ -515,7 +515,7 @@ window.promptssrCyrl = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 2-3 concrete teaching strategies for scaffolding. Examples: providing pre-drawn organizers/templates, using a simplified checklist with specific guiding questions, or modeling a think-aloud process (e.g., 'Watch how I match...'). Focus on how to teach and vary complexity without simplifying materials.",
+                      "description": "Пружите 2-3 конкретне наставне стратегије за подршку. Примери: пружање унапред нацртаних организатора/шаблона, коришћење поједностављене контролне листе са конкретним питањима за вођење, или моделовање процеса размишљања наглас (нпр. „Погледајте како ја повезујем...“). Фокусирајте се на то како да подучавате и мењате сложеност без поједностављивања материјала.",
                       "x-format": "{items}"
                     }
                   },
@@ -534,7 +534,7 @@ window.promptssrCyrl = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Provide 1-2 extension tasks that deepen conceptual understanding. Include specific challenges (e.g., 'Adjust spacing to show...') or higher-order questions (e.g., 'How would you model... accurately?'). Must align to the same learning objectives.",
+                      "description": "Понудите 1-2 додатна задатка који продубљују концептуално разумевање. Укључите конкретне изазове (нпр. „Подесите размак како бисте показали...“) или питања вишег реда (нпр. „Како бисте прецизно моделовали...?“). Морају бити усклађени са истим циљевима учења.",
                       "x-format": "{items}"
                     },
                     "ExpectedStudentResponses": {
@@ -543,7 +543,7 @@ window.promptssrCyrl = {
                         "type": "string",
                         "x-format": "- {value}"
                       },
-                      "description": "Expected student responses showing what success looks like. Return empty array if not applicable.",
+                      "description": "Очекивани одговори ученика који показују како изгледа успех. Вратите празан низ ако није применљиво.",
                       "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                     }
                   },
@@ -565,7 +565,7 @@ window.promptssrCyrl = {
             },
             "AccommodationsAndModifications": {
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Овај одељак мора да садржи две врсте подршке: Опште подршке и Индивидуализоване подршке. Фокусирајте се на приступ, а не на смањење захтевности.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -573,18 +573,18 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points.",
+                  "description": "Стратегије које нису специфичне за ученике, а које побољшавају приступ за све ученике (нпр. визуелни прикази, унапред попуњене белешке, дигитални речник, инструкције подељене на делове). Наведите 2-4 тачке.",
                   "x-format": "{items}"
                 },
                 "IndividualSupport": {
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Специфичне прилагодбе и модификације за именоване ученике са формалним плановима. Наведите СВАКОГ ученика појединачно; НЕ групишите ученике заједно. Подршка за сваког ученика треба да буде лако прегледна листа.",
                   "items": {
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Име и презиме појединачног ученика који прима ове подршке."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -592,7 +592,7 @@ window.promptssrCyrl = {
                           "type": "string",
                           "x-format": "- {value}"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Формални план наведен за овог ученика у упиту. Преуредите план у јасну листу. Можете га парафразирати ради бољег форматирања, али НЕ изостављајте нити додајте било какве информације."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -600,7 +600,7 @@ window.promptssrCyrl = {
                           "type": "string",
                           "x-format": "- {value}"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task.",
+                        "description": "Конкретни алати/почеци реченица/визуелни прикази/организатори за овај задатак.",
                         "x-format": "{items}"
                       }
                     },
@@ -635,7 +635,7 @@ window.promptssrCyrl = {
         },
         "IndependentPractice": {
           "type": "object",
-          "description": "Structured Independent Practice section.",
+          "description": "Структурисани одељак за самосталну вежбу.",
           "properties": {
             "Materials": {
               "type": "array",
@@ -643,16 +643,16 @@ window.promptssrCyrl = {
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Required materials.",
+              "description": "Потребни материјали.",
               "x-format": "**📚 {loc.Materials}**\n\n{items}"
             },
             "Purpose": {
               "type": "string",
-              "description": "Purpose of the independent practice."
+              "description": "Сврха самосталне вежбе."
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Sequential tasks for independent practice.",
+              "description": "Секвенцијални задаци за самосталну вежбу.",
               "items": {
                 "type": "object",
                 "properties": {
@@ -661,15 +661,15 @@ window.promptssrCyrl = {
                   },
                   "DOKLevel": {
                     "type": "string",
-                    "description": "e.g., 'DOK 3' or 'DOK 3-4'"
+                    "description": "нпр. „DOK 3“ или „DOK 3-4“"
                   },
                   "TeacherNotes": {
                     "type": "string",
-                    "description": "Explanation connecting task to presentation/goals."
+                    "description": "Објашњење које повезује задатак са презентацијом/циљевима."
                   },
                   "Instruction": {
                     "type": "string",
-                    "description": "The specific instruction or 'Say:' statement."
+                    "description": "Конкретна инструкција или изјава „Реците:“"
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -677,7 +677,7 @@ window.promptssrCyrl = {
                       "type": "string",
                       "x-format": "  - {value}"
                     },
-                    "description": "Sample answers.",
+                    "description": "Примерни одговори.",
                     "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}"
                   },
                   "SuccessCriteria": {
@@ -686,7 +686,7 @@ window.promptssrCyrl = {
                       "type": "string",
                       "x-format": "  - {value}"
                     },
-                    "description": "2-4 elements showing mastery.",
+                    "description": "2-4 елемента који показују овладаност.",
                     "x-format": "- {loc.SuccessCriteria}\n\n{items}"
                   }
                 },
@@ -705,7 +705,7 @@ window.promptssrCyrl = {
             },
             "Reflection": {
               "type": "array",
-              "description": "Self-regulation and transcendence questions.",
+              "description": "Питања за саморегулацију и трансценденцију.",
               "items": {
                 "type": "object",
                 "properties": {
@@ -714,7 +714,7 @@ window.promptssrCyrl = {
                   },
                   "ReflectionType": {
                     "type": "string",
-                    "description": "e.g., 'Self-Regulation' or 'Transcendence'"
+                    "description": "нпр. „Саморегулација“ или „Трансценденција“"
                   }
                 },
                 "required": [
@@ -731,7 +731,7 @@ window.promptssrCyrl = {
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "The early finisher task prompt/description."
+                  "description": "Задатак/опис за ученике који заврше раније."
                 },
                 "Requirements": {
                   "type": "array",
@@ -739,12 +739,12 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Specific elements students must address.",
+                  "description": "Одређени елементи на које ученици морају да се осврну.",
                   "x-format": "{items}"
                 },
                 "Justification": {
                   "type": "string",
-                  "description": "Concluding sentence about using accurate principles."
+                  "description": "Закључна реченица о примени тачних принципа."
                 }
               },
               "required": [
@@ -768,7 +768,7 @@ window.promptssrCyrl = {
         },
         "ReviewAndSpacedRetrieval": {
           "type": "object",
-          "description": "Structured Review & Spaced Retrieval section. This 5-minute activity reinforces prior concepts and connects them to current learning.",
+          "description": "Одељак Структурисано понављање и распоређено призивање. Ова активност од 5 минута учвршћује претходне појмове и повезује их са тренутним учењем.",
           "properties": {
             "Materials": {
               "type": "array",
@@ -776,21 +776,21 @@ window.promptssrCyrl = {
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Required materials (often none needed).",
+              "description": "Потребни материјали (често нису потребни).",
               "x-format": "**📚 {loc.Materials}**\n\n{items}"
             },
             "TeacherNotes": {
               "type": "string",
-              "description": "Teacher Notes paragraph that explains: How this review strategy enhances retention, connection to prior learning concepts, and how transcendent reflection deepens understanding.",
+              "description": "Пасус са напоменама за наставника који објашњава: Како ова стратегија понављања унапређује задржавање, повезивање са појмовима претходног учења и како трансцендентно промишљање продубљује разумевање.",
               "x-format": "**{loc.TeacherNotes}:** {value}"
             },
             "ActiveRecall": {
               "type": "object",
-              "description": "Instructions for Teachers containing Active Recall prompt.",
+              "description": "Упутства за наставнике која садрже подстицај за активно присећање.",
               "properties": {
                 "Instruction": {
                   "type": "string",
-                  "description": "Active Recall prompt using partner/group sharing. Must use a 'Say:' statement."
+                  "description": "Подстицај за активно присећање уз дељење у пару/групи. Мора да садржи изјаву „Реците:“."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -798,7 +798,7 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 bulleted examples).",
+                  "description": "Очекивани одговори ученика (2-3 наведена примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 },
                 "CorrectCommonMisconceptions": {
@@ -807,7 +807,7 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Sample misconception statements and teacher response scripts addressing each (e.g. 'If a student says X, respond Y').",
+                  "description": "Примери уобичајених заблуда и сценарији наставниковог одговора који се баве сваким од њих (нпр. „Ако ученик каже X, одговорите Y“).",
                   "x-format": "**{loc.CorrectCommonMisconceptions}**\n\n{items}"
                 }
               },
@@ -821,11 +821,11 @@ window.promptssrCyrl = {
             },
             "EssentialQuestionConnection": {
               "type": "object",
-              "description": "Connection to the unit's essential question.",
+              "description": "Повезаност са суштинским питањем јединице.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Teacher prompt linking to unit question. Must use a 'Say:' statement."
+                  "description": "Подстицај наставника који повезује са питањем јединице. Мора да садржи изјаву „Реците:“."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -833,7 +833,7 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 examples).",
+                  "description": "Очекивани одговори ученика (2-3 примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -846,11 +846,11 @@ window.promptssrCyrl = {
             },
             "TranscendentThinking": {
               "type": "object",
-              "description": "Reflection on real-world application or broader impact.",
+              "description": "Размишљање о примени у стварном свету или ширем утицају.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Real-world application prompt. Must include a think time instruction (e.g., 'Take 30 seconds to think silently, then share:') and use a 'Say:' statement."
+                  "description": "Подстицај за примену у стварном свету. Мора да садржи упутство за време за размишљање (нпр. „Одвојте 30 секунди да тихо размислите, па поделите:“) и да користи изјаву „Реците:“."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -858,7 +858,7 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Expected Student Responses (2-3 examples).",
+                  "description": "Очекивани одговори ученика (2-3 примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -871,15 +871,15 @@ window.promptssrCyrl = {
             },
             "SpacedRetrieval": {
               "type": "object",
-              "description": "Recall of specific prior learning concepts.",
+              "description": "Подсећање на конкретне претходно научене појмове.",
               "properties": {
                 "HeaderTitle": {
                   "type": "string",
-                  "description": "Clear reference to specific prior lesson (e.g., 'Spaced Retrieval (Draws from Unit 2, Lesson 3)')."
+                  "description": "Јасна референца на претходни час (нпр. „Распоређено призивање (ослања се на Јединицу 2, Час 3)“)."
                 },
                 "Instruction": {
                   "type": "string",
-                  "description": "Question connecting past and current concepts. Must use a 'Say:' statement."
+                  "description": "Питање које повезује прошле и садашње појмове. Мора да садржи изјаву „Реците:“."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -887,7 +887,7 @@ window.promptssrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Detailed success criteria or expected student responses (2-3 examples).",
+                  "description": "Детаљни критеријуми успеха или очекивани одговори ученика (2-3 примера).",
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}"
                 }
               },
@@ -914,18 +914,18 @@ window.promptssrCyrl = {
         "FormativeAssessment": {
           "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
           "type": "array",
-          "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+          "description": "Тачно 4 формативна питања за процену, по једно за сваки DOK ниво.",
           "items": {
             "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
             "type": "object",
             "properties": {
               "PromptLabel": {
                 "type": "string",
-                "description": "e.g., 'Prompt 1 (DOK 1)'"
+                "description": "нпр. „Prompt 1 (DOK 1)”"
               },
               "Question": {
                 "type": "string",
-                "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+                "description": "Тачно текст питања, нпр. „Зашто планете остају у орбити уместо да одлете у свемир?”"
               },
               "ExpectedStudentResponses": {
                 "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -934,7 +934,7 @@ window.promptssrCyrl = {
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "1-2 sample responses showing mastery (wrapped in quotes)."
+                "description": "1–2 примерна одговора који показују савладаност (наводници)."
               }
             },
             "required": [
@@ -950,24 +950,24 @@ window.promptssrCyrl = {
         "StudentPractice": {
           "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
           "type": "object",
-          "description": "Homework/out-of-class practice.",
+          "description": "Домаћи задатак/вежба ван наставе.",
           "properties": {
             "TeacherNotes": {
               "x-format": "**{loc.TeacherNotes}:** {value}",
               "type": "string",
-              "description": "Short explanation of the practice goals, e.g., 'These tasks reinforce today's learning about [topic] by asking students to observe real-world patterns and explain them using the concepts introduced in class...'"
+              "description": "Кратко објашњење циљева вежбе, нпр. „Ови задаци учвршћују данашње учење о [topic] тако што од ученика траже да посматрају обрасце из стварног света и објасне их користећи појмове уведене на часу...”"
             },
             "PracticeTasks": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
+              "description": "Тачно 3 задатка за вежбу (DOK 2 или DOK 3).",
               "items": {
                 "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
                 "type": "object",
                 "properties": {
                   "TaskDescription": {
                     "type": "string",
-                    "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'"
+                    "description": "нпр. „(DOK 2) Вечерас изађи напоље и напиши 3–4 реченице...”"
                   },
                   "ExpectedStudentResponses": {
                     "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -990,11 +990,11 @@ window.promptssrCyrl = {
             "Reflection": {
               "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
               "type": "object",
-              "description": "A reflection task for the students.",
+              "description": "Задатак за размишљање за ученике.",
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'"
+                  "description": "нпр. „Размишљање: Напиши 2–3 реченице као одговор на један подстицај:”"
                 },
                 "ReflectionOptions": {
                   "type": "array",
@@ -1002,7 +1002,7 @@ window.promptssrCyrl = {
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Exactly 4 reflection question options in quotes."
+                  "description": "Тачно 4 опције питања за размишљање у наводницима."
                 }
               },
               "required": [

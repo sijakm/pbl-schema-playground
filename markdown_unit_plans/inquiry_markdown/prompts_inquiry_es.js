@@ -79,14 +79,14 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Descripció de la unitat com un sol paràgraf cohesionat de text pla (4–5 oracions completes) escrit amb una veu natural de docent que podries dir directament als estudiants. Sense HTML, sense emojis, sense viñetes. Ha de fluir de manera conversacional però seguir aquesta estructura (sense encapçalaments): (1) oració ganxo que desperti curiositat o marqui un contrast sorprenent, (2) oració de 'En esta unitat, vosaltres...' sobre els resultats de domini, (3) oració de 'Fortalecerán sus habilidades en...' sobre les capacitats de pensament/anàlisi, (4) oració de 'Esto se conecta con...' sobre la rellevància en el món real, (5) oració de 'Entender esto importa porque...' sobre la importància més àmplia o l'impacte a llarg termini."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Crea preguntes essencials que se centrin només en conceptes amplis i universals com el canvi, l'evidència, els patrons, les relacions, els sistemes o el raonament. NO esmentis termes, processos, vocabulari o exemples específics del contingut. Les preguntes han de ser obertes, transferibles a totes les disciplines i impossibles de respondre aprenent la lliçó o el contingut de la unitat. Enfoca't només en les grans idees, no en el contingut temàtic.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -95,7 +95,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Sección completa de 'Objectius d'aprenentatge de l'estudiant' per a tota aquesta unitat. Cada element de la llista ha de ser un objectiu clar i mesurable que comenci amb un verb mesurable i acabi amb una etiqueta DOK entre parèntesis",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -104,7 +104,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Enumera tots els estàndards educatius únics usats en qualsevol part d'aquesta unitat i les seves lliçons. NO afegeixis estàndards que no apareguin en el contingut de la unitat. Cada estàndard ha d'incloure el codi i la descripció de l'estàndard, per exemple, 'MS-ESS1-1: Desenvolupar i usar un model del sistema Terra–Sol–Lluna per descriure els patrons cíclics de les fases lunars, eclipsi i estacions'.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -113,7 +113,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "KeyVocabulary": {
           "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Secció completa de 'Vocabulari clau' com una llista de cadenes. Cada cadena ha de ser un sol terme amb la seva definició separada per un guionet. Exemple: 'Gravetat - La força que atrau els objectes entre si'. Totes les definicions han de ser breus, apropiades per a l'edat i directament relacionades amb el contingut de la lliçó.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -132,21 +132,21 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Llista de contenidors de lliçons per a aquesta unitat (només esquema). Cada element no s'ha de solapar i ha de tenir un abast clarament delimitat perquè el contingut de les lliçons no es repeteixi.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Número d'ordre d'una lliçó. Basat en 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Títol breu de la lliçó com a text pla."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 oracions que descriguin l'abast, l'enfocament i els límits de la lliçó per evitar solapament amb altres lliçons."
           }
         },
         "required": [
@@ -180,16 +180,16 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "AssessPriorKnowledge": {
       "x-format": "### 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN NULL or OMIT this field. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions.",
+      "description": "Secció d'Avaluar Coneixements Previs. NOMÉS la Lliçó 1 ha de contenir un bloc detallat; TOTES LES ALTRES LLIÇONS HAN DE RETORNAR NULL o Ometre aquest camp. Per a la Lliçó 1, l'estructura ha d'incloure ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt i AlternateOptions.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we build...\"'"
+          "description": "Instruccions clares i plantilla/estructura per a la modalitat triada. Per exemple: 'Digues: \"Antes de construir...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
           "type": "array",
-          "description": "Anticipated answers or common misconceptions for the chosen modality.",
+          "description": "Respostes anticipades o conceptes erronis comuns per a la modalitat triada.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -197,12 +197,12 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Closing teacher prompt (do NOT include the 'Say:' prefix) that validates student thinking and previews unit investigation."
+          "description": "Pregunta de tancament del docent (NO incloguis el prefix 'Di:') que validi el pensament dels estudiants i anticipi la investigació de la unitat."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
           "type": "array",
-          "description": "2 brief alternate options a teacher could choose.",
+          "description": "2 opcions breus alternatives que un docent podria triar.",
           "items": {
             "x-format": "{index}. {value}",
             "type": "string"
@@ -220,7 +220,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+      "description": "Enganxa literalment totes les preguntes essencials a nivell d'unitat en el mateix ordre si es van proporcionar. Si no, genera exactament 3 preguntes conceptuals que se centrin només en conceptes amplis i universals com el canvi, l'evidència, els patrons, les relacions, els sistemes o el raonament. NO esmentis termes, processos, vocabulari o exemples específics del contingut. Les preguntes han de ser obertes, transferibles a totes les disciplines i impossibles de respondre aprenent la lliçó o el contingut de la unitat. Enfoca't només en les grans idees, no en el contingut temàtic.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -229,7 +229,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
+      "description": "Selecciona textualment el vocabulari clau per a aquesta lliçó del vocabulari a nivell d'unitat proporcionat en l'avís. NO inventis paraules noves. Has de reutilitzar la redacció exacta de Step 0 UnitDescription.KeyVocabulary.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -238,7 +238,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the specific student learning objectives for this lesson from the unit-level objectives provided in the prompt. Do NOT invent new objectives. You must reuse the exact wording from the Step 0 UnitDescription.StudentLearningObjectives.",
+      "description": "Selecciona textualment els objectius d'aprenentatge de l'estudiant específics per a aquesta lliçó dels objectius a nivell d'unitat proporcionats en l'avís. NO inventis objectius nous. Has de reutilitzar la redacció exacta de Step 0 UnitDescription.StudentLearningObjectives.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -247,7 +247,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "List only the unique educational standards addressed in this specific lesson. Each standard must include standard code and description and must be exactly the same used in the Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Enumera només els estàndards educatius únics abordats en aquesta lliçó específica. Cada estàndard ha d'incloure el codi i la descripció de l'estàndard i ha de ser exactament el mateix usat en la Unitat. per exemple, 'MS-ESS1-1: Desenvolupar i usar un model del sistema Terra–Sol–Lluna per descriure els patrons cíclics de les fases lunars, eclipsi i estacions.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -260,7 +260,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Llista de materials requerits (per exemple, suports visuals, marcadors, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -275,11 +275,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script to introduce the phenomenon. Ensure it focuses on sparking curiosity without giving scientific explanations."
+                  "description": "Crea un guió per presentar el fenomen. Assegura't que se centri a despertar curiositat sense donar explicacions científiques."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 specific pedagogical moves that guide silent observation and partner sharing. Include scripts (do NOT include the 'Say:' prefix, e.g., 'Take 30 seconds to look silently...'). Focus on capturing and organizing student observations into meaningful categories and encouraging multiple perspectives.",
+                  "description": "Genera 2–3 movimientos pedagógicos específicos que guíen la observación silenciosa y la conversación en parejas. Incluye guiones (NO incluyas el prefijo 'Di:', por ejemplo, 'Tomen 30 segundos para mirar en silencio...'). Enfócate en capturar y organizar las observaciones de los estudiantes en categorías significativas y en fomentar múltiples perspectivas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -287,7 +287,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts as a single string to help students identify details, notice patterns, and surface initial wonderings. Encourage students to explain why certain details feel important and to build on or contrast each other’s observations."
+                  "description": "Genera 2–3 indicaciones específicas como una sola cadena para ayudar a los estudiantes a identificar detalles, notar patrones y plantear curiosidades iniciales. Anima a los estudiantes a explicar por qué ciertos detalles parecen importantes y a construir sobre las observaciones de otros o contrastarlas."
                 }
               },
               "required": [
@@ -303,15 +303,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a specific teacher script (do NOT include the 'Say:' prefix) that helps students turn their observations of the phenomenon into research questions or problems while clustering ideas into key themes."
+                  "description": "Crea un guion específico del docente (NO incluyas el prefijo 'Di:') que ayude a los estudiantes a convertir sus observaciones del fenómeno en preguntas o problemas de investigación mientras agrupan las ideas en temas clave."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 specific prompts to help students connect observations to underlying challenges, justify thinking with evidence, and prioritize which ideas are most worth investigating."
+                  "description": "Proporciona 2–3 indicaciones específicas para ayudar a los estudiantes a conectar las observaciones con desafíos subyacentes, justificar el pensamiento con evidencia y priorizar qué ideas vale más la pena investigar."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Suggest 2-3 moves to support students in refining and grouping their ideas, while pressing them to explain their reasoning. Include instructions to record and highlight recurring questions without answering them.",
+                  "description": "Sugiere 2–3 movimientos para apoyar a los estudiantes a refinar y agrupar sus ideas, mientras les pides que expliquen su razonamiento. Incluye instrucciones para registrar y resaltar preguntas recurrentes sin responderlas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -331,15 +331,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Develop a teacher-led instruction (do NOT include the 'Say:' prefix) to facilitate partner or group discussion that generates specific ideas, explanations, or solutions using available information and constraints. Encourage comparison and reasoning."
+                  "description": "Desarrolla una instrucción guiada por el docente (NO incluyas el prefijo 'Di:') para facilitar una discusión en parejas o grupos que genere ideas, explicaciones o soluciones específicas usando la información y las restricciones disponibles. Anima a comparar y razonar."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "List 2-3 prompts to encourage students to propose ideas, explain reasoning, consider alternative approaches, and evaluate which parts of their thinking are strongest or most uncertain."
+                  "description": "Enumera 2–3 indicaciones para animar a los estudiantes a proponer ideas, explicar su razonamiento, considerar enfoques alternativos y evaluar qué partes de su pensamiento son más fuertes o más inciertas."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Describe 2-3 circulation moves to listen for reasoning, press for clarity/justification, and highlight diverse approaches without evaluating which is correct.",
+                  "description": "Describe 2–3 movimientos de circulación para escuchar el razonamiento, pedir claridad/justificación y resaltar enfoques diversos sin evaluar cuál es correcto.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -359,15 +359,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script to push students to refine and test their ideas by examining assumptions, considering different conditions, and identifying key factors of this lesson."
+                  "description": "Crea un guion para impulsar a los estudiantes a refinar y probar sus ideas examinando supuestos, considerando diferentes condiciones e identificando factores clave de esta lección."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Suggest 2-3 specific prompts to test ideas against new conditions, identify weaknesses, and revise thinking using evidence for this lesson's phenomena."
+                  "description": "Sugiere 2–3 indicaciones específicas para probar ideas frente a nuevas condiciones, identificar debilidades y revisar el pensamiento usando evidencia para los fenómenos de esta lección."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Provide 2-3 specific moves to encourage students to revisit and revise their initial ideas based on evidence and justify changes in their thinking.",
+                  "description": "Proporciona 2–3 movimientos específicos para animar a los estudiantes a revisar y corregir sus ideas iniciales a partir de la evidencia y justificar los cambios en su pensamiento.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -375,7 +375,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "Closing": {
                   "type": "string",
-                  "description": "A final instruction to push students to test and revise their ideas, consider long-term effects and changing conditions, and use evidence from observations to strengthen or challenge their thinking."
+                  "description": "Una instrucción final para impulsar a los estudiantes a probar y revisar sus ideas, considerar efectos a largo plazo y condiciones cambiantes, y usar evidencia de las observaciones para fortalecer o desafiar su pensamiento."
                 }
               },
               "required": [
@@ -410,7 +410,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales requeridos (por ejemplo, apoyos visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -425,11 +425,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a teacher script (do NOT include the 'Say:' prefix) to introduce the question brainstorming session. Focus on moving from individual to partner sharing to expand ideas."
+                  "description": "Crea un guion del docente (NO incluyas el prefijo 'Di:') para presentar la sesión de lluvia de preguntas. Enfócate en pasar del trabajo individual al intercambio en parejas para ampliar las ideas."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 specific moves to support student generation of questions. Include providing think time, capturing all questions publicly, and encouraging students to refine, combine, or expand questions without judgmental evaluation.",
+                  "description": "Genera 2–3 movimientos específicos para apoyar la generación de preguntas por parte de los estudiantes. Incluye dar tiempo para pensar, registrar todas las preguntas públicamente y animar a refinar, combinar o ampliar preguntas sin evaluación juiciosa.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -437,7 +437,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts to help students surface curiosities, identify what they want to understand, and focus on key aspects of the system or design."
+                  "description": "Genera 2–3 indicaciones específicas para ayudar a los estudiantes a hacer aflorar curiosidades, identificar qué quieren entender y centrarse en aspectos clave del sistema o diseño."
                 }
               },
               "required": [
@@ -453,11 +453,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script (do NOT include the 'Say:' prefix) to guide students in selecting a question that would help them learn the most from a testable model."
+                  "description": "Crea un guion (NO incluyas el prefijo 'Di:') para guiar a los estudiantes en la selección de una pregunta que les ayude a aprender lo máximo de un modelo comprobable."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Suggest 2-3 moves to guide students in sorting questions into themes and comparing ideas based on testability. Include moves to support students in refining broad questions into clear investigations by identifying variables.",
+                  "description": "Sugiere 2–3 movimientos para guiar a los estudiantes a clasificar preguntas en temas y comparar ideas según su comprobabilidad. Incluye movimientos para apoyar a los estudiantes a refinar preguntas amplias en investigaciones claras identificando variables.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -465,7 +465,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 prompts to help students evaluate questions based on testability, clarity, focus on variables, and potential to generate useful evidence."
+                  "description": "Genera 2–3 indicaciones para ayudar a los estudiantes a evaluar preguntas según su comprobabilidad, claridad, enfoque en variables y potencial para generar evidencia útil."
                 }
               },
               "required": [
@@ -481,11 +481,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script (do NOT include the 'Say:' prefix) to prompt students to define what they will observe, change, and collect as evidence."
+                  "description": "Crear un guion (no incluyas el prefijo 'Say:') para pedir a los estudiantes que definan qué observarán, qué cambiarán y qué recopilarán como evidencia."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Describe 2-3 moves to support students in designing an investigation plan and identifying variables. Include moves to press students to make plans specific and testable, and ensure they have a clear way to determine success.",
+                  "description": "Describe 2-3 acciones para apoyar a los estudiantes al diseñar un plan de investigación e identificar variables. Incluye acciones para presionar a los estudiantes a que hagan planes específicos y comprobables, y asegúrate de que tengan una manera clara de determinar el éxito.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -493,7 +493,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 specific prompts to help students clarify what they will change, keep the same, and how they will compare results."
+                  "description": "Proporciona 2-3 indicaciones específicas para ayudar a los estudiantes a aclarar qué cambiarán, qué mantendrán igual y cómo compararán los resultados."
                 }
               },
               "required": [
@@ -526,7 +526,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales requeridos (p. ej., ayudas visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -541,11 +541,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create teacher instructions to introduce a puzzling scenario or model. First provide a bracketed action like [Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result to spark curiosity], then provide the conversational script (do NOT include the 'Say:' prefix)."
+                  "description": "Crea instrucciones para el docente para presentar una situación o modelo desconcertante. Primero proporciona una acción entre corchetes como [Muestra un modelo, una situación, una demostración o una historia corta que incluya un defecto, una ineficiencia o un resultado inesperado para despertar la curiosidad], luego proporciona el guion conversacional (no incluyas el prefijo 'Say:')."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 moves to guide the launch. State the instructional actions clearly without prefixing them with 'Say:'. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.",
+                  "description": "Genera 2-3 acciones para guiar el inicio. Expresa claramente las acciones instruccionales sin anteponerlas con 'Say:'. Incluye darles a los estudiantes tiempo para observar antes de actuar, fomentar múltiples interpretaciones y reforzar que puede haber varias ideas válidas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -553,7 +553,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts to help students notice important or unexpected features, generate possible explanations, and justify thinking with evidence."
+                  "description": "Genera 2-3 indicaciones específicas para ayudar a los estudiantes a notar características importantes o inesperadas, generar posibles explicaciones y justificar su pensamiento con evidencia."
                 }
               },
               "required": [
@@ -569,11 +569,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a spoken script (do NOT include the 'Say:' prefix) to frame the task as interdependent and emphasize shared responsibility. Include instructions for students to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips."
+                  "description": "Crea un guion oral (no incluyas el prefijo 'Say:') para enmarcar la tarea como interdependiente y enfatizar la responsabilidad compartida. Incluye instrucciones para que los estudiantes usen iniciadores de oraciones (p. ej., 'Creo... porque...') y estructuras de participación como fichas de conversación."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Do not prefix these actions with 'Say:'. Ensure they focus on all students contributing to observing and refining ideas.",
+                  "description": "Enumera 3-5 acciones específicas o comportamientos de los estudiantes que se deben monitorear durante el trabajo en grupo (p. ej., identificar patrones, registrar en tablas de datos compartidas, comparar interpretaciones). No antepongas estas acciones con 'Say:'. Asegúrate de que se centren en que todos los estudiantes contribuyan a observar y refinar ideas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -581,7 +581,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 prompts to encourage students to share observations, compare interpretations, justify claims with evidence, and collaboratively revise ideas."
+                  "description": "Proporciona 2-3 indicaciones para animar a los estudiantes a compartir observaciones, comparar interpretaciones, justificar afirmaciones con evidencia y revisar ideas de manera colaborativa."
                 }
               },
               "required": [
@@ -594,11 +594,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
             "CirculationPrompts": {
               "type": "object",
               "x-format": "**{loc.CirculationPromptsTitle}**\n\n**{loc.ConceptualPromptsTitle}**\n\n{value.Conceptual}\n\n**{loc.ReasoningPromptsTitle}**\n\n{value.Reasoning}\n\n**{loc.CollaborationPromptsTitle}**\n\n{value.Collaboration}",
-              "description": "Specific prompts to be used by the teacher while circulating between groups.",
+              "description": "Indicaciones específicas para que use el docente mientras circula entre los grupos.",
               "properties": {
                 "Conceptual": {
                   "type": "array",
-                  "description": "2-3 prompts focusing on key scientific or lesson concepts (e.g., 'What evidence shows this is working?').",
+                  "description": "2-3 indicaciones centradas en conceptos científicos o de la lección clave (p. ej., '¿Qué evidencia muestra que esto está funcionando?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -606,7 +606,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "Reasoning": {
                   "type": "array",
-                  "description": "2-3 prompts to press for justification and logic (e.g., 'How does this trial change your thinking?').",
+                  "description": "2-3 indicaciones para exigir justificación y lógica (p. ej., '¿Cómo cambia esta prueba tu forma de pensar?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -614,7 +614,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "Collaboration": {
                   "type": "array",
-                  "description": "2-3 prompts to ensure all voices are included (e.g., 'Who has not contributed yet?').",
+                  "description": "2-3 indicaciones para garantizar que todas las voces estén incluidas (p. ej., '¿Quién no ha contribuido todavía?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -639,18 +639,18 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "AnticipatedMisconceptions": {
           "type": "array",
           "x-format": "### ⚠️ {loc.AnticipatedMisconceptions}{items}",
-          "description": "Generate 2-3 common student misconceptions likely to arise during this lesson. Each item must focus on a specific misunderstanding and a teacher response script.",
+          "description": "Genera 2-3 conceptos erróneos comunes de los estudiantes que probablemente surjan durante esta lección. Cada elemento debe centrarse en un malentendido específico y una respuesta del docente.",
           "items": {
             "type": "object",
             "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                "description": "Describe el concepto erróneo en 1 oración, comenzando con 'Los estudiantes pueden pensar...'. NO uses negritas ni etiquetas de énfasis."
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Say:'). NO uses negritas ni etiquetas de énfasis."
               }
             },
             "required": [
@@ -670,7 +670,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas.",
+                  "description": "Genera 2-3 apoyos específicos para la lección (elementos visuales, bancos de palabras, gestos) para ayudar a los estudiantes multilingües a acceder y expresar ideas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -678,7 +678,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "SentenceStarters": {
                   "type": "array",
-                  "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson.",
+                  "description": "Genera 3-4 iniciadores de oraciones que ayuden a los estudiantes a describir, explicar y comunicar su pensamiento para esta lección específica.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -697,7 +697,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task.",
+                  "description": "Genera 2-3 apoyos paso a paso (herramientas estructuradas, ejemplos modelados, pensar en voz alta) y orientación exacta para ayudar a los estudiantes a completar la tarea.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -705,7 +705,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "Checklist": {
                   "type": "array",
-                  "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation.",
+                  "description": "Genera 3-4 preguntas de lista de verificación para guiar a los estudiantes a dar sentido a su aprendizaje durante la investigación.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -724,7 +724,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence.",
+                  "description": "Genera 2-3 extensiones que aumenten la complejidad (retos específicos, identificación de patrones) para ayudar a los estudiantes a profundizar o mejorar su pensamiento usando evidencia.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -732,11 +732,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                  "description": "Genera una pregunta compleja (no incluyas el prefijo 'Say:') para exigir una comprensión conceptual más profunda."
                 },
                 "ExpectedResponses": {
                   "type": "array",
-                  "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question.",
+                  "description": "Genera 3-4 ejemplos específicos de respuestas estudiantiles de alta calidad a la pregunta avanzada.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -761,7 +761,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "AccommodationsAndModifications": {
           "x-format": "### 🤝 {loc.AccommodationsAndModifications}\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
           "type": "object",
-          "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+          "description": "Esta sección debe incluir dos tipos de apoyos: Apoyos Generales y Apoyos Individualizados. Céntrate en el acceso, no en reducir el rigor.",
           "properties": {
             "General": {
               "type": "array",
@@ -769,19 +769,19 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+              "description": "Estrategias no específicas para estudiantes que mejoran el acceso para todos los aprendices (p. ej., elementos visuales, notas parcialmente completadas, glosario digital, instrucciones fragmentadas). Proporciona 2-4 viñetas."
             },
             "IndividualSupport": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+              "description": "Acomodaciones y modificaciones específicas para estudiantes nombrados con planes formales. Enumera a CADA estudiante individualmente; no agrupar estudiantes. Los apoyos para cada estudiante deben ser una lista fácil de revisar rápidamente.",
               "items": {
                 "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                 "type": "object",
                 "properties": {
                   "StudentName": {
                     "type": "string",
-                    "description": "First and last name of the individual student receiving these supports."
+                    "description": "Nombre y apellido del estudiante individual que recibe estos apoyos."
                   },
                   "PlanProvided": {
                     "type": "array",
@@ -789,7 +789,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    "description": "El plan formal proporcionado para este estudiante en el enunciado. Analiza el plan en una lista clara. Puedes parafrasearlo para mejorar el formato, pero no omitas ni agregues ninguna información."
                   },
                   "PlanImplementation": {
                     "type": "array",
@@ -797,7 +797,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Concrete tools/stems/visuals/organizers for this task."
+                    "description": "Herramientas/contenedores de oraciones/visualizaciones/organizadores concretos para esta tarea."
                   }
                 },
                 "required": [
@@ -821,11 +821,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generate one specific question (do NOT include the 'Say:' prefix) to check for student understanding during or at the end of the investigation."
+              "description": "Genera una pregunta específica (no incluyas el prefijo 'Say:') para comprobar la comprensión de los estudiantes durante o al final de la investigación."
             },
             "ExpectedResponses": {
               "type": "array",
-              "description": "Generate 3-4 expected student responses that show mastery of the lesson concept.",
+              "description": "Genera 3-4 respuestas esperadas de los estudiantes que demuestren dominio del concepto de la lección.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -857,7 +857,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales requeridos (p. ej., ayudas visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -869,11 +869,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) to bring students back to the research question and surfacing emerging ideas about how the design works."
+              "description": "Una declaración (no incluyas el prefijo 'Say:') para devolver a los estudiantes a la pregunta de investigación y hacer aflorar ideas emergentes sobre cómo funciona el diseño."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagogical moves to give students time to review data, identify patterns, and compare results through discussion.",
+              "description": "2-3 acciones pedagógicas para dar a los estudiantes tiempo de revisar datos, identificar patrones y comparar resultados mediante la discusión.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -881,7 +881,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 specific questions to push students to explain patterns, justify decisions with evidence, and describe cause-and-effect relationships.",
+              "description": "3-4 preguntas específicas para empujar a los estudiantes a explicar patrones, justificar decisiones con evidencia y describir relaciones de causa y efecto.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -889,15 +889,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) outlining what their written explanation must include (content-specific components) and a reminder to use data as evidence."
+              "description": "Una declaración (no incluyas el prefijo 'Say:') que describa lo que debe incluir su explicación escrita (componentes específicos del contenido) y un recordatorio para usar los datos como evidencia."
             },
             "CollaborationInstruction": {
               "type": "string",
-              "description": "Instruction for students to write independently then share with a partner or group to refine their reasoning."
+              "description": "Instrucción para que los estudiantes escriban de manera independiente y luego compartan con un compañero o grupo para refinar su razonamiento."
             },
             "Guardrail": {
               "type": "string",
-              "description": "A firm reminder that the teacher should NOT provide the scientific explanation, but instead press students to point to data."
+              "description": "Un recordatorio firme de que el docente NO debe proporcionar la explicación científica, sino más bien insistir en que los estudiantes señalen los datos."
             }
           },
           "required": [
@@ -912,7 +912,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "3-4 responses that directly answer the research question using evidence and cause-and-effect reasoning (e.g., 'when we changed ___, ___ happened').",
+          "description": "3-4 respuestas que respondan directamente a la pregunta de investigación usando evidencia y razonamiento de causa y efecto (p. ej., 'cuando cambiamos ___, ___ ocurrió').",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -933,7 +933,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales requeridos (p. ej., apoyos visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -945,11 +945,11 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) to prompt students to think about the broader implications of their evidence beyond the classroom."
+              "description": "Una declaración (NO incluyas el prefijo 'Say:') para invitar a los estudiantes a pensar en las implicaciones más amplias de su evidencia más allá del aula."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagogical moves to encourage students to discuss with partners/groups and generate their own examples of real-world impact.",
+              "description": "2-3 acciones pedagógicas para animar a los estudiantes a conversar con parejas/grupos y generar sus propios ejemplos de impacto en el mundo real.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -957,7 +957,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 specific questions to connect the investigation results to everyday life, community issues, or system redesign.",
+              "description": "3-4 preguntas específicas para conectar los resultados de la investigación con la vida cotidiana, los problemas de la comunidad o el rediseño de sistemas.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -977,7 +977,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+              "description": "Genera 1 pregunta de pensamiento trascendente que requiera que los estudiantes apliquen lo aprendido más allá de sí mismos a contextos del mundo real (comunidades, desafíos globales). Enfócate en por qué aprender importa a gran escala (seguridad, sostenibilidad, innovación, etc.). Evita el enfoque personal o solo escolar."
             }
           },
           "required": [
@@ -987,7 +987,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "4-5 responses illustrating how students might apply their understanding to authentic, real-world contexts or future-oriented problem solving.",
+          "description": "4-5 respuestas que ilustren cómo los estudiantes podrían aplicar su comprensión a contextos auténticos del mundo real o a la resolución de problemas orientada al futuro.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -1005,29 +1005,29 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Transcendent Thinking section 4. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must provide direct teacher prompts without the 'Say:' prefix and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
+      "description": "Sección completa de 'Repaso y Recuperación Espaciada'. Esta actividad de 5 minutos debe incluir: 1. Instrucciones para el docente que contengan: - Indicador de Recuperación Activa usando intercambio con parejas/grupos - Respuestas esperadas de los estudiantes (2-3 ejemplos con viñetas) 2. Conexión con la Pregunta Esencial 3. Sección de Pensamiento Trascendente 4. Componente de Recuperación Espaciada que contenga: - Referencia clara a una lección previa específica - Pregunta que conecte conceptos pasados + actuales - Criterios de éxito / respuestas esperadas detalladas Todas las secciones deben proporcionar indicaciones directas para el docente sin el prefijo 'Say:' y tener claramente etiquetadas 'Respuestas Esperadas de los Estudiantes' mostrando 2-3 respuestas de ejemplo.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Teacher notes explaining how this review strategy strengthens retention through active recall and connects the investigation to core science ideas."
+          "description": "Notas para el docente que expliquen cómo esta estrategia de repaso fortalece la retención mediante la recuperación activa y conecta la investigación con las ideas científicas fundamentales."
         },
         "InstructionsForTeachers": {
           "type": "object",
           "x-format": "{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
-          "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
+          "description": "Orientación docente paso a paso para la sesión de repaso y recuperación espaciada de 5 minutos.",
           "properties": {
             "ActiveRecall": {
               "type": "object",
               "x-format": "### 🔁 {loc.ActiveRecall}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the investigation.",
+              "description": "Pide a los estudiantes que recuperen el aprendizaje clave de la lección de hoy usando solo evidencia de la investigación.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "A specific teacher script (do NOT include the 'Say:' prefix) that prompts students to reflect on today's investigation and what it revealed about the system."
+                  "description": "Un guion específico para el docente (NO incluyas el prefijo 'Say:') que invite a los estudiantes a reflexionar sobre la investigación de hoy y lo que reveló sobre el sistema."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "3-4 examples of high-quality student responses showing clear use of evidence.",
+                  "description": "3-4 ejemplos de respuestas estudiantiles de alta calidad que muestren un uso claro de la evidencia.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1043,15 +1043,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
             "EssentialQuestionConnection": {
               "type": "object",
               "x-format": "### 💭 {loc.EssentialQuestionConnection}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Help students connect today's specific evidence to the broader unit essential questions.",
+              "description": "Ayuda a los estudiantes a conectar la evidencia específica de hoy con las preguntas esenciales más amplias de la unidad.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "A teacher script (do NOT include the 'Say:' prefix) that links today's findings to one of the unit's essential questions."
+                  "description": "Un guion para el docente (NO incluyas el prefijo 'Say:') que conecte los hallazgos de hoy con una de las preguntas esenciales de la unidad."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 examples of how students justify the connection using evidence.",
+                  "description": "2-3 ejemplos de cómo los estudiantes justifican la conexión usando evidencia.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1067,15 +1067,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
             "SpacedRetrieval": {
               "type": "object",
               "x-format": "### ⏳ {loc.SpacedRetrieval}\n\n**{loc.Say}:** {value.TeacherSay}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
+              "description": "Retoma un concepto de una unidad o lección anterior para fortalecer la retención acumulativa.",
               "properties": {
                 "TeacherSay": {
                   "type": "string",
-                  "description": "A teacher script (do NOT include the 'Say:' prefix) that explicitly connects a concept from a prior lesson to today's work. Must include the meta-reference (e.g., '(Draws from Unit 1, Lesson 2.)') directly in the text."
+                  "description": "Un guion para el docente (NO incluyas el prefijo 'Say:') que conecte explícitamente un concepto de una lección previa con el trabajo de hoy. Debe incluir la metarreferencia (p. ej., '(Proviene de la Unidad 1, Lección 2.)') directamente en el texto."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "1-2 examples of high-quality student responses showing clear recall of evidence from prior learning.",
+                  "description": "1-2 ejemplos de respuestas estudiantiles de alta calidad que muestren un recuerdo claro de la evidencia del aprendizaje previo.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1106,18 +1106,18 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "FormativeAssessment": {
       "x-format": "### ✅ {loc.FormativeAssessment}\n\n{items}",
       "type": "array",
-      "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+      "description": "Exactamente 4 indicaciones de Evaluación Formativa, una para cada nivel de DOK.",
       "items": {
         "x-format": "\n\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "p. ej., 'Indicador 1 (DOK 1)'"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+            "description": "El texto exacto de la pregunta, p. ej., '¿Por qué los planetas permanecen en órbita en lugar de salir disparados al espacio?'"
           },
           "ExpectedStudentResponses": {
             "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -1126,7 +1126,7 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1-2 respuestas de muestra que demuestren dominio."
           }
         },
         "required": [
@@ -1142,26 +1142,26 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
     "StudentPractice": {
       "x-format": "### 🖋️ {loc.StudentPractice}\n\n**{loc.TeacherNotes}:** {loc.StudentPracticeNotes}\n\n{value.Tasks}\n\n**🔎 {loc.Reflection}:**\n\n{value.Reflection}",
       "type": "object",
-      "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+      "description": "Sección completa de 'Práctica del Estudiante' para tarea / práctica fuera del aula.",
       "properties": {
         "Tasks": {
           "type": "array",
-          "description": "Generate 3 tasks covering DOK levels 2 and 3.",
+          "description": "Genera 3 tareas que cubran los niveles DOK 2 y 3.",
           "items": {
             "type": "object",
             "x-format": "\n\n**{value.TaskTitle}**\n\n{value.Instruction}\n\n{value.SuccessCriteria}",
             "properties": {
               "TaskTitle": {
                 "type": "string",
-                "description": "e.g., '1. (DOK 2)'"
+                "description": "p. ej., '1. (DOK 2)'"
               },
               "Instruction": {
                 "type": "string",
-                "description": "Clear step-by-step student directions for the task."
+                "description": "Instrucciones claras y paso a paso para que el estudiante realice la tarea."
               },
               "SuccessCriteria": {
                 "type": "array",
-                "description": "4-5 specific, evidence-based bullet points showing what mastery looks like for this task. CRITICAL: Every criterion MUST start with an action verb (e.g., 'Describes', 'Explains', 'Uses').",
+                "description": "4-5 viñetas específicas, basadas en evidencia, que muestren cómo se ve el dominio para esta tarea. CRÍTICO: Cada criterio DEBE comenzar con un verbo de acción (p. ej., 'Describe', 'Explica', 'Usa').",
                 "items": {
                   "x-format": "- {value}",
                   "type": "string"
@@ -1178,15 +1178,15 @@ Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
         },
         "Reflection": {
           "type": "object",
-          "description": "End with self-regulation or transcendent thinking reflections.",
+          "description": "Termina con reflexiones de autorregulación o de pensamiento trascendente.",
           "properties": {
             "Instruction": {
               "type": "string",
-              "description": "Instruction for the reflection section (e.g., 'Write 2–3 sentences responding to one prompt:')."
+              "description": "Instrucción para la sección de reflexión (p. ej., 'Escribe 2–3 oraciones respondiendo a una de las siguientes preguntas:')."
             },
             "Prompts": {
               "type": "array",
-              "description": "4-5 specific reflection prompts connecting today's inquiry to real life, future tools, or personal learning.",
+              "description": "4-5 indicaciones específicas de reflexión que conecten la investigación de hoy con la vida real, herramientas futuras o el aprendizaje personal.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"

@@ -112,7 +112,7 @@ window.labPromptssrCyrl = {
         "Description": {
           "x-format": false,
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Opis jedinice kao jedna celovita prozna pasusna celina u prirodnom nastavničkom tonu od 4–5 potpunih rečenica koju biste mogli direktno da izgovorite učenicima. Bez HTML-a, bez emodžija, bez nabrajanja. Mora da teče razgovorno, ali da prati ovu strukturu (bez naslova): (1) uvodna rečenica koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica sa „U ovoj jedinici ćete...” o ishodima usvajanja, (3) rečenica sa „Razvićete svoje veštine u...” o misaonim/analitičkim sposobnostima, (4) rečenica sa „Ovo je povezano sa...” o značaju za stvarni svet, (5) rečenica sa „Razumevanje ovoga je važno jer...” o širem značaju ili dugoročnom uticaju."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
@@ -120,7 +120,7 @@ window.labPromptssrCyrl = {
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Kreirajte suštinska pitanja koja se fokusiraju samo na široke, univerzalne pojmove kao što su promena, dokazi, obrasci, odnosi, sistemi ili zaključivanje. Ne pominjite nijedne pojmove specifične za predmet, procese, vokabular ili primere. Pitanja moraju biti otvorenog tipa, primenljiva u svim disciplinama i nemoguća za odgovor samo učenjem sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, a ne na predmetnu materiju.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -129,7 +129,7 @@ window.labPromptssrCyrl = {
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Kompletan odeljak 'Učenikovi ishodi učenja' za celu ovu jedinicu. Svaka stavka liste mora biti jasan, merljiv ishod koji počinje merljivim glagolom i završava oznakom DOK u zagradama",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -138,7 +138,7 @@ window.labPromptssrCyrl = {
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Navedite sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. Ne dodajte standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora da sadrži kod standarda i opis, npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -147,7 +147,7 @@ window.labPromptssrCyrl = {
         "KeyVocabulary": {
           "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Kompletan odeljak 'Ključni vokabular' kao lista stringova. Svaki string treba da bude jedan termin sa definicijom odvojenom crticom/kosom crtom. Primer: 'Gravitacija - Sila koja privlači tela jedno ka drugom'. Sve definicije moraju biti kratke, prilagođene uzrastu i direktno povezane sa sadržajem lekcije.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -166,21 +166,21 @@ window.labPromptssrCyrl = {
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Spisak organizacionih celina lekcija za ovu jedinicu (samo okvir). Svaka stavka mora biti nepreklapajuća i jasno obuhvaćena tako da se sadržaj lekcija ne ponavlja između lekcija.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Redni broj lekcije. Zasnovano na 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Kratak naslov lekcije kao običan tekst."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 rečenice koje opisuju obim lekcije, fokus i granice kako bi se sprečilo preklapanje sa drugim lekcijama."
           }
         },
         "required": [
@@ -213,7 +213,7 @@ window.labPromptssrCyrl = {
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the essential questions that are generated in unit level in same order.",
+      "description": "Samo nalepite sva suštinska pitanja koja su generisana na nivou jedinice istim redosledom.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -222,7 +222,7 @@ window.labPromptssrCyrl = {
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+      "description": "Kompletan odeljak 'Učenikovi ishodi učenja' kao običan tekst. Svaka stavka mora biti jasan, merljiv ishod koji počinje merljivim glagolom i završava oznakom DOK u zagradama, npr. 'Modelujte kako Zemljina rotacija oko svoje ose uzrokuje dan i noć (DOK 2).'",
       "minItems": 2,
       "maxItems": 3,
       "items": {
@@ -233,7 +233,7 @@ window.labPromptssrCyrl = {
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Kompletan odeljak 'Usklađeno sa standardima' kao običan tekst za ovu lekciju. Svaki standard mora da sadrži kod standarda i opis, a kod i opis moraju biti potpuno isti kao u jedinici. npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -242,7 +242,7 @@ window.labPromptssrCyrl = {
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
+      "description": "Izaberite doslovno ključni vokabular za ovu lekciju iz vokabulara na nivou jedinice navedenog u promptu. Ne izmišljajte nove reči. Morate ponovo koristiti tačno originalno navođenje iz Step 0 UnitDescription.KeyVocabulary.",
       "items": {
         "x-format": "{index}. {value}",
         "type": "string"
@@ -251,16 +251,16 @@ window.labPromptssrCyrl = {
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN NULL or OMIT this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section. 8. Closing teacher 'Say:' prompt. 9. After fully developing one modality, provide 2 brief alternate options.",
+      "description": "Odeljak Procena predznanja. SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU Vratiti NULL ili izostaviti ovo polje. Za Lekciju 1, struktura mora da uključuje: 1. Ovaj odeljak uključite samo u prvu lekciju jedinice. 2. Osigurajte da se koriste DOK 1-3 podsticaji. 3. Uključite preduslove veština potrebne za ishode učenja učenika. 4. Izaberite jedan modalitet sa ove liste i potpuno ga razradite: postavljanje pitanja, K-W-L, vizuali, koncept mape, refleksivno pisanje, anticipativni vodiči, ocenjivanje vokabulara. 5. Početni nastavnikov podsticaj sa 'Say:' izjavom. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak 'Očekivani odgovori učenika'. 8. Završni nastavnikov 'Say:' podsticaj. 9. Nakon potpunog razrađivanja jednog modaliteta, obezbedite 2 kratke alternativne opcije.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we begin...\"'"
+          "description": "Jasna uputstva i šablon/struktura za izabrani modalitet. Npr. 'Say: \"Pre nego što počnemo...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
           "type": "array",
-          "description": "Anticipated answers or common misconceptions for the chosen modality.",
+          "description": "Predviđeni odgovori učenika ili česte zablude za izabrani modalitet.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -268,12 +268,12 @@ window.labPromptssrCyrl = {
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation."
+          "description": "Završni nastavnikov 'Say:' podsticaj koji potvrđuje razmišljanje učenika i najavljuje istraživanje jedinice."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
           "type": "array",
-          "description": "2 brief alternate options a teacher could choose.",
+          "description": "2 kratke alternativne opcije koje bi nastavnik mogao da izabere.",
           "items": {
             "x-format": "{index}. {value}",
             "type": "string"
@@ -291,17 +291,17 @@ window.labPromptssrCyrl = {
     "Question": {
       "x-format": "### {green}(Question (5 min))\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students will observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.",
+      "description": "Vodite nastavnika tako da učenici posmatraju fenomen, identifikuju nešto zbunjujuće i postave smisleno pitanje koje će voditi istraživanje.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for Word - Purpose: Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation."
+          "description": "Doslovno - Svrha: Posmatrati fenomen, identifikovati nešto zbunjujuće i postaviti smisleno pitanje koje će voditi istraživanje."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Списак потребних материјала (нпр. визуелна помагала, маркери итд.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -318,7 +318,7 @@ window.labPromptssrCyrl = {
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to present a phenomenon and invite questions."
+              "description": "Корак-по-корак наставникова упутства, радње и „Реци:“ подстицаји за представљање феномена и позивање на питања."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -327,11 +327,11 @@ window.labPromptssrCyrl = {
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "3-4 expected student questions or ideas about the phenomenon."
+              "description": "3-4 очекивана ученичка питања или идеје о феномену."
             },
             "FinalInvestigationQuestion": {
               "type": "string",
-              "description": "The final step in the teacher instructions. Start this string with the next sequential number following the previous instructions (e.g., '8. Final Step: Say: ...') and state the big question to investigate today."
+              "description": "Последњи корак у наставниковим упутствима. Започните овај низ следећим редним бројем који долази после претходних упутстава (нпр. „8. Завршни корак: Реци: ...“) и наведите велико питање које ћемо данас истраживати."
             }
           },
           "required": [
@@ -352,17 +352,17 @@ window.labPromptssrCyrl = {
     "Research": {
       "x-format": "### {green}(Research (5 min))\n\n**{loc.Purpose}:** Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students learn background information, vocabulary, and prior knowledge needed to understand the topic.",
+      "description": "Усмерите наставника тако да ученици науче основне информације, речник и претходно знање потребно за разумевање теме.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for word: Purpose: Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation."
+          "description": "Реч по реч: Сврха: Прикупити основне информације, речник и претходно знање потребно за разумевање теме и припремити се за информисано истраживање."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Списак потребних материјала (нпр. визуелна помагала, маркери итд.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -379,7 +379,7 @@ window.labPromptssrCyrl = {
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to explain background knowledge, vocabulary, and model the phenomenon."
+              "description": "Корак-по-корак наставникова упутства, радње и „Реци:“ подстицаји за објашњавање основног знања, речника и моделовање феномена."
             },
             "AnticipatedMisconceptions": {
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
@@ -390,11 +390,11 @@ window.labPromptssrCyrl = {
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Student misconception"
+                    "description": "Ученичка заблуда"
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "What the teacher should say to correct it"
+                    "description": "Шта наставник треба да каже да би је исправио"
                   }
                 },
                 "required": [
@@ -422,12 +422,12 @@ window.labPromptssrCyrl = {
     "Hypothesize": {
       "x-format": "### {green}(Hypothesize (5 min))\n\n**{loc.Purpose}:** Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students develop a testable prediction.",
+      "description": "Усмерите наставника тако да ученици развију проверљиву прогнозу.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for Word: Purpose: Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen."
+          "description": "Реч по реч: Сврха: Развити проверљиву прогнозу или тврдњу засновану на њиховом истраживању и образложењу, постављајући јасно очекивање о томе шта верују да ће се десити."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -448,7 +448,7 @@ window.labPromptssrCyrl = {
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Teacher instructions. Include 'Say:' prompts. Provide a specific instruction like 'Write on the board:' followed by a markdown bulleted list of 4-5 hypothesis sentence frames."
+              "description": "Наставникова упутства. Укључите „Реци:“ подстицаје. Дајте конкретно упутство као што је „Запишите на табли:“ праћено markdown набрајаном листом од 4-5 почетних формулација хипотезе."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -457,7 +457,7 @@ window.labPromptssrCyrl = {
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "3-4 expected hypothesis examples."
+              "description": "3-4 примера очекиваних хипотеза."
             }
           },
           "required": [
@@ -477,12 +477,12 @@ window.labPromptssrCyrl = {
     "Experiment": {
       "x-format": "### {green}(Experiment (20 min))\n\n**{loc.Purpose}:** Carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students carry out a structured investigation.",
+      "description": "Усмерите наставника тако да ученици спроведу структурисано истраживање.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for word: Purpose: Carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement."
+          "description": "Реч по реч: Сврха: Спровести структурисано истраживање – практично, симулирано или аналитичко – како би се тестирала њихова хипотеза и прикупили докази посматрањем или мерењем."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -503,7 +503,7 @@ window.labPromptssrCyrl = {
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Step-by-step teacher instructions to organize the experiment, give directions, and circulate."
+              "description": "Корак-по-корак наставникова упутства за организовање експеримента, давање упутстава и обилазак током рада."
             },
             "QuickCheck": {
               "x-format": "✔️**{loc.QuickCheck}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}",
@@ -565,7 +565,7 @@ window.labPromptssrCyrl = {
                         "x-format": "- {value}",
                         "type": "string"
                       },
-                      "description": "For Go Deeper responses."
+                      "description": "За одговоре „Иди даље“."
                     }
                   },
                   "required": [
@@ -585,7 +585,7 @@ window.labPromptssrCyrl = {
             "AccommodationsAndModifications": {
               "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Овај одељак мора да садржи две врсте подршке: опште подршке и индивидуализоване подршке. Фокусирајте се на приступ, а не на снижавање захтева.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -593,19 +593,19 @@ window.labPromptssrCyrl = {
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Стратегије које нису специфичне за појединачне ученике, а које побољшавају приступ за све ученике (нпр. визуелни прикази, унапред попуњене белешке, дигитални речник, подељена упутства). Наведите 2-4 ставке у набрајаној листи."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Посебне прилагодбе и модификације за именоване ученике са формалним плановима. Наведите СВАКОГ ученика појединачно; немојте груписати ученике заједно. Подршка за сваког ученика треба да буде лако прегледна листа.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Име и презиме појединачног ученика који добија ове подршке."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -613,7 +613,7 @@ window.labPromptssrCyrl = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Формални план достављен за овог ученика у задатку. Рашчланите план у јасну листу. Можете парафразирати да бисте побољшали формат, али немојте изоставити или додати било какве информације."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -621,7 +621,7 @@ window.labPromptssrCyrl = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Конкретни алати/почеци реченица/визуелни прикази/организатори за овај задатак."
                       }
                     },
                     "required": [
@@ -659,17 +659,17 @@ window.labPromptssrCyrl = {
     "Analyze": {
       "x-format": "### {green}(Analyze (5 min))\n\n**{loc.Purpose}:** Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teachers so students interpret the data they collected.",
+      "description": "Усмерите наставнике тако да ученици тумаче податке које су прикупили.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Purpose: Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions."
+          "description": "Сврха: Тумаче податке које су прикупили, идентификују обрасце, процењују своју хипотезу и састављају закључке засноване на доказима."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Листа потребних материјала (нпр. визуелна помагала, маркери итд.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -688,7 +688,7 @@ window.labPromptssrCyrl = {
                 "properties": {
                   "Step": {
                     "type": "string",
-                    "description": "The teacher instruction text (e.g. 'Provide sentence starters:'). Do NOT include numbering, it is handled automatically."
+                    "description": "Наставников инструкцијски текст (нпр. „Наведите почетке реченица:“). Немојте укључивати нумерацију; она се обрађује аутоматски."
                   },
                   "Bullets": {
                     "type": "array",
@@ -697,7 +697,7 @@ window.labPromptssrCyrl = {
                       "type": "string",
                       "x-format": "- {value}"
                     },
-                    "description": "Optional bullet points. You MUST provide a list of 4-5 sentence starters when the step asks for them. You MUST provide a list of 4-5 circulation prompts when the step asks for them. Otherwise, provide an empty array."
+                    "description": "Опционе тачке. МОРАМ да обезбедите листу од 4-5 почетака реченица када корак то тражи. МОРАМ да обезбедите листу од 4-5 подстицаја за обилазак учионице када корак то тражи. У супротном, наведите празну листу."
                   }
                 },
                 "required": [
@@ -706,7 +706,7 @@ window.labPromptssrCyrl = {
                 ],
                 "additionalProperties": false
               },
-              "description": "Step-by-step teacher instructions. You MUST include exactly one step specifically for sentence starters and fill its 'Bullets' array. You MUST include exactly one step specifically for circulation prompts and fill its 'Bullets' array."
+              "description": "Корак-по-корак наставникова упутства. МОРАМ да укључите тачно један корак који је посебно за почетке реченица и попуните његов низ „Bullets“. МОРАМ да укључите тачно један корак који је посебно за подстицаје за обилазак учионице и попуните његов низ „Bullets“."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -715,7 +715,7 @@ window.labPromptssrCyrl = {
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Expected answers or sentence frame completions from students."
+              "description": "Очекивани одговори или довршавања шаблона реченица од стране ученика."
             }
           },
           "required": [
@@ -735,12 +735,12 @@ window.labPromptssrCyrl = {
     "Share": {
       "x-format": "### {green}(Share (5 min))\n\n**{loc.Purpose}:** Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teachers so students communicate their findings clearly.",
+      "description": "Усмерите наставнике тако да ученици јасно комуницирају своја открића.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for word: Purpose: Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding."
+          "description": "Реч по реч: Сврха: Јасно комуницирају своја открића другима, користећи доказе да објасне шта су открили, зашто је то важно и како доприноси дубљем разумевању."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -763,7 +763,7 @@ window.labPromptssrCyrl = {
                 "properties": {
                   "Step": {
                     "type": "string",
-                    "description": "The teacher instruction text (e.g. 'Write on board:'). Do NOT include numbering, it is handled automatically."
+                    "description": "Наставников инструкцијски текст (нпр. „Напишите на табли:“). Немојте укључивати нумерацију; она се обрађује аутоматски."
                   },
                   "Bullets": {
                     "type": "array",
@@ -772,7 +772,7 @@ window.labPromptssrCyrl = {
                       "type": "string",
                       "x-format": "- {value}"
                     },
-                    "description": "Optional bullet points. You MUST provide a list of 4-5 points when the step provides a structure for sharing. You MUST provide a list of 4-5 teacher prompts (questions) when the step asks for them. Otherwise, provide an empty array."
+                    "description": "Опционе тачке. МОРАМ да обезбедите листу од 4-5 ставки када корак пружа структуру за дељење. МОРАМ да обезбедите листу од 4-5 наставничких подстицаја (питања) када корак то тражи. У супротном, наведите празну листу."
                   }
                 },
                 "required": [
@@ -781,7 +781,7 @@ window.labPromptssrCyrl = {
                 ],
                 "additionalProperties": false
               },
-              "description": "Step-by-step teacher instructions. You MUST include exactly one step specifically for providing a structure for sharing and fill its 'Bullets' array. You MUST include exactly one step specifically for teacher prompts and fill its 'Bullets' array."
+              "description": "Корак-по-корак наставникова упутства. МОРАМ да укључите тачно један корак који је посебно за обезбеђивање структуре за дељење и попуните његов низ „Bullets“. МОРАМ да укључите тачно један корак који је посебно за наставничке подстицаје и попуните његов низ „Bullets“."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -790,7 +790,7 @@ window.labPromptssrCyrl = {
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Expected ideas shared by students."
+              "description": "Очекиване идеје које ученици деле."
             }
           },
           "required": [
@@ -810,16 +810,16 @@ window.labPromptssrCyrl = {
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section.",
+      "description": "Пун одељак „Понављање и распоређено дозивање из меморије“.",
       "properties": {
         "ActiveRecall": {
           "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Asking students to recall NEW learning from TODAY'S lesson.",
+          "description": "Постављање ученицима да се присете НОВОГ градива из ДАНАШЊЕ лекције.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Наставников подстицај који почиње са „Реците:“."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -839,11 +839,11 @@ window.labPromptssrCyrl = {
         "EssentialQuestionConnection": {
           "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Teacher prompt linking to unit question.",
+          "description": "Наставников подстицај који повезује са питањем јединице.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Наставников подстицај који почиње са „Реци: “."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -863,11 +863,11 @@ window.labPromptssrCyrl = {
         "TranscendentThinking": {
           "x-format": "🌍 **{loc.TranscendentThinking}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Asking students to connect the learning to other real-world scenarios.",
+          "description": "Питање које ученике подстиче да повежу учење са другим сценаријима из стварног света.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Наставников подстицај који почиње са „Реци: “."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -887,15 +887,15 @@ window.labPromptssrCyrl = {
         "SpacedRetrieval": {
           "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Recall from a specific prior lesson/unit.",
+          "description": "Подсетник из конкретне претходне лекције/јединице.",
           "properties": {
             "PriorLearningContext": {
               "type": "string",
-              "description": "Context sentence like 'Earlier in this lesson, students learned...'"
+              "description": "Контекстуална реченица попут „Раније у овој лекцији, ученици су научили...“"
             },
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Наставников подстицај који почиње са „Реци: “."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
@@ -925,18 +925,18 @@ window.labPromptssrCyrl = {
     "FormativeAssessment": {
       "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
       "type": "array",
-      "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+      "description": "Тачно 4 подстицаја за формативно оцењивање, по један за сваки DOK ниво.",
       "items": {
         "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "нпр. „Подстицај 1 (DOK 1)“"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text."
+            "description": "Тачан текст питања."
           },
           "ExpectedStudentResponses": {
             "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -945,7 +945,7 @@ window.labPromptssrCyrl = {
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1–2 примера одговора који показују савладаност."
           }
         },
         "required": [
@@ -961,23 +961,23 @@ window.labPromptssrCyrl = {
     "StudentPractice": {
       "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
       "type": "object",
-      "description": "Homework/out-of-class practice.",
+      "description": "Домаћи задатак/вежбање ван наставе.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Teacher notes explaining how these practice tasks reinforce today's learning and strengthen long-term retention."
+          "description": "Напомене за наставника које објашњавају како ови задаци за вежбање учвршћују данашње учење и јачају дугорочно памћење."
         },
         "PracticeTasks": {
           "x-format": "{items}",
           "type": "array",
-          "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
+          "description": "Тачно 3 задатка за вежбање (DOK 2 или DOK 3).",
           "items": {
             "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
             "type": "object",
             "properties": {
               "TaskDescription": {
                 "type": "string",
-                "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'"
+                "description": "нпр. „(DOK 2) Вечерас изађи напоље и напиши 3–4 реченице...“"
               },
               "ExpectedStudentResponses": {
                 "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -1000,11 +1000,11 @@ window.labPromptssrCyrl = {
         "Reflection": {
           "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
           "type": "object",
-          "description": "A reflection task for the students.",
+          "description": "Задатак за размишљање за ученике.",
           "properties": {
             "Prompt": {
               "type": "string",
-              "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'"
+              "description": "нпр. „Размишљање: Напиши 2–3 реченице као одговор на један подстицај:“"
             },
             "ReflectionOptions": {
               "type": "array",
@@ -1012,7 +1012,7 @@ window.labPromptssrCyrl = {
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Exactly 4 reflection question options."
+              "description": "Тачно 4 опције за питања за размишљање."
             }
           },
           "required": [

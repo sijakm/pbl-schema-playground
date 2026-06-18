@@ -112,7 +112,7 @@ REQUISITOS DE SALIDA:
         "Description": {
           "x-format": false,
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Descripción de la unidad como un solo párrafo de texto plano coherente (4–5 oraciones completas) escrita con una voz natural de docente que podrías decir directamente a los estudiantes. Sin HTML, sin emojis, sin viñetas. Debe fluir de manera conversacional, pero seguir esta estructura (sin encabezados): (1) oración gancho que despierte curiosidad o haga un contraste sorprendente, (2) oración de 'En esta unidad, aprenderás...' sobre resultados de dominio, (3) oración de 'Fortalecerás tus habilidades en...' sobre capacidades de pensamiento/análisis, (4) oración de 'Esto se conecta con...' sobre relevancia en el mundo real, (5) oración de 'Entender esto importa porque...' sobre importancia más amplia o impacto a largo plazo."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
@@ -120,7 +120,7 @@ REQUISITOS DE SALIDA:
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Crea preguntas esenciales que se centren solo en conceptos amplios y universales como el cambio, la evidencia, los patrones, las relaciones, los sistemas o el razonamiento. No menciones términos, procesos, vocabulario o ejemplos específicos de ninguna materia. Las preguntas deben ser abiertas, transferibles a todas las disciplinas e imposibles de responder aprendiendo el contenido de la lección o la unidad. Enfócate solo en las ideas grandes, no en el contenido de la materia.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -129,7 +129,7 @@ REQUISITOS DE SALIDA:
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Sección completa de 'Objetivos de Aprendizaje del Estudiante' para toda esta unidad. Cada elemento de la lista debe ser un objetivo claro y medible que comience con un verbo medible y termine con una etiqueta DOK entre paréntesis",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -138,7 +138,7 @@ REQUISITOS DE SALIDA:
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Enumera todos los estándares educativos únicos usados en cualquier parte de esta unidad y sus lecciones. No agregues estándares que no aparezcan en el contenido de la unidad. Cada estándar debe incluir el código del estándar y la descripción, por ejemplo, 'MS-ESS1-1: Desarrollar y usar un modelo del sistema Tierra-sol-luna para describir los patrones cíclicos de las fases lunares, los eclipses y las estaciones.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -147,7 +147,7 @@ REQUISITOS DE SALIDA:
         "KeyVocabulary": {
           "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Sección completa de 'Vocabulario Clave' como una lista de cadenas. Cada cadena debe ser un solo término con la definición separada por un guion/guion medio. Ejemplo: 'Gravedad - La fuerza que atrae a los objetos entre sí'. Todas las definiciones deben ser breves, apropiadas para la edad y directamente relacionadas con el contenido de la lección.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -166,21 +166,21 @@ REQUISITOS DE SALIDA:
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Lista de contenedores de lecciones para esta unidad (solo esquema). Cada elemento debe no superponerse y estar claramente delimitado para que el contenido de las lecciones no se repita entre lecciones.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Número de orden de una lección. Basado en 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Título breve de la lección como texto plano."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 oraciones que describan el alcance, el enfoque y los límites de la lección para evitar solapamientos con otras lecciones."
           }
         },
         "required": [
@@ -213,7 +213,7 @@ REQUISITOS DE SALIDA:
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the essential questions that are generated in unit level in same order.",
+      "description": "Pega solo todas las preguntas esenciales que se generan a nivel de unidad en el mismo orden.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -222,7 +222,7 @@ REQUISITOS DE SALIDA:
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses, e.g. 'Model how Earth's rotation on its axis causes day and night (DOK 2).'",
+      "description": "Sección completa de 'Objetivos de Aprendizaje del Estudiante' como texto plano. Cada elemento debe ser un objetivo claro y medible que comience con un verbo medible y termine con una etiqueta DOK entre paréntesis, por ejemplo, 'Modelar cómo la rotación de la Tierra sobre su eje causa el día y la noche (DOK 2).'",
       "minItems": 2,
       "maxItems": 3,
       "items": {
@@ -233,7 +233,7 @@ REQUISITOS DE SALIDA:
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Sección completa de 'Estándares Alineados' como texto plano para esta lección. Cada estándar debe incluir el código del estándar y la descripción, y el código y la descripción deben ser exactamente los mismos usados en la Unidad. Por ejemplo, 'MS-ESS1-1: Desarrollar y usar un modelo del sistema Tierra-sol-luna para describir los patrones cíclicos de las fases lunares, los eclipses y las estaciones.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -242,7 +242,7 @@ REQUISITOS DE SALIDA:
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
+      "description": "Selecciona textualmente el vocabulario clave para esta lección del vocabulario a nivel de unidad proporcionado en el prompt. No inventes nuevas palabras. Debes reutilizar la redacción exacta de Step 0 UnitDescription.KeyVocabulary.",
       "items": {
         "x-format": "{index}. {value}",
         "type": "string"
@@ -251,16 +251,16 @@ REQUISITOS DE SALIDA:
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN NULL or OMIT this field. For Lesson 1, structure must include: 1. Include this section only in the first lesson of the unit. 2. Ensure DOK 1-3 prompts are used. 3. Include prerequisite skills needed for the student learning objectives. 4. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Initial teacher prompt with 'Say:' statement. 6. Clear instructions and template/structure for the chosen modality. 7. 'Expected Student Responses' section. 8. Closing teacher 'Say:' prompt. 9. After fully developing one modality, provide 2 brief alternate options.",
+      "description": "Sección de Evaluación de Conocimientos Previos. SOLO la Lección 1 debe contener un bloque detallado; TODAS LAS DEMÁS LECCIONES DEBEN DEVOLVER NULL u OMITIR este campo. Para la Lección 1, la estructura debe incluir: 1. Incluye esta sección solo en la primera lección de la unidad. 2. Asegúrate de usar preguntas DOK 1-3. 3. Incluye habilidades prerrequisito necesarias para los objetivos de aprendizaje del estudiante. 4. Elige una modalidad de esta lista y desarróllala por completo: cuestionamiento, K-W-L, visuales, mapas conceptuales, escritura reflexiva, guías de anticipación, valoraciones de vocabulario. 5. Indicación inicial del docente con 'Di:'. 6. Instrucciones claras y plantilla/estructura para la modalidad elegida. 7. Sección de 'Respuestas Esperadas de los Estudiantes'. 8. Cierre del docente con indicación 'Di:'. 9. Después de desarrollar por completo una modalidad, proporciona 2 opciones breves alternativas.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we begin...\"'"
+          "description": "Instrucciones claras y plantilla/estructura para la modalidad elegida. Ej.: 'Di: \"Antes de comenzar...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
           "type": "array",
-          "description": "Anticipated answers or common misconceptions for the chosen modality.",
+          "description": "Respuestas anticipadas o conceptos erróneos comunes para la modalidad elegida.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -268,12 +268,12 @@ REQUISITOS DE SALIDA:
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation."
+          "description": "Cierre del docente con indicación 'Di:' que valide el pensamiento de los estudiantes y anticipe la investigación de la unidad."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
           "type": "array",
-          "description": "2 brief alternate options a teacher could choose.",
+          "description": "2 opciones breves alternativas que un docente podría elegir.",
           "items": {
             "x-format": "{index}. {value}",
             "type": "string"
@@ -291,17 +291,17 @@ REQUISITOS DE SALIDA:
     "Question": {
       "x-format": "### {green}(Question (5 min))\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students will observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.",
+      "description": "Guía al docente para que los estudiantes observen un fenómeno, identifiquen algo que les resulte desconcertante y generen una pregunta significativa que guiará la investigación.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for Word - Purpose: Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation."
+          "description": "Palabra por palabra - Propósito: Observar un fenómeno, identificar algo desconcertante y generar una pregunta significativa que guiará la investigación."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales necesarios (p. ej., ayudas visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -318,7 +318,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to present a phenomenon and invite questions."
+              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Say:' para presentar un fenómeno e invitar preguntas."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -327,11 +327,11 @@ REQUISITOS DE SALIDA:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "3-4 expected student questions or ideas about the phenomenon."
+              "description": "3-4 preguntas o ideas esperadas de los estudiantes sobre el fenómeno."
             },
             "FinalInvestigationQuestion": {
               "type": "string",
-              "description": "The final step in the teacher instructions. Start this string with the next sequential number following the previous instructions (e.g., '8. Final Step: Say: ...') and state the big question to investigate today."
+              "description": "El paso final en las instrucciones del docente. Comience esta cadena con el siguiente número secuencial que siga a las instrucciones anteriores (p. ej., '8. Paso final: Say: ...') y exprese la gran pregunta que se investigará hoy."
             }
           },
           "required": [
@@ -352,17 +352,17 @@ REQUISITOS DE SALIDA:
     "Research": {
       "x-format": "### {green}(Research (5 min))\n\n**{loc.Purpose}:** Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students learn background information, vocabulary, and prior knowledge needed to understand the topic.",
+      "description": "Guíe al docente para que los estudiantes aprendan información de fondo, vocabulario y conocimientos previos necesarios para comprender el tema.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for word: Purpose: Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation."
+          "description": "Palabra por palabra: Propósito: Recopilar información de fondo, vocabulario y conocimientos previos necesarios para comprender el tema y prepararse para una investigación informada."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales necesarios (p. ej., ayudas visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -379,7 +379,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Step-by-step teacher instructions, actions, and 'Say:' prompts to explain background knowledge, vocabulary, and model the phenomenon."
+              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Say:' para explicar conocimientos de fondo, vocabulario y modelar el fenómeno."
             },
             "AnticipatedMisconceptions": {
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
@@ -390,11 +390,11 @@ REQUISITOS DE SALIDA:
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Student misconception"
+                    "description": "Idea errónea del estudiante"
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "What the teacher should say to correct it"
+                    "description": "Lo que el docente debe decir para corregirla"
                   }
                 },
                 "required": [
@@ -422,12 +422,12 @@ REQUISITOS DE SALIDA:
     "Hypothesize": {
       "x-format": "### {green}(Hypothesize (5 min))\n\n**{loc.Purpose}:** Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students develop a testable prediction.",
+      "description": "Guíe al docente para que los estudiantes elaboren una predicción comprobable.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for Word: Purpose: Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen."
+          "description": "Palabra por palabra: Propósito: Elaborar una predicción o afirmación comprobable basada en su investigación y razonamiento, estableciendo una expectativa clara de lo que creen que sucederá."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -448,7 +448,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Teacher instructions. Include 'Say:' prompts. Provide a specific instruction like 'Write on the board:' followed by a markdown bulleted list of 4-5 hypothesis sentence frames."
+              "description": "Instrucciones para el docente. Incluya indicaciones de 'Say:'. Proporcione una instrucción específica como 'Write on the board:' seguida de una lista con viñetas en formato markdown de 4-5 marcos de oraciones para la hipótesis."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -457,7 +457,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "3-4 expected hypothesis examples."
+              "description": "3-4 ejemplos de hipótesis esperadas."
             }
           },
           "required": [
@@ -477,12 +477,12 @@ REQUISITOS DE SALIDA:
     "Experiment": {
       "x-format": "### {green}(Experiment (20 min))\n\n**{loc.Purpose}:** Carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teacher so students carry out a structured investigation.",
+      "description": "Guíe al docente para que los estudiantes realicen una investigación estructurada.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for word: Purpose: Carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement."
+          "description": "Palabra por palabra: Propósito: Llevar a cabo una investigación estructurada, práctica, simulada o analítica, para poner a prueba su hipótesis y recopilar evidencia mediante observación o medición."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -503,7 +503,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Step-by-step teacher instructions to organize the experiment, give directions, and circulate."
+              "description": "Instrucciones paso a paso para el docente para organizar el experimento, dar indicaciones y circular."
             },
             "QuickCheck": {
               "x-format": "✔️**{loc.QuickCheck}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}",
@@ -565,7 +565,7 @@ REQUISITOS DE SALIDA:
                         "x-format": "- {value}",
                         "type": "string"
                       },
-                      "description": "For Go Deeper responses."
+                      "description": "Para respuestas de Go Deeper."
                     }
                   },
                   "required": [
@@ -585,7 +585,7 @@ REQUISITOS DE SALIDA:
             "AccommodationsAndModifications": {
               "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Esta sección debe incluir dos tipos de apoyos: Apoyos generales y apoyos individualizados. Enfóquese en el acceso, no en reducir la rigurosidad.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -593,19 +593,19 @@ REQUISITOS DE SALIDA:
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Estrategias no específicas para estudiantes que mejoran el acceso para todos los aprendices (p. ej., apoyos visuales, notas previamente completadas, glosario digital, instrucciones fragmentadas). Proporcione 2-4 viñetas."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Adaptaciones y modificaciones específicas para estudiantes nombrados con planes formales. Enumere a CADA estudiante individualmente; no agrupe a los estudiantes. Los apoyos para cada estudiante deben ser una lista fácil de revisar de un vistazo.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Nombre y apellido del estudiante individual que recibe estos apoyos."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -613,7 +613,7 @@ REQUISITOS DE SALIDA:
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "El plan formal proporcionado para este estudiante en el enunciado. Analice el plan en una lista clara. Puede parafrasearlo para mejorar el formato, pero no omita ni añada ninguna información."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -621,7 +621,7 @@ REQUISITOS DE SALIDA:
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Herramientas/indicadores/recursos visuales/organizadores concretos para esta tarea."
                       }
                     },
                     "required": [
@@ -659,17 +659,17 @@ REQUISITOS DE SALIDA:
     "Analyze": {
       "x-format": "### {green}(Analyze (5 min))\n\n**{loc.Purpose}:** Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teachers so students interpret the data they collected.",
+      "description": "Guíe a los docentes para que los estudiantes interpreten los datos que recopilaron.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Purpose: Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions."
+          "description": "Propósito: Interpretar los datos que recopilaron, identificar patrones, evaluar su hipótesis y construir conclusiones basadas en evidencia."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Lista de materiales requeridos (p. ej., apoyos visuales, marcadores, etc.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -688,7 +688,7 @@ REQUISITOS DE SALIDA:
                 "properties": {
                   "Step": {
                     "type": "string",
-                    "description": "The teacher instruction text (e.g. 'Provide sentence starters:'). Do NOT include numbering, it is handled automatically."
+                    "description": "El texto de la instrucción del docente (p. ej., 'Proporcione iniciadores de oraciones:'). No incluya numeración; se maneja automáticamente."
                   },
                   "Bullets": {
                     "type": "array",
@@ -697,7 +697,7 @@ REQUISITOS DE SALIDA:
                       "type": "string",
                       "x-format": "- {value}"
                     },
-                    "description": "Optional bullet points. You MUST provide a list of 4-5 sentence starters when the step asks for them. You MUST provide a list of 4-5 circulation prompts when the step asks for them. Otherwise, provide an empty array."
+                    "description": "Viñetas opcionales. DEBE proporcionar una lista de 4-5 iniciadores de oraciones cuando el paso lo pida. DEBE proporcionar una lista de 4-5 indicaciones de circulación cuando el paso lo pida. De lo contrario, proporcione una matriz vacía."
                   }
                 },
                 "required": [
@@ -706,7 +706,7 @@ REQUISITOS DE SALIDA:
                 ],
                 "additionalProperties": false
               },
-              "description": "Step-by-step teacher instructions. You MUST include exactly one step specifically for sentence starters and fill its 'Bullets' array. You MUST include exactly one step specifically for circulation prompts and fill its 'Bullets' array."
+              "description": "Instrucciones paso a paso para el docente. DEBE incluir exactamente un paso específicamente para iniciadores de oraciones y completar su matriz 'Bullets'. DEBE incluir exactamente un paso específicamente para indicaciones de circulación y completar su matriz 'Bullets'."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -715,7 +715,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Expected answers or sentence frame completions from students."
+              "description": "Respuestas esperadas o completaciones de marcos de oraciones por parte de los estudiantes."
             }
           },
           "required": [
@@ -735,12 +735,12 @@ REQUISITOS DE SALIDA:
     "Share": {
       "x-format": "### {green}(Share (5 min))\n\n**{loc.Purpose}:** Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Guide teachers so students communicate their findings clearly.",
+      "description": "Guíe a los docentes para que los estudiantes comuniquen claramente sus hallazgos.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Word for word: Purpose: Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding."
+          "description": "Palabra por palabra: Propósito: Comunicar claramente sus hallazgos a otros, usando evidencia para explicar lo que descubrieron, por qué importa y cómo contribuye a una comprensión más profunda."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -763,7 +763,7 @@ REQUISITOS DE SALIDA:
                 "properties": {
                   "Step": {
                     "type": "string",
-                    "description": "The teacher instruction text (e.g. 'Write on board:'). Do NOT include numbering, it is handled automatically."
+                    "description": "El texto de la instrucción del docente (p. ej., 'Escriba en la pizarra:'). No incluya numeración; se maneja automáticamente."
                   },
                   "Bullets": {
                     "type": "array",
@@ -772,7 +772,7 @@ REQUISITOS DE SALIDA:
                       "type": "string",
                       "x-format": "- {value}"
                     },
-                    "description": "Optional bullet points. You MUST provide a list of 4-5 points when the step provides a structure for sharing. You MUST provide a list of 4-5 teacher prompts (questions) when the step asks for them. Otherwise, provide an empty array."
+                    "description": "Viñetas opcionales. DEBE proporcionar una lista de 4-5 puntos cuando el paso proporcione una estructura para compartir. DEBE proporcionar una lista de 4-5 preguntas de los docentes cuando el paso lo pida. De lo contrario, proporcione una matriz vacía."
                   }
                 },
                 "required": [
@@ -781,7 +781,7 @@ REQUISITOS DE SALIDA:
                 ],
                 "additionalProperties": false
               },
-              "description": "Step-by-step teacher instructions. You MUST include exactly one step specifically for providing a structure for sharing and fill its 'Bullets' array. You MUST include exactly one step specifically for teacher prompts and fill its 'Bullets' array."
+              "description": "Instrucciones paso a paso para el docente. DEBE incluir exactamente un paso específicamente para proporcionar una estructura para compartir y completar su matriz 'Bullets'. DEBE incluir exactamente un paso específicamente para preguntas del docente y completar su matriz 'Bullets'."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -790,7 +790,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Expected ideas shared by students."
+              "description": "Ideas esperadas compartidas por los estudiantes."
             }
           },
           "required": [
@@ -810,16 +810,16 @@ REQUISITOS DE SALIDA:
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section.",
+      "description": "Sección completa de 'Repaso y recuperación espaciada'.",
       "properties": {
         "ActiveRecall": {
           "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Asking students to recall NEW learning from TODAY'S lesson.",
+          "description": "Pedir a los estudiantes que recuerden el NUEVO aprendizaje de la lección DE HOY.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "La indicación del docente que comienza con 'Diga: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -839,11 +839,11 @@ REQUISITOS DE SALIDA:
         "EssentialQuestionConnection": {
           "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Teacher prompt linking to unit question.",
+          "description": "Indicador del docente vinculado a la pregunta de la unidad.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "El indicador del docente que comienza con 'Say: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -863,11 +863,11 @@ REQUISITOS DE SALIDA:
         "TranscendentThinking": {
           "x-format": "🌍 **{loc.TranscendentThinking}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Asking students to connect the learning to other real-world scenarios.",
+          "description": "Pedir a los estudiantes que conecten el aprendizaje con otros escenarios del mundo real.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "El indicador del docente que comienza con 'Say: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -887,15 +887,15 @@ REQUISITOS DE SALIDA:
         "SpacedRetrieval": {
           "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Recall from a specific prior lesson/unit.",
+          "description": "Recordar de una lección/unidad previa específica.",
           "properties": {
             "PriorLearningContext": {
               "type": "string",
-              "description": "Context sentence like 'Earlier in this lesson, students learned...'"
+              "description": "Frase de contexto como 'Earlier in this lesson, students learned...'"
             },
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "El indicador del docente que comienza con 'Say: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
@@ -925,18 +925,18 @@ REQUISITOS DE SALIDA:
     "FormativeAssessment": {
       "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
       "type": "array",
-      "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+      "description": "Exactamente 4 indicadores de Evaluación Formativa, uno para cada nivel de DOK.",
       "items": {
         "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "p. ej., 'Prompt 1 (DOK 1)'"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text."
+            "description": "El texto exacto de la pregunta."
           },
           "ExpectedStudentResponses": {
             "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -945,7 +945,7 @@ REQUISITOS DE SALIDA:
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1-2 respuestas de muestra que demuestren dominio."
           }
         },
         "required": [
@@ -961,23 +961,23 @@ REQUISITOS DE SALIDA:
     "StudentPractice": {
       "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
       "type": "object",
-      "description": "Homework/out-of-class practice.",
+      "description": "Práctica para la tarea fuera de clase.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Teacher notes explaining how these practice tasks reinforce today's learning and strengthen long-term retention."
+          "description": "Notas del docente que explican cómo estas tareas de práctica refuerzan el aprendizaje de hoy y fortalecen la retención a largo plazo."
         },
         "PracticeTasks": {
           "x-format": "{items}",
           "type": "array",
-          "description": "Exactly 3 practice tasks (DOK 2 or DOK 3).",
+          "description": "Exactamente 3 tareas de práctica (DOK 2 o DOK 3).",
           "items": {
             "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
             "type": "object",
             "properties": {
               "TaskDescription": {
                 "type": "string",
-                "description": "e.g., '(DOK 2) Tonight, go outside and write 3-4 sentences...'"
+                "description": "p. ej., '(DOK 2) Esta noche, sal afuera y escribe 3-4 oraciones...'"
               },
               "ExpectedStudentResponses": {
                 "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -1000,11 +1000,11 @@ REQUISITOS DE SALIDA:
         "Reflection": {
           "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
           "type": "object",
-          "description": "A reflection task for the students.",
+          "description": "Una tarea de reflexión para los estudiantes.",
           "properties": {
             "Prompt": {
               "type": "string",
-              "description": "e.g., 'Reflection: Write 2-3 sentences responding to one prompt:'"
+              "description": "p. ej., 'Reflexión: Escribe 2-3 oraciones respondiendo a una de las indicaciones:'"
             },
             "ReflectionOptions": {
               "type": "array",
@@ -1012,7 +1012,7 @@ REQUISITOS DE SALIDA:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Exactly 4 reflection question options."
+              "description": "Exactamente 4 opciones de preguntas de reflexión."
             }
           },
           "required": [

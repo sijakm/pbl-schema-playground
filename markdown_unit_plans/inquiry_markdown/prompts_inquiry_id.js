@@ -79,14 +79,14 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Deskripsi unit sebagai satu paragraf teks biasa yang utuh (4–5 kalimat lengkap) ditulis dengan suara guru yang natural dan bisa Anda sampaikan langsung kepada siswa. Tanpa HTML, tanpa emoji, tanpa poin-poin. Harus mengalir secara percakapan tetapi mengikuti struktur ini (tanpa judul): (1) kalimat pembuka yang memancing rasa ingin tahu atau membuat kontras yang mengejutkan, (2) kalimat 'Dalam unit ini, Anda akan...' tentang hasil penguasaan, (3) kalimat 'Anda akan memperkuat keterampilan Anda dalam...' tentang kemampuan berpikir/analisis, (4) kalimat 'Ini terhubung dengan...' tentang relevansi dunia nyata, (5) kalimat 'Memahami ini penting karena...' tentang signifikansi yang lebih luas atau dampak jangka panjang."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Buat pertanyaan esensial yang hanya berfokus pada konsep-konsep luas dan universal seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran. Jangan menyebut istilah, proses, kosakata, atau contoh yang spesifik pada mata pelajaran apa pun. Pertanyaan harus terbuka, dapat dipindahkan lintas semua disiplin, dan mustahil dijawab hanya dengan mempelajari pelajaran atau isi unit. Fokus hanya pada ide-ide besar, bukan materi pelajaran.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -95,7 +95,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Bagian 'Student Learning Objectives' lengkap untuk seluruh unit ini. Setiap item daftar harus merupakan tujuan yang jelas dan terukur yang dimulai dengan kata kerja terukur dan diakhiri dengan label DOK dalam tanda kurung",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -104,7 +104,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Daftar semua standar pendidikan unik yang digunakan di mana pun dalam unit ini dan pelajarannya. Jangan menambahkan standar yang tidak muncul dalam konten unit. Setiap standar harus mencakup kode standar dan deskripsi, misalnya 'MS-ESS1-1: Mengembangkan dan menggunakan model sistem bumi–matahari–bulan untuk mendeskripsikan pola siklik fase bulan, gerhana, dan musim.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -113,7 +113,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "KeyVocabulary": {
           "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
           "type": "array",
-          "description": "Full 'Key Vocabulary' section as a list of strings. Each string should be a single term with definition separated by dash/hyphen. Example: 'Gravity - The force that pulls objects toward each other'. All definitions must be short, age-appropriate, and directly related to the lesson's content.",
+          "description": "Bagian 'Key Vocabulary' lengkap sebagai daftar string. Setiap string harus berupa satu istilah dengan definisi yang dipisahkan oleh tanda hubung. Contoh: 'Gravitasi - Gaya yang menarik benda-benda satu sama lain'. Semua definisi harus singkat, sesuai usia, dan berhubungan langsung dengan konten pelajaran.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -132,21 +132,21 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Daftar container pelajaran untuk unit ini (hanya kerangka). Setiap item harus tidak saling tumpang tindih dan ruang lingkupnya harus jelas agar konten pelajaran tidak berulang antar pelajaran.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Nomor urut sebuah pelajaran. Berbasis 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Judul pelajaran singkat sebagai teks biasa."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 kalimat yang mendeskripsikan cakupan, fokus, dan batasan pelajaran untuk mencegah tumpang tindih dengan pelajaran lain."
           }
         },
         "required": [
@@ -180,16 +180,16 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "AssessPriorKnowledge": {
       "x-format": "### 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Assess Prior Knowledge section. ONLY Lesson 1 should contain a detailed block; ALL OTHER LESSONS MUST RETURN NULL or OMIT this field. For Lesson 1, structure must include ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, and AlternateOptions.",
+      "description": "Bagian Assess Prior Knowledge. HANYA Pelajaran 1 yang harus berisi blok rinci; SEMUA PELAJARAN LAIN HARUS MENGEMBALIKAN NULL atau menghilangkan field ini. Untuk Pelajaran 1, strukturnya harus mencakup ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt, dan AlternateOptions.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we build...\"'"
+          "description": "Instruksi dan struktur/template yang jelas untuk modalitas yang dipilih. Contoh: 'Ucapkan: \"Sebelum kita membangun...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
           "type": "array",
-          "description": "Anticipated answers or common misconceptions for the chosen modality.",
+          "description": "Jawaban yang diantisipasi atau kesalahpahaman umum untuk modalitas yang dipilih.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -197,12 +197,12 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Closing teacher prompt (do NOT include the 'Say:' prefix) that validates student thinking and previews unit investigation."
+          "description": "Prompt penutup guru (jangan sertakan awalan 'Ucapkan:') yang memvalidasi pemikiran siswa dan mempratinjau penyelidikan unit."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
           "type": "array",
-          "description": "2 brief alternate options a teacher could choose.",
+          "description": "2 opsi alternatif singkat yang dapat dipilih guru.",
           "items": {
             "x-format": "{index}. {value}",
             "type": "string"
@@ -220,7 +220,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the unit-level essential questions in the same order if provided. If not provided, generate exactly 3 conceptual questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+      "description": "Tempel saja semua pertanyaan esensial tingkat unit dalam urutan yang sama jika disediakan. Jika tidak, hasilkan tepat 3 pertanyaan konseptual yang hanya berfokus pada konsep-konsep luas dan universal seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran. Jangan menyebut istilah, proses, kosakata, atau contoh spesifik pada mata pelajaran apa pun. Pertanyaan harus terbuka, dapat dipindahkan lintas semua disiplin, dan mustahil dijawab hanya dengan mempelajari pelajaran atau isi unit. Fokus hanya pada ide-ide besar, bukan materi pelajarannya.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -229,7 +229,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the key vocabulary for this lesson from the unit-level vocabulary provided in the prompt. Do NOT invent new words. You must reuse the exact wording from the Step 0 UnitDescription.KeyVocabulary.",
+      "description": "Pilih secara verbatim kosakata kunci untuk pelajaran ini dari kosakata tingkat unit yang diberikan dalam prompt. Jangan menciptakan kata baru. Anda harus menggunakan kembali kata-kata yang persis dari Step 0 UnitDescription.KeyVocabulary.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -238,7 +238,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Select verbatim the specific student learning objectives for this lesson from the unit-level objectives provided in the prompt. Do NOT invent new objectives. You must reuse the exact wording from the Step 0 UnitDescription.StudentLearningObjectives.",
+      "description": "Pilih secara verbatim tujuan pembelajaran siswa spesifik untuk pelajaran ini dari tujuan tingkat unit yang diberikan dalam prompt. Jangan menciptakan tujuan baru. Anda harus menggunakan kembali kata-kata yang persis dari Step 0 UnitDescription.StudentLearningObjectives.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -247,7 +247,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "List only the unique educational standards addressed in this specific lesson. Each standard must include standard code and description and must be exactly the same used in the Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Daftar hanya standar pendidikan unik yang dibahas dalam pelajaran spesifik ini. Setiap standar harus mencakup kode standar dan deskripsi dan harus sama persis seperti yang digunakan dalam Unit. misalnya 'MS-ESS1-1: Mengembangkan dan menggunakan model sistem bumi–matahari–bulan untuk mendeskripsikan pola siklik fase bulan, gerhana, dan musim.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -260,7 +260,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Daftar materi yang diperlukan (misalnya, alat bantu visual, spidol, dll.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -275,11 +275,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script to introduce the phenomenon. Ensure it focuses on sparking curiosity without giving scientific explanations."
+                  "description": "Buat skrip untuk memperkenalkan fenomena. Pastikan fokusnya pada memancing rasa ingin tahu tanpa memberikan penjelasan ilmiah."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 specific pedagogical moves that guide silent observation and partner sharing. Include scripts (do NOT include the 'Say:' prefix, e.g., 'Take 30 seconds to look silently...'). Focus on capturing and organizing student observations into meaningful categories and encouraging multiple perspectives.",
+                  "description": "Hasilkan 2-3 langkah pedagogis spesifik yang memandu observasi diam dan berbagi dengan pasangan. Sertakan skrip (jangan sertakan awalan 'Ucapkan: ', misalnya, 'Luangkan 30 detik untuk melihat dengan diam...'). Fokus pada menangkap dan mengorganisasi observasi siswa ke dalam kategori yang bermakna dan mendorong berbagai perspektif.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -287,7 +287,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts as a single string to help students identify details, notice patterns, and surface initial wonderings. Encourage students to explain why certain details feel important and to build on or contrast each other’s observations."
+                  "description": "Hasilkan 2-3 prompt spesifik sebagai satu string untuk membantu siswa mengidentifikasi detail, melihat pola, dan memunculkan pertanyaan awal. Dorong mereka untuk menjelaskan mengapa detail tertentu terasa penting dan untuk membangun atau membandingkan observasi satu sama lain."
                 }
               },
               "required": [
@@ -303,15 +303,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a specific teacher script (do NOT include the 'Say:' prefix) that helps students turn their observations of the phenomenon into research questions or problems while clustering ideas into key themes."
+                  "description": "Buat skrip guru yang spesifik (jangan sertakan awalan 'Ucapkan:') yang membantu siswa mengubah observasi mereka tentang fenomena menjadi pertanyaan penelitian atau masalah sambil mengelompokkan ide-ide ke dalam tema-tema kunci."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 specific prompts to help students connect observations to underlying challenges, justify thinking with evidence, and prioritize which ideas are most worth investigating."
+                  "description": "Berikan 2-3 prompt spesifik untuk membantu siswa menghubungkan observasi dengan tantangan yang mendasari, membenarkan pemikiran dengan bukti, dan memprioritaskan ide mana yang paling layak diteliti."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Suggest 2-3 moves to support students in refining and grouping their ideas, while pressing them to explain their reasoning. Include instructions to record and highlight recurring questions without answering them.",
+                  "description": "Sarankan 2-3 langkah untuk mendukung siswa dalam menyempurnakan dan mengelompokkan ide-ide mereka, sambil mendorong mereka menjelaskan alasan mereka. Sertakan instruksi untuk mencatat dan menyorot pertanyaan berulang tanpa menjawabnya.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -331,15 +331,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Develop a teacher-led instruction (do NOT include the 'Say:' prefix) to facilitate partner or group discussion that generates specific ideas, explanations, or solutions using available information and constraints. Encourage comparison and reasoning."
+                  "description": "Kembangkan instruksi yang dipimpin guru (jangan sertakan awalan 'Ucapkan:') untuk memfasilitasi diskusi pasangan atau kelompok yang menghasilkan ide, penjelasan, atau solusi spesifik menggunakan informasi dan batasan yang tersedia. Dorong perbandingan dan penalaran."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "List 2-3 prompts to encourage students to propose ideas, explain reasoning, consider alternative approaches, and evaluate which parts of their thinking are strongest or most uncertain."
+                  "description": "Daftar 2-3 prompt untuk mendorong siswa mengusulkan ide, menjelaskan alasan, mempertimbangkan pendekatan alternatif, dan mengevaluasi bagian mana dari pemikiran mereka yang paling kuat atau paling tidak pasti."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Describe 2-3 circulation moves to listen for reasoning, press for clarity/justification, and highlight diverse approaches without evaluating which is correct.",
+                  "description": "Jelaskan 2-3 langkah sirkulasi untuk mendengarkan penalaran, mendorong kejelasan/pembenaran, dan menyoroti pendekatan yang beragam tanpa mengevaluasi mana yang benar.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -359,15 +359,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script to push students to refine and test their ideas by examining assumptions, considering different conditions, and identifying key factors of this lesson."
+                  "description": "Buat skrip untuk mendorong siswa menyempurnakan dan menguji ide mereka dengan memeriksa asumsi, mempertimbangkan kondisi berbeda, dan mengidentifikasi faktor-faktor kunci dari pelajaran ini."
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Suggest 2-3 specific prompts to test ideas against new conditions, identify weaknesses, and revise thinking using evidence for this lesson's phenomena."
+                  "description": "Sarankan 2-3 prompt spesifik untuk menguji ide terhadap kondisi baru, mengidentifikasi kelemahan, dan merevisi pemikiran menggunakan bukti untuk fenomena pelajaran ini."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Provide 2-3 specific moves to encourage students to revisit and revise their initial ideas based on evidence and justify changes in their thinking.",
+                  "description": "Berikan 2-3 langkah spesifik untuk mendorong siswa meninjau kembali dan merevisi ide awal mereka berdasarkan bukti dan membenarkan perubahan dalam pemikiran mereka.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -375,7 +375,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "Closing": {
                   "type": "string",
-                  "description": "A final instruction to push students to test and revise their ideas, consider long-term effects and changing conditions, and use evidence from observations to strengthen or challenge their thinking."
+                  "description": "Instruksi akhir untuk mendorong siswa menguji dan merevisi ide mereka, mempertimbangkan efek jangka panjang dan kondisi yang berubah, serta menggunakan bukti dari observasi untuk memperkuat atau menantang pemikiran mereka."
                 }
               },
               "required": [
@@ -410,7 +410,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Daftar materi yang diperlukan (misalnya, alat bantu visual, spidol, dll.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -425,11 +425,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a teacher script (do NOT include the 'Say:' prefix) to introduce the question brainstorming session. Focus on moving from individual to partner sharing to expand ideas."
+                  "description": "Buat skrip guru (jangan sertakan awalan 'Ucapkan:') untuk memperkenalkan sesi brainstorming pertanyaan. Fokus pada perpindahan dari berbagi secara individual ke berbagi berpasangan untuk memperluas ide."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 specific moves to support student generation of questions. Include providing think time, capturing all questions publicly, and encouraging students to refine, combine, or expand questions without judgmental evaluation.",
+                  "description": "Hasilkan 2-3 langkah spesifik untuk mendukung generasi pertanyaan oleh siswa. Sertakan memberi waktu berpikir, mencatat semua pertanyaan secara publik, dan mendorong siswa menyempurnakan, menggabungkan, atau memperluas pertanyaan tanpa evaluasi yang menghakimi.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -437,7 +437,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts to help students surface curiosities, identify what they want to understand, and focus on key aspects of the system or design."
+                  "description": "Hasilkan 2-3 prompt spesifik untuk membantu siswa memunculkan rasa ingin tahu, mengidentifikasi apa yang ingin mereka pahami, dan berfokus pada aspek-aspek kunci dari sistem atau desain."
                 }
               },
               "required": [
@@ -453,11 +453,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script (do NOT include the 'Say:' prefix) to guide students in selecting a question that would help them learn the most from a testable model."
+                  "description": "Buat skrip (jangan sertakan awalan 'Ucapkan:') untuk membimbing siswa dalam memilih pertanyaan yang akan membantu mereka belajar paling banyak dari model yang dapat diuji."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Suggest 2-3 moves to guide students in sorting questions into themes and comparing ideas based on testability. Include moves to support students in refining broad questions into clear investigations by identifying variables.",
+                  "description": "Sarankan 2-3 langkah untuk membimbing siswa dalam mengurutkan pertanyaan ke dalam tema-tema dan membandingkan ide berdasarkan keterujian. Sertakan langkah untuk mendukung siswa menyempurnakan pertanyaan luas menjadi penyelidikan yang jelas dengan mengidentifikasi variabel.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -465,7 +465,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 prompts to help students evaluate questions based on testability, clarity, focus on variables, and potential to generate useful evidence."
+                  "description": "Hasilkan 2-3 prompt untuk membantu siswa mengevaluasi pertanyaan berdasarkan keterujian, kejelasan, fokus pada variabel, dan potensi menghasilkan bukti yang berguna."
                 }
               },
               "required": [
@@ -481,11 +481,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a script (do NOT include the 'Say:' prefix) to prompt students to define what they will observe, change, and collect as evidence."
+                  "description": "Buatlah sebuah skrip (jangan sertakan awalan 'Say:') untuk meminta siswa mendefinisikan apa yang akan mereka amati, ubah, dan kumpulkan sebagai bukti."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Describe 2-3 moves to support students in designing an investigation plan and identifying variables. Include moves to press students to make plans specific and testable, and ensure they have a clear way to determine success.",
+                  "description": "Jelaskan 2-3 langkah untuk mendukung siswa dalam merancang rencana investigasi dan mengidentifikasi variabel. Sertakan langkah-langkah untuk mendorong siswa membuat rencana yang spesifik dan dapat diuji, serta pastikan mereka memiliki cara yang jelas untuk menentukan keberhasilan.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -493,7 +493,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 specific prompts to help students clarify what they will change, keep the same, and how they will compare results."
+                  "description": "Berikan 2-3 pertanyaan spesifik untuk membantu siswa memperjelas apa yang akan mereka ubah, pertahankan tetap sama, dan bagaimana mereka akan membandingkan hasilnya."
                 }
               },
               "required": [
@@ -526,7 +526,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Daftar bahan yang diperlukan (mis. alat bantu visual, spidol, dll.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -541,11 +541,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create teacher instructions to introduce a puzzling scenario or model. First provide a bracketed action like [Display a model, scenario, demonstration, or short story that includes a flaw, inefficiency, or unexpected result to spark curiosity], then provide the conversational script (do NOT include the 'Say:' prefix)."
+                  "description": "Buat instruksi guru untuk memperkenalkan situasi atau model yang membingungkan. Pertama berikan tindakan dalam tanda kurung seperti [Tampilkan model, situasi, demonstrasi, atau cerita pendek yang berisi kekeliruan, ketidakefisienan, atau hasil yang tidak terduga untuk memicu rasa ingin tahu], lalu berikan skrip percakapan (jangan sertakan awalan 'Say:')."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generate 2-3 moves to guide the launch. State the instructional actions clearly without prefixing them with 'Say:'. Include giving students time to observe before acting, encouraging multiple interpretations, and reinforcing that there may be multiple valid ideas.",
+                  "description": "Hasilkan 2-3 langkah untuk memandu peluncuran. Nyatakan tindakan pembelajaran dengan jelas tanpa memberi awalan 'Say:'. Sertakan memberi siswa waktu untuk mengamati sebelum bertindak, mendorong berbagai penafsiran, dan menegaskan bahwa mungkin ada banyak ide yang benar.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -553,7 +553,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Generate 2-3 specific prompts to help students notice important or unexpected features, generate possible explanations, and justify thinking with evidence."
+                  "description": "Hasilkan 2-3 pertanyaan spesifik untuk membantu siswa memperhatikan fitur penting atau tidak terduga, menghasilkan penjelasan yang mungkin, dan membenarkan pemikiran dengan bukti."
                 }
               },
               "required": [
@@ -569,11 +569,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Create a spoken script (do NOT include the 'Say:' prefix) to frame the task as interdependent and emphasize shared responsibility. Include instructions for students to use sentence starters (e.g., 'I think... because...') and participation structures like talking chips."
+                  "description": "Buat skrip lisan (jangan sertakan awalan 'Say:') untuk membingkai tugas sebagai saling bergantung dan menekankan tanggung jawab bersama. Sertakan instruksi agar siswa menggunakan kalimat pembuka (mis., 'Saya berpikir... karena...') dan struktur partisipasi seperti talking chips."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "List 3-5 specific moves or student behaviors to monitor during group work (e.g., identifying patterns, recording in shared data tables, comparing interpretations). Do not prefix these actions with 'Say:'. Ensure they focus on all students contributing to observing and refining ideas.",
+                  "description": "Cantumkan 3-5 langkah spesifik atau perilaku siswa yang perlu dipantau selama kerja kelompok (mis., mengidentifikasi pola, mencatat dalam tabel data bersama, membandingkan penafsiran). Jangan beri awalan 'Say:' pada tindakan-tindakan ini. Pastikan fokusnya adalah agar semua siswa berkontribusi dalam mengamati dan menyempurnakan ide.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -581,7 +581,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Provide 2-3 prompts to encourage students to share observations, compare interpretations, justify claims with evidence, and collaboratively revise ideas."
+                  "description": "Berikan 2-3 pertanyaan untuk mendorong siswa berbagi pengamatan, membandingkan penafsiran, membenarkan klaim dengan bukti, dan merevisi ide secara kolaboratif."
                 }
               },
               "required": [
@@ -594,11 +594,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
             "CirculationPrompts": {
               "type": "object",
               "x-format": "**{loc.CirculationPromptsTitle}**\n\n**{loc.ConceptualPromptsTitle}**\n\n{value.Conceptual}\n\n**{loc.ReasoningPromptsTitle}**\n\n{value.Reasoning}\n\n**{loc.CollaborationPromptsTitle}**\n\n{value.Collaboration}",
-              "description": "Specific prompts to be used by the teacher while circulating between groups.",
+              "description": "Pertanyaan spesifik yang akan digunakan guru saat berkeliling di antara kelompok.",
               "properties": {
                 "Conceptual": {
                   "type": "array",
-                  "description": "2-3 prompts focusing on key scientific or lesson concepts (e.g., 'What evidence shows this is working?').",
+                  "description": "2-3 pertanyaan yang berfokus pada konsep sains atau pembelajaran utama (mis., 'Bukti apa yang menunjukkan ini berhasil?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -606,7 +606,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "Reasoning": {
                   "type": "array",
-                  "description": "2-3 prompts to press for justification and logic (e.g., 'How does this trial change your thinking?').",
+                  "description": "2-3 pertanyaan untuk mendorong pembenaran dan logika (mis., 'Bagaimana uji coba ini mengubah pemikiranmu?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -614,7 +614,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "Collaboration": {
                   "type": "array",
-                  "description": "2-3 prompts to ensure all voices are included (e.g., 'Who has not contributed yet?').",
+                  "description": "2-3 pertanyaan untuk memastikan semua suara terlibat (mis., 'Siapa yang belum berkontribusi?').",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -639,18 +639,18 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "AnticipatedMisconceptions": {
           "type": "array",
           "x-format": "### ⚠️ {loc.AnticipatedMisconceptions}{items}",
-          "description": "Generate 2-3 common student misconceptions likely to arise during this lesson. Each item must focus on a specific misunderstanding and a teacher response script.",
+          "description": "Hasilkan 2-3 miskonsepsi umum siswa yang kemungkinan muncul selama pelajaran ini. Setiap item harus berfokus pada satu kesalahpahaman spesifik dan sebuah skrip respons guru.",
           "items": {
             "type": "object",
             "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                "description": "Jelaskan miskonsepsi dalam 1 kalimat, diawali dengan 'Siswa mungkin berpikir...'. JANGAN gunakan penebalan atau tag tebal apa pun."
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                "description": "Skrip respons yang jelas untuk guru (diawali dengan 'Teacher Response: ') yang mencontohkan bagaimana merespons pada saat itu dengan pertanyaan spesifik (jangan sertakan awalan 'Say:'). JANGAN gunakan penebalan atau tag tebal apa pun."
               }
             },
             "required": [
@@ -670,7 +670,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas.",
+                  "description": "Hasilkan 2-3 dukungan khusus pelajaran (visual, bank kata, isyarat tangan) untuk membantu pembelajar bahasa mengakses dan mengekspresikan ide.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -678,7 +678,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "SentenceStarters": {
                   "type": "array",
-                  "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson.",
+                  "description": "Hasilkan 3-4 kalimat pembuka yang membantu siswa mendeskripsikan, menjelaskan, dan mengomunikasikan pemikiran mereka untuk pelajaran spesifik ini.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -697,7 +697,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task.",
+                  "description": "Hasilkan 2-3 dukungan langkah demi langkah (alat terstruktur, contoh yang dimodelkan, think-aloud) dan panduan yang tepat untuk membantu siswa menyelesaikan tugas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -705,7 +705,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "Checklist": {
                   "type": "array",
-                  "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation.",
+                  "description": "Hasilkan 3-4 pertanyaan daftar periksa untuk memandu siswa memahami pembelajaran mereka selama investigasi.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -724,7 +724,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence.",
+                  "description": "Hasilkan 2-3 pengayaan yang meningkatkan kompleksitas (tantangan spesifik, identifikasi pola) untuk membantu siswa memperdalam atau meningkatkan pemikiran mereka dengan menggunakan bukti.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -732,11 +732,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                  "description": "Hasilkan satu pertanyaan/prompt kompleks (jangan sertakan awalan 'Say:') untuk mendorong pemahaman konseptual yang lebih dalam."
                 },
                 "ExpectedResponses": {
                   "type": "array",
-                  "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question.",
+                  "description": "Hasilkan 3-4 contoh spesifik respons siswa berkualitas tinggi untuk pertanyaan lanjutan.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -761,7 +761,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "AccommodationsAndModifications": {
           "x-format": "### 🤝 {loc.AccommodationsAndModifications}\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
           "type": "object",
-          "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+          "description": "Bagian ini harus mencakup dua jenis dukungan: General Supports dan Individualized Supports. Fokus pada akses, bukan menurunkan rigor.",
           "properties": {
             "General": {
               "type": "array",
@@ -769,19 +769,19 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+              "description": "Strategi umum yang tidak spesifik untuk siswa tertentu yang meningkatkan akses bagi semua pembelajar (mis., visual, catatan yang sudah terisi, glosarium digital, instruksi yang dipecah). Berikan 2-4 poin bullet."
             },
             "IndividualSupport": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+              "description": "Akomodasi dan modifikasi spesifik untuk siswa bernama dengan rencana formal. Cantumkan SETIAP siswa secara individual; jangan mengelompokkan siswa bersama. Dukungan untuk setiap siswa harus berupa daftar yang mudah dipindai.",
               "items": {
                 "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                 "type": "object",
                 "properties": {
                   "StudentName": {
                     "type": "string",
-                    "description": "First and last name of the individual student receiving these supports."
+                    "description": "Nama depan dan nama belakang siswa individual yang menerima dukungan ini."
                   },
                   "PlanProvided": {
                     "type": "array",
@@ -789,7 +789,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    "description": "Rencana formal yang diberikan untuk siswa ini dalam prompt. Uraikan rencana tersebut menjadi daftar yang jelas. Anda boleh memparafrasekannya untuk memperbaiki format, tetapi jangan menghilangkan atau menambahkan informasi apa pun."
                   },
                   "PlanImplementation": {
                     "type": "array",
@@ -797,7 +797,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Concrete tools/stems/visuals/organizers for this task."
+                    "description": "Alat/stem/visual/organizer konkret untuk tugas ini."
                   }
                 },
                 "required": [
@@ -821,11 +821,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generate one specific question (do NOT include the 'Say:' prefix) to check for student understanding during or at the end of the investigation."
+              "description": "Hasilkan satu pertanyaan spesifik (jangan sertakan awalan 'Say:') untuk memeriksa pemahaman siswa selama atau pada akhir investigasi."
             },
             "ExpectedResponses": {
               "type": "array",
-              "description": "Generate 3-4 expected student responses that show mastery of the lesson concept.",
+              "description": "Hasilkan 3-4 respons siswa yang diharapkan yang menunjukkan penguasaan konsep pelajaran.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -857,7 +857,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Daftar bahan yang diperlukan (mis. alat bantu visual, spidol, dll.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -869,11 +869,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) to bring students back to the research question and surfacing emerging ideas about how the design works."
+              "description": "Pernyataan (jangan sertakan awalan 'Say:') untuk mengembalikan siswa ke pertanyaan penelitian dan memunculkan ide-ide yang mulai muncul tentang bagaimana desain bekerja."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagogical moves to give students time to review data, identify patterns, and compare results through discussion.",
+              "description": "2-3 langkah pedagogis untuk memberi siswa waktu meninjau data, mengidentifikasi pola, dan membandingkan hasil melalui diskusi.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -881,7 +881,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 specific questions to push students to explain patterns, justify decisions with evidence, and describe cause-and-effect relationships.",
+              "description": "3-4 pertanyaan spesifik untuk mendorong siswa menjelaskan pola, membenarkan keputusan dengan bukti, dan mendeskripsikan hubungan sebab-akibat.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -889,15 +889,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) outlining what their written explanation must include (content-specific components) and a reminder to use data as evidence."
+              "description": "Pernyataan (jangan sertakan awalan 'Say:') yang menguraikan apa saja yang harus disertakan dalam penjelasan tertulis mereka (komponen yang spesifik terhadap konten) dan pengingat untuk menggunakan data sebagai bukti."
             },
             "CollaborationInstruction": {
               "type": "string",
-              "description": "Instruction for students to write independently then share with a partner or group to refine their reasoning."
+              "description": "Instruksi agar siswa menulis secara mandiri lalu berbagi dengan pasangan atau kelompok untuk menyempurnakan penalaran mereka."
             },
             "Guardrail": {
               "type": "string",
-              "description": "A firm reminder that the teacher should NOT provide the scientific explanation, but instead press students to point to data."
+              "description": "Peringatan tegas bahwa guru TIDAK boleh memberikan penjelasan ilmiah, melainkan harus mendorong siswa untuk menunjukkan data."
             }
           },
           "required": [
@@ -912,7 +912,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "3-4 responses that directly answer the research question using evidence and cause-and-effect reasoning (e.g., 'when we changed ___, ___ happened').",
+          "description": "3-4 respons yang secara langsung menjawab pertanyaan penelitian menggunakan bukti dan penalaran sebab-akibat (mis., 'ketika kami mengubah ___, ___ terjadi').",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -933,7 +933,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List of required materials (e.g. visual aids, markers, etc.)",
+          "description": "Daftar bahan yang diperlukan (mis., alat bantu visual, spidol, dll.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -945,11 +945,11 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "A statement (do NOT include the 'Say:' prefix) to prompt students to think about the broader implications of their evidence beyond the classroom."
+              "description": "Pernyataan (jangan sertakan awalan 'Katakan:') untuk mendorong siswa memikirkan implikasi yang lebih luas dari bukti mereka di luar kelas."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagogical moves to encourage students to discuss with partners/groups and generate their own examples of real-world impact.",
+              "description": "2-3 langkah pedagogis untuk mendorong siswa berdiskusi dengan pasangan/kelompok dan menghasilkan contoh mereka sendiri tentang dampak di dunia nyata.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -957,7 +957,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 specific questions to connect the investigation results to everyday life, community issues, or system redesign.",
+              "description": "3-4 pertanyaan spesifik untuk menghubungkan hasil investigasi dengan kehidupan sehari-hari, isu komunitas, atau desain ulang sistem.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -977,7 +977,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+              "description": "Hasilkan 1 pertanyaan berpikir transenden yang mengharuskan siswa menerapkan pembelajaran melampaui diri mereka sendiri ke konteks dunia nyata (komunitas, tantangan global). Fokus pada mengapa pembelajaran penting dalam skala besar (keselamatan, keberlanjutan, inovasi, dll.). Hindari fokus yang hanya pada pribadi/sekolah."
             }
           },
           "required": [
@@ -987,7 +987,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "4-5 responses illustrating how students might apply their understanding to authentic, real-world contexts or future-oriented problem solving.",
+          "description": "4-5 respons yang menggambarkan bagaimana siswa dapat menerapkan pemahaman mereka pada konteks dunia nyata yang autentik atau pemecahan masalah berorientasi masa depan.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -1005,29 +1005,29 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section. This 5-minute activity must include: 1. Instructions for Teachers containing: - Active Recall prompt using partner/group sharing - Expected Student Responses (2-3 bulleted examples) 2. Essential Question Connection 3. Transcendent Thinking section 4. Spaced Retrieval component containing: - Clear reference to specific prior lesson - Question connecting past + current concepts - Detailed success criteria / expected responses All sections must provide direct teacher prompts without the 'Say:' prefix and clearly labeled 'Expected Student Responses' showing 2-3 sample answers.",
+      "description": "Bagian lengkap 'Tinjauan & Pengambilan Kembali Berspasi'. Aktivitas 5 menit ini harus mencakup: 1. Instruksi untuk Guru yang berisi: - Pemicu Active Recall menggunakan berbagi pasangan/kelompok - Respons Siswa yang Diharapkan (2-3 contoh berbentuk poin) 2. Koneksi Pertanyaan Esensial 3. Bagian Berpikir Transenden 4. Komponen Pengambilan Kembali Berspasi yang berisi: - Rujukan jelas ke pelajaran sebelumnya yang spesifik - Pertanyaan yang menghubungkan konsep masa lalu + saat ini - Kriteria keberhasilan / respons yang diharapkan secara rinci Semua bagian harus menyediakan perintah langsung untuk guru tanpa awalan 'Katakan:' dan dengan jelas menampilkan 'Respons Siswa yang Diharapkan' yang berisi 2-3 contoh jawaban.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Teacher notes explaining how this review strategy strengthens retention through active recall and connects the investigation to core science ideas."
+          "description": "Catatan guru yang menjelaskan bagaimana strategi tinjauan ini memperkuat retensi melalui active recall dan menghubungkan investigasi dengan ide-ide sains inti."
         },
         "InstructionsForTeachers": {
           "type": "object",
           "x-format": "{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
-          "description": "Step-by-step teacher guidance for the 5-minute review and spaced retrieval session.",
+          "description": "Panduan guru langkah demi langkah untuk sesi tinjauan dan pengambilan kembali berspasi selama 5 menit.",
           "properties": {
             "ActiveRecall": {
               "type": "object",
               "x-format": "### 🔁 {loc.ActiveRecall}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Prompt students to retrieve key learning from today's lesson using only evidence from the investigation.",
+              "description": "Minta siswa mengambil kembali pembelajaran kunci dari pelajaran hari ini hanya menggunakan bukti dari investigasi.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "A specific teacher script (do NOT include the 'Say:' prefix) that prompts students to reflect on today's investigation and what it revealed about the system."
+                  "description": "Skrip guru spesifik (jangan sertakan awalan 'Katakan:') yang mendorong siswa merefleksikan investigasi hari ini dan apa yang terungkap tentang sistem tersebut."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "3-4 examples of high-quality student responses showing clear use of evidence.",
+                  "description": "3-4 contoh respons siswa berkualitas tinggi yang menunjukkan penggunaan bukti secara jelas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1043,15 +1043,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
             "EssentialQuestionConnection": {
               "type": "object",
               "x-format": "### 💭 {loc.EssentialQuestionConnection}\n\n**{loc.Say}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Help students connect today's specific evidence to the broader unit essential questions.",
+              "description": "Bantu siswa menghubungkan bukti spesifik hari ini dengan pertanyaan esensial unit yang lebih luas.",
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "A teacher script (do NOT include the 'Say:' prefix) that links today's findings to one of the unit's essential questions."
+                  "description": "Skrip guru (jangan sertakan awalan 'Katakan:') yang menghubungkan temuan hari ini dengan salah satu pertanyaan esensial unit."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "2-3 examples of how students justify the connection using evidence.",
+                  "description": "2-3 contoh bagaimana siswa membenarkan hubungan tersebut menggunakan bukti.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1067,15 +1067,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
             "SpacedRetrieval": {
               "type": "object",
               "x-format": "### ⏳ {loc.SpacedRetrieval}\n\n**{loc.Say}:** {value.TeacherSay}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedStudentResponses}",
-              "description": "Revisit a concept from a previous unit or lesson to strengthen cumulative retention.",
+              "description": "Tinjau kembali konsep dari unit atau pelajaran sebelumnya untuk memperkuat retensi kumulatif.",
               "properties": {
                 "TeacherSay": {
                   "type": "string",
-                  "description": "A teacher script (do NOT include the 'Say:' prefix) that explicitly connects a concept from a prior lesson to today's work. Must include the meta-reference (e.g., '(Draws from Unit 1, Lesson 2.)') directly in the text."
+                  "description": "Skrip guru (jangan sertakan awalan 'Katakan:') yang secara eksplisit menghubungkan konsep dari pelajaran sebelumnya dengan pekerjaan hari ini. Harus menyertakan meta-referensi (mis., '(Berasal dari Unit 1, Pelajaran 2.)') langsung di dalam teks."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
-                  "description": "1-2 examples of high-quality student responses showing clear recall of evidence from prior learning.",
+                  "description": "1-2 contoh respons siswa berkualitas tinggi yang menunjukkan ingatan yang jelas terhadap bukti dari pembelajaran sebelumnya.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -1106,18 +1106,18 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "FormativeAssessment": {
       "x-format": "### ✅ {loc.FormativeAssessment}\n\n{items}",
       "type": "array",
-      "description": "Exactly 4 Formative Assessment prompts, one for each DOK level.",
+      "description": "Tepat 4 pemicu Penilaian Formatif, masing-masing untuk satu tingkat DOK.",
       "items": {
         "x-format": "\n\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "mis., 'Pemicu 1 (DOK 1)'"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text, e.g., 'Why do planets stay in orbit instead of flying off into space?'"
+            "description": "Teks pertanyaan yang tepat, mis., 'Mengapa planet tetap berada di orbit alih-alih terlempar ke luar angkasa?'"
           },
           "ExpectedStudentResponses": {
             "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -1126,7 +1126,7 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1-2 contoh respons yang menunjukkan penguasaan."
           }
         },
         "required": [
@@ -1142,26 +1142,26 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
     "StudentPractice": {
       "x-format": "### 🖋️ {loc.StudentPractice}\n\n**{loc.TeacherNotes}:** {loc.StudentPracticeNotes}\n\n{value.Tasks}\n\n**🔎 {loc.Reflection}:**\n\n{value.Reflection}",
       "type": "object",
-      "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+      "description": "Bagian lengkap 'Latihan Siswa' untuk pekerjaan rumah / praktik di luar kelas.",
       "properties": {
         "Tasks": {
           "type": "array",
-          "description": "Generate 3 tasks covering DOK levels 2 and 3.",
+          "description": "Hasilkan 3 tugas yang mencakup tingkat DOK 2 dan 3.",
           "items": {
             "type": "object",
             "x-format": "\n\n**{value.TaskTitle}**\n\n{value.Instruction}\n\n{value.SuccessCriteria}",
             "properties": {
               "TaskTitle": {
                 "type": "string",
-                "description": "e.g., '1. (DOK 2)'"
+                "description": "mis., '1. (DOK 2)'"
               },
               "Instruction": {
                 "type": "string",
-                "description": "Clear step-by-step student directions for the task."
+                "description": "Petunjuk siswa langkah demi langkah yang jelas untuk tugas tersebut."
               },
               "SuccessCriteria": {
                 "type": "array",
-                "description": "4-5 specific, evidence-based bullet points showing what mastery looks like for this task. CRITICAL: Every criterion MUST start with an action verb (e.g., 'Describes', 'Explains', 'Uses').",
+                "description": "4-5 poin berbasis bukti yang spesifik yang menunjukkan seperti apa penguasaan untuk tugas ini. KRITIS: Setiap kriteria HARUS diawali dengan kata kerja tindakan (mis., 'Menggambarkan', 'Menjelaskan', 'Menggunakan').",
                 "items": {
                   "x-format": "- {value}",
                   "type": "string"
@@ -1178,15 +1178,15 @@ Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
         },
         "Reflection": {
           "type": "object",
-          "description": "End with self-regulation or transcendent thinking reflections.",
+          "description": "Akhiri dengan refleksi regulasi diri atau berpikir transenden.",
           "properties": {
             "Instruction": {
               "type": "string",
-              "description": "Instruction for the reflection section (e.g., 'Write 2–3 sentences responding to one prompt:')."
+              "description": "Instruksi untuk bagian refleksi (mis., 'Tulis 2–3 kalimat yang menanggapi satu pertanyaan:')."
             },
             "Prompts": {
               "type": "array",
-              "description": "4-5 specific reflection prompts connecting today's inquiry to real life, future tools, or personal learning.",
+              "description": "4-5 prompt refleksi spesifik yang menghubungkan penyelidikan hari ini dengan kehidupan nyata, alat masa depan, atau pembelajaran pribadi.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"

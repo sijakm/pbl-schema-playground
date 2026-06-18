@@ -34,7 +34,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
   "properties": {
     "UnitPlan": {
       "type": "object",
-      "description": "Return a complete Project-Based Learning (PBL) Unit Plan. Do NOT add extra keys. Populate every required field. Must work for ANY subject. Localize stakeholders/audience/resources to provided zip/location without inventing exact addresses/phone numbers.",
+      "description": "Vrati kompletan plan jedinice za Project-Based Learning (PBL). Ne dodaj dodatne ključeve. Popuni svako obavezno polje. Mora da funkcioniše za BILO KOJI predmet. Lokalizuj zainteresovane strane/audijenciju/resurse prema datom poštanskom broju/lokaciji bez izmišljanja tačnih adresa/brojeva telefona.",
       "additionalProperties": false,
       "required": [
         "AssessPriorKnowledge",
@@ -52,16 +52,16 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
         "AssessPriorKnowledge": {
           "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n**{loc.Purpose}:** {loc.PBLAssessPriorKnowledgePurposeText}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
           "type": "object",
-          "description": "Assess Prior Knowledge section. 1. Ensure DOK 1-3 prompts are used. 2. Include prerequisite skills needed for the student learning objectives. 3. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 4. Initial teacher prompt with 'Say:' statement. 5. Clear instructions and template/structure for the chosen modality. 6. 'Expected Student Responses' section. 7. Closing teacher 'Say:' prompt. 8. After fully developing one modality, provide 2 brief alternate options.",
+          "description": "Sekcija Procena prethodnog znanja. 1. Uveri se da se koriste DOK 1-3 podsticaji. 2. Uključi veštine predznanja potrebne za ciljeve učenja učenika. 3. Izaberi jedan modalitet sa ove liste i u potpunosti ga razvij: postavljanje pitanja, K-W-L, vizuelni prikazi, koncept mape, reflektivno pisanje, vodiči za anticipaciju, ocenjivanje vokabulara. 4. Početni učiteljev podsticaj sa izjavom 'Reci:'. 5. Jasna uputstva i šablon/struktura za izabrani modalitet. 6. Sekcija 'Očekivani odgovori učenika'. 7. Završni učiteljev podsticaj 'Reci:'. 8. Nakon što u potpunosti razviješ jedan modalitet, navedi 2 kratke alternativne opcije.",
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we begin...\"'"
+              "description": "Jasna uputstva i šablon/struktura za izabrani modalitet. Npr. 'Reci: \"Pre nego što počnemo...\"'"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
               "type": "array",
-              "description": "Anticipated answers or common misconceptions for the chosen modality. IMPORTANT: Do not include bullet points, dashes, or numbers at the beginning of the strings.",
+              "description": "Predviđeni odgovori ili uobičajene zablude za izabrani modalitet. VAŽNO: Ne uključuj nabrajanja, crtice ili brojeve na početku stringova.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -69,12 +69,12 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation."
+              "description": "Završni učiteljev podsticaj 'Reci:' koji potvrđuje učeničko razmišljanje i najavljuje istraživanje jedinice."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
               "type": "array",
-              "description": "2 brief alternate options a teacher could choose.",
+              "description": "2 kratke alternativne opcije koje nastavnik može izabrati.",
               "items": {
                 "x-format": "{index}. {value}",
                 "type": "string"
@@ -108,11 +108,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "properties": {
             "TaskStatementTitle": {
               "type": "string",
-              "description": "The title of the student-facing launch message (e.g. Message from the Coconut Creek STEM Innovation Team)."
+              "description": "Naslov poruke za pokretanje namenjene učenicima (npr. Poruka od Coconut Creek STEM Innovation Team)."
             },
             "LetterGreeting": {
               "type": "string",
-              "description": "The opening greeting for the student-facing launch message (e.g., 'Hello engineers-in-training,')."
+              "description": "Uvodni pozdrav za poruku namenjenu učenicima (npr. 'Zdravo, budući inženjeri,')."
             },
             "LetterBody": {
               "x-format": "{items}",
@@ -121,27 +121,27 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "x-format": "{value}\n\n",
                 "type": "string"
               },
-              "description": "The main paragraphs of the student-facing launch message (3-5 paragraphs) written like a credible local organization or person. Must include a clear connection to the problem, the driving question, the deliverable requirements, and an inspiring call to action. Urgent, meaningful, authentic. Do NOT include the title, greeting, sign-off phrase (e.g. 'Sincerely,'), or sender name here. Only include the body paragraphs."
+              "description": "Glavni pasusi poruke namenjene učenicima (3-5 pasusa) napisani kao kredibilna lokalna organizacija ili osoba. Mora da sadrži jasnu vezu sa problemom, vodeće pitanje, zahteve za isporučivi proizvod i inspirativan poziv na akciju. Hitno, značajno, autentično. Ne uključuj naslov, pozdrav, završnu frazu (npr. 'Srdačno,') niti ime pošiljaoca ovde. Samo telo poruke u pasusima."
             },
             "LetterSignOff": {
               "type": "string",
-              "description": "The sign-off phrase for the message (e.g., 'Sincerely,'). Just provide the sign-off phrase, nothing else."
+              "description": "Završna fraza za poruku (npr. 'Srdačno,'). Navedite samo završnu frazu, ništa drugo."
             },
             "LetterSender": {
               "type": "string",
-              "description": "The name of the credible local organization or person sending the message (e.g., 'Coconut Creek STEM Innovation Team'). Do NOT include the sign-off (e.g., 'Sincerely') here."
+              "description": "Ime kredibilne lokalne organizacije ili osobe koja šalje poruku (npr. 'Coconut Creek STEM Innovation Team'). Ne uključuj završnu frazu (npr. 'Srdačno') ovde."
             },
             "DrivingQuestion": {
               "type": "string",
-              "description": "One strong open-ended Driving Question grounded in place and stakeholder need. This question must also be woven into the LetterBody. MUST be reused verbatim in FramingTheLearning.DrivingQuestion."
+              "description": "Jedno snažno, otvoreno vodeće pitanje zasnovano na mestu i potrebama zainteresovanih strana. Ovo pitanje mora takođe biti utkano u telo pisma. MORA se ponovo koristiti doslovno u FramingTheLearning.DrivingQuestion."
             },
             "Mission": {
               "type": "string",
-              "description": "Paragraph starting with 'Your task is to...' describing what students will create/do and why it matters to the community/audience."
+              "description": "Pasus koji počinje sa 'Vaš zadatak je da...' i opisuje šta će učenici stvoriti/uraditi i zašto je to važno za zajednicu/audijenciju."
             },
             "ProjectContextAndStakeholders": {
               "type": "string",
-              "description": "Short narrative: who is impacted, why it matters now locally, and which stakeholders/audiences care."
+              "description": "Kratka narativna celina: ko je pogođen, zašto je to sada lokalno važno i koje zainteresovane strane/audijencije su zainteresovane."
             },
             "FinalDeliverableRequirements": {
               "type": "array",
@@ -151,11 +151,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "type": "string",
                 "x-format": "{index}. {value}"
               },
-              "description": "Written for students, describe the final deliverable they will create and the authentic audience it serves. Format each item with a bolded title (e.g. **Summary:** ...). Do NOT include any numbering (like 1., 2.) or bullet points at the beginning of your strings; start directly with the bolded title. Must include at least a brief summary, then four components: (1) Concept & Purpose Plan explaining the idea through a visual or written representation and why it matters to the community or context; (2) Evidence-Based Justification requiring analysis of at least two relevant factors and explanation of choices using evidence from research, data, experimentation, or observation; (3) Model or Representation describing the type of model created, what it represents, how it functions, and how it reveals the force, stability, efficiency, or system behind the idea; and (4) The Verdict, a concluding, evidence-backed argument explaining why the solution is effective, feasible, or meaningful, summarizing reasoning, evidence, and model, and communicating the value of the design to the authentic audience. Your final statement should show that you can apply disciplinary knowledge, use evidence, model complex ideas, and explain real-world implications."
+              "description": "Napisano za učenike, opiši konačni isporučivi proizvod koji će kreirati i autentičnu publiku kojoj je namenjen. Formatiraj svaku stavku sa podebljanim naslovom (npr. **Sažetak:** ...). Ne koristi nikakvo numerisanje (kao 1., 2.) niti nabrajanja na početku stringova; počni direktno podebljanim naslovom. Mora da uključi bar kratak sažetak, zatim četiri komponente: (1) Plan koncepta i svrhe koji objašnjava ideju kroz vizuelni ili pisani prikaz i zašto je važna za zajednicu ili kontekst; (2) Argument zasnovan na dokazima koji zahteva analizu najmanje dva relevantna faktora i objašnjenje izbora uz korišćenje dokaza iz istraživanja, podataka, eksperimentisanja ili posmatranja; (3) Model ili predstavu koja opisuje vrstu modela koji je napravljen, šta predstavlja, kako funkcioniše i kako otkriva silu, stabilnost, efikasnost ili sistem iza ideje; i (4) Presudu, završni argument zasnovan na dokazima koji objašnjava zašto je rešenje efikasno, izvodljivo ili značajno, sažima rezonovanje, dokaze i model, i komunicira vrednost dizajna autentičnoj publici. Tvoja završna izjava treba da pokaže da možeš da primeniš disciplinarno znanje, koristiš dokaze, modeluješ složene ideje i objasniš implikacije u stvarnom svetu."
             },
             "ClosingCallToAction": {
               "type": "string",
-              "description": "Inspiring close: the community/audience is counting on creative thinkers who can turn evidence into action. Emphasize that ancient ideas can inspire modern solutions."
+              "description": "Inspirativan završetak: zajednica/audijencija računa na kreativne mislioce koji mogu da pretvore dokaze u akciju. Naglasi da drevne ideje mogu da inspirišu savremena rešenja."
             }
           }
         },
@@ -177,14 +177,14 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Standards listed verbatim when provided, format 'CODE: description'. Do NOT include bullet points at the beginning of your strings."
+              "description": "Standardi navedeni doslovno kada su dati, u formatu 'KOD: opis'. Ne uključuj nabrajanja na početku stringova."
             },
             "BigIdeasAndEssentialQuestions": {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
               "maxItems": 4,
-              "description": "Generate 3-4 Big Idea and Essential Question pairs that establish the enduring, transferable concepts anchoring the entire unit, guide inquiry and assessment design, and provide an overarching conceptual framework connecting all tasks, skills, and activities into meaningful understanding.",
+              "description": "Generiši 3-4 para Velika ideja i Ključno pitanje koji uspostavljaju trajne, prenosive koncepte koji oslanjaju celu jedinicu, usmeravaju istraživanje i dizajn procene, i pružaju sveobuhvatan konceptualni okvir koji povezuje sve zadatke, veštine i aktivnosti u smisleno razumevanje.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{loc.BigIdeaLabel}** {value.BigIdea}\n\n- {loc.EssentialQuestionLabel} {value.EssentialQuestion}",
@@ -196,11 +196,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "BigIdea": {
                     "type": "string",
-                    "description": "A broad, conceptual statement of enduring understanding that explains a fundamental principle underlying the unit, connects all tasks and assessments, supports transferable learning beyond the specific context, and reflects core disciplinary thinking rather than isolated facts."
+                    "description": "Široka, konceptualna tvrdnja trajnog razumevanja koja objašnjava fundamentalni princip koji stoji iza jedinice, povezuje sve zadatke i procene, podržava prenosivo učenje izvan specifičnog konteksta i odražava osnovno disciplinarno mišljenje, a ne izolovane činjenice."
                   },
                   "EssentialQuestion": {
                     "type": "string",
-                    "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter."
+                    "description": "Kreiraj ključna pitanja koja se fokusiraju isključivo na široke, univerzalne pojmove kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. Ne pominji nikakve pojmove specifične za predmet, procese, vokabular ili primere. Pitanja moraju biti otvorena, prenosiva kroz sve discipline i nemoguća za odgovor učenjem lekcije ili sadržaja jedinice. Fokusiraj se samo na velike ideje, ne na sadržaj predmeta."
                   }
                 }
               }
@@ -223,7 +223,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, and explain how or why something works rather than just what it is. Write the objectives as direct continuations of the phrase 'Students will understand that...'. Do NOT repeat the phrase 'Students will understand that', and do NOT start with verbs like 'Explain that' or 'Describe that' (e.g., just write 'engineering designs improve when...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Svaki cilj mora da se završava sa (DOK X) i da predstavlja Velike ideje ili Trajna razumevanja tako što će generisati 3 do 5 konceptualnih, dugoročnih tvrdnji koje objašnjavaju zašto je učenje važno izvan jedinice, ističu prenosive obrasce, odnose ili principe kroz različite kontekste, i objašnjavaju kako ili zašto nešto funkcioniše, a ne samo šta je to. Napišite ciljeve kao direktne nastavke fraze 'Učenici će razumeti da...'. Ne ponavljajte frazu 'Učenici će razumeti da', i ne počinjite glagolima kao što su 'Objasniti da' ili 'Opisati da' (npr. jednostavno napišite 'inženjerski dizajni se poboljšavaju kada...'). NE uključujte nikakvo numerisanje, stavke sa nabrajanjima ili crtice na početku vaših nizova."
                 },
                 "StudentsWillKnowThat": {
                   "type": "array",
@@ -233,7 +233,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, and include an appropriate DOK label typically at level 1 or 2. Write the objectives as direct continuations of the phrase 'Students will know that...'. Do NOT repeat the phrase 'Students will know that', and do NOT start with verbs like 'Identify that' or 'Define' (e.g., just write 'a lever has an effort arm...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Svaki cilj mora da se završava sa (DOK X) i da predstavlja Činjenice ili Ključna sadržajna znanja tako što će generisati 3 do 5 disciplinarno specifičnih činjenica, termina ili osnovnih tvrdnji znanja koje identifikuju suštinske informacije koje učenici treba da zapamte, da ostanu konkretne i činjenične, a ne konceptualne, da podržavaju standarde jedinice i zadatke učinka, da koriste jasan akademski rečnik primeren predmetu i da uključe odgovarajuću DOK oznaku, obično na nivou 1 ili 2. Napišite ciljeve kao direktne nastavke fraze 'Učenici će znati da...'. Ne ponavljajte frazu 'Učenici će znati da', i ne počinjite glagolima kao što su 'Identifikovati da' ili 'Definisati' (npr. jednostavno napišite 'poluga ima krak sile...'). NE uključujte nikakvo numerisanje, stavke sa nabrajanjima ili crtice na početku vaših nizova."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
@@ -243,7 +243,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; and include an appropriate DOK level between 2 and 4. Write the objectives as direct continuations of the phrase 'Students will be able to...'. Begin directly with a measurable action verb (e.g., analyze, compare, design, model, solve). Do NOT repeat the prefix 'Students will be able to'. DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Svaki cilj mora da se završava sa (DOK X) i da predstavlja Veštine ili Prakse usklađene sa disciplinom tako što će generisati 4 do 7 tvrdnji zasnovanih na veštinama koje opisuju šta će učenici raditi; uskladite ih sa disciplinarno specifičnim praksama; povežite ih direktno sa projektnim isporučivim proizvodom ili zadatkom učinka; neka budu merljive i uočljive; i uključite odgovarajući DOK nivo između 2 i 4. Napišite ciljeve kao direktne nastavke fraze 'Učenici će biti u stanju da...'. Počnite direktno merljivim glagolom radnje (npr. analizirati, uporediti, dizajnirati, modelovati, rešiti). Ne ponavljajte prefiks 'Učenici će biti u stanju da'. NE uključujte nikakvo numerisanje, stavke sa nabrajanjima ili crtice na početku vaših nizova."
                 }
               }
             }
@@ -263,12 +263,12 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "properties": {
             "DrivingQuestion": {
               "type": "string",
-              "description": "MUST match UnitOverview.DrivingQuestion verbatim. State the actual driving question (e.g. 'How can we design an invention inspired by ancient Egyptian innovation to solve a real problem in our Coconut Creek community?')."
+              "description": "MORA da se poklapa sa UnitOverview.DrivingQuestion doslovno. Navedite stvarno vodeće pitanje (npr. 'Kako možemo da osmislimo pronalazak inspirisan inovacijama drevnog Egipta da bismo rešili stvarni problem u našoj zajednici u Koko Kriuku?')."
             },
             "ProblemDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "The problem description paragraphs explaining the real challenge. Explain why the problem matters and the consequences if it is not addressed, identifying underlying contributing factors. Show how misunderstanding, missing information, or overlooked variables contribute to the issue. Explain how the solution serves a real, relevant authentic audience. Do NOT include any numbering or bullet points at the beginning of your strings.",
+              "description": "Opis problema u paragrafima koji objašnjavaju stvarni izazov. Objasnite zašto je problem važan i kakve su posledice ako se ne reši, identifikujući osnovne doprinoseće faktore. Pokažite kako pogrešno razumevanje, nedostajuće informacije ili prevideni faktori doprinose problemu. Objasnite kako rešenje služi stvarnoj, relevantnoj autentičnoj publici. NE uključujte nikakvo numerisanje ili stavke sa nabrajanjem na početku vaših nizova.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -277,7 +277,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "ProjectDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "Narrative paragraphs of how learning builds across the multi-day project (inquiry -> apply -> refine -> present). Explain how students begin by exploring examples, notice patterns, apply science knowledge through hands-on tests, then use those findings to develop an original invention. Explain how they revise prototypes and present ideas to an authentic audience. Do NOT include any numbering or bullet points at the beginning of your strings.",
+              "description": "Narativni paragrafi o tome kako se učenje razvija tokom višednevnog projekta (istraživanje -> primena -> usavršavanje -> predstavljanje). Objasnite kako učenici počinju istraživanjem primera, uočavaju obrasce, primenjuju naučna znanja kroz praktična testiranja, a zatim koriste ta saznanja da razviju originalan pronalazak. Objasnite kako revidiraju prototipe i predstavljaju ideje autentičnoj publici. NE uključujte nikakvo numerisanje ili stavke sa nabrajanjem na početku vaših nizova.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -288,7 +288,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "minItems": 3,
               "maxItems": 5,
               "x-format": "{items}",
-              "description": "Must include 3 to 5 Place-Based Sites of Engagement. Ensure sites represent varied contexts and clearly show how the local community is part of the learning ecosystem.",
+              "description": "MORA da uključuje 3 do 5 lokacija za angažovanje zasnovanih na mestu. Obezbedite da lokacije predstavljaju različite kontekste i jasno pokažu kako je lokalna zajednica deo ekosistema učenja.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{value.SiteTitle}**\n\n- **{loc.StudentEngagement}:** {value.StudentEngagement}\n- **{loc.Relevance}:** {value.Relevance}",
@@ -301,15 +301,15 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "SiteTitle": {
                     "type": "string",
-                    "description": "A meaningful physical, community, virtual, or discipline-specific location relevant to the unit's context (e.g., 'Coconut Creek Middle School Campus (Primary Investigation Site)')."
+                    "description": "Značajna fizička, društvena, virtuelna ili disciplinarno specifična lokacija relevantna za kontekst jedinice (npr. 'Kampus srednje škole Coconut Creek (primarno mesto istraživanja)')."
                   },
                   "StudentEngagement": {
                     "type": "string",
-                    "description": "Explaining authentic inquiry activities students complete at or with the site such as observation, data collection, interviews, analysis, virtual exploration, or guided field tasks tied to the real-world problem."
+                    "description": "Objašnjavanje autentičnih istraživačkih aktivnosti koje učenici obavljaju na lokaciji ili uz nju, kao što su posmatranje, prikupljanje podataka, intervjui, analiza, virtuelno istraživanje ili vođeni terenski zadaci povezani sa stvarnim problemom."
                   },
                   "Relevance": {
                     "type": "string",
-                    "description": "Explaining why the site matters by connecting it to the problem, showing how it provides evidence or expertise, clarifying how it supports solution design or modeling, and highlighting local or community-specific significance."
+                    "description": "Objašnjavanje zašto je lokacija važna povezivanjem sa problemom, pokazujući kako obezbeđuje dokaze ili stručno znanje, pojašnjavajući kako podržava dizajn rešenja ili modelovanje i ističući lokalni ili zajednički značaj."
                   }
                 }
               }
@@ -327,7 +327,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "minItems": 4,
                   "maxItems": 4,
                   "x-format": "{items}",
-                  "description": "Create a Tiered Academic Vocabulary section with exactly four labeled tiers.",
+                  "description": "Napravite odeljak sa akademskim rečnikom po nivoima sa tačno četiri označena nivoa.",
                   "items": {
                     "type": "object",
                     "x-format": "\n\n**{value.TierTitle}**\n\n*{value.TierWhyItMatters}*\n\n{value.Terms}",
@@ -340,17 +340,17 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "properties": {
                       "TierTitle": {
                         "type": "string",
-                        "description": "MUST be exactly one of these: 'Tier 1: Essential / Core Vocabulary', 'Tier 2: Application, Modeling, or Process Vocabulary', 'Tier 3: Real-World or Project-Specific Vocabulary', 'Tier 4: Enrichment & Extension Vocabulary'."
+                        "description": "MORA biti tačno jedno od sledećeg: 'Nivo 1: Osnovni / ključni rečnik', 'Nivo 2: Rečnik primene, modelovanja ili procesa', 'Nivo 3: Rečnik iz stvarnog sveta ili vezan za projekat', 'Nivo 4: Rečnik za obogaćivanje i proširenje'."
                       },
                       "TierWhyItMatters": {
                         "type": "string",
-                        "description": "A brief italicized sentence explaining how these terms help students in the project context (e.g. 'These terms help students name the most important ideas and objects they will see, build, and discuss during the project.')."
+                        "description": "Kratka kurzivom napisana rečenica koja objašnjava kako ovi termini pomažu učenicima u kontekstu projekta (npr. 'Ovi termini pomažu učenicima da imenuju najvažnije ideje i objekte koje će videti, graditi i o kojima će razgovarati tokom projekta.')."
                       },
                       "Terms": {
                         "type": "array",
                         "minItems": 3,
                         "x-format": "\n\n{items}",
-                        "description": "List unit-appropriate vocabulary terms with student-friendly definitions.",
+                        "description": "Navedite vokabular primeren jedinici sa definicijama razumljivim učenicima.",
                         "items": {
                           "type": "object",
                           "x-format": "{index}. **{value.Term}**: {value.Definition}\n",
@@ -362,11 +362,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "properties": {
                             "Term": {
                               "type": "string",
-                              "description": "The vocabulary word (e.g., 'force'). Do NOT include any numbering or bullet points."
+                              "description": "Reč iz vokabulara (npr. 'sila'). Ne uključujte nikakvo numerisanje ili stavke sa nabrajanjem."
                             },
                             "Definition": {
                               "type": "string",
-                              "description": "A student-friendly definition."
+                              "description": "Definicija razumljiva učenicima."
                             }
                           }
                         }
@@ -391,7 +391,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "AuthenticAudience": {
               "type": "object",
               "x-format": "{value.Audiences}\n\n**{loc.StudentParticipationInAudienceSelection}**\n\n{value.StudentParticipation}",
-              "description": "Identify and engage an authentic audience beyond the classroom.",
+              "description": "Identifikujte i uključite autentičnu publiku izvan učionice.",
               "additionalProperties": false,
               "required": [
                 "Audiences",
@@ -415,26 +415,26 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "properties": {
                       "AudienceName": {
                         "type": "string",
-                        "description": "The name of the specific authentic audience group (e.g. 'City of Coconut Creek Sustainability & Environmental Advisory Board'). Do NOT include bullet points or numbering."
+                        "description": "Naziv određene grupe autentične publike (npr. 'Savet za održivost i zaštitu životne sredine grada Coconut Creek'). Ne uključujte stavke sa nabrajanjem ili numerisanje."
                       },
                       "PrimaryAudienceDescription": {
                         "type": "string",
-                        "description": "Clear description of who this audience is (individuals, organizations, or groups) and their relationship to the project's context or problem. Must be detailed, at least 2-3 sentences."
+                        "description": "Jasan opis ko je ta publika (pojedinci, organizacije ili grupe) i kakav je njihov odnos prema kontekstu ili problemu projekta. Mora biti detaljno, najmanje 2-3 rečenice."
                       },
                       "WhyThisAudienceIsQualified": {
                         "type": "string",
-                        "description": "Explanation of why this audience has relevant expertise, lived experience, or authority related to the project topic. Must be detailed, at least 2-3 sentences."
+                        "description": "Objašnjenje zašto ova publika ima relevantnu stručnost, iskustvo iz stvarnog života ili autoritet vezan za temu projekta. Mora biti detaljno, najmanje 2-3 rečenice."
                       },
                       "HowThisAudienceElevatesTheProject": {
                         "type": "string",
-                        "description": "How the presence of this audience increases authenticity, rigor, motivation, or real-world impact for students. Must be detailed, at least 2-3 sentences."
+                        "description": "Kako prisustvo ove publike povećava autentičnost, rigoroznost, motivaciju ili uticaj u stvarnom svetu za učenike. Mora biti detaljno, najmanje 2-3 rečenice."
                       }
                     }
                   }
                 },
                 "StudentParticipation": {
                   "type": "string",
-                  "description": "A paragraph explaining how students help identify which audience best fits their invention by discussing who would benefit from or evaluate the solution."
+                  "description": "Pasus koji objašnjava kako učenici pomažu da se identifikuje koja publika najbolje odgovara njihovom izumu tako što razgovaraju o tome ko bi imao koristi od rešenja ili ko bi ga ocenio."
                 }
               }
             },
@@ -454,15 +454,15 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "CriteriaForSuccess": {
                     "type": "string",
-                    "description": "The measurable student learning objective ending with DOK level. Do NOT include bullet points or numbering."
+                    "description": "Merljivi ishod učenja učenika koji se završava DOK nivoom. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "SuccessCriteria": {
                     "type": "string",
-                    "description": "The specific success criteria explaining what the student will do to demonstrate learning. Do NOT include bullet points or numbering."
+                    "description": "Specifični kriterijumi uspeha koji objašnjavaju šta će učenik uraditi da pokaže učenje. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "PointOfDemonstration": {
                     "type": "string",
-                    "description": "Where the evidence will appear, separated into Formative: and Summative: statements. Do NOT include bullet points or numbering."
+                    "description": "Gde će se dokaz pojaviti, odvojen izjavama Formativno: i Sumativno:. Ne uključujte nabrajanje ni numerisanje."
                   }
                 }
               }
@@ -471,7 +471,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "type": "array",
               "x-format": "{items}",
               "minItems": 4,
-              "description": "Analytic Rubric detailing the competencies required by the project. Each row represents one evaluated skill. The Novice to Expert progression must reflect increasing sophistication.",
+              "description": "Analitička rubrika koja detaljno opisuje kompetencije potrebne za projekat. Svaki red predstavlja jednu procenjenu veštinu. Napredovanje od Početnika do Eksperta mora odražavati sve veću sofisticiranost.",
               "items": {
                 "type": "object",
                 "x-format": "| {value.Criterion} | {value.Novice} | {value.Apprentice} | {value.Practitioner} | {value.Expert} |",
@@ -486,23 +486,23 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "Criterion": {
                     "type": "string",
-                    "description": "The evaluated skill, competency, or dimension of the final project. Do NOT include bullet points or numbering."
+                    "description": "Procena veština, kompetencije ili dimenzije završnog projekta. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "Novice": {
                     "type": "string",
-                    "description": "Description of novice level performance. Must not use deficit-based language such as fails, lacks, or missing. Do NOT include bullet points or numbering."
+                    "description": "Opis performansi na nivou početnika. Ne sme koristiti jezik zasnovan na deficitu, kao što su ne uspeva, nedostaje ili odsustvuje. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "Apprentice": {
                     "type": "string",
-                    "description": "Description of apprentice level performance. Do NOT include bullet points or numbering."
+                    "description": "Opis performansi na nivou šegrta. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "Practitioner": {
                     "type": "string",
-                    "description": "Description of practitioner level performance. Do NOT include bullet points or numbering."
+                    "description": "Opis performansi na nivou praktičara. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "Expert": {
                     "type": "string",
-                    "description": "Description of expert level performance. Must build on the Practitioner level with deeper insight, precision, or complexity. Do NOT include bullet points or numbering."
+                    "description": "Opis performansi na nivou eksperta. Mora se nadograđivati na nivo praktičara sa dubljim uvidom, preciznošću ili složenošću. Ne uključujte nabrajanje ni numerisanje."
                   }
                 }
               }
@@ -523,14 +523,14 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "properties": {
             "LearningPlanOverview": {
               "type": "string",
-              "description": "A 2-4 sentence summary explaining how the project is organized into three flexible phases (Phase 1, Phase 2, Phase 3) rather than fixed day counts. Briefly describe what students do in each phase (e.g., in Phase 1 they build background knowledge; in Phase 2 they apply science ideas through investigations; in Phase 3 they refine prototypes and present to an authentic audience). Do not use bullet points or numbering."
+              "description": "Sažetak od 2-4 rečenice koji objašnjava kako je projekat organizovan u tri fleksibilne faze (Faza 1, Faza 2, Faza 3) umesto u fiksan broj dana. Ukratko opišite šta učenici rade u svakoj fazi (npr. u Fazi 1 grade predznanje; u Fazi 2 primenjuju naučne ideje kroz istraživanja; u Fazi 3 dorađuju prototipe i predstavljaju autentičnoj publici). Ne koristite nabrajanje ni numerisanje."
             },
             "ProjectPhases": {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
               "maxItems": 3,
-              "description": "The three phases of the project. The total duration across all 3 phases MUST exactly equal the total number of days requested for the project.",
+              "description": "Tri faze projekta. Ukupno trajanje kroz sve 3 faze MORA tačno da bude jednako ukupnom broju dana traženom za projekat.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n### {violet}({value.PhaseTitle})\n\n{value.PhaseDescription}\n\n**{loc.ConceptsOrSkillsEmphasized}:** {value.ConceptsOrSkills}\n\n**{loc.CollaborationAndVisibleThinking}:** {value.CollaborationAndVisibleThinking}\n\n{value.KeyLearningExperiences}",
@@ -545,29 +545,29 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "PhaseTitle": {
                     "type": "string",
-                    "description": "The title and duration of the phase (e.g., 'Phase 1: 1-2 days' or 'Phase 3: 2 days'). IMPORTANT: The duration must be explicitly stated in the title, and the sum of maximum days across all phases must exactly match the total requested project length. Do NOT include bullet points or numbering."
+                    "description": "Naziv i trajanje faze (npr. 'Faza 1: 1-2 dana' ili 'Faza 3: 2 dana'). VAŽNO: Trajanje mora biti izričito navedeno u nazivu, a zbir maksimalnih dana kroz sve faze mora tačno odgovarati ukupnoj traženoj dužini projekta. Ne uključujte nabrajanje ni numerisanje."
                   },
                   "PhaseDescription": {
                     "type": "string",
-                    "description": "A short 1-2 sentence paragraph describing what students do during this phase to deepen understanding or synthesize learning."
+                    "description": "Kratak pasus od 1-2 rečenice koji opisuje šta učenici rade tokom ove faze kako bi produbili razumevanje ili sintetisali učenje."
                   },
                   "ConceptsOrSkills": {
                     "type": "string",
-                    "description": "A comma-separated list of the core concepts or skills emphasized in this phase (e.g. 'Observation, questioning, modeling, lever systems, structure stability'). Do NOT include bullet points or numbering."
+                    "description": "Lista osnovnih pojmova ili veština, odvojenih zarezima, na koje se u ovoj fazi stavlja naglasak (npr. 'Posmatranje, postavljanje pitanja, modelovanje, polužni sistemi, stabilnost strukture'). Ne uključujte nabrajanje ni numerisanje."
                   },
                   "CollaborationAndVisibleThinking": {
                     "type": "string",
-                    "description": "A sentence explaining how students collaborate and make their thinking visible in this phase (e.g. 'Students use think-pair-share, sketch notes, and quick group comparisons to make their thinking visible.'). Do NOT include bullet points or numbering."
+                    "description": "Rečenica koja objašnjava kako učenici sarađuju i čine svoje razmišljanje vidljivim u ovoj fazi (npr. 'Učenici koriste think-pair-share, skicirane beleške i brza grupna poređenja da bi svoje razmišljanje učinili vidljivim.'). Ne uključujte nabrajanje ni numerisanje."
                   },
                   "KeyLearningExperiences": {
                     "type": "array",
                     "x-format": "{items}",
                     "minItems": 3,
-                    "description": "A list of the specific learning activities or tasks in this phase.",
+                    "description": "Lista specifičnih aktivnosti ili zadataka učenja u ovoj fazi.",
                     "items": {
                       "type": "string",
                       "x-format": "- {value}",
-                      "description": "A specific learning activity (e.g. 'Shaduf build and test'). Do NOT include any numbering or bullet points at the beginning of your strings."
+                      "description": "Specifična aktivnost učenja (npr. 'Izrada i testiranje šadufa'). Ne uključujte numerisanje ni nabrajanje na početku svojih stringova."
                     }
                   }
                 }
@@ -577,11 +577,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
-              "description": "The output must contain exactly three project goals, each expressed as a conceptual category followed by detailed bullets or short paragraphs. Goal 1, Apply Disciplinary Content to a Real-World Problem, requires students to use discipline-specific knowledge to analyze or solve an authentic challenge, list 4-6 core concepts or principles they will apply, and show how these ideas connect to real-world conditions or constraints. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, requires describing the authentic challenge students must address, listing what students will create, model, compare, analyze, evaluate, or justify, and including processes such as modeling, predicting, comparing, evaluating, and decision-making. Goal 3, Communicate Findings to a Real Audience, requires students to prepare a polished, professional-quality final product, tailor communication to the needs of a real stakeholder group, and reference authentic audiences such as local experts, community organizations, industry professionals, school leadership, families, or community members.",
+              "description": "Izlaz mora da sadrži tačno tri cilja projekta, od kojih je svaki izražen kao konceptualna kategorija praćena detaljnim nabrajanjima ili kratkim pasusima. Cilj 1, Primena disciplinskog sadržaja na problem iz stvarnog sveta, zahteva da učenici koriste znanje specifično za disciplinu da analiziraju ili reše autentični izazov, navedu 4-6 osnovnih pojmova ili principa koje će primeniti i pokažu kako se te ideje povezuju sa uslovima ili ograničenjima iz stvarnog sveta. Cilj 2, Rešavanje stvarnog, razvojno primerenog problemskog zadatka ili istraživačkog problema, zahteva opis autentičnog izazova na koji učenici moraju da odgovore, navođenje onoga što će kreirati, modelovati, uporediti, analizirati, proceniti ili opravdati, i uključivanje procesa kao što su modelovanje, predviđanje, poređenje, procenjivanje i donošenje odluka. Cilj 3, Saopštavanje nalaza stvarnoj publici, zahteva da učenici pripreme uglađen, profesionalno kvalitetan završni proizvod, prilagode komunikaciju potrebama stvarne zainteresovane grupe i navedu autentične publike kao što su lokalni stručnjaci, organizacije zajednice, stručnjaci iz industrije, školsko rukovodstvo, porodice ili članovi zajednice.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n",
-                "description": "A specific project goal formatted with bold labels (e.g. '**Goal 1: Apply Disciplinary Content to a Real-World Problem** Use knowledge...')"
+                "description": "Specifičan cilj projekta formatiran podebljanim oznakama (npr. '**Goal 1: Apply Disciplinary Content to a Real-World Problem** Use knowledge...')"
               }
             },
             "FinalDeliverableSummary": {
@@ -595,7 +595,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "GroupSuggestions": {
               "type": "object",
-              "description": "Outlines group size, roles and teacher duties.",
+              "description": "Opisuje veličinu grupe, uloge i dužnosti nastavnika.",
               "additionalProperties": false,
               "required": [
                 "GroupSize",
@@ -606,12 +606,12 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "GroupSize": {
                   "type": "string",
-                  "description": "The output must state a recommended group size such as 3 to 4 students and must provide a rationale explaining how this size supports productive discussion, shared engagement, and manageable task distribution. Example: 'Group Size 3 to 4 students is ideal because...'"
+                  "description": "Izlaz mora navesti preporučenu veličinu grupe, kao što je 3 do 4 učenika, i mora pružiti obrazloženje koje objašnjava kako ova veličina podržava produktivnu diskusiju, zajedničko angažovanje i upravljivu raspodelu zadataka. Primer: 'Veličina grupe od 3 do 4 učenika je idealna zato što...'"
                 },
                 "RotatingRolesAndDuties": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The output must provide a list of roles formatted as 'Role Name: description of duties'. The list must include at least four roles (Facilitator, Recorder, Materials Manager, Presenter/Communicator) and Teacher expectations at the end.",
+                  "description": "Izlaz mora navesti listu uloga formatiranu kao 'Naziv uloge: opis dužnosti'. Lista mora da sadrži najmanje četiri uloge (Facilitator, Recorder, Materials Manager, Presenter/Communicator) i očekivanja od nastavnika na kraju.",
                   "minItems": 4,
                   "items": {
                     "type": "string",
@@ -621,7 +621,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "TeacherGroupingStrategyPrompt": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The model must output exactly these two strings: 1) '\"What is the main purpose of your grouping in this activity-peer support, rich discussion, challenge, or efficiency? Once you have named the purpose, which grouping approach best fits it: mixed-ability, interest-based, skills-based, or random?\"' 2) 'This question encourages teachers to choose grouping methods that match instructional goals rather than defaulting to convenience or habit.'",
+                  "description": "Model mora da izbaci tačno ova dva niza: 1) '\"What is the main purpose of your grouping in this activity-peer support, rich discussion, challenge, or efficiency? Once you have named the purpose, which grouping approach best fits it: mixed-ability, interest-based, skills-based, or random?\"' 2) 'Ovo pitanje podstiče nastavnike da izaberu metode grupisanja koje odgovaraju nastavnim ciljevima, umesto da se oslanjaju na praktičnost ili naviku.'",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}\n"
@@ -630,7 +630,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "GroupingStrategyRecommendations": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The model must output the exact grouping strategy recommendations formatted with bold labels (e.g. '**Mixed-ability Groups:** Best when...'). Strategies to include: Mixed-ability Groups, Interest-based Groups, Skills-based Groups, Randomized Groups.",
+                  "description": "Model mora da izbaci tačne preporuke za strategiju grupisanja formatirane podebljanim oznakama (npr. '**Mixed-ability Groups:** Najbolje kada...'). Strategije koje treba uključiti: Mixed-ability Groups, Interest-based Groups, Skills-based Groups, Randomized Groups.",
                   "minItems": 4,
                   "items": {
                     "type": "string",
@@ -645,7 +645,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase1}\n\n### {green}({loc.Phase1Title})\n\n**Focus Statement**\n{value.Phase1_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase1_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase1_GuidingQuestions}\n\n{value.Phase1_Differentiation}\n\n{value.Phase1_AccommodationsAndModifications}\n\n{value.Phase1_AnticipatedMisconceptions}\n\n{value.Phase1_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase1_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase1_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase1_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase1_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase1_ReflectionPrompt.Introduction}\n{value.Phase1_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "First phase of teacher guidance",
+          "description": "Prva faza nastavničkog vođenja",
           "required": [
             "Phase1_FocusStatement",
             "Phase1_CollaborativeActivities",
@@ -664,7 +664,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "properties": {
             "Phase1_FocusStatement": {
               "type": "string",
-              "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit's Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question."
+              "description": "Obezbedite kratku izjavu koja opisuje kako ova faza gradi radoznalost, uvodi problem iz stvarnog sveta i aktivira rano rezonovanje. Izjava fokusa mora da uključuje podsticanje radoznalosti o osnovnom fenomenu ili problemu, rano posmatranje i istraživanje, zapažanja i pitanja koja dolaze od učenika, kao i jasnu vezu sa vodećim pitanjem jedinice. Formulacija treba da odražava da u ovoj uvodnoj fazi učenici grade radoznalost i počinju da otkrivaju naučni ili konceptualni problem u srži projekta, i da kroz posmatranje, istraživanje i rane pokušaje modelovanja prikupljaju neposredne dokaze koji povezuju njihovo početno razmišljanje sa vodećim pitanjem."
             },
             "Phase1_CollaborativeActivities": {
               "type": "array",
@@ -719,7 +719,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generišite 2-3 podrške specifične za lekciju (vizuelni prikazi, rečnici, gestovi) kako biste pomogli učenicima koji uče jezik da pristupe idejama i izraze ih. NE počinjite stavke tačkama, crticama ili brojevima. Samo napišite običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -727,7 +727,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generišite 3-4 početne rečenice koje pomažu učenicima da opišu, objasne i saopšte svoje razmišljanje za ovu specifičnu lekciju. NE počinjite stavke tačkama, crticama ili brojevima. Samo napišite običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -746,7 +746,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generišite 2-3 podrške korak po korak (strukturisani alati, modeli primera, glasno razmišljanje) i precizne smernice koje će pomoći učenicima da završe zadatak. NE počinjite stavke tačkama, crticama ili brojevima. Samo napišite običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -754,7 +754,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generišite 3-4 pitanja sa kontrolne liste koja će voditi učenike u razumevanju sopstvenog učenja tokom istraživanja. NE počinjite stavke tačkama, crticama ili brojevima. Samo napišite običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -773,7 +773,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generišite 2-3 proširenja koja povećavaju složenost (specifični izazovi, identifikacija obrazaca) kako biste pomogli učenicima da prodube ili poboljšaju svoje razmišljanje koristeći dokaze. NE počinjite stavke tačkama, crticama ili brojevima. Samo napišite običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -781,11 +781,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Generišite jedan složen podsticaj/pitanje (ne uključujte prefiks 'Say:') za podsticanje dubljeg konceptualnog razumevanja."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generišite 3-4 konkretna primera visokokvalitetnih odgovora učenika na napredno pitanje. NE počinjite stavke tačkama, crticama ili brojevima. Samo napišite običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -810,7 +810,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase1_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Ovaj odeljak mora da sadrži dve vrste podrške: Opšte podrške i Individualizovane podrške. Fokus je na pristupu, a ne na smanjenju rigoroznosti.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -818,19 +818,19 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Nestručne strategije specifične za učenike koje poboljšavaju pristup za sve učenike (npr. vizuali, unapred popunjene beleške, digitalni rečnik, podeljena uputstva na delove). Dajte 2-4 stavke u formi nabrajanja."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Specifične adaptacije i modifikacije za imenovane učenike sa formalnim planovima. Navedite SVAKOG učenika pojedinačno; ne grupišite učenike zajedno. Podrške za svakog učenika treba da budu lako pregledna lista.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Ime i prezime pojedinačnog učenika koji prima ovu podršku."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -838,7 +838,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Formalni plan dat za ovog učenika u promptu. Raščlanite plan u jasnu listu. Možete parafrazirati radi boljeg formata, ali nemojte izostaviti niti dodati bilo kakve informacije."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -846,7 +846,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Konkretni alati/stabljike/vizuali/organizatori za ovaj zadatak."
                       }
                     },
                     "required": [
@@ -867,18 +867,18 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase1_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Generišite 2-3 uobičajene zablude učenika koje će verovatno iskrsnuti tokom ove faze. Svaka stavka mora da se fokusira na konkretno nerazumevanje i na skriptu odgovora nastavnika.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Opišite zabludu u 1 rečenici, počevši sa 'Učenici možda misle...'. NE koristite nikakvo podebljavanje ili strong tagove."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Jasna skripta odgovora usmerena ka nastavniku (koja počinje sa 'Teacher Response: ') koja modeluje kako odgovoriti u datom trenutku uz konkretan podsticaj (ne uključujte prefiks 'Say:'). NE koristite nikakvo podebljavanje ili strong tagove."
                   }
                 },
                 "required": [
@@ -894,7 +894,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Generišite 1 transcendentalno pitanje za razmišljanje koje od učenika zahteva da primene učenje izvan sebe, na kontekste iz stvarnog sveta (zajednice, globalni izazovi). Fokusirajte se na to zašto je učenje važno na velikoj skali (bezbednost, održivost, inovacije itd.). Izbegavajte lični/fokus samo na školu."
                 }
               },
               "required": [
@@ -905,7 +905,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase1_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Završno pitanje za proveru razumevanja sa 2-3 očekivana odgovora učenika koji pokazuju savladanost",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -915,7 +915,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke sa nabrajanjem, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -937,7 +937,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke sa nabrajanjem, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -959,7 +959,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke sa nabrajanjem, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -984,7 +984,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "Model mora da kreira komponentu Razmaknutog prisećanja koja od učenika zahteva da se sete ključnog pojma iz određene prethodne jedinice ili časa bez pozivanja na bilo kakve prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Skripta nastavnika mora početi sa Say: i može da se odnosi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora da podstakne učenike da ponovo iznesu ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su varijable povezane ili kako se proces odvija) isključivo iz pamćenja, bez toga da nastavnik daje tragove ili delimična objašnjenja. Izlaz mora da se završi sa Očekivanim odgovorima učenika, prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici — a ne prompt — izneli zapamćene ideje.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1002,7 +1002,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke sa nabrajanjem, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1034,7 +1034,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke sa nabrajanjem, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1066,7 +1066,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke sa nabrajanjem, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1092,13 +1092,13 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "Phase1_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Jedan pasus koji objašnjava znanje i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počinje sa 'Ovi zadaci učvršćuju današnje učenje o ____ kroz ______.' pri čemu se praznine popunjavaju relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
             },
             "Phase1_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Zadaci treba da budu usklađeni sa fokusom faze i očekivanom dubinom znanja. Koristite samo DOK 2, 3 ili 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1111,7 +1111,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Nivo dubine znanja za zadatak. MORA biti JEDAN od: 'DOK 2', 'DOK 3' ili 'DOK 4'. DOK 1 je strogo zabranjen."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -1128,7 +1128,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "Phase1_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Ako i samo ako je predmet matematika: uključite problem međusobnog preplitanja + nastavnikov podsticaj + očekivane odgovore + nastavnikovu napomenu. U suprotnom prazan string."
             },
             "Phase1_ReflectionPrompt": {
               "type": "object",
@@ -1140,7 +1140,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Kratak uvod za učenike u refleksiju, npr. 'Napiši 2-3 rečenice odgovarajući na jedan podsticaj:'"
                 },
                 "Prompts": {
                   "type": "array",
@@ -1157,7 +1157,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase2}\n\n### {green}({loc.Phase2Title})\n\n**Focus Statement**\n{value.Phase2_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase2_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase2_GuidingQuestions}\n\n{value.Phase2_Differentiation}\n\n{value.Phase2_AccommodationsAndModifications}\n\n{value.Phase2_AnticipatedMisconceptions}\n\n{value.Phase2_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase2_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase2_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase2_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase2_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase2_ReflectionPrompt.Introduction}\n{value.Phase2_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "Second phase of teacher guidance",
+          "description": "Druga faza nastavničkih smernica",
           "required": [
             "Phase2_FocusStatement",
             "Phase2_CollaborativeActivities",
@@ -1176,7 +1176,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "properties": {
             "Phase2_FocusStatement": {
               "type": "string",
-              "description": "Write a 1-3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit's Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user."
+              "description": "Napišite Focus Statement od 1-3 rečenice koji sažima svrhu faze, objašnjava kako učenici grade razumevanje kroz rad zasnovan na istraživanju, izričito povezuje fazu sa Pokretačkim pitanjem jedinice ili realnim problemom i opisuje kako ova faza približava učenike stvaranju njihovog konačnog proizvoda. Izjava uvek mora biti napisana kao jedan kratak pasus i mora biti prilagođena specifičnim detaljima projekta koje je korisnik naveo."
             },
             "Phase2_CollaborativeActivities": {
               "type": "array",
@@ -1231,7 +1231,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 2-3 podrške specifične za lekciju (vizuali, banke reči, gestovi) koje će pomoći učenicima jezika da pristupe idejama i izraze ih. NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1239,7 +1239,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 3-4 početne rečenice koje pomažu učenicima da opišu, objasne i saopšte svoje razmišljanje za ovu konkretnu lekciju. NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1258,7 +1258,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 2-3 podrške korak po korak (strukturirani alati, modeli primera, razmišljanje naglas) i tačno vođenje kako bi pomogao učenicima da završe zadatak. NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1266,7 +1266,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 3-4 pitanja sa kontrolne liste koja će voditi učenike da razumeju svoje učenje tokom istraživanja. NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1285,7 +1285,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 2-3 proširenja koja povećavaju složenost (specifični izazovi, identifikacija obrazaca) kako bi pomogla učenicima da prodube ili unaprede svoje razmišljanje koristeći dokaze. NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1293,11 +1293,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Generiši jedno složeno pitanje/prompt (NE uključuj prefiks 'Say:') koje podstiče dublje konceptualno razumevanje."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 3-4 konkretna primera visokokvalitetnih odgovora učenika na napredno pitanje. NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1322,7 +1322,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase2_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Ovaj odeljak mora da uključuje dve vrste podrške: Opšte podrške i Individualizovane podrške. Fokusiraj se na pristup, a ne na smanjenje rigoroznosti.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -1330,19 +1330,19 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Strategije koje nisu specifične za učenike i koje poboljšavaju pristup za sve učenike (npr. vizuali, unapred popunjene beleške, digitalni rečnik, instrukcije podeljene u korake). Navedi 2-4 stavke pod tačkama."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Specifične prilagodbe i modifikacije za imenovane učenike sa formalnim planovima. NavedI SVAKOG učenika pojedinačno; NE grupiši učenike zajedno. Podrška za svakog učenika treba da bude lista koja se lako pregleda.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Ime i prezime pojedinačnog učenika koji dobija ove podrške."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -1350,7 +1350,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Formalni plan naveden za ovog učenika u promptu. Raščlani plan u jasnu listu. Možeš parafrazirati radi boljeg formatiranja, ali NEMOJ da izostaviš ili dodaš bilo koju informaciju."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1358,7 +1358,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Konkretni alati/početne formulacije/vizuali/organizeri za ovaj zadatak."
                       }
                     },
                     "required": [
@@ -1379,18 +1379,18 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase2_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Generiši 2-3 uobičajene zablude učenika koje bi verovatno mogle da se pojave tokom ove faze. Svaka stavka mora da se fokusira na određeno nerazumevanje i skriptu odgovora nastavnika.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Opiši zabludu u 1 rečenici, počevši sa 'Students may think...'. NE koristi podebljavanje niti jake oznake."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Jasna skripta odgovora za nastavnika (počevši sa 'Teacher Response: ') koja pokazuje kako da se reaguje u trenutku uz konkretan podsticaj (ne uključuj prefiks 'Say:'). NE koristi podebljavanje niti jake oznake."
                   }
                 },
                 "required": [
@@ -1406,7 +1406,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Generiši 1 transcendentno pitanje za razmišljanje koje zahteva od učenika da primene učenje izvan sebe, u stvarnim kontekstima (zajednice, globalni izazovi). Fokusiraj se na to zašto je učenje važno na velikoj skali (bezbednost, održivost, inovacija itd.). Izbegavaj lični/školski fokus."
                 }
               },
               "required": [
@@ -1417,7 +1417,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase2_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Završno pitanje za proveru razumevanja sa 2-3 očekivana odgovora učenika koji pokazuju ovladanost",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1427,7 +1427,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1449,7 +1449,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NEMOJ da započinješ stavke pod tačkama, crticama ili brojevima. Samo napiši običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1471,7 +1471,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1496,7 +1496,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "Model mora da kreira komponentu za razmaknuto prisećanje koja zahteva od učenika da se prisete ključnog koncepta iz određene prethodne jedinice ili lekcije bez pozivanja na bilo koje prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Nastavnički scenario mora početi sa Say: i može se odnositi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora podstaći učenike da ponovo izraze ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su promenljive povezane ili kako se proces odvija) isključivo iz sećanja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora da se završi sa Expected Student Responses i da sadrži 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici, a ne prompt, izneli zapamćene ideje.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1514,7 +1514,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1546,7 +1546,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1578,7 +1578,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1604,13 +1604,13 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Jedan pasus koji objašnjava znanje i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počne sa 'These tasks reinforce today's learning about ____ by ______.' pri čemu su praznine popunjene relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Zadaci treba da budu usklađeni sa fokusom faze i očekivanom dubinom znanja. Koristite samo DOK 2, 3 ili 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1623,7 +1623,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Nivo dubine znanja za zadatak. MORA biti JEDNO od sledećeg: 'DOK 2', 'DOK 3' ili 'DOK 4'. DOK 1 je strogo zabranjen."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -1640,7 +1640,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "Phase2_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Ako i SAMO AKO je predmet matematika: uključite interleaving problem + nastavnički podsticaj + očekivane odgovore + nastavničku napomenu. U suprotnom prazna niska."
             },
             "Phase2_ReflectionPrompt": {
               "type": "object",
@@ -1652,7 +1652,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Kratak uvod namenjen učenicima za refleksiju, npr. 'Napiši 2-3 rečenice kao odgovor na jedan podsticaj:'"
                 },
                 "Prompts": {
                   "type": "array",
@@ -1669,7 +1669,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase3}\n\n### {green}({loc.Phase3Title})\n\n**Focus Statement**\n{value.Phase3_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase3_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase3_GuidingQuestions}\n\n{value.Phase3_Differentiation}\n\n{value.Phase3_AccommodationsAndModifications}\n\n{value.Phase3_AnticipatedMisconceptions}\n\n{value.Phase3_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase3_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase3_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase3_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase3_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase3_ReflectionPrompt.Introduction}\n{value.Phase3_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "Third phase of teacher guidance",
+          "description": "Treća faza nastavničkog usmeravanja",
           "required": [
             "Phase3_FocusStatement",
             "Phase3_CollaborativeActivities",
@@ -1688,7 +1688,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
           "properties": {
             "Phase3_FocusStatement": {
               "type": "string",
-              "description": "Generate a 2-4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project's authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning."
+              "description": "Generiši fokusnu izjavu od 2-4 rečenice koja jasno saopštava svrhu Faze 3 i njenu ulogu u vođenju učenika ka konačnom proizvodu. Izjava mora objasniti da se Faza 3 fokusira na dorađivanje ideja, primenu učenja, jačanje dokaza, pripremu završnih proizvoda i uključivanje u dublje rezonovanje i reviziju. Mora izričito pokazati kako Faza 3 unapređuje autentičan stvarni izazov projekta, kako učenici koriste dokaze da poboljšaju rešenja i kako ih ovaj rad priprema za autentičnu publiku. Izjava mora sadržati intelektualni rad kao što su dorađivanje, revizija, sintetisanje, procenjivanje, opravdavanje, finalizovanje i komunikacija, i mora ukazivati na to kako učenici finalizuju modele, proizvode, objašnjenja ili predloge, pripremaju prezentacije ili javna prikazivanja i razmišljaju o učenju kako bi ojačali svoje rezonovanje."
             },
             "Phase3_CollaborativeActivities": {
               "type": "array",
@@ -1743,7 +1743,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 2-3 podrške specifične za lekciju (vizuali, banke reči, gestovi) kako bi se učenicima koji uče jezik olakšao pristup i izražavanje ideja. NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1751,7 +1751,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 3-4 početka rečenica koji pomažu učenicima da opišu, objasne i saopšte svoje razmišljanje za ovu specifičnu lekciju. NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1770,7 +1770,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 2-3 podrške korak po korak (strukturisani alati, modeli primera, razmišljanje naglas) i tačno uputstvo koje pomaže učenicima da završe zadatak. NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1778,7 +1778,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 3-4 pitanja sa kontrolne liste koja vode učenike da razumeju svoje učenje tokom istraživanja. NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1797,7 +1797,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 2-3 proširenja koja povećavaju složenost (specifični izazovi, identifikacija obrazaca) kako bi se učenicima pomoglo da prodube ili unaprede svoje razmišljanje koristeći dokaze. NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1805,11 +1805,11 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Generiši jedan složen podsticaj (ne uključuj prefiks 'Say:')/pitanje koje će podstaći dublje konceptualno razumevanje."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Generiši 3-4 konkretna primera kvalitetnih odgovora učenika na napredno pitanje. NE POČINjI stavke sa nabrajanjem, crticama ili brojevima. Samo napiši običan tekst.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1834,7 +1834,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase3_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Ovaj odeljak mora da sadrži dve vrste podrške: Opštu podršku i Individualizovanu podršku. Fokus je na pristupu, a ne na smanjenju rigoroznosti.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -1842,19 +1842,19 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Strategije koje nisu specifične za određenog učenika, a poboljšavaju pristup za sve učenike (npr. vizuelni prikazi, unapred popunjene beleške, digitalni rečnik, instrukcije podeljene na manje delove). Navedite 2-4 stavke u formatu bullet points."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Specifične prilagodbe i modifikacije za imenovane učenike sa formalnim planovima. Navedite SVAKOG učenika pojedinačno; NE grupišite učenike zajedno. Podrška za svakog učenika treba da bude lista koju je lako pregledati.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Ime i prezime pojedinačnog učenika koji prima ovu podršku."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -1862,7 +1862,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Formalni plan koji je za ovog učenika dat u promptu. Razložite plan u jasnu listu. Možete parafrazirati radi boljeg formatiranja, ali NE izostavljajte niti dodajte bilo kakve informacije."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1870,7 +1870,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Konkretni alati/starteri/vizuelni prikazi/organizatori za ovaj zadatak."
                       }
                     },
                     "required": [
@@ -1891,18 +1891,18 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase3_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Generišite 2-3 česte zablude učenika koje bi se verovatno javile tokom ove faze. Svaka stavka mora da se fokusira na određenu pogrešnu pretpostavku i na skriptu za odgovor nastavnika.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Opišite zabludu u 1 rečenici, počevši sa 'Students may think...'. NE koristite podebljavanje niti strong tagove."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Jasna skripta za odgovor nastavnika namenjena nastavniku (počinje sa 'Teacher Response: ') koja pokazuje kako odgovoriti u trenutku uz konkretan podsticaj (ne uključujte prefiks 'Say:'). NE koristite podebljavanje niti strong tagove."
                   }
                 },
                 "required": [
@@ -1918,7 +1918,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Generišite 1 transcendentno pitanje za razmišljanje koje zahteva od učenika da primene učenje izvan sebe, u kontekstima stvarnog sveta (zajednice, globalni izazovi). Fokusirajte se na to zašto je učenje važno na velikoj skali (bezbednost, održivost, inovacije itd.). Izbegavajte lični/školski fokus."
                 }
               },
               "required": [
@@ -1929,7 +1929,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase3_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Završno pitanje za proveru razumevanja sa 2-3 očekivana odgovora učenika koji pokazuju savladanost",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1939,7 +1939,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke bullet pointovima, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1961,7 +1961,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke bullet pointovima, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1983,7 +1983,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke bullet pointovima, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2008,7 +2008,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "Model mora da kreira komponentu Razmaknuto prisećanje koja zahteva od učenika da se prisete ključnog koncepta iz određene prethodne jedinice ili lekcije bez pozivanja na bilo kakve prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Skripta nastavnika mora početi sa Say: i može se odnositi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora da podstakne učenike da ponovo iznesu ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su promenljive povezane ili kako se proces odvija) potpuno iz memorije, bez davanja nagoveštaja ili delimičnih objašnjenja. Izlaz mora da se završi sa Expected Student Responses koji prikazuje 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici — a ne prompt — izneli zapamćene ideje.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -2026,7 +2026,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke bullet pointovima, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2058,7 +2058,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke bullet pointovima, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2090,7 +2090,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NE počinjite stavke bullet pointovima, crticama ili brojevima. Samo napišite običan tekst.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2116,13 +2116,13 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Jedan pasus koji objašnjava znanja i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počne sa 'These tasks reinforce today's learning about ____ by ______.' pri čemu se prazna mesta popunjavaju relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Zadaci treba da budu usklađeni sa fokusom faze i očekivanom dubinom znanja. Koristite samo DOK 2, 3 ili 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -2135,7 +2135,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Nivo dubine znanja za zadatak. MORA biti JEDNO od: 'DOK 2', 'DOK 3' ili 'DOK 4'. DOK 1 je strogo zabranjen."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -2152,7 +2152,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
             },
             "Phase3_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Ako i SAMO AKO je predmet matematika: uključite smenjivanje zadataka + nastavnikov podsticaj + očekivane odgovore + nastavnikovu napomenu. U suprotnom prazna niska."
             },
             "Phase3_ReflectionPrompt": {
               "type": "object",
@@ -2164,7 +2164,7 @@ VAŽNO: odgovor mora biti na {{$ResponseLanguage}}`,
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Kratak uvod za učenike u refleksiju, npr. 'Napiši 2-3 rečenice kao odgovor na jedan podsticaj:'"
                 },
                 "Prompts": {
                   "type": "array",

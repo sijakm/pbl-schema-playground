@@ -34,7 +34,7 @@ window.pblPrompts_enru = {
   "properties": {
     "UnitPlan": {
       "type": "object",
-      "description": "Return a complete Project-Based Learning (PBL) Unit Plan. Do NOT add extra keys. Populate every required field. Must work for ANY subject. Localize stakeholders/audience/resources to provided zip/location without inventing exact addresses/phone numbers.",
+      "description": "Предоставьте полный план модуля проектного обучения (PBL). НЕ добавляйте лишних ключей. Заполните каждое обязательное поле. Должно работать для ЛЮБОГО предмета. Локализуйте заинтересованные стороны/аудиторию/ресурсы под указанный почтовый индекс/местоположение, не выдумывая точные адреса/номера телефонов.",
       "additionalProperties": false,
       "required": [
         "AssessPriorKnowledge",
@@ -52,16 +52,16 @@ window.pblPrompts_enru = {
         "AssessPriorKnowledge": {
           "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n**{loc.Purpose}:** {loc.PBLAssessPriorKnowledgePurposeText}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
           "type": "object",
-          "description": "Assess Prior Knowledge section. 1. Ensure DOK 1-3 prompts are used. 2. Include prerequisite skills needed for the student learning objectives. 3. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 4. Initial teacher prompt with 'Say:' statement. 5. Clear instructions and template/structure for the chosen modality. 6. 'Expected Student Responses' section. 7. Closing teacher 'Say:' prompt. 8. After fully developing one modality, provide 2 brief alternate options.",
+          "description": "Раздел «Оценка предыдущих знаний». 1. Убедитесь, что используются запросы DOK 1-3. 2. Включите навыки-предпосылки, необходимые для целей обучения учащегося. 3. Выберите один формат из этого списка и полностью его разработайте: опрос, K-W-L, визуальные материалы, концептуальные карты, рефлексивное письмо, антиципационные таблицы, оценки словарного запаса. 4. Начальный инструктаж учителя со строкой 'Say:'. 5. Чёткие инструкции и шаблон/структура для выбранного формата. 6. Раздел 'Ожидаемые ответы учащихся'. 7. Завершающий инструктаж учителя с пометкой 'Say:'. 8. После полного развития одного формата предложите 2 кратких альтернативных варианта.",
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we begin...\"'"
+              "description": "Чёткие инструкции и шаблон/структура для выбранного формата. Например: 'Say: \"Before we begin...\"'"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
               "type": "array",
-              "description": "Anticipated answers or common misconceptions for the chosen modality. IMPORTANT: Do not include bullet points, dashes, or numbers at the beginning of the strings.",
+              "description": "Предполагаемые ответы или распространённые заблуждения для выбранного формата. ВАЖНО: не включайте маркеры, тире или цифры в начале строк.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -69,12 +69,12 @@ window.pblPrompts_enru = {
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation."
+              "description": "Завершающая реплика учителя с пометкой 'Say:', которая подтверждает ход мыслей учащихся и предваряет исследование модуля."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
               "type": "array",
-              "description": "2 brief alternate options a teacher could choose.",
+              "description": "2 кратких альтернативных варианта, которые мог бы выбрать учитель.",
               "items": {
                 "x-format": "{index}. {value}",
                 "type": "string"
@@ -108,11 +108,11 @@ window.pblPrompts_enru = {
           "properties": {
             "TaskStatementTitle": {
               "type": "string",
-              "description": "The title of the student-facing launch message (e.g. Message from the Coconut Creek STEM Innovation Team)."
+              "description": "Название приветственного сообщения для учащихся (например, Message from the Coconut Creek STEM Innovation Team)."
             },
             "LetterGreeting": {
               "type": "string",
-              "description": "The opening greeting for the student-facing launch message (e.g., 'Hello engineers-in-training,')."
+              "description": "Приветствие в начале приветственного сообщения для учащихся (например, 'Hello engineers-in-training,')."
             },
             "LetterBody": {
               "x-format": "{items}",
@@ -121,27 +121,27 @@ window.pblPrompts_enru = {
                 "x-format": "{value}\n\n",
                 "type": "string"
               },
-              "description": "The main paragraphs of the student-facing launch message (3-5 paragraphs) written like a credible local organization or person. Must include a clear connection to the problem, the driving question, the deliverable requirements, and an inspiring call to action. Urgent, meaningful, authentic. Do NOT include the title, greeting, sign-off phrase (e.g. 'Sincerely,'), or sender name here. Only include the body paragraphs."
+              "description": "Основные абзацы приветственного сообщения для учащихся (3–5 абзацев), написанные так, будто это достоверная местная организация или человек. Должна быть чёткая связь с проблемой, направляющим вопросом, требованиями к итоговому продукту и вдохновляющим призывом к действию. Срочно, значимо, аутентично. НЕ включайте здесь заголовок, приветствие, прощальную формулу (например, 'Sincerely,') или имя отправителя. Только основной текст абзацев."
             },
             "LetterSignOff": {
               "type": "string",
-              "description": "The sign-off phrase for the message (e.g., 'Sincerely,'). Just provide the sign-off phrase, nothing else."
+              "description": "Прощальная формула для сообщения (например, 'Sincerely,'). Укажите только саму формулу прощания, больше ничего."
             },
             "LetterSender": {
               "type": "string",
-              "description": "The name of the credible local organization or person sending the message (e.g., 'Coconut Creek STEM Innovation Team'). Do NOT include the sign-off (e.g., 'Sincerely') here."
+              "description": "Имя достоверной местной организации или человека, отправляющего сообщение (например, 'Coconut Creek STEM Innovation Team'). НЕ включайте здесь прощальную формулу (например, 'Sincerely')."
             },
             "DrivingQuestion": {
               "type": "string",
-              "description": "One strong open-ended Driving Question grounded in place and stakeholder need. This question must also be woven into the LetterBody. MUST be reused verbatim in FramingTheLearning.DrivingQuestion."
+              "description": "Один сильный открытый направляющий вопрос, основанный на местоположении и потребности заинтересованной стороны. Этот вопрос также должен быть вплетён в текст письма. ДОЛЖЕН использоваться дословно в FramingTheLearning.DrivingQuestion."
             },
             "Mission": {
               "type": "string",
-              "description": "Paragraph starting with 'Your task is to...' describing what students will create/do and why it matters to the community/audience."
+              "description": "Абзац, начинающийся с 'Your task is to...', описывающий, что учащиеся будут создавать/делать и почему это важно для сообщества/аудитории."
             },
             "ProjectContextAndStakeholders": {
               "type": "string",
-              "description": "Short narrative: who is impacted, why it matters now locally, and which stakeholders/audiences care."
+              "description": "Краткий рассказ: кто затронут, почему это важно сейчас на местном уровне и каких заинтересованных сторон/аудиторий это касается."
             },
             "FinalDeliverableRequirements": {
               "type": "array",
@@ -151,11 +151,11 @@ window.pblPrompts_enru = {
                 "type": "string",
                 "x-format": "{index}. {value}"
               },
-              "description": "Written for students, describe the final deliverable they will create and the authentic audience it serves. Format each item with a bolded title (e.g. **Summary:** ...). Do NOT include any numbering (like 1., 2.) or bullet points at the beginning of your strings; start directly with the bolded title. Must include at least a brief summary, then four components: (1) Concept & Purpose Plan explaining the idea through a visual or written representation and why it matters to the community or context; (2) Evidence-Based Justification requiring analysis of at least two relevant factors and explanation of choices using evidence from research, data, experimentation, or observation; (3) Model or Representation describing the type of model created, what it represents, how it functions, and how it reveals the force, stability, efficiency, or system behind the idea; and (4) The Verdict, a concluding, evidence-backed argument explaining why the solution is effective, feasible, or meaningful, summarizing reasoning, evidence, and model, and communicating the value of the design to the authentic audience. Your final statement should show that you can apply disciplinary knowledge, use evidence, model complex ideas, and explain real-world implications."
+              "description": "Для учащихся: опишите конечный продукт, который они создадут, и подлинную аудиторию, для которой он предназначен. Форматируйте каждый пункт с жирным заголовком (например, **Summary:** ...). НЕ используйте нумерацию (например, 1., 2.) или маркеры в начале строк; начинайте сразу с жирного заголовка. Должно обязательно включать как минимум краткое резюме, затем четыре компонента: (1) Concept & Purpose Plan — объяснение идеи через визуальное или письменное представление и того, почему это важно для сообщества или контекста; (2) Evidence-Based Justification — анализ как минимум двух релевантных факторов и объяснение выбора с использованием доказательств из исследований, данных, экспериментов или наблюдений; (3) Model or Representation — описание типа созданной модели, того, что она представляет, как она функционирует и как она раскрывает силу, устойчивость, эффективность или систему, стоящую за идеей; и (4) The Verdict — заключительный, подкреплённый доказательствами аргумент, объясняющий, почему решение эффективно, осуществимо или значимо, подытоживающий рассуждение, доказательства и модель и передающий ценность разработки для подлинной аудитории. Ваше итоговое утверждение должно показать, что вы можете применять предметные знания, использовать доказательства, моделировать сложные идеи и объяснять последствия для реального мира."
             },
             "ClosingCallToAction": {
               "type": "string",
-              "description": "Inspiring close: the community/audience is counting on creative thinkers who can turn evidence into action. Emphasize that ancient ideas can inspire modern solutions."
+              "description": "Вдохновляющее завершение: сообщество/аудитория рассчитывает на творческих мыслителей, которые смогут превратить доказательства в действия. Подчеркните, что древние идеи могут вдохновлять современные решения."
             }
           }
         },
@@ -177,14 +177,14 @@ window.pblPrompts_enru = {
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Standards listed verbatim when provided, format 'CODE: description'. Do NOT include bullet points at the beginning of your strings."
+              "description": "Стандарты, указанные дословно, если они предоставлены; формат: 'CODE: description'. Не добавляйте маркеры в начале строк."
             },
             "BigIdeasAndEssentialQuestions": {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
               "maxItems": 4,
-              "description": "Generate 3-4 Big Idea and Essential Question pairs that establish the enduring, transferable concepts anchoring the entire unit, guide inquiry and assessment design, and provide an overarching conceptual framework connecting all tasks, skills, and activities into meaningful understanding.",
+              "description": "Сгенерируйте 3–4 пары «Большая идея и ключевой вопрос», которые задают устойчивые, переносимые концепции, лежащие в основе всего модуля, направляют исследование и разработку оценивания и обеспечивают общую концептуальную рамку, связывающую все задания, навыки и виды деятельности в осмысленное понимание.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{loc.BigIdeaLabel}** {value.BigIdea}\n\n- {loc.EssentialQuestionLabel} {value.EssentialQuestion}",
@@ -196,11 +196,11 @@ window.pblPrompts_enru = {
                 "properties": {
                   "BigIdea": {
                     "type": "string",
-                    "description": "A broad, conceptual statement of enduring understanding that explains a fundamental principle underlying the unit, connects all tasks and assessments, supports transferable learning beyond the specific context, and reflects core disciplinary thinking rather than isolated facts."
+                    "description": "Широкое, концептуальное утверждение об устойчивом понимании, которое объясняет фундаментальный принцип, лежащий в основе модуля, связывает все задания и оценивания, поддерживает переносимое обучение за пределы конкретного контекста и отражает ключевое предметное мышление, а не изолированные факты."
                   },
                   "EssentialQuestion": {
                     "type": "string",
-                    "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter."
+                    "description": "Создавайте ключевые вопросы, которые фокусируются только на широких, универсальных концепциях, таких как изменение, доказательства, закономерности, отношения, системы или рассуждение. НЕ упоминайте какие-либо предметные термины, процессы, лексику или примеры. Вопросы должны быть открытыми, переносимыми в любые дисциплины и невозможными для ответа после изучения содержания урока или модуля. Сосредоточьтесь только на больших идеях, а не на содержании предмета."
                   }
                 }
               }
@@ -223,7 +223,7 @@ window.pblPrompts_enru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, and explain how or why something works rather than just what it is. Write the objectives as direct continuations of the phrase 'Students will understand that...'. Do NOT repeat the phrase 'Students will understand that', and do NOT start with verbs like 'Explain that' or 'Describe that' (e.g., just write 'engineering designs improve when...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Каждая цель должна заканчиваться на (DOK X) и представлять Big Ideas или Enduring Understandings, генерируя 3–5 концептуальных, долгосрочных утверждений, которые объясняют, почему обучение важно за пределами модуля, подчеркивают переносимые закономерности, отношения или принципы в разных контекстах и объясняют, как или почему что-то работает, а не просто что это такое. Пишите цели как прямое продолжение фразы 'Students will understand that...'. Не повторяйте фразу 'Students will understand that' и не начинайте с глаголов вроде 'Explain that' или 'Describe that' (например, просто напишите 'engineering designs improve when...'). НЕ включайте никакой нумерации, маркированных списков или тире в начале ваших строк."
                 },
                 "StudentsWillKnowThat": {
                   "type": "array",
@@ -233,7 +233,7 @@ window.pblPrompts_enru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, and include an appropriate DOK label typically at level 1 or 2. Write the objectives as direct continuations of the phrase 'Students will know that...'. Do NOT repeat the phrase 'Students will know that', and do NOT start with verbs like 'Identify that' or 'Define' (e.g., just write 'a lever has an effort arm...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Каждая цель должна заканчиваться на (DOK X) и представлять Facts or Core Content Knowledge, генерируя 3–5 предметно-специфических фактов, терминов или базовых утверждений знаний, которые определяют важную информацию, которую учащиеся должны помнить, остаются конкретными и фактическими, а не концептуальными, поддерживают стандарты модуля и итоговые задания, используют четкую академическую лексику, соответствующую предмету, и включают соответствующую метку DOK, обычно на уровне 1 или 2. Пишите цели как прямое продолжение фразы 'Students will know that...'. Не повторяйте фразу 'Students will know that' и не начинайте с глаголов вроде 'Identify that' или 'Define' (например, просто напишите 'a lever has an effort arm...'). НЕ включайте никакой нумерации, маркированных списков или тире в начале ваших строк."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
@@ -243,7 +243,7 @@ window.pblPrompts_enru = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; and include an appropriate DOK level between 2 and 4. Write the objectives as direct continuations of the phrase 'Students will be able to...'. Begin directly with a measurable action verb (e.g., analyze, compare, design, model, solve). Do NOT repeat the prefix 'Students will be able to'. DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Каждая цель должна заканчиваться на (DOK X) и представлять Skills or Practices, соответствующие дисциплине, генерируя 4–7 утверждений, основанных на навыках, которые описывают, что будут делать учащиеся; согласуйте их с дисциплинарно-специфическими практиками; напрямую связывайте их с итоговым проектным продуктом или заданием на выполнение; сохраняйте измеримость и наблюдаемость; и включайте соответствующий уровень DOK между 2 и 4. Пишите цели как прямое продолжение фразы 'Students will be able to...'. Начинайте непосредственно с измеримого глагола действия (например, analyze, compare, design, model, solve). Не повторяйте префикс 'Students will be able to'. НЕ включайте никакой нумерации, маркированных списков или тире в начале ваших строк."
                 }
               }
             }
@@ -263,12 +263,12 @@ window.pblPrompts_enru = {
           "properties": {
             "DrivingQuestion": {
               "type": "string",
-              "description": "MUST match UnitOverview.DrivingQuestion verbatim. State the actual driving question (e.g. 'How can we design an invention inspired by ancient Egyptian innovation to solve a real problem in our Coconut Creek community?')."
+              "description": "ДОЛЖНО точно соответствовать UnitOverview.DrivingQuestion дословно. Укажите фактический driving question (например, 'How can we design an invention inspired by ancient Egyptian innovation to solve a real problem in our Coconut Creek community?')."
             },
             "ProblemDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "The problem description paragraphs explaining the real challenge. Explain why the problem matters and the consequences if it is not addressed, identifying underlying contributing factors. Show how misunderstanding, missing information, or overlooked variables contribute to the issue. Explain how the solution serves a real, relevant authentic audience. Do NOT include any numbering or bullet points at the beginning of your strings.",
+              "description": "Абзацы с описанием проблемы, объясняющие реальный вызов. Объясните, почему проблема важна и каковы последствия, если ее не решить, определяя лежащие в основе способствующие факторы. Покажите, как непонимание, недостающая информация или упущенные переменные способствуют возникновению проблемы. Объясните, как решение служит реальной, значимой, аутентичной аудитории. НЕ включайте никакой нумерации или маркированных списков в начале ваших строк.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -277,7 +277,7 @@ window.pblPrompts_enru = {
             "ProjectDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "Narrative paragraphs of how learning builds across the multi-day project (inquiry -> apply -> refine -> present). Explain how students begin by exploring examples, notice patterns, apply science knowledge through hands-on tests, then use those findings to develop an original invention. Explain how they revise prototypes and present ideas to an authentic audience. Do NOT include any numbering or bullet points at the beginning of your strings.",
+              "description": "Повествовательные абзацы о том, как обучение выстраивается на протяжении многодневного проекта (inquiry -> apply -> refine -> present). Объясните, как учащиеся начинают с изучения примеров, замечают закономерности, применяют научные знания через практические испытания, а затем используют эти выводы для разработки оригинального изобретения. Объясните, как они дорабатывают прототипы и представляют идеи аутентичной аудитории. НЕ включайте никакой нумерации или маркированных списков в начале ваших строк.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -288,7 +288,7 @@ window.pblPrompts_enru = {
               "minItems": 3,
               "maxItems": 5,
               "x-format": "{items}",
-              "description": "Must include 3 to 5 Place-Based Sites of Engagement. Ensure sites represent varied contexts and clearly show how the local community is part of the learning ecosystem.",
+              "description": "ДОЛЖНО включать 3–5 Place-Based Sites of Engagement. Убедитесь, что sites представляют разнообразные контексты и ясно показывают, что местное сообщество является частью учебной экосистемы.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{value.SiteTitle}**\n\n- **{loc.StudentEngagement}:** {value.StudentEngagement}\n- **{loc.Relevance}:** {value.Relevance}",
@@ -301,15 +301,15 @@ window.pblPrompts_enru = {
                 "properties": {
                   "SiteTitle": {
                     "type": "string",
-                    "description": "A meaningful physical, community, virtual, or discipline-specific location relevant to the unit's context (e.g., 'Coconut Creek Middle School Campus (Primary Investigation Site)')."
+                    "description": "Место физическое, общественное, виртуальное или предметно-специфическое, релевантное контексту модуля (например, 'Coconut Creek Middle School Campus (Primary Investigation Site)')."
                   },
                   "StudentEngagement": {
                     "type": "string",
-                    "description": "Explaining authentic inquiry activities students complete at or with the site such as observation, data collection, interviews, analysis, virtual exploration, or guided field tasks tied to the real-world problem."
+                    "description": "Объяснение аутентичных исследовательских действий, которые учащиеся выполняют в этом месте или с его помощью, таких как наблюдение, сбор данных, интервью, анализ, виртуальное исследование или направленные полевые задания, связанные с реальной проблемой."
                   },
                   "Relevance": {
                     "type": "string",
-                    "description": "Explaining why the site matters by connecting it to the problem, showing how it provides evidence or expertise, clarifying how it supports solution design or modeling, and highlighting local or community-specific significance."
+                    "description": "Объяснение того, почему это место важно, путем связи с проблемой, демонстрации того, как оно предоставляет доказательства или экспертные знания, разъяснения того, как оно поддерживает проектирование решения или моделирование, и подчеркивания местной или общественной значимости."
                   }
                 }
               }
@@ -327,7 +327,7 @@ window.pblPrompts_enru = {
                   "minItems": 4,
                   "maxItems": 4,
                   "x-format": "{items}",
-                  "description": "Create a Tiered Academic Vocabulary section with exactly four labeled tiers.",
+                  "description": "Создайте раздел Tiered Academic Vocabulary, состоящий ровно из четырех размеченных tiers.",
                   "items": {
                     "type": "object",
                     "x-format": "\n\n**{value.TierTitle}**\n\n*{value.TierWhyItMatters}*\n\n{value.Terms}",
@@ -340,17 +340,17 @@ window.pblPrompts_enru = {
                     "properties": {
                       "TierTitle": {
                         "type": "string",
-                        "description": "MUST be exactly one of these: 'Tier 1: Essential / Core Vocabulary', 'Tier 2: Application, Modeling, or Process Vocabulary', 'Tier 3: Real-World or Project-Specific Vocabulary', 'Tier 4: Enrichment & Extension Vocabulary'."
+                        "description": "ДОЛЖНО быть точно одним из следующих: 'Tier 1: Essential / Core Vocabulary', 'Tier 2: Application, Modeling, or Process Vocabulary', 'Tier 3: Real-World or Project-Specific Vocabulary', 'Tier 4: Enrichment & Extension Vocabulary'."
                       },
                       "TierWhyItMatters": {
                         "type": "string",
-                        "description": "A brief italicized sentence explaining how these terms help students in the project context (e.g. 'These terms help students name the most important ideas and objects they will see, build, and discuss during the project.')."
+                        "description": "Короткое курсивное предложение, объясняющее, как эти термины помогают учащимся в контексте проекта (например, 'These terms help students name the most important ideas and objects they will see, build, and discuss during the project.')."
                       },
                       "Terms": {
                         "type": "array",
                         "minItems": 3,
                         "x-format": "\n\n{items}",
-                        "description": "List unit-appropriate vocabulary terms with student-friendly definitions.",
+                        "description": "Перечислите соответствующие уровню модуля термины словаря со понятными для учащихся определениями.",
                         "items": {
                           "type": "object",
                           "x-format": "{index}. **{value.Term}**: {value.Definition}\n",
@@ -362,11 +362,11 @@ window.pblPrompts_enru = {
                           "properties": {
                             "Term": {
                               "type": "string",
-                              "description": "The vocabulary word (e.g., 'force'). Do NOT include any numbering or bullet points."
+                              "description": "Словарное слово (например, 'force'). Не включайте никакой нумерации или маркированных списков."
                             },
                             "Definition": {
                               "type": "string",
-                              "description": "A student-friendly definition."
+                              "description": "Понятное для учащихся определение."
                             }
                           }
                         }
@@ -391,7 +391,7 @@ window.pblPrompts_enru = {
             "AuthenticAudience": {
               "type": "object",
               "x-format": "{value.Audiences}\n\n**{loc.StudentParticipationInAudienceSelection}**\n\n{value.StudentParticipation}",
-              "description": "Identify and engage an authentic audience beyond the classroom.",
+              "description": "Определите и вовлеките аутентичную аудиторию за пределами класса.",
               "additionalProperties": false,
               "required": [
                 "Audiences",
@@ -415,26 +415,26 @@ window.pblPrompts_enru = {
                     "properties": {
                       "AudienceName": {
                         "type": "string",
-                        "description": "The name of the specific authentic audience group (e.g. 'City of Coconut Creek Sustainability & Environmental Advisory Board'). Do NOT include bullet points or numbering."
+                        "description": "Название конкретной аутентичной аудитории (например, 'City of Coconut Creek Sustainability & Environmental Advisory Board'). Не включайте маркированные списки или нумерацию."
                       },
                       "PrimaryAudienceDescription": {
                         "type": "string",
-                        "description": "Clear description of who this audience is (individuals, organizations, or groups) and their relationship to the project's context or problem. Must be detailed, at least 2-3 sentences."
+                        "description": "Четкое описание того, кто эта аудитория (отдельные люди, организации или группы) и как они связаны с контекстом или проблемой проекта. Должно быть подробно, не менее 2–3 предложений."
                       },
                       "WhyThisAudienceIsQualified": {
                         "type": "string",
-                        "description": "Explanation of why this audience has relevant expertise, lived experience, or authority related to the project topic. Must be detailed, at least 2-3 sentences."
+                        "description": "Объяснение того, почему эта аудитория обладает соответствующей экспертизой, опытом жизни или полномочиями, связанными с темой проекта. Должно быть подробно, не менее 2–3 предложений."
                       },
                       "HowThisAudienceElevatesTheProject": {
                         "type": "string",
-                        "description": "How the presence of this audience increases authenticity, rigor, motivation, or real-world impact for students. Must be detailed, at least 2-3 sentences."
+                        "description": "Как присутствие этой аудитории повышает подлинность, строгость, мотивацию или реальное влияние для учащихся. Должно быть подробно, не менее 2-3 предложений."
                       }
                     }
                   }
                 },
                 "StudentParticipation": {
                   "type": "string",
-                  "description": "A paragraph explaining how students help identify which audience best fits their invention by discussing who would benefit from or evaluate the solution."
+                  "description": "Абзац, объясняющий, как учащиеся помогают определить, какая аудитория лучше всего подходит для их изобретения, обсуждая, кто выиграет от решения или будет его оценивать."
                 }
               }
             },
@@ -454,15 +454,15 @@ window.pblPrompts_enru = {
                 "properties": {
                   "CriteriaForSuccess": {
                     "type": "string",
-                    "description": "The measurable student learning objective ending with DOK level. Do NOT include bullet points or numbering."
+                    "description": "Измеримая учебная цель учащихся, заканчивающаяся уровнем DOK. Не включайте маркированные списки или нумерацию."
                   },
                   "SuccessCriteria": {
                     "type": "string",
-                    "description": "The specific success criteria explaining what the student will do to demonstrate learning. Do NOT include bullet points or numbering."
+                    "description": "Конкретные критерии успеха, объясняющие, что будет делать учащийся, чтобы продемонстрировать обучение. Не включайте маркированные списки или нумерацию."
                   },
                   "PointOfDemonstration": {
                     "type": "string",
-                    "description": "Where the evidence will appear, separated into Formative: and Summative: statements. Do NOT include bullet points or numbering."
+                    "description": "Где будет появляться доказательство, разделённое на утверждения Formative: и Summative:. Не включайте маркированные списки или нумерацию."
                   }
                 }
               }
@@ -471,7 +471,7 @@ window.pblPrompts_enru = {
               "type": "array",
               "x-format": "{items}",
               "minItems": 4,
-              "description": "Analytic Rubric detailing the competencies required by the project. Each row represents one evaluated skill. The Novice to Expert progression must reflect increasing sophistication.",
+              "description": "Аналитическая рубрика, подробно описывающая компетенции, требуемые проектом. Каждая строка представляет один оцениваемый навык. Переход от Novice к Expert должен отражать возрастающую сложность.",
               "items": {
                 "type": "object",
                 "x-format": "| {value.Criterion} | {value.Novice} | {value.Apprentice} | {value.Practitioner} | {value.Expert} |",
@@ -486,23 +486,23 @@ window.pblPrompts_enru = {
                 "properties": {
                   "Criterion": {
                     "type": "string",
-                    "description": "The evaluated skill, competency, or dimension of the final project. Do NOT include bullet points or numbering."
+                    "description": "Оцениваемый навык, компетенция или аспект итогового проекта. Не включайте маркированные списки или нумерацию."
                   },
                   "Novice": {
                     "type": "string",
-                    "description": "Description of novice level performance. Must not use deficit-based language such as fails, lacks, or missing. Do NOT include bullet points or numbering."
+                    "description": "Описание уровня Novice. Не используйте язык дефицита, такой как fails, lacks или missing. Не включайте маркированные списки или нумерацию."
                   },
                   "Apprentice": {
                     "type": "string",
-                    "description": "Description of apprentice level performance. Do NOT include bullet points or numbering."
+                    "description": "Описание уровня Apprentice. Не включайте маркированные списки или нумерацию."
                   },
                   "Practitioner": {
                     "type": "string",
-                    "description": "Description of practitioner level performance. Do NOT include bullet points or numbering."
+                    "description": "Описание уровня Practitioner. Не включайте маркированные списки или нумерацию."
                   },
                   "Expert": {
                     "type": "string",
-                    "description": "Description of expert level performance. Must build on the Practitioner level with deeper insight, precision, or complexity. Do NOT include bullet points or numbering."
+                    "description": "Описание уровня Expert. Должно опираться на уровень Practitioner, добавляя более глубокое понимание, точность или сложность. Не включайте маркированные списки или нумерацию."
                   }
                 }
               }
@@ -523,14 +523,14 @@ window.pblPrompts_enru = {
           "properties": {
             "LearningPlanOverview": {
               "type": "string",
-              "description": "A 2-4 sentence summary explaining how the project is organized into three flexible phases (Phase 1, Phase 2, Phase 3) rather than fixed day counts. Briefly describe what students do in each phase (e.g., in Phase 1 they build background knowledge; in Phase 2 they apply science ideas through investigations; in Phase 3 they refine prototypes and present to an authentic audience). Do not use bullet points or numbering."
+              "description": "Краткое резюме из 2-4 предложений, объясняющее, как проект организован в три гибкие фазы (Phase 1, Phase 2, Phase 3), а не по фиксированному количеству дней. Кратко опишите, что учащиеся делают на каждой фазе (например, в Phase 1 они формируют базовые знания; в Phase 2 они применяют научные идеи через исследования; в Phase 3 они дорабатывают прототипы и представляют их подлинной аудитории). Не используйте маркированные списки или нумерацию."
             },
             "ProjectPhases": {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
               "maxItems": 3,
-              "description": "The three phases of the project. The total duration across all 3 phases MUST exactly equal the total number of days requested for the project.",
+              "description": "Три фазы проекта. Общая продолжительность всех 3 фаз ДОЛЖНА в точности равняться общему количеству дней, запрошенному для проекта.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n### {violet}({value.PhaseTitle})\n\n{value.PhaseDescription}\n\n**{loc.ConceptsOrSkillsEmphasized}:** {value.ConceptsOrSkills}\n\n**{loc.CollaborationAndVisibleThinking}:** {value.CollaborationAndVisibleThinking}\n\n{value.KeyLearningExperiences}",
@@ -545,29 +545,29 @@ window.pblPrompts_enru = {
                 "properties": {
                   "PhaseTitle": {
                     "type": "string",
-                    "description": "The title and duration of the phase (e.g., 'Phase 1: 1-2 days' or 'Phase 3: 2 days'). IMPORTANT: The duration must be explicitly stated in the title, and the sum of maximum days across all phases must exactly match the total requested project length. Do NOT include bullet points or numbering."
+                    "description": "Название и длительность фазы (например, 'Phase 1: 1-2 days' или 'Phase 3: 2 days'). ВАЖНО: длительность должна быть явно указана в названии, а сумма максимального числа дней по всем фазам должна в точности соответствовать общему запрошенному сроку проекта. Не включайте маркированные списки или нумерацию."
                   },
                   "PhaseDescription": {
                     "type": "string",
-                    "description": "A short 1-2 sentence paragraph describing what students do during this phase to deepen understanding or synthesize learning."
+                    "description": "Краткий абзац из 1-2 предложений, описывающий, что учащиеся делают на этой фазе, чтобы углубить понимание или синтезировать обучение."
                   },
                   "ConceptsOrSkills": {
                     "type": "string",
-                    "description": "A comma-separated list of the core concepts or skills emphasized in this phase (e.g. 'Observation, questioning, modeling, lever systems, structure stability'). Do NOT include bullet points or numbering."
+                    "description": "Список через запятую основных понятий или навыков, акцентируемых на этой фазе (например, 'Observation, questioning, modeling, lever systems, structure stability'). Не включайте маркированные списки или нумерацию."
                   },
                   "CollaborationAndVisibleThinking": {
                     "type": "string",
-                    "description": "A sentence explaining how students collaborate and make their thinking visible in this phase (e.g. 'Students use think-pair-share, sketch notes, and quick group comparisons to make their thinking visible.'). Do NOT include bullet points or numbering."
+                    "description": "Предложение, объясняющее, как учащиеся сотрудничают и делают своё мышление видимым на этой фазе (например, 'Students use think-pair-share, sketch notes, and quick group comparisons to make their thinking visible.'). Не включайте маркированные списки или нумерацию."
                   },
                   "KeyLearningExperiences": {
                     "type": "array",
                     "x-format": "{items}",
                     "minItems": 3,
-                    "description": "A list of the specific learning activities or tasks in this phase.",
+                    "description": "Список конкретных учебных действий или задач на этой фазе.",
                     "items": {
                       "type": "string",
                       "x-format": "- {value}",
-                      "description": "A specific learning activity (e.g. 'Shaduf build and test'). Do NOT include any numbering or bullet points at the beginning of your strings."
+                      "description": "Конкретное учебное действие (например, 'Shaduf build and test'). Не включайте нумерацию или маркированные списки в начале строк."
                     }
                   }
                 }
@@ -577,11 +577,11 @@ window.pblPrompts_enru = {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
-              "description": "The output must contain exactly three project goals, each expressed as a conceptual category followed by detailed bullets or short paragraphs. Goal 1, Apply Disciplinary Content to a Real-World Problem, requires students to use discipline-specific knowledge to analyze or solve an authentic challenge, list 4-6 core concepts or principles they will apply, and show how these ideas connect to real-world conditions or constraints. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, requires describing the authentic challenge students must address, listing what students will create, model, compare, analyze, evaluate, or justify, and including processes such as modeling, predicting, comparing, evaluating, and decision-making. Goal 3, Communicate Findings to a Real Audience, requires students to prepare a polished, professional-quality final product, tailor communication to the needs of a real stakeholder group, and reference authentic audiences such as local experts, community organizations, industry professionals, school leadership, families, or community members.",
+              "description": "Выходные данные должны содержать ровно три цели проекта, каждая из которых выражена как концептуальная категория, за которой следуют подробные маркеры или короткие абзацы. Goal 1, Apply Disciplinary Content to a Real-World Problem, требует, чтобы учащиеся использовали предметно-специфические знания для анализа или решения подлинной задачи, перечислили 4-6 основных понятий или принципов, которые они будут применять, и показали, как эти идеи связаны с реальными условиями или ограничениями. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, требует описания подлинной задачи, которую учащиеся должны решить, перечисления того, что они будут создавать, моделировать, сравнивать, анализировать, оценивать или обосновывать, и включения таких процессов, как моделирование, прогнозирование, сравнение, оценка и принятие решений. Goal 3, Communicate Findings to a Real Audience, требует, чтобы учащиеся подготовили отшлифованный, профессионально качественный итоговый продукт, адаптировали сообщение к потребностям реальной группы заинтересованных лиц и ссылались на подлинные аудитории, такие как местные эксперты, общественные организации, специалисты отрасли, руководство школы, семьи или члены сообщества.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n",
-                "description": "A specific project goal formatted with bold labels (e.g. '**Goal 1: Apply Disciplinary Content to a Real-World Problem** Use knowledge...')"
+                "description": "Конкретная цель проекта, оформленная с выделенными жирным шрифтом подзаголовками (например, '**Цель 1: Применить предметный материал к реальной проблеме** Используйте знания...')"
               }
             },
             "FinalDeliverableSummary": {
@@ -595,7 +595,7 @@ window.pblPrompts_enru = {
             },
             "GroupSuggestions": {
               "type": "object",
-              "description": "Outlines group size, roles and teacher duties.",
+              "description": "Определяет размер группы, роли и обязанности учителя.",
               "additionalProperties": false,
               "required": [
                 "GroupSize",
@@ -606,12 +606,12 @@ window.pblPrompts_enru = {
               "properties": {
                 "GroupSize": {
                   "type": "string",
-                  "description": "The output must state a recommended group size such as 3 to 4 students and must provide a rationale explaining how this size supports productive discussion, shared engagement, and manageable task distribution. Example: 'Group Size 3 to 4 students is ideal because...'"
+                  "description": "Выходной текст должен указывать рекомендуемый размер группы, например 3–4 учащихся, и должен содержать обоснование, объясняющее, как такой размер способствует продуктивному обсуждению, совместной вовлеченности и управляемому распределению задач. Пример: 'Размер группы 3–4 учащихся идеален, потому что...'"
                 },
                 "RotatingRolesAndDuties": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The output must provide a list of roles formatted as 'Role Name: description of duties'. The list must include at least four roles (Facilitator, Recorder, Materials Manager, Presenter/Communicator) and Teacher expectations at the end.",
+                  "description": "Выходной текст должен содержать список ролей, оформленный как 'Название роли: описание обязанностей'. Список должен включать как минимум четыре роли (Фасилитатор, Секретарь, Ответственный за материалы, Презентатор/Коммуникатор) и ожидания к учителю в конце.",
                   "minItems": 4,
                   "items": {
                     "type": "string",
@@ -621,7 +621,7 @@ window.pblPrompts_enru = {
                 "TeacherGroupingStrategyPrompt": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The model must output exactly these two strings: 1) '\"What is the main purpose of your grouping in this activity-peer support, rich discussion, challenge, or efficiency? Once you have named the purpose, which grouping approach best fits it: mixed-ability, interest-based, skills-based, or random?\"' 2) 'This question encourages teachers to choose grouping methods that match instructional goals rather than defaulting to convenience or habit.'",
+                  "description": "Модель должна выдать ровно эти две строки: 1) '\"В чем основная цель вашего объединения в этой деятельности — поддержка сверстников, содержательное обсуждение, вызов или эффективность? После того как вы назовете цель, какой подход к объединению лучше всего ей соответствует: смешанные по уровню, по интересам, по навыкам или случайные?\"' 2) 'Этот вопрос побуждает учителей выбирать методы объединения, соответствующие учебным целям, а не полагаться по умолчанию на удобство или привычку.'",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}\n"
@@ -630,7 +630,7 @@ window.pblPrompts_enru = {
                 "GroupingStrategyRecommendations": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The model must output the exact grouping strategy recommendations formatted with bold labels (e.g. '**Mixed-ability Groups:** Best when...'). Strategies to include: Mixed-ability Groups, Interest-based Groups, Skills-based Groups, Randomized Groups.",
+                  "description": "Модель должна вывести точные рекомендации по стратегии объединения, оформленные с жирными подзаголовками (например, '**Группы смешанного уровня:** Лучше всего, когда...'). Включить следующие стратегии: Группы смешанного уровня, Группы по интересам, Группы по навыкам, Случайно сформированные группы.",
                   "minItems": 4,
                   "items": {
                     "type": "string",
@@ -645,7 +645,7 @@ window.pblPrompts_enru = {
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase1}\n\n### {green}({loc.Phase1Title})\n\n**Focus Statement**\n{value.Phase1_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase1_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase1_GuidingQuestions}\n\n{value.Phase1_Differentiation}\n\n{value.Phase1_AccommodationsAndModifications}\n\n{value.Phase1_AnticipatedMisconceptions}\n\n{value.Phase1_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase1_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase1_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase1_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase1_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase1_ReflectionPrompt.Introduction}\n{value.Phase1_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "First phase of teacher guidance",
+          "description": "Первая фаза руководства для учителя",
           "required": [
             "Phase1_FocusStatement",
             "Phase1_CollaborativeActivities",
@@ -664,7 +664,7 @@ window.pblPrompts_enru = {
           "properties": {
             "Phase1_FocusStatement": {
               "type": "string",
-              "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit's Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question."
+              "description": "Предоставьте краткое утверждение, описывающее, как этот этап пробуждает любопытство, знакомит с реальной проблемой и активирует раннее мышление. Формулировка фокуса должна включать пробуждение любопытства к основному явлению или проблеме, раннее наблюдение и исследование, самостоятельные замечания и вопросы учащихся, а также четкую связь с Ведущим вопросом модуля. Формулировка должна отражать, что на этом стартовом этапе учащиеся пробуждают любопытство и начинают раскрывать научную или концептуальную проблему, лежащую в центре проекта, и что через наблюдение, исследование и ранние попытки моделирования они собирают непосредственные доказательства, связывающие их первоначальные представления с Ведущим вопросом."
             },
             "Phase1_CollaborativeActivities": {
               "type": "array",
@@ -719,7 +719,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 2–3 поддержки, специфичные для урока (визуальные материалы, словари, жесты), чтобы помочь изучающим язык учащимся понимать и выражать идеи. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -727,7 +727,7 @@ window.pblPrompts_enru = {
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 3–4 начала предложений, которые помогают учащимся описывать, объяснять и передавать свои мысли по этому конкретному уроку. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -746,7 +746,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 2–3 пошаговые поддержки (структурированные инструменты, примеры с моделированием, «think-aloud») и точные указания, чтобы помочь учащимся выполнить задание. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -754,7 +754,7 @@ window.pblPrompts_enru = {
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 3–4 контрольных вопроса, чтобы помочь учащимся осмыслить свое обучение во время исследования. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -773,7 +773,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 2–3 расширения, повышающие сложность (конкретные вызовы, выявление закономерностей), чтобы помочь учащимся углубить или улучшить свое мышление, используя доказательства. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -781,11 +781,11 @@ window.pblPrompts_enru = {
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Сформулируйте один сложный запрос/вопрос (НЕ включайте префикс 'Say:') для более глубокого концептуального понимания."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 3–4 конкретных примера высококачественных ответов учащихся на продвинутый вопрос. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -810,7 +810,7 @@ window.pblPrompts_enru = {
             "Phase1_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Этот раздел должен включать два типа поддержек: Общие поддержки и Индивидуализированные поддержки. Делайте акцент на доступности, а не на снижении сложности.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -818,19 +818,19 @@ window.pblPrompts_enru = {
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Неспецифичные для учащихся стратегии, которые улучшают доступ для всех обучающихся (например, визуальные материалы, заранее заполненные заметки, цифровой глоссарий, фрагментированные инструкции). Предоставьте 2–4 пункта списка."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Конкретные адаптации и модификации для названных учащихся с официальными планами. Перечислите КАЖДОГО учащегося отдельно; НЕ объединяйте учащихся в группы. Поддержки для каждого учащегося должны быть легко просматриваемым списком.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Имя и фамилия отдельного учащегося, получающего эти поддержки."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -838,7 +838,7 @@ window.pblPrompts_enru = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Официальный план, предоставленный для этого учащегося в запросе. Разбейте план на понятный список. Вы можете перефразировать его для улучшения форматирования, но НЕ опускайте и НЕ добавляйте никакой информации."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -846,7 +846,7 @@ window.pblPrompts_enru = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Конкретные инструменты/стебли/визуальные материалы/организаторы для этой задачи."
                       }
                     },
                     "required": [
@@ -867,18 +867,18 @@ window.pblPrompts_enru = {
             "Phase1_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Сгенерируйте 2–3 распространённых заблуждения учащихся, которые, вероятно, возникнут на этом этапе. Каждый пункт должен быть сосредоточен на конкретном непонимании и сценарии ответа учителя.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Опишите заблуждение в 1 предложении, начиная с «Students may think...». НЕ используйте жирное выделение или теги strong."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Чёткий сценарий ответа учителя, ориентированный на преподавателя (начиная с «Teacher Response: »), который показывает, как реагировать в моменте с конкретной подсказкой (не включайте префикс «Say:»). НЕ используйте жирное выделение или теги strong."
                   }
                 },
                 "required": [
@@ -894,7 +894,7 @@ window.pblPrompts_enru = {
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Сгенерируйте 1 вопрос на трансцендентное мышление, который требует от учащихся применять обучение за пределами себя в реальных контекстах (сообщества, глобальные вызовы). Сосредоточьтесь на том, почему обучение важно в масштабах (безопасность, устойчивость, инновации и т. д.). Избегайте личного/школьного фокуса."
                 }
               },
               "required": [
@@ -905,7 +905,7 @@ window.pblPrompts_enru = {
             "Phase1_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Итоговый вопрос на проверку понимания с 2–3 ожидаемыми ответами учащихся, демонстрирующими освоение материала",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -915,7 +915,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто пишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -937,7 +937,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто пишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -959,7 +959,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто пишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -984,7 +984,7 @@ window.pblPrompts_enru = {
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "Модель должна создать компонент пространственного извлечения, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего блока или урока без ссылки на какие-либо прошлые активности, рабочие листы, модели, подписи или шаги, связанные с заданием. Сценарий учителя должен начинаться с Say: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о ней научились. Вопрос на извлечение должен побуждать учащихся переформулировать или применить ранее изученное концептуальное понимание (например, как работает система, как связаны переменные или как разворачивается процесс) полностью по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Expected Student Responses, показывая 2–3 примера, которые точно отражают концептуальное воспроизведение, демонстрируя, что именно учащиеся, а не подсказка, предоставили вспомненные идеи.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1002,7 +1002,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто пишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1034,7 +1034,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто пишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1066,7 +1066,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто пишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1092,13 +1092,13 @@ window.pblPrompts_enru = {
             },
             "Phase1_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Один абзац, объясняющий знания и навыки, отработанные во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с «Эти задания укрепляют сегодняшнее обучение о ____ by ______.», где пропуски заполнены соответствующим содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долгосрочное запоминание."
             },
             "Phase1_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Задания должны соответствовать фокусу этапа и ожидаемой глубине знаний. Используйте только DOK 2, 3 или 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1111,7 +1111,7 @@ window.pblPrompts_enru = {
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Уровень глубины знаний для задания. ДОЛЖЕН БЫТЬ РОВНО ОДНИМ ИЗ: 'DOK 2', 'DOK 3' или 'DOK 4'. DOK 1 строго запрещён."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -1128,7 +1128,7 @@ window.pblPrompts_enru = {
             },
             "Phase1_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Если и ТОЛЬКО ЕСЛИ предмет — математика: включите задачу на интерливинг + подсказку учителя + ожидаемые ответы + заметку учителя. В противном случае — пустая строка."
             },
             "Phase1_ReflectionPrompt": {
               "type": "object",
@@ -1140,7 +1140,7 @@ window.pblPrompts_enru = {
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Краткое вступление для учащихся к рефлексии, например: «Напишите 2–3 предложения, отвечая на один из вопросов:»"
                 },
                 "Prompts": {
                   "type": "array",
@@ -1157,7 +1157,7 @@ window.pblPrompts_enru = {
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase2}\n\n### {green}({loc.Phase2Title})\n\n**Focus Statement**\n{value.Phase2_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase2_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase2_GuidingQuestions}\n\n{value.Phase2_Differentiation}\n\n{value.Phase2_AccommodationsAndModifications}\n\n{value.Phase2_AnticipatedMisconceptions}\n\n{value.Phase2_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase2_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase2_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase2_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase2_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase2_ReflectionPrompt.Introduction}\n{value.Phase2_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "Second phase of teacher guidance",
+          "description": "Вторая фаза руководства учителя",
           "required": [
             "Phase2_FocusStatement",
             "Phase2_CollaborativeActivities",
@@ -1176,7 +1176,7 @@ window.pblPrompts_enru = {
           "properties": {
             "Phase2_FocusStatement": {
               "type": "string",
-              "description": "Write a 1-3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit's Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user."
+              "description": "Напишите краткое утверждение Focus Statement из 1–3 предложений, которое подводит итог цели фазы, объясняет, как учащиеся строят понимание через исследовательскую работу, явно связывает фазу с Driving Question или реальной проблемой модуля и описывает, как эта фаза приближает их к созданию итогового продукта. Утверждение всегда должно быть оформлено как один короткий абзац и должно быть адаптировано к конкретным деталям проекта, предоставленным пользователем."
             },
             "Phase2_CollaborativeActivities": {
               "type": "array",
@@ -1231,7 +1231,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 2-3 поддерживающих средства, специфичных для урока (визуалы, наборы слов, жесты), чтобы помочь изучающим язык понимать и выражать идеи. НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1239,7 +1239,7 @@ window.pblPrompts_enru = {
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 3-4 начала предложений, которые помогают учащимся описывать, объяснять и передавать свои мысли для этого конкретного урока. НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1258,7 +1258,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 2-3 пошаговые поддержки (структурированные инструменты, моделируемые примеры, размышление вслух) и точные указания, которые помогут учащимся выполнить задание. НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1266,7 +1266,7 @@ window.pblPrompts_enru = {
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 3-4 контрольных вопроса, чтобы помочь учащимся осмыслить своё обучение во время исследования. НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1285,7 +1285,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 2-3 расширения, повышающие сложность (конкретные вызовы, выявление закономерностей), чтобы помочь учащимся углубить или улучшить своё мышление, используя доказательства. НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1293,11 +1293,11 @@ window.pblPrompts_enru = {
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Сгенерируйте один сложный вопрос (не включайте префикс 'Say:')/вопрос, чтобы подтолкнуть к более глубокому концептуальному пониманию."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Сгенерируйте 3-4 конкретных примера высококачественных ответов учащихся на продвинутый вопрос. НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1322,7 +1322,7 @@ window.pblPrompts_enru = {
             "Phase2_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Этот раздел должен включать два типа поддержки: Общие поддержки и Индивидуализированные поддержки. Делайте акцент на доступе, а не на снижении сложности.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -1330,19 +1330,19 @@ window.pblPrompts_enru = {
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Стратегии, не привязанные к конкретным учащимся, которые повышают доступ для всех учеников (например, визуалы, заранее заполненные заметки, цифровой глоссарий, разбитые на части инструкции). Предоставьте 2-4 пункта."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Специальные приспособления и модификации для названных учащихся с формальными планами. Укажите КАЖДОГО учащегося отдельно; НЕ объединяйте учащихся в группы. Поддержка для каждого учащегося должна быть в форме списка, который легко просмотреть.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Имя и фамилия отдельного учащегося, получающего эти поддержки."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -1350,7 +1350,7 @@ window.pblPrompts_enru = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Формальный план, предоставленный для этого учащегося в запросе. Разбейте план на понятный список. Вы можете перефразировать его, чтобы улучшить форматирование, но НЕ опускайте и НЕ добавляйте никакой информации."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1358,7 +1358,7 @@ window.pblPrompts_enru = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Конкретные инструменты/начальные фразы/визуалы/органайзеры для этого задания."
                       }
                     },
                     "required": [
@@ -1379,18 +1379,18 @@ window.pblPrompts_enru = {
             "Phase2_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Сгенерируйте 2-3 распространённых заблуждения учащихся, которые, вероятно, возникнут на этом этапе. Каждый пункт должен быть сосредоточен на конкретном неверном понимании и скрипте ответа учителя.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Опишите заблуждение в 1 предложении, начиная с 'Students may think...'. НЕ используйте никакого выделения жирным или strong-тегов."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Чёткий скрипт ответа учителя (начинающийся с 'Teacher Response: '), который показывает, как реагировать в данный момент с конкретной подсказкой (не включайте префикс 'Say:'). НЕ используйте никакого выделения жирным или strong-тегов."
                   }
                 },
                 "required": [
@@ -1406,7 +1406,7 @@ window.pblPrompts_enru = {
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Сгенерируйте 1 вопрос, побуждающий к выходу за пределы собственного опыта, который требует от учащихся применять знания в реальных контекстах (сообщества, глобальные вызовы). Сосредоточьтесь на том, почему обучение важно в масштабах общества (безопасность, устойчивость, инновации и т. д.). Избегайте личного или школьного фокуса."
                 }
               },
               "required": [
@@ -1417,7 +1417,7 @@ window.pblPrompts_enru = {
             "Phase2_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Итоговый вопрос для проверки понимания с 2-3 ожидаемыми ответами учащихся, демонстрирующими освоение материала",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1427,7 +1427,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1449,7 +1449,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте элементы с маркированных пунктов, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1471,7 +1471,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1496,7 +1496,7 @@ window.pblPrompts_enru = {
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "Модель должна создать компонент Spaced Retrieval, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего модуля или урока, не ссылаясь ни на какие прошлые активности, рабочие листы, модели, ярлыки или шаги, специфичные для задания. Сценарий учителя должен начинаться с Say: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о нём узнали. Вопрос на извлечение должен побуждать учащихся пересказать или применить ранее изученное концептуальное понимание (например, как работает система, как связаны переменные или как протекает процесс) исключительно по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Expected Student Responses с 2-3 примерами, которые точно отражают концептуальное воспроизведение, показывая, что именно учащиеся, а не подсказка, выдали вспомненные идеи.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1514,7 +1514,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1546,7 +1546,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1578,7 +1578,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1604,13 +1604,13 @@ window.pblPrompts_enru = {
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Один абзац, объясняющий знания и навыки, отрабатываемые во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с 'These tasks reinforce today's learning about ____ by ______.' , где пропуски заполняются содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долгосрочное запоминание."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Задания должны соответствовать фокусу этапа и ожидаемой глубине знаний. Используйте только DOK 2, 3 или 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1623,7 +1623,7 @@ window.pblPrompts_enru = {
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Уровень глубины знаний для задания. ДОЛЖЕН БЫТЬ ОДНИМ ИЗ: 'DOK 2', 'DOK 3' или 'DOK 4'. DOK 1 строго запрещён."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -1640,7 +1640,7 @@ window.pblPrompts_enru = {
             },
             "Phase2_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Если И ТОЛЬКО ЕСЛИ предмет — математика: включите interleaving problem + teacher prompt + expected responses + teacher note. В противном случае пустая строка."
             },
             "Phase2_ReflectionPrompt": {
               "type": "object",
@@ -1652,7 +1652,7 @@ window.pblPrompts_enru = {
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Краткое введение для учащихся к рефлексии, например: 'Напишите 2-3 предложения, отвечая на один вопрос:'"
                 },
                 "Prompts": {
                   "type": "array",
@@ -1669,7 +1669,7 @@ window.pblPrompts_enru = {
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase3}\n\n### {green}({loc.Phase3Title})\n\n**Focus Statement**\n{value.Phase3_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase3_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase3_GuidingQuestions}\n\n{value.Phase3_Differentiation}\n\n{value.Phase3_AccommodationsAndModifications}\n\n{value.Phase3_AnticipatedMisconceptions}\n\n{value.Phase3_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase3_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase3_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase3_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase3_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase3_ReflectionPrompt.Introduction}\n{value.Phase3_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "Third phase of teacher guidance",
+          "description": "Третий этап педагогического руководства",
           "required": [
             "Phase3_FocusStatement",
             "Phase3_CollaborativeActivities",
@@ -1688,7 +1688,7 @@ window.pblPrompts_enru = {
           "properties": {
             "Phase3_FocusStatement": {
               "type": "string",
-              "description": "Generate a 2-4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project's authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning."
+              "description": "Создайте Focus Statement из 2-4 предложений, чётко передающее цель Phase 3 и его роль в продвижении учащихся к итоговому продукту. В заявлении должно быть объяснено, что Phase 3 сосредоточен на уточнении идей, применении изученного, усилении доказательств, подготовке итоговых продуктов и вовлечении в более глубокое рассуждение и пересмотр. Оно должно явно показывать, как Phase 3 продвигает аутентичную реальную задачу проекта, как учащиеся используют доказательства для улучшения решений и как эта работа готовит их к аутентичной аудитории. Заявление должно включать интеллектуальную работу, такую как уточнение, пересмотр, синтез, оценивание, обоснование, завершение и представление, и оно должно указывать, как учащиеся завершают модели, продукты, объяснения или предложения, готовят презентации или публичные показы и осмысливают обучение, чтобы укрепить свои рассуждения."
             },
             "Phase3_CollaborativeActivities": {
               "type": "array",
@@ -1743,7 +1743,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Создайте 2-3 поддерживающих средства для урока (визуалы, банки слов, жесты), чтобы помочь изучающим язык получать доступ к идеям и выражать их. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1751,7 +1751,7 @@ window.pblPrompts_enru = {
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Создайте 3-4 начала фраз, которые помогают учащимся описывать, объяснять и передавать свои мысли для этого конкретного урока. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1770,7 +1770,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Создайте 2-3 пошаговые опоры (структурированные инструменты, моделируемые примеры, think-alouds) и точные указания, которые помогут учащимся выполнить задание. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1778,7 +1778,7 @@ window.pblPrompts_enru = {
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Создайте 3-4 контрольных вопроса, которые помогут учащимся осмыслить своё обучение во время исследования. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1797,7 +1797,7 @@ window.pblPrompts_enru = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Создайте 2-3 расширения, которые повышают сложность (конкретные вызовы, выявление закономерностей), чтобы помочь учащимся углубить или улучшить своё мышление, используя доказательства. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1805,11 +1805,11 @@ window.pblPrompts_enru = {
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Создайте один сложный вопрос (не включайте префикс 'Say:')/вопрос, чтобы углубить концептуальное понимание."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Создайте 3-4 конкретных примера высококачественных ответов учащихся на продвинутый вопрос. НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1834,7 +1834,7 @@ window.pblPrompts_enru = {
             "Phase3_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Этот раздел должен включать два типа поддержки: General Supports и Individualized Supports. Делайте упор на доступ, а не на снижение сложности.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -1842,19 +1842,19 @@ window.pblPrompts_enru = {
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Нестуденто-специфичные стратегии, которые улучшают доступ для всех учащихся (например, визуальные опоры, предварительно заполненные заметки, цифровой глоссарий, инструкции, разбитые на части). Предоставьте 2–4 пункта."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Конкретные accommodations и modifications для указанных поимённо учащихся с официальными планами. Перечислите КАЖДОГО учащегося отдельно; НЕ объединяйте учащихся вместе. Поддержка для каждого учащегося должна быть в виде легко просматриваемого списка.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Имя и фамилия отдельного учащегося, получающего эту поддержку."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -1862,7 +1862,7 @@ window.pblPrompts_enru = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "Официальный план, предоставленный для этого учащегося в запросе. Разберите план в понятный список. Вы можете перефразировать его, чтобы улучшить форматирование, но НЕ опускайте и НЕ добавляйте никакой информации."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1870,7 +1870,7 @@ window.pblPrompts_enru = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Конкретные инструменты/основы фраз/визуальные опоры/организаторы для этого задания."
                       }
                     },
                     "required": [
@@ -1891,18 +1891,18 @@ window.pblPrompts_enru = {
             "Phase3_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Сгенерируйте 2–3 распространённых заблуждения учащихся, которые, вероятно, возникнут на этом этапе. Каждый пункт должен быть сосредоточен на конкретном непонимании и сценарии ответа учителя.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Опишите заблуждение в 1 предложении, начиная с 'Students may think...'. НЕ используйте никакого выделения жирным шрифтом или сильных тегов."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Чёткий сценарий ответа учителя (начинающийся с 'Teacher Response: '), который моделирует, как отреагировать в моменте с конкретным запросом (НЕ включайте префикс 'Say:'). НЕ используйте никакого выделения жирным шрифтом или сильных тегов."
                   }
                 },
                 "required": [
@@ -1918,7 +1918,7 @@ window.pblPrompts_enru = {
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Сгенерируйте 1 вопрос, побуждающий к трансцендентному мышлению, который требует от учащихся применять знания за пределами себя, в реальных контекстах (сообщества, глобальные вызовы). Сфокусируйтесь на том, почему обучение важно в масштабах (безопасность, устойчивость, инновации и т. д.). Избегайте фокуса только на личном опыте или школе."
                 }
               },
               "required": [
@@ -1929,7 +1929,7 @@ window.pblPrompts_enru = {
             "Phase3_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Итоговый вопрос для проверки понимания с 2–3 ожидаемыми ответами учащихся, демонстрирующими владение материалом",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1939,7 +1939,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1961,7 +1961,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1983,7 +1983,7 @@ window.pblPrompts_enru = {
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркеров, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2008,7 +2008,7 @@ window.pblPrompts_enru = {
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "Модель должна создать компонент Spaced Retrieval, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего модуля или урока, не ссылаясь на какие-либо прошлые занятия, рабочие листы, модели, подписи или шаги, специфичные для задания. Сценарий учителя должен начинаться с Say: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о ней научились. Вопрос на извлечение должен побуждать учащихся воспроизвести или применить ранее изученное концептуальное понимание (например, как работает система, как соотносятся переменные или как разворачивается процесс) полностью по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Expected Student Responses с 2–3 примерами, которые точно отражают концептуальное воспроизведение, демонстрируя, что именно учащиеся, а не запрос, предоставили вспоминаемые идеи.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -2026,7 +2026,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркерами, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2058,7 +2058,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркерами, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2090,7 +2090,7 @@ window.pblPrompts_enru = {
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "НЕ начинайте пункты с маркерами, тире или цифр. Просто напишите обычный текст.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2116,13 +2116,13 @@ window.pblPrompts_enru = {
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Один абзац, объясняющий знания и навыки, отрабатываемые во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с 'These tasks reinforce today's learning about ____ by ______.'; пропуски заполняются соответствующим содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долговременное запоминание."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Задания должны соответствовать фокусу этапа и ожидаемой глубине знаний. Используйте только DOK 2, 3 или 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -2135,7 +2135,7 @@ window.pblPrompts_enru = {
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Уровень Depth of Knowledge для задания. ДОЛЖЕН БЫТЬ ТОЛЬКО ОДНИМ из следующих: 'DOK 2', 'DOK 3' или 'DOK 4'. DOK 1 строго запрещён."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -2152,7 +2152,7 @@ window.pblPrompts_enru = {
             },
             "Phase3_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Если и ТОЛЬКО ЕСЛИ предмет — математика: включите задание на чередование + реплику учителя + ожидаемые ответы + заметку для учителя. В противном случае — пустая строка."
             },
             "Phase3_ReflectionPrompt": {
               "type": "object",
@@ -2164,7 +2164,7 @@ window.pblPrompts_enru = {
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Краткое введение для ученика к рефлексии, например: «Напишите 2–3 предложения в ответ на один вопрос:»"
                 },
                 "Prompts": {
                   "type": "array",

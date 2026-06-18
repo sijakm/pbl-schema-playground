@@ -111,7 +111,7 @@ PERSYARATAN OUTPUT:
       "properties": {
         "Description": {
           "type": "string",
-          "description": "Unit description as one cohesive plain-text paragraph (4–5 complete sentences) written in natural teacher voice that you could say directly to students. No HTML, no emojis, no bullet points. Must flow conversationally but follow this structure (without headlines): (1) hook sentence that sparks curiosity or makes a surprising contrast, (2) 'In this unit, you will...' sentence about mastery outcomes, (3) 'You'll strengthen your skills in...' sentence about thinking/analysis abilities, (4) 'This connects to...' sentence about real-world relevance, (5) 'Understanding this matters because...' sentence about broader significance or long-term impact."
+          "description": "Deskripsi unit sebagai satu paragraf teks biasa yang utuh (4–5 kalimat lengkap) ditulis dengan suara guru yang natural dan bisa Anda ucapkan langsung kepada siswa. Tanpa HTML, tanpa emoji, tanpa poin-poin. Harus mengalir secara percakapan tetapi mengikuti struktur ini (tanpa judul): (1) kalimat pembuka yang memicu rasa ingin tahu atau membuat kontras yang mengejutkan, (2) kalimat 'Dalam unit ini, Anda akan...' tentang hasil penguasaan, (3) kalimat 'Anda akan memperkuat keterampilan Anda dalam...' tentang kemampuan berpikir/analisis, (4) kalimat 'Ini terhubung dengan...' tentang relevansi di dunia nyata, (5) kalimat 'Memahami hal ini penting karena...' tentang signifikansi yang lebih luas atau dampak jangka panjang."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
@@ -119,7 +119,7 @@ PERSYARATAN OUTPUT:
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter.",
+          "description": "Buat pertanyaan esensial yang hanya berfokus pada konsep-konsep luas dan universal seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran. Jangan menyebutkan istilah, proses, kosakata, atau contoh yang spesifik pada mata pelajaran apa pun. Pertanyaan harus terbuka, dapat ditransfer ke semua disiplin ilmu, dan mustahil dijawab dengan mempelajari pelajaran atau konten unit. Fokus hanya pada ide-ide besar, bukan materi pelajaran.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -128,7 +128,7 @@ PERSYARATAN OUTPUT:
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Full 'Student Learning Objectives' section for this whole unit. Each list item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses",
+          "description": "Bagian lengkap 'Student Learning Objectives' untuk seluruh unit ini. Setiap butir daftar harus menjadi tujuan yang jelas dan terukur yang dimulai dengan kata kerja terukur dan diakhiri dengan label DOK dalam tanda kurung",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -137,7 +137,7 @@ PERSYARATAN OUTPUT:
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "List all unique educational standards used anywhere in this unit and its lessons. Do NOT add standards that do not appear in the unit content. Each standard must include standard code and description, e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "description": "Daftar semua standar pendidikan unik yang digunakan di mana pun dalam unit ini dan pelajarannya. Jangan menambahkan standar yang tidak muncul dalam konten unit. Setiap standar harus mencakup kode standar dan deskripsi, misalnya 'MS-ESS1-1: Mengembangkan dan menggunakan model sistem Bumi–matahari–bulan untuk mendeskripsikan pola siklis fase bulan, gerhana, dan musim.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -155,21 +155,21 @@ PERSYARATAN OUTPUT:
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "List of lesson containers for this unit (outline only). Each item must be non-overlapping and scoped clearly so lesson content does not repeat across lessons.",
+      "description": "Daftar kontainer pelajaran untuk unit ini (hanya kerangka). Setiap item harus tidak saling tumpang tindih dan dibatasi secara jelas agar konten pelajaran tidak berulang antar pelajaran.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Ordering number of a lesson. 1 Based."
+            "description": "Nomor urut dari sebuah pelajaran. Berbasis 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Short lesson title as plain text."
+            "description": "Judul singkat pelajaran sebagai teks biasa."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 sentences describing the lesson scope, focus, and boundaries to prevent overlap with other lessons."
+            "description": "2–4 kalimat yang menjelaskan cakupan pelajaran, fokus, dan batasannya untuk mencegah tumpang tindih dengan pelajaran lain."
           }
         },
         "required": [
@@ -202,7 +202,7 @@ PERSYARATAN OUTPUT:
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Just paste all the essential questions that are generated in unit level in same order.",
+      "description": "Tempel semua pertanyaan esensial yang dihasilkan pada tingkat unit dalam urutan yang sama.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -211,7 +211,7 @@ PERSYARATAN OUTPUT:
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "List of vocabulary terms with definitions. (e.g. 'Solar System – The Sun and all...'). ONLY include terms that are actively used in this specific lesson.",
+      "description": "Daftar istilah kosakata beserta definisinya. (misalnya 'Tata Surya – Matahari dan semua...'). HANYA sertakan istilah yang benar-benar digunakan dalam pelajaran spesifik ini.",
       "items": {
         "x-format": "{index}. {value}",
         "type": "string"
@@ -220,7 +220,7 @@ PERSYARATAN OUTPUT:
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Full 'Student Learning Objectives' section as plain text. Each item must be a clear, measurable objective that starts with a measurable verb and ends with a DOK label in parentheses.",
+      "description": "Bagian lengkap 'Student Learning Objectives' sebagai teks biasa. Setiap butir harus menjadi tujuan yang jelas dan terukur yang dimulai dengan kata kerja terukur dan diakhiri dengan label DOK dalam tanda kurung.",
       "minItems": 2,
       "maxItems": 3,
       "items": {
@@ -231,7 +231,7 @@ PERSYARATAN OUTPUT:
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "Full 'Standards Aligned' section as plain text for this lesson. Each standard must include standard code and description and code and description must be exactly the same used in Unit. e.g. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.'",
+      "description": "Bagian lengkap 'Standards Aligned' sebagai teks biasa untuk pelajaran ini. Setiap standar harus mencakup kode standar dan deskripsi dan kode serta deskripsi harus persis sama dengan yang digunakan dalam Unit. misalnya 'MS-ESS1-1: Mengembangkan dan menggunakan model sistem Bumi–matahari–bulan untuk mendeskripsikan pola siklis fase bulan, gerhana, dan musim.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -240,11 +240,11 @@ PERSYARATAN OUTPUT:
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**Say:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**Say:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**Say:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Full 'Assess Prior Knowledge' section. CRITICAL: Look at the 'lessonNumber' in the Attached Lesson Content. IF this is Lesson 1, populate this object fully. IF this is Lesson 2, 3, or any other lesson, YOU MUST RETURN AN EMPTY OBJECT {} with NO properties. Do not populate this for any lesson other than Lesson 1.",
+      "description": "Bagian lengkap 'Assess Prior Knowledge'. KRITIS: Lihat 'lessonNumber' dalam Attached Lesson Content. JIKA ini adalah Lesson 1, isi objek ini sepenuhnya. JIKA ini adalah Lesson 2, 3, atau pelajaran lainnya, ANDA HARUS MENGEMBALIKAN OBJEK KOSONG {} tanpa properti apa pun. Jangan mengisi ini untuk pelajaran selain Lesson 1.",
       "properties": {
         "SayIntroduction": {
           "type": "string",
-          "description": "What the teacher says to introduce the activity."
+          "description": "Apa yang guru katakan untuk memperkenalkan aktivitas."
         },
         "StatementsToProject": {
           "x-format": "{items}",
@@ -253,11 +253,11 @@ PERSYARATAN OUTPUT:
             "x-format": "- {value}",
             "type": "string"
           },
-          "description": "List of statements to project or read, containing both accurate ideas and common misconceptions."
+          "description": "Daftar pernyataan untuk diproyeksikan atau dibacakan, yang berisi ide-ide akurat dan kesalahpahaman umum."
         },
         "SayInstructions": {
           "type": "string",
-          "description": "What the teacher says to instruct students on what to do with the statements."
+          "description": "Apa yang guru katakan untuk mengarahkan siswa tentang apa yang harus dilakukan dengan pernyataan-pernyataan tersebut."
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -266,15 +266,15 @@ PERSYARATAN OUTPUT:
             "x-format": "- {value}",
             "type": "string"
           },
-          "description": "Expected student responses/markings for each statement."
+          "description": "Respons/penandaan siswa yang diharapkan untuk setiap pernyataan."
         },
         "SayConclusion": {
           "type": "string",
-          "description": "What the teacher says to wrap up."
+          "description": "Apa yang guru katakan untuk menutup."
         },
         "ActionConclusion": {
           "type": "string",
-          "description": "Teacher action to conclude (e.g., drawing a diagram)."
+          "description": "Tindakan guru untuk mengakhiri (misalnya, menggambar diagram)."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -283,7 +283,7 @@ PERSYARATAN OUTPUT:
             "x-format": "- {value}",
             "type": "string"
           },
-          "description": "List of alternate options for the activity."
+          "description": "Daftar opsi alternatif untuk aktivitas tersebut."
         }
       },
       "required": [
@@ -300,11 +300,11 @@ PERSYARATAN OUTPUT:
     "Objective": {
       "x-format": "### {green}({loc.Objective} {value.Duration})\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Create an Objective section that clearly states the student learning goals for the lesson.",
+      "description": "Buatlah bagian Objective yang dengan jelas menyatakan tujuan belajar siswa untuk pelajaran ini.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(2-3 min)')"
+          "description": "Perkiraan waktu (misalnya '(2-3 menit)')"
         },
         "Materials": {
           "x-format": "{items}",
@@ -323,7 +323,7 @@ PERSYARATAN OUTPUT:
             "properties": {
               "Step": {
                 "type": "string",
-                "description": "Teacher step or script."
+                "description": "Langkah atau naskah guru."
               },
               "Bullets": {
                 "x-format": "{items}",
@@ -332,7 +332,7 @@ PERSYARATAN OUTPUT:
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "Optional list of bullet points for this step. For the first step, include the actual learning objectives here."
+                "description": "Daftar opsional poin-poin bullet untuk langkah ini. Untuk langkah pertama, sertakan tujuan belajar yang sebenarnya di sini."
               }
             },
             "required": [
@@ -341,7 +341,7 @@ PERSYARATAN OUTPUT:
             ],
             "additionalProperties": false
           },
-          "description": "Must include: 1) Explain learning goals using direct teacher-facing script (e.g., Say: '...') and put the actual objectives in the Bullets array. 2) Ask students to record objectives in their notebooks. 3) Briefly tell the teacher how to connect objectives to students' real-life experiences."
+          "description": "Harus mencakup: 1) Jelaskan tujuan belajar menggunakan naskah langsung untuk guru (misalnya, Katakan: '...') dan letakkan tujuan yang sebenarnya di array Bullets. 2) Minta siswa mencatat tujuan di buku catatan mereka. 3) Secara singkat beri tahu guru cara menghubungkan tujuan dengan pengalaman nyata siswa."
         }
       },
       "required": [
@@ -354,11 +354,11 @@ PERSYARATAN OUTPUT:
     "ContentDeliveryAndInteractiveActivities": {
       "x-format": "### {green}({loc.ContentDeliveryAndInteractiveActivities} {value.Duration})\n\n**1. {loc.Hook}** {value.Hook}\n\n**2. {loc.Vocabulary}**\n\n{value.Vocabulary.Bullets}\n\n{value.Vocabulary.ConclusionSay}\n\n**3. {loc.NewConceptsAndKnowledge}**\n\n{value.NewConceptsAndKnowledge}\n\n### ⚡ {loc.AttentionReset}\n\n**{loc.Purpose}:** {value.AttentionReset.StandardParagraph}\n\n{value.AttentionReset.Directions}\n\n{loc.WhyThisWorks}:\n\n{value.AttentionReset.WhyThisWorks}\n\n### {loc.ContinueInstructionAfterActivity}\n\n{value.ContinueInstruction}\n\n### ⚠️ {loc.AnticipatedMisconceptions}\n\n{value.AnticipatedMisconceptions}\n\n{value.Connect}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
       "type": "object",
-      "description": "Block for content delivery.",
+      "description": "Blok untuk penyampaian konten.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(30 min)')"
+          "description": "Perkiraan waktu (misalnya '(30 menit)')"
         },
         "Hook": {
           "x-format": "{items}",
@@ -367,7 +367,7 @@ PERSYARATAN OUTPUT:
             "x-format": "{value}\n\n",
             "type": "string"
           },
-          "description": "Write a dramatic, high-engagement hook delivered through teacher script. Should be surprising, curiosity-building, and tied to the main concept."
+          "description": "Tulis hook dramatis dengan keterlibatan tinggi yang disampaikan melalui naskah guru. Harus mengejutkan, membangun rasa ingin tahu, dan terkait dengan konsep utama."
         },
         "Vocabulary": {
           "type": "object",
@@ -379,11 +379,11 @@ PERSYARATAN OUTPUT:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "List essential vocabulary terms. Provide teacher script for defining each term formatted strictly as: '[Term] - Say: \"[Definition/Script]\"'. Example: 'Lever - Say: \"A lever is a simple machine...\"'."
+              "description": "Cantumkan istilah kosakata penting. Sediakan naskah guru untuk mendefinisikan setiap istilah dengan format ketat sebagai: '[Istilah] - Katakan: \"[Definisi/Naskah]\"'. Contoh: 'Lever - Katakan: \"A lever is a simple machine...\"'."
             },
             "ConclusionSay": {
               "type": "string",
-              "description": "A concluding 'Say: ' statement to transition."
+              "description": "Pernyataan 'Katakan:' penutup untuk transisi."
             }
           },
           "required": [
@@ -399,15 +399,15 @@ PERSYARATAN OUTPUT:
             "x-format": "{value}\n\n",
             "type": "string"
           },
-          "description": "Write a detailed teacher lecture with scripts (Say: “…”). Include step-by-step what teacher says, does, and may demonstrate. Break down complex ideas, provide examples/analogies, make explicit connections to prior knowledge."
+          "description": "Tulis ceramah guru yang rinci dengan naskah (Katakan: “…”). Sertakan langkah demi langkah tentang apa yang guru katakan, lakukan, dan mungkin demonstrasikan. Pecah ide-ide kompleks, berikan contoh/analogi, buat hubungan eksplisit dengan pengetahuan sebelumnya."
         },
         "AttentionReset": {
           "type": "object",
-          "description": "Insert the standard attention-reset paragraph exactly as written: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
+          "description": "Sisipkan paragraf standar pengaturan ulang perhatian persis seperti tertulis: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
           "properties": {
             "StandardParagraph": {
               "type": "string",
-              "description": "Must be exactly: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (word for word)'"
+              "description": "Harus persis: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (word for word)'"
             },
             "Directions": {
               "x-format": "{items}",
@@ -416,7 +416,7 @@ PERSYARATAN OUTPUT:
                 "x-format": "{index}. {value}",
                 "type": "string"
               },
-              "description": "Provide directions for the activity, including teacher script and what students & teacher need to do."
+              "description": "Sediakan arahan untuk aktivitas tersebut, termasuk naskah guru dan apa yang perlu dilakukan siswa & guru."
             },
             "WhyThisWorks": {
               "x-format": "{items}",
@@ -425,7 +425,7 @@ PERSYARATAN OUTPUT:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Explain in bullets why activity works for re-engagement, resetting cognitive focus, reinforcing concepts and purposeful preview. E.g. 'Standing + movement resets attention.'"
+              "description": "Jelaskan dalam bentuk bullet mengapa aktivitas ini efektif untuk re-engagement, mengatur ulang fokus kognitif, memperkuat konsep, dan memberikan preview yang bertujuan. Misalnya: 'Berdiri + gerakan mengatur ulang perhatian.'"
             }
           },
           "required": [
@@ -442,23 +442,23 @@ PERSYARATAN OUTPUT:
             "x-format": "{index}. {value}\n\n",
             "type": "string"
           },
-          "description": "Numbered steps to continue instruction with teacher scripts (Say: “…”). Break down complex ideas, provide examples/analogies, to intrigue, foreshadow future learning, extend key ideas."
+          "description": "Langkah bernomor untuk melanjutkan instruksi dengan naskah guru (Katakan: “…”). Pecah ide-ide kompleks, berikan contoh/analogi, untuk memancing rasa ingin tahu, memberi isyarat pembelajaran berikutnya, memperluas ide-ide kunci."
         },
         "AnticipatedMisconceptions": {
           "x-format": "{items}",
           "type": "array",
-          "description": "List anticipated common student misconceptions to ensure teacher is ready.",
+          "description": "Cantumkan miskonsepsi umum siswa yang diperkirakan agar guru siap.",
           "items": {
             "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "e.g., 'Students may think a bigger lever always works better.'"
+                "description": "mis., 'Siswa mungkin berpikir bahwa tuas yang lebih besar selalu bekerja lebih baik.'"
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "How to effectively respond to potential student misunderstanding and guide to accurate understanding."
+                "description": "Cara merespons secara efektif potensi kesalahpahaman siswa dan membimbing menuju pemahaman yang akurat."
               }
             },
             "required": [
@@ -471,19 +471,19 @@ PERSYARATAN OUTPUT:
         "Connect": {
           "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. Say: \"{value.Step1Say}\"\n\n2. Say: \"{value.Step2Say}\"\n\n3. Prompt:\n\n{value.Step3Prompts}\n\n4. Whole-group share: Say: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Relate to a purpose. Connect to one of the essential questions.",
+          "description": "Hubungkan dengan tujuan. Kaitkan dengan salah satu pertanyaan esensial.",
           "properties": {
             "Duration": {
               "type": "string",
-              "description": "e.g., '(3 min)'"
+              "description": "misalnya, '(3 menit)'"
             },
             "Step1Say": {
               "type": "string",
-              "description": "Teacher script connecting the previous activity to a bigger idea."
+              "description": "Naskah guru yang menghubungkan kegiatan sebelumnya dengan ide yang lebih besar."
             },
             "Step2Say": {
               "type": "string",
-              "description": "Teacher script asking students to turn and talk to a partner."
+              "description": "Naskah guru yang meminta siswa untuk menoleh dan berbicara dengan pasangan."
             },
             "Step3Prompts": {
               "x-format": "{items}",
@@ -492,11 +492,11 @@ PERSYARATAN OUTPUT:
                 "x-format": "- \"{value}\"",
                 "type": "string"
               },
-              "description": "Specific questions for the prompt (e.g., 'Why was the shaduf important...', 'What evidence shows...')."
+              "description": "Pertanyaan spesifik untuk prompt tersebut (misalnya, 'Mengapa shaduf itu penting...', 'Bukti apa yang menunjukkan...')."
             },
             "Step4Say": {
               "type": "string",
-              "description": "Teacher script for whole-group share (e.g., 'Let's hear a few ideas...')."
+              "description": "Naskah guru untuk berbagi dalam kelompok besar (misalnya, 'Mari kita dengarkan beberapa ide...')."
             },
             "ExpectedStudentResponses": {
               "x-format": "{items}",
@@ -505,7 +505,7 @@ PERSYARATAN OUTPUT:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Deep expected student responses that use reasoning or evidence."
+              "description": "Respons siswa yang diharapkan secara mendalam yang menggunakan penalaran atau bukti."
             }
           },
           "required": [
@@ -521,7 +521,7 @@ PERSYARATAN OUTPUT:
         "Differentiation": {
           "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
           "type": "object",
-          "description": "Differentiate instruction (how to teach, not simplify materials). Vary complexity and depth, promote active engagement/language. Realistic for classroom.",
+          "description": "Diferensiasikan pengajaran (bagaimana mengajar, bukan menyederhanakan materi). Variasikan kompleksitas dan kedalaman, dorong keterlibatan aktif/bahasa. Realistis untuk kelas.",
           "properties": {
             "LanguageLearners": {
               "x-format": "**{loc.LanguageLearners}**\n\n{items}",
@@ -557,7 +557,7 @@ PERSYARATAN OUTPUT:
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "For Go Deeper responses."
+                  "description": "Untuk respons Go Deeper."
                 }
               },
               "required": [
@@ -577,7 +577,7 @@ PERSYARATAN OUTPUT:
         "AccommodationsAndModifications": {
           "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
           "type": "object",
-          "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+          "description": "Bagian ini harus mencakup dua jenis dukungan: Dukungan Umum dan Dukungan Individual. Fokus pada akses, bukan menurunkan rigor.",
           "properties": {
             "General": {
               "type": "array",
@@ -585,19 +585,19 @@ PERSYARATAN OUTPUT:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+              "description": "Strategi non-spesifik siswa yang meningkatkan akses bagi semua pembelajar (misalnya, visual, catatan yang sudah diisi sebagian, glosarium digital, instruksi yang dipecah-pecah). Berikan 2-4 poin bullet."
             },
             "IndividualSupport": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+              "description": "Akomodasi dan modifikasi spesifik untuk siswa yang disebutkan dengan rencana formal. Cantumkan SETIAP siswa secara individual; JANGAN mengelompokkan siswa bersama. Dukungan untuk setiap siswa harus berupa daftar yang mudah dipindai.",
               "items": {
                 "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                 "type": "object",
                 "properties": {
                   "StudentName": {
                     "type": "string",
-                    "description": "First and last name of the individual student receiving these supports."
+                    "description": "Nama depan dan nama belakang dari siswa individu yang menerima dukungan ini."
                   },
                   "PlanProvided": {
                     "type": "array",
@@ -605,7 +605,7 @@ PERSYARATAN OUTPUT:
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                    "description": "Rencana formal yang diberikan untuk siswa ini dalam prompt. Uraikan rencana menjadi daftar yang jelas. Anda boleh memparafrasekannya untuk memperbaiki format, tetapi JANGAN menghilangkan atau menambahkan informasi apa pun."
                   },
                   "PlanImplementation": {
                     "type": "array",
@@ -613,7 +613,7 @@ PERSYARATAN OUTPUT:
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Concrete tools/stems/visuals/organizers for this task."
+                    "description": "Alat/kerangka kalimat/visual/pengorganisasi konkret untuk tugas ini."
                   }
                 },
                 "required": [
@@ -649,16 +649,16 @@ PERSYARATAN OUTPUT:
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
       "type": "object",
-      "description": "Full 'Review & Spaced Retrieval' section.",
+      "description": "Bagian lengkap 'Tinjauan & Pengambilan Kembali Berjarak'.",
       "properties": {
         "ActiveRecall": {
           "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Asking students to recall NEW learning from TODAY'S lesson.",
+          "description": "Meminta siswa mengingat pembelajaran BARU dari pelajaran HARI INI.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Prompt guru yang dimulai dengan 'Say: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -678,11 +678,11 @@ PERSYARATAN OUTPUT:
         "EssentialQuestionConnection": {
           "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Teacher prompt linking to unit question.",
+          "description": "Prompt guru yang mengaitkan dengan pertanyaan unit.",
           "properties": {
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Prompt guru yang dimulai dengan 'Say: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -702,15 +702,15 @@ PERSYARATAN OUTPUT:
         "SpacedRetrieval": {
           "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
           "type": "object",
-          "description": "Recall from a specific prior lesson/unit.",
+          "description": "Ingat kembali dari pelajaran/unit sebelumnya yang spesifik.",
           "properties": {
             "PriorLearningContext": {
               "type": "string",
-              "description": "Context sentence like 'Earlier in this lesson, students learned...'"
+              "description": "Kalimat konteks seperti 'Sebelumnya dalam pelajaran ini, siswa belajar...'"
             },
             "Say": {
               "type": "string",
-              "description": "The teacher prompt starting with 'Say: '."
+              "description": "Prompt guru yang dimulai dengan 'Ucapkan: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
@@ -739,19 +739,19 @@ PERSYARATAN OUTPUT:
     "QAndAAndDiscussion": {
       "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. Say: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. Ask:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. Say: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" Record: {value.InstructionsForTeachers.Step3_CaptureRecord} Say:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. Say: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} Say: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
       "type": "object",
-      "description": "Block for Q&A and Discussion.",
+      "description": "Bagian untuk Tanya Jawab dan Diskusi.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(5 min)')"
+          "description": "Perkiraan waktu (misalnya '(5 min)')"
         },
         "InstructionsForTeachers": {
           "type": "object",
-          "description": "Teacher guidance for the Q&A and Discussion session.",
+          "description": "Panduan guru untuk sesi Tanya Jawab dan Diskusi.",
           "properties": {
             "Step1_InviteSay": {
               "type": "string",
-              "description": "e.g., 'Now is your chance to think about what we learned...'"
+              "description": "misalnya, 'Sekarang adalah kesempatanmu untuk memikirkan apa yang telah kita pelajari...'"
             },
             "Step2_AskQuestions": {
               "x-format": "{items}",
@@ -760,31 +760,31 @@ PERSYARATAN OUTPUT:
                 "x-format": "   - \"{value}\"",
                 "type": "string"
               },
-              "description": "3-4 questions to ask students."
+              "description": "3-4 pertanyaan untuk diajukan kepada siswa."
             },
             "Step3_CaptureSay1": {
               "type": "string",
-              "description": "e.g., 'If you have a question, that means you are thinking deeply...'"
+              "description": "misalnya, 'Jika kamu punya pertanyaan, itu berarti kamu sedang berpikir secara mendalam...'"
             },
             "Step3_CaptureRecord": {
               "type": "string",
-              "description": "e.g., 'Write student questions on a chart titled Questions We Still Have.'"
+              "description": "misalnya, 'Tuliskan pertanyaan siswa pada bagan berjudul Pertanyaan yang Masih Kita Miliki.'"
             },
             "Step3_CaptureSay2": {
               "type": "string",
-              "description": "e.g., 'We will keep adding to this chart throughout the unit...'"
+              "description": "misalnya, 'Kita akan terus menambahkan ke bagan ini sepanjang unit ini...'"
             },
             "Step4_AnswerSay1": {
               "type": "string",
-              "description": "e.g., 'Let's look at our questions. Which ones can we answer using what we learned today?'"
+              "description": "misalnya, 'Mari kita lihat pertanyaan kita. Mana saja yang bisa kita jawab menggunakan apa yang kita pelajari hari ini?'"
             },
             "Step4_AnswerAddress": {
               "type": "string",
-              "description": "e.g., 'Address a few questions using student responses and evidence.'"
+              "description": "misalnya, 'Bahas beberapa pertanyaan menggunakan tanggapan siswa dan bukti.'"
             },
             "Step4_AnswerSay2": {
               "type": "string",
-              "description": "e.g., 'Some of these questions will help guide what we learn next...'"
+              "description": "misalnya, 'Beberapa pertanyaan ini akan membantu memandu apa yang akan kita pelajari selanjutnya...'"
             }
           },
           "required": [
@@ -809,11 +809,11 @@ PERSYARATAN OUTPUT:
     "Conclusion": {
       "x-format": "### {green}({loc.Conclusion} {value.Duration})\n\n{value.BuildCuriosity}",
       "type": "object",
-      "description": "Block for Conclusion.",
+      "description": "Bagian untuk Penutup.",
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Time estimate (e.g. '(1 min)')"
+          "description": "Perkiraan waktu (misalnya '(1 min)')"
         },
         "BuildCuriosity": {
           "type": "string"
@@ -828,18 +828,18 @@ PERSYARATAN OUTPUT:
     "FormativeAssessment": {
       "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
       "type": "array",
-      "description": "Extract and generate EXACTLY 4 Formative Assessment prompts covering DOK 1-4. For each prompt, include the PromptLabel, Question, and ExpectedStudentResponses.",
+      "description": "Ekstrak dan buat TEPAT 4 prompt Penilaian Formatif yang mencakup DOK 1-4. Untuk setiap prompt, sertakan PromptLabel, Pertanyaan, dan TanggapanSiswaYangDiharapkan.",
       "items": {
         "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n{value.ExpectedStudentResponses}\n",
         "type": "object",
         "properties": {
           "PromptLabel": {
             "type": "string",
-            "description": "e.g., 'Prompt 1 (DOK 1)'"
+            "description": "misalnya, 'Prompt 1 (DOK 1)'"
           },
           "Question": {
             "type": "string",
-            "description": "The exact question text."
+            "description": "Teks pertanyaan yang tepat."
           },
           "ExpectedStudentResponses": {
             "x-format": "{items}",
@@ -848,7 +848,7 @@ PERSYARATAN OUTPUT:
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1-2 sample responses showing mastery."
+            "description": "1-2 contoh tanggapan yang menunjukkan penguasaan."
           }
         },
         "required": [
@@ -864,23 +864,23 @@ PERSYARATAN OUTPUT:
     "StudentPractice": {
       "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**Teacher Notes:** {value.TeacherNotes}\n\n{value.Tasks}\n\n🔎 **{loc.Reflection}:** {value.Reflection.Prompt}\n\n{value.Reflection.ReflectionOptions}",
       "type": "object",
-      "description": "Full 'Student Practice' section for homework / out-of-class practice.",
+      "description": "Bagian lengkap 'Latihan Siswa' untuk pekerjaan rumah / latihan di luar kelas.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
-          "description": "Notes explaining how the tasks reinforce today's learning and strengthen long-term retention."
+          "description": "Catatan yang menjelaskan bagaimana tugas-tugas tersebut memperkuat pembelajaran hari ini dan memperkuat retensi jangka panjang."
         },
         "Tasks": {
           "x-format": "{items}",
           "type": "array",
-          "description": "Generate 4 practice tasks covering DOK levels 2, 3, and 4.",
+          "description": "Buat 4 tugas latihan yang mencakup level DOK 2, 3, dan 4.",
           "items": {
             "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{loc.SuccessCriteria}\n\n{value.SuccessCriteria}",
             "type": "object",
             "properties": {
               "TaskDescription": {
                 "type": "string",
-                "description": "e.g., '(DOK 2) Draw a shaduf and label...'"
+                "description": "misalnya, '(DOK 2) Gambar sebuah shaduf dan beri label...'"
               },
               "SuccessCriteria": {
                 "x-format": "{items}",
@@ -889,7 +889,7 @@ PERSYARATAN OUTPUT:
                   "x-format": "- {value}",
                   "type": "string"
                 },
-                "description": "3 success criteria bullet points."
+                "description": "3 poin bullet kriteria keberhasilan."
               }
             },
             "required": [
@@ -903,11 +903,11 @@ PERSYARATAN OUTPUT:
         },
         "Reflection": {
           "type": "object",
-          "description": "A reflection task for the students.",
+          "description": "Sebuah tugas refleksi untuk para siswa.",
           "properties": {
             "Prompt": {
               "type": "string",
-              "description": "e.g., 'Write 2-3 sentences responding to one prompt:'"
+              "description": "misalnya, 'Tulis 2-3 kalimat sebagai respons terhadap satu pertanyaan:'"
             },
             "ReflectionOptions": {
               "x-format": "{items}",
@@ -916,7 +916,7 @@ PERSYARATAN OUTPUT:
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "3-4 reflection question options."
+              "description": "3-4 opsi pertanyaan refleksi."
             }
           },
           "required": [

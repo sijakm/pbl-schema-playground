@@ -35,7 +35,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
   "properties": {
     "UnitPlan": {
       "type": "object",
-      "description": "Return a complete Project-Based Learning (PBL) Unit Plan. Do NOT add extra keys. Populate every required field. Must work for ANY subject. Localize stakeholders/audience/resources to provided zip/location without inventing exact addresses/phone numbers.",
+      "description": "Devuelve un Plan de Unidad de Aprendizaje Basado en Proyectos (ABP) completo. No agregues claves extra. Completa todos los campos obligatorios. Debe funcionar para CUALQUIER materia. Localiza a las partes interesadas/la audiencia/los recursos al código postal/ubicación proporcionados sin inventar direcciones o números de teléfono exactos.",
       "additionalProperties": false,
       "required": [
         "AssessPriorKnowledge",
@@ -53,16 +53,16 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
         "AssessPriorKnowledge": {
           "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n**{loc.Purpose}:** {loc.PBLAssessPriorKnowledgePurposeText}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
           "type": "object",
-          "description": "Assess Prior Knowledge section. 1. Ensure DOK 1-3 prompts are used. 2. Include prerequisite skills needed for the student learning objectives. 3. Pick one modality from this list and fully develop it: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 4. Initial teacher prompt with 'Say:' statement. 5. Clear instructions and template/structure for the chosen modality. 6. 'Expected Student Responses' section. 7. Closing teacher 'Say:' prompt. 8. After fully developing one modality, provide 2 brief alternate options.",
+          "description": "Sección de Evaluación de Conocimientos Previos. 1. Asegúrate de usar preguntas de DOK 1-3. 2. Incluye las habilidades prerrequisito necesarias para los objetivos de aprendizaje del estudiante. 3. Elige una modalidad de esta lista y desarróllala por completo: cuestionamiento, K-W-L, elementos visuales, mapas conceptuales, escritura reflexiva, guías de anticipación, valoraciones de vocabulario. 4. Indicación inicial del docente con la frase 'Say:'. 5. Instrucciones claras y plantilla/estructura para la modalidad elegida. 6. Sección de 'Expected Student Responses'. 7. Frase de cierre del docente con 'Say:'. 8. Después de desarrollar por completo una modalidad, proporciona 2 opciones breves alternativas.",
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Clear instructions and template/structure for the chosen modality. E.g. 'Say: \"Before we begin...\"'"
+              "description": "Instrucciones claras y plantilla/estructura para la modalidad elegida. Por ejemplo: 'Say: \"Before we begin...\"'"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
               "type": "array",
-              "description": "Anticipated answers or common misconceptions for the chosen modality. IMPORTANT: Do not include bullet points, dashes, or numbers at the beginning of the strings.",
+              "description": "Respuestas anticipadas o conceptos erróneos comunes para la modalidad elegida. IMPORTANTE: No incluyas viñetas, guiones ni números al comienzo de las cadenas.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -70,12 +70,12 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Closing teacher 'Say:' prompt that validates student thinking and previews unit investigation."
+              "description": "Frase de cierre del docente con 'Say:' que valida el pensamiento de los estudiantes y adelanta la investigación de la unidad."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
               "type": "array",
-              "description": "2 brief alternate options a teacher could choose.",
+              "description": "2 opciones breves alternativas que un docente podría elegir.",
               "items": {
                 "x-format": "{index}. {value}",
                 "type": "string"
@@ -109,11 +109,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "properties": {
             "TaskStatementTitle": {
               "type": "string",
-              "description": "The title of the student-facing launch message (e.g. Message from the Coconut Creek STEM Innovation Team)."
+              "description": "El título del mensaje de lanzamiento dirigido a los estudiantes (por ejemplo, Message from the Coconut Creek STEM Innovation Team)."
             },
             "LetterGreeting": {
               "type": "string",
-              "description": "The opening greeting for the student-facing launch message (e.g., 'Hello engineers-in-training,')."
+              "description": "El saludo inicial para el mensaje de lanzamiento dirigido a los estudiantes (por ejemplo, 'Hello engineers-in-training,')."
             },
             "LetterBody": {
               "x-format": "{items}",
@@ -122,27 +122,27 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "x-format": "{value}\n\n",
                 "type": "string"
               },
-              "description": "The main paragraphs of the student-facing launch message (3-5 paragraphs) written like a credible local organization or person. Must include a clear connection to the problem, the driving question, the deliverable requirements, and an inspiring call to action. Urgent, meaningful, authentic. Do NOT include the title, greeting, sign-off phrase (e.g. 'Sincerely,'), or sender name here. Only include the body paragraphs."
+              "description": "Los párrafos principales del mensaje de lanzamiento dirigido a los estudiantes (3-5 párrafos) escritos como una organización local creíble o una persona. Debe incluir una conexión clara con el problema, la pregunta guía, los requisitos del entregable y un llamado a la acción inspirador. Urgente, significativo, auténtico. No incluyas el título, el saludo, la frase de despedida (por ejemplo, 'Sincerely,') ni el nombre del remitente aquí. Solo incluye los párrafos del cuerpo."
             },
             "LetterSignOff": {
               "type": "string",
-              "description": "The sign-off phrase for the message (e.g., 'Sincerely,'). Just provide the sign-off phrase, nothing else."
+              "description": "La frase de despedida para el mensaje (por ejemplo, 'Sincerely,'). Proporciona solo la frase de despedida, nada más."
             },
             "LetterSender": {
               "type": "string",
-              "description": "The name of the credible local organization or person sending the message (e.g., 'Coconut Creek STEM Innovation Team'). Do NOT include the sign-off (e.g., 'Sincerely') here."
+              "description": "El nombre de la organización local creíble o de la persona que envía el mensaje (por ejemplo, 'Coconut Creek STEM Innovation Team'). No incluyas la despedida (por ejemplo, 'Sincerely') aquí."
             },
             "DrivingQuestion": {
               "type": "string",
-              "description": "One strong open-ended Driving Question grounded in place and stakeholder need. This question must also be woven into the LetterBody. MUST be reused verbatim in FramingTheLearning.DrivingQuestion."
+              "description": "Una pregunta guía abierta sólida, fundamentada en el lugar y en la necesidad de las partes interesadas. Esta pregunta también debe integrarse en LetterBody. DEBE reutilizarse textualmente en FramingTheLearning.DrivingQuestion."
             },
             "Mission": {
               "type": "string",
-              "description": "Paragraph starting with 'Your task is to...' describing what students will create/do and why it matters to the community/audience."
+              "description": "Párrafo que comienza con 'Your task is to...' describiendo qué crearán o harán los estudiantes y por qué es importante para la comunidad/audiencia."
             },
             "ProjectContextAndStakeholders": {
               "type": "string",
-              "description": "Short narrative: who is impacted, why it matters now locally, and which stakeholders/audiences care."
+              "description": "Narrativa breve: quiénes se ven afectados, por qué importa ahora a nivel local y qué partes interesadas/audiencias se preocupan."
             },
             "FinalDeliverableRequirements": {
               "type": "array",
@@ -152,11 +152,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "type": "string",
                 "x-format": "{index}. {value}"
               },
-              "description": "Written for students, describe the final deliverable they will create and the authentic audience it serves. Format each item with a bolded title (e.g. **Summary:** ...). Do NOT include any numbering (like 1., 2.) or bullet points at the beginning of your strings; start directly with the bolded title. Must include at least a brief summary, then four components: (1) Concept & Purpose Plan explaining the idea through a visual or written representation and why it matters to the community or context; (2) Evidence-Based Justification requiring analysis of at least two relevant factors and explanation of choices using evidence from research, data, experimentation, or observation; (3) Model or Representation describing the type of model created, what it represents, how it functions, and how it reveals the force, stability, efficiency, or system behind the idea; and (4) The Verdict, a concluding, evidence-backed argument explaining why the solution is effective, feasible, or meaningful, summarizing reasoning, evidence, and model, and communicating the value of the design to the authentic audience. Your final statement should show that you can apply disciplinary knowledge, use evidence, model complex ideas, and explain real-world implications."
+              "description": "Escrito para estudiantes, describe el producto final que crearán y la audiencia auténtica a la que sirve. Formatea cada elemento con un título en negrita (por ejemplo, **Summary:** ...). No incluyas numeración (como 1., 2.) ni viñetas al comienzo de tus cadenas; comienza directamente con el título en negrita. Debe incluir al menos un breve resumen y luego cuatro componentes: (1) Concept & Purpose Plan explicando la idea mediante una representación visual o escrita y por qué importa a la comunidad o al contexto; (2) Evidence-Based Justification exigiendo análisis de al menos dos factores relevantes y explicación de las decisiones usando evidencia de investigación, datos, experimentación u observación; (3) Model or Representation describiendo el tipo de modelo creado, qué representa, cómo funciona y cómo revela la fuerza, estabilidad, eficiencia o sistema detrás de la idea; y (4) The Verdict, un argumento final respaldado por evidencia que explique por qué la solución es efectiva, viable o significativa, resuma el razonamiento, la evidencia y el modelo, y comunique el valor del diseño a la audiencia auténtica. Tu declaración final debe mostrar que puedes aplicar conocimiento disciplinario, usar evidencia, modelar ideas complejas y explicar implicaciones del mundo real."
             },
             "ClosingCallToAction": {
               "type": "string",
-              "description": "Inspiring close: the community/audience is counting on creative thinkers who can turn evidence into action. Emphasize that ancient ideas can inspire modern solutions."
+              "description": "Cierre inspirador: la comunidad/audiencia cuenta con pensadores creativos que pueden convertir la evidencia en acción. Enfatiza que las ideas antiguas pueden inspirar soluciones modernas."
             }
           }
         },
@@ -178,14 +178,14 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "type": "string",
                 "x-format": "- {value}"
               },
-              "description": "Standards listed verbatim when provided, format 'CODE: description'. Do NOT include bullet points at the beginning of your strings."
+              "description": "Estándares listados literalmente cuando se proporcionen, con el formato 'CÓDIGO: descripción'. No incluyas viñetas al comienzo de tus cadenas."
             },
             "BigIdeasAndEssentialQuestions": {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
               "maxItems": 4,
-              "description": "Generate 3-4 Big Idea and Essential Question pairs that establish the enduring, transferable concepts anchoring the entire unit, guide inquiry and assessment design, and provide an overarching conceptual framework connecting all tasks, skills, and activities into meaningful understanding.",
+              "description": "Genera 3-4 pares de Big Idea y Essential Question que establezcan los conceptos duraderos y transferibles que fundamentan toda la unidad, guíen el diseño de la indagación y la evaluación, y proporcionen un marco conceptual general que conecte todas las tareas, habilidades y actividades en una comprensión significativa.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{loc.BigIdeaLabel}** {value.BigIdea}\n\n- {loc.EssentialQuestionLabel} {value.EssentialQuestion}",
@@ -197,11 +197,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "BigIdea": {
                     "type": "string",
-                    "description": "A broad, conceptual statement of enduring understanding that explains a fundamental principle underlying the unit, connects all tasks and assessments, supports transferable learning beyond the specific context, and reflects core disciplinary thinking rather than isolated facts."
+                    "description": "Una afirmación conceptual amplia de comprensión duradera que explique un principio fundamental subyacente a la unidad, conecte todas las tareas y evaluaciones, apoye el aprendizaje transferible más allá del contexto específico y refleje el pensamiento disciplinario central en lugar de hechos aislados."
                   },
                   "EssentialQuestion": {
                     "type": "string",
-                    "description": "Create essential questions that focus only on broad, universal concepts such as change, evidence, patterns, relationships, systems, or reasoning. Do NOT mention any subject-specific terms, processes, vocabulary, or examples. The questions must be open-ended, transferable across all disciplines, and impossible to answer by learning the lesson or unit content. Focus only on the big ideas, not the subject matter."
+                    "description": "Crea preguntas esenciales que se centren solo en conceptos amplios y universales como cambio, evidencia, patrones, relaciones, sistemas o razonamiento. No menciones términos, procesos, vocabulario o ejemplos específicos de ninguna materia. Las preguntas deben ser abiertas, transferibles entre todas las disciplinas e imposibles de responder aprendiendo el contenido de la lección o la unidad. Concéntrate solo en las grandes ideas, no en el contenido de la materia."
                   }
                 }
               }
@@ -224,7 +224,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Big Ideas or Enduring Understandings by generating 3 to 5 conceptual, long-term statements that explain why the learning matters beyond the unit, highlight transferable patterns, relationships, or principles across contexts, and explain how or why something works rather than just what it is. Write the objectives as direct continuations of the phrase 'Students will understand that...'. Do NOT repeat the phrase 'Students will understand that', and do NOT start with verbs like 'Explain that' or 'Describe that' (e.g., just write 'engineering designs improve when...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Cada objetivo debe terminar con (DOK X) y representar Ideas Grandes o Comprensiones Duraderas generando 3 a 5 enunciados conceptuales y a largo plazo que expliquen por qué el aprendizaje importa más allá de la unidad, destaquen patrones, relaciones o principios transferibles entre contextos, y expliquen cómo o por qué algo funciona en lugar de solo qué es. Escribe los objetivos como continuaciones directas de la frase 'Students will understand that...'. No repitas la frase 'Students will understand that', y no comiences con verbos como 'Explain that' o 'Describe that' (por ejemplo, simplemente escribe 'los diseños de ingeniería mejoran cuando...'). NO incluyas numeración, viñetas ni guiones al inicio de tus cadenas."
                 },
                 "StudentsWillKnowThat": {
                   "type": "array",
@@ -234,7 +234,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Facts or Core Content Knowledge by generating 3 to 5 discipline-specific facts, terms, or foundational knowledge statements that identify essential information students must remember, remain concrete and factual rather than conceptual, support the unit standards and performance tasks, use clear academic vocabulary appropriate to the subject, and include an appropriate DOK label typically at level 1 or 2. Write the objectives as direct continuations of the phrase 'Students will know that...'. Do NOT repeat the phrase 'Students will know that', and do NOT start with verbs like 'Identify that' or 'Define' (e.g., just write 'a lever has an effort arm...'). DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Cada objetivo debe terminar con (DOK X) y representar Hechos o Conocimientos Fundamentales del Contenido generando 3 a 5 enunciados basados en la disciplina, términos o conocimientos fundamentales que identifiquen información esencial que los estudiantes deben recordar, sean concretos y fácticos en lugar de conceptuales, apoyen los estándares de la unidad y las tareas de desempeño, usen vocabulario académico claro apropiado para la materia e incluyan una etiqueta DOK adecuada normalmente en el nivel 1 o 2. Escribe los objetivos como continuaciones directas de la frase 'Students will know that...'. No repitas la frase 'Students will know that', y no comiences con verbos como 'Identify that' o 'Define' (por ejemplo, simplemente escribe 'una palanca tiene un brazo de esfuerzo...'). NO incluyas numeración, viñetas ni guiones al inicio de tus cadenas."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
@@ -244,7 +244,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Each objective must end with (DOK X) and represent Skills or Practices aligned to the discipline by generating 4 to 7 skills-based statements describing what students will do; align with discipline-specific practices; connect directly to the project deliverable or performance task; remain measurable and observable; and include an appropriate DOK level between 2 and 4. Write the objectives as direct continuations of the phrase 'Students will be able to...'. Begin directly with a measurable action verb (e.g., analyze, compare, design, model, solve). Do NOT repeat the prefix 'Students will be able to'. DO NOT include any numbering, bullet points, or dashes at the beginning of your strings."
+                  "description": "Cada objetivo debe terminar con (DOK X) y representar Habilidades o Prácticas alineadas con la disciplina generando de 4 a 7 enunciados basados en habilidades que describan lo que harán los estudiantes; alinea con prácticas específicas de la disciplina; conéctalo directamente con el producto del proyecto o la tarea de desempeño; manténlo medible y observable; e incluye un nivel DOK apropiado entre 2 y 4. Escribe los objetivos como continuaciones directas de la frase 'Students will be able to...'. Comienza directamente con un verbo de acción medible (por ejemplo, analizar, comparar, diseñar, modelar, resolver). No repitas el prefijo 'Students will be able to'. NO incluyas numeración, viñetas ni guiones al inicio de tus cadenas."
                 }
               }
             }
@@ -264,12 +264,12 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "properties": {
             "DrivingQuestion": {
               "type": "string",
-              "description": "MUST match UnitOverview.DrivingQuestion verbatim. State the actual driving question (e.g. 'How can we design an invention inspired by ancient Egyptian innovation to solve a real problem in our Coconut Creek community?')."
+              "description": "DEBE coincidir textualmente con UnitOverview.DrivingQuestion. Indica la pregunta impulsora real (por ejemplo, 'How can we design an invention inspired by ancient Egyptian innovation to solve a real problem in our Coconut Creek community?')."
             },
             "ProblemDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "The problem description paragraphs explaining the real challenge. Explain why the problem matters and the consequences if it is not addressed, identifying underlying contributing factors. Show how misunderstanding, missing information, or overlooked variables contribute to the issue. Explain how the solution serves a real, relevant authentic audience. Do NOT include any numbering or bullet points at the beginning of your strings.",
+              "description": "Los párrafos de la descripción del problema que explican el desafío real. Explica por qué importa el problema y las consecuencias si no se aborda, identificando factores contribuyentes subyacentes. Muestra cómo la incomprensión, la información faltante o las variables pasadas por alto contribuyen al problema. Explica cómo la solución sirve a una audiencia auténtica real y relevante. NO incluyas numeración ni viñetas al comienzo de tus cadenas.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -278,7 +278,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "ProjectDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "Narrative paragraphs of how learning builds across the multi-day project (inquiry -> apply -> refine -> present). Explain how students begin by exploring examples, notice patterns, apply science knowledge through hands-on tests, then use those findings to develop an original invention. Explain how they revise prototypes and present ideas to an authentic audience. Do NOT include any numbering or bullet points at the beginning of your strings.",
+              "description": "Párrafos narrativos de cómo el aprendizaje se desarrolla a lo largo del proyecto de varios días (indagación -> aplicación -> refinamiento -> presentación). Explica cómo los estudiantes comienzan explorando ejemplos, notan patrones, aplican conocimientos de ciencias mediante pruebas prácticas y luego usan esos hallazgos para desarrollar un invento original. Explica cómo revisan prototipos y presentan ideas a una audiencia auténtica. NO incluyas numeración ni viñetas al comienzo de tus cadenas.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -289,7 +289,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "minItems": 3,
               "maxItems": 5,
               "x-format": "{items}",
-              "description": "Must include 3 to 5 Place-Based Sites of Engagement. Ensure sites represent varied contexts and clearly show how the local community is part of the learning ecosystem.",
+              "description": "Debe incluir de 3 a 5 Sitios de Participación Basados en el Lugar. Asegúrate de que los sitios representen contextos variados y muestren claramente cómo la comunidad local forma parte del ecosistema de aprendizaje.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{value.SiteTitle}**\n\n- **{loc.StudentEngagement}:** {value.StudentEngagement}\n- **{loc.Relevance}:** {value.Relevance}",
@@ -302,15 +302,15 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "SiteTitle": {
                     "type": "string",
-                    "description": "A meaningful physical, community, virtual, or discipline-specific location relevant to the unit's context (e.g., 'Coconut Creek Middle School Campus (Primary Investigation Site)')."
+                    "description": "Una ubicación física, comunitaria, virtual o específica de la disciplina relevante para el contexto de la unidad (por ejemplo, 'Coconut Creek Middle School Campus (Primary Investigation Site)')."
                   },
                   "StudentEngagement": {
                     "type": "string",
-                    "description": "Explaining authentic inquiry activities students complete at or with the site such as observation, data collection, interviews, analysis, virtual exploration, or guided field tasks tied to the real-world problem."
+                    "description": "Explicar actividades auténticas de indagación que los estudiantes completan en o con el sitio, como observación, recolección de datos, entrevistas, análisis, exploración virtual o tareas de campo guiadas vinculadas al problema del mundo real."
                   },
                   "Relevance": {
                     "type": "string",
-                    "description": "Explaining why the site matters by connecting it to the problem, showing how it provides evidence or expertise, clarifying how it supports solution design or modeling, and highlighting local or community-specific significance."
+                    "description": "Explicar por qué el sitio importa conectándolo con el problema, mostrando cómo proporciona evidencia o experiencia, aclarando cómo apoya el diseño o modelado de soluciones y destacando su importancia local o específica de la comunidad."
                   }
                 }
               }
@@ -328,7 +328,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "minItems": 4,
                   "maxItems": 4,
                   "x-format": "{items}",
-                  "description": "Create a Tiered Academic Vocabulary section with exactly four labeled tiers.",
+                  "description": "Crea una sección de Vocabulario Académico por Niveles con exactamente cuatro niveles etiquetados.",
                   "items": {
                     "type": "object",
                     "x-format": "\n\n**{value.TierTitle}**\n\n*{value.TierWhyItMatters}*\n\n{value.Terms}",
@@ -341,17 +341,17 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "properties": {
                       "TierTitle": {
                         "type": "string",
-                        "description": "MUST be exactly one of these: 'Tier 1: Essential / Core Vocabulary', 'Tier 2: Application, Modeling, or Process Vocabulary', 'Tier 3: Real-World or Project-Specific Vocabulary', 'Tier 4: Enrichment & Extension Vocabulary'."
+                        "description": "DEBE ser exactamente uno de estos: 'Tier 1: Essential / Core Vocabulary', 'Tier 2: Application, Modeling, or Process Vocabulary', 'Tier 3: Real-World or Project-Specific Vocabulary', 'Tier 4: Enrichment & Extension Vocabulary'."
                       },
                       "TierWhyItMatters": {
                         "type": "string",
-                        "description": "A brief italicized sentence explaining how these terms help students in the project context (e.g. 'These terms help students name the most important ideas and objects they will see, build, and discuss during the project.')."
+                        "description": "Una breve oración en cursiva que explique cómo estos términos ayudan a los estudiantes en el contexto del proyecto (por ejemplo, 'These terms help students name the most important ideas and objects they will see, build, and discuss during the project.')."
                       },
                       "Terms": {
                         "type": "array",
                         "minItems": 3,
                         "x-format": "\n\n{items}",
-                        "description": "List unit-appropriate vocabulary terms with student-friendly definitions.",
+                        "description": "Enumera términos de vocabulario apropiados para la unidad con definiciones amigables para los estudiantes.",
                         "items": {
                           "type": "object",
                           "x-format": "{index}. **{value.Term}**: {value.Definition}\n",
@@ -363,11 +363,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "properties": {
                             "Term": {
                               "type": "string",
-                              "description": "The vocabulary word (e.g., 'force'). Do NOT include any numbering or bullet points."
+                              "description": "La palabra de vocabulario (por ejemplo, 'force'). No incluyas numeración ni viñetas."
                             },
                             "Definition": {
                               "type": "string",
-                              "description": "A student-friendly definition."
+                              "description": "Una definición amigable para los estudiantes."
                             }
                           }
                         }
@@ -392,7 +392,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "AuthenticAudience": {
               "type": "object",
               "x-format": "{value.Audiences}\n\n**{loc.StudentParticipationInAudienceSelection}**\n\n{value.StudentParticipation}",
-              "description": "Identify and engage an authentic audience beyond the classroom.",
+              "description": "Identificar e involucrar una audiencia auténtica más allá del aula.",
               "additionalProperties": false,
               "required": [
                 "Audiences",
@@ -416,26 +416,26 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "properties": {
                       "AudienceName": {
                         "type": "string",
-                        "description": "The name of the specific authentic audience group (e.g. 'City of Coconut Creek Sustainability & Environmental Advisory Board'). Do NOT include bullet points or numbering."
+                        "description": "El nombre del grupo de audiencia auténtica específico (por ejemplo, 'City of Coconut Creek Sustainability & Environmental Advisory Board'). No incluyas viñetas ni numeración."
                       },
                       "PrimaryAudienceDescription": {
                         "type": "string",
-                        "description": "Clear description of who this audience is (individuals, organizations, or groups) and their relationship to the project's context or problem. Must be detailed, at least 2-3 sentences."
+                        "description": "Descripción clara de quién es esta audiencia (individuos, organizaciones o grupos) y su relación con el contexto o problema del proyecto. Debe ser detallada, de al menos 2 a 3 oraciones."
                       },
                       "WhyThisAudienceIsQualified": {
                         "type": "string",
-                        "description": "Explanation of why this audience has relevant expertise, lived experience, or authority related to the project topic. Must be detailed, at least 2-3 sentences."
+                        "description": "Explicación de por qué esta audiencia tiene experiencia relevante, experiencia vivida o autoridad relacionada con el tema del proyecto. Debe ser detallada, de al menos 2 a 3 oraciones."
                       },
                       "HowThisAudienceElevatesTheProject": {
                         "type": "string",
-                        "description": "How the presence of this audience increases authenticity, rigor, motivation, or real-world impact for students. Must be detailed, at least 2-3 sentences."
+                        "description": "Cómo la presencia de esta audiencia aumenta la autenticidad, el rigor, la motivación o el impacto en el mundo real para los estudiantes. Debe ser detallado, de al menos 2-3 oraciones."
                       }
                     }
                   }
                 },
                 "StudentParticipation": {
                   "type": "string",
-                  "description": "A paragraph explaining how students help identify which audience best fits their invention by discussing who would benefit from or evaluate the solution."
+                  "description": "Un párrafo que explique cómo los estudiantes ayudan a identificar qué audiencia se ajusta mejor a su invento al discutir quién se beneficiaría de la solución o la evaluaría."
                 }
               }
             },
@@ -455,15 +455,15 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "CriteriaForSuccess": {
                     "type": "string",
-                    "description": "The measurable student learning objective ending with DOK level. Do NOT include bullet points or numbering."
+                    "description": "El objetivo de aprendizaje medible del estudiante que termina con el nivel DOK. No incluya viñetas ni numeración."
                   },
                   "SuccessCriteria": {
                     "type": "string",
-                    "description": "The specific success criteria explaining what the student will do to demonstrate learning. Do NOT include bullet points or numbering."
+                    "description": "Los criterios específicos de éxito que explican lo que hará el estudiante para demostrar el aprendizaje. No incluya viñetas ni numeración."
                   },
                   "PointOfDemonstration": {
                     "type": "string",
-                    "description": "Where the evidence will appear, separated into Formative: and Summative: statements. Do NOT include bullet points or numbering."
+                    "description": "Dónde aparecerá la evidencia, separada en enunciados de Formativa: y Sumativa:. No incluya viñetas ni numeración."
                   }
                 }
               }
@@ -472,7 +472,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "type": "array",
               "x-format": "{items}",
               "minItems": 4,
-              "description": "Analytic Rubric detailing the competencies required by the project. Each row represents one evaluated skill. The Novice to Expert progression must reflect increasing sophistication.",
+              "description": "Rúbrica analítica que detalla las competencias requeridas por el proyecto. Cada fila representa una habilidad evaluada. La progresión de Novato a Experto debe reflejar una sofisticación creciente.",
               "items": {
                 "type": "object",
                 "x-format": "| {value.Criterion} | {value.Novice} | {value.Apprentice} | {value.Practitioner} | {value.Expert} |",
@@ -487,23 +487,23 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "Criterion": {
                     "type": "string",
-                    "description": "The evaluated skill, competency, or dimension of the final project. Do NOT include bullet points or numbering."
+                    "description": "La habilidad, competencia o dimensión evaluada del proyecto final. No incluya viñetas ni numeración."
                   },
                   "Novice": {
                     "type": "string",
-                    "description": "Description of novice level performance. Must not use deficit-based language such as fails, lacks, or missing. Do NOT include bullet points or numbering."
+                    "description": "Descripción del desempeño de nivel novato. No debe usar lenguaje basado en déficits como falla, carece o ausente. No incluya viñetas ni numeración."
                   },
                   "Apprentice": {
                     "type": "string",
-                    "description": "Description of apprentice level performance. Do NOT include bullet points or numbering."
+                    "description": "Descripción del desempeño de nivel aprendiz. No incluya viñetas ni numeración."
                   },
                   "Practitioner": {
                     "type": "string",
-                    "description": "Description of practitioner level performance. Do NOT include bullet points or numbering."
+                    "description": "Descripción del desempeño de nivel practicante. No incluya viñetas ni numeración."
                   },
                   "Expert": {
                     "type": "string",
-                    "description": "Description of expert level performance. Must build on the Practitioner level with deeper insight, precision, or complexity. Do NOT include bullet points or numbering."
+                    "description": "Descripción del desempeño de nivel experto. Debe basarse en el nivel Practicante con mayor profundidad, precisión o complejidad. No incluya viñetas ni numeración."
                   }
                 }
               }
@@ -524,14 +524,14 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "properties": {
             "LearningPlanOverview": {
               "type": "string",
-              "description": "A 2-4 sentence summary explaining how the project is organized into three flexible phases (Phase 1, Phase 2, Phase 3) rather than fixed day counts. Briefly describe what students do in each phase (e.g., in Phase 1 they build background knowledge; in Phase 2 they apply science ideas through investigations; in Phase 3 they refine prototypes and present to an authentic audience). Do not use bullet points or numbering."
+              "description": "Un resumen de 2-4 oraciones que explique cómo el proyecto se organiza en tres fases flexibles (Fase 1, Fase 2, Fase 3) en lugar de conteos fijos de días. Describa brevemente lo que hacen los estudiantes en cada fase (por ejemplo, en la Fase 1 construyen conocimientos previos; en la Fase 2 aplican ideas científicas mediante investigaciones; en la Fase 3 refinan prototipos y presentan a una audiencia auténtica). No use viñetas ni numeración."
             },
             "ProjectPhases": {
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
               "maxItems": 3,
-              "description": "The three phases of the project. The total duration across all 3 phases MUST exactly equal the total number of days requested for the project.",
+              "description": "Las tres fases del proyecto. La duración total entre las 3 fases DEBE ser exactamente igual al número total de días solicitado para el proyecto.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n### {violet}({value.PhaseTitle})\n\n{value.PhaseDescription}\n\n**{loc.ConceptsOrSkillsEmphasized}:** {value.ConceptsOrSkills}\n\n**{loc.CollaborationAndVisibleThinking}:** {value.CollaborationAndVisibleThinking}\n\n{value.KeyLearningExperiences}",
@@ -546,29 +546,29 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "PhaseTitle": {
                     "type": "string",
-                    "description": "The title and duration of the phase (e.g., 'Phase 1: 1-2 days' or 'Phase 3: 2 days'). IMPORTANT: The duration must be explicitly stated in the title, and the sum of maximum days across all phases must exactly match the total requested project length. Do NOT include bullet points or numbering."
+                    "description": "El título y la duración de la fase (por ejemplo, 'Fase 1: 1-2 días' o 'Fase 3: 2 días'). IMPORTANTE: La duración debe declararse explícitamente en el título, y la suma de los días máximos de todas las fases debe coincidir exactamente con la duración total solicitada del proyecto. No incluya viñetas ni numeración."
                   },
                   "PhaseDescription": {
                     "type": "string",
-                    "description": "A short 1-2 sentence paragraph describing what students do during this phase to deepen understanding or synthesize learning."
+                    "description": "Un párrafo breve de 1-2 oraciones que describa lo que hacen los estudiantes durante esta fase para profundizar la comprensión o sintetizar el aprendizaje."
                   },
                   "ConceptsOrSkills": {
                     "type": "string",
-                    "description": "A comma-separated list of the core concepts or skills emphasized in this phase (e.g. 'Observation, questioning, modeling, lever systems, structure stability'). Do NOT include bullet points or numbering."
+                    "description": "Una lista separada por comas de los conceptos o habilidades centrales enfatizados en esta fase (por ejemplo, 'Observación, cuestionamiento, modelado, sistemas de palancas, estabilidad estructural'). No incluya viñetas ni numeración."
                   },
                   "CollaborationAndVisibleThinking": {
                     "type": "string",
-                    "description": "A sentence explaining how students collaborate and make their thinking visible in this phase (e.g. 'Students use think-pair-share, sketch notes, and quick group comparisons to make their thinking visible.'). Do NOT include bullet points or numbering."
+                    "description": "Una oración que explique cómo los estudiantes colaboran y hacen visible su pensamiento en esta fase (por ejemplo, 'Los estudiantes usan pensar-emparejar-compartir, notas de boceto y comparaciones rápidas en grupo para hacer visible su pensamiento.'). No incluya viñetas ni numeración."
                   },
                   "KeyLearningExperiences": {
                     "type": "array",
                     "x-format": "{items}",
                     "minItems": 3,
-                    "description": "A list of the specific learning activities or tasks in this phase.",
+                    "description": "Una lista de las actividades o tareas de aprendizaje específicas en esta fase.",
                     "items": {
                       "type": "string",
                       "x-format": "- {value}",
-                      "description": "A specific learning activity (e.g. 'Shaduf build and test'). Do NOT include any numbering or bullet points at the beginning of your strings."
+                      "description": "Una actividad de aprendizaje específica (por ejemplo, 'Construcción y prueba de shaduf'). No incluya numeración ni viñetas al comienzo de sus cadenas."
                     }
                   }
                 }
@@ -578,11 +578,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "type": "array",
               "x-format": "{items}",
               "minItems": 3,
-              "description": "The output must contain exactly three project goals, each expressed as a conceptual category followed by detailed bullets or short paragraphs. Goal 1, Apply Disciplinary Content to a Real-World Problem, requires students to use discipline-specific knowledge to analyze or solve an authentic challenge, list 4-6 core concepts or principles they will apply, and show how these ideas connect to real-world conditions or constraints. Goal 2, Solve a Real, Developmentally Appropriate Design or Inquiry Problem, requires describing the authentic challenge students must address, listing what students will create, model, compare, analyze, evaluate, or justify, and including processes such as modeling, predicting, comparing, evaluating, and decision-making. Goal 3, Communicate Findings to a Real Audience, requires students to prepare a polished, professional-quality final product, tailor communication to the needs of a real stakeholder group, and reference authentic audiences such as local experts, community organizations, industry professionals, school leadership, families, or community members.",
+              "description": "La salida debe contener exactamente tres objetivos del proyecto, cada uno expresado como una categoría conceptual seguida de viñetas detalladas o párrafos breves. El Objetivo 1, Aplicar contenido disciplinar a un problema del mundo real, requiere que los estudiantes utilicen conocimientos específicos de la disciplina para analizar o resolver un desafío auténtico, enumerar de 4 a 6 conceptos o principios centrales que aplicarán, y mostrar cómo estas ideas se conectan con condiciones o restricciones del mundo real. El Objetivo 2, Resolver un problema real de diseño o indagación apropiado para el desarrollo, requiere describir el desafío auténtico que los estudiantes deben abordar, enumerar lo que crearán, modelarán, compararán, analizarán, evaluarán o justificarán, e incluir procesos como modelado, predicción, comparación, evaluación y toma de decisiones. El Objetivo 3, Comunicar hallazgos a una audiencia real, requiere que preparen un producto final pulido y de calidad profesional, adapten la comunicación a las necesidades de un grupo real de partes interesadas y hagan referencia a audiencias auténticas como expertos locales, organizaciones comunitarias, profesionales de la industria, liderazgo escolar, familias o miembros de la comunidad.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n",
-                "description": "A specific project goal formatted with bold labels (e.g. '**Goal 1: Apply Disciplinary Content to a Real-World Problem** Use knowledge...')"
+                "description": "Un objetivo específico del proyecto formateado con etiquetas en negrita (por ejemplo, '**Goal 1: Aplicar el contenido disciplinar a un problema del mundo real** Use knowledge...')"
               }
             },
             "FinalDeliverableSummary": {
@@ -596,7 +596,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "GroupSuggestions": {
               "type": "object",
-              "description": "Outlines group size, roles and teacher duties.",
+              "description": "Describe el tamaño del grupo, los roles y las responsabilidades del docente.",
               "additionalProperties": false,
               "required": [
                 "GroupSize",
@@ -607,12 +607,12 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "GroupSize": {
                   "type": "string",
-                  "description": "The output must state a recommended group size such as 3 to 4 students and must provide a rationale explaining how this size supports productive discussion, shared engagement, and manageable task distribution. Example: 'Group Size 3 to 4 students is ideal because...'"
+                  "description": "La salida debe indicar un tamaño de grupo recomendado, como 3 a 4 estudiantes, y debe proporcionar una justificación que explique cómo este tamaño favorece una discusión productiva, una participación compartida y una distribución manejable de las tareas. Ejemplo: 'El tamaño del grupo de 3 a 4 estudiantes es ideal porque...'"
                 },
                 "RotatingRolesAndDuties": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The output must provide a list of roles formatted as 'Role Name: description of duties'. The list must include at least four roles (Facilitator, Recorder, Materials Manager, Presenter/Communicator) and Teacher expectations at the end.",
+                  "description": "La salida debe proporcionar una lista de roles formateada como 'Nombre del rol: descripción de las responsabilidades'. La lista debe incluir al menos cuatro roles (Facilitador, Registrador, Encargado de materiales, Presentador/Comunicador) y, al final, las expectativas del docente.",
                   "minItems": 4,
                   "items": {
                     "type": "string",
@@ -622,7 +622,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "TeacherGroupingStrategyPrompt": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The model must output exactly these two strings: 1) '\"What is the main purpose of your grouping in this activity-peer support, rich discussion, challenge, or efficiency? Once you have named the purpose, which grouping approach best fits it: mixed-ability, interest-based, skills-based, or random?\"' 2) 'This question encourages teachers to choose grouping methods that match instructional goals rather than defaulting to convenience or habit.'",
+                  "description": "El modelo debe producir exactamente estas dos cadenas: 1) '\"¿Cuál es el propósito principal de tu agrupación en esta actividad: apoyo entre pares, discusión profunda, desafío o eficiencia? Una vez que hayas nombrado el propósito, ¿qué enfoque de agrupación se ajusta mejor a él: habilidad mixta, basado en intereses, basado en habilidades o aleatorio?\"' 2) 'Esta pregunta anima a los docentes a elegir métodos de agrupación que coincidan con los objetivos instruccionales en lugar de recurrir por defecto a la conveniencia o al hábito.'",
                   "items": {
                     "type": "string",
                     "x-format": "- {value}\n"
@@ -631,7 +631,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "GroupingStrategyRecommendations": {
                   "type": "array",
                   "x-format": "{items}",
-                  "description": "The model must output the exact grouping strategy recommendations formatted with bold labels (e.g. '**Mixed-ability Groups:** Best when...'). Strategies to include: Mixed-ability Groups, Interest-based Groups, Skills-based Groups, Randomized Groups.",
+                  "description": "El modelo debe generar exactamente las recomendaciones de estrategia de agrupación formateadas con etiquetas en negrita (por ejemplo, '**Grupos de habilidad mixta:** Son mejores cuando...'). Las estrategias que se deben incluir son: Grupos de habilidad mixta, Grupos basados en intereses, Grupos basados en habilidades, Grupos aleatorizados.",
                   "minItems": 4,
                   "items": {
                     "type": "string",
@@ -646,7 +646,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase1}\n\n### {green}({loc.Phase1Title})\n\n**Focus Statement**\n{value.Phase1_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase1_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase1_GuidingQuestions}\n\n{value.Phase1_Differentiation}\n\n{value.Phase1_AccommodationsAndModifications}\n\n{value.Phase1_AnticipatedMisconceptions}\n\n{value.Phase1_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase1_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase1_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase1_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase1_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase1_ReflectionPrompt.Introduction}\n{value.Phase1_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "First phase of teacher guidance",
+          "description": "Primera fase de orientación del docente",
           "required": [
             "Phase1_FocusStatement",
             "Phase1_CollaborativeActivities",
@@ -665,7 +665,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "properties": {
             "Phase1_FocusStatement": {
               "type": "string",
-              "description": "Provide a short statement describing how this phase builds curiosity, introduces the real-world problem, and activates early reasoning. The Focus Statement must include curiosity-building about the core phenomenon or problem, early observation and exploration, student-driven noticing and questioning, and a clear connection to the unit's Driving Question. The wording should reflect that in this launch phase students build curiosity and begin uncovering the scientific or conceptual problem at the center of the project, and that through observation, exploration, and early modeling attempts they gather firsthand evidence that connects their initial thinking to the Driving Question."
+              "description": "Proporciona una breve declaración que describa cómo esta fase despierta la curiosidad, presenta el problema del mundo real y activa el razonamiento inicial. La Declaración de enfoque debe incluir la creación de curiosidad sobre el fenómeno o problema central, la observación y exploración tempranas, el descubrimiento y cuestionamiento impulsados por los estudiantes, y una conexión clara con la Pregunta guía de la unidad. La redacción debe reflejar que en esta fase de lanzamiento los estudiantes construyen curiosidad y comienzan a descubrir el problema científico o conceptual en el centro del proyecto, y que, a través de la observación, la exploración y los primeros intentos de modelización, reúnen evidencia de primera mano que conecta su pensamiento inicial con la Pregunta guía."
             },
             "Phase1_CollaborativeActivities": {
               "type": "array",
@@ -720,7 +720,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 2-3 apoyos específicos para la lección (apoyos visuales, bancos de palabras, gestos) para ayudar a los estudiantes de idiomas a acceder a las ideas y expresarlas. NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -728,7 +728,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 3-4 inicios de oración que ayuden a los estudiantes a describir, explicar y comunicar su pensamiento para esta lección específica. NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -747,7 +747,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 2-3 apoyos paso a paso (herramientas estructuradas, ejemplos modelados, pensamiento en voz alta) y orientación precisa para ayudar a los estudiantes a completar la tarea. NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -755,7 +755,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 3-4 preguntas de lista de verificación para guiar a los estudiantes a darle sentido a su aprendizaje durante la investigación. NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -774,7 +774,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 2-3 extensiones que aumenten la complejidad (desafíos específicos, identificación de patrones) para ayudar a los estudiantes a profundizar o mejorar su pensamiento usando evidencia. NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -782,11 +782,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Genera un prompt complejo (NO incluyas el prefijo 'Say:')/pregunta para exigir una comprensión conceptual más profunda."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 3-4 ejemplos específicos de respuestas de alta calidad de los estudiantes a la pregunta avanzada. NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -811,7 +811,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase1_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Esta sección debe incluir dos tipos de apoyos: Apoyos generales y apoyos individualizados. Enfócate en el acceso, no en reducir el rigor.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -819,19 +819,19 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Estrategias no específicas de un estudiante que mejoran el acceso para todos los estudiantes (por ejemplo, elementos visuales, notas prellenadas, glosario digital, instrucciones fragmentadas). Proporciona 2-4 viñetas."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Adaptaciones y modificaciones específicas para estudiantes nombrados con planes formales. Enumera A CADA estudiante individualmente; no agrupes a los estudiantes. Los apoyos para cada estudiante deben ser una lista fácil de revisar.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Nombre y apellido del estudiante individual que recibe estos apoyos."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -839,7 +839,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "El plan formal proporcionado para este estudiante en el prompt. Analiza el plan en una lista clara. Puedes parafrasearlo para mejorar el formato, pero no omitas ni añadas ninguna información."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -847,7 +847,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Herramientas/tallos/recursos visuales/organizadores concretos para esta tarea."
                       }
                     },
                     "required": [
@@ -868,18 +868,18 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase1_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Genere 2-3 conceptos erróneos comunes de los estudiantes que probablemente surjan durante esta fase. Cada elemento debe centrarse en un malentendido específico y un guion de respuesta del docente.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Describa el concepto erróneo en 1 oración, comenzando con 'Students may think...'. NO use negritas ni etiquetas en negrita."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Un guion de respuesta claro para el docente (que comience con 'Teacher Response: ') que modele cómo responder en el momento con un aviso específico (NO incluya el prefijo 'Say:'). NO use negritas ni etiquetas en negrita."
                   }
                 },
                 "required": [
@@ -895,7 +895,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Genere 1 pregunta de pensamiento trascendente que requiera que los estudiantes apliquen el aprendizaje más allá de ellos mismos a contextos del mundo real (comunidades, desafíos globales). Enfóquese en por qué el aprendizaje importa a gran escala (seguridad, sostenibilidad, innovación, etc.). Evite el enfoque personal o solo escolar."
                 }
               },
               "required": [
@@ -906,7 +906,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase1_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Pregunta final de comprobación de comprensión con 2-3 respuestas esperadas de los estudiantes que muestren dominio",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -916,7 +916,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Solo escriba el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -938,7 +938,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Solo escriba el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -960,7 +960,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Solo escriba el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -985,7 +985,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior específica sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas o pasos específicos de la tarea. El guion del docente debe comenzar con Say: y solo puede hacer referencia al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el docente dé pistas ni explicaciones parciales. La salida debe terminar con Expected Student Responses mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que son los estudiantes—no el prompt—quienes proporcionan las ideas recordadas.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1003,7 +1003,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Solo escriba el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1035,7 +1035,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Solo escriba el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1067,7 +1067,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Solo escriba el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1093,13 +1093,13 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "Phase1_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'These tasks reinforce today's learning about ____ by ______.' donde los espacios en blanco se completan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
             },
             "Phase1_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Las tareas deben alinearse con el enfoque de la fase y la profundidad de conocimiento esperada. Use solo DOK 2, 3 o 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1112,7 +1112,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Nivel de Profundidad de Conocimiento para la tarea. DEBE ser UNO de: 'DOK 2', 'DOK 3' o 'DOK 4'. DOK 1 está estrictamente prohibido."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -1129,7 +1129,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "Phase1_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Solo si y SOLO si la asignatura es matemáticas: incluya un problema de intercalado + indicación del docente + respuestas esperadas + nota del docente. De lo contrario, cadena vacía."
             },
             "Phase1_ReflectionPrompt": {
               "type": "object",
@@ -1141,7 +1141,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Introducción breve dirigida al estudiante para la reflexión, por ejemplo, 'Escribe 2-3 oraciones respondiendo a una de las indicaciones:'."
                 },
                 "Prompts": {
                   "type": "array",
@@ -1158,7 +1158,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase2}\n\n### {green}({loc.Phase2Title})\n\n**Focus Statement**\n{value.Phase2_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase2_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase2_GuidingQuestions}\n\n{value.Phase2_Differentiation}\n\n{value.Phase2_AccommodationsAndModifications}\n\n{value.Phase2_AnticipatedMisconceptions}\n\n{value.Phase2_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase2_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase2_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase2_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase2_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase2_ReflectionPrompt.Introduction}\n{value.Phase2_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "Second phase of teacher guidance",
+          "description": "Segunda fase de la guía del docente",
           "required": [
             "Phase2_FocusStatement",
             "Phase2_CollaborativeActivities",
@@ -1177,7 +1177,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "properties": {
             "Phase2_FocusStatement": {
               "type": "string",
-              "description": "Write a 1-3 sentence Focus Statement that summarizes the purpose of the phase, explains how students build understanding through inquiry-based work, explicitly connects the phase to the unit's Driving Question or real-world problem, and describes how this phase moves students closer to producing their final deliverable. The statement must always be written as a single short paragraph and must be customized to the specific project details provided by the user."
+              "description": "Escriba una Declaración de enfoque de 1 a 3 oraciones que resuma el propósito de la fase, explique cómo los estudiantes construyen comprensión mediante el trabajo basado en la indagación, conecte explícitamente la fase con la Pregunta Impulsora de la unidad o el problema del mundo real, y describa cómo esta fase los acerca a producir su entrega final. La declaración siempre debe escribirse como un solo párrafo breve y debe personalizarse con los detalles específicos del proyecto proporcionados por el usuario."
             },
             "Phase2_CollaborativeActivities": {
               "type": "array",
@@ -1232,7 +1232,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 2-3 apoyos específicos de la lección (apoyos visuales, bancos de palabras, gestos) para ayudar a los estudiantes que aprenden el idioma a acceder a las ideas y expresarlas. NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1240,7 +1240,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 3-4 frases iniciales que ayuden a los estudiantes a describir, explicar y comunicar su pensamiento para esta lección específica. NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1259,7 +1259,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 2-3 apoyos paso a paso (herramientas estructuradas, ejemplos modelados, pensamiento en voz alta) e indicaciones exactas para ayudar a los estudiantes a completar la tarea. NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1267,7 +1267,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 3-4 preguntas de lista de cotejo para guiar a los estudiantes a dar sentido a su aprendizaje durante la investigación. NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1286,7 +1286,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 2-3 extensiones que aumenten la complejidad (desafíos específicos, identificación de patrones) para ayudar a los estudiantes a profundizar o mejorar su pensamiento usando evidencia. NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1294,11 +1294,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Genera una pregunta compleja (NO incluyas el prefijo 'Say:')/pregunta para impulsar una comprensión conceptual más profunda."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genera 3-4 ejemplos específicos de respuestas estudiantiles de alta calidad a la pregunta avanzada. NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1323,7 +1323,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase2_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Esta sección debe incluir dos tipos de apoyos: Apoyos generales y apoyos individualizados. Enfócate en el acceso, no en bajar el rigor.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -1331,19 +1331,19 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Estrategias no específicas para estudiantes que mejoran el acceso para todos los alumnos (por ejemplo, apoyos visuales, notas parcialmente completadas, glosario digital, instrucciones fragmentadas). Proporciona 2-4 viñetas."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Adaptaciones y modificaciones específicas para estudiantes nombrados con planes formales. Enumera a CADA estudiante individualmente; no agrupes a los estudiantes. Los apoyos para cada estudiante deben ser una lista fácil de revisar.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Nombre y apellido del estudiante individual que recibe estos apoyos."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -1351,7 +1351,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "El plan formal proporcionado para este estudiante en la consigna. Analiza el plan y conviértelo en una lista clara. Puedes parafrasearlo para mejorar el formato, pero NO omitas ni agregues información."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1359,7 +1359,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Herramientas concretas/inicios de frase/apoyos visuales/organizadores para esta tarea."
                       }
                     },
                     "required": [
@@ -1380,18 +1380,18 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase2_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Genera 2-3 conceptos erróneos comunes de los estudiantes que probablemente surjan durante esta fase. Cada elemento debe centrarse en un malentendido específico y en un guion de respuesta del docente.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Describe el concepto erróneo en 1 oración, comenzando con 'Students may think...'. NO uses negritas ni etiquetas de énfasis."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Un guion claro de respuesta para el docente (que comience con 'Teacher Response: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Say:'). NO uses negritas ni etiquetas de énfasis."
                   }
                 },
                 "required": [
@@ -1407,7 +1407,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Genera 1 pregunta de pensamiento trascendente que requiera que los estudiantes apliquen el aprendizaje más allá de sí mismos a contextos del mundo real (comunidades, desafíos globales). Enfócate en por qué el aprendizaje importa a gran escala (seguridad, sostenibilidad, innovación, etc.). Evita un enfoque personal o solo escolar."
                 }
               },
               "required": [
@@ -1418,7 +1418,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase2_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Pregunta final de comprobación de comprensión con 2-3 respuestas esperadas de los estudiantes que demuestren dominio",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1428,7 +1428,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1450,7 +1450,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO empieces los elementos con viñetas, guiones ni números. Escribe solo el texto sin formato.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1472,7 +1472,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1497,7 +1497,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior específica sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas ni pasos específicos de la tarea. El guion del maestro debe comenzar con Say: y solo puede referirse al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el maestro dé pistas o explicaciones parciales. El producto debe terminar con Expected Student Responses mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que los estudiantes, no la consigna, aportaron las ideas recordadas.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1515,7 +1515,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1547,7 +1547,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1579,7 +1579,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1605,13 +1605,13 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'These tasks reinforce today's learning about ____ by ______.' donde los espacios en blanco se completan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Las tareas deben alinearse con el enfoque de la fase y la profundidad de conocimiento esperada. Use solo DOK 2, 3 o 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1624,7 +1624,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Nivel de Profundidad de Conocimiento para la tarea. DEBE ser UNO de: 'DOK 2', 'DOK 3' o 'DOK 4'. DOK 1 está estrictamente prohibido."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -1641,7 +1641,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "Phase2_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Si y SOLO SI la asignatura es matemáticas: incluya problema de intercalado + indicación del maestro + respuestas esperadas + nota del maestro. De lo contrario, cadena vacía."
             },
             "Phase2_ReflectionPrompt": {
               "type": "object",
@@ -1653,7 +1653,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Introducción breve dirigida a los estudiantes para la reflexión, por ejemplo: 'Escribe 2-3 oraciones respondiendo a una consigna:'"
                 },
                 "Prompts": {
                   "type": "array",
@@ -1670,7 +1670,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "type": "object",
           "x-format": "## 🧑‍🏫 {loc.TeacherGuidancePhase3}\n\n### {green}({loc.Phase3Title})\n\n**Focus Statement**\n{value.Phase3_FocusStatement}\n\n### {violet}({loc.CollaborativeActivities})\n\n{value.Phase3_CollaborativeActivities}\n\n### {violet}({loc.GuidingQuestions})\n\n{value.Phase3_GuidingQuestions}\n\n{value.Phase3_Differentiation}\n\n{value.Phase3_AccommodationsAndModifications}\n\n{value.Phase3_AnticipatedMisconceptions}\n\n{value.Phase3_TranscendentThinking}\n\n### {violet}(✔ {loc.QuickCheck})\n\n{value.Phase3_QuickChecks}\n\n### {violet}(⏳ {loc.SpacedRetrieval})\n\n{value.Phase3_SpacedRetrieval}\n\n### {green}(🖊 {loc.StudentPractice})\n\n**{loc.TeacherNotes}:**\n{value.Phase3_StudentPractice_TeacherNotes}\n\n**{loc.PracticeTasks}:**\n{value.Phase3_StudentPractice_Tasks}\n\n**🔎 {loc.Reflection}**\n{value.Phase3_ReflectionPrompt.Introduction}\n{value.Phase3_ReflectionPrompt.Prompts}",
           "additionalProperties": false,
-          "description": "Third phase of teacher guidance",
+          "description": "Tercera fase de la orientación docente",
           "required": [
             "Phase3_FocusStatement",
             "Phase3_CollaborativeActivities",
@@ -1689,7 +1689,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
           "properties": {
             "Phase3_FocusStatement": {
               "type": "string",
-              "description": "Generate a 2-4 sentence Focus Statement that clearly communicates the purpose of Phase 3 and its role in moving students toward the final product. The statement must explain that Phase 3 focuses on refining ideas, applying learning, strengthening evidence, preparing culminating products, and engaging in deeper reasoning and revision. It must explicitly show how Phase 3 advances the project's authentic real-world challenge, how students use evidence to improve solutions, and how this work prepares them for an authentic audience. The statement must include intellectual work such as refining, revising, synthesizing, evaluating, justifying, finalizing, and communicating, and it must indicate how students finalize models, products, explanations, or proposals, prepare presentations or public showcases, and reflect on learning to strengthen their reasoning."
+              "description": "Genere una Declaración de Enfoque de 2 a 4 oraciones que comunique claramente el propósito de la Fase 3 y su papel para llevar a los estudiantes hacia el producto final. La declaración debe explicar que la Fase 3 se centra en refinar ideas, aplicar lo aprendido, fortalecer la evidencia, preparar productos culminantes y participar en un razonamiento y una revisión más profundos. Debe mostrar explícitamente cómo la Fase 3 avanza el desafío auténtico y del mundo real del proyecto, cómo los estudiantes usan evidencia para mejorar soluciones y cómo este trabajo los prepara para una audiencia auténtica. La declaración debe incluir trabajo intelectual como refinar, revisar, sintetizar, evaluar, justificar, finalizar y comunicar, e indicar cómo los estudiantes finalizan modelos, productos, explicaciones o propuestas, preparan presentaciones o muestras públicas y reflexionan sobre el aprendizaje para fortalecer su razonamiento."
             },
             "Phase3_CollaborativeActivities": {
               "type": "array",
@@ -1744,7 +1744,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 lesson-specific supports (visuals, word banks, gestures) to help language learners access and express ideas. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genere 2-3 apoyos específicos para la lección (imágenes, bancos de palabras, gestos) para ayudar a los estudiantes multilingües a acceder y expresar ideas. NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1752,7 +1752,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SentenceStarters": {
                       "type": "array",
-                      "description": "Generate 3-4 sentence starters that help students describe, explain, and communicate their thinking for this specific lesson. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genere 3-4 inicios de oración que ayuden a los estudiantes a describir, explicar y comunicar su pensamiento para esta lección específica. NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1771,7 +1771,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 step-by-step supports (structured tools, modeled examples, think-alouds) and exact guidance to help students complete the task. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genere 2-3 apoyos paso a paso (herramientas estructuradas, ejemplos modelados, pensar en voz alta) e indicaciones exactas para ayudar a los estudiantes a completar la tarea. NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1779,7 +1779,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "Checklist": {
                       "type": "array",
-                      "description": "Generate 3-4 checklist questions to guide students in making sense of their learning during the investigation. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genere 3-4 preguntas de lista de verificación para guiar a los estudiantes a dar sentido a su aprendizaje durante la investigación. NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1798,7 +1798,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Generate 2-3 extensions that increase complexity (specific challenges, pattern identification) to help students deepen or improve their thinking uses evidence. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genere 2-3 extensiones que aumenten la complejidad (desafíos específicos, identificación de patrones) para ayudar a los estudiantes a profundizar o mejorar su pensamiento usando evidencia. NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1806,11 +1806,11 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generate one complex prompt (do NOT include the 'Say:' prefix)/question to press for deeper conceptual understanding."
+                      "description": "Genere una consigna compleja (NO incluya el prefijo 'Say:')/pregunta para profundizar la comprensión conceptual."
                     },
                     "ExpectedResponses": {
                       "type": "array",
-                      "description": "Generate 3-4 specific examples of high-quality student responses to the advanced question. DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "Genere 3-4 ejemplos específicos de respuestas estudiantiles de alta calidad a la pregunta avanzada. NO comience los elementos con viñetas, guiones ni números. Escriba solo el texto plano.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1835,7 +1835,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase3_AccommodationsAndModifications": {
               "x-format": "### {violet}(🤝 {loc.AccommodationsAndModifications})\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
               "type": "object",
-              "description": "This section must include two types of supports: General Supports and Individualized Supports. Focus on access, not lowering rigor.",
+              "description": "Esta sección debe incluir dos tipos de apoyos: Apoyos Generales y Apoyos Individualizados. Enfoque en el acceso, no en reducir el rigor.",
               "properties": {
                 "General": {
                   "type": "array",
@@ -1843,19 +1843,19 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     "x-format": "- {value}",
                     "type": "string"
                   },
-                  "description": "Non-student-specific strategies that improve access for all learners (e.g., visuals, pre-filled notes, digital glossary, chunked instructions). Provide 2-4 bullet points."
+                  "description": "Estrategias no específicas para estudiantes que mejoran el acceso para todos los alumnos (por ejemplo, apoyos visuales, notas prellenadas, glosario digital, instrucciones divididas en partes). Proporciona 2-4 viñetas."
                 },
                 "IndividualSupport": {
                   "x-format": "{items}",
                   "type": "array",
-                  "description": "Specific accommodations and modifications for named students with formal plans. List EACH student individually; do NOT group students together. The supports for each student should be an easy-to-scan list.",
+                  "description": "Adaptaciones y modificaciones específicas para los estudiantes nombrados con planes formales. Enumera a CADA estudiante de forma individual; NO agrupe a los estudiantes. Los apoyos para cada estudiante deben presentarse en una lista fácil de revisar.",
                   "items": {
                     "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                     "type": "object",
                     "properties": {
                       "StudentName": {
                         "type": "string",
-                        "description": "First and last name of the individual student receiving these supports."
+                        "description": "Nombre y apellido del estudiante individual que recibe estos apoyos."
                       },
                       "PlanProvided": {
                         "type": "array",
@@ -1863,7 +1863,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "The formal plan provided for this student in the prompt. Parse the plan into a clear list. You may paraphrase it to improve formatting, but do NOT omit or add any information."
+                        "description": "El plan formal proporcionado para este estudiante en el enunciado. Convierte el plan en una lista clara. Puedes parafrasearlo para mejorar el formato, pero NO omitas ni añadas ninguna información."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1871,7 +1871,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Concrete tools/stems/visuals/organizers for this task."
+                        "description": "Herramientas concretas/inicios de oración/apoyos visuales/organizadores para esta tarea."
                       }
                     },
                     "required": [
@@ -1892,18 +1892,18 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase3_AnticipatedMisconceptions": {
               "type": "array",
               "x-format": "### {violet}(⚠️ {loc.AnticipatedMisconceptions}){items}",
-              "description": "Generate 2-3 common student misconceptions likely to arise during this phase. Each item must focus on a specific misunderstanding and a teacher response script.",
+              "description": "Genera 2-3 concepciones erróneas comunes de los estudiantes que probablemente surjan durante esta fase. Cada elemento debe centrarse en un malentendido específico y un guion de respuesta del docente.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags."
+                    "description": "Describe la concepción errónea en 1 oración, comenzando con 'Los estudiantes pueden pensar...'. NO utilices texto en negrita ni etiquetas de énfasis."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags."
+                    "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con un indicio específico (NO incluyas el prefijo 'Say:'). NO utilices texto en negrita ni etiquetas de énfasis."
                   }
                 },
                 "required": [
@@ -1919,7 +1919,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Generate 1 transcendent thinking question that requires students to apply learning beyond themselves to real-world contexts (communities, global challenges). Focus on why learning matters at scale (safety, sustainability, innovation, etc.). Avoid personal/school-only focus."
+                  "description": "Genera 1 pregunta de pensamiento trascendente que requiera que los estudiantes apliquen lo aprendido más allá de sí mismos a contextos del mundo real (comunidades, desafíos globales). Enfócate en por qué el aprendizaje importa a gran escala (seguridad, sostenibilidad, innovación, etc.). Evita el enfoque personal o solo escolar."
                 }
               },
               "required": [
@@ -1930,7 +1930,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase3_QuickChecks": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-              "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+              "description": "Pregunta final de verificación de comprensión con 2-3 respuestas esperadas de los estudiantes que muestren dominio",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1940,7 +1940,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto en formato plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1962,7 +1962,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto en formato plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -1984,7 +1984,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "SuccessCriteriaOrExpectedResponses": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto en formato plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2009,7 +2009,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "The model must create a Spaced Retrieval component that requires students to recall a key concept from a specific prior unit or lesson without referencing any past activities, worksheets, models, labels, or task-specific steps. The teacher script must begin with Say: and may reference only the topic of the prior learning, not what students learned about it. The retrieval question must prompt students to restate or apply a previously learned conceptual understanding (such as how a system works, how variables relate, or how a process unfolds) entirely from memory, without the teacher giving hints or partial explanations. The output must end with Expected Student Responses showing 2-3 examples that accurately reflect conceptual recall, demonstrating that students-not the prompt-supplied the remembered ideas.",
+              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas ni pasos específicos de la tarea. El guion del docente debe comenzar con Say: y puede hacer referencia únicamente al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el docente dé pistas ni explicaciones parciales. La salida debe terminar con Respuestas esperadas de los estudiantes mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que los estudiantes y no la consigna aportaron las ideas recordadas.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -2027,7 +2027,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto en formato plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2059,7 +2059,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto en formato plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2091,7 +2091,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                     },
                     "ExpectedResponseOrSuccessCriteria": {
                       "type": "array",
-                      "description": "DO NOT start items with bullet points, dashes, or numbers. Just write the plain text.",
+                      "description": "NO comiences los elementos con viñetas, guiones ni números. Escribe solo el texto en formato plano.",
                       "minItems": 2,
                       "items": {
                         "type": "string",
@@ -2117,13 +2117,13 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "One paragraph explaining the knowledge and skills practiced across all tasks in this phase. The paragraph MUST start with 'These tasks reinforce today's learning about ____ by ______.' where the blanks are filled with relevant project content, followed by an explanation of how these tasks strengthen long-term retention."
+              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'These tasks reinforce today's learning about ____ by ______.' donde los espacios se llenan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",
               "minItems": 2,
               "maxItems": 3,
-              "description": "Tasks should align to the phase focus and expected depth of knowledge. Use only DOK 2, 3, or 4.",
+              "description": "Las tareas deben alinearse con el enfoque de la fase y la profundidad de conocimiento esperada. Usa solo DOK 2, 3 o 4.",
               "items": {
                 "type": "object",
                 "additionalProperties": false,
@@ -2136,7 +2136,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
                 "properties": {
                   "DOK": {
                     "type": "string",
-                    "description": "Depth of Knowledge level for the task. MUST be ONE of: 'DOK 2', 'DOK 3', or 'DOK 4'. DOK 1 is strictly forbidden."
+                    "description": "Nivel de profundidad de conocimiento para la tarea. DEBE ser UNO de: 'DOK 2', 'DOK 3' o 'DOK 4'. DOK 1 está estrictamente prohibido."
                   },
                   "StudentDirections": {
                     "type": "string"
@@ -2153,7 +2153,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
             },
             "Phase3_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "If and ONLY IF subject is math: include interleaving problem + teacher prompt + expected responses + teacher note. Otherwise empty string."
+              "description": "Si y SOLO SI la materia es matemáticas: incluye un problema de intercalado + un indicio del docente + respuestas esperadas + una nota del docente. De lo contrario, una cadena vacía."
             },
             "Phase3_ReflectionPrompt": {
               "type": "object",
@@ -2165,7 +2165,7 @@ IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
               "properties": {
                 "Introduction": {
                   "type": "string",
-                  "description": "Student-facing short introduction to the reflection, e.g., 'Write 2-3 sentences responding to one prompt:'"
+                  "description": "Breve introducción para el estudiante a la reflexión, por ejemplo, 'Escribe 2-3 oraciones respondiendo a una indicación:'"
                 },
                 "Prompts": {
                   "type": "array",
