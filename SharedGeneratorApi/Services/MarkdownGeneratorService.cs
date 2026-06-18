@@ -149,14 +149,14 @@ public class MarkdownGeneratorService
                     var lessonData = JObject.Parse(lessonJsons[i]);
 
                     string formatted = schema.FormatJson(lessonData, localizer, cache);
-                    Console.WriteLine($"\n=== REZULTAT POSLE KOLEGINOG KODA (LEKCIJA {i + 1}) ===");
+                    Console.WriteLine($"\n=== PARSED LESSON RESULT (LESSON {i + 1}) ===");
                     Console.WriteLine(formatted);
                     Console.WriteLine("===================================================\n");
                     sb.AppendLine(formatted);
                 }
                 catch (Exception ex)
                 {
-                    sb.AppendLine($"<!-- GREŠKA PRI PARSIRANJU LEKCIJE {i + 1}: {ex.Message} -->");
+                    sb.AppendLine($"<!-- ERROR PARSING LESSON {i + 1}: {ex.Message} -->");
                     sb.AppendLine(lessonJsons[i]);
                     sb.AppendLine();
                 }
