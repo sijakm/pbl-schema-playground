@@ -223,7 +223,7 @@ window.pblPrompts_ensrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Svaki cilj mora da se završava sa (DOK X) i da predstavlja Velike ideje ili trajna razumevanja tako što će generisati 3 do 5 konceptualnih, dugoročnih iskaza koji objašnjavaju zašto je učenje važno izvan jedinice, ističu prenosive obrasce, odnose ili principe kroz različite kontekste, i objašnjavaju kako ili zašto nešto funkcioniše, a ne samo šta je to. Napišite ciljeve kao direktne nastavke fraze 'Učenici će razumeti da...'. Nemojte ponavljati frazu 'Učenici će razumeti da', i nemojte počinjati glagolima poput 'Objasniti da' ili 'Opisati da' (npr. jednostavno napišite 'inženjerski dizajni se poboljšavaju kada...'). NE uključujte bilo kakvo numerisanje, tačke ili crte na početku svojih nizova."
+                  "description": "Сваки циљ мора да се завршава са (ДОК X) и да представља Велике идеје или трајна разумевања тако што ће генерисати 3 до 5 концептуалних, дугорочних исказа који објашњавају зашто је учење важно изван јединице, истичу преносиве обрасце, односе или принципе кроз различите контексте, и објашњавају како или зашто нешто функционише, а не само шта је то. Напишите циљеве као директне наставке фразе 'Ученици ће разумети да...'. Немојте понављати фразу 'Ученици ће разумети да', и немојте почињати глаголима попут 'Објаснити да' или 'Описати да' (нпр. једноставно напишите 'инжењерски дизајни се побољшавају када...'). НЕ укључујте било какво нумерисање, тачке илиCrte на почетку ваших низова."
                 },
                 "StudentsWillKnowThat": {
                   "type": "array",
@@ -233,7 +233,7 @@ window.pblPrompts_ensrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Svaki cilj mora da se završava sa (DOK X) i da predstavlja činjenice ili osnovna sadržajna znanja tako što će generisati 3 do 5 činjenica specifičnih za disciplinu, pojmova ili iskaza osnovnog znanja koji identifikuju suštinske informacije koje učenici moraju da zapamte, da ostanu konkretni i činjenični umesto konceptualni, da podržavaju standarde jedinice i zadatke učinka, da koriste jasan akademski rečnik odgovarajući predmetu, i da uključuju odgovarajuću DOK oznaku obično na nivou 1 ili 2. Napišite ciljeve kao direktne nastavke fraze 'Učenici će znati da...'. Nemojte ponavljati frazu 'Učenici će znati da', i nemojte počinjati glagolima poput 'Identifikovati da' ili 'Definisati' (npr. jednostavno napišite 'poluga ima krak sile...'). NE uključujte bilo kakvo numerisanje, tačke ili crte na početku svojih nizova."
+                  "description": "Сваки циљ мора да се завршава са (ДОК X) и да представља чињенице или основна садржајна знања тако што ће генерисати 3 до 5 чињеница специфичних за дисциплину, појмова или исказа основног знања који идентификују суштинске информације које ученици морају да запамте, да остану конкретни и чињенични уместо концептуални, да подржавају стандарде јединице и задатке учинка, да користе јасан академски речник одговарајући предмету, и да укључују одговарајућу ДОК ознаку обично на нивоу 1 или 2. Напишите циљеве као директне наставке фразе 'Ученици ће знати да...'. Немојте понављати фразу 'Ученици ће знати да', и немојте почињати глаголима попут 'Идентификовати да' или 'Дефинисати' (нпр. једноставно напишите 'полиuga има крак силе...'). НЕ укључујте било какво нумерисање, тачке или crte на почетку ваших низова."
                 },
                 "StudentsWillBeAbleTo": {
                   "type": "array",
@@ -243,7 +243,7 @@ window.pblPrompts_ensrCyrl = {
                     "type": "string",
                     "x-format": "- {value}"
                   },
-                  "description": "Svaki cilj mora da se završava sa (DOK X) i da predstavlja veštine ili prakse usklađene sa disciplinom tako što će generisati 4 do 7 veštinski zasnovanih iskaza koji opisuju šta će učenici raditi; uskladite ih sa praksama specifičnim za disciplinu; povežite ih direktno sa projektnim proizvodom ili zadatkom učinka; ostanite merljivi i uočljivi; i uključite odgovarajući DOK nivo između 2 i 4. Napišite ciljeve kao direktne nastavke fraze 'Učenici će biti sposobni da...'. Počnite direktno merljivim akcionim glagolom (npr. analizirati, uporediti, dizajnirati, modelovati, rešiti). Nemojte ponavljati prefiks 'Učenici će biti sposobni da'. NE uključujte bilo kakvo numerisanje, tačke ili crte na početku svojih nizova."
+                  "description": "Сваки циљ мора да се завршава са (ДОК X) и да представља вештине или праксе усаглашене са дисциплином тако што ће генерисати 4 до 7 вештински заснованих исказа који описују шта ће ученици радити; усагласите их са праксама специфичним за дисциплину; повежите их директно са пројектним производом или задатком учинка; останите мерљиви и уочљиви; и укључите одговарајући ДОК ниво између 2 и 4. Напишите циљеве као директне наставке фразе 'Ученици ће бити способни да...'. Почните директно мерљивим акционним глаголом (нпр. анализирати, упоређивати, дизајнирати, моделовати, решити). Немојте понављати префикс 'Ученици ће бити способни да'. НЕ укључујте било какво нумерисање, тачке или crte на почетку ваших низова."
                 }
               }
             }
@@ -263,12 +263,12 @@ window.pblPrompts_ensrCyrl = {
           "properties": {
             "DrivingQuestion": {
               "type": "string",
-              "description": "MORA da se poklapa sa UnitOverview.DrivingQuestion doslovno. Navedite stvarno vodeće pitanje (npr. 'Kako možemo da dizajniramo izum inspirisan inovacijama drevnog Egipta da rešimo stvarni problem u našoj zajednici u Coconut Creeku?')."
+              "description": "МОРа да се поклапа са UnitOverview.DrivingQuestion дословно. Наведите стварно водеће питање (нпр. 'Како можемо да дизајнирамо изум инспирисан иновацијама древног Египта да решимо стварни проблем у нашој заједници у КокоНат Крику?')."
             },
             "ProblemDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "Paragrafi opisa problema koji objašnjavaju stvarni izazov. Objasnite zašto je problem važan i koje su posledice ako se ne rešava, identifikujući osnovne faktore koji doprinose problemu. Pokažite kako nerazumevanje, nedostajuće informacije ili prevideni varijabli doprinose problemu. Objasnite kako rešenje služi stvarnoj, relevantnoj autentičnoj publici. NE uključujte bilo kakvo numerisanje ili tačke na početku svojih nizova.",
+              "description": "Параграфи описа проблема који објашњавају стварни изазов. Објасните зашто је проблем важан и које су последице ако се не решава, идентификујући основне факторе који доприносе проблем. Показите како неразумевање, недостајуће информације или превидени варијабли доприносе проблему. Објасните како решење служи стварној, релевантној аутентичној публика. НЕ укључујте било какво нумерисање или тачке на почетку ваших низова.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -277,7 +277,7 @@ window.pblPrompts_ensrCyrl = {
             "ProjectDescription": {
               "type": "array",
               "x-format": "{items}",
-              "description": "Narativni pasusi o tome kako učenje raste kroz višednevni projekat (istraživanje -> primena -> doterivanje -> predstavljanje). Objasnite kako učenici počinju istraživanjem primera, primećuju obrasce, primenjuju naučna znanja kroz praktična testiranja, a zatim koriste te nalaze da razviju originalan izum. Objasnite kako revidiraju prototipove i predstavljaju ideje autentičnoj publici. NE uključujte bilo kakvo numerisanje ili tačke na početku svojih nizova.",
+              "description": "Наративни пасуси о томе како учење расте кроз вишедневни пројекат (истраживање -> примена -> дотеривање -> представљање). Објасните како ученици почињу истраживањем примера, примећују обрасце, примењују научна знања кроз практична тестирања, а затим користе те налазе да развију оригиналан изум. Објасните како ревидирају прототипове и представљају идеје аутентичној публици. НЕ укључујте било какво нумерисање или тачке на почетку ваших низова.",
               "items": {
                 "type": "string",
                 "x-format": "{value}\n\n"
@@ -288,7 +288,7 @@ window.pblPrompts_ensrCyrl = {
               "minItems": 3,
               "maxItems": 5,
               "x-format": "{items}",
-              "description": "MORA da uključuje 3 do 5 lokacija za angažovanje zasnovanih na mestu. Osigurajte da lokacije predstavljaju različite kontekste i jasno pokažu kako je lokalna zajednica deo ekosistema učenja.",
+              "description": "МОРа да укључује 3 до 5 локација за ангажовање заснованих на месту. Осигурајте да локације представљају различите контексте и јасно покажу како је локална заједница део екосистема учења.",
               "items": {
                 "type": "object",
                 "x-format": "\n\n**{value.SiteTitle}**\n\n- **{loc.StudentEngagement}:** {value.StudentEngagement}\n- **{loc.Relevance}:** {value.Relevance}",
@@ -301,15 +301,15 @@ window.pblPrompts_ensrCyrl = {
                 "properties": {
                   "SiteTitle": {
                     "type": "string",
-                    "description": "Značajno fizičko, zajedničko, virtuelno ili predmetno specifično mesto relevantno za kontekst jedinice (npr. 'Kampus srednje škole Coconut Creek (primarna istraživačka lokacija)')."
+                    "description": "Значајно физичко, заједничко, виртуелно или предметно специјализовано место релевантно за контекст јединице (нпр. 'Кампус средње школе КокоНат Крик (примарна истраживачка локација)')."
                   },
                   "StudentEngagement": {
                     "type": "string",
-                    "description": "Objašnjavanje autentičnih istraživačkih aktivnosti koje učenici izvode na lokaciji ili uz nju, kao što su posmatranje, prikupljanje podataka, intervjui, analiza, virtuelno istraživanje ili vođeni terenski zadaci povezani sa stvarnim problemom."
+                    "description": "Објашњавање аутентичних истраживачких активности које ученици изводе на локацији или уз њу, као што су посматрање, прикупљање података, интервјуи, анализа, виртуелно истраживање или вођени теренски задаци повезани са стварним проблемом."
                   },
                   "Relevance": {
                     "type": "string",
-                    "description": "Objašnjavanje zašto je lokacija važna tako što je povezuje sa problemom, pokazuje kako obezbeđuje dokaze ili stručnost, pojašnjava kako podržava dizajn ili modelovanje rešenja i ističe lokalni ili zajednici svojstven značaj."
+                    "description": "Објашњавање зашто је локација важна тако што је повезује са проблемом, показује како обезбеђује доказе или стручност, појашњава како подржава дизајн или моделирање решења и истиче локални или заједници својствен значај."
                   }
                 }
               }
@@ -327,7 +327,7 @@ window.pblPrompts_ensrCyrl = {
                   "minItems": 4,
                   "maxItems": 4,
                   "x-format": "{items}",
-                  "description": "Kreirajte odeljak Začetnog akademskog vokabulara sa tačno četiri označena nivoa.",
+                  "description": "Креирајте оделак Зачетног академског вокабулара са тачно четири означена нивоа.",
                   "items": {
                     "type": "object",
                     "x-format": "\n\n**{value.TierTitle}**\n\n*{value.TierWhyItMatters}*\n\n{value.Terms}",
@@ -340,17 +340,17 @@ window.pblPrompts_ensrCyrl = {
                     "properties": {
                       "TierTitle": {
                         "type": "string",
-                        "description": "MORA da bude tačno jedno od sledećeg: 'Nivo 1: Osnovni / ključni vokabular', 'Nivo 2: Vokabular primene, modelovanja ili procesa', 'Nivo 3: Vokabular iz stvarnog sveta ili projekta', 'Nivo 4: Vokabular za proširenje i napredovanje'."
+                        "description": "МОРа да буде тачно једно од следећег: 'Ниво 1: Основни / кључни вокабулар', 'Ниво 2: Вокабулар примене, моделирања или процеса', 'Ниво 3: Вокабулар из стварног света или пројекта', 'Ниво 4: Вокабулар за проширење и напредовање'."
                       },
                       "TierWhyItMatters": {
                         "type": "string",
-                        "description": "Kratka kurzivna rečenica koja objašnjava kako ovi termini pomažu učenicima u kontekstu projekta (npr. 'Ovi pojmovi pomažu učenicima da imenuju najvažnije ideje i objekte koje će videti, graditi i o kojima će razgovarati tokom projekta.')."
+                        "description": "Кратка курсивна реченица која објашњава како ови термини помажу ученицима у контексту пројекта (нпр. 'Ови појмови помажу ученицима да именују најважније идеје и објекте које ће видети, градити и о којима ће разговарати током пројекта.')."
                       },
                       "Terms": {
                         "type": "array",
                         "minItems": 3,
                         "x-format": "\n\n{items}",
-                        "description": "Navedite vokabular odgovarajući jedinici sa definicijama razumljivim učenicima.",
+                        "description": "Наведите вокабулар одговарајући јединици са дефиницијама разумљивим ученицима.",
                         "items": {
                           "type": "object",
                           "x-format": "{index}. **{value.Term}**: {value.Definition}\n",
@@ -362,11 +362,11 @@ window.pblPrompts_ensrCyrl = {
                           "properties": {
                             "Term": {
                               "type": "string",
-                              "description": "Reč iz vokabulara (npr. 'sila'). Ne uključujte nikakvo numerisanje ili tačke."
+                              "description": "Реч из вокабулара (нпр. 'сила'). Не укључујте никакво нумерисање или тачке."
                             },
                             "Definition": {
                               "type": "string",
-                              "description": "Definicija razumljiva učenicima."
+                              "description": "Дефиниција разумљива ученицима."
                             }
                           }
                         }
@@ -391,7 +391,7 @@ window.pblPrompts_ensrCyrl = {
             "AuthenticAudience": {
               "type": "object",
               "x-format": "{value.Audiences}\n\n**{loc.StudentParticipationInAudienceSelection}**\n\n{value.StudentParticipation}",
-              "description": "Identifikujte i angažujte autentičnu publiku izvan učionice.",
+              "description": "Идентификујте и ангажујте аутентичну публику изван учионице.",
               "additionalProperties": false,
               "required": [
                 "Audiences",
@@ -415,15 +415,15 @@ window.pblPrompts_ensrCyrl = {
                     "properties": {
                       "AudienceName": {
                         "type": "string",
-                        "description": "Naziv određene grupe autentične publike (npr. 'Odbor za održivost i ekološko savetovanje grada Coconut Creeka'). Ne uključujte tačke ili numerisanje."
+                        "description": "Назив одређене групе аутентичне публике (нпр. 'Обор за одрживост и еколошко саветовање града КокоНат Крика'). Не укључујте тачке или нумерисање."
                       },
                       "PrimaryAudienceDescription": {
                         "type": "string",
-                        "description": "Jasan opis ko je ova publika (pojedinci, organizacije ili grupe) i njihov odnos prema kontekstu ili problemu projekta. Mora biti detaljno, najmanje 2-3 rečenice."
+                        "description": "Јасан опис ко је ова публика (појединци, организације или групе) и њихов однос према контексту или проблему пројекта. Мора бити детаљно, најмање 2-3 реченице."
                       },
                       "WhyThisAudienceIsQualified": {
                         "type": "string",
-                        "description": "Objašnjenje zašto ova publika ima relevantnu stručnost, iskustvo iz prve ruke ili autoritet u vezi sa temom projekta. Mora biti detaljno, najmanje 2-3 rečenice."
+                        "description": "Објашњење зашто ова публика има релевантну стручност, искуство из прве руке или ауторитет у вези са темом пројекта. Мора бити детаљно, најмање 2-3 реченице."
                       },
                       "HowThisAudienceElevatesTheProject": {
                         "type": "string",
@@ -838,7 +838,7 @@ window.pblPrompts_ensrCyrl = {
                           "x-format": "- {value}",
                           "type": "string"
                         },
-                        "description": "Званични план дат за овог ученика у упутству. Претворите план у јасан списак. Можете парафразирати ради бољег форматирања, али НЕ изостављајте нити додајте било какве информације."
+                        "description": "Званични план дат за овог ученика у упутству. Претворите план у јасан списак. Можете парафразирати ради бољег форматирања, али НЕ изостављајте нити додаћите било какве информације."
                       },
                       "PlanImplementation": {
                         "type": "array",
@@ -1496,7 +1496,7 @@ window.pblPrompts_ensrCyrl = {
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Модел мора да креира компоненту razmaknutog ponavljanja која захтева од ученика да се присете кључног концепта из одређене претходне јединице или лекције, без позивања на било какве прошле активности, радне листове, моделе, ознаке или кораке специфичне за задатак. Наставников сценарио мора да почиње са Reci: и може да се односи само на тему претходног учења, а не на оно што су ученици о њој научили. Питање за присећање мора да подстакне ученике да поново изнесу или примене претходно научено концептуално разумевање (као што је како систем функционише, како су променљиве повезане или како се процес одвија) у потпуности из сећања, без тога да наставник даје наговештаје или делимична објашњења. Излаз мора да се заврши са Očekivani odgovori učenika који показују 2-3 примера који тачно одражавају концептуално присећање, показујући да су ученици — а не сам подстицај — предложили запамћене идеје.",
+              "description": "Модел мора да креира компоненту размакнутог понављања која захтева од ученика да се присете кључног концепта из одређене претходне јединице или лекције, без позивања на било какве прошле активности, радне листове, моделе, ознаке или кораке специфичне за задатак. Наставников сценарио мора да почиње са Reci: и може да се односи само на тему претходног учења, а не на оно што су ученици о њој научили. Питање за присећање мора да подстакне ученике да поново изнесу или примене претходно научено концептуално разумевање (као што је како систем функционише, како су променљиве повезане или како се процес одвија) у потпуности из сећања, без тога да наставник даје наговештаје или делимична објашњења. Излаз мора да се заврши са Очекивани одговори ученика који показују 2-3 примера која тачно одражавају концептуално присећање, показујући да су ученици — а не сам подстицај — предложили запамћене идеје.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1688,7 +1688,7 @@ window.pblPrompts_ensrCyrl = {
           "properties": {
             "Phase3_FocusStatement": {
               "type": "string",
-              "description": "Направи Focus Statement од 2-4 реченице који јасно саопштава сврху Фазе 3 и њену улогу у вођењу ученика ка финалном производу. Изјава мора објаснити да се Фаза 3 фокусира на прецизирање идеја, примену учења, јачање доказа, припрему завршних производа и укључивање у дубље резоновање и ревизију. Мора изричито показати како Фаза 3 унапређује аутентичан реални изазов пројекта, како ученици користе доказе да побољшају решења и како их овај рад припрема за аутентичну публику. Изјава мора да укључује интелектуални рад као што су прецизирање, ревидирање, синтетисање, вредновање, оправдавање, финализовање и комуницирање, и мора да означи како ученици финализују моделе, производе, објашњења или предлоге, припремају презентације или јавне приказе и размишљају о учењу како би ојачали своје резоновање."
+              "description": "Направи Фокус изјава од 2-4 реченице који јасно саопштава сврху Фазе 3 и њену улогу у вођењу ученика ка финалном производу. Изјава мора објаснити да се Фаза 3 фокусира на прецизирање идеја, примену учења, јачање доказа, припрему завршних производа и укључивање у дубље резоновање и ревизију. Мора изричито показати како Фаза 3 унапређује аутентичан реални изазов пројекта, како ученици користе доказе да побољшају решења и како их овај рад припрема за аутентичну публику. Изјава мора да укључује интелектуални рад као што су прецизирање, ревидирање, синтетисање, вредновање, оправдавање, финализовање и комуницирање, и мора да означи како ученици финализују моделе, производе, објашњења или предлоге, припремају презентације или јавне приказе и размишљају о учењу како би ојачали своје резоновање."
             },
             "Phase3_CollaborativeActivities": {
               "type": "array",
@@ -1770,7 +1770,7 @@ window.pblPrompts_ensrCyrl = {
                   "properties": {
                     "Strategies": {
                       "type": "array",
-                      "description": "Направи 2-3 подршке корак по корак (структурисани алати, моделирани примери, think-alouds) и тачно упутство како би ученици завршили задатак. НЕ почињи ставке набрајањем, цртицама или бројевима. Само напиши обичан текст.",
+                      "description": "Направи 2-3 подршке корак по корак (структурисани алати, моделирани примери, think-alouds) и тачно упутство како би ученици завршили задатак. НЕ почињи ставке набрајањем, цртицама или бројевima. Само напиши обичан текст.",
                       "items": {
                         "x-format": "- {value}",
                         "type": "string"
@@ -1898,11 +1898,11 @@ window.pblPrompts_ensrCyrl = {
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Опишите заблуду у 1 реченици, која почиње са 'Učenici mogu misliti...'. НЕ користите подебљавање нити ознаке за наглашавање."
+                    "description": "Опишите заблуду у 1 реченици, која почиње са 'Ученци могу мислити...'. НЕ користите подебљавање нити ознаке за наглашавање."
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Јасан сценарио одговора за наставника (који почиње са 'Teacher Response: ') који показује како да се одговори у тренутку помоћу конкретног подстицаја (НЕ укључивати префикс 'Say:'). НЕ користите подебљавање нити ознаке за наглашавање."
+                    "description": "Јасан сценарио одговора за наставника (који почиње са 'Наставнички одговор: ') који показује како да се одговори у тренутку помоћу конкретног подстицаја (НЕ укључивати префикс 'Say:'). НЕ користите подебљавање нити ознаке за наглашавање."
                   }
                 },
                 "required": [
@@ -2116,7 +2116,7 @@ window.pblPrompts_ensrCyrl = {
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Један пасус који објашњава знања и вештине које се вежбају кроз све задатке у овој фази. Пасус МОРА да почиње са 'Ovi zadaci jačaju današnje učenje o ____ tako što ______.' при чему су празнине попуњене релевантним садржајем пројекта, након чега следи објашњење како ови задаци јачају дугорочно памћење."
+              "description": "Један пасус који објашњава знања и вештине које се вежбају кроз све задатке у овој фази. Пасус МОРА да почиње са 'Ови задаци јачају данашње учење о ____ тако што ______.' при чему су празнине попуњене релевантним садржајем пројекта, након чега следи објашњење како ови задаци јачају дугорочно памћење."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",
@@ -2393,5 +2393,5 @@ window.pblPrompts_ensrCyrl = {
       "UnitPlan.TeacherGuidancePhase3.Phase3_SpacedRetrieval"
     ]
   }
-},
+}
 };

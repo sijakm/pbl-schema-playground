@@ -744,7 +744,7 @@ window.lecturePromptssrCyrl = {
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Процена времена (нпр. „(5 min)“)"
+          "description": "Процена времена (нпр. „(5 мин)“)"
         },
         "InstructionsForTeachers": {
           "type": "object",
@@ -814,7 +814,7 @@ window.lecturePromptssrCyrl = {
       "properties": {
         "Duration": {
           "type": "string",
-          "description": "Процена времена (нпр. „(1 min)“)"
+          "description": "Процена времена (нпр. „(1 мин)“)"
         },
         "BuildCuriosity": {
           "type": "string"
@@ -849,7 +849,7 @@ window.lecturePromptssrCyrl = {
               "x-format": "- {value}",
               "type": "string"
             },
-            "description": "1–2 примера одговора који показују савладавање."
+            "description": "1–2 примера одговора који показују савладање."
           }
         },
         "required": [
@@ -964,5 +964,5 @@ window.lecturePromptssrCyrl = {
       "FormativeAssessment"
     ]
   }
-},
+}
 };

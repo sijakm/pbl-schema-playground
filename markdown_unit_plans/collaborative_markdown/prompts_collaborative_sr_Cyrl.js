@@ -168,7 +168,7 @@ CollaborativeActivities:
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Потпуни одељак „Исходи учења ученика“ за целу ову јединицу. Свака ставка листе мора бити јасан, мерљив исход који почиње мерљивим глаголом и завршава се ознаком DOK у загради",
+          "description": "Потпуни одељак „Исходи учења ученика“ за целу ову јединицу. Свака ставка листе мора бити јасан, мерљив исход који почиње мерљивим глаголом и завршава се ознаком DOK у заглади.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -267,7 +267,7 @@ CollaborativeActivities:
         "StudentLearningObjectives": {
           "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "2–3 мерљива исхода, од којих се сваки завршава ознаком DOK у загради.",
+          "description": "2–3 мерљива исхода, од којих се сваки завршава ознаком DOK у заглади.",
           "items": {
             "x-format": "- {value}\n",
             "type": "string"
@@ -727,7 +727,7 @@ CollaborativeActivities:
         "ReflectionOnGroupDynamics": {
           "x-format": "### {green}({loc.ReflectionOnGroupDynamics})\n\n{value.DebriefPrompt}\n\n{value.TeacherFacilitationOptions}\n\n{value.ClosingPrompt}",
           "type": "object",
-          "description": "Ученици процењују колико је група добро радила заједно. МОРА да садржи тачно 3 сегмента редом: подстицај за кратку анализу, опције за вођење разговора и завршни подстицај који повезује са нормама.",
+          "description": "Ученици процењују колико је група добро радила заједно. МОРА да садржи тачно 3 секмента редом: подстицај за кратку анализу, опције за вођење разговора и завршни подстицај који повезује са нормама.",
           "properties": {
             "DebriefPrompt": {
               "x-format": "**1.** {value.Say}\n\n{value.ExpectedStudentResponses}",
@@ -993,7 +993,7 @@ CollaborativeActivities:
             "Reflection": {
               "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
               "type": "object",
-              "description": "Задатак за рефлексију за ученике.",
+              "description": "Задатак за рефлексију за ученице.",
               "properties": {
                 "Prompt": {
                   "type": "string",
@@ -1066,5 +1066,5 @@ CollaborativeActivities:
       "LessonDescription.CollaborativeActivities.AccommodationsAndModifications"
     ]
   }
-},
+}
 };

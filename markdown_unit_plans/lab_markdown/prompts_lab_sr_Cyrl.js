@@ -112,7 +112,7 @@ window.labPromptssrCyrl = {
         "Description": {
           "x-format": false,
           "type": "string",
-          "description": "Opis jedinice kao jedna celovita prozna pasusna celina u prirodnom nastavničkom tonu od 4–5 potpunih rečenica koju biste mogli direktno da izgovorite učenicima. Bez HTML-a, bez emodžija, bez nabrajanja. Mora da teče razgovorno, ali da prati ovu strukturu (bez naslova): (1) uvodna rečenica koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica sa „U ovoj jedinici ćete...” o ishodima usvajanja, (3) rečenica sa „Razvićete svoje veštine u...” o misaonim/analitičkim sposobnostima, (4) rečenica sa „Ovo je povezano sa...” o značaju za stvarni svet, (5) rečenica sa „Razumevanje ovoga je važno jer...” o širem značaju ili dugoročnom uticaju."
+          "description": "Опис јединице као једна целовита проза пасусна целина у природном наставничком тону од 4–5 потпуних реченица коју бисте могли директно да изговорите ученицима. Без HTML-а, без емодџија, без набрајања. Мора да тече разговорно, али да прати ову структуру (без наслова): (1) уводна реченица која буди радозналост или прави изненађујући контраст, (2) реченица са „У овој јединици ћете...” о исходима усвајања, (3) реченица са „Развићете своје вештине у...” о мисаоним/аналитичким способностима, (4) реченица са „Ово је повезано са...” о значају за стварни свет, (5) реченица са „Разумевање овога је важно јер...” о ширем значају или дугорочном утицају."
         },
         "EssentialQuestions": {
           "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
@@ -120,7 +120,7 @@ window.labPromptssrCyrl = {
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
-          "description": "Kreirajte suštinska pitanja koja se fokusiraju samo na široke, univerzalne pojmove kao što su promena, dokazi, obrasci, odnosi, sistemi ili zaključivanje. Ne pominjite nijedne pojmove specifične za predmet, procese, vokabular ili primere. Pitanja moraju biti otvorenog tipa, primenljiva u svim disciplinama i nemoguća za odgovor samo učenjem sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, a ne na predmetnu materiju.",
+          "description": "Креирајте суштинска питања која се фокусирају само на широке, универзалне појмове као што су промена, докази, обрасци, односи, системи или закључивање. Не помињите ниједне појмове специфичне за предмет, процесе, вокабулар или примере. Питања морају бити отвореног типа, применљива у свим дисциплинама и немогућа за одговор само учењем садржаја лекције или јединице. Фокусирајте се само на велике идеје, а не на предметну материју.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -129,7 +129,7 @@ window.labPromptssrCyrl = {
         "StudentLearningObjectives": {
           "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
           "type": "array",
-          "description": "Kompletan odeljak 'Učenikovi ishodi učenja' za celu ovu jedinicu. Svaka stavka liste mora biti jasan, merljiv ishod koji počinje merljivim glagolom i završava oznakom DOK u zagradama",
+          "description": "Комплетан оделак 'Учникови исходи учења' за целу ову јединицу. Свакa ставка листе мора бити јасан, мерљив исход који почиње мерљивим глаголом и завршава ознаком ДOK у заградама",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -138,7 +138,7 @@ window.labPromptssrCyrl = {
         "StandardsAligned": {
           "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
           "type": "array",
-          "description": "Navedite sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. Ne dodajte standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora da sadrži kod standarda i opis, npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.",
+          "description": "Наведите све јединствене образовне стандарде коришћене било где у овој јединици и њеним лекцијама. Не додајте стандарде који се не појављују у садржају јединице. Свак стандарда мора да садржи код стандарда и опис, нпр. 'МС-ЕСС1-1: Развијте и користите модел система Земља–Сунце–Месец да бисте описали цикличне обрасце месечевих мена, помрачења и годишњих доба.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -147,7 +147,7 @@ window.labPromptssrCyrl = {
         "KeyVocabulary": {
           "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
           "type": "array",
-          "description": "Kompletan odeljak 'Ključni vokabular' kao lista stringova. Svaki string treba da bude jedan termin sa definicijom odvojenom crticom/kosom crtom. Primer: 'Gravitacija - Sila koja privlači tela jedno ka drugom'. Sve definicije moraju biti kratke, prilagođene uzrastu i direktno povezane sa sadržajem lekcije.",
+          "description": "Комплетан оделак 'Кључни вокабулар' као листа стрингова. Свакa стринг треба да буде један термин са дефиницијом одвојеном цртичком/косом цртом. Пример: 'Гравитација - Сила која привлачи тела једно ка другом'. Све дефиниције морају бити кратке, прилагођене узрасту и директно повезане са садржајем лекције.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -166,21 +166,21 @@ window.labPromptssrCyrl = {
     "Lessons": {
       "x-format": false,
       "type": "array",
-      "description": "Spisak organizacionih celina lekcija za ovu jedinicu (samo okvir). Svaka stavka mora biti nepreklapajuća i jasno obuhvaćena tako da se sadržaj lekcija ne ponavlja između lekcija.",
+      "description": "Списак организационих целина лекција за ову јединицу (само оквир). Свакa ставка мора бити непоклапајућа и јасно обухваћена тако да се садржај лекција не понавља између лекција.",
       "items": {
         "type": "object",
         "properties": {
           "lessonNumber": {
             "type": "integer",
-            "description": "Redni broj lekcije. Zasnovano na 1."
+            "description": "Редни број лекције. Засновано на 1."
           },
           "lessonTitle": {
             "type": "string",
-            "description": "Kratak naslov lekcije kao običan tekst."
+            "description": "Кратак наслов лекције као обичан текст."
           },
           "lessonOutline": {
             "type": "string",
-            "description": "2–4 rečenice koje opisuju obim lekcije, fokus i granice kako bi se sprečilo preklapanje sa drugim lekcijama."
+            "description": "2–4 реченице које описују обим лекције, фокус и границе како би се спречило поклапање са другим лекцијама."
           }
         },
         "required": [
@@ -213,7 +213,7 @@ window.labPromptssrCyrl = {
     "EssentialQuestions": {
       "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
       "type": "array",
-      "description": "Samo nalepite sva suštinska pitanja koja su generisana na nivou jedinice istim redosledom.",
+      "description": "Само налепите сва суштинска питања која су генерисана на нивоу јединице истим редоследом.",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -222,7 +222,7 @@ window.labPromptssrCyrl = {
     "StudentLearningObjectives": {
       "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
       "type": "array",
-      "description": "Kompletan odeljak 'Učenikovi ishodi učenja' kao običan tekst. Svaka stavka mora biti jasan, merljiv ishod koji počinje merljivim glagolom i završava oznakom DOK u zagradama, npr. 'Modelujte kako Zemljina rotacija oko svoje ose uzrokuje dan i noć (DOK 2).'",
+      "description": "Комплетан оделак 'Учникови исходи учења' као обичан текст. Свакa ставка мора бити јасан, мерљив исход који почиње мерљивим глаголом и завршава ознаком ДOK у заградама, нпр. 'Моделујте како Земљина ротација око своје осе узрокује дан и ноћ (ДOK 2).'",
       "minItems": 2,
       "maxItems": 3,
       "items": {
@@ -233,7 +233,7 @@ window.labPromptssrCyrl = {
     "StandardsAligned": {
       "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
       "type": "array",
-      "description": "Kompletan odeljak 'Usklađeno sa standardima' kao običan tekst za ovu lekciju. Svaki standard mora da sadrži kod standarda i opis, a kod i opis moraju biti potpuno isti kao u jedinici. npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.'",
+      "description": "Комплетан оделак 'Усклађено са стандардима' као обичан текст за ову лекцију. Свак стандарда мора да садржи код стандарда и опис, а код и опис морају бити потпуно исти као у јединици. нпр. 'МС-ЕСС1-1: Развијте и користите модел система Земља–Сунце–Месец да бисте описали цикличне обрасце месечевих мена, помрачења и годишњих доба.'",
       "items": {
         "x-format": "- {value}",
         "type": "string"
@@ -242,7 +242,7 @@ window.labPromptssrCyrl = {
     "KeyVocabulary": {
       "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
       "type": "array",
-      "description": "Izaberite doslovno ključni vokabular za ovu lekciju iz vokabulara na nivou jedinice navedenog u promptu. Ne izmišljajte nove reči. Morate ponovo koristiti tačno originalno navođenje iz Step 0 UnitDescription.KeyVocabulary.",
+      "description": "Изаберите дословно кључни вокабулар за ову лекцију из вокабулара на нивоу јединице наведеног у промпту. Не измишљајте нове речи. Морате поново искористити тачно оригинално наводење из Степ 0 UnitDescription.KeyVocabulary.",
       "items": {
         "x-format": "{index}. {value}",
         "type": "string"
@@ -251,16 +251,16 @@ window.labPromptssrCyrl = {
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Odeljak Procena predznanja. SAMO Lekcija 1 treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU Vratiti NULL ili izostaviti ovo polje. Za Lekciju 1, struktura mora da uključuje: 1. Ovaj odeljak uključite samo u prvu lekciju jedinice. 2. Osigurajte da se koriste DOK 1-3 podsticaji. 3. Uključite preduslove veština potrebne za ishode učenja učenika. 4. Izaberite jedan modalitet sa ove liste i potpuno ga razradite: postavljanje pitanja, K-W-L, vizuali, koncept mape, refleksivno pisanje, anticipativni vodiči, ocenjivanje vokabulara. 5. Početni nastavnikov podsticaj sa 'Say:' izjavom. 6. Jasna uputstva i šablon/struktura za izabrani modalitet. 7. Odeljak 'Očekivani odgovori učenika'. 8. Završni nastavnikov 'Say:' podsticaj. 9. Nakon potpunog razrađivanja jednog modaliteta, obezbedite 2 kratke alternativne opcije.",
+      "description": "Одељак Процена предзнања. САМО Лекција 1 треба да садржи детаљан блок; СВЕ ОСТАЛЕ ЛЕКЦИЈЕ МОРАЈУ Вратити NULL или изостaviti ово поље. За Лекцију 1, структура мора да укључује: 1. Овај одељак укључите само у прву лекцију јединице. 2. Осигурајте да се користе ДOK 1-3 подстицаји. 3. Укључите предуслове вештина потребне за исходе учења ученика. 4. Изаберите један модалитет са ове листе и потпуно га разрадите: постављање питања, K-W-L, визуали, концепт мапе, рефлексивно писање, антипативни водичи, оцењивање вокабулара. 5. Почетни наставников подстицај са 'Say:' изјавом. 6. Јасна упутства и шаблон/структура за изабрани модалитет. 7. Одељак 'Очекивани одговори ученика'. 8. Завршни наставников 'Say:' подстицај. 9. Након потпуне разраде једног модалитета, обезбедите 2 кратке алтернативне опције.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Jasna uputstva i šablon/struktura za izabrani modalitet. Npr. 'Say: \"Pre nego što počnemo...\"'"
+          "description": "Јасна упутства и шаблон/структура за изабрани модалитет. Нпр. 'Say: \"Пре него што почнемо...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
           "type": "array",
-          "description": "Predviđeni odgovori učenika ili česte zablude za izabrani modalitet.",
+          "description": "Предвиђени одговори ученика или честе заблуде за изабрани модалитет.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -268,12 +268,12 @@ window.labPromptssrCyrl = {
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Završni nastavnikov 'Say:' podsticaj koji potvrđuje razmišljanje učenika i najavljuje istraživanje jedinice."
+          "description": "Завршни наставников 'Say:' подстицај који потврђује разматрање ученика и најављује истраживање јединице."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
           "type": "array",
-          "description": "2 kratke alternativne opcije koje bi nastavnik mogao da izabere.",
+          "description": "2 кратке алтернативне опције које би наставник могао да изабере.",
           "items": {
             "x-format": "{index}. {value}",
             "type": "string"
@@ -291,12 +291,12 @@ window.labPromptssrCyrl = {
     "Question": {
       "x-format": "### {green}(Question (5 min))\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Vodite nastavnika tako da učenici posmatraju fenomen, identifikuju nešto zbunjujuće i postave smisleno pitanje koje će voditi istraživanje.",
+      "description": "Водите наставника тако да ученици посматрају феномен, идентификују нешто збуњујуће и поставе смислено питање које ће водити истраживање.",
       "properties": {
         "Purpose": {
           "x-format": false,
           "type": "string",
-          "description": "Doslovno - Svrha: Posmatrati fenomen, identifikovati nešto zbunjujuće i postaviti smisleno pitanje koje će voditi istraživanje."
+          "description": "Дословно - Сврха: Посматрати феномен, идентификовати нешто збуњујуће и поставити смислено питање које ће водити истраживање."
         },
         "Materials": {
           "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -394,7 +394,7 @@ window.labPromptssrCyrl = {
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Шта наставник треба да каже да би је исправио"
+                    "description": "Шта наставник треба да каже да би je исправио"
                   }
                 },
                 "required": [
@@ -706,7 +706,7 @@ window.labPromptssrCyrl = {
                 ],
                 "additionalProperties": false
               },
-              "description": "Корак-по-корак наставникова упутства. МОРАМ да укључите тачно један корак који је посебно за почетке реченица и попуните његов низ „Bullets“. МОРАМ да укључите тачно један корак који је посебно за подстицаје за обилазак учионице и попуните његов низ „Bullets“."
+              "description": "Корак-по-корак наставникова упутства. МОРАМ да укључим тачно један корак који је посебно за почетке реченица и попуните његов низ „Bullets“. МОРАМ да укључим тачно један корак који је посебно за подстицаје за обилазак учионице и попуните његов низ „Bullets“."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -781,7 +781,7 @@ window.labPromptssrCyrl = {
                 ],
                 "additionalProperties": false
               },
-              "description": "Корак-по-корак наставникова упутства. МОРАМ да укључите тачно један корак који је посебно за обезбеђивање структуре за дељење и попуните његов низ „Bullets“. МОРАМ да укључите тачно један корак који је посебно за наставничке подстицаје и попуните његов низ „Bullets“."
+              "description": "Корак-по-корак наставникова упутства. МОРАМ да укључим тачно један корак који је посебно за обезбеђивање структуре за дељење и попуните његов низ „Bullets“. МОРАМ да укључим тачно један корак који је посебно за наставничке подстицаје и попуните његов низ „Bullets“."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -1061,5 +1061,5 @@ window.labPromptssrCyrl = {
       "FormativeAssessment"
     ]
   }
-},
+}
 };

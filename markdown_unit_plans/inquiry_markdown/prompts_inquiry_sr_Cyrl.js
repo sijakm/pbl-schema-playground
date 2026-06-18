@@ -429,7 +429,7 @@ window.promptssrCyrl = {
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Генеришите 2–3 конкретна потеза који подржавају стварање ученичких питања. Укључите време за индивидуално размишљање, јавно бележење свих питања и подстицање ученика да прецизирају, споје или прошире питања без вредносног оцењивања.",
+                  "description": "Генеришите 2–3 конкретna потеза који подржавају стварање ученичких питања. Укључите време за индивидуално размишљање, јавно бележење свих питања и подстицање ученика да прецизирају, споје или прошире питања без вредносног оцењивања.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -437,7 +437,7 @@ window.promptssrCyrl = {
                 },
                 "PromptingOptions": {
                   "type": "string",
-                  "description": "Генеришите 2–3 конкретна подстицаја који ће помоћи ученицима да изнесу своје знатижеље, идентификују шта желе да разумеју и усредсреде се на кључне аспекте система или дизајна."
+                  "description": "Генеришите 2–3 конкретna подстицаја који ће помоћи ученицима да изнесу своје знатижеље, идентификују шта желе да разумеју и усредсреде се на кључне аспекте система или дизајна."
                 }
               },
               "required": [
@@ -598,7 +598,7 @@ window.promptssrCyrl = {
               "properties": {
                 "Conceptual": {
                   "type": "array",
-                  "description": "2–3 подстицаја усмерена на кључне научне или наставне концепте (нпр. „Који доказ показује да ово функционише?“).",
+                  "description": "2–3 подстицаја усмерена на кључне научне или наставне концепте (нпр. „Који доказ показује да ово функциониše?“).",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -697,7 +697,7 @@ window.promptssrCyrl = {
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generišite 2-3 podrške korak po korak (strukturirani alati, modeli primera, razmišljanje naglas) i precizne smernice kako biste pomogli učenicima da završe zadatak.",
+                  "description": "Генеришите 2-3 подршке корак по корак (структивни алати, модели примера, размишљање наглас) и прецизне смернице како бисте помогли ученицима да заврше задатак.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -705,7 +705,7 @@ window.promptssrCyrl = {
                 },
                 "Checklist": {
                   "type": "array",
-                  "description": "Generišite 3-4 pitanja sa kontrolne liste koja će voditi učenike u razumevanju sopstvenog učenja tokom istrage.",
+                  "description": "Генеришите 3-4 питања са контролне листе која ће водити ученике у разумевању сопственог учења током истраге.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -724,7 +724,7 @@ window.promptssrCyrl = {
               "properties": {
                 "Strategies": {
                   "type": "array",
-                  "description": "Generišite 2-3 proširenja koja povećavaju složenost (konkretni izazovi, prepoznavanje obrazaca) kako biste pomogli učenicima da prodube ili unaprede svoje razmišljanje koristeći dokaze.",
+                  "description": "Генеришите 2-3 проширења која повећавају сложеност (конкретни изазови, препознавање образаца) kako бисте помогли ученицима да продубе или унапреде своје размишљање користећи доказе.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -732,11 +732,11 @@ window.promptssrCyrl = {
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Generišite jedan složen podsticaj (nemojte uključivati prefiks 'Say:')/pitanje koje će podstaći dublje konceptualno razumevanje."
+                  "description": "Генеришите један сложен подстицај (немојте укључивати префикс 'Say:')/питање које ће подстаћи дубље концептуално разумевање."
                 },
                 "ExpectedResponses": {
                   "type": "array",
-                  "description": "Generišite 3-4 konkretna primera visokokvalitetnih odgovora učenika na napredno pitanje.",
+                  "description": "Генеришите 3-4 конкретна примера висококвалитетних одговора ученика на напредно питање.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -761,7 +761,7 @@ window.promptssrCyrl = {
         "AccommodationsAndModifications": {
           "x-format": "### 🤝 {loc.AccommodationsAndModifications}\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
           "type": "object",
-          "description": "Ovaj odeljak mora da sadrži dve vrste podrške: Opšte podrške i Individualizovane podrške. Fokusirajte se na pristup, a ne na smanjenje zahteva.",
+          "description": "Овај оделак мора да садржи две врсте подршке: Опште подршке и Индивидуализоване подршке. Фокусирајте се на приступ, а не на смањење захтева.",
           "properties": {
             "General": {
               "type": "array",
@@ -769,19 +769,19 @@ window.promptssrCyrl = {
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Strategije koje nisu specifične za određenog učenika, a koje poboljšavaju pristup za sve učenike (npr. vizuelni prikazi, unapred popunjene beleške, digitalni rečnik, instrukcije podeljene na delove). Obezbedite 2-4 stavke u obliku nabrajanja."
+              "description": "Стратегије које нису специфичне за одређеног ученика, а које побољшавају приступ за све ученике (нпр. визуелни прикази, унапред попуњене белешке, дигитални речник, инструкције подељене на делове). Обезбедите 2-4 ставке у облику набрајања."
             },
             "IndividualSupport": {
               "x-format": "{items}",
               "type": "array",
-              "description": "Specifični prilagođeni oblici podrške i izmene za imenovane učenike sa formalnim planovima. Navedite SVAKOG učenika pojedinačno; nemojte grupisati učenike zajedno. Podrške za svakog učenika treba da budu lista koja se lako pregledava.",
+              "description": "Специфични прилагођени облици подршке и измене за именоване ученике са формалним плановима. Наведите СВАКОГ ученика појединачно; немојте груписати ученике заједно. Подршке за сваког ученика треба да буду листа која се лако прегледа.",
               "items": {
                 "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
                 "type": "object",
                 "properties": {
                   "StudentName": {
                     "type": "string",
-                    "description": "Ime i prezime pojedinačnog učenika koji prima ovu podršku."
+                    "description": "Име и презиме појединачног ученика који прима ову подршку."
                   },
                   "PlanProvided": {
                     "type": "array",
@@ -789,7 +789,7 @@ window.promptssrCyrl = {
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Formalni plan naveden za ovog učenika u promptu. Razložite plan u jasnu listu. Možete parafrazirati radi boljeg formatiranja, ali nemojte izostaviti niti dodati bilo koju informaciju."
+                    "description": "Формални план наведен за овог ученика у промпту. Разложите план у јасну листу. Можете парафразирати ради бољег форматирања, али немојте изоставити нити додати било коју информацију."
                   },
                   "PlanImplementation": {
                     "type": "array",
@@ -797,7 +797,7 @@ window.promptssrCyrl = {
                       "x-format": "- {value}",
                       "type": "string"
                     },
-                    "description": "Konkretni alati/podsticaji/vizuelni prikazi/organizatori za ovaj zadatak."
+                    "description": "Конкретни алати/подстицаји/визуелни прикази/организатори за овај задатак."
                   }
                 },
                 "required": [
@@ -821,11 +821,11 @@ window.promptssrCyrl = {
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generišite jedno konkretno pitanje (nemojte uključivati prefiks 'Say:') za proveru razumevanja učenika tokom ili na kraju istrage."
+              "description": "Генеришите једно конкретно питање (немојте укључивати префикс 'Say:') за проверу разумевања ученика током или на крају истраге."
             },
             "ExpectedResponses": {
               "type": "array",
-              "description": "Generišite 3-4 očekivana odgovora učenika koji pokazuju ovladanost konceptom lekcije.",
+              "description": "Генеришите 3-4 очекивана одговора ученика који показују овладаност концептом лекције.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -857,7 +857,7 @@ window.promptssrCyrl = {
         "Materials": {
           "x-format": "{items}",
           "type": "array",
-          "description": "Lista potrebnog materijala (npr. vizuelna pomagala, markeri itd.)",
+          "description": "Листа потребног материјала (нпр. визуелна помагала, маркиери итд.)",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -869,11 +869,11 @@ window.promptssrCyrl = {
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "Izjava (nemojte uključivati prefiks 'Say:') kojom se učenici vraćaju na istraživačko pitanje i izdvajaju nove ideje o tome kako dizajn funkcioniše."
+              "description": "Изјава (немојте укључивати префикс 'Say:') којом се ученици враћају на истраживачко питање и издвајају нове идеје о томе како дизајн функционише."
             },
             "FacilitationMoves": {
               "type": "array",
-              "description": "2-3 pedagoška poteza koja daju učenicima vreme da pregledaju podatke, prepoznaju obrasce i uporede rezultate kroz diskusiju.",
+              "description": "2-3 педагошка потеза која дају ученицима време да прегледају податке, препознају обрасце и упореде резултате кроз дискусију.",
               "items": {
                 "x-format": "{value}\n\n",
                 "type": "string"
@@ -881,7 +881,7 @@ window.promptssrCyrl = {
             },
             "ProbingQuestions": {
               "type": "array",
-              "description": "3-4 konkretna pitanja koja će podstaći učenike da objasne obrasce, opravdaju odluke dokazima i opišu uzročno-posledične odnose.",
+              "description": "3-4 конкретна питања која ће подстаћи ученике да објасне обрасце, оправдају одлуке доказима и опишу узрочно-последичне односе.",
               "items": {
                 "x-format": "- {value}",
                 "type": "string"
@@ -889,11 +889,11 @@ window.promptssrCyrl = {
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "Izjava (nemojte uključivati prefiks 'Say:') koja opisuje šta njihov pisani odgovor mora da sadrži (komponente specifične za sadržaj) i podsetnik da koriste podatke kao dokaz."
+              "description": "Изјава (немојте укључивати префикс 'Say:') која описује шта њихов написани одговор мора да садржи (компоненте специфичне за садржај) и подсетник да користе податке као доказ."
             },
             "CollaborationInstruction": {
               "type": "string",
-              "description": "Uputstvo za učenike da prvo rade samostalno, a zatim da podele sa partnerom ili grupom kako bi unapredili svoje obrazloženje."
+              "description": "Упутство за ученике да прво раде самостално, а затим да поделе са партнером или групом како би унапредили своје образложење."
             },
             "Guardrail": {
               "type": "string",
@@ -987,7 +987,7 @@ window.promptssrCyrl = {
         },
         "ExpectedStudentResponses": {
           "type": "array",
-          "description": "4-5 одговора који илуструју како би ученици могли да примене своје разумевање у аутентичним, реалним контекстима или у решавању проблема окренутом будућности.",
+          "description": "4-5 одговора који илуструју како би ученици могли да примене своје разумевање у аутентичним, реалним контекстима или у решавању problema окренутом будућности.",
           "items": {
             "x-format": "- {value}",
             "type": "string"
@@ -1243,5 +1243,5 @@ window.promptssrCyrl = {
       "InvestigationPhase.AccommodationsAndModifications"
     ]
   }
-},
+}
 };
