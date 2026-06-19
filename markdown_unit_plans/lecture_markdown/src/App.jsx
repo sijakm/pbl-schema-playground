@@ -117,10 +117,17 @@ export default function App() {
     setStatusMsg("Running...");
     log("Starting chain...");
     try {
-      if (window.utils && window.apiClient && window.lecturePromptsEN) {
+      let p = window.prompts_lecture;
+      if (language === 'sr-Latn') p = window.prompts_lecture_sr_Latn;
+      else if (language === 'sr-Cyrl') p = window.prompts_lecture_sr_Cyrl;
+      else if (language === 'es') p = window.prompts_lecture_es;
+      else if (language === 'ru') p = window.prompts_lecture_ru;
+      else if (language === 'id') p = window.prompts_lecture_id;
+      if (!p) p = window.prompts_lecture;
+
+      if (window.utils && window.apiClient && p) {
         log("Global utils found. Running full chain.");
         const endpoint = DEFAULT_ENDPOINT;
-        const p = window.lecturePromptsEN;
         const vars = {
           Subject: subject,
           Name: name,

@@ -140,13 +140,13 @@ export default function App() {
     setStatusMsg("Running...");
     log("Starting chain...");
     try {
-      let p = window.prompts_direct_instructions;
-      if (language === 'sr-Latn') p = window.prompts_direct_instructions_sr_Latn;
-      else if (language === 'sr-Cyrl') p = window.prompts_direct_instructions_sr_Cyrl;
-      else if (language === 'es') p = window.prompts_direct_instructions_es;
-      else if (language === 'ru') p = window.prompts_direct_instructions_ru;
-      else if (language === 'id') p = window.prompts_direct_instructions_id;
-      if (!p) p = window.prompts_direct_instructions;
+      let p = window.promptsEN;
+      if (language === 'sr-Latn') p = window.promptssrLatn;
+      else if (language === 'sr-Cyrl') p = window.promptssrCyrl;
+      else if (language === 'es') p = window.promptses;
+      else if (language === 'ru') p = window.promptsru;
+      else if (language === 'id') p = window.promptsid;
+      if (!p) p = window.promptsEN;
 
       if (window.utils && window.apiClient && p) {
         log("Global utils found. Running full chain.");
