@@ -1,0 +1,102 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "Opis jedinice kao jedan koherentan odlomak u običnom tekstu (4–5 potpunih rečenica) napisan prirodnim glasom nastavnika koji možete direktno reći učenicima. Bez HTML-a, bez emodžija, bez nabrajanja. Mora da teče razgovorno, ali da prati ovu strukturu (bez naslova): (1) uvodna rečenica koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica „U ovoj jedinici ćete...” o ishodima ovladavanja, (3) rečenica „Ojačaćete svoje veštine u...” o veštinama mišljenja/analize, (4) rečenica „Ovo se povezuje sa...” o značaju u stvarnom svetu, (5) rečenica „Razumevanje ovoga je važno zato što...” o širem značaju ili dugoročnom uticaju."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Kreirajte suštinska pitanja koja se fokusiraju isključivo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. Nemojte pominjati bilo kakve termine, procese, vokabular ili primere specifične za predmet. Pitanja moraju biti otvorenog tipa, prenosiva kroz sve discipline i nemoguće ih je odgovoriti učenjem sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, ne na sadržaj predmeta.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "Potpuna sekcija 'Ciljevi učenja učenika' za celu ovu jedinicu. Svaka stavka liste mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se oznakom DOK u zagradama",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Navedite sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. Nemojte dodavati standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora da sadrži kod standarda i opis, npr. 'MS-ESS1-1: Razvijte i koristite model sistema Zemlja–Sunce–Mesec da biste opisali ciklične obrasce mesečevih mena, pomračenja i godišnjih doba.'",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "KeyVocabulary": {
+          "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
+          "type": "array",
+          "description": "Potpuna sekcija 'Ključni vokabular' kao lista stringova. Svaki string treba da bude jedan termin sa definicijom odvojenom crticom/kosanom crtom. Primer: 'Gravitacija - Sila koja privlači objekte jedne ka drugima'. Sve definicije moraju biti kratke, prilagođene uzrastu i direktno povezane sa sadržajem lekcije.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned",
+        "KeyVocabulary"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "x-format": false,
+      "type": "array",
+      "description": "Lista kontejnera za lekcije za ovu jedinicu (samo pregled). Svaka stavka mora biti nepokrivajuća i jasno obuhvaćena tako da se sadržaj lekcije ne ponavlja kroz lekcije.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Redni broj lekcije. Na osnovu 1."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Kratak naslov lekcije kao običan tekst."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 rečenice koje opisuju obuhvat lekcije, fokus i granice kako bi se sprečilo preklapanje sa drugim lekcijama."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+Kreirajte SAMO nacrt INKVAJRI jedinice (Korak 0) koristeći informacije u nastavku. Ne kreirajte kompletan plan jedinice i ne pišite potpune planove časova.
+
+MORATE izvesti validan JSON koji tačno odgovara datoj JSON šemi: UnitPlanResponse. Ne uključujte nikakve dodatne ključeve. Koristite kompaktno JSON formatiranje (bez dodatnih praznih redova ili razmaka između JSON svojstava). Bez HTML-a. Bez emodžija. Običan tekst unutar string polja.
+
+Predmet jedinice: {{$Subject}}
+Naziv jedinice: {{$Name}}
+Opis/Uputstvo jedinice: {{$UserPrompt}}
+Nivo razreda: {{$GradeLevel}}
+Trajanje časa u minutima: {{$ClassDuration}}
+Traženi broj časova: {{$NumberOfItems}}
+Standardi sa kojima treba uskladiti (koristite doslovno ako su prisutni; nemojte dodavati nove standarde): {{$Standards}}
+Učenici sa individualizovanom podrškom (samo kontekst): {{$LearningPlans}}
+Resursi/mediji za upotrebu: {{$MediaContext}}
+Sadržaj jedinice: {{$AttachedUnit}}
+Priloženi sadržaj časa (ako postoji): {{$AttachedLesson}}
+
+ZAHTEVI ZA INKVAJRI NACRT:
+- Ovo je zasnovano na istraživanju. Časovi MORAJU napredovati kroz ovaj niz:
+  (1) fenomen/iskustvo + uočavanje/zapitanost,
+  (2) izbor pitanja + planiranje istraživanja,
+  (3) prikupljanje dokaza + uočavanje obrazaca,
+  (4) izgradnja modela + revizija koristeći dokaze,
+  (5) objašnjenje/argumentacija + komunikacija + transfer.
+- Održavajte stvaranje značenja kroz otkrivanje: učenici grade i revidiraju modele koristeći posmatranja i jednostavne podatke; naglasite dokaze, obrazlaganje i komunikaciju.
+- Održavajte usklađenost SAMO sa datim standardima. Ne dodajte nikakve nove standarde ili okvire.
+- Kulturna relevantnost i inkluzija: uključite kratke kontekste ili perspektive relevantne za zajednicu bez stereotipa.
+- Umešavanje i transfer: vraćajte se veštinama kroz časove (posmatranje, modelovanje, argumentovanje na osnovu dokaza, komunikacija).
+- Časovi MORAJU biti nepreklapajući sa jasnim granicama.
+
+OGRANIČENJA ZA NIZ ČASOVA:
+- Niz Lessons MORA da sadrži tačno {{$NumberOfItems}} časova.
+- lessonNumber počinje od 1 i strogo raste za 1.
+- Obezbedite logičan sled od osnovnih istraživačkih poteza ka složenijem modelovanju i objašnjavanju.
+- Raspored mora da odgovara časovima od {{$ClassDuration}} minuta za nivo {{$GradeLevel}}.
+
+PRAVILO ZA IZLAZ:
+Vratite SAMO JSON koji je validan prema šemi UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

@@ -1,0 +1,51 @@
+Crea UN plan de lección de LABORATORIO (NO un plan de unidad, NO múltiples lecciones) usando la información de abajo.
+DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado. No incluyas claves adicionales. Usa un formato JSON compacto (sin líneas en blanco extra).
+Asignatura de la unidad:
+{{$Subject}}
+Nombre de la unidad:
+{{$Name}}
+Descripción/Instrucción de la unidad:
+{{$UserPrompt}}
+Nivel de grado:
+{{$GradeLevel}}
+Duración del período de clase en minutos
+{{$ClassDuration}}
+Recursos/Medios a usar:
+{{$MediaContext}}
+Contenido de la unidad:
+{{$ParentUnitData}}
+Estándares a los que alinearse:
+{{$Standards}}
+Contenido adjunto de la lección:
+{{$AttachedLesson}}
+
+Preguntas esenciales de la unidad (USA ESTAS VERBATIM):
+{{$UnitEssentialQuestions}}
+
+Si las Preguntas esenciales de la unidad arriba están vacías, genera exactamente 3 preguntas conceptuales siguiendo estas reglas:
+- Cada pregunta DEBE ser una oración completa, gramaticalmente correcta, que termine con signo de interrogación.
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
+- Las preguntas DEBEN ser conceptuales y exploratorias, no fácticas, procedimentales ni definicionales.
+- Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una asignatura.
+- Las preguntas DEBEN poder transferirse entre disciplinas y aplicarse más allá de esta unidad.
+
+ESTUDIANTES CON APOYO INDIVIDUALIZADO (DEBE usarse SOLO dentro de Experiment.AccommodationsAndModifications; usa los nombres/planes de los estudiantes exactamente como están escritos):
+{{$LearningPlans}}
+
+REGLAS IMPORTANTES DE CONTENIDO:
+- Mantén la lección alineada con el enfoque de la unidad: desarrollar y usar modelos para describir la composición atómica de moléculas simples y/o estructuras extendidas.
+- Incluye conexiones breves y de alto nivel con otros DCI relevantes cuando sea apropiado, pero mantén la lección centrada en el modelado y el razonamiento estructura-propiedad (sin matemáticas profundas, sin balancear ecuaciones a menos que los estándares lo requieran explícitamente).
+- Asegúrate de que todas las partes de la lección reflejen el Alcance/Límites de la lección proporcionados en el contexto de la unidad; evita introducir nuevos conceptos principales que pertenezcan a otras lecciones.
+- EssentialQuestions: DEBE ser exactamente igual a las preguntas esenciales a nivel de unidad (mismo texto, mismo orden).
+- AssessPriorKnowledge: SOLO si LessonNumber == 1, escribe 150–250 palabras y sigue la estructura requerida en la descripción del esquema. Si LessonNumber != 1, devuelve "" (cadena vacía).
+- Fases del laboratorio (Question, Research, Hypothesize, Experiment, Analyze, Share): Sigue los requisitos instruccionales específicos y las cadenas de "Purpose:" de cada fase tal como se definen en el esquema JSON.
+- Experiment.AccommodationsAndModifications debe incluir apoyos generales seguidos del apoyo individual para cada estudiante proporcionado en {{$LearningPlans}}.
+- StudentPractice DEBE incluir un párrafo TeacherNotes que comience con 'Estas tareas refuerzan el aprendizaje de hoy sobre ____ mediante ______.', una lista de 2-3 tareas con DOK 2-4 y criterios de éxito, y el entrelazado si la asignatura es matemáticas.
+
+REQUISITOS DE SALIDA:
+- La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
+- La salida DEBE ser un SOLO plan de lección.
+- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

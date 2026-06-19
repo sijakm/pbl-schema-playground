@@ -1,0 +1,58 @@
+Kreirajte pregled jedinice i strukturu časa koristeći informacije ispod. NE pišite kompletne planove časova.
+                    
+Na osnovu predmeta jedinice, obrazovnih standarda, opisa/instrukcije jedinice, razreda, trajanja školskog časa (u minutima) i traženog broja časova, generišite JSON odgovor koji uključuje koherentan UnitDescription i nenadovezujuću listu lekcijskih „kontejnera“.
+
+Predmet jedinice:
+{{$Subject}}
+
+Naziv jedinice:
+{{$Name}}
+
+Opis/instrukcija jedinice:
+{{$UserPrompt}}
+
+Razred:
+{{$GradeLevel}}
+
+Trajanje časa u minutima:
+{{$ClassDuration}}
+	
+Standardi za usklađivanje:
+{{$Standards}}
+    
+Učenici sa individualizovanom podrškom:
+{{$LearningPlans}}
+
+Resursi/mediji za korišćenje:
+{{$MediaContext}}
+	
+Sadržaj jedinice:
+{{$AttachedUnit}}
+
+Zahtevi za suštinska pitanja:
+- Svako pitanje MORA biti potpuna, gramatički ispravna rečenica koja se završava znakom pitanja.
+- Svako pitanje MORA počinjati sa „Kako” ili „Zašto”.
+
+- Pitanja MORAJU biti konceptualna i istraživačka, ne činjenična, proceduralna ili definicijska.
+- Pitanja MORAJU biti usmerena na široke, univerzalne ideje (kao što su promena, dokazi, obrasci, odnosi, sistemi ili rasuđivanje), a ne na sadržaj specifičan za predmet.
+- Pitanja MORAJU biti prenosiva kroz discipline i primenljiva izvan ove jedinice.
+- Pitanja MORAJU biti ponovo korišćena doslovno u svakoj lekciji unutar jedinice.
+
+Šta treba generisati:
+- Izlaz MORA biti validan JSON koji odgovara šemi.
+- OBAVEZNO: U potpunosti popunite sva svojstva unutar objekta "UnitDescription":
+  - "Description": Napišite pasus od 4–5 rečenica koji opisuje glavni fokus jedinice i narativno putovanje.
+  - "StudentLearningObjectives": Navedite 3–5 ključnih merljivih ciljeva učenja za jedinicu.
+  - "StandardsAligned": Navedite sve standarde koji se obrađuju tokom jedinice.
+  - "EssentialQuestions": Tačno 3 konceptualna pitanja koja slede gore navedena pravila.
+- GENERIŠITE listu "Lessons" koja sadrži tačno {{$NumberOfItems}} lekcija.
+  - Svaka lekcija mora da sadrži "lessonNumber" (indeks počevši od 1), "lessonName" i "lessonDescription" (2–4 rečenice koje opisuju obim lekcije).
+
+Ograničenja:
+- Zadržite jedinicu i svaku lekciju usklađene sa fokusom jedinice.
+- Osigurajte logičan redosled od osnovnih ideja ka složenijem modelovanju.
+- Tačnost: Sav sadržaj mora biti naučno tačan i primeren uzrastu.
+
+Izlaz MORA biti validan JSON koji odgovara šemi. Koristite kompaktno formatiranje (bez dodatnih praznih linija).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

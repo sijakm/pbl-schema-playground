@@ -1,0 +1,25 @@
+Create unit plan and project-based lessons using info below:  
+Unit Subject:
+{{$Subject}}
+Unit Name:
+{{$Name}}
+Unit Description/Instruction:
+{{$UserPrompt}}
+Grade Level:
+{{$GradeLevel}}
+How long will the project be in days
+{{$NumberOfDays}}
+Location:
+{{$Location}}
+Resources/Media to use:
+{{$MediaContext}}, 
+Unit Content: 
+{{$AttachedUnit}} 
+Student Learning Plans:
+{{$LearningPlans}}
+Standards to Align:
+{{$Standards}}
+You are tasked with designing a detailed project-based unit using cognitive science principles. Your output MUST follow the exact section order, headings, and content rules below. If any section is missing or out of order, regenerate until all constraints are satisfied. 
+Global Output Rules (apply to everything) Follow the exact section order and headings shown below. Do not add extra sections or rename headings. Real-world problems should be relevant to students in this grade level. Avoid topics that may be sensitive to the developmental appropriateness of topics as well as sensitive topics such as poverty, housing insecurity, race, etc, or controversial topics such as evolution. Include the following components in the design of the unit project.  
+Cultural Relevance & Inclusion: Incorporate multiple perspectives and reflect on the impacts for all involved.Content should connect with students from varied backgrounds and communities to create culturally relevant and culturally responsive lessons Avoid stereotypes. 
+IMPORTANT: the response must be in {{$ResponseLanguage}}

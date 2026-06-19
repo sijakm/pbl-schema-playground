@@ -1,0 +1,769 @@
+{
+  "title": "LectureUnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "EssentialQuestions": {
+      "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
+      "type": "array",
+      "description": "Просто вставьте все ключевые вопросы, которые были сгенерированы на уровне блока, в том же порядке.",
+      "items": {
+        "x-format": "- {value}",
+        "type": "string"
+      }
+    },
+    "KeyVocabulary": {
+      "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
+      "type": "array",
+      "description": "Список словарных терминов с определениями. (например, 'Солнечная система – Солнце и всё...'). ВКЛЮЧАЙТЕ только термины, которые активно используются в этом конкретном уроке.",
+      "items": {
+        "x-format": "{index}. {value}",
+        "type": "string"
+      }
+    },
+    "StudentLearningObjectives": {
+      "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
+      "type": "array",
+      "description": "Полный раздел «Цели обучения учащихся» в виде обычного текста. Каждый пункт должен быть чёткой, измеримой целью, которая начинается с измеряемого глагола и заканчивается меткой DOK в скобках.",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+        "x-format": "- {value}\n",
+        "type": "string"
+      }
+    },
+    "StandardsAligned": {
+      "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
+      "type": "array",
+      "description": "Полный раздел «Соответствие стандартам» в виде обычного текста для этого урока. Каждый стандарт должен включать код стандарта и описание, а код и описание должны быть точно такими же, как в Блоке. Например: 'MS-ESS1-1: Разработайте и используйте модель системы Земля–Солнце–Луна, чтобы описывать циклические закономерности фаз Луны, затмений и времён года.'",
+      "items": {
+        "x-format": "- {value}",
+        "type": "string"
+      }
+    },
+    "AssessPriorKnowledge": {
+      "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**{loc.Say}:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**{loc.Say}:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**{loc.Say}:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
+      "type": "object",
+      "description": "Полный раздел «Оценка предварительных знаний». КРИТИЧНО: Посмотрите на 'lessonNumber' в прикреплённом содержимом урока. ЕСЛИ это Урок 1, заполните этот объект полностью. ЕСЛИ это Урок 2, 3 или любой другой урок, ВЫ ДОЛЖНЫ ВЕРНУТЬ ПУСТОЙ ОБЪЕКТ {} БЕЗ КАКИХ-ЛИБО СВОЙСТВ. Не заполняйте это для любого урока, кроме Урока 1.",
+      "properties": {
+        "SayIntroduction": {
+          "type": "string",
+          "description": "Что говорит учитель, чтобы представить задание."
+        },
+        "StatementsToProject": {
+          "x-format": "{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          },
+          "description": "Список утверждений для показа на экране или чтения, включающий как верные идеи, так и распространённые заблуждения."
+        },
+        "SayInstructions": {
+          "type": "string",
+          "description": "Что говорит учитель, чтобы объяснить учащимся, что делать с утверждениями."
+        },
+        "ExpectedStudentResponses": {
+          "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          },
+          "description": "Ожидаемые ответы/пометки учащихся для каждого утверждения."
+        },
+        "SayConclusion": {
+          "type": "string",
+          "description": "Что говорит учитель, чтобы подвести итог."
+        },
+        "ActionConclusion": {
+          "type": "string",
+          "description": "Действие учителя для завершения (например, рисование схемы)."
+        },
+        "AlternateOptions": {
+          "x-format": "**{loc.AlternateOptions}**\n\n{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          },
+          "description": "Список альтернативных вариантов для задания."
+        }
+      },
+      "required": [
+        "SayIntroduction",
+        "StatementsToProject",
+        "SayInstructions",
+        "ExpectedStudentResponses",
+        "SayConclusion",
+        "ActionConclusion",
+        "AlternateOptions"
+      ],
+      "additionalProperties": false
+    },
+    "Objective": {
+      "x-format": "### {green}({loc.Objective} {value.Duration})\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n**📚 {loc.Materials}**\n\n{value.Materials}\n\n**📋 {loc.InstructionsForTeachers}**\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Создайте раздел Objective, который ясно формулирует учебные цели учащегося для урока.",
+      "properties": {
+        "Duration": {
+          "type": "string",
+          "description": "Оценка времени (например, '(2-3 min)')"
+        },
+        "Materials": {
+          "x-format": "{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "{items}",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "x-format": "\n\n**{index}.** {value.Step}\n{value.Bullets}",
+            "properties": {
+              "Step": {
+                "type": "string",
+                "description": "Шаг или сценарий учителя."
+              },
+              "Bullets": {
+                "x-format": "{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                },
+                "description": "Необязательный список пунктов для этого шага. Для первого шага включите сюда фактические учебные цели."
+              }
+            },
+            "required": [
+              "Step",
+              "Bullets"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Должно включать: 1) Объясните учебные цели, используя прямой сценарий для учителя (например, Скажите: '...'), и поместите фактические цели в массив Bullets. 2) Попросите учащихся записать цели в свои тетради. 3) Кратко объясните учителю, как связать цели с реальным жизненным опытом учащихся."
+        }
+      },
+      "required": [
+        "Duration",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "ContentDeliveryAndInteractiveActivities": {
+      "x-format": "### {green}({loc.ContentDeliveryAndInteractiveActivities} {value.Duration})\n\n**1. {loc.Hook}** {value.Hook}\n\n**2. {loc.Vocabulary}**\n\n{value.Vocabulary.Bullets}\n\n{value.Vocabulary.ConclusionSay}\n\n**3. {loc.NewConceptsAndKnowledge}**\n\n{value.NewConceptsAndKnowledge}\n\n### ⚡ {loc.AttentionReset}\n\n**{loc.Purpose}:** {value.AttentionReset.StandardParagraph}\n\n{value.AttentionReset.Directions}\n\n{loc.WhyThisWorks}:\n\n{value.AttentionReset.WhyThisWorks}\n\n### {loc.ContinueInstructionAfterActivity}\n\n{value.ContinueInstruction}\n\n### ⚠️ {loc.AnticipatedMisconceptions}\n\n{value.AnticipatedMisconceptions}\n\n{value.Connect}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
+      "type": "object",
+      "description": "Блок для подачи содержания.",
+      "properties": {
+        "Duration": {
+          "type": "string",
+          "description": "Оценка времени (например, '(30 min)')"
+        },
+        "Hook": {
+          "x-format": "{items}",
+          "type": "array",
+          "items": {
+            "x-format": "{value}\n\n",
+            "type": "string"
+          },
+          "description": "Напишите драматический, вызывающий высокий интерес хук, поданный через сценарий учителя. Он должен быть удивительным, вызывать любопытство и быть связанным с основной концепцией."
+        },
+        "Vocabulary": {
+          "type": "object",
+          "properties": {
+            "Bullets": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Перечислите основные термины словаря. Для определения каждого термина предоставьте сценарий учителя в строго следующем формате: '[Термин] - Скажите: \"[Определение/Сценарий]\"'. Пример: 'Lever - Скажите: \"Рычаг — это простая машина...\"'."
+            },
+            "ConclusionSay": {
+              "type": "string",
+              "description": "Заключительное утверждение 'Скажите: ' для перехода."
+            }
+          },
+          "required": [
+            "Bullets",
+            "ConclusionSay"
+          ],
+          "additionalProperties": false
+        },
+        "NewConceptsAndKnowledge": {
+          "x-format": "{items}",
+          "type": "array",
+          "items": {
+            "x-format": "{value}\n\n",
+            "type": "string"
+          },
+          "description": "Напишите подробную лекцию учителя со сценариями (Скажите: “…”). Включите пошагово, что говорит, делает и, возможно, демонстрирует учитель. Разбейте сложные идеи, приведите примеры/аналогии, явно свяжите их с уже имеющимися знаниями."
+        },
+        "AttentionReset": {
+          "type": "object",
+          "description": "Вставьте стандартный абзац для сброса внимания точно в таком виде, как он написан: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview.'",
+          "properties": {
+            "StandardParagraph": {
+              "type": "string",
+              "description": "Должно быть точно: 'This activity re-engages attention, resets cognitive focus, and reinforces the concept with movement + novelty while providing a purposeful preview. (word for word)'"
+            },
+            "Directions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "{index}. {value}",
+                "type": "string"
+              },
+              "description": "Предоставьте инструкции для активности, включая сценарий учителя и то, что должны делать учащиеся и учитель."
+            },
+            "WhyThisWorks": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Объясните в пунктах, почему активность работает для повторного вовлечения, сброса когнитивной фокусировки, закрепления концепций и целенаправленного предварительного ознакомления. Например: 'Standing + movement resets attention.'"
+            }
+          },
+          "required": [
+            "StandardParagraph",
+            "Directions",
+            "WhyThisWorks"
+          ],
+          "additionalProperties": false
+        },
+        "ContinueInstruction": {
+          "x-format": "{items}",
+          "type": "array",
+          "items": {
+            "x-format": "{index}. {value}\n\n",
+            "type": "string"
+          },
+          "description": "Нумерованные шаги для продолжения обучения со сценариями учителя (Скажите: “…”). Разбейте сложные идеи, приведите примеры/аналогии, чтобы заинтриговать, намекнуть на будущие знания, расширить ключевые идеи."
+        },
+        "AnticipatedMisconceptions": {
+          "x-format": "{items}",
+          "type": "array",
+          "description": "Перечислите ожидаемые распространённые заблуждения учащихся, чтобы учитель был готов.",
+          "items": {
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
+            "type": "object",
+            "properties": {
+              "Misconception": {
+                "type": "string",
+                "description": "например, 'Учащиеся могут подумать, что большой рычаг всегда работает лучше.'"
+              },
+              "TeacherResponse": {
+                "type": "string",
+                "description": "Как эффективно реагировать на возможное непонимание учащихся и направлять к точному пониманию."
+              }
+            },
+            "required": [
+              "Misconception",
+              "TeacherResponse"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "Connect": {
+          "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. {loc.Say}: \"{value.Step1Say}\"\n\n2. {loc.Say}: \"{value.Step2Say}\"\n\n3. {loc.Prompt}:\n\n{value.Step3Prompts}\n\n4. Whole-group share: {loc.Say}: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Свяжите с целью. Свяжите с одним из ключевых вопросов.",
+          "properties": {
+            "Duration": {
+              "type": "string",
+              "description": "например, «(3 мин)»"
+            },
+            "Step1Say": {
+              "type": "string",
+              "description": "Сценарий речи учителя, связывающий предыдущее задание с более широкой идеей."
+            },
+            "Step2Say": {
+              "type": "string",
+              "description": "Сценарий речи учителя, в котором ученикам предлагается повернуться и обсудить с партнёром."
+            },
+            "Step3Prompts": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- \"{value}\"",
+                "type": "string"
+              },
+              "description": "Конкретные вопросы для задания (например, «Почему шадуф был важен...», «Какие доказательства показывают...»)."
+            },
+            "Step4Say": {
+              "type": "string",
+              "description": "Сценарий речи учителя для обсуждения со всем классом (например, «Давайте послушаем несколько идей...»)."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Глубокие ожидаемые ответы учеников, в которых используется рассуждение или доказательства."
+            }
+          },
+          "required": [
+            "Duration",
+            "Step1Say",
+            "Step2Say",
+            "Step3Prompts",
+            "Step4Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "Differentiation": {
+          "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+          "type": "object",
+          "description": "Дифференцируйте обучение (как преподавать, а не упрощать материалы). Меняйте сложность и глубину, поощряйте активное вовлечение/использование языка. Реалистично для класса.",
+          "properties": {
+            "LanguageLearners": {
+              "x-format": "**{loc.LanguageLearners}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            },
+            "AdditionalScaffolding": {
+              "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            },
+            "GoDeeper": {
+              "x-format": "**{loc.GoDeeper}**\n\n{value.Challenges}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "properties": {
+                "Challenges": {
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "Для ответов Go Deeper."
+                }
+              },
+              "required": [
+                "Challenges",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "LanguageLearners",
+            "AdditionalScaffolding",
+            "GoDeeper"
+          ],
+          "additionalProperties": false
+        },
+        "AccommodationsAndModifications": {
+          "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+          "type": "object",
+          "description": "Этот раздел должен включать два типа поддержки: Общая поддержка и Индивидуализированная поддержка. Делайте акцент на доступности, а не на снижении уровня требований.",
+          "properties": {
+            "General": {
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Неспецифичные для конкретных учеников стратегии, которые улучшают доступ для всех учащихся (например, визуальные материалы, заранее заполненные заметки, цифровой глоссарий, инструкции, разбитые на части). Предоставьте 2–4 пункта списком."
+            },
+            "IndividualSupport": {
+              "x-format": "{items}",
+              "type": "array",
+              "description": "Конкретные приспособления и модификации для названных учеников с официальными планами. Перечислите КАЖДОГО ученика отдельно; НЕ объединяйте учеников в группы. Поддержка для каждого ученика должна быть легко просматриваемым списком.",
+              "items": {
+                "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                "type": "object",
+                "properties": {
+                  "StudentName": {
+                    "type": "string",
+                    "description": "Имя и фамилия отдельного ученика, получающего эту поддержку."
+                  },
+                  "PlanProvided": {
+                    "type": "array",
+                    "items": {
+                      "x-format": "- {value}",
+                      "type": "string"
+                    },
+                    "description": "Официальный план, предоставленный для этого ученика в запросе. Разбейте план на понятный список. Вы можете перефразировать его для улучшения форматирования, но НЕ опускайте и не добавляйте никакой информации."
+                  },
+                  "PlanImplementation": {
+                    "type": "array",
+                    "items": {
+                      "x-format": "- {value}",
+                      "type": "string"
+                    },
+                    "description": "Конкретные инструменты/речевые шаблоны/визуальные материалы/органайзеры для этого задания."
+                  }
+                },
+                "required": [
+                  "StudentName",
+                  "PlanProvided",
+                  "PlanImplementation"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "General",
+            "IndividualSupport"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Duration",
+        "Hook",
+        "Vocabulary",
+        "NewConceptsAndKnowledge",
+        "AttentionReset",
+        "ContinueInstruction",
+        "AnticipatedMisconceptions",
+        "Connect",
+        "Differentiation",
+        "AccommodationsAndModifications"
+      ],
+      "additionalProperties": false
+    },
+    "ReviewAndSpacedRetrieval": {
+      "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.SpacedRetrieval}",
+      "type": "object",
+      "description": "Полный раздел «Повторение и интервальное извлечение».",
+      "properties": {
+        "ActiveRecall": {
+          "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Просить учеников вспомнить НОВОЕ, чему они научились СЕГОДНЯ на уроке.",
+          "properties": {
+            "Say": {
+              "type": "string",
+              "description": "Подсказка учителя, начинающаяся с «Скажите: »."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "EssentialQuestionConnection": {
+          "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Подсказка учителя, связывающая с вопросом модуля.",
+          "properties": {
+            "Say": {
+              "type": "string",
+              "description": "Подсказка учителя, начинающаяся с «Скажите: »."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "SpacedRetrieval": {
+          "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Вспомнить из конкретного предыдущего урока/модуля.",
+          "properties": {
+            "PriorLearningContext": {
+              "type": "string",
+              "description": "Контекстное предложение, например: «Ранее на этом уроке учащиеся узнали...»"
+            },
+            "Say": {
+              "type": "string",
+              "description": "Подсказка для учителя, начинающаяся с «Скажите: »."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "PriorLearningContext",
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "ActiveRecall",
+        "EssentialQuestionConnection",
+        "SpacedRetrieval"
+      ],
+      "additionalProperties": false
+    },
+    "QAndAAndDiscussion": {
+      "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. {loc.Say}: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. {loc.AskLabel}:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. {loc.Say}: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" {loc.RecordLabel}: {value.InstructionsForTeachers.Step3_CaptureRecord} {loc.Say}:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. {loc.Say}: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} {loc.Say}: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
+      "type": "object",
+      "description": "Блок для вопросов и ответов и обсуждения.",
+      "properties": {
+        "Duration": {
+          "type": "string",
+          "description": "Оценка времени (например, «(5 мин)»)"
+        },
+        "InstructionsForTeachers": {
+          "type": "object",
+          "description": "Руководство для учителя по сеансу вопросов и ответов и обсуждения.",
+          "properties": {
+            "Step1_InviteSay": {
+              "type": "string",
+              "description": "например, «Сейчас у вас есть возможность подумать о том, что мы узнали...»"
+            },
+            "Step2_AskQuestions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "   - \"{value}\"",
+                "type": "string"
+              },
+              "description": "3–4 вопроса, которые нужно задать учащимся."
+            },
+            "Step3_CaptureSay1": {
+              "type": "string",
+              "description": "например, «Если у вас есть вопрос, это значит, что вы глубоко размышляете...»"
+            },
+            "Step3_CaptureRecord": {
+              "type": "string",
+              "description": "например, «Запишите вопросы учащихся на таблице с заголовком „Вопросы, которые у нас ещё остались“.»"
+            },
+            "Step3_CaptureSay2": {
+              "type": "string",
+              "description": "например, «Мы будем продолжать добавлять записи в эту таблицу на протяжении всего модуля...»"
+            },
+            "Step4_AnswerSay1": {
+              "type": "string",
+              "description": "например, «Давайте посмотрим на наши вопросы. На какие из них мы можем ответить, используя то, что мы узнали сегодня?»"
+            },
+            "Step4_AnswerAddress": {
+              "type": "string",
+              "description": "например, «Ответьте на несколько вопросов, используя ответы учащихся и доказательства.»"
+            },
+            "Step4_AnswerSay2": {
+              "type": "string",
+              "description": "например, «Некоторые из этих вопросов помогут направлять то, чему мы будем учиться дальше...»"
+            }
+          },
+          "required": [
+            "Step1_InviteSay",
+            "Step2_AskQuestions",
+            "Step3_CaptureSay1",
+            "Step3_CaptureRecord",
+            "Step3_CaptureSay2",
+            "Step4_AnswerSay1",
+            "Step4_AnswerAddress",
+            "Step4_AnswerSay2"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Duration",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "Conclusion": {
+      "x-format": "### {green}({loc.Conclusion} {value.Duration})\n\n{value.BuildCuriosity}",
+      "type": "object",
+      "description": "Блок для заключения.",
+      "properties": {
+        "Duration": {
+          "type": "string",
+          "description": "Оценка времени (например, «(1 мин)»)"
+        },
+        "BuildCuriosity": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Duration",
+        "BuildCuriosity"
+      ],
+      "additionalProperties": false
+    },
+    "FormativeAssessment": {
+      "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
+      "type": "array",
+      "description": "Извлеките и сгенерируйте РОВНО 4 подсказки для формирующего оценивания, охватывающие DOK 1–4. Для каждой подсказки включите PromptLabel, Question и ExpectedStudentResponses.",
+      "items": {
+        "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n{value.ExpectedStudentResponses}\n",
+        "type": "object",
+        "properties": {
+          "PromptLabel": {
+            "type": "string",
+            "description": "например, «Подсказка 1 (DOK 1)»"
+          },
+          "Question": {
+            "type": "string",
+            "description": "Точный текст вопроса."
+          },
+          "ExpectedStudentResponses": {
+            "x-format": "{items}",
+            "type": "array",
+            "items": {
+              "x-format": "- {value}",
+              "type": "string"
+            },
+            "description": "1–2 примера ответов, демонстрирующих освоение материала."
+          }
+        },
+        "required": [
+          "PromptLabel",
+          "Question",
+          "ExpectedStudentResponses"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "StudentPractice": {
+      "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**Teacher Notes:** {value.TeacherNotes}\n\n{value.Tasks}\n\n🔎 **{loc.Reflection}:** {value.Reflection.Prompt}\n\n{value.Reflection.ReflectionOptions}",
+      "type": "object",
+      "description": "Полный раздел «Практика учащихся» для домашней / внеурочной практики.",
+      "properties": {
+        "TeacherNotes": {
+          "type": "string",
+          "description": "Заметки, объясняющие, как задания закрепляют сегодняшний материал и укрепляют долгосрочное запоминание."
+        },
+        "Tasks": {
+          "x-format": "{items}",
+          "type": "array",
+          "description": "Сгенерируйте 4 практических задания, охватывающих уровни DOK 2, 3 и 4.",
+          "items": {
+            "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{loc.SuccessCriteria}\n\n{value.SuccessCriteria}",
+            "type": "object",
+            "properties": {
+              "TaskDescription": {
+                "type": "string",
+                "description": "например: «(DOK 2) Нарисуйте шадуф и подпишите...»"
+              },
+              "SuccessCriteria": {
+                "x-format": "{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                },
+                "description": "3 пункта с критериями успеха."
+              }
+            },
+            "required": [
+              "TaskDescription",
+              "SuccessCriteria"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "Reflection": {
+          "type": "object",
+          "description": "Задание на рефлексию для учащихся.",
+          "properties": {
+            "Prompt": {
+              "type": "string",
+              "description": "например: «Напишите 2–3 предложения, отвечая на один из вопросов:»"
+            },
+            "ReflectionOptions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "3–4 варианта вопросов для рефлексии."
+            }
+          },
+          "required": [
+            "Prompt",
+            "ReflectionOptions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "TeacherNotes",
+        "Tasks",
+        "Reflection"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "EssentialQuestions",
+    "KeyVocabulary",
+    "StudentLearningObjectives",
+    "StandardsAligned",
+    "AssessPriorKnowledge",
+    "Objective",
+    "ContentDeliveryAndInteractiveActivities",
+    "ReviewAndSpacedRetrieval",
+    "QAndAAndDiscussion",
+    "Conclusion",
+    "FormativeAssessment",
+    "StudentPractice"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "StandardsAligned"
+    ],
+    "AssessPriorKnowledge": [
+      "AssessPriorKnowledge"
+    ],
+    "FormativeAssessment": [
+      "FormativeAssessment"
+    ]
+  }
+}

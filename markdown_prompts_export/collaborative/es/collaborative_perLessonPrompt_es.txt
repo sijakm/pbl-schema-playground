@@ -1,0 +1,91 @@
+Crea UN plan de clase de estilo colaborativo (NO un plan de unidad, NO varias lecciones) usando la información de abajo.
+
+DEBES entregar JSON válido que coincida exactamente con el esquema JSON proporcionado (LessonPlanResponse con un único objeto "LessonPlan"). No incluyas claves اضافales. Usa formato JSON compacto (sin líneas en blanco extra).
+
+CONTEXTO DE LA UNIDAD (contexto de solo lectura para coherencia):
+Asignatura de la unidad:
+{{$Subject}}
+
+Contenido de la unidad: 
+{{$ParentUnitData}}
+
+Descripción/Instrucción de la unidad: Crea una unidad usando los siguientes Estándares:
+{{$Standards}}
+
+Nivel de grado:
+{{$GradeLevel}}
+
+Recursos/medios a usar: 
+{{$MediaContext}}
+
+Duración del periodo de clase en minutos:
+{{$ClassDuration}}
+
+Título de la lección:
+{{$Name}}
+
+Descripción/Instrucción de la unidad: 
+{{$UserPrompt}}
+
+Preguntas esenciales de la unidad (USA ESTAS TEXTUALMENTE):
+{{$UnitEssentialQuestions}}
+
+Si las Preguntas esenciales de la unidad arriba están vacías, genera exactamente 3 preguntas conceptuales siguiendo estas reglas:
+- Cada pregunta DEBE ser una oración completa y gramaticalmente correcta que termine con un signo de interrogación.
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
+- Las preguntas DEBEN ser conceptuales y exploratorias, no factuales, procedimentales ni definicionales.
+- Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una materia.
+- Deben poder transferirse entre disciplinas y aplicarse más allá de esta unidad.
+
+ESTUDIANTES CON APOYO INDIVIDUALIZADO (DEBE usarse SOLO dentro de CollaborativeActivities.AccommodationsAndModifications; usa los nombres/planes de los estudiantes exactamente como están escritos):
+{{$LearningPlans}}
+
+REGLAS IMPORTANTES DE CONTENIDO (Estilo colaborativo):
+- Mantén la lección alineada con el enfoque de la unidad y el Alcance/Límites de la lección arriba; evita introducir conceptos nuevos principales que pertenezcan a otras lecciones.
+- Relevancia cultural e inclusión: incorpora múltiples perspectivas; conecta con diversas comunidades; evita estereotipos; muestra impactos para todas las personas involucradas.
+- Transferencia: integra aplicación y razonamiento en el mundo real a lo largo de toda la lección.
+- Intercalado: cuando los estudiantes practiquen/apliquen, mezcla estrategias o conceptos (no práctica bloqueada). Si la lección contiene algún razonamiento tipo matemático, incluye al menos un elemento intercalado DOK 3–4 que mezcle el contenido actual con un concepto de una lección anterior y que requiera justificar la elección de la estrategia.
+
+REGLAS ESPECÍFICAS DE LOS CAMPOS:
+- EssentialQuestions: DEBEN coincidir exactamente con las preguntas esenciales a nivel de unidad (mismo texto, mismo orden).
+- AssessPriorKnowledge: Si esta sección es requerida (por ejemplo, para la primera lección o cuando se introducen nuevos conceptos principales), escribe entre 150 y 250 palabras siguiendo la estructura requerida en la descripción del esquema. De lo contrario, devuelve "" (cadena vacía).
+- Instruction:
+  - InstructionsForTeachers: Estos pasos deben ser exhaustivos e incluir todo el aprendizaje nuevo de la lección con explicaciones de cómo enseñarlo. Sé preciso.
+  - Debe incluir cómo introducir el nuevo contenido de la materia (ganchos, preguntas guía, transiciones).
+  - Debe incluir el contenido y el guion para que el docente enseñe el contenido de manera directa (definiciones, ejemplos, puntos clave, explicaciones).
+  - La estructura debe fluir de manera natural con indicaciones de Diga/Haga/Pregunte/Escuche/Escriba.
+  - IMPORTANTE: No incluyas encabezados en mayúsculas (como GANCHO, INTRODUCCIÓN, etc.) para las secciones.
+  - IMPORTANTE: No incluyas duraciones de tiempo para instrucciones o pasos individuales.
+  - TranscendentThinking: Proporciona una pregunta de aplicación al mundo real que conecte el aprendizaje con propósito/significado, seguida de la etiqueta 'Respuestas esperadas de los estudiantes:' y 2–3 ejemplos.
+- GroupStructureAndRoles:
+  - La salida DEBE estar dirigida al docente.
+  - GroupSize: especifica 'pares', 'tríos' o '4-5 estudiantes'.
+  - TeacherSay: 1-2 oraciones explicando que los roles importan y que modelarás cómo se ve cada rol.
+  - Roles: Debe definir exactamente estos cinco roles (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) con funciones concretas ligadas a las CollaborativeActivities de la lección.
+  - Rotation: Una oración que especifique cuándo rotan los roles en ESTA lección (por ejemplo, "Rote los roles después de la Fase A y nuevamente antes de la caminata por la galería.").
+
+CollaborativeActivities:
+- Crea una actividad colaborativa interdependiente (reemplazo colaborativo para Práctica guiada) alineada con el alcance de esta lección.
+- Cada estudiante debe contribuir y los grupos deben producir un producto o decisión compartida.
+- Incluye señales de tiempo, guion del docente para Say:, prompts de circulación + respuestas esperadas, y una verificación rápida en la que TODOS los estudiantes respondan + respuestas esperadas.
+- Incluye Differentiation (3 niveles) y AccommodationsAndModifications (General + IndividualSupport exactamente como se proporciona).
+- Si esta es una lección de matemáticas, incluye un problema intercalado DOK 3–4 que mezcle el contenido actual con una lección/unidad previa y explica por qué se incluye; de lo contrario, omite el intercalado.
+- ReflectionOnGroupDynamics:
+  - Debe durar aproximadamente 5 minutos.
+  - Incluye 2–4 preguntas de debrief para estudiantes (por ejemplo, qué salió bien, desafío, si se escuchó su voz).
+  - Proporciona acciones de facilitación del docente (exit slip de escritura rápida, autoevaluación grupal 1–5, o discusión de 2 minutos), con preguntas del docente y respuestas esperadas de los estudiantes.
+  - Vincula explícitamente la reflexión con CollaborationGuidelines.
+- ReviewAndSpacedRetrieval:
+  - Misma estructura y requisitos que la versión de Instrucción Directa (ver descripción del esquema).
+  - Debe incluir una comprobación de recuperación que conecte con UN concepto de una lección previa (nombra el número de la lección anterior).
+- StudentPractice:
+  - Práctica para casa/fuera de clase.
+  - Debe seguir el formato exacto requerido en la descripción del esquema (incluyendo los marcadores ✅Expected Student Responses).
+
+REQUISITOS DE SALIDA:
+- La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
+- La salida DEBE ser un ÚNICO plan de lección solamente.
+- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

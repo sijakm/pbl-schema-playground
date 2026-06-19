@@ -1,0 +1,39 @@
+Buat HANYA kerangka unit INKUIRI (Langkah 0) menggunakan informasi di bawah ini. Jangan buat rencana unit lengkap dan jangan tulis rencana pelajaran lengkap.
+
+Anda HARUS menghasilkan JSON valid yang sesuai dengan skema JSON yang disediakan secara persis: UnitPlanResponse. Jangan sertakan kunci tambahan apa pun. Gunakan format JSON ringkas (tanpa baris kosong tambahan atau spasi berlebih di antara properti JSON). Tanpa HTML. Tanpa emoji. Teks biasa di dalam field string.
+
+Mata Pelajaran Unit: {{$Subject}}
+Nama Unit: {{$Name}}
+Deskripsi/Instruksi Unit: {{$UserPrompt}}
+Tingkat Kelas: {{$GradeLevel}}
+Durasi periode kelas dalam menit: {{$ClassDuration}}
+Jumlah Pelajaran yang Diminta: {{$NumberOfItems}}
+Standar yang Harus Selaras (gunakan apa adanya jika ada; jangan tambahkan standar baru): {{$Standards}}
+Siswa dengan dukungan individual (hanya konteks): {{$LearningPlans}}
+Sumber Daya/Media yang akan digunakan: {{$MediaContext}}
+Konten Unit: {{$AttachedUnit}}
+Konten Pelajaran Terlampir (jika ada): {{$AttachedLesson}}
+
+PERSYARATAN KERANGKA INKUIRI:
+- Ini berbasis inkuiri terlebih dahulu. Pelajaran HARUS berkembang melalui alur ini:
+  (1) fenomena/pengalaman + memperhatikan/bertanya-tanya,
+  (2) memilih pertanyaan + merencanakan penyelidikan,
+  (3) pengumpulan bukti + menemukan pola,
+  (4) membangun model + revisi menggunakan bukti,
+  (5) penjelasan/argumen + komunikasi + transfer.
+- Pertahankan pemahaman makna (pemahaman makna (sensemaking)) melalui penemuan: siswa membangun dan merevisi model menggunakan pengamatan dan data sederhana; tekankan bukti, penalaran, dan komunikasi.
+- Tetap selaras HANYA dengan standar yang disediakan. Jangan tambahkan standar atau kerangka kerja baru.
+- Relevansi budaya & inklusi: sertakan konteks atau perspektif singkat yang relevan dengan komunitas tanpa stereotip.
+- Interleaving & transfer: tinjau kembali keterampilan di seluruh pelajaran (mengamati, memodelkan, berargumen dari bukti, berkomunikasi).
+- Pelajaran HARUS tidak tumpang tindih dan memiliki batas yang jelas.
+
+KETENTUAN ARRAY PELAJARAN:
+- Array Lessons HARUS berisi tepat {{$NumberOfItems}} pelajaran.
+- lessonNumber berbasis 1 dan meningkat secara ketat sebesar 1.
+- Pastikan urutan logis dari langkah inkuiri dasar menuju pemodelan dan penjelasan yang lebih kompleks.
+- Pengaturan waktu harus sesuai dengan periode kelas {{$ClassDuration}} menit di kelas {{$GradeLevel}}.
+
+ATURAN KELUARAN:
+Kembalikan HANYA JSON yang valid terhadap skema UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

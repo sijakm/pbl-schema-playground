@@ -1,0 +1,104 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "x-format": false,
+          "type": "string",
+          "description": "Descripción de la unidad como un solo párrafo de texto plano coherente (4–5 oraciones completas) escrita con una voz natural de docente que podrías decir directamente a los estudiantes. Sin HTML, sin emojis, sin viñetas. Debe fluir de manera conversacional, pero seguir esta estructura (sin encabezados): (1) oración gancho que despierte curiosidad o haga un contraste sorprendente, (2) oración de 'En esta unidad, aprenderás...' sobre resultados de dominio, (3) oración de 'Fortalecerás tus habilidades en...' sobre capacidades de pensamiento/análisis, (4) oración de 'Esto se conecta con...' sobre relevancia en el mundo real, (5) oración de 'Entender esto importa porque...' sobre importancia más amplia o impacto a largo plazo."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "x-cache": true,
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Crea preguntas esenciales que se centren solo en conceptos amplios y universales como el cambio, la evidencia, los patrones, las relaciones, los sistemas o el razonamiento. No menciones términos, procesos, vocabulario o ejemplos específicos de ninguna materia. Las preguntas deben ser abiertas, transferibles a todas las disciplinas e imposibles de responder aprendiendo el contenido de la lección o la unidad. Enfócate solo en las ideas grandes, no en el contenido de la materia.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "Sección completa de 'Objetivos de Aprendizaje del Estudiante' para toda esta unidad. Cada elemento de la lista debe ser un objetivo claro y medible que comience con un verbo medible y termine con una etiqueta DOK entre paréntesis",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Enumera todos los estándares educativos únicos usados en cualquier parte de esta unidad y sus lecciones. No agregues estándares que no aparezcan en el contenido de la unidad. Cada estándar debe incluir el código del estándar y la descripción, por ejemplo, 'MS-ESS1-1: Desarrollar y usar un modelo del sistema Tierra-sol-luna para describir los patrones cíclicos de las fases lunares, los eclipses y las estaciones.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "KeyVocabulary": {
+          "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
+          "type": "array",
+          "description": "Sección completa de 'Vocabulario Clave' como una lista de cadenas. Cada cadena debe ser un solo término con la definición separada por un guion/guion medio. Ejemplo: 'Gravedad - La fuerza que atrae a los objetos entre sí'. Todas las definiciones deben ser breves, apropiadas para la edad y directamente relacionadas con el contenido de la lección.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned",
+        "KeyVocabulary"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "x-format": false,
+      "type": "array",
+      "description": "Lista de contenedores de lecciones para esta unidad (solo esquema). Cada elemento debe no superponerse y estar claramente delimitado para que el contenido de las lecciones no se repita entre lecciones.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Número de orden de una lección. Basado en 1."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Título breve de la lección como texto plano."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 oraciones que describan el alcance, el enfoque y los límites de la lección para evitar solapamientos con otras lecciones."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

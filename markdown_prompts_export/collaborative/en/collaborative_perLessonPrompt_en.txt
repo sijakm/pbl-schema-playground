@@ -1,0 +1,89 @@
+Create ONE collaborative-style lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
+
+You MUST output valid JSON that matches the provided JSON schema exactly (LessonPlanResponse with a single "LessonPlan" object). Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
+
+UNIT CONTEXT (read-only context for coherence):
+Unit Subject:
+{{$Subject}}
+
+Unit Content: 
+{{$ParentUnitData}}
+
+Unit Description/Instruction: Create a unit using the following Standards:
+{{$Standards}}
+
+Grade Level:
+{{$GradeLevel}}
+
+Resources/Media to use: 
+{{$MediaContext}}
+
+Duration of class period in minutes:
+{{$ClassDuration}}
+
+Lesson Title:
+{{$Name}}
+
+Unit Description/Instruction: 
+{{$UserPrompt}}
+
+Unit Essential Questions (USE THESE VERBATIM):
+{{$UnitEssentialQuestions}}
+
+If Unit Essential Questions above is empty, generate exactly 3 conceptual questions following these rules:
+- Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
+- Each question MUST begin with either "How" or "Why".
+
+- Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
+- Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
+- Questions MUST be transferable across disciplines and applicable beyond this unit.
+
+STUDENTS WITH INDIVIDUALIZED SUPPORT (MUST be used ONLY inside CollaborativeActivities.AccommodationsAndModifications; use the student names/plans exactly as written):
+{{$LearningPlans}}
+
+IMPORTANT CONTENT RULES (Collaborative Style):
+- Keep the lesson aligned to the unit focus and the Lesson Scope/Boundaries above; avoid introducing new major concepts that belong to other lessons.
+- Cultural Relevance & Inclusion: incorporate multiple perspectives; connect to varied communities; avoid stereotypes; show impacts for all involved.
+- Transfer: embed real-world application and reasoning throughout.
+- Interleaving: when students practice/apply, mix strategies or concepts (not blocked practice). If the lesson contains any math-like reasoning, include at least one DOK 3–4 interleaved item that mixes current content with an earlier lesson concept and requires students to justify strategy choice.
+
+FIELD-SPECIFIC RULES:
+- EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
+- AssessPriorKnowledge: If this section is required (e.g., for the first lesson or when introducing new major concepts), write 150–250 words following the required structure in the schema description. Otherwise, return "" (empty string).
+- Instruction:
+  - InstructionsForTeachers: These steps must be thorough and include all new learning for the lesson with explanations for how to teach it. Be precise.
+  - It must include how to introduce the new subject content (hooks, guiding questions, transitions).
+  - It must include the content and script for the teacher to teach content directly (definitions, examples, key points, explanations).
+  - Structure must flow naturally with Say/Do/Ask/Listen for/Write prompts.
+  - IMPORTANT: Do NOT include all-caps headers (like HOOK, INTRODUCTION, etc.) for sections.
+  - IMPORTANT: Do NOT include time durations for individual directions or steps.
+  - TranscendentThinking: Provide one real-world application question connecting learning to purpose/meaning, followed by the label 'Expected Student Responses:' and 2–3 examples.
+- GroupStructureAndRoles:
+  - Output MUST be teacher-facing.
+  - GroupSize: specify 'pairs', 'triads', or '4-5 students'.
+  - TeacherSay: 1-2 sentences explaining that roles matter and you will model what each role looks like.
+  - Roles: Must define exactly these five roles (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) with concrete duties tied to the lesson's CollaborativeActivities.
+  - Rotation: One sentence specifying when roles rotate in THIS lesson (e.g., "Rotate roles after Phase A and again before the gallery walk.")
+
+CollaborativeActivities:
+- Create an interdependent collaborative activity (collaborative replacement for Guided Practice) aligned to this lesson’s scope.
+- Every student must contribute and groups must produce a shared product or decision.
+- Include timing cues, teacher Say: scripting, circulation prompts + expected responses, and a quick check where ALL students respond + expected responses.
+- Include Differentiation (3 tiers) and AccommodationsAndModifications (General + IndividualSupport exactly as provided).
+- If this is a math lesson, include one DOK 3–4 interleaved problem mixing current content with a prior lesson/unit and explain why it is included; otherwise omit interleaving.
+- ReflectionOnGroupDynamics:
+  - Must be ~5 minutes.
+  - Include 2–4 student debrief prompts (e.g., what went well, challenge, voice heard).
+  - Provide teacher facilitation moves (quick-write exit slip, group self-rating 1–5, or 2-minute discussion), with teacher prompts and expected student answers.
+  - Explicitly link reflection back to CollaborationGuidelines.
+- ReviewAndSpacedRetrieval:
+  - Same structure and requirements as the Direct Instruction version (see schema description).
+  - Must include a retrieval check that connects to ONE prior lesson concept (name the prior lesson number).
+- StudentPractice:
+  - Homework/out-of-class practice.
+  - Must follow the exact required format in the schema description (including the ✅Expected Student Responses markers).
+
+OUTPUT REQUIREMENTS:
+- Output MUST be valid JSON matching the provided schema exactly.
+- Output MUST be a SINGLE lesson plan only.
+- No HTML. No emojis. No markdown. Plain text inside string fields.

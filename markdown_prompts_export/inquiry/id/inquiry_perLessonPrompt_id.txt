@@ -1,0 +1,36 @@
+Buat SATU rencana pembelajaran inkuiri (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan informasi di bawah ini. Anda HARUS menghasilkan JSON valid yang cocok persis dengan skema JSON yang disediakan: InquiryUnitPlanResponse. Jangan sertakan kunci tambahan apa pun. Gunakan format JSON yang ringkas (tanpa baris kosong tambahan atau spasi di antara properti JSON). Tanpa HTML. Tanpa emoji. Tanpa markdown. Teks biasa di dalam bidang string.
+
+Mata Pelajaran Unit: {{$Subject}}
+Nama Unit: {{$Name}}
+Deskripsi/Instruksi Unit: {{$UserPrompt}}
+Tingkat Kelas: {{$GradeLevel}}
+Durasi jam pelajaran dalam menit: {{$ClassDuration}}
+Standar yang Harus Disejajarkan (gunakan secara verbatim jika ada; JANGAN menambahkan standar baru): {{$Standards}}
+Siswa dengan dukungan individual (HARUS digunakan HANYA di dalam InvestigationPhase.AccommodationsAndModifications; gunakan nama/rencana siswa persis seperti yang tertulis): {{$LearningPlans}}
+Sumber/Media yang digunakan: {{$MediaContext}}
+Konten Unit: {{$AttachedUnit}}
+
+Elemen Unit dan Pelajaran dari Langkah 0 (gunakan verbatim):
+{{$ParentUnitData}}
+- UnitDescription.EssentialQuestions (persis seperti yang diberikan; gunakan kembali verbatim jika relevan): {{$UnitEssentialQuestions}}
+
+Konten Pelajaran Terlampir (jika ada): {{$AttachedLesson}}
+
+PERSYARATAN ALUR PELAJARAN INKUIRI:
+- Pelajaran ini harus mengikuti alur inkuiri dan selaras dengan batasan kerangka pelajaran: Orientasi → Konseptualisasi → Investigasi → Kesimpulan → Diskusi.
+- Pertahankan proses pemaknaan melalui penemuan: siswa membangun dan merevisi ide melalui pengamatan dan data sederhana; tekankan bukti, penalaran, dan komunikasi.
+- Relevansi budaya & inklusi: sertakan konteks atau perspektif yang relevan dengan komunitas secara singkat tanpa stereotip.
+- JANGAN memperkenalkan konsep besar baru yang menjadi bagian dari pelajaran lain; tetap berada dalam cakupan dan batasan kerangka pelajaran ini.
+- Tetap selaras HANYA dengan standar yang disediakan. JANGAN menambahkan standar atau kerangka kerja baru apa pun.
+- Tindakan guru harus membimbing cara berpikir tanpa memberikan penjelasan ilmiah secara langsung.
+
+ATURAN SPESIFIK BIDANG (petakan ke skema):
+- AssessPriorKnowledge: HANYA jika nomor pelajaran adalah 1, tulis 150–250 kata dan ikuti struktur yang diwajibkan dalam deskripsi skema; selain itu kembalikan "".
+- InvestigationPhase.AccommodationsAndModifications:
+  - General: sertakan dukungan umum.
+  - IndividualSupport: array harus mencantumkan tepat siswa dan rencana yang diberikan (nama/rencana sama persis; tidak ada siswa tambahan; tidak ada siswa yang terlewat).
+
+ATURAN OUTPUT:
+Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

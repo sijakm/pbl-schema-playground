@@ -1,0 +1,91 @@
+Buat SATU rencana pembelajaran bergaya kolaboratif (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan info di bawah ini.
+
+Anda HARUS menghasilkan JSON yang valid yang cocok persis dengan skema JSON yang disediakan (LessonPlanResponse dengan satu objek "LessonPlan"). Jangan sertakan kunci tambahan apa pun. Gunakan pemformatan JSON ringkas (tanpa baris kosong tambahan).
+
+KONTEKS UNIT (konteks hanya-baca untuk koherensi):
+Mata Pelajaran Unit:
+{{$Subject}}
+
+Konten Unit:
+{{$ParentUnitData}}
+
+Deskripsi/Instruksi Unit: Buat unit menggunakan Standar berikut:
+{{$Standards}}
+
+Tingkat Kelas:
+{{$GradeLevel}}
+
+Sumber/Media yang digunakan:
+{{$MediaContext}}
+
+Durasi jam pelajaran dalam menit:
+{{$ClassDuration}}
+
+Judul Pelajaran:
+{{$Name}}
+
+Deskripsi/Instruksi Unit:
+{{$UserPrompt}}
+
+Pertanyaan Esensial Unit (GUNAKAN INI SECARA VERBATIM):
+{{$UnitEssentialQuestions}}
+
+Jika Pertanyaan Esensial Unit di atas kosong, hasilkan tepat 3 pertanyaan konseptual dengan mengikuti aturan berikut:
+- Setiap pertanyaan HARUS berupa kalimat lengkap, secara tata bahasa benar, dan diakhiri dengan tanda tanya.
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
+- Pertanyaan HARUS konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
+- Pertanyaan HARUS berfokus pada ide-ide luas dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
+- Pertanyaan HARUS dapat ditransfer lintas disiplin dan berlaku di luar unit ini.
+
+SISWA DENGAN DUKUNGAN TERINDIVIDUALISASI (HARUS hanya digunakan di dalam CollaborativeActivities.AccommodationsAndModifications; gunakan nama/rencana siswa persis seperti yang tertulis):
+{{$LearningPlans}}
+
+ATURAN KONTEN PENTING (Gaya Kolaboratif):
+- Jaga pembelajaran tetap selaras dengan fokus unit dan Batasan/Ruang Lingkup Pelajaran di atas; hindari memperkenalkan konsep besar baru yang termasuk ke pelajaran lain.
+- Relevansi Budaya & Inklusi: sertakan berbagai perspektif; hubungkan ke komunitas yang beragam; hindari stereotip; tunjukkan dampak bagi semua pihak yang terlibat.
+- Transfer: tanamkan penerapan dan penalaran dunia nyata sepanjang pembelajaran.
+- Interleaving: saat siswa berlatih/menerapkan, campurkan strategi atau konsep (bukan latihan yang dikelompokkan). Jika pelajaran berisi penalaran seperti matematika, sertakan setidaknya satu item interleaved DOK 3–4 yang menggabungkan konten saat ini dengan konsep pelajaran sebelumnya dan mengharuskan siswa membenarkan pilihan strategi.
+
+ATURAN SPESIFIK BIDANG:
+- EssentialQuestions: HARUS sama persis dengan pertanyaan esensial tingkat unit (teks yang sama, urutan yang sama).
+- AssessPriorKnowledge: Jika bagian ini diperlukan (misalnya, untuk pelajaran pertama atau ketika memperkenalkan konsep besar baru), tulis 150–250 kata mengikuti struktur yang diwajibkan dalam deskripsi skema. Jika tidak, kembalikan "" (string kosong).
+- Instruction:
+  - InstructionsForTeachers: Langkah-langkah ini harus menyeluruh dan mencakup semua pembelajaran baru untuk pelajaran ini beserta penjelasan bagaimana mengajarkannya. Harus tepat.
+  - Harus mencakup cara memperkenalkan konten baru subjek (hook, pertanyaan penuntun, transisi).
+  - Harus mencakup konten dan naskah bagi guru untuk mengajarkan konten secara langsung (definisi, contoh, poin penting, penjelasan).
+  - Struktur harus mengalir secara alami dengan prompt Katakan/Lakukan/Tanyakan/Dengarkan/Tulis.
+  - PENTING: Jangan sertakan header huruf kapital semua (seperti HOOK, PENGANTAR, dll.) untuk bagian-bagian.
+  - PENTING: Jangan sertakan durasi waktu untuk petunjuk atau langkah individual.
+  - TranscendentThinking: Berikan satu pertanyaan penerapan dunia nyata yang menghubungkan pembelajaran dengan tujuan/makna, diikuti label 'Respons Siswa yang Diharapkan:' dan 2–3 contoh.
+- GroupStructureAndRoles:
+  - Output HARUS ditujukan untuk guru.
+  - GroupSize: tentukan 'berpasangan', 'bertiga', atau '4-5 siswa'.
+  - TeacherSay: 1–2 kalimat yang menjelaskan bahwa peran itu penting dan Anda akan memodelkan seperti apa setiap peran.
+  - Roles: Harus mendefinisikan tepat lima peran ini (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) dengan tugas konkret yang terkait dengan CollaborativeActivities pada pelajaran ini.
+  - Rotation: Satu kalimat yang menentukan kapan peran berputar dalam pelajaran INI (misalnya, "Rotasikan peran setelah Fase A dan sekali lagi sebelum gallery walk.").
+
+CollaborativeActivities:
+- Buat aktivitas kolaboratif yang saling bergantung (pengganti kolaboratif untuk Latihan Terbimbing) yang selaras dengan ruang lingkup pelajaran ini.
+- Setiap siswa harus berkontribusi dan kelompok harus menghasilkan produk atau keputusan bersama.
+- Sertakan petunjuk waktu, scripting guru pada bagian Say:, prompt saat berkeliling + respons yang diharapkan, dan cek cepat di mana SEMUA siswa merespons + respons yang diharapkan.
+- Sertakan Differentiation (3 tingkatan) dan AccommodationsAndModifications (General + IndividualSupport persis seperti yang diberikan).
+- Jika ini pelajaran matematika, sertakan satu masalah interleaved DOK 3–4 yang menggabungkan konten saat ini dengan pelajaran/unit sebelumnya dan jelaskan mengapa itu disertakan; jika bukan, jangan sertakan interleaving (pembelajaran berselang) (pembelajaran berselang).
+- ReflectionOnGroupDynamics:
+  - Harus sekitar 5 menit.
+  - Sertakan 2–4 prompt debrief siswa (mis., apa yang berjalan baik, tantangan, suara siapa yang terdengar).
+  - Berikan langkah fasilitasi guru (quick-write exit slip, penilaian diri kelompok 1–5, atau diskusi 2 menit), dengan prompt guru dan jawaban siswa yang diharapkan.
+  - Secara eksplisit hubungkan refleksi kembali ke CollaborationGuidelines.
+- ReviewAndSpacedRetrieval:
+  - Struktur dan persyaratan sama dengan versi Direct Instruction (lihat deskripsi skema).
+  - Harus mencakup cek retrieval yang terhubung ke SATU konsep pelajaran sebelumnya (sebutkan nomor pelajaran sebelumnya).
+- StudentPractice:
+  - PR di rumah/di luar kelas.
+  - Harus mengikuti format tepat yang diwajibkan dalam deskripsi skema (termasuk penanda ✅Expected Student Responses).
+
+PERSYARATAN OUTPUT:
+- Output HARUS berupa JSON valid yang cocok persis dengan skema yang disediakan.
+- Output HARUS berupa SATU rencana pelajaran saja.
+- Tidak ada HTML. Tidak ada emoji. Tidak ada markdown. Teks biasa di dalam field string.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

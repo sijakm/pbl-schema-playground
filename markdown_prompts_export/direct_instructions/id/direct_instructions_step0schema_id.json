@@ -1,0 +1,93 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "Deskripsi unit sebagai satu paragraf teks biasa yang utuh (4–5 kalimat lengkap) ditulis dengan suara guru yang alami yang bisa Anda ucapkan langsung kepada siswa. Tanpa HTML, tanpa emoji, tanpa poin-poin. Harus mengalir secara percakapan tetapi mengikuti struktur ini (tanpa judul): (1) kalimat pembuka yang memancing rasa ingin tahu atau membuat kontras yang mengejutkan, (2) kalimat 'Dalam unit ini, Anda akan...' tentang hasil penguasaan, (3) kalimat 'Anda akan memperkuat keterampilan Anda dalam...' tentang kemampuan berpikir/analisis, (4) kalimat 'Ini terhubung dengan...' tentang relevansi di dunia nyata, (5) kalimat 'Memahami hal ini penting karena...' tentang signifikansi yang lebih luas atau dampak jangka panjang."
+        },
+        "EssentialQuestions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Buat pertanyaan esensial yang hanya berfokus pada konsep-konsep luas dan universal seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran. Jangan menyebut istilah, proses, kosakata, atau contoh yang spesifik pada mata pelajaran apa pun. Pertanyaan harus bersifat terbuka, dapat ditransfer lintas semua disiplin, dan mustahil dijawab hanya dengan mempelajari isi pelajaran atau unit. Fokus hanya pada gagasan besar, bukan materi pelajaran.",
+          "items": {
+            "type": "string",
+            "x-format": "- {value}"
+          },
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "x-cache": true
+        },
+        "StudentLearningObjectives": {
+          "type": "array",
+          "description": "Bagian 'Student Learning Objectives' lengkap untuk seluruh unit ini. Setiap butir daftar harus menjadi tujuan yang jelas dan terukur yang dimulai dengan kata kerja yang terukur dan diakhiri dengan label DOK dalam tanda kurung",
+          "items": {
+            "type": "string",
+            "x-format": "- {value}"
+          },
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}"
+        },
+        "StandardsAligned": {
+          "type": "array",
+          "description": "Daftarkan semua standar pendidikan unik yang digunakan di mana pun dalam unit ini dan pelajarannya. Jangan menambahkan standar yang tidak muncul dalam konten unit. Setiap standar harus mencakup kode standar dan deskripsi, misalnya 'MS-ESS1-1: Kembangkan dan gunakan model sistem Bumi–matahari–bulan untuk menggambarkan pola siklus fase bulan, gerhana, dan musim.",
+          "items": {
+            "type": "string",
+            "x-format": "- {value}"
+          },
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}"
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "type": "array",
+      "description": "Daftar kontainer pelajaran untuk unit ini (hanya kerangka). Setiap item harus tidak tumpang tindih dan dibatasi dengan jelas sehingga konten pelajaran tidak berulang antarpelajaran.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Nomor urut sebuah pelajaran. Berbasis 1."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Judul singkat pelajaran sebagai teks biasa."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 kalimat yang mendeskripsikan cakupan, fokus, dan batasan pelajaran untuk mencegah tumpang tindih dengan pelajaran lain."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      },
+      "x-format": false
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

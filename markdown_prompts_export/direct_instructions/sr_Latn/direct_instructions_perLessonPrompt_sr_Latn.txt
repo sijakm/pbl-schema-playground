@@ -1,0 +1,54 @@
+Kreirajte JEDAN plan časa (NE plan jedinice, NE više časova) koristeći informacije ispod.
+MORATE da izbacite važeći JSON koji tačno odgovara datoj JSON šemi (LessonPlanResponse sa jednim objektom "LessonPlan"). Ne uključujte dodatne ključeve. Koristite kompaktno JSON formatiranje (bez dodatnih praznih linija).
+Predmet jedinice: 
+{{$Subject}}
+Naziv jedinice: 
+{{$Name}}
+Opis/Uputstvo jedinice: 
+{{$UserPrompt}}
+Razred: 
+{{$GradeLevel}}
+Trajanje časa u minutima 
+{{$ClassDuration}}
+Resursi/mediji za upotrebu: 
+{{$MediaContext}}
+Sadržaj jedinice: 
+{{$ParentUnitData}}
+Standardi sa kojima treba uskladiti:
+{{$Standards}}
+Priloženi sadržaj časa: 
+{{$AttachedLesson}}
+
+Suštinska pitanja jedinice (KORISTITE OVA DOSLOVNO):
+{{$UnitEssentialQuestions}}
+
+Ako su Suštinska pitanja jedinice iznad prazna, generišite tačno 3 konceptualna pitanja prema sledećim pravilima:
+- Svako pitanje MORA biti potpuna, gramatički ispravna rečenica koja se završava znakom pitanja.
+- Svako pitanje MORA počinjati sa „Kako” ili „Zašto”.
+
+- Pitanja MORAJU biti konceptualna i istraživačka, a ne činjenična, proceduralna ili definicijska.
+- Pitanja MORAJU biti usmerena na široke, univerzalne ideje (kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje), a ne na sadržaj specifičan za predmet.
+- Pitanja MORAJU biti prenosiva između disciplina i primenljiva van ove jedinice.
+
+UČENICI SA INDIVIDUALIZOVANOM PODRŠKOM (MORA se koristiti ISKLJUČIVO unutar GuidedPractice.AccommodationsAndModifications; koristite imena/planove učenika tačno onako kako su napisani):
+{{$LearningPlans}}
+
+VAŽNA PRAVILA SADRŽAJA:
+- Održite čas usklađen sa fokusom jedinice: razvijanje i korišćenje modela za opisivanje atomske kompozicije prostih molekula i/ili proširenih struktura.
+- Uključite kratke, visokog nivoa veze sa drugim relevantnim DCI gde je prikladno, ali zadržite čas usmeren na modelovanje i rezonovanje o strukturi i svojstvima (bez duboke matematike, bez balansiranja jednačina osim ako standardi to izričito zahtevaju).
+- Osigurajte da svi delovi časa odražavaju gore navedeni obim/granice časa; izbegavajte unošenje novih glavnih pojmova koji pripadaju drugim časovima.
+- EssentialQuestions: MORAJU tačno biti jednake suštinskim pitanjima na nivou jedinice (isti tekst, isti redosled).
+- AssessPriorKnowledge: SAMO ako je LessonNumber == 1, napišite 150–250 reči i pratite traženu strukturu u opisu šeme. Ako LessonNumber != 1, vratite "" (prazan string).
+- DirectPresentation mora biti ≤10 minuta ukupno i mora pratiti traženi format HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT sa Say/Do/Ask/✅ Expected Student Responses/Write, a očekivani odgovori učenika treba da budu u vidu nabrajanja (NE uključujte zaglavlja/naslove odeljaka u string).
+- GuidedPractice.InstructionsForTeachers mora imati najmanje 700 reči i mora sadržati tražene komponente navedene u opisu šeme.
+- GuidedPractice.AccommodationsAndModifications mora da sadrži:
+  - General: opšte podrške
+  - IndividualSupport: niz sa tačno navedenim učenicima i njihovim planovima (ista imena/planovi; bez dodatnih učenika).
+- StudentPractice MORA da sadrži TeacherNotes pasus koji počinje sa 'These tasks reinforce today’s learning about ____ by ______.', listu od 2-3 zadatka sa DOK 2-4 i kriterijumima uspeha, i međusobno prožimanje ako je predmet matematika.
+
+ZAHTEVI ZA IZLAZ:
+- Izlaz MORA biti validan JSON koji tačno odgovara datoj šemi.
+- Izlaz MORA biti JEDAN jedini plan časa.
+- Bez HTML-a. Bez emodžija. Bez markdowna. Običan tekst unutar string polja.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

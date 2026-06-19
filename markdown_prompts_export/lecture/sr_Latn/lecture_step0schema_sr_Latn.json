@@ -1,0 +1,93 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "Opis jedinice kao jedna koherentna pasusna celina u običnom tekstu (4–5 celih rečenica) napisana prirodnim glasom nastavnika koji možete direktno reći učenicima. Bez HTML-a, bez emodžija, bez nabrajanja. Mora teći razgovorno, ali pratiti ovu strukturu (bez naslova): (1) uvodna rečenica koja budi radoznalost ili pravi iznenađujući kontrast, (2) rečenica „U ovoj jedinici ćete...” o ishodima ovladavanja, (3) rečenica „Učvrstićete svoje veštine u...” o misaonim/analitičkim sposobnostima, (4) rečenica „Ovo se povezuje sa...” o značaju u stvarnom svetu, (5) rečenica „Razumevanje ovoga je važno zato što...” o širem značaju ili dugoročnom uticaju."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "x-cache": true,
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Kreirajte suštinska pitanja koja se fokusiraju samo na široke, univerzalne koncepte kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje. Ne pominjite nikakve termine specifične za predmet, procese, vokabular ili primere. Pitanja moraju biti otvorena, prenosiva kroz sve discipline i nemoguća za odgovor bez učenja sadržaja lekcije ili jedinice. Fokusirajte se samo na velike ideje, a ne na sadržaj predmeta.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "Ceo odeljak 'Student Learning Objectives' za celu ovu jedinicu. Svaka stavka liste mora biti jasan, merljiv cilj koji počinje merljivim glagolom i završava se DOK oznakom u zagradama",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Navedite sve jedinstvene obrazovne standarde korišćene bilo gde u ovoj jedinici i njenim lekcijama. Ne dodajte standarde koji se ne pojavljuju u sadržaju jedinice. Svaki standard mora da sadrži kod standarda i opis, npr. 'MS-ESS1-1: Razviti i koristiti model sistema Zemlja–Sunce–Mesec da bi se opisali ciklični obrasci mesečevih mena, pomračenja i godišnjih doba.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "x-format": false,
+      "type": "array",
+      "description": "Lista kontejnera lekcija za ovu jedinicu (samo okvirno). Svaka stavka mora biti nepreklapajuća i jasno ograničena tako da sadržaj lekcije ne ponavlja sadržaj drugih lekcija.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Redni broj lekcije. Na osnovu 1."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Kratak naslov lekcije kao običan tekst."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 rečenice koje opisuju obim lekcije, fokus i granice kako bi se sprečilo preklapanje sa drugim lekcijama."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+Kreirajte plan jedinice i časove zasnovane na projektu koristeći informacije ispod:  
+Predmet jedinice:
+{{$Subject}}
+Naziv jedinice:
+{{$Name}}
+Opis/Uputstvo za jedinicu:
+{{$UserPrompt}}
+Nivo razreda:
+{{$GradeLevel}}
+Koliko će projekat trajati u danima
+{{$NumberOfDays}}
+Lokacija:
+{{$Location}}
+Resursi/mediji za upotrebu:
+{{$MediaContext}}, 
+Sadržaj jedinice: 
+{{$AttachedUnit}} 
+Planovi učenja učenika:
+{{$LearningPlans}}
+Standardi sa kojima treba uskladiti:
+{{$Standards}}
+Vaš zadatak je da osmislite detaljnu jedinicu zasnovanu na projektu koristeći principe kognitivne nauke. Vaš izlaz MORA pratiti tačan redosled sekcija, naslova i pravila sadržaja navedenih ispod. Ako bilo koja sekcija nedostaje ili je van redosleda, generišite ponovo dok svi uslovi ne budu ispunjeni. 
+Globalna pravila izlaza (primenjuju se na sve) Pratite tačan redosled sekcija i naslove prikazane ispod. Ne dodajte dodatne sekcije niti preimenujte naslove. Problemi iz stvarnog sveta treba da budu relevantni za učenike ovog nivoa razreda. Izbegavajte teme koje mogu biti osetljive u pogledu razvojne prikladnosti, kao i osetljive teme kao što su siromaštvo, stambena nesigurnost, rasa itd., ili kontroverzne teme kao što je evolucija. U dizajn jedinice projekta uključite sledeće komponente.  
+Kulturna relevantnost i uključivost: Uključite više perspektiva i razmotrite uticaje na sve uključene. Sadržaj treba da se poveže sa učenicima iz različitih sredina i zajednica kako bi se kreirali kulturno relevantni i kulturno odgovorni časovi. Izbegavajte stereotipe. 
+VAŽNO: odgovor mora biti na {{$ResponseLanguage}}
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

@@ -1,0 +1,34 @@
+Create ONE inquiry lesson plan (NOT a unit plan, NOT multiple lessons) using the info below. You MUST output valid JSON that matches the provided JSON schema exactly: InquiryUnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. No markdown. Plain text inside string fields.
+
+Unit Subject: {{$Subject}}
+Unit Name: {{$Name}}
+Unit Description/Instruction: {{$UserPrompt}}
+Grade Level: {{$GradeLevel}}
+Duration of class period in minutes: {{$ClassDuration}}
+Standards to Align (use verbatim if present; do NOT add new standards): {{$Standards}}
+Students with individualized support (MUST be used ONLY inside InvestigationPhase.AccommodationsAndModifications; use the student names/plans exactly as written): {{$LearningPlans}}
+Resources/Media to use: {{$MediaContext}}
+Unit Content: {{$AttachedUnit}}
+
+Unit and Lesson Elements from Step 0 (use verbatim):
+{{$ParentUnitData}}
+- UnitDescription.EssentialQuestions (exactly as provided; reuse verbatim where relevant): {{$UnitEssentialQuestions}}
+
+Attached Lesson Content (if any): {{$AttachedLesson}}
+
+INQUIRY LESSON FLOW REQUIREMENTS:
+- This lesson must follow the inquiry arc and be aligned to the lesson outline boundaries: Orientation → Conceptualization → Investigation → Conclusion → Discussion.
+- Maintain sensemaking through discovery: students build and revise ideas using observations and simple data; emphasize evidence, reasoning, and communication.
+- Cultural relevance & inclusion: include brief community-relevant contexts or perspectives without stereotypes.
+- Do NOT introduce major new concepts that belong to other lessons; stay within the scope and boundaries of this lesson’s outline.
+- Keep alignment ONLY to the provided standards. Do NOT add any new standards or frameworks.
+- Teacher moves must guide thinking without giving scientific explanations directly.
+
+FIELD-SPECIFIC RULES (map to schema):
+- AssessPriorKnowledge: ONLY if lesson number is 1, write 150–250 words and follow the required structure in the schema description; otherwise return "".
+- InvestigationPhase.AccommodationsAndModifications:
+  - General: include general supports.
+  - IndividualSupport: array must include exactly the provided students and their plans (same names/plans; no extra students; no missing students).
+
+OUTPUT RULE:
+Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.

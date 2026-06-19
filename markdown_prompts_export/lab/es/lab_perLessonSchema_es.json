@@ -1,0 +1,856 @@
+{
+  "title": "LabUnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "EssentialQuestions": {
+      "x-format": "### 💭 {loc.EssentialQuestions}\n\n{items}",
+      "type": "array",
+      "description": "Pega solo todas las preguntas esenciales que se generan a nivel de unidad en el mismo orden.",
+      "items": {
+        "x-format": "- {value}",
+        "type": "string"
+      }
+    },
+    "StudentLearningObjectives": {
+      "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
+      "type": "array",
+      "description": "Sección completa de 'Objetivos de Aprendizaje del Estudiante' como texto plano. Cada elemento debe ser un objetivo claro y medible que comience con un verbo medible y termine con una etiqueta DOK entre paréntesis, por ejemplo, 'Modelar cómo la rotación de la Tierra sobre su eje causa el día y la noche (DOK 2).'",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+        "x-format": "- {value}\n",
+        "type": "string"
+      }
+    },
+    "StandardsAligned": {
+      "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
+      "type": "array",
+      "description": "Sección completa de 'Estándares Alineados' como texto plano para esta lección. Cada estándar debe incluir el código del estándar y la descripción, y el código y la descripción deben ser exactamente los mismos usados en la Unidad. Por ejemplo, 'MS-ESS1-1: Desarrollar y usar un modelo del sistema Tierra-sol-luna para describir los patrones cíclicos de las fases lunares, los eclipses y las estaciones.'",
+      "items": {
+        "x-format": "- {value}",
+        "type": "string"
+      }
+    },
+    "KeyVocabulary": {
+      "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
+      "type": "array",
+      "description": "Selecciona textualmente el vocabulario clave para esta lección del vocabulario a nivel de unidad proporcionado en el prompt. No inventes nuevas palabras. Debes reutilizar la redacción exacta de Step 0 UnitDescription.KeyVocabulary.",
+      "items": {
+        "x-format": "{index}. {value}",
+        "type": "string"
+      }
+    },
+    "AssessPriorKnowledge": {
+      "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
+      "type": "object",
+      "description": "Sección de Evaluación de Conocimientos Previos. SOLO la Lección 1 debe contener un bloque detallado; TODAS LAS DEMÁS LECCIONES DEBEN DEVOLVER NULL u OMITIR este campo. Para la Lección 1, la estructura debe incluir: 1. Incluye esta sección solo en la primera lección de la unidad. 2. Asegúrate de usar preguntas DOK 1-3. 3. Incluye habilidades prerrequisito necesarias para los objetivos de aprendizaje del estudiante. 4. Elige una modalidad de esta lista y desarróllala por completo: cuestionamiento, K-W-L, visuales, mapas conceptuales, escritura reflexiva, guías de anticipación, valoraciones de vocabulario. 5. Indicación inicial del docente con 'Di:'. 6. Instrucciones claras y plantilla/estructura para la modalidad elegida. 7. Sección de 'Respuestas Esperadas de los Estudiantes'. 8. Cierre del docente con indicación 'Di:'. 9. Después de desarrollar por completo una modalidad, proporciona 2 opciones breves alternativas.",
+      "properties": {
+        "ActivityInstructions": {
+          "type": "string",
+          "description": "Instrucciones claras y plantilla/estructura para la modalidad elegida. Ej.: 'Di: \"Antes de comenzar...\"'"
+        },
+        "ExpectedStudentResponses": {
+          "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+          "type": "array",
+          "description": "Respuestas anticipadas o conceptos erróneos comunes para la modalidad elegida.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "ClosingTeacherPrompt": {
+          "type": "string",
+          "description": "Cierre del docente con indicación 'Di:' que valide el pensamiento de los estudiantes y anticipe la investigación de la unidad."
+        },
+        "AlternateOptions": {
+          "x-format": "**{loc.AlternateOptions}**\n\n{items}",
+          "type": "array",
+          "description": "2 opciones breves alternativas que un docente podría elegir.",
+          "items": {
+            "x-format": "{index}. {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ActivityInstructions",
+        "ExpectedStudentResponses",
+        "ClosingTeacherPrompt",
+        "AlternateOptions"
+      ],
+      "additionalProperties": false
+    },
+    "Question": {
+      "x-format": "### {green}({loc.LabQuestionTitle})\n\n**{loc.Purpose}:** {loc.LabQuestionPurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Guía al docente para que los estudiantes observen un fenómeno, identifiquen algo que les resulte desconcertante y generen una pregunta significativa que guiará la investigación.",
+      "properties": {
+        "Purpose": {
+          "x-format": false,
+          "type": "string",
+          "description": "Palabra por palabra - Propósito: Observar un fenómeno, identificar algo desconcertante y generar una pregunta significativa que guiará la investigación."
+        },
+        "Materials": {
+          "x-format": "**📚 {loc.Materials}**\n\n{items}",
+          "type": "array",
+          "description": "Lista de materiales necesarios (p. ej., ayudas visuales, marcadores, etc.)",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{value.Instructions}\n\n{value.ExpectedStudentResponses}\n\n{value.FinalInvestigationQuestion}",
+          "type": "object",
+          "properties": {
+            "Instructions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "\n\n{value}",
+                "type": "string"
+              },
+              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Diga:' para presentar un fenómeno e invitar preguntas."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "3-4 preguntas o ideas esperadas de los estudiantes sobre el fenómeno."
+            },
+            "FinalInvestigationQuestion": {
+              "type": "string",
+              "description": "El paso final en las instrucciones del docente. Comience esta cadena con el siguiente número secuencial que siga a las instrucciones anteriores (p. ej., '8. Paso final: Diga: ...') y exprese la gran pregunta que se investigará hoy."
+            }
+          },
+          "required": [
+            "Instructions",
+            "ExpectedStudentResponses",
+            "FinalInvestigationQuestion"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "Research": {
+      "x-format": "### {green}({loc.LabResearchTitle})\n\n**{loc.Purpose}:** {loc.LabResearchPurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Guíe al docente para que los estudiantes aprendan información de fondo, vocabulario y conocimientos previos necesarios para comprender el tema.",
+      "properties": {
+        "Purpose": {
+          "x-format": false,
+          "type": "string",
+          "description": "Palabra por palabra: Propósito: Recopilar información de fondo, vocabulario y conocimientos previos necesarios para comprender el tema y prepararse para una investigación informada."
+        },
+        "Materials": {
+          "x-format": "**📚 {loc.Materials}**\n\n{items}",
+          "type": "array",
+          "description": "Lista de materiales necesarios (p. ej., ayudas visuales, marcadores, etc.)",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{value.Instructions}\n\n{value.AnticipatedMisconceptions}",
+          "type": "object",
+          "properties": {
+            "Instructions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "\n\n{value}",
+                "type": "string"
+              },
+              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Diga:' para explicar conocimientos de fondo, vocabulario y modelar el fenómeno."
+            },
+            "AnticipatedMisconceptions": {
+              "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
+                "type": "object",
+                "properties": {
+                  "Misconception": {
+                    "type": "string",
+                    "description": "Idea errónea del estudiante"
+                  },
+                  "TeacherResponse": {
+                    "type": "string",
+                    "description": "Lo que el docente debe decir para corregirla"
+                  }
+                },
+                "required": [
+                  "Misconception",
+                  "TeacherResponse"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "Instructions",
+            "AnticipatedMisconceptions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "Hypothesize": {
+      "x-format": "### {green}({loc.LabHypothesizeTitle})\n\n**{loc.Purpose}:** {loc.LabHypothesizePurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Guíe al docente para que los estudiantes elaboren una predicción comprobable.",
+      "properties": {
+        "Purpose": {
+          "x-format": false,
+          "type": "string",
+          "description": "Palabra por palabra: Propósito: Elaborar una predicción o afirmación comprobable basada en su investigación y razonamiento, estableciendo una expectativa clara de lo que creen que sucederá."
+        },
+        "Materials": {
+          "x-format": "**📚 {loc.Materials}**\n\n{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{value.Instructions}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "properties": {
+            "Instructions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "\n\n{value}",
+                "type": "string"
+              },
+              "description": "Instrucciones para el docente. Incluya indicaciones de 'Diga:'. Proporcione una instrucción específica como 'Escriba en la pizarra:' seguida de una lista con viñetas en formato markdown de 4-5 marcos de oraciones para la hipótesis."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "3-4 ejemplos de hipótesis esperadas."
+            }
+          },
+          "required": [
+            "Instructions",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "Experiment": {
+      "x-format": "### {green}({loc.LabExperimentTitle})\n\n**{loc.Purpose}:** {loc.LabExperimentPurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Guíe al docente para que los estudiantes realicen una investigación estructurada.",
+      "properties": {
+        "Purpose": {
+          "x-format": false,
+          "type": "string",
+          "description": "Palabra por palabra: Propósito: Llevar a cabo una investigación estructurada, práctica, simulada o analítica, para poner a prueba su hipótesis y recopilar evidencia mediante observación o medición."
+        },
+        "Materials": {
+          "x-format": "**📚 {loc.Materials}**\n\n{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{value.Instructions}\n\n{value.QuickCheck}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
+          "type": "object",
+          "properties": {
+            "Instructions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "x-format": "\n\n{value}",
+                "type": "string"
+              },
+              "description": "Instrucciones paso a paso para el docente para organizar el experimento, dar indicaciones y circular."
+            },
+            "QuickCheck": {
+              "x-format": "✔️**{loc.QuickCheck}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "properties": {
+                "Question": {
+                  "type": "string"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "Question",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            },
+            "Differentiation": {
+              "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+              "type": "object",
+              "properties": {
+                "LanguageLearners": {
+                  "x-format": "**{loc.LanguageLearners}**\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                },
+                "AdditionalScaffolding": {
+                  "x-format": "**{loc.StudentsInNeedOfAdditionalScaffolding}**\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                },
+                "GoDeeper": {
+                  "x-format": "**{loc.GoDeeper}**\n\n{value.Challenges}\n\n{value.ExpectedStudentResponses}",
+                  "type": "object",
+                  "properties": {
+                    "Challenges": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      }
+                    },
+                    "ExpectedStudentResponses": {
+                      "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "Para respuestas de Go Deeper."
+                    }
+                  },
+                  "required": [
+                    "Challenges",
+                    "ExpectedStudentResponses"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "LanguageLearners",
+                "AdditionalScaffolding",
+                "GoDeeper"
+              ],
+              "additionalProperties": false
+            },
+            "AccommodationsAndModifications": {
+              "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+              "type": "object",
+              "description": "Esta sección debe incluir dos tipos de apoyos: Apoyos generales y apoyos individualizados. Enfóquese en el acceso, no en reducir la rigurosidad.",
+              "properties": {
+                "General": {
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "Estrategias no específicas para estudiantes que mejoran el acceso para todos los aprendices (p. ej., apoyos visuales, notas previamente completadas, glosario digital, instrucciones fragmentadas). Proporcione 2-4 viñetas."
+                },
+                "IndividualSupport": {
+                  "x-format": "{items}",
+                  "type": "array",
+                  "description": "Adaptaciones y modificaciones específicas para estudiantes nombrados con planes formales. Enumere a CADA estudiante individualmente; no agrupe a los estudiantes. Los apoyos para cada estudiante deben ser una lista fácil de revisar de un vistazo.",
+                  "items": {
+                    "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                    "type": "object",
+                    "properties": {
+                      "StudentName": {
+                        "type": "string",
+                        "description": "Nombre y apellido del estudiante individual que recibe estos apoyos."
+                      },
+                      "PlanProvided": {
+                        "type": "array",
+                        "items": {
+                          "x-format": "- {value}",
+                          "type": "string"
+                        },
+                        "description": "El plan formal proporcionado para este estudiante en el enunciado. Analice el plan en una lista clara. Puede parafrasearlo para mejorar el formato, pero no omita ni añada ninguna información."
+                      },
+                      "PlanImplementation": {
+                        "type": "array",
+                        "items": {
+                          "x-format": "- {value}",
+                          "type": "string"
+                        },
+                        "description": "Herramientas/indicadores/recursos visuales/organizadores concretos para esta tarea."
+                      }
+                    },
+                    "required": [
+                      "StudentName",
+                      "PlanProvided",
+                      "PlanImplementation"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "General",
+                "IndividualSupport"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "Instructions",
+            "QuickCheck",
+            "Differentiation",
+            "AccommodationsAndModifications"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "Analyze": {
+      "x-format": "### {green}({loc.LabAnalyzeTitle})\n\n**{loc.Purpose}:** {loc.LabAnalyzePurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Guíe a los docentes para que los estudiantes interpreten los datos que recopilaron.",
+      "properties": {
+        "Purpose": {
+          "x-format": false,
+          "type": "string",
+          "description": "Propósito: Interpretar los datos que recopilaron, identificar patrones, evaluar su hipótesis y construir conclusiones basadas en evidencia."
+        },
+        "Materials": {
+          "x-format": "**📚 {loc.Materials}**\n\n{items}",
+          "type": "array",
+          "description": "Lista de materiales requeridos (p. ej., apoyos visuales, marcadores, etc.)",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{value.Instructions}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "properties": {
+            "Instructions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "x-format": "\n\n**{index}.** {value.Step}\n{value.Bullets}",
+                "properties": {
+                  "Step": {
+                    "type": "string",
+                    "description": "El texto de la instrucción del docente (p. ej., 'Proporcione iniciadores de oraciones:'). No incluya numeración; se maneja automáticamente."
+                  },
+                  "Bullets": {
+                    "type": "array",
+                    "x-format": "{items}",
+                    "items": {
+                      "type": "string",
+                      "x-format": "- {value}"
+                    },
+                    "description": "Viñetas opcionales. DEBE proporcionar una lista de 4-5 iniciadores de oraciones cuando el paso lo pida. DEBE proporcionar una lista de 4-5 indicaciones de circulación cuando el paso lo pida. De lo contrario, proporcione una matriz vacía."
+                  }
+                },
+                "required": [
+                  "Step",
+                  "Bullets"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Instrucciones paso a paso para el docente. DEBE incluir exactamente un paso específicamente para iniciadores de oraciones y completar su matriz 'Bullets'. DEBE incluir exactamente un paso específicamente para indicaciones de circulación y completar su matriz 'Bullets'."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Respuestas esperadas o completaciones de marcos de oraciones por parte de los estudiantes."
+            }
+          },
+          "required": [
+            "Instructions",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "Share": {
+      "x-format": "### {green}({loc.LabShareTitle})\n\n**{loc.Purpose}:** {loc.LabSharePurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "type": "object",
+      "description": "Guíe a los docentes para que los estudiantes comuniquen claramente sus hallazgos.",
+      "properties": {
+        "Purpose": {
+          "x-format": false,
+          "type": "string",
+          "description": "Palabra por palabra: Propósito: Comunicar claramente sus hallazgos a otros, usando evidencia para explicar lo que descubrieron, por qué importa y cómo contribuye a una comprensión más profunda."
+        },
+        "Materials": {
+          "x-format": "**📚 {loc.Materials}**\n\n{items}",
+          "type": "array",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "InstructionsForTeachers": {
+          "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{value.Instructions}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "properties": {
+            "Instructions": {
+              "x-format": "{items}",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "x-format": "\n\n**{index}.** {value.Step}\n{value.Bullets}",
+                "properties": {
+                  "Step": {
+                    "type": "string",
+                    "description": "El texto de la instrucción del docente (p. ej., 'Escriba en la pizarra:'). No incluya numeración; se maneja automáticamente."
+                  },
+                  "Bullets": {
+                    "type": "array",
+                    "x-format": "{items}",
+                    "items": {
+                      "type": "string",
+                      "x-format": "- {value}"
+                    },
+                    "description": "Viñetas opcionales. DEBE proporcionar una lista de 4-5 puntos cuando el paso proporcione una estructura para compartir. DEBE proporcionar una lista de 4-5 preguntas de los docentes cuando el paso lo pida. De lo contrario, proporcione una matriz vacía."
+                  }
+                },
+                "required": [
+                  "Step",
+                  "Bullets"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Instrucciones paso a paso para el docente. DEBE incluir exactamente un paso específicamente para proporcionar una estructura para compartir y completar su matriz 'Bullets'. DEBE incluir exactamente un paso específicamente para preguntas del docente y completar su matriz 'Bullets'."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Ideas esperadas compartidas por los estudiantes."
+            }
+          },
+          "required": [
+            "Instructions",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Purpose",
+        "Materials",
+        "InstructionsForTeachers"
+      ],
+      "additionalProperties": false
+    },
+    "ReviewAndSpacedRetrieval": {
+      "x-format": "### 🧠 {green}({loc.ReviewAndSpacedRetrieval})\n\n{loc.ReviewAndSpacedRetrievalLabNotes}\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}",
+      "type": "object",
+      "description": "Sección completa de 'Repaso y recuperación espaciada'.",
+      "properties": {
+        "ActiveRecall": {
+          "x-format": "🔄 **{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Pedir a los estudiantes que recuerden el NUEVO aprendizaje de la lección DE HOY.",
+          "properties": {
+            "Say": {
+              "type": "string",
+              "description": "La indicación del docente que comienza con 'Diga: '."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "EssentialQuestionConnection": {
+          "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Indicador del docente vinculado a la pregunta de la unidad.",
+          "properties": {
+            "Say": {
+              "type": "string",
+              "description": "El indicador del docente que comienza con 'Diga: '."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "TranscendentThinking": {
+          "x-format": "🌍 **{loc.TranscendentThinking}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Pedir a los estudiantes que conecten el aprendizaje con otros escenarios del mundo real.",
+          "properties": {
+            "Say": {
+              "type": "string",
+              "description": "El indicador del docente que comienza con 'Diga: '."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        },
+        "SpacedRetrieval": {
+          "x-format": "⏳ **{loc.SpacedRetrieval}**\n\n{value.PriorLearningContext} {value.Say}\n\n{value.ExpectedStudentResponses}",
+          "type": "object",
+          "description": "Recordar de una lección/unidad previa específica.",
+          "properties": {
+            "PriorLearningContext": {
+              "type": "string",
+              "description": "Frase de contexto como 'Earlier in this lesson, students learned...'"
+            },
+            "Say": {
+              "type": "string",
+              "description": "El indicador del docente que comienza con 'Diga: '."
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "PriorLearningContext",
+            "Say",
+            "ExpectedStudentResponses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "ActiveRecall",
+        "EssentialQuestionConnection",
+        "TranscendentThinking",
+        "SpacedRetrieval"
+      ],
+      "additionalProperties": false
+    },
+    "FormativeAssessment": {
+      "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
+      "type": "array",
+      "description": "Exactamente 4 indicadores de Evaluación Formativa, uno para cada nivel de DOK.",
+      "items": {
+        "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
+        "type": "object",
+        "properties": {
+          "PromptLabel": {
+            "type": "string",
+            "description": "p. ej., 'Prompt 1 (DOK 1)'"
+          },
+          "Question": {
+            "type": "string",
+            "description": "El texto exacto de la pregunta."
+          },
+          "ExpectedStudentResponses": {
+            "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+            "type": "array",
+            "items": {
+              "x-format": "- {value}",
+              "type": "string"
+            },
+            "description": "1-2 respuestas de muestra que demuestren dominio."
+          }
+        },
+        "required": [
+          "PromptLabel",
+          "Question",
+          "ExpectedStudentResponses"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "StudentPractice": {
+      "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
+      "type": "object",
+      "description": "Práctica para la tarea fuera de clase.",
+      "properties": {
+        "TeacherNotes": {
+          "type": "string",
+          "description": "Notas del docente que explican cómo estas tareas de práctica refuerzan el aprendizaje de hoy y fortalecen la retención a largo plazo."
+        },
+        "PracticeTasks": {
+          "x-format": "{items}",
+          "type": "array",
+          "description": "Exactamente 3 tareas de práctica (DOK 2 o DOK 3).",
+          "items": {
+            "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
+            "type": "object",
+            "properties": {
+              "TaskDescription": {
+                "type": "string",
+                "description": "p. ej., '(DOK 2) Esta noche, sal afuera y escribe 3-4 oraciones...'"
+              },
+              "ExpectedStudentResponses": {
+                "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "TaskDescription",
+              "ExpectedStudentResponses"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "Reflection": {
+          "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
+          "type": "object",
+          "description": "Una tarea de reflexión para los estudiantes.",
+          "properties": {
+            "Prompt": {
+              "type": "string",
+              "description": "p. ej., 'Reflexión: Escribe 2-3 oraciones respondiendo a una de las indicaciones:'"
+            },
+            "ReflectionOptions": {
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Exactamente 4 opciones de preguntas de reflexión."
+            }
+          },
+          "required": [
+            "Prompt",
+            "ReflectionOptions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "TeacherNotes",
+        "PracticeTasks",
+        "Reflection"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "EssentialQuestions",
+    "StudentLearningObjectives",
+    "StandardsAligned",
+    "KeyVocabulary",
+    "AssessPriorKnowledge",
+    "Question",
+    "Research",
+    "Hypothesize",
+    "Experiment",
+    "Analyze",
+    "Share",
+    "ReviewAndSpacedRetrieval",
+    "FormativeAssessment",
+    "StudentPractice"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "StandardsAligned"
+    ],
+    "AssessPriorKnowledge": [
+      "AssessPriorKnowledge"
+    ],
+    "FormativeAssessment": [
+      "FormativeAssessment"
+    ]
+  }
+}

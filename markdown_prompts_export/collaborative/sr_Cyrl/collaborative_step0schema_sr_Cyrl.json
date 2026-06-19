@@ -1,0 +1,93 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "Јединица је као прича која почиње једним неочекиваним питањем и води вас ка дубљем разумевању. У овој јединици ћете овладати кључним знањима и умењима која ће вам помоћи да повезујете идеје и објашњавате их јасно. Ојачаћете своје вештине у размишљању, анализи и доношењу закључака на основу онога што примећујете. Ово је важно јер се оно што учите повезује са стварним ситуацијама, одлукама и проблемима са којима се људи сусрећу сваког дана. Разумевање овога је значајно зато што вам помаже да градите трајно знање које можете да користите и сада и касније."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "x-cache": true,
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Направите суштинска питања која се фокусирају само на шире, универзалне појмове као што су промена, доказ, обрасци, односи, системи или закључивање. НЕ помињите никакве термине, процесе, вокабулар или примере специфичне за предмет. Питања морају бити отвореног типа, преносива кроз све дисциплине и немогућа за одговорити само учењем садржаја лекције или јединице. Фокусирајте се само на велике идеје, а не на сам садржај предмета.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "Потпуни одељак „Исходи учења ученика“ за целу ову јединицу. Свака ставка листе мора бити јасан, мерљив исход који почиње мерљивим глаголом и завршава се ознаком DOK у заглади.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Наведите све јединствене образовне стандарде који се користе било где у овој јединици и њеним лекцијама. НЕ додавајте стандарде који се не појављују у садржају јединице. Сваки стандард мора да садржи шифру и опис стандарда, нпр. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "x-format": false,
+      "type": "array",
+      "description": "Листа контејнера за лекције за ову јединицу (само оквирно). Свака ставка мора бити не-преклапајућа и јасно обухваћена тако да садржај лекције не понавља садржај других лекција.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Редни број лекције. 1 Based."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Кратак наслов лекције као обичан текст."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 реченице које описују обим лекције, фокус и границе како би се спречило преклапање са другим лекцијама."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

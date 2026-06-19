@@ -1,0 +1,49 @@
+Create ONE LAB lesson plan (NOT a unit plan, NOT multiple lessons) using the info below.
+You MUST output valid JSON that matches the provided JSON schema exactly. Do not include any extra keys. Use compact JSON formatting (no extra blank lines).
+Unit Subject: 
+{{$Subject}}
+Unit Name: 
+{{$Name}}
+Unit Description/Instruction: 
+{{$UserPrompt}}
+Grade Level: 
+{{$GradeLevel}}
+Duration of class period in minutes 
+{{$ClassDuration}}
+Resources/Media to use: 
+{{$MediaContext}}
+Unit Content: 
+{{$ParentUnitData}}
+Standards to Align:
+{{$Standards}}
+Attached Lesson Content: 
+{{$AttachedLesson}}
+
+Unit Essential Questions (USE THESE VERBATIM):
+{{$UnitEssentialQuestions}}
+
+If Unit Essential Questions above is empty, generate exactly 3 conceptual questions following these rules:
+- Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
+- Each question MUST begin with either "How" or "Why".
+
+- Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
+- Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
+- Questions MUST be transferable across disciplines and applicable beyond this unit.
+
+STUDENTS WITH INDIVIDUALIZED SUPPORT (MUST be used ONLY inside Experiment.AccommodationsAndModifications; use the student names/plans exactly as written):
+{{$LearningPlans}}
+
+IMPORTANT CONTENT RULES:
+- Keep the lesson aligned to the unit focus: developing and using models to describe atomic composition of simple molecules and/or extended structures.
+- Include brief, high-level connections to other relevant DCIs where appropriate, but keep the lesson centered on modeling and structure–property reasoning (no deep math, no balancing equations unless explicitly required by standards).
+- Ensure all parts of the lesson reflect the Lesson Scope/Boundaries provided in the unit context; avoid introducing new major concepts that belong to other lessons.
+- EssentialQuestions: MUST exactly equal the unit-level essential questions (same text, same order).
+- AssessPriorKnowledge: ONLY if LessonNumber == 1, write 150–250 words and follow the required structure in the schema description. If LessonNumber != 1, return "" (empty string).
+- Lab Phases (Question, Research, Hypothesize, Experiment, Analyze, Share): Follow the specific instructional requirements and "Purpose:" strings for each phase as defined in the JSON schema.
+- Experiment.AccommodationsAndModifications must include general supports followed by individual support for each student provided in {{$LearningPlans}}.
+- StudentPractice MUST include a TeacherNotes paragraph starting with 'These tasks reinforce today's learning about ____ by ______.', a list of 2-3 tasks with DOK 2-4 and success criteria, and interleaving if the subject is math.
+
+OUTPUT REQUIREMENTS:
+- Output MUST be valid JSON matching the provided schema exactly.
+- Output MUST be a SINGLE lesson plan only.
+- No HTML. No emojis. No markdown. Plain text inside string fields.

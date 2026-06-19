@@ -1,0 +1,54 @@
+Crea UNA planificación de lección (NO un plan de unidad, NO varias lecciones) usando la información de abajo.
+DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado (LessonPlanResponse con un único objeto "LessonPlan"). No incluyas claves adicionales. Usa un formato JSON compacto (sin líneas en blanco extra).
+Asignatura de la unidad: 
+{{$Subject}}
+Nombre de la unidad: 
+{{$Name}}
+Descripción/Instrucción de la unidad: 
+{{$UserPrompt}}
+Nivel de grado: 
+{{$GradeLevel}}
+Duración del periodo de clase en minutos 
+{{$ClassDuration}}
+Recursos/medios a usar: 
+{{$MediaContext}}
+Contenido de la unidad: 
+{{$ParentUnitData}}
+Estándares a alinear:
+{{$Standards}}
+Contenido de la lección adjunta: 
+{{$AttachedLesson}}
+
+Preguntas esenciales de la unidad (USA ESTAS TEXTUALMENTE):
+{{$UnitEssentialQuestions}}
+
+Si las Preguntas esenciales de la unidad arriba están vacías, genera exactamente 3 preguntas conceptuales siguiendo estas reglas:
+- Cada pregunta DEBE ser una oración completa, gramaticalmente correcta, que termine con un signo de interrogación.
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
+- Las preguntas DEBEN ser conceptuales y exploratorias, no fácticas, procedimentales ni definicionales.
+- Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una asignatura.
+- Las preguntas DEBEN poder transferirse entre disciplinas y aplicarse más allá de esta unidad.
+
+ESTUDIANTES CON APOYO INDIVIDUALIZADO (DEBE usarse SOLO dentro de GuidedPractice.AccommodationsAndModifications; usa los nombres/planes de los estudiantes exactamente como están escritos):
+{{$LearningPlans}}
+
+REGLAS IMPORTANTES DE CONTENIDO:
+- Mantén la lección alineada con el enfoque de la unidad: desarrollar y usar modelos para describir la composición atómica de moléculas simples y/o estructuras extendidas.
+- Incluye conexiones breves y de alto nivel con otros DCI relevantes cuando corresponda, pero mantén la lección centrada en el modelado y el razonamiento estructura-propiedad (sin matemáticas profundas, sin balancear ecuaciones a menos que los estándares lo exijan explícitamente).
+- Asegúrate de que todas las partes de la lección reflejen los límites/alcance de la lección indicados arriba; evita introducir nuevos conceptos principales que pertenezcan a otras lecciones.
+- EssentialQuestions: DEBE ser exactamente igual a las preguntas esenciales a nivel de unidad (mismo texto, mismo orden).
+- AssessPriorKnowledge: SOLO si LessonNumber == 1, escribe 150–250 palabras y sigue la estructura requerida en la descripción del esquema. Si LessonNumber != 1, devuelve "" (cadena vacía).
+- DirectPresentation debe ser ≤10 minutos en total y debe seguir el formato requerido HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT con Say/Do/Ask/✅ Expected Student Responses/Write, y las respuestas esperadas de los estudiantes deben estar como viñetas (NO incluyas los encabezados/títulos de sección dentro de la cadena).
+- GuidedPractice.InstructionsForTeachers debe tener al menos 700 palabras e incluir los componentes requeridos que se enumeran en la descripción del esquema.
+- GuidedPractice.AccommodationsAndModifications debe incluir:
+  - General: apoyos generales
+  - IndividualSupport: arreglo con exactamente los estudiantes y sus planes proporcionados (mismos nombres/planes; sin estudiantes adicionales).
+- StudentPractice DEBE incluir un párrafo TeacherNotes que comience con 'These tasks reinforce today’s learning about ____ by ______.', una lista de 2-3 tareas con DOK 2-4 y criterios de éxito, e intercalado si la asignatura es matemáticas.
+
+REQUISITOS DE SALIDA:
+- La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
+- La salida DEBE ser UNA SOLA planificación de lección.
+- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

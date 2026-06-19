@@ -1,0 +1,36 @@
+Crea UNA lección de indagación (NO un plan de unidad, NO múltiples lecciones) usando la información de abajo. DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado: InquiryUnitPlanResponse. No incluyas claves adicionales. Usa formato JSON compacto (sin líneas en blanco extra ni espacios en blanco entre propiedades JSON). Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
+
+Asignatura de la unidad: {{$Subject}}
+Nombre de la unidad: {{$Name}}
+Descripción/Instrucción de la unidad: {{$UserPrompt}}
+Nivel de grado: {{$GradeLevel}}
+Duración del período de clase en minutos: {{$ClassDuration}}
+Estándares a alinear (usa literalmente si están presentes; NO agregues nuevos estándares): {{$Standards}}
+Estudiantes con apoyo individualizado (DEBE usarse SOLO dentro de InvestigationPhase.AccommodationsAndModifications; usa los nombres/planes de los estudiantes exactamente como están escritos): {{$LearningPlans}}
+Recursos/medios a usar: {{$MediaContext}}
+Contenido de la unidad: {{$AttachedUnit}}
+
+Elementos de la unidad y la lección del Paso 0 (usar literalmente):
+{{$ParentUnitData}}
+- UnitDescription.EssentialQuestions (exactamente como se proporciona; reutilízalas literalmente cuando sea relevante): {{$UnitEssentialQuestions}}
+
+Contenido de la lección adjunta (si lo hay): {{$AttachedLesson}}
+
+REQUISITOS DEL FLUJO DE LA LECCIÓN DE INDAGACIÓN:
+- Esta lección debe seguir el arco de indagación y estar alineada con los límites del esquema de la lección: Orientación → Conceptualización → Investigación → Conclusión → Discusión.
+- Mantén la construcción de significado mediante el descubrimiento: los estudiantes construyen y revisan ideas usando observaciones y datos simples; enfatiza la evidencia, el razonamiento y la comunicación.
+- Relevancia cultural e inclusión: incluye contextos o perspectivas breves relevantes para la comunidad sin estereotipos.
+- NO introduzcas conceptos nuevos importantes que pertenezcan a otras lecciones; mantente dentro del alcance y los límites del esquema de esta lección.
+- Mantén la alineación SOLO con los estándares proporcionados. NO agregues estándares ni marcos nuevos.
+- Las acciones del docente deben guiar el pensamiento sin dar explicaciones científicas directamente.
+
+REGLAS ESPECÍFICAS DE CAMPOS (asignar al esquema):
+- AssessPriorKnowledge: SOLO si el número de la lección es 1, escribe 150–250 palabras y sigue la estructura requerida en la descripción del esquema; de lo contrario, devuelve "".
+- InvestigationPhase.AccommodationsAndModifications:
+  - General: incluye apoyos generales.
+  - IndividualSupport: el arreglo debe incluir exactamente a los estudiantes proporcionados y sus planes (mismos nombres/planes; sin estudiantes extra; sin estudiantes faltantes).
+
+REGLA DE SALIDA:
+Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

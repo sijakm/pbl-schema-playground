@@ -1,0 +1,36 @@
+Kreirajte JEDAN plan časa po istraživačkom pristupu (NE plan jedinice, NE više časova) koristeći informacije ispod. MORATE izlaziti sa važećim JSON-om koji tačno odgovara datoj JSON šemi: InquiryUnitPlanResponse. Nemojte uključivati nikakve dodatne ključeve. Koristite kompaktan JSON format (bez dodatnih praznih redova ili belina između JSON svojstava). Bez HTML-a. Bez emodžija. Bez markdown-a. Običan tekst unutar string polja.
+
+Predmet jedinice: {{$Subject}}
+Naziv jedinice: {{$Name}}
+Opis/uputstvo jedinice: {{$UserPrompt}}
+Nivo razreda: {{$GradeLevel}}
+Trajanje časa u minutima: {{$ClassDuration}}
+Standardi kojima treba uskladiti (koristite doslovno ako su prisutni; NE dodajite nove standarde): {{$Standards}}
+Učenici sa individualizovanom podrškom (MORAJU se koristiti SAMO unutar InvestigationPhase.AccommodationsAndModifications; koristite imena/planove učenika tačno onako kako su napisani): {{$LearningPlans}}
+Resursi/mediji za korišćenje: {{$MediaContext}}
+Sadržaj jedinice: {{$AttachedUnit}}
+
+Elementi jedinice i časa iz koraka 0 (koristite doslovno):
+{{$ParentUnitData}}
+- UnitDescription.EssentialQuestions (tačno kako je navedeno; ponovo koristite doslovno gde je relevantno): {{$UnitEssentialQuestions}}
+
+Priložen sadržaj časa (ako postoji): {{$AttachedLesson}}
+
+ZAHTEVI TOKA ISTRAŽIVAČKOG ČASA:
+- Ovaj čas mora pratiti istraživački tok i biti usklađen sa granicama nacrta časa: Orijentacija → Konceptualizacija → Istraživanje → Zaključak → Diskusija.
+- Održavajte smisleno učenje kroz otkrivanje: učenici grade i revidiraju ideje kroz posmatranja i jednostavne podatke; naglasite dokaze, obrazloženje i komunikaciju.
+- Kulturna relevantnost i inkluzija: uključite kratke kontekste ili perspektive relevantne za zajednicu bez stereotipa.
+- Ne uvodite velike nove koncepte koji pripadaju drugim časovima; ostanite u okviru i granicama ovog nacrta časa.
+- Održavajte usklađenost SAMO sa datim standardima. Ne dodajite nikakve nove standarde ili okvire.
+- Nastavničke intervencije treba da usmeravaju razmišljanje bez direktnog davanja naučnih objašnjenja.
+
+PRAVILA SPECIFIČNA ZA POLJA (mapirajte na šemu):
+- AssessPriorKnowledge: SAMO ako je broj časa 1, napišite 150–250 reči i pratite obaveznu strukturu u opisu šeme; u suprotnom vratite "".
+- InvestigationPhase.AccommodationsAndModifications:
+  - General: uključite opšte podrške.
+  - IndividualSupport: niz mora sadržati tačno navedene učenike i njihove planove (ista imena/planovi; bez dodatnih učenika; bez izostavljenih učenika).
+
+PRAVILO IZLAZA:
+Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

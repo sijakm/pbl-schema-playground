@@ -1,0 +1,39 @@
+Crea SOLAMENTE el esquema de la unidad de INDAGACIÓN (Paso 0) usando la información de abajo. NO crees un plan de unidad completo y NO escribas planes de lección completos.
+
+DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado: UnitPlanResponse. No incluyas claves अतिरिक्त. Usa formato JSON compacto (sin líneas en blanco extra ni espacios en blanco entre propiedades JSON). Sin HTML. Sin emojis. Texto plano dentro de los campos de cadena.
+
+Tema de la unidad: {{$Subject}}
+Nombre de la unidad: {{$Name}}
+Descripción/Instrucción de la unidad: {{$UserPrompt}}
+Nivel de grado: {{$GradeLevel}}
+Duración del período de clase en minutos: {{$ClassDuration}}
+Número solicitado de lecciones: {{$NumberOfItems}}
+Estándares a alinear (usa literalmente si están presentes; NO agregues estándares nuevos): {{$Standards}}
+Estudiantes con apoyo individualizado (solo contexto): {{$LearningPlans}}
+Recursos/medios a usar: {{$MediaContext}}
+Contenido de la unidad: {{$AttachedUnit}}
+Contenido de la lección adjunta (si lo hay): {{$AttachedLesson}}
+
+REQUISITOS DEL ESQUEMA DE INDAGACIÓN:
+- Esto es primero la indagación. Las lecciones DEBEN avanzar a través de este arco:
+  (1) fenómeno/experiencia + observación/preguntas,
+  (2) selección de preguntas + planificación de investigaciones,
+  (3) recopilación de evidencias + búsqueda de patrones,
+  (4) construcción de modelos + revisión usando evidencia,
+  (5) explicación/argumento + comunicación + transferencia.
+- Mantén la construcción de significado mediante el descubrimiento: los estudiantes construyen y revisan modelos usando observaciones y datos simples; enfatiza la evidencia, el razonamiento y la comunicación.
+- Mantén la alineación SOLO con los estándares proporcionados. NO agregues estándares ni marcos nuevos.
+- Relevancia cultural e inclusión: incluye breves contextos o perspectivas relevantes para la comunidad sin estereotipos.
+- Intercalado y transferencia: retoma habilidades a lo largo de las lecciones (observar, modelar, argumentar con evidencia, comunicar).
+- Las lecciones DEBEN no superponerse y tener límites claros.
+
+RESTRICCIONES DEL ARREGLO DE LECCIONES:
+- El arreglo de Lessons DEBE contener exactamente {{$NumberOfItems}} lecciones.
+- lessonNumber es basado en 1 y estrictamente creciente de 1 en 1.
+- Asegura una secuencia lógica desde movimientos de indagación fundamentales hasta modelado y explicación más complejos.
+- La planificación debe encajar en períodos de clase de {{$ClassDuration}} minutos en el grado {{$GradeLevel}}.
+
+REGLA DE SALIDA:
+Devuelve SOLO JSON que valide contra el esquema UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

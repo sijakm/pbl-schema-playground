@@ -1,0 +1,51 @@
+Buat SATU rencana pelajaran LAB (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan informasi di bawah ini.
+Anda WAJIB menghasilkan JSON valid yang cocok dengan skema JSON yang disediakan secara tepat. Jangan sertakan kunci tambahan apa pun. Gunakan pemformatan JSON ringkas (tanpa baris kosong tambahan).
+Mata Pelajaran Unit: 
+{{$Subject}}
+Nama Unit: 
+{{$Name}}
+Deskripsi/Instruksi Unit: 
+{{$UserPrompt}}
+Tingkat Kelas: 
+{{$GradeLevel}}
+Durasi periode kelas dalam menit 
+{{$ClassDuration}}
+Sumber Daya/Media yang digunakan: 
+{{$MediaContext}}
+Konten Unit: 
+{{$ParentUnitData}}
+Standar yang harus diselaraskan:
+{{$Standards}}
+Konten Pelajaran Terlampir:
+{{$AttachedLesson}}
+
+Pertanyaan Esensial Unit (GUNAKAN INI SECARA VERBATIM):
+{{$UnitEssentialQuestions}}
+
+Jika Pertanyaan Esensial Unit di atas kosong, buat tepat 3 pertanyaan konseptual dengan mengikuti aturan berikut:
+- Setiap pertanyaan HARUS berupa kalimat lengkap dan benar secara gramatikal yang diakhiri dengan tanda tanya.
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
+- Pertanyaan HARUS bersifat konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
+- Pertanyaan HARUS berfokus pada gagasan luas dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
+- Pertanyaan HARUS dapat ditransfer lintas disiplin dan dapat diterapkan di luar unit ini.
+
+SISWA DENGAN DUKUNGAN INDIVIDUAL (HARUS digunakan HANYA di dalam Experiment.AccommodationsAndModifications; gunakan nama/rencana siswa persis seperti yang ditulis):
+{{$LearningPlans}}
+
+PENTINGNYA ATURAN KONTEN:
+- Jaga agar pelajaran tetap selaras dengan fokus unit: mengembangkan dan menggunakan model untuk mendeskripsikan komposisi atom dari molekul sederhana dan/atau struktur yang lebih luas.
+- Sertakan koneksi singkat tingkat tinggi ke DCI relevan lainnya bila sesuai, tetapi tetap pusatkan pelajaran pada pemodelan dan penalaran struktur–sifat (tanpa matematika mendalam, tanpa menyeimbangkan persamaan kecuali secara eksplisit diwajibkan oleh standar).
+- Pastikan semua bagian pelajaran mencerminkan Batasan/Ruang Lingkup Pelajaran yang disediakan dalam konteks unit; hindari memperkenalkan konsep utama baru yang termasuk ke pelajaran lain.
+- EssentialQuestions: HARUS persis sama dengan pertanyaan esensial tingkat unit (teks yang sama, urutan yang sama).
+- AssessPriorKnowledge: HANYA jika LessonNumber == 1, tulis 150–250 kata dan ikuti struktur yang diwajibkan dalam deskripsi skema. Jika LessonNumber != 1, kembalikan "" (string kosong).
+- Fase Lab (Question, Research, Hypothesize, Experiment, Analyze, Share): Ikuti persyaratan instruksional spesifik dan string "Purpose:" untuk setiap fase sebagaimana didefinisikan dalam skema JSON.
+- Experiment.AccommodationsAndModifications harus memuat dukungan umum yang diikuti dukungan individual untuk setiap siswa yang disediakan dalam {{$LearningPlans}}.
+- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'Tugas-tugas ini memperkuat pembelajaran hari ini tentang ____ melalui ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving (pembelajaran berselang) (pembelajaran berselang) jika mata pelajaran adalah matematika.
+
+PERSYARATAN OUTPUT:
+- Output HARUS berupa JSON valid yang cocok dengan skema yang disediakan secara tepat.
+- Output HARUS berupa HANYA satu rencana pelajaran.
+- Tanpa HTML. Tanpa emoji. Tanpa markdown. Teks biasa di dalam field string.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

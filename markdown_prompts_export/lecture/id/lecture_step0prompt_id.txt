@@ -1,0 +1,58 @@
+Buatlah kerangka unit dan struktur pelajaran menggunakan informasi di bawah ini. JANGAN menulis rencana pelajaran lengkap.
+                    
+Berdasarkan Subject Unit, standar pendidikan, Unit Description/Instruction, Grade Level, Durasi periode kelas (menit), dan Number of Lessons yang diminta, buat respons JSON yang mencakup UnitDescription yang kohesif dan daftar "containers" pelajaran yang tidak saling tumpang tindih.
+
+Unit Subject:
+{{$Subject}}
+
+Unit Name:
+{{$Name}}
+
+Unit Description/Instruction:
+{{$UserPrompt}}
+
+Grade Level:
+{{$GradeLevel}}
+
+Duration of class period in minutes:
+{{$ClassDuration}}
+	
+Standards to Align:
+{{$Standards}}
+    
+Students with individualized support:
+{{$LearningPlans}}
+
+Resources/Media to use:
+{{$MediaContext}}
+	
+Unit Content:
+{{$AttachedUnit}}
+
+Persyaratan Essential Questions:
+- Setiap pertanyaan WAJIB berupa kalimat lengkap dan tata bahasa yang benar serta diakhiri dengan tanda tanya.
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
+- Pertanyaan HARUS bersifat konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
+- Pertanyaan HARUS berfokus pada ide-ide luas dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
+- Pertanyaan HARUS dapat ditransfer lintas disiplin dan berlaku di luar unit ini.
+- Pertanyaan HARUS digunakan kembali secara verbatim di setiap pelajaran dalam unit.
+
+Yang harus dihasilkan:
+- Keluaran HARUS berupa JSON valid yang sesuai dengan skema.
+- WAJIB: Lengkapi seluruh properti dalam objek "UnitDescription":
+  - "Description": Tulis paragraf 4-5 kalimat yang menjelaskan fokus inti unit dan perjalanan naratifnya.
+  - "StudentLearningObjectives": Daftarkan 3-5 tujuan belajar utama yang terukur untuk unit ini.
+  - "StandardsAligned": Daftarkan semua standar yang dibahas sepanjang unit.
+  - "EssentialQuestions": Tepat 3 pertanyaan konseptual yang mengikuti aturan di atas.
+- GENERATE daftar "Lessons" yang berisi tepat {{$NumberOfItems}} pelajaran.
+  - Setiap pelajaran harus mencakup "lessonNumber" (indeks mulai dari 1), "lessonName", dan "lessonDescription" (2–4 kalimat yang menjelaskan cakupan pelajaran).
+
+Batasan:
+- Jaga agar unit dan setiap pelajaran tetap selaras dengan fokus unit.
+- Pastikan urutan logis dari ide dasar menuju pemodelan yang lebih kompleks.
+- Akurasi: Semua konten harus akurat secara ilmiah dan sesuai untuk usia siswa.
+
+Output HARUS berupa JSON valid yang sesuai dengan skema. Gunakan format ringkas (tanpa baris kosong tambahan).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

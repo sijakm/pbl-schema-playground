@@ -1,0 +1,832 @@
+{
+  "title": "LessonPlanResponse",
+  "type": "object",
+  "properties": {
+    "LessonDescription": {
+      "type": "object",
+      "properties": {
+        "LessonTitle": {
+          "x-format": "# {value}",
+          "type": "string",
+          "description": "Кратак описни наслов за лекцију. НЕ укључујте емоџије овде."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭 {loc.EssentialQuestions}\n\n{cache.EssentialQuestions}",
+          "type": "array",
+          "description": "Само налепите сва суштинска питања на нивоу јединице истим редоследом ако су наведена. Ако нису наведена, генеришите тачно 3 концептуална питања која се фокусирају само на шире, универзалне појмове као што су промена, доказ, обрасци, односи, системи или закључивање. НЕ помињите никакве термине, процесе, вокабулар или примере специфичне за предмет. Питања морају бити отвореног типа, преносива кроз све дисциплине и немогућа за одговорити само учењем садржаја лекције или јединице. Фокусирајте се само на велике идеје, а не на сам садржај предмета.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "KeyVocabulary": {
+          "x-format": "### 🔤 {loc.KeyVocabulary}\n\n{items}",
+          "type": "array",
+          "description": "Листа стрингова у формату „Термин - Дефиниција“. Дефиниције морају бити кратке, примерене узрасту и повезане са овом лекцијом.",
+          "items": {
+            "x-format": "{index}. {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯 {loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "2–3 мерљива исхода, од којих се сваки завршава ознаком DOK у заглади.",
+          "items": {
+            "x-format": "- {value}\n",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏 {loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Усклађени образовни стандарди за ову лекцију. Морају се тачно поклапати са стандардима јединице у коду и опису.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "AssessPriorKnowledge": {
+          "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
+          "type": "object",
+          "description": "Одељак Процена претходног знања. САМО Лекција 1 треба да садржи детаљан блок; СВЕ ОСТАЛЕ ЛЕКЦИЈЕ МОРАЈУ ВРАТИТИ NULL или изоставити ово поље. За Лекцију 1, структура мора да садржи ActivityInstructions, ExpectedStudentResponses, ClosingTeacherPrompt и AlternateOptions.",
+          "properties": {
+            "ActivityInstructions": {
+              "type": "string",
+              "description": "Јасна упутства и шаблон/структуру за изабрану модалност. Нпр. 'Реците: \"Пре него што почнемо да градимо...\"'"
+            },
+            "ExpectedStudentResponses": {
+              "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+              "type": "array",
+              "description": "Очекивани одговори ученика или честе заблуде за изабрану модалност.",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            },
+            "ClosingTeacherPrompt": {
+              "type": "string",
+              "description": "Завршни наставников подстицај у облику „Реците:“ који потврђује размишљање ученика и најављује истраживање јединице."
+            },
+            "AlternateOptions": {
+              "x-format": "**{loc.AlternateOptions}**\n\n{items}",
+              "type": "array",
+              "description": "2 кратке алтернативне опције које наставник може да изабере.",
+              "items": {
+                "x-format": "{index}. {value}",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ActivityInstructions",
+            "ExpectedStudentResponses",
+            "ClosingTeacherPrompt",
+            "AlternateOptions"
+          ],
+          "additionalProperties": false
+        },
+        "Instruction": {
+          "x-format": "### {green}({loc.Instruction})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.AnticipatedMisconceptions}\n\n{value.TranscendentThinking}\n\n{value.QuickCheck}",
+          "type": "object",
+          "description": "Одељак „Упутство“ за колаборативну лекцију (еквивалентно директном излагању).",
+          "properties": {
+            "Materials": {
+              "x-format": "**📚 {loc.Materials}**\n\n{items}",
+              "type": "array",
+              "description": "Листа материјала.",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            },
+            "InstructionsForTeachers": {
+              "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}",
+              "type": "array",
+              "description": "Скрипт за наставника организован у узастопне кораке. Ови кораци морају заједно да делују као свеобухватан водич који помаже наставнику да испоручи нови садржај. Мора да укључује како да се уведе нови садржај теме (уводи, вођена питања, прелази), као и садржај/скрипт за наставника за директно поучавање (дефиниције, примери, кључне тачке, објашњења). Упутства треба да буду детаљна и да обухвате све ново градиво за час са објашњењима како да се оно предаје. Будите прецизни. Не користите НАСЛОВЕ СВИХ ВЕЛИКИХ СЛОВА за одељке и не укључујте временске ознаке.",
+              "items": {
+                "x-format": "\n\n**{index}.** {value.Instruction}\n\n{value.ExpectedStudentResponses}",
+                "type": "object",
+                "properties": {
+                  "Instruction": {
+                    "type": "string",
+                    "description": "Акција наставника, нпр. Реците: '...', Урадите: '...', Питајте: '...'"
+                  },
+                  "ExpectedStudentResponses": {
+                    "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                    "type": "array",
+                    "description": "Очекивани одговори ако је упутство било питање. Вратите празан низ ако није применљиво.",
+                    "items": {
+                      "x-format": "  - {value}",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "Instruction",
+                  "ExpectedStudentResponses"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "AnticipatedMisconceptions": {
+              "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
+              "type": "array",
+              "description": "Списак уобичајених заблуда и тачан језик за исправљање сваке од њих.",
+              "items": {
+                "x-format": "\n\n**{index}.** {value.Misconception}\n  - {value.Correction}",
+                "type": "object",
+                "properties": {
+                  "Misconception": {
+                    "type": "string",
+                    "description": "Опис заблуде."
+                  },
+                  "Correction": {
+                    "type": "string",
+                    "description": "Језик за исправљање који почиње са 'Реците: '."
+                  }
+                },
+                "required": [
+                  "Misconception",
+                  "Correction"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "TranscendentThinking": {
+              "x-format": "### 🌍 {loc.TranscendentThinking}\n\n{value.Question}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "description": "Питање о примени у стварном свету које повезује учење са сврхом/значењем.",
+              "properties": {
+                "Question": {
+                  "type": "string"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "description": "2-3 очекивана одговора ученика који показују дубље разумевање.",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "Question",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            },
+            "QuickCheck": {
+              "x-format": "**{loc.QuickCheck}**\n\n{value.Question}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "description": "Завршно питање за проверу разумевања.",
+              "properties": {
+                "Question": {
+                  "type": "string"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "description": "2-3 очекивана одговора ученика.",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "Question",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "Materials",
+            "InstructionsForTeachers",
+            "AnticipatedMisconceptions",
+            "TranscendentThinking",
+            "QuickCheck"
+          ],
+          "additionalProperties": false
+        },
+        "GroupStructureAndRoles": {
+          "x-format": "### {green}({loc.GroupStructureAndRoles})\n\n{loc.DetermineThePurpose}\n\n{value.GroupSize}\n\n**📋 {loc.InstructionsForTeachers}**\n{value.TeacherSay}\n\n{value.Roles}\n\n{value.Rotation}",
+          "type": "object",
+          "description": "Величина групе, скрипт наставника, дефинисане улоге и ротирање.",
+          "properties": {
+            "GroupSize": {
+              "x-format": "{loc.GroupSize}: {value}",
+              "type": "string",
+              "description": "нпр. 'парови', 'тројке' или '4-5 ученика'"
+            },
+            "TeacherSay": {
+              "type": "string",
+              "description": "Скрипт наставника који објашњава улоге."
+            },
+            "Roles": {
+              "x-format": "{value.Facilitator}\n{value.Recorder}\n{value.MaterialsManager}\n{value.Timekeeper}\n{value.Presenter}",
+              "type": "object",
+              "properties": {
+                "Facilitator": {
+                  "x-format": "- **{loc.Facilitator}:** {value}",
+                  "type": "string"
+                },
+                "Recorder": {
+                  "x-format": "- **{loc.Recorder}:** {value}",
+                  "type": "string"
+                },
+                "MaterialsManager": {
+                  "x-format": "- **{loc.MaterialsManager}:** {value}",
+                  "type": "string"
+                },
+                "Timekeeper": {
+                  "x-format": "- **{loc.Timekeeper}:** {value}",
+                  "type": "string"
+                },
+                "Presenter": {
+                  "x-format": "- **{loc.Presenter}:** {value}",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Facilitator",
+                "Recorder",
+                "MaterialsManager",
+                "Timekeeper",
+                "Presenter"
+              ],
+              "additionalProperties": false
+            },
+            "Rotation": {
+              "x-format": "{loc.Rotation}:\n- {value}",
+              "type": "string",
+              "description": "Реченица која наводи када се улоге ротирају."
+            }
+          },
+          "required": [
+            "GroupSize",
+            "TeacherSay",
+            "Roles",
+            "Rotation"
+          ],
+          "additionalProperties": false
+        },
+        "CollaborationGuidelines": {
+          "x-format": "### {green}({loc.CollaborationGuidelines})\n\n{loc.CollaborationGuidelinesIntro}\n\n{items}",
+          "type": "array",
+          "description": "Подстицаји који помажу групама да креирају сопствене норме сарадње.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "CollaborativeActivities": {
+          "x-format": "### {green}({loc.CollaborativeActivities})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
+          "type": "object",
+          "description": "Међузависни групни рад (колаборативна замена за Вођену вежбу). Усмерен ка наставнику, високо структуриран и осмишљен тако да ученици не могу сами да заврше задатак. Мора да укључи: (а) јасну међузависност (џигсо, изградњу консензуса, галеријску шетњу, структурисани изазов за решавање проблема или слично), (б) експлицитно време за сваку фазу (нпр. '8 минута дискусије, 2 минута припреме одговора'), (в) скриптирану наставничку фасилитацију користећи 'Реците:' изјаве током целог процеса, (г) заједнички групни производ (тврдња, модел, табела, сет решења, галеријски артефакт итд.), (д) подстицаје за циркулацију са очекиваним одговорима ученика, (ђ) најмање једну проверу одговора свих ученика (таблице за писање, брзо писање, гласање, палчеви итд.) са очекиваним одговорима, (е) кратко питање за проверу + очекиване одговоре, (ж) диференцијацију у три нивоа усмерену на инструкцију (не на прилагођавања), и (з) ПрилагођавањаИМодификације раздвојене на Општа подршка и ИндивидуалнаПодршка, тачно у складу са датим ученицима/плановима. Обезбедите културну релевантност и инклузију позивањем на више перспектива и осигурањем равноправног учешћа.",
+          "properties": {
+            "Materials": {
+              "x-format": "**📚 {loc.Materials}**\n\n{items}",
+              "type": "array",
+              "description": "Комплетна листа наставничког и ученичког материјала који се користе у овој колаборативној активности. Укључите све припремљене ставке (картице са подстицајима, оквире реченица, картице са улогама, чек-листе, рубрике, листове за галеријску шетњу, табле за писање, тајмере, визуелне материјале, листе речи итд.). По једна ставка по елементу низа; без места за попуњавање.",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              }
+            },
+            "InstructionsForTeachers": {
+              "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}",
+              "type": "array",
+              "description": "Скрипт наставника за колаборативну активност (циљ је 6-8 нумерисаних корака). Осигурајте да је један корак изричито 'Подстицаји за циркулацију:' и да садржи конкретна питања која треба поставити групама док раде.",
+              "items": {
+                "x-format": "\n\n**{index}.** {value.Instruction}{value.CirculationPrompts}{value.ExpectedStudentResponses}",
+                "type": "object",
+                "properties": {
+                  "Instruction": {
+                    "type": "string",
+                    "description": "Одређена акција наставника, која почиње са 'Реците: ', 'Урадите: ', или тачно 'Подстицаји за циркулацију:'."
+                  },
+                  "CirculationPrompts": {
+                    "x-format": "\n{items}",
+                    "type": "array",
+                    "description": "ПОПУНИТИ ОВО САМО ако је инструкција 'Подстицаји за циркулацију:'. Наведите конкретна питања која треба поставити групама током циркулације. ИЗОСТАВИТЕ ово својство ако није применљиво.",
+                    "items": {
+                      "x-format": "   - {value.Prompt}{value.ExpectedStudentResponses}",
+                      "type": "object",
+                      "properties": {
+                        "Prompt": {
+                          "type": "string",
+                          "description": "Питање које треба поставити групи."
+                        },
+                        "ExpectedStudentResponses": {
+                          "x-format": "\n     ✅ {loc.ExpectedStudentResponses}\n{items}",
+                          "type": "array",
+                          "description": "Очекивани одговори на овај конкретан позив за размену. ИЗОСТАВИТЕ ово својство ако га нема.",
+                          "items": {
+                            "x-format": "       - {value}",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "required": [
+                        "Prompt",
+                        "ExpectedStudentResponses"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "ExpectedStudentResponses": {
+                    "x-format": "\n   ✅ {loc.ExpectedStudentResponses}\n{items}",
+                    "type": "array",
+                    "description": "Очекивани одговори ако је Упутство било директно питање целом разреду. ИЗОСТАВИТЕ ово својство ако није применљиво.",
+                    "items": {
+                      "x-format": "     - {value}",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "Instruction",
+                  "CirculationPrompts",
+                  "ExpectedStudentResponses"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "Differentiation": {
+              "x-format": "**🪜 {loc.Differentiation}**\n\n{value.LanguageLearners}\n\n{value.AdditionalScaffolding}\n\n{value.GoDeeper}",
+              "type": "object",
+              "description": "Означено са три јасно означена нивоа: Ученици који уче језик, Ученици којима је потребна додатна подршка, Идемо даље. Захтеви: Садржај мора да буде диференциран, а не да пружа адаптације или модификације (то се решава на другом месту). Стратегије треба да се усредсреде на то како се подучава, а не на то како се материјали поједностављују. Активности треба да варирају у сложености и дубини, усклађене са истим циљевима учења. Сваки ниво мора да подстиче активно ангажовање, развој језика и концептуално разумевање. Користите јасан језик усмерен ка наставнику и обезбедите да подршка буде реалистична за употребу у учионици.",
+              "properties": {
+                "LanguageLearners": {
+                  "x-format": "{loc.LanguageLearners}\n\n{value.Strategies}",
+                  "type": "object",
+                  "properties": {
+                    "Strategies": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "Пружите 2-3 конкретне наставне стратегије за ученике који уче језик. Примери: пружање конкретних визуелних подршки (нпр. 'Лист са чињеницама о планети'), коришћење реченичних оквира (нпр. 'Ово је постављено овде зато што...'), или тражење од ученика да гестом/показивањем покажу пре него што усмено објасне. Фокусирајте се на активно ангажовање и развој језика."
+                    }
+                  },
+                  "required": [
+                    "Strategies"
+                  ],
+                  "additionalProperties": false
+                },
+                "AdditionalScaffolding": {
+                  "x-format": "{loc.StudentsInNeedOfAdditionalScaffolding}\n\n{value.Strategies}",
+                  "type": "object",
+                  "properties": {
+                    "Strategies": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "Пружите 2-3 конкретне наставне стратегије за скелетну подршку. Примери: пружање унапред нацртаних организатора/шаблона, коришћење поједностављене контролне листе са конкретним усмеравајућим питањима, или моделовање процеса размишљања наглас (нпр. 'Погледајте како ја усклађујем...'). Фокусирајте се на то како да подучавате и да варирате сложеност без поједностављивања материјала."
+                    }
+                  },
+                  "required": [
+                    "Strategies"
+                  ],
+                  "additionalProperties": false
+                },
+                "GoDeeper": {
+                  "x-format": "{loc.GoDeeper}\n\n{value.Strategies}",
+                  "type": "object",
+                  "properties": {
+                    "Strategies": {
+                      "type": "array",
+                      "items": {
+                        "x-format": "- {value}",
+                        "type": "string"
+                      },
+                      "description": "Пружите 1-2 проширена задатка који продубљују концептуално разумевање. Укључите конкретне изазове (нпр. 'Подесите размак да бисте показали...') или питања вишег реда (нпр. 'Како бисте моделовали... тачно?'). Морају бити усклађени са истим циљевима учења."
+                    }
+                  },
+                  "required": [
+                    "Strategies"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "LanguageLearners",
+                "AdditionalScaffolding",
+                "GoDeeper"
+              ],
+              "additionalProperties": false
+            },
+            "AccommodationsAndModifications": {
+              "x-format": "**🤝 {loc.AccommodationsAndModifications}**\n\n**{loc.GeneralSupport}:**\n{value.General}\n\n**{loc.IndividualSupport}:**\n{value.IndividualSupport}",
+              "type": "object",
+              "description": "Овај одељак мора да садржи две врсте подршке: Опште подршке и Индивидуализоване подршке. Фокус је на приступу, а не на смањењу захтевности.",
+              "properties": {
+                "General": {
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "Стратегије које нису специфичне за ученика и које побољшавају приступ за све ученике (нпр. визуелни прикази, унапред попуњене белешке, дигитални речник, инструкције подељене у делове). Наведите 2-4 тачке."
+                },
+                "IndividualSupport": {
+                  "x-format": "{items}",
+                  "type": "array",
+                  "description": "Конкретне адаптације и модификације за именоване ученике са формалним плановима. Наведите СВАКОГ ученика појединачно; НЕ групишите ученике заједно. Подршке за сваког ученика треба да буду лаке за преглед у облику листе.",
+                  "items": {
+                    "x-format": "### {red}({value.StudentName})\n\n**{loc.PlanProvided}:**\n{value.PlanProvided}\n\n**{loc.PlanImplementation}:**\n{value.PlanImplementation}",
+                    "type": "object",
+                    "properties": {
+                      "StudentName": {
+                        "type": "string",
+                        "description": "Име и презиме појединачног ученика који добија ове подршке."
+                      },
+                      "PlanProvided": {
+                        "type": "array",
+                        "items": {
+                          "x-format": "- {value}",
+                          "type": "string"
+                        },
+                        "description": "Формални план наведен за овог ученика у упутству. Разложите план у јасну листу. Можете парафразирати да бисте побољшали формат, али НЕ изостављајте нити додајте било какве информације."
+                      },
+                      "PlanImplementation": {
+                        "type": "array",
+                        "items": {
+                          "x-format": "- {value}",
+                          "type": "string"
+                        },
+                        "description": "Конкретни алати/реченични оквири/визуелни прикази/организатори за овај задатак."
+                      }
+                    },
+                    "required": [
+                      "StudentName",
+                      "PlanProvided",
+                      "PlanImplementation"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "General",
+                "IndividualSupport"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "Materials",
+            "InstructionsForTeachers",
+            "Differentiation",
+            "AccommodationsAndModifications"
+          ],
+          "additionalProperties": false
+        },
+        "ReflectionOnGroupDynamics": {
+          "x-format": "### {green}({loc.ReflectionOnGroupDynamics})\n\n{value.DebriefPrompt}\n\n{value.TeacherFacilitationOptions}\n\n{value.ClosingPrompt}",
+          "type": "object",
+          "description": "Ученици процењују колико је група добро радила заједно. МОРА да садржи тачно 3 секмента редом: подстицај за кратку анализу, опције за вођење разговора и завршни подстицај који повезује са нормама.",
+          "properties": {
+            "DebriefPrompt": {
+              "x-format": "**1.** {value.Say}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "description": "Кратак подстицај за анализу за ученике након сарадње.",
+              "properties": {
+                "Say": {
+                  "type": "string",
+                  "description": "Тачан текст који наставник изговара, нпр. 'Реците: \"Одвојте два минута да размислите: Шта је наша група данас добро урадила?\"'"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "Очекивани одговори ученика (2-3 примера)."
+                }
+              },
+              "required": [
+                "Say",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            },
+            "TeacherFacilitationOptions": {
+              "x-format": "**2.** {loc.TeacherFacilitationOptions}\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Тачно 3 наставничка корака за вођење разговора из којих се бира (нпр. Брзи излазни запис, оцена групне сарадње од 1-5, двоминутно дељење у целом разреду). Само опције, без очекиваних одговора."
+            },
+            "ClosingPrompt": {
+              "x-format": "**3.** {value}",
+              "type": "string",
+              "description": "Завршни наставнички подстицај који повезује размишљања са смерницама за сарадњу. нпр. 'Реците: \"Која је ваша норма данас највише помогла?\"'"
+            }
+          },
+          "required": [
+            "DebriefPrompt",
+            "TeacherFacilitationOptions",
+            "ClosingPrompt"
+          ],
+          "additionalProperties": false
+        },
+        "ReviewAndSpacedRetrieval": {
+          "x-format": "### {green}({loc.ReviewAndSpacedRetrieval})\n\n{value.Materials}\n\n{value.TeacherNotes}\n\n📋 **{loc.InstructionsForTeachers}**\n\n{value.ActiveRecall}\n\n{value.EssentialQuestionConnection}\n\n{value.TranscendentThinking}\n\n{value.SpacedRetrieval}",
+          "type": "object",
+          "description": "Комплетан одељак 'Преглед и распоређено враћање на научено'.",
+          "properties": {
+            "Materials": {
+              "x-format": "**📚 {loc.Materials}**\n\n{items}",
+              "type": "array",
+              "items": {
+                "x-format": "- {value}",
+                "type": "string"
+              },
+              "description": "Листа материјала (нпр. ['None'] или ['Whiteboards'])."
+            },
+            "TeacherNotes": {
+              "x-format": "**{loc.TeacherNotes}:** {value}",
+              "type": "string",
+              "description": "Кратка напомена која објашњава како вежба присећања подржава задржавање знања."
+            },
+            "ActiveRecall": {
+              "x-format": "**{loc.ActiveRecall}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}\n\n{value.CorrectCommonMisconceptions}",
+              "type": "object",
+              "description": "Подстицање ученика да се присете НОВОГ градива са ДАНАШЊЕГ часа.",
+              "properties": {
+                "Say": {
+                  "type": "string",
+                  "description": "Наставнички подстицај."
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                },
+                "CorrectCommonMisconceptions": {
+                  "x-format": "⚠️ {loc.CorrectCommonMisconceptions}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "1-2 заблуде и како их исправити."
+                }
+              },
+              "required": [
+                "Say",
+                "ExpectedStudentResponses",
+                "CorrectCommonMisconceptions"
+              ],
+              "additionalProperties": false
+            },
+            "EssentialQuestionConnection": {
+              "x-format": "💭 **{loc.EssentialQuestionConnection}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "description": "Наставнички подстицај који повезује са питањем јединице.",
+              "properties": {
+                "Say": {
+                  "type": "string"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "Say",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            },
+            "TranscendentThinking": {
+              "x-format": "🌍 **{loc.TranscendentThinking}**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "description": "Подстицај за примену у стварном свету.",
+              "properties": {
+                "Say": {
+                  "type": "string"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "Say",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            },
+            "SpacedRetrieval": {
+              "x-format": "⏳ **{loc.SpacedRetrieval} ({value.DrawsFrom})**\n\n{value.Say}\n\n{value.ExpectedStudentResponses}",
+              "type": "object",
+              "description": "Присећање из одређеног претходног часа/јединице.",
+              "properties": {
+                "DrawsFrom": {
+                  "type": "string",
+                  "description": "Претходни час на који се позива, нпр. 'Draws from Unit 2, Lesson 3'"
+                },
+                "Say": {
+                  "type": "string"
+                },
+                "ExpectedStudentResponses": {
+                  "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "DrawsFrom",
+                "Say",
+                "ExpectedStudentResponses"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "Materials",
+            "TeacherNotes",
+            "ActiveRecall",
+            "EssentialQuestionConnection",
+            "TranscendentThinking",
+            "SpacedRetrieval"
+          ],
+          "additionalProperties": false
+        },
+        "FormativeAssessment": {
+          "x-format": "### ✅ {green}({loc.FormativeAssessment})\n\n{items}",
+          "type": "array",
+          "description": "Тачно 4 подстицаја за формативно оцењивање, по један за сваки DOK ниво.",
+          "items": {
+            "x-format": "\n**{value.PromptLabel}:** {value.Question}\n\n{value.ExpectedStudentResponses}\n",
+            "type": "object",
+            "properties": {
+              "PromptLabel": {
+                "type": "string",
+                "description": "нпр. 'Prompt 1 (DOK 1)'"
+              },
+              "Question": {
+                "type": "string",
+                "description": "Тачан текст питања, нпр. 'Why do planets stay in orbit instead of flying off into space?'"
+              },
+              "ExpectedStudentResponses": {
+                "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                "type": "array",
+                "items": {
+                  "x-format": "- {value}",
+                  "type": "string"
+                },
+                "description": "1-2 примерна одговора који показују савладаност (стављена у наводнике)."
+              }
+            },
+            "required": [
+              "PromptLabel",
+              "Question",
+              "ExpectedStudentResponses"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "StudentPractice": {
+          "x-format": "### 🖊️ {green}({loc.StudentPractice})\n\n{value.TeacherNotes}\n\n{value.PracticeTasks}\n\n{value.Reflection}",
+          "type": "object",
+          "description": "Домаћи задатак/вежба ван наставе.",
+          "properties": {
+            "TeacherNotes": {
+              "x-format": "**{loc.TeacherNotes}:** {value}",
+              "type": "string",
+              "description": "Кратко објашњење циљева вежбања, нпр. 'These tasks reinforce today's learning about [topic] by asking students to observe real-world patterns and explain them using the concepts introduced in class...'"
+            },
+            "PracticeTasks": {
+              "x-format": "{items}",
+              "type": "array",
+              "description": "Тачно 3 задатка за вежбу (DOK 2 или DOK 3).",
+              "items": {
+                "x-format": "\n\n**{index}.** {value.TaskDescription}\n\n{value.ExpectedStudentResponses}",
+                "type": "object",
+                "properties": {
+                  "TaskDescription": {
+                    "type": "string",
+                    "description": "нпр. '(DOK 2) Вечерас, изађи напоље и напиши 3-4 реченице...'"
+                  },
+                  "ExpectedStudentResponses": {
+                    "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
+                    "type": "array",
+                    "items": {
+                      "x-format": "- {value}",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "TaskDescription",
+                  "ExpectedStudentResponses"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "Reflection": {
+              "x-format": "{value.Prompt}\n\n{value.ReflectionOptions}",
+              "type": "object",
+              "description": "Задатак за рефлексију за ученице.",
+              "properties": {
+                "Prompt": {
+                  "type": "string",
+                  "description": "нпр. 'Reflection: Write 2-3 sentences responding to one prompt:'"
+                },
+                "ReflectionOptions": {
+                  "type": "array",
+                  "items": {
+                    "x-format": "- {value}",
+                    "type": "string"
+                  },
+                  "description": "Тачно 4 опције питања за рефлексију у наводницима."
+                }
+              },
+              "required": [
+                "Prompt",
+                "ReflectionOptions"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "TeacherNotes",
+            "PracticeTasks",
+            "Reflection"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "LessonTitle",
+        "EssentialQuestions",
+        "KeyVocabulary",
+        "StudentLearningObjectives",
+        "StandardsAligned",
+        "AssessPriorKnowledge",
+        "Instruction",
+        "GroupStructureAndRoles",
+        "CollaborationGuidelines",
+        "CollaborativeActivities",
+        "ReflectionOnGroupDynamics",
+        "ReviewAndSpacedRetrieval",
+        "FormativeAssessment",
+        "StudentPractice"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "LessonDescription"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "LessonDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "LessonDescription.StandardsAligned"
+    ],
+    "AssessPriorKnowledge": [
+      "LessonDescription.AssessPriorKnowledge"
+    ],
+    "SpacedLearningAndRetrieval": [
+      "LessonDescription.ReviewAndSpacedRetrieval"
+    ],
+    "FormativeAssessment": [
+      "LessonDescription.FormativeAssessment"
+    ],
+    "AccommodationsAndModifications": [
+      "LessonDescription.CollaborativeActivities.AccommodationsAndModifications"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+Create ONLY the INQUIRY unit outline (Step 0) using the info below. Do NOT create a full unit plan and do NOT write full lesson plans.
+
+You MUST output valid JSON that matches the provided JSON schema exactly: UnitPlanResponse. Do not include any extra keys. Use compact JSON formatting (no extra blank lines or whitespace between JSON properties). No HTML. No emojis. Plain text inside string fields.
+
+Unit Subject: {{$Subject}}
+Unit Name: {{$Name}}
+Unit Description/Instruction: {{$UserPrompt}}
+Grade Level: {{$GradeLevel}}
+Duration of class period in minutes: {{$ClassDuration}}
+Requested Number of Lessons: {{$NumberOfItems}}
+Standards to Align (use verbatim if present; do NOT add new standards): {{$Standards}}
+Students with individualized support (context only): {{$LearningPlans}}
+Resources/Media to use: {{$MediaContext}}
+Unit Content: {{$AttachedUnit}}
+Attached Lesson Content (if any): {{$AttachedLesson}}
+
+INQUIRY OUTLINE REQUIREMENTS:
+- This is inquiry-first. Lessons MUST progress through this arc:
+  (1) phenomenon/experience + noticing/wondering,
+  (2) selecting questions + planning investigations,
+  (3) evidence collection + pattern-finding,
+  (4) model-building + revision using evidence,
+  (5) explanation/argument + communication + transfer.
+- Maintain sensemaking through discovery: students build and revise models using observations and simple data; emphasize evidence, reasoning, and communication.
+- Keep alignment ONLY to the provided standards. Do NOT add any new standards or frameworks.
+- Cultural relevance & inclusion: include brief community-relevant contexts or perspectives without stereotypes.
+- Interleaving & transfer: revisit skills across lessons (observing, modeling, arguing from evidence, communicating).
+- Lessons MUST be non-overlapping with clear boundaries.
+
+LESSONS ARRAY CONSTRAINTS:
+- The Lessons array MUST contain exactly {{$NumberOfItems}} lessons.
+- lessonNumber is 1-based and strictly increasing by 1.
+- Ensure logical sequencing from foundational inquiry moves to more complex modeling and explanation.
+- Pacing must fit {{$ClassDuration}} minute class periods at grade {{$GradeLevel}}.
+
+OUTPUT RULE:
+Return ONLY JSON that validates against the UnitPlanResponse schema.

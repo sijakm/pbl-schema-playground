@@ -1,0 +1,102 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "Опис јединице као један кохерентан параграф обичног текста (4–5 потпуних реченица) написан природним тоном наставника, који можете директно изговорити ученицима. Без HTML-а, без емоџија, без набрајања. Мора да тече разговорно, али да прати ову структуру (без наслова): (1) уводна реченица која побуђује радозналост или прави изненађујући контраст, (2) реченица „У овој јединици ћете...” о исходима савладавања, (3) реченица „Јачаћете своје вештине у...” о мисаоним/аналитичким способностима, (4) реченица „Ово се повезује са...” о значају у стварном свету, (5) реченица „Разумевање овога је важно јер...” о ширем значају или дугорочном утицају."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Направите суштинска питања која се фокусирају само на широке, универзалне појмове као што су промена, докази, обрасци, односи, системи или расуђивање. Не помињите никакве појмове специфичне за предмет, процесе, речник или примере. Питања морају бити отворена, преносива кроз све дисциплине и немогућа за одговорити учењем садржаја лекције или јединице. Фокусирајте се само на велике идеје, а не на садржај предмета.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "Потпуна секција „Исходи учења ученика” за целу ову јединицу. Свака ставка листе мора бити јасан, мерљив исход који почиње мерљивим глаголом и завршава се DOK ознаком у загради",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Наведите све јединствене образовне стандарде коришћене било где у овој јединици и њеним лекцијама. Не додавајте стандарде који се не појављују у садржају јединице. Сваки стандард мора да садржи шифру стандарда и опис, нпр. 'MS-ESS1-1: Develop and use a model of the Earth–sun–moon system to describe the cyclic patterns of lunar phases, eclipses, and seasons.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "KeyVocabulary": {
+          "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
+          "type": "array",
+          "description": "Потпуна секција „Кључни речник” као листа стрингова. Сваки стринг треба да буде један појам са дефиницијом одвојеном цртицом/хифеном. Пример: 'Гравитација - Сила која привлачи објекте једне ка другима'. Све дефиниције морају бити кратке, прилагођене узрасту и директно повезане са садржајем лекције.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned",
+        "KeyVocabulary"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "x-format": false,
+      "type": "array",
+      "description": "Листа контејнера лекција за ову јединицу (само преглед). Свака ставка мора бити не-преклапајућа и јасно обухваћена тако да се садржај лекција не понавља између лекција.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Редни број лекције. 1 Based."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Кратак наслов лекције као обичан текст."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 реченице које описују обим, фокус и границе лекције како би се спречило преклапање са другим лекцијама."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

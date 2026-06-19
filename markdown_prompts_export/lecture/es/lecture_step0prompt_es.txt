@@ -1,0 +1,58 @@
+Crea el esquema de la unidad y la estructura de las lecciones usando la información de abajo. NO escribas planes de lección completos.
+                    
+Basándote en el tema de la unidad, los estándares educativos, la descripción/instrucción de la unidad, el nivel de grado, la duración del periodo de clase (minutos) y el número solicitado de lecciones, genera una respuesta en JSON que incluya una UnitDescription cohesiva y una lista no superpuesta de "contenedores" de lecciones.
+
+Tema de la unidad:
+{{$Subject}}
+
+Nombre de la unidad:
+{{$Name}}
+
+Descripción/Instrucción de la unidad:
+{{$UserPrompt}}
+
+Nivel de grado:
+{{$GradeLevel}}
+
+Duración del periodo de clase en minutos:
+{{$ClassDuration}}
+	
+Estándares a los que se debe alinear:
+{{$Standards}}
+    
+Estudiantes con apoyo individualizado:
+{{$LearningPlans}}
+
+Recursos/medios a utilizar:
+{{$MediaContext}}
+	
+Contenido de la unidad:
+{{$AttachedUnit}}
+
+Requisitos de las Preguntas Esenciales:
+- Cada pregunta DEBE ser una oración completa, gramaticalmente correcta, que termine con un signo de interrogación.
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
+- Las preguntas DEBEN ser conceptuales y exploratorias, no fácticas, procedimentales ni definicionales.
+- Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una materia.
+- Las preguntas DEBEN poder transferirse entre disciplinas y ser aplicables más allá de esta unidad.
+- Las preguntas DEBEN reutilizarse textualmente en cada lección dentro de la unidad.
+
+Qué generar:
+- La salida DEBE ser JSON válido que coincida con el esquema.
+- OBLIGATORIO: Completa totalmente todas las propiedades dentro del objeto "UnitDescription":
+  - "Description": Escribe un párrafo de 4 a 5 oraciones que describa el enfoque central de la unidad y su recorrido narrativo.
+  - "StudentLearningObjectives": Enumera de 3 a 5 objetivos de aprendizaje clave y medibles para la unidad.
+  - "StandardsAligned": Enumera todos los estándares que se abordarán a lo largo de la unidad.
+  - "EssentialQuestions": Exactamente 3 preguntas conceptuales siguiendo las reglas anteriores.
+- GENERA la lista "Lessons" que contenga exactamente {{$NumberOfItems}} lecciones.
+  - Cada lección debe incluir "lessonNumber" (índice basado en 1), "lessonName" y "lessonDescription" (2–4 oraciones que describan el alcance de la lección).
+
+Restricciones:
+- Mantén la unidad y cada lección alineadas con el enfoque de la unidad.
+- Asegura una secuencia lógica desde ideas fundamentales hasta modelado más complejo.
+- Precisión: Todo el contenido debe ser científicamente exacto y apropiado para la edad.
+
+La salida DEBE ser JSON válido que coincida con el esquema. Usa formato compacto (sin líneas en blanco extra).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

@@ -1,0 +1,102 @@
+{
+  "title": "UnitPlanResponse",
+  "type": "object",
+  "properties": {
+    "UnitDescription": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "Descripció de la unitat com un sol paràgraf cohesionat de text pla (4–5 oracions completes) escrit amb una veu natural de docent que podries dir directament als estudiants. Sense HTML, sense emojis, sense viñetes. Ha de fluir de manera conversacional però seguir aquesta estructura (sense encapçalaments): (1) oració ganxo que desperti curiositat o marqui un contrast sorprenent, (2) oració de 'En esta unitat, vosaltres...' sobre els resultats de domini, (3) oració de 'Fortalecerán sus habilidades en...' sobre les capacitats de pensament/anàlisi, (4) oració de 'Esto se conecta con...' sobre la rellevància en el món real, (5) oració de 'Entender esto importa porque...' sobre la importància més àmplia o l'impacte a llarg termini."
+        },
+        "EssentialQuestions": {
+          "x-format": "### 💭{loc.EssentialQuestions}\n\n{items}",
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Crea preguntes essencials que se centrin només en conceptes amplis i universals com el canvi, l'evidència, els patrons, les relacions, els sistemes o el raonament. NO esmentis termes, processos, vocabulari o exemples específics del contingut. Les preguntes han de ser obertes, transferibles a totes les disciplines i impossibles de respondre aprenent la lliçó o el contingut de la unitat. Enfoca't només en les grans idees, no en el contingut temàtic.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StudentLearningObjectives": {
+          "x-format": "### 🎯{loc.StudentLearningObjectives}\n\n{items}",
+          "type": "array",
+          "description": "Sección completa de 'Objectius d'aprenentatge de l'estudiant' per a tota aquesta unitat. Cada element de la llista ha de ser un objectiu clar i mesurable que comenci amb un verb mesurable i acabi amb una etiqueta DOK entre parèntesis",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "StandardsAligned": {
+          "x-format": "### 📏{loc.StandardsAligned}\n\n{items}",
+          "type": "array",
+          "description": "Enumera tots els estàndards educatius únics usats en qualsevol part d'aquesta unitat i les seves lliçons. NO afegeixis estàndards que no apareguin en el contingut de la unitat. Cada estàndard ha d'incloure el codi i la descripció de l'estàndard, per exemple, 'MS-ESS1-1: Desenvolupar i usar un model del sistema Terra–Sol–Lluna per descriure els patrons cíclics de les fases lunars, eclipsi i estacions'.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        },
+        "KeyVocabulary": {
+          "x-format": "### 🔤{loc.KeyVocabulary}\n\n{items}",
+          "type": "array",
+          "description": "Secció completa de 'Vocabulari clau' com una llista de cadenes. Cada cadena ha de ser un sol terme amb la seva definició separada per un guionet. Exemple: 'Gravetat - La força que atrau els objectes entre si'. Totes les definicions han de ser breus, apropiades per a l'edat i directament relacionades amb el contingut de la lliçó.",
+          "items": {
+            "x-format": "- {value}",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Description",
+        "EssentialQuestions",
+        "StudentLearningObjectives",
+        "StandardsAligned",
+        "KeyVocabulary"
+      ],
+      "additionalProperties": false
+    },
+    "Lessons": {
+      "x-format": false,
+      "type": "array",
+      "description": "Llista de contenidors de lliçons per a aquesta unitat (només esquema). Cada element no s'ha de solapar i ha de tenir un abast clarament delimitat perquè el contingut de les lliçons no es repeteixi.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lessonNumber": {
+            "type": "integer",
+            "description": "Número d'ordre d'una lliçó. Basat en 1."
+          },
+          "lessonTitle": {
+            "type": "string",
+            "description": "Títol breu de la lliçó com a text pla."
+          },
+          "lessonOutline": {
+            "type": "string",
+            "description": "2–4 oracions que descriguin l'abast, l'enfocament i els límits de la lliçó per evitar solapament amb altres lliçons."
+          }
+        },
+        "required": [
+          "lessonNumber",
+          "lessonTitle",
+          "lessonOutline"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "UnitDescription",
+    "Lessons"
+  ],
+  "additionalProperties": false,
+  "x-removablePaths": {
+    "EssentialQuestions": [
+      "UnitDescription.EssentialQuestions"
+    ],
+    "StandardsAligned": [
+      "UnitDescription.StandardsAligned"
+    ]
+  }
+}

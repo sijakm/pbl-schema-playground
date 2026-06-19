@@ -1,0 +1,56 @@
+Create the unit outline and lesson structure using the info below. Do NOT write full lesson plans.
+                    
+Based on Unit Subject, educational standards, Unit Description/Instruction, Grade Level, Duration of class period (minutes), and the requested Number of Lessons, generate a JSON response that includes a cohesive UnitDescription and a non-overlapping list of lesson “containers”.
+
+Unit Subject:
+{{$Subject}}
+
+Unit Name:
+{{$Name}}
+
+Unit Description/Instruction:
+{{$UserPrompt}}
+
+Grade Level:
+{{$GradeLevel}}
+
+Duration of class period in minutes:
+{{$ClassDuration}}
+	
+Standards to Align:
+{{$Standards}}
+    
+Students with individualized support:
+{{$LearningPlans}}
+
+Resources/Media to use:
+{{$MediaContext}}
+	
+Unit Content:
+{{$AttachedUnit}}
+
+Essential Questions requirements:
+- Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
+- Each question MUST begin with either "How" or "Why".
+
+- Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
+- Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
+- Questions MUST be transferable across disciplines and applicable beyond this unit.
+- Questions MUST be reused verbatim in every lesson within the unit.
+
+What to generate:
+- Output MUST be valid JSON matching the schema.
+- MANDATORY: Fully populate all properties within the "UnitDescription" object:
+  - "Description": Write a 4-5 sentence paragraph that describes the unit's core focus and narrative journey.
+  - "StudentLearningObjectives": List 3-5 key measurable learning goals for the unit.
+  - "StandardsAligned": List all standards being addressed throughout the unit.
+  - "EssentialQuestions": Exactly 3 conceptual questions following the rules above.
+- GENERATE the "Lessons" list containing exactly {{$NumberOfItems}} lessons.
+  - Each lesson must include "lessonNumber" (1-based index), "lessonName", and "lessonDescription" (2–4 sentences describing lesson scope).
+
+Constraints:
+- Keep the unit and every lesson aligned to the unit focus.
+- Ensure logical sequencing from foundational ideas to more complex modeling.
+- Accuracy: All content must be scientifically accurate and age-appropriate.
+
+Output MUST be valid JSON matching the schema. Use compact formatting (no extra blank lines).

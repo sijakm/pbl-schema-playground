@@ -1,0 +1,54 @@
+Buat SATU rencana pembelajaran (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan info di bawah ini.
+ANDA HARUS menghasilkan JSON valid yang cocok persis dengan skema JSON yang disediakan (LessonPlanResponse dengan satu objek "LessonPlan"). Jangan sertakan kunci tambahan apa pun. Gunakan format JSON ringkas (tanpa baris kosong tambahan).
+Subject Unit: 
+{{$Subject}}
+Nama Unit: 
+{{$Name}}
+Deskripsi/Instruksi Unit: 
+{{$UserPrompt}}
+Tingkat Kelas: 
+{{$GradeLevel}}
+Durasi jam pelajaran dalam menit 
+{{$ClassDuration}}
+Sumber/Media yang digunakan: 
+{{$MediaContext}}
+Konten Unit: 
+{{$ParentUnitData}}
+Standar yang harus Selaras:
+{{$Standards}}
+Konten Pelajaran Terlampir: 
+{{$AttachedLesson}}
+
+Pertanyaan Esensial Unit (GUNAKAN INI SECARA APA ADANYA):
+{{$UnitEssentialQuestions}}
+
+Jika Pertanyaan Esensial Unit di atas kosong, hasilkan tepat 3 pertanyaan konseptual dengan mengikuti aturan berikut:
+- Setiap pertanyaan HARUS berupa kalimat lengkap, tata bahasa benar, dan diakhiri tanda tanya.
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
+- Pertanyaan HARUS bersifat konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
+- Pertanyaan HARUS berfokus pada gagasan umum dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
+- Pertanyaan HARUS dapat dipindahkan lintas disiplin dan berlaku di luar unit ini.
+
+SISWA DENGAN DUKUNGAN TERINDIVIDUALISASI (HARUS hanya digunakan di dalam GuidedPractice.AccommodationsAndModifications; gunakan nama rencana siswa persis seperti tertulis):
+{{$LearningPlans}}
+
+ATURAN PENTING KONTEN:
+- Jaga agar pembelajaran tetap selaras dengan fokus unit: mengembangkan dan menggunakan model untuk mendeskripsikan komposisi atom dari molekul sederhana dan/atau struktur yang lebih kompleks.
+- Sertakan koneksi singkat tingkat tinggi ke DCI relevan lainnya jika sesuai, tetapi tetap pusatkan pelajaran pada pemodelan dan penalaran struktur–sifat (tanpa matematika mendalam, tanpa menyeimbangkan persamaan kecuali secara eksplisit diwajibkan oleh standar).
+- Pastikan semua bagian pelajaran mencerminkan Batasan/Cakupan Pelajaran di atas; hindari memperkenalkan konsep besar baru yang termasuk dalam pelajaran lain.
+- EssentialQuestions: HARUS persis sama dengan pertanyaan esensial tingkat unit (teks sama, urutan sama).
+- AssessPriorKnowledge: HANYA jika LessonNumber == 1, tulis 150–250 kata dan ikuti struktur yang diwajibkan dalam deskripsi skema. Jika LessonNumber != 1, kembalikan "" (string kosong).
+- DirectPresentation harus ≤10 menit total dan harus mengikuti format HOOK/INTRODUCTION/DIRECT TEACHING/GUIDED ENGAGEMENT yang diwajibkan dengan Say/Do/Ask/✅ Expected Student Responses/Write, dan respons siswa yang diharapkan sebagai poin-poin bullet (JANGAN sertakan header/judul bagian dalam string).
+- GuidedPractice.InstructionsForTeachers harus minimal 700 kata dan harus memuat komponen wajib yang tercantum dalam deskripsi skema.
+- GuidedPractice.AccommodationsAndModifications harus mencakup:
+  - General: dukungan umum
+  - IndividualSupport: array dengan tepat siswa dan rencana yang disediakan (nama/rencana sama; tidak ada siswa tambahan).
+- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'These tasks reinforce today’s learning about ____ by ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving (pembelajaran berselang) jika mata pelajaran adalah matematika.
+
+PERSYARATAN OUTPUT:
+- Output HARUS berupa JSON valid yang cocok persis dengan skema yang disediakan.
+- Output HARUS HANYA satu rencana pembelajaran.
+- Tidak ada HTML. Tidak ada emoji. Tidak ada markdown. Teks biasa di dalam field string.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.

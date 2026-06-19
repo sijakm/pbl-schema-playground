@@ -1,0 +1,91 @@
+Kreirajte JEDAN plan časa u kolaborativnom stilu (NE plan jedinice, NE više časova) koristeći informacije ispod.
+
+MORATE dati važeći JSON koji tačno odgovara priloženoj JSON šemi (LessonPlanResponse sa jednim objektom "LessonPlan"). Ne uključujte nikakve dodatne ključeve. Koristite kompaktno JSON formatiranje (bez dodatnih praznih redova).
+
+KONTEKST JEDINICE (kontekst samo za čitanje radi koherentnosti):
+Predmet jedinice:
+{{$Subject}}
+
+Sadržaj jedinice: 
+{{$ParentUnitData}}
+
+Opis/Uputstvo za jedinicu: Kreirajte jedinicu koristeći sledeće standarde:
+{{$Standards}}
+
+Nivo razreda:
+{{$GradeLevel}}
+
+Resursi/mediji koje treba koristiti: 
+{{$MediaContext}}
+
+Trajanje školskog časa u minutima:
+{{$ClassDuration}}
+
+Naziv časa:
+{{$Name}}
+
+Opis/Uputstvo za jedinicu: 
+{{$UserPrompt}}
+
+Ključna pitanja jedinice (KORISTITE OVA DOSLOVNO):
+{{$UnitEssentialQuestions}}
+
+Ako je gore navedena sekcija Ključna pitanja jedinice prazna, generišite tačno 3 konceptualna pitanja prema sledećim pravilima:
+- Svako pitanje MORA biti potpuna, gramatički ispravna rečenica koja se završava znakom pitanja.
+- Svako pitanje MORA počinjati sa „Kako” ili „Zašto”.
+
+- Pitanja MORAJU biti konceptualna i istraživačka, a ne činjenična, proceduralna ili definiciona.
+- Pitanja MORAJU biti usmerena na široke, univerzalne ideje (kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje), a ne na sadržaj specifičan za predmet.
+- Pitanja MORAJU biti prenosiva između disciplina i primenljiva van ove jedinice.
+
+UČENICI SA INDIVIDUALIZOVANOM PODRŠKOM (MORAJU se koristiti SAMO unutar CollaborativeActivities.AccommodationsAndModifications; koristite imena/planove učenika tačno kako su napisani):
+{{$LearningPlans}}
+
+VAŽNA PRAVILA SADRŽAJA (kolaborativni stil):
+- Održite čas usklađen sa fokusom jedinice i gornjim obimom/granicama časa; izbegavajte uvođenje novih glavnih pojmova koji pripadaju drugim časovima.
+- Kulturna relevantnost i inkluzija: uključite više perspektiva; povežite sa različitim zajednicama; izbegavajte stereotipe; pokažite uticaje na sve uključene.
+- Prenos: ugrađujte primenu u stvarnom svetu i rezonovanje tokom celog časa.
+- Mešanje sadržaja: kada učenici vežbaju/primenjuju, mešajte strategije ili koncepte (ne blokovska vežba). Ako čas sadrži bilo kakvo rezonovanje nalik matematičkom, uključite najmanje jednu DOK 3–4 mešanu stavku koja spaja trenutni sadržaj sa konceptom iz ranijeg časa i zahteva da učenici obrazlože izbor strategije.
+
+PRAVILA PO POLJIMA:
+- EssentialQuestions: MORAJU tačno biti jednaka ključnim pitanjima na nivou jedinice (isti tekst, isti redosled).
+- AssessPriorKnowledge: Ako je ovaj deo obavezan (npr. za prvi čas ili kada se uvode novi glavni pojmovi), napišite 150–250 reči poštujući traženu strukturu u opisu šeme. U suprotnom, vratite "" (prazan string).
+- Instruction:
+  - InstructionsForTeachers: Ovi koraci moraju biti detaljni i uključivati svo novo učenje za čas uz objašnjenja kako da se ono podučava. Budite precizni.
+  - Mora uključivati kako predstaviti novi sadržaj (hookovi, vodeća pitanja, prelazi).
+  - Mora uključivati sadržaj i skriptu za nastavnika da direktno poučava sadržaj (definicije, primeri, ključne tačke, objašnjenja).
+  - Struktura mora prirodno teći kroz Recite/Uradite/Pitajte/Osluškujte/Napišite podsticaje.
+  - VAŽNO: Ne uključujte NASLOVE U VELIKIM SLOVIMA (kao UVOD, PREDSTAVLJANJE, itd.) za sekcije.
+  - VAŽNO: Ne uključujte trajanje po minutima za pojedinačna uputstva ili korake.
+  - TranscendentThinking: Dajte jedno pitanje za primenu u stvarnom svetu koje povezuje učenje sa svrhom/meaning, zatim oznaku 'Očekivani odgovori učenika:' i 2–3 primera.
+- GroupStructureAndRoles:
+  - Izlaz MORA biti namenjen nastavniku.
+  - GroupSize: navedite 'parovi', 'trojke' ili '4-5 učenika'.
+  - TeacherSay: 1–2 rečenice koje objašnjavaju da su uloge važne i da ćete modelovati kako svaka uloga izgleda.
+  - Roles: Moraju biti definisane tačno sledećih pet uloga (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) sa konkretnim dužnostima povezanim sa CollaborativeActivities časa.
+  - Rotation: Jedna rečenica koja precizira kada se uloge rotiraju u OVOM času (npr. "Rotirajte uloge nakon Faze A i ponovo pre galerijske šetnje.").
+
+CollaborativeActivities:
+- Kreirajte međuzavisnu kolaborativnu aktivnost (kolaborativna zamena za Vođenu praksu) usklađenu sa obimom ovog časa.
+- Svaki učenik mora doprineti i grupe moraju proizvesti zajednički proizvod ili odluku.
+- Uključite vremenske naznake, scripting za nastavnikov Recite, podsticaje za obilazak/kretnju po učionici + očekivane odgovore, i brzu proveru gde SVI učenici odgovaraju + očekivane odgovore.
+- Uključite Differentiation (3 nivoa) i AccommodationsAndModifications (General + IndividualSupport tačno kako je dato).
+- Ako je ovo čas iz matematike, uključite jednu DOK 3–4 mešanu problematiku koja spaja trenutni sadržaj sa prethodnim časom/jedinicom i objasnite zašto je uključena; u suprotnom izostavite mešanje.
+- ReflectionOnGroupDynamics:
+  - Mora biti oko 5 minuta.
+  - Uključite 2–4 podsticaja za studentski razgovor/debrief (npr. šta je dobro funkcionisalo, izazov, čiji je glas bio saslušan).
+  - Obezbedite poteze za facilitaciju nastavnika (kratak pisani izlazni slip, samoprocenjivanje grupe 1–5, ili 2-minutna diskusija), sa promptovima za nastavnika i očekivanim odgovorima učenika.
+  - Eksplicitno povežite refleksiju sa CollaborationGuidelines.
+- ReviewAndSpacedRetrieval:
+  - Ista struktura i isti zahtevi kao Direct Instruction verzija (vidi opis šeme).
+  - Mora uključiti retrieval proveru koja se povezuje sa JEDNIM prethodnim pojmom iz ranijeg časa (navedite broj tog prethodnog časa).
+- StudentPractice:
+  - Domaći/vežba van časa.
+  - Mora pratiti tačan traženi format u opisu šeme (uključujući ✅Expected Student Responses markere).
+
+ZAHTEVI ZA IZLAZ:
+- Izlaz MORA biti validan JSON koji tačno odgovara priloženoj šemi.
+- Izlaz MORA biti SAMO jedan plan časa.
+- Bez HTML-a. Bez emoji-ja. Bez markdowna. Običan tekst unutar string polja.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.
