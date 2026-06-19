@@ -717,7 +717,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse okvire za rečenice to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1229,7 +1229,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse okvire za rečenice to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1606,7 +1606,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Jedan pasus koji objašnjava znanje i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počne sa 'These tasks reinforce today's learning about ____ by ______.' pri čemu su praznine popunjene relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
+              "description": "Jedan pasus koji objašnjava znanje i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počne sa 'Ovi zadaci utvrđuju današnje učenje o ____ kroz ______.' pri čemu su praznine popunjene relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
@@ -1642,7 +1642,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "Ako i SAMO AKO je predmet matematika: uključite interleaving problem + nastavnički podsticaj + očekivane odgovore + nastavničku napomenu. U suprotnom prazna niska."
+              "description": "Ako i SAMO AKO je predmet matematika: uključite ukršteno učenje (ukršteno učenje (interleaving)) problem + nastavnički podsticaj + očekivane odgovore + nastavničku napomenu. U suprotnom prazna niska."
             },
             "Phase2_ReflectionPrompt": {
               "type": "object",
@@ -1741,7 +1741,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse okvire za rečenice to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -2118,7 +2118,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Jedan pasus koji objašnjava znanja i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počne sa 'These tasks reinforce today's learning about ____ by ______.' pri čemu se prazna mesta popunjavaju relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
+              "description": "Jedan pasus koji objašnjava znanja i veštine koje se vežbaju kroz sve zadatke u ovoj fazi. Pasus MORA da počne sa 'Ovi zadaci utvrđuju današnje učenje o ____ kroz ______.' pri čemu se prazna mesta popunjavaju relevantnim sadržajem projekta, nakon čega sledi objašnjenje kako ovi zadaci jačaju dugoročno pamćenje."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",

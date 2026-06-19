@@ -717,7 +717,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse структуры предложений to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1229,7 +1229,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse структуры предложений to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1606,7 +1606,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Один абзац, объясняющий знания и навыки, отрабатываемые во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с 'These tasks reinforce today's learning about ____ by ______.' , где пропуски заполняются содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долгосрочное запоминание."
+              "description": "Один абзац, объясняющий знания и навыки, отрабатываемые во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с 'Эти задания закрепляют сегодняшнее изучение ____ с помощью ______.' , где пропуски заполняются содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долгосрочное запоминание."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
@@ -1642,7 +1642,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "Если И ТОЛЬКО ЕСЛИ предмет — математика: включите interleaving problem + teacher prompt + expected responses + teacher note. В противном случае пустая строка."
+              "description": "Если И ТОЛЬКО ЕСЛИ предмет — математика: включите чередование (чередование (interleaving)) problem + teacher prompt + expected responses + teacher note. В противном случае пустая строка."
             },
             "Phase2_ReflectionPrompt": {
               "type": "object",
@@ -1741,7 +1741,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse структуры предложений to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -2118,7 +2118,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Один абзац, объясняющий знания и навыки, отрабатываемые во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с 'These tasks reinforce today's learning about ____ by ______.'; пропуски заполняются соответствующим содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долговременное запоминание."
+              "description": "Один абзац, объясняющий знания и навыки, отрабатываемые во всех заданиях на этом этапе. Абзац ДОЛЖЕН начинаться с 'Эти задания закрепляют сегодняшнее изучение ____ с помощью ______.'; пропуски заполняются соответствующим содержанием проекта, после чего следует объяснение того, как эти задания укрепляют долговременное запоминание."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",

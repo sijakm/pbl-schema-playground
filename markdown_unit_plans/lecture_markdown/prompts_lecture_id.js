@@ -99,8 +99,8 @@ ATURAN KONTEN PENTING:
 - EssentialQuestions: HARUS sama persis dengan pertanyaan esensial tingkat unit (teks yang sama, urutan yang sama).
 - AssessPriorKnowledge: HANYA jika LessonNumber == 1, isi objek sesuai yang didefinisikan dalam skema. Untuk SEMUA PELAJARAN LAIN, ANDA HARUS mengembalikan objek kosong {} tanpa kunci apa pun di dalamnya. JANGAN gunakan placeholder seperti "N/A", "none", atau array kosong.
 - ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications harus mencakup dukungan umum terlebih dahulu, lalu dukungan individual untuk setiap siswa yang disediakan di {{$LearningPlans}}.
-- Saat menyarankan "sentence frames" atau "sentence starters" di bagian mana pun dalam rencana pelajaran (terutama di Individualized Supports), ANDA HARUS memberikan kalimat awal yang sebenarnya dan spesifik yang disesuaikan dengan konten pelajaran sehingga guru dapat menggunakannya secara langsung.
-- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'These tasks reinforce today's learning about ____ by ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving jika subjeknya matematika.
+- Saat menyarankan "kerangka kalimat" atau "awal kalimat" di bagian mana pun dalam rencana pelajaran (terutama di Individualized Supports), ANDA HARUS memberikan kalimat awal yang sebenarnya dan spesifik yang disesuaikan dengan konten pelajaran sehingga guru dapat menggunakannya secara langsung.
+- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'Tugas-tugas ini memperkuat pembelajaran hari ini tentang ____ melalui ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving (pembelajaran berselang) (pembelajaran berselang) jika subjeknya matematika.
 
 PERSYARATAN OUTPUT:
 - Output HARUS berupa JSON valid yang sesuai dengan skema yang diberikan secara tepat.
@@ -455,7 +455,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "type": "array",
           "description": "Cantumkan miskonsepsi umum siswa yang diperkirakan agar guru siap.",
           "items": {
-            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {

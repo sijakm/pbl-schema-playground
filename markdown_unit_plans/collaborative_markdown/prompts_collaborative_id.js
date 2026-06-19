@@ -113,23 +113,23 @@ ATURAN SPESIFIK BIDANG:
   - InstructionsForTeachers: Langkah-langkah ini harus menyeluruh dan mencakup semua pembelajaran baru untuk pelajaran ini beserta penjelasan bagaimana mengajarkannya. Harus tepat.
   - Harus mencakup cara memperkenalkan konten baru subjek (hook, pertanyaan penuntun, transisi).
   - Harus mencakup konten dan naskah bagi guru untuk mengajarkan konten secara langsung (definisi, contoh, poin penting, penjelasan).
-  - Struktur harus mengalir secara alami dengan prompt Say/Do/Ask/Listen for/Write.
-  - PENTING: Jangan sertakan header huruf kapital semua (seperti HOOK, INTRODUCTION, dll.) untuk bagian-bagian.
+  - Struktur harus mengalir secara alami dengan prompt Katakan/Lakukan/Tanyakan/Dengarkan/Tulis.
+  - PENTING: Jangan sertakan header huruf kapital semua (seperti HOOK, PENGANTAR, dll.) untuk bagian-bagian.
   - PENTING: Jangan sertakan durasi waktu untuk petunjuk atau langkah individual.
-  - TranscendentThinking: Berikan satu pertanyaan penerapan dunia nyata yang menghubungkan pembelajaran dengan tujuan/makna, diikuti label 'Expected Student Responses:' dan 2–3 contoh.
+  - TranscendentThinking: Berikan satu pertanyaan penerapan dunia nyata yang menghubungkan pembelajaran dengan tujuan/makna, diikuti label 'Respons Siswa yang Diharapkan:' dan 2–3 contoh.
 - GroupStructureAndRoles:
   - Output HARUS ditujukan untuk guru.
-  - GroupSize: tentukan 'pairs', 'triads', atau '4-5 students'.
+  - GroupSize: tentukan 'berpasangan', 'bertiga', atau '4-5 siswa'.
   - TeacherSay: 1–2 kalimat yang menjelaskan bahwa peran itu penting dan Anda akan memodelkan seperti apa setiap peran.
   - Roles: Harus mendefinisikan tepat lima peran ini (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) dengan tugas konkret yang terkait dengan CollaborativeActivities pada pelajaran ini.
-  - Rotation: Satu kalimat yang menentukan kapan peran berputar dalam pelajaran INI (misalnya, "Rotate roles after Phase A and again before the gallery walk.").
+  - Rotation: Satu kalimat yang menentukan kapan peran berputar dalam pelajaran INI (misalnya, "Rotasikan peran setelah Fase A dan sekali lagi sebelum gallery walk.").
 
 CollaborativeActivities:
-- Buat aktivitas kolaboratif yang saling bergantung (pengganti kolaboratif untuk Guided Practice) yang selaras dengan ruang lingkup pelajaran ini.
+- Buat aktivitas kolaboratif yang saling bergantung (pengganti kolaboratif untuk Latihan Terbimbing) yang selaras dengan ruang lingkup pelajaran ini.
 - Setiap siswa harus berkontribusi dan kelompok harus menghasilkan produk atau keputusan bersama.
 - Sertakan petunjuk waktu, scripting guru pada bagian Say:, prompt saat berkeliling + respons yang diharapkan, dan cek cepat di mana SEMUA siswa merespons + respons yang diharapkan.
 - Sertakan Differentiation (3 tingkatan) dan AccommodationsAndModifications (General + IndividualSupport persis seperti yang diberikan).
-- Jika ini pelajaran matematika, sertakan satu masalah interleaved DOK 3–4 yang menggabungkan konten saat ini dengan pelajaran/unit sebelumnya dan jelaskan mengapa itu disertakan; jika bukan, jangan sertakan interleaving.
+- Jika ini pelajaran matematika, sertakan satu masalah interleaved DOK 3–4 yang menggabungkan konten saat ini dengan pelajaran/unit sebelumnya dan jelaskan mengapa itu disertakan; jika bukan, jangan sertakan interleaving (pembelajaran berselang) (pembelajaran berselang).
 - ReflectionOnGroupDynamics:
   - Harus sekitar 5 menit.
   - Sertakan 2–4 prompt debrief siswa (mis., apa yang berjalan baik, tantangan, suara siapa yang terdengar).
@@ -527,7 +527,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         "CollaborativeActivities": {
           "x-format": "### {green}({loc.CollaborativeActivities})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
           "type": "object",
-          "description": "Kerja kelompok saling bergantung (pengganti kolaboratif untuk Guided Practice). Ditujukan untuk guru, sangat terstruktur, dan dirancang agar siswa tidak dapat menyelesaikan tugas secara mandiri. Harus mencakup: (a) saling ketergantungan yang jelas (jigsaw, membangun konsensus, gallery walk, pemecahan masalah terstruktur, atau serupa), (b) pengaturan waktu yang eksplisit untuk setiap fase (misalnya, '8 menit diskusi, 2 menit menyiapkan respons'), (c) fasilitasi guru yang terskrip menggunakan pernyataan 'Katakan:' di sepanjang proses, (d) produk kelompok bersama (klaim, model, bagan, set solusi, artefak gallery, dll.), (e) prompt saat berkeliling beserta respons siswa yang diharapkan, (f) setidaknya satu cek respons SELURUH siswa (papan tulis mini, menulis cepat, polling, acungan jempol, dll.) dengan respons yang diharapkan, (g) pertanyaan cek cepat + respons yang diharapkan, (h) Diferensiasi dalam tiga tingkat yang berfokus pada instruksi (bukan akomodasi), dan (i) AccommodationsAndModifications yang dipisahkan menjadi General supports dan IndividualSupport yang cocok persis dengan siswa/rencana yang diberikan. Pastikan relevansi budaya dan inklusi dengan mengundang berbagai perspektif dan memastikan partisipasi yang adil.",
+          "description": "Kerja kelompok saling bergantung (pengganti kolaboratif untuk Latihan Terbimbing). Ditujukan untuk guru, sangat terstruktur, dan dirancang agar siswa tidak dapat menyelesaikan tugas secara mandiri. Harus mencakup: (a) saling ketergantungan yang jelas (jigsaw, membangun konsensus, gallery walk, pemecahan masalah terstruktur, atau serupa), (b) pengaturan waktu yang eksplisit untuk setiap fase (misalnya, '8 menit diskusi, 2 menit menyiapkan respons'), (c) fasilitasi guru yang terskrip menggunakan pernyataan 'Katakan:' di sepanjang proses, (d) produk kelompok bersama (klaim, model, bagan, set solusi, artefak gallery, dll.), (e) prompt saat berkeliling beserta respons siswa yang diharapkan, (f) setidaknya satu cek respons SELURUH siswa (papan tulis mini, menulis cepat, polling, acungan jempol, dll.) dengan respons yang diharapkan, (g) pertanyaan cek cepat + respons yang diharapkan, (h) Diferensiasi dalam tiga tingkat yang berfokus pada instruksi (bukan akomodasi), dan (i) AccommodationsAndModifications yang dipisahkan menjadi General supports dan IndividualSupport yang cocok persis dengan siswa/rencana yang diberikan. Pastikan relevansi budaya dan inklusi dengan mengundang berbagai perspektif dan memastikan partisipasi yang adil.",
           "properties": {
             "Materials": {
               "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -541,19 +541,19 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "InstructionsForTeachers": {
               "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}",
               "type": "array",
-              "description": "Skrip guru untuk aktivitas kolaboratif (usahakan 6-8 langkah bernomor). Pastikan satu langkah secara eksplisit berbunyi 'Circulation Prompts:' yang mencakup pertanyaan spesifik untuk diajukan kepada kelompok saat mereka bekerja.",
+              "description": "Skrip guru untuk aktivitas kolaboratif (usahakan 6-8 langkah bernomor). Pastikan satu langkah secara eksplisit berbunyi 'Prompt Keliling:' yang mencakup pertanyaan spesifik untuk diajukan kepada kelompok saat mereka bekerja.",
               "items": {
                 "x-format": "\n\n**{index}.** {value.Instruction}{value.CirculationPrompts}{value.ExpectedStudentResponses}",
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Tindakan guru yang spesifik, dimulai dengan 'Katakan: ', 'Lakukan: ', atau persis 'Circulation Prompts:'."
+                    "description": "Tindakan guru yang spesifik, dimulai dengan 'Katakan: ', 'Lakukan: ', atau persis 'Prompt Keliling:'."
                   },
                   "CirculationPrompts": {
                     "x-format": "\n{items}",
                     "type": "array",
-                    "description": "HANYA isi ini jika Instruction adalah 'Circulation Prompts:'. Daftarkan pertanyaan spesifik untuk diajukan kepada kelompok saat berkeliling. HAPUS properti ini jika tidak berlaku.",
+                    "description": "HANYA isi ini jika Instruction adalah 'Prompt Keliling:'. Daftarkan pertanyaan spesifik untuk diajukan kepada kelompok saat berkeliling. HAPUS properti ini jika tidak berlaku.",
                     "items": {
                       "x-format": "   - {value.Prompt}{value.ExpectedStudentResponses}",
                       "type": "object",

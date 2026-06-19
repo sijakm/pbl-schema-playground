@@ -113,21 +113,21 @@ PRAVILA PO POLJIMA:
   - InstructionsForTeachers: Ovi koraci moraju biti detaljni i uključivati svo novo učenje za čas uz objašnjenja kako da se ono podučava. Budite precizni.
   - Mora uključivati kako predstaviti novi sadržaj (hookovi, vodeća pitanja, prelazi).
   - Mora uključivati sadržaj i skriptu za nastavnika da direktno poučava sadržaj (definicije, primeri, ključne tačke, objašnjenja).
-  - Struktura mora prirodno teći kroz Say/Do/Ask/Listen for/Write podsticaje.
-  - VAŽNO: Ne uključujte NASLOVE U VELIKIM SLOVIMA (kao HOOK, INTRODUCTION, itd.) za sekcije.
+  - Struktura mora prirodno teći kroz Recite/Uradite/Pitajte/Osluškujte/Napišite podsticaje.
+  - VAŽNO: Ne uključujte NASLOVE U VELIKIM SLOVIMA (kao UVOD, PREDSTAVLJANJE, itd.) za sekcije.
   - VAŽNO: Ne uključujte trajanje po minutima za pojedinačna uputstva ili korake.
-  - TranscendentThinking: Dajte jedno pitanje za primenu u stvarnom svetu koje povezuje učenje sa svrhom/meaning, zatim oznaku 'Expected Student Responses:' i 2–3 primera.
+  - TranscendentThinking: Dajte jedno pitanje za primenu u stvarnom svetu koje povezuje učenje sa svrhom/meaning, zatim oznaku 'Očekivani odgovori učenika:' i 2–3 primera.
 - GroupStructureAndRoles:
   - Izlaz MORA biti namenjen nastavniku.
-  - GroupSize: navedite 'pairs', 'triads' ili '4-5 students'.
+  - GroupSize: navedite 'parovi', 'trojke' ili '4-5 učenika'.
   - TeacherSay: 1–2 rečenice koje objašnjavaju da su uloge važne i da ćete modelovati kako svaka uloga izgleda.
   - Roles: Moraju biti definisane tačno sledećih pet uloga (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) sa konkretnim dužnostima povezanim sa CollaborativeActivities časa.
-  - Rotation: Jedna rečenica koja precizira kada se uloge rotiraju u OVOM času (npr. "Rotate roles after Phase A and again before the gallery walk.").
+  - Rotation: Jedna rečenica koja precizira kada se uloge rotiraju u OVOM času (npr. "Rotirajte uloge nakon Faze A i ponovo pre galerijske šetnje.").
 
 CollaborativeActivities:
-- Kreirajte međuzavisnu kolaborativnu aktivnost (kolaborativna zamena za Guided Practice) usklađenu sa obimom ovog časa.
+- Kreirajte međuzavisnu kolaborativnu aktivnost (kolaborativna zamena za Vođenu praksu) usklađenu sa obimom ovog časa.
 - Svaki učenik mora doprineti i grupe moraju proizvesti zajednički proizvod ili odluku.
-- Uključite vremenske naznake, scripting za teacher Say, promptove za obilazak/kretnju po učionici + očekivane odgovore, i brzu proveru gde SVI učenici odgovaraju + očekivane odgovore.
+- Uključite vremenske naznake, scripting za nastavnikov Recite, podsticaje za obilazak/kretnju po učionici + očekivane odgovore, i brzu proveru gde SVI učenici odgovaraju + očekivane odgovore.
 - Uključite Differentiation (3 nivoa) i AccommodationsAndModifications (General + IndividualSupport tačno kako je dato).
 - Ako je ovo čas iz matematike, uključite jednu DOK 3–4 mešanu problematiku koja spaja trenutni sadržaj sa prethodnim časom/jedinicom i objasnite zašto je uključena; u suprotnom izostavite mešanje.
 - ReflectionOnGroupDynamics:
@@ -541,19 +541,19 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "InstructionsForTeachers": {
               "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}",
               "type": "array",
-              "description": "Scenarijo nastavnika za kolaborativnu aktivnost (cilj je 6-8 numerisanih koraka). Obavezno obezbedite da jedan korak bude eksplicitno 'Circulation Prompts:' i da uključuje konkretna pitanja koja treba postavljati grupama dok rade.",
+              "description": "Scenarijo nastavnika za kolaborativnu aktivnost (cilj je 6-8 numerisanih koraka). Obavezno obezbedite da jedan korak bude eksplicitno 'Podsticaji za obilazak:' i da uključuje konkretna pitanja koja treba postavljati grupama dok rade.",
               "items": {
                 "x-format": "\n\n**{index}.** {value.Instruction}{value.CirculationPrompts}{value.ExpectedStudentResponses}",
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Konkretna nastavnikova aktivnost, koja počinje sa 'Recite: ', 'Uradite: ' ili tačno 'Circulation Prompts:'."
+                    "description": "Konkretna nastavnikova aktivnost, koja počinje sa 'Recite: ', 'Uradite: ' ili tačno 'Podsticaji za obilazak:'."
                   },
                   "CirculationPrompts": {
                     "x-format": "\n{items}",
                     "type": "array",
-                    "description": "POPUNITE OVO SAMO ako je Instruction 'Circulation Prompts:'. Navedite konkretna pitanja koja treba postavljati grupama tokom obilaska. Izostavite ovo svojstvo ako nije primenljivo.",
+                    "description": "POPUNITE OVO SAMO ako je Instruction 'Podsticaji za obilazak:'. Navedite konkretna pitanja koja treba postavljati grupama tokom obilaska. Izostavite ovo svojstvo ako nije primenljivo.",
                     "items": {
                       "x-format": "   - {value.Prompt}{value.ExpectedStudentResponses}",
                       "type": "object",

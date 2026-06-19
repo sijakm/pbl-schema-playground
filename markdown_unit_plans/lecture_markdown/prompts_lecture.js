@@ -349,7 +349,7 @@ OUTPUT REQUIREMENTS:
             "type": "array",
             "description": "List anticipated common student misconceptions to ensure teacher is ready.",
             "items": {
-              "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+              "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
               "type": "object",
               "properties": {
                 "Misconception": { "type": "string", "description": "e.g., 'Students may think a bigger lever always works better.'" },

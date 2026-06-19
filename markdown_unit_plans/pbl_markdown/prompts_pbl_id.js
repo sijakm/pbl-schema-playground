@@ -717,7 +717,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse kerangka kalimat to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1094,7 +1094,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase1_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Satu paragraf yang menjelaskan pengetahuan dan keterampilan yang dipraktikkan di semua tugas dalam fase ini. Paragraf HARUS dimulai dengan 'These tasks reinforce today's learning about ____ by ______.' dengan bagian yang kosong diisi dengan konten proyek yang relevan, diikuti oleh penjelasan tentang bagaimana tugas-tugas ini memperkuat retensi jangka panjang."
+              "description": "Satu paragraf yang menjelaskan pengetahuan dan keterampilan yang dipraktikkan di semua tugas dalam fase ini. Paragraf HARUS dimulai dengan 'Tugas-tugas ini memperkuat pembelajaran hari ini tentang ____ melalui ______.' dengan bagian yang kosong diisi dengan konten proyek yang relevan, diikuti oleh penjelasan tentang bagaimana tugas-tugas ini memperkuat retensi jangka panjang."
             },
             "Phase1_StudentPractice_Tasks": {
               "type": "array",
@@ -1130,7 +1130,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase1_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "Jika dan HANYA JIKA subjek adalah matematika: sertakan soal interleaving + prompt guru + respons yang diharapkan + catatan guru. Jika bukan, string kosong."
+              "description": "Jika dan HANYA JIKA subjek adalah matematika: sertakan soal interleaving (pembelajaran berselang) (pembelajaran berselang) + prompt guru + respons yang diharapkan + catatan guru. Jika bukan, string kosong."
             },
             "Phase1_ReflectionPrompt": {
               "type": "object",
@@ -1229,7 +1229,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse kerangka kalimat to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1606,7 +1606,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Satu paragraf yang menjelaskan pengetahuan dan keterampilan yang dipraktikkan di semua tugas dalam fase ini. Paragraf HARUS dimulai dengan 'These tasks reinforce today's learning about ____ by ______.' di mana bagian kosong diisi dengan konten proyek yang relevan, diikuti oleh penjelasan tentang bagaimana tugas-tugas ini memperkuat retensi jangka panjang."
+              "description": "Satu paragraf yang menjelaskan pengetahuan dan keterampilan yang dipraktikkan di semua tugas dalam fase ini. Paragraf HARUS dimulai dengan 'Tugas-tugas ini memperkuat pembelajaran hari ini tentang ____ melalui ______.' di mana bagian kosong diisi dengan konten proyek yang relevan, diikuti oleh penjelasan tentang bagaimana tugas-tugas ini memperkuat retensi jangka panjang."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
@@ -1642,7 +1642,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "Jika dan HANYA JIKA subjeknya matematika: sertakan soal interleaving + prompt guru + respons yang diharapkan + catatan guru. Selain itu, string kosong."
+              "description": "Jika dan HANYA JIKA subjeknya matematika: sertakan soal interleaving (pembelajaran berselang) (pembelajaran berselang) + prompt guru + respons yang diharapkan + catatan guru. Selain itu, string kosong."
             },
             "Phase2_ReflectionPrompt": {
               "type": "object",
@@ -1741,7 +1741,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse kerangka kalimat to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -2154,7 +2154,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase3_StudentPractice_InterleavingIfMath": {
               "type": "string",
-              "description": "Jika dan HANYA JIKA subjek adalah matematika: sertakan masalah interleaving + prompt guru + respons yang diharapkan + catatan guru. Jika tidak, string kosong."
+              "description": "Jika dan HANYA JIKA subjek adalah matematika: sertakan masalah interleaving (pembelajaran berselang) (pembelajaran berselang) + prompt guru + respons yang diharapkan + catatan guru. Jika tidak, string kosong."
             },
             "Phase3_ReflectionPrompt": {
               "type": "object",

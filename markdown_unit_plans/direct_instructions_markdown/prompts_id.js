@@ -103,7 +103,7 @@ ATURAN PENTING KONTEN:
 - GuidedPractice.AccommodationsAndModifications harus mencakup:
   - General: dukungan umum
   - IndividualSupport: array dengan tepat siswa dan rencana yang disediakan (nama/rencana sama; tidak ada siswa tambahan).
-- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'These tasks reinforce today’s learning about ____ by ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving jika mata pelajaran adalah matematika.
+- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'These tasks reinforce today’s learning about ____ by ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving (pembelajaran berselang) jika mata pelajaran adalah matematika.
 
 PERSYARATAN OUTPUT:
 - Output HARUS berupa JSON valid yang cocok persis dengan skema yang disediakan.

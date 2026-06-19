@@ -217,7 +217,15 @@
         "TeacherResponseLabel": "Teacher Response",
         "WriteOnTheBoardLabel": "Write on the board",
         "AskLabel": "Ask",
-        "RecordLabel": "Record"
+        "RecordLabel": "Record",
+        "OrientationPhase": "Orientation Phase",
+        "ConceptualizationPhase": "Conceptualization Phase",
+        "InvestigationPhase": "Investigation Phase",
+        "ConclusionPhase": "Conclusion Phase",
+        "DiscussionPhase": "Discussion Phase",
+        "LearningPlanOverview": "Learning Plan Overview",
+        "GroupingStrategyRecommendations": "Grouping Strategy Recommendations",
+        "GuidingQuestions": "Guiding Questions"
     },
     "sr-Latn": {
         "EssentialQuestions": "Suštinska pitanja",
@@ -437,7 +445,15 @@
         "TeacherResponseLabel": "Odgovor nastavnika",
         "WriteOnTheBoardLabel": "Napišite na tabli",
         "AskLabel": "Pitajte",
-        "RecordLabel": "Zabeležite"
+        "RecordLabel": "Zabeležite",
+        "OrientationPhase": "Faza orijentacije",
+        "ConceptualizationPhase": "Faza konceptualizacije",
+        "InvestigationPhase": "Faza istraživanja",
+        "ConclusionPhase": "Faza zaključka",
+        "DiscussionPhase": "Faza diskusije",
+        "LearningPlanOverview": "Pregled plana učenja",
+        "GroupingStrategyRecommendations": "Preporuke za strategiju grupisanja",
+        "GuidingQuestions": "Vodeća pitanja"
     },
     "sr-Cyrl": {
         "EssentialQuestions": "Суштинска питања",
@@ -657,7 +673,15 @@
         "TeacherResponseLabel": "Одговор наставника",
         "WriteOnTheBoardLabel": "Напишите на табли",
         "AskLabel": "Питајте",
-        "RecordLabel": "Забележите"
+        "RecordLabel": "Забележите",
+        "OrientationPhase": "Фаза оријентације",
+        "ConceptualizationPhase": "Фаза концептуализације",
+        "InvestigationPhase": "Фаза истраживања",
+        "ConclusionPhase": "Фаза закључка",
+        "DiscussionPhase": "Фаза дискусије",
+        "LearningPlanOverview": "Преглед плана учења",
+        "GroupingStrategyRecommendations": "Препоруке за стратегију груписања",
+        "GuidingQuestions": "Водећа питања"
     },
     "id": {
         "EssentialQuestions": "Pertanyaan Esensial",
@@ -877,7 +901,15 @@
         "TeacherResponseLabel": "Respons Guru",
         "WriteOnTheBoardLabel": "Tulis di papan tulis",
         "AskLabel": "Tanyakan",
-        "RecordLabel": "Catat"
+        "RecordLabel": "Catat",
+        "OrientationPhase": "Fase Orientasi",
+        "ConceptualizationPhase": "Fase Konseptualisasi",
+        "InvestigationPhase": "Fase Investigasi",
+        "ConclusionPhase": "Fase Kesimpulan",
+        "DiscussionPhase": "Fase Diskusi",
+        "LearningPlanOverview": "Gambaran Umum Rencana Pembelajaran",
+        "GroupingStrategyRecommendations": "Rekomendasi Strategi Pengelompokan",
+        "GuidingQuestions": "Pertanyaan Pemandu"
     },
     "es": {
         "EssentialQuestions": "Preguntas Esenciales",
@@ -1097,7 +1129,15 @@
         "TeacherResponseLabel": "Respuesta del docente",
         "WriteOnTheBoardLabel": "Escriba en la pizarra",
         "AskLabel": "Pregunte",
-        "RecordLabel": "Anote"
+        "RecordLabel": "Anote",
+        "OrientationPhase": "Fase de Orientación",
+        "ConceptualizationPhase": "Fase de Conceptualización",
+        "InvestigationPhase": "Fase de Investigación",
+        "ConclusionPhase": "Fase de Conclusión",
+        "DiscussionPhase": "Fase de Discusión",
+        "LearningPlanOverview": "Descripción General del Plan de Aprendizaje",
+        "GroupingStrategyRecommendations": "Recomendaciones de Estrategia de Agrupación",
+        "GuidingQuestions": "Preguntas Guía"
     },
     "ru": {
         "EssentialQuestions": "Ключевые вопросы",
@@ -1317,6 +1357,14 @@
         "TeacherResponseLabel": "Ответ учителя",
         "WriteOnTheBoardLabel": "Напишите на доске",
         "AskLabel": "Спросите",
-        "RecordLabel": "Запишите"
+        "RecordLabel": "Запишите",
+        "OrientationPhase": "Фаза ориентации",
+        "ConceptualizationPhase": "Фаза концептуализации",
+        "InvestigationPhase": "Фаза исследования",
+        "ConclusionPhase": "Фаза заключения",
+        "DiscussionPhase": "Фаза обсуждения",
+        "LearningPlanOverview": "Обзор учебного плана",
+        "GroupingStrategyRecommendations": "Рекомендации по стратегии группировки",
+        "GuidingQuestions": "Наводящие вопросы"
     }
 }

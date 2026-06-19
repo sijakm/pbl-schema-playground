@@ -100,7 +100,7 @@ REGLAS IMPORTANTES DE CONTENIDO:
 - AssessPriorKnowledge: SOLO si LessonNumber == 1, escribe 150–250 palabras y sigue la estructura requerida en la descripción del esquema. Si LessonNumber != 1, devuelve "" (cadena vacía).
 - Fases del laboratorio (Question, Research, Hypothesize, Experiment, Analyze, Share): Sigue los requisitos instruccionales específicos y las cadenas de "Purpose:" de cada fase tal como se definen en el esquema JSON.
 - Experiment.AccommodationsAndModifications debe incluir apoyos generales seguidos del apoyo individual para cada estudiante proporcionado en {{$LearningPlans}}.
-- StudentPractice DEBE incluir un párrafo TeacherNotes que comience con 'These tasks reinforce today's learning about ____ by ______.', una lista de 2-3 tareas con DOK 2-4 y criterios de éxito, y el entrelazado si la asignatura es matemáticas.
+- StudentPractice DEBE incluir un párrafo TeacherNotes que comience con 'Estas tareas refuerzan el aprendizaje de hoy sobre ____ mediante ______.', una lista de 2-3 tareas con DOK 2-4 y criterios de éxito, y el entrelazado si la asignatura es matemáticas.
 
 REQUISITOS DE SALIDA:
 - La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
@@ -391,7 +391,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
               "type": "array",
               "items": {
-                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
                 "type": "object",
                 "properties": {
                   "Misconception": {

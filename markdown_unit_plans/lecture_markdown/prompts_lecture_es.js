@@ -99,8 +99,8 @@ REGLAS IMPORTANTES DE CONTENIDO:
 - EssentialQuestions: DEBE ser exactamente igual a las preguntas esenciales a nivel de unidad (mismo texto, mismo orden).
 - AssessPriorKnowledge: SOLO si LessonNumber == 1, completa el objeto como se define en el esquema. Para TODAS LAS DEMÁS LECCIONES, DEBES devolver un objeto vacío {} sin claves dentro. NO uses marcadores como "N/A", "none" ni matrices vacías.
 - ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications debe incluir apoyos generales seguidos del apoyo individual para cada estudiante proporcionado en {{$LearningPlans}}.
-- Cuando sugieras "sentence frames" o "sentence starters" en cualquier parte del plan de la lección (especialmente en Individualized Supports), DEBES proporcionar las frases iniciales específicas y reales adaptadas al contenido de la lección para que el docente pueda usarlas directamente.
-- StudentPractice DEBE incluir un párrafo de TeacherNotes que comience con 'These tasks reinforce today's learning about ____ by ______.', una lista de 2-3 tareas con DOK 2-4 y criterios de éxito, e intercalado si la asignatura es matemáticas.
+- Cuando sugieras "marcos de oraciones" o "iniciadores de oraciones" en cualquier parte del plan de la lección (especialmente en Individualized Supports), DEBES proporcionar las frases iniciales específicas y reales adaptadas al contenido de la lección para que el docente pueda usarlas directamente.
+- StudentPractice DEBE incluir un párrafo de TeacherNotes que comience con 'Estas tareas refuerzan el aprendizaje de hoy sobre ____ mediante ______.', una lista de 2-3 tareas con DOK 2-4 y criterios de éxito, e intercalado si la asignatura es matemáticas.
 
 REQUISITOS DE SALIDA:
 - La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
@@ -455,7 +455,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "type": "array",
           "description": "Enumera las ideas erróneas comunes anticipadas de los estudiantes para asegurar que el docente esté preparado.",
           "items": {
-            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {

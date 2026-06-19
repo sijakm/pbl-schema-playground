@@ -100,7 +100,7 @@ VAŽNA PRAVILA SADRŽAJA:
 - AssessPriorKnowledge: SAMO ako LessonNumber == 1, napišite 150–250 reči i sledite traženu strukturu iz opisa šeme. Ako LessonNumber != 1, vratite "" (prazan string).
 - Faze laboratorije (Question, Research, Hypothesize, Experiment, Analyze, Share): Pratite specifične nastavne zahteve i stringove „Purpose:” za svaku fazu, kao što je definisano u JSON šemi.
 - Experiment.AccommodationsAndModifications mora da sadrži opštu podršku, a zatim individualnu podršku za svakog učenika navedenog u {{$LearningPlans}}.
-- StudentPractice MORA da uključuje pasus TeacherNotes koji počinje sa 'These tasks reinforce today's learning about ____ by ______.', listu od 2-3 zadatka sa DOK 2-4 i kriterijumima uspeha, i međusobno smenjivanje ako je predmet matematika.
+- StudentPractice MORA da uključuje pasus TeacherNotes koji počinje sa 'Ovi zadaci utvrđuju današnje učenje o ____ kroz ______.', listu od 2-3 zadatka sa DOK 2-4 i kriterijumima uspeha, i međusobno smenjivanje ako je predmet matematika.
 
 ZAHTEVI ZA IZLAZ:
 - Izlaz MORA biti validan JSON koji tačno odgovara dostavljenoj šemi.
@@ -391,7 +391,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
               "type": "array",
               "items": {
-                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
                 "type": "object",
                 "properties": {
                   "Misconception": {
@@ -694,7 +694,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Step": {
                     "type": "string",
-                    "description": "Tekst nastavničkog uputstva (npr. 'Provide sentence starters:'). Nemojte uključivati numeraciju; ona se obrađuje automatski."
+                    "description": "Tekst nastavničkog uputstva (npr. 'Provide početke rečenica:'). Nemojte uključivati numeraciju; ona se obrađuje automatski."
                   },
                   "Bullets": {
                     "type": "array",

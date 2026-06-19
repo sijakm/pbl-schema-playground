@@ -387,7 +387,7 @@ OUTPUT REQUIREMENTS:
                 "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
                 "type": "array",
                 "items": {
-                  "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+                  "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
                   "type": "object",
                   "properties": {
                     "Misconception": { "type": "string", "description": "Student misconception" },

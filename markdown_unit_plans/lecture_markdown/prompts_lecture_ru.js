@@ -99,8 +99,8 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
 - EssentialQuestions: ДОЛЖНЫ в точности равняться ключевым вопросам на уровне модуля (тот же текст, тот же порядок).
 - AssessPriorKnowledge: ТОЛЬКО если LessonNumber == 1, заполните объект так, как определено в схеме. ДЛЯ ВСЕХ ДРУГИХ УРОКОВ вы ДОЛЖНЫ вернуть пустой объект {} без каких-либо ключей внутри. НЕ используйте заполнители вроде "N/A", "none" или пустые массивы.
 - ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications должен включать общие меры поддержки, а затем индивидуальную поддержку для каждого учащегося, указанного в {{$LearningPlans}}.
-- Когда где-либо в плане урока предлагаются "sentence frames" или "sentence starters" (особенно в Individualized Supports), вы ДОЛЖНЫ предоставить реальные, конкретные речевые шаблоны, адаптированные к содержанию урока, чтобы учитель мог использовать их напрямую.
-- StudentPractice ДОЛЖЕН включать абзац TeacherNotes, начинающийся с 'These tasks reinforce today's learning about ____ by ______.', список из 2–3 заданий с DOK 2–4 и критериями успешности, а также чередование (interleaving), если предмет — математика.
+- Когда где-либо в плане урока предлагаются "структуры предложений" или "начала предложений" (особенно в Individualized Supports), вы ДОЛЖНЫ предоставить реальные, конкретные речевые шаблоны, адаптированные к содержанию урока, чтобы учитель мог использовать их напрямую.
+- StudentPractice ДОЛЖЕН включать абзац TeacherNotes, начинающийся с 'Эти задания закрепляют сегодняшнее изучение ____ с помощью ______.', список из 2–3 заданий с DOK 2–4 и критериями успешности, а также чередование (чередование (чередование (interleaving))), если предмет — математика.
 
 ТРЕБОВАНИЯ К ВЫВОДУ:
 - Вывод ДОЛЖЕН быть корректным JSON, точно соответствующим предоставленной схеме.
@@ -455,7 +455,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "type": "array",
           "description": "Перечислите ожидаемые распространённые заблуждения учащихся, чтобы учитель был готов.",
           "items": {
-            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {

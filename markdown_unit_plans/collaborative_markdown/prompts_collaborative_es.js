@@ -113,19 +113,19 @@ REGLAS ESPECÍFICAS DE LOS CAMPOS:
   - InstructionsForTeachers: Estos pasos deben ser exhaustivos e incluir todo el aprendizaje nuevo de la lección con explicaciones de cómo enseñarlo. Sé preciso.
   - Debe incluir cómo introducir el nuevo contenido de la materia (ganchos, preguntas guía, transiciones).
   - Debe incluir el contenido y el guion para que el docente enseñe el contenido de manera directa (definiciones, ejemplos, puntos clave, explicaciones).
-  - La estructura debe fluir de manera natural con indicaciones de Say/Do/Ask/Listen for/Write.
-  - IMPORTANTE: No incluyas encabezados en mayúsculas (como HOOK, INTRODUCTION, etc.) para las secciones.
+  - La estructura debe fluir de manera natural con indicaciones de Diga/Haga/Pregunte/Escuche/Escriba.
+  - IMPORTANTE: No incluyas encabezados en mayúsculas (como GANCHO, INTRODUCCIÓN, etc.) para las secciones.
   - IMPORTANTE: No incluyas duraciones de tiempo para instrucciones o pasos individuales.
-  - TranscendentThinking: Proporciona una pregunta de aplicación al mundo real que conecte el aprendizaje con propósito/significado, seguida de la etiqueta 'Expected Student Responses:' y 2–3 ejemplos.
+  - TranscendentThinking: Proporciona una pregunta de aplicación al mundo real que conecte el aprendizaje con propósito/significado, seguida de la etiqueta 'Respuestas esperadas de los estudiantes:' y 2–3 ejemplos.
 - GroupStructureAndRoles:
   - La salida DEBE estar dirigida al docente.
-  - GroupSize: especifica 'pairs', 'triads' o '4-5 students'.
+  - GroupSize: especifica 'pares', 'tríos' o '4-5 estudiantes'.
   - TeacherSay: 1-2 oraciones explicando que los roles importan y que modelarás cómo se ve cada rol.
   - Roles: Debe definir exactamente estos cinco roles (Facilitator, Recorder, MaterialsManager, Timekeeper, Presenter) con funciones concretas ligadas a las CollaborativeActivities de la lección.
-  - Rotation: Una oración que especifique cuándo rotan los roles en ESTA lección (por ejemplo, "Rotate roles after Phase A and again before the gallery walk.").
+  - Rotation: Una oración que especifique cuándo rotan los roles en ESTA lección (por ejemplo, "Rote los roles después de la Fase A y nuevamente antes de la caminata por la galería.").
 
 CollaborativeActivities:
-- Crea una actividad colaborativa interdependiente (reemplazo colaborativo para Guided Practice) alineada con el alcance de esta lección.
+- Crea una actividad colaborativa interdependiente (reemplazo colaborativo para Práctica guiada) alineada con el alcance de esta lección.
 - Cada estudiante debe contribuir y los grupos deben producir un producto o decisión compartida.
 - Incluye señales de tiempo, guion del docente para Say:, prompts de circulación + respuestas esperadas, y una verificación rápida en la que TODOS los estudiantes respondan + respuestas esperadas.
 - Incluye Differentiation (3 niveles) y AccommodationsAndModifications (General + IndividualSupport exactamente como se proporciona).
@@ -541,19 +541,19 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "InstructionsForTeachers": {
               "x-format": "**📋 {loc.InstructionsForTeachers}**\n\n{items}",
               "type": "array",
-              "description": "Guion del docente para la actividad colaborativa (apunte a 6-8 pasos numerados). Asegúrese de que un paso sea explícitamente 'Circulation Prompts:' y que incluya preguntas específicas para hacer a los grupos mientras trabajan.",
+              "description": "Guion del docente para la actividad colaborativa (apunte a 6-8 pasos numerados). Asegúrese de que un paso sea explícitamente 'Preguntas de circulación:' y que incluya preguntas específicas para hacer a los grupos mientras trabajan.",
               "items": {
                 "x-format": "\n\n**{index}.** {value.Instruction}{value.CirculationPrompts}{value.ExpectedStudentResponses}",
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "La acción específica del docente, comenzando con 'Di: ', 'Haz: ', o exactamente 'Circulation Prompts:'."
+                    "description": "La acción específica del docente, comenzando con 'Di: ', 'Haz: ', o exactamente 'Preguntas de circulación:'."
                   },
                   "CirculationPrompts": {
                     "x-format": "\n{items}",
                     "type": "array",
-                    "description": "SOLO complete esto si la instrucción es 'Circulation Prompts:'. Enumere preguntas específicas para hacer a los grupos mientras circula. OMITA esta propiedad si no aplica.",
+                    "description": "SOLO complete esto si la instrucción es 'Preguntas de circulación:'. Enumere preguntas específicas para hacer a los grupos mientras circula. OMITA esta propiedad si no aplica.",
                     "items": {
                       "x-format": "   - {value.Prompt}{value.ExpectedStudentResponses}",
                       "type": "object",

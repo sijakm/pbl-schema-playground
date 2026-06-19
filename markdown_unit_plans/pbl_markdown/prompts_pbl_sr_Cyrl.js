@@ -717,7 +717,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse оквире за реченице to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1094,7 +1094,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase1_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Један пасус који објашњава знање и вештине које се вежбају кроз све задатке у овој фази. Пасус МОРА да почиње са 'These tasks reinforce today's learning about ____ by ______.' при чему се празнине попуњавају релевантним садржајем пројекта, након чега следи објашњење како ови задаци јачају дугорочно памћење."
+              "description": "Један пасус који објашњава знање и вештине које се вежбају кроз све задатке у овој фази. Пасус МОРА да почиње са 'Ови задаци утврђују данашње учење о ____ кроз ______.' при чему се празнине попуњавају релевантним садржајем пројекта, након чега следи објашњење како ови задаци јачају дугорочно памћење."
             },
             "Phase1_StudentPractice_Tasks": {
               "type": "array",
@@ -1229,7 +1229,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse оквире за реченице to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1606,7 +1606,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Један пасус који објашњава знања и вештине увежбане кроз све задатке у овој фази. Пасус МОРА да почиње са 'These tasks reinforce today's learning about ____ by ______.' где су празнине попуњене релевантним садржајем пројекта, након чега следи објашњење како ови задаци јачају дугорочно памћење."
+              "description": "Један пасус који објашњава знања и вештине увежбане кроз све задатке у овој фази. Пасус МОРА да почиње са 'Ови задаци утврђују данашње учење о ____ кроз ______.' где су празнине попуњене релевантним садржајем пројекта, након чега следи објашњење како ови задаци јачају дугорочно памћење."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
@@ -1741,7 +1741,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse оквире за реченице to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",

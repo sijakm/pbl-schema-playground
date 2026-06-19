@@ -100,7 +100,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
 - AssessPriorKnowledge: ТОЛЬКО если LessonNumber == 1, напишите 150–250 слов и следуйте требуемой структуре, описанной в схеме. Если LessonNumber != 1, верните "" (пустую строку).
 - Фазы Lab (Question, Research, Hypothesize, Experiment, Analyze, Share): следуйте конкретным инструктивным требованиям и строкам "Purpose:" для каждой фазы, как они определены в JSON-схеме.
 - Experiment.AccommodationsAndModifications должен включать общую поддержку, а затем индивидуальную поддержку для каждого учащегося, указанного в {{$LearningPlans}}.
-- StudentPractice ДОЛЖЕН включать абзац TeacherNotes, начинающийся с 'These tasks reinforce today's learning about ____ by ______.', список из 2–3 заданий с DOK 2–4 и критериями успеха, а также интерливинг, если предмет — математика.
+- StudentPractice ДОЛЖЕН включать абзац TeacherNotes, начинающийся с 'Эти задания закрепляют сегодняшнее изучение ____ с помощью ______.', список из 2–3 заданий с DOK 2–4 и критериями успеха, а также интерливинг, если предмет — математика.
 
 ТРЕБОВАНИЯ К ВЫВОДУ:
 - Вывод ДОЛЖЕН быть корректным JSON, точно соответствующим предоставленной схеме.
@@ -391,7 +391,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
               "type": "array",
               "items": {
-                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
                 "type": "object",
                 "properties": {
                   "Misconception": {

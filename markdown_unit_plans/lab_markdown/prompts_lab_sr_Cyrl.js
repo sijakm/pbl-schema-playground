@@ -100,7 +100,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
 - AssessPriorKnowledge: САМО ако је LessonNumber == 1, напишите 150–250 речи и пратите обавезну структуру у опису шеме. Ако LessonNumber != 1, вратите "" (празан стринг).
 - Фазе лабораторије (Question, Research, Hypothesize, Experiment, Analyze, Share): Пратите специфичне наставне захтеве и стрингове „Purpose:“ за сваку фазу како су дефинисани у JSON шеми.
 - Experiment.AccommodationsAndModifications мора да укључи општу подршку, а затим индивидуалну подршку за сваког ученика наведеног у {{$LearningPlans}}.
-- StudentPractice МОРА да садржи пасус TeacherNotes који почиње са 'These tasks reinforce today's learning about ____ by ______.', листу од 2–3 задатка са DOK 2-4 и критеријумима успеха, и међусобно преплитање ако је предмет математика.
+- StudentPractice МОРА да садржи пасус TeacherNotes који почиње са 'Ови задаци утврђују данашње учење о ____ кроз ______.', листу од 2–3 задатка са DOK 2-4 и критеријумима успеха, и међусобно преплитање ако је предмет математика.
 
 ЗАХТЕВИ ЗА ИЗЛАЗ:
 - Излаз МОРА бити важећи JSON који тачно одговара достављеној шеми.
@@ -391,7 +391,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
               "type": "array",
               "items": {
-                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
                 "type": "object",
                 "properties": {
                   "Misconception": {

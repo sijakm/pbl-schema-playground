@@ -99,8 +99,8 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
 - EssentialQuestions: МОРАЈУ тачно бити једнака кључним питањима на нивоу јединице (исти текст, исти редослед).
 - AssessPriorKnowledge: САМО ако је LessonNumber == 1, попуните објекат како је дефинисано у шеми. За СВЕ ОСТАЛЕ ЧАСОВЕ, МОРАМЕТЕ вратити празан објекат {} без иједног кључа унутра. НЕ користите чиниоце као што су „N/A”, „none” или празне низове.
 - ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications мора да садржи општу подршку праћену индивидуалном подршком за сваког ученика наведеног у {{$LearningPlans}}.
-- Када било где у плану часа предлажете „sentence frames” или „sentence starters” (посебно у Individualized Supports), МОРАМЕТЕ дати стварне, конкретне реченичне оквире прилагођене садржају часа тако да их наставник може директно користити.
-- StudentPractice МОРА да садржи пасус TeacherNotes који почиње са 'These tasks reinforce today's learning about ____ by ______.', листу од 2-3 задатка са DOK 2-4 и критеријумима успеха, и међуповезивање ако је предмет математика.
+- Када било где у плану часа предлажете „оквире за реченице” или „почетке реченица” (посебно у Individualized Supports), МОРАМЕТЕ дати стварне, конкретне реченичне оквире прилагођене садржају часа тако да их наставник може директно користити.
+- StudentPractice МОРА да садржи пасус TeacherNotes који почиње са 'Ови задаци утврђују данашње учење о ____ кроз ______.', листу од 2-3 задатка са DOK 2-4 и критеријумима успеха, и међуповезивање ако је предмет математика.
 
 ЗАХТЕВИ ЗА ИЗЛАЗ:
 - Излаз МОРА бити ваљан JSON који тачно одговара достављеној шеми.
@@ -455,7 +455,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "type": "array",
           "description": "Наведите очекиване уобичајене заблуде ученика како би наставник био спреман.",
           "items": {
-            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {

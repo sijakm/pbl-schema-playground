@@ -670,7 +670,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "LanguageLearners": {
               "type": "object",
-              "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+              "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse структуры предложений to support explanation and reasoning:\n\n{value.SentenceStarters}",
               "properties": {
                 "Strategies": {
                   "type": "array",

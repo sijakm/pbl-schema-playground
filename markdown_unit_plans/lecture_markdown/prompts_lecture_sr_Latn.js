@@ -99,8 +99,8 @@ VAŽNA PRAVILA O SADRŽAJU:
 - EssentialQuestions: MORAJU biti potpuno jednaka pitanjima na nivou jedinice (isti tekst, isti redosled).
 - AssessPriorKnowledge: SAMO ako je LessonNumber == 1, popunite objekat onako kako je definisano u šemi. Za SVE OSTALE LEKCIJE, MORATE vratiti prazan objekat {} bez ijednog ključa unutra. NEMOJTE koristiti zamene poput "N/A", "none" ili prazne nizove.
 - ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications mora uključivati opštu podršku praćenu individualnom podrškom za svakog učenika navedenog u {{$LearningPlans}}.
-- Kada bilo gde u planu lekcije predlažete "sentence frames" ili "sentence starters" (posebno u Individualized Supports), MORATE dati stvarne, konkretne rečenične obrasce prilagođene sadržaju lekcije tako da ih nastavnik može direktno koristiti.
-- StudentPractice MORA uključivati paragraf TeacherNotes koji počinje sa 'These tasks reinforce today's learning about ____ by ______.', listu od 2-3 zadatka sa DOK 2-4 i kriterijumima uspeha, i interleaving ako je predmet matematika.
+- Kada bilo gde u planu lekcije predlažete "okvire za rečenice" ili "početke rečenica" (posebno u Individualized Supports), MORATE dati stvarne, konkretne rečenične obrasce prilagođene sadržaju lekcije tako da ih nastavnik može direktno koristiti.
+- StudentPractice MORA uključivati paragraf TeacherNotes koji počinje sa 'Ovi zadaci utvrđuju današnje učenje o ____ kroz ______.', listu od 2-3 zadatka sa DOK 2-4 i kriterijumima uspeha, i ukršteno učenje (ukršteno učenje (interleaving)) ako je predmet matematika.
 
 ZAHTEVI ZA IZLAZ:
 - Izlaz MORA biti validan JSON koji tačno odgovara datoj šemi.
@@ -455,7 +455,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "type": "array",
           "description": "Navedite očekivane česte zablude učenika kako bi nastavnik bio spreman.",
           "items": {
-            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "type": "object",
             "properties": {
               "Misconception": {

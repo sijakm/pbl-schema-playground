@@ -100,7 +100,7 @@ PENTINGNYA ATURAN KONTEN:
 - AssessPriorKnowledge: HANYA jika LessonNumber == 1, tulis 150–250 kata dan ikuti struktur yang diwajibkan dalam deskripsi skema. Jika LessonNumber != 1, kembalikan "" (string kosong).
 - Fase Lab (Question, Research, Hypothesize, Experiment, Analyze, Share): Ikuti persyaratan instruksional spesifik dan string "Purpose:" untuk setiap fase sebagaimana didefinisikan dalam skema JSON.
 - Experiment.AccommodationsAndModifications harus memuat dukungan umum yang diikuti dukungan individual untuk setiap siswa yang disediakan dalam {{$LearningPlans}}.
-- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'These tasks reinforce today's learning about ____ by ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving jika mata pelajaran adalah matematika.
+- StudentPractice HARUS menyertakan paragraf TeacherNotes yang dimulai dengan 'Tugas-tugas ini memperkuat pembelajaran hari ini tentang ____ melalui ______.', daftar 2-3 tugas dengan DOK 2-4 dan kriteria keberhasilan, serta interleaving (pembelajaran berselang) (pembelajaran berselang) jika mata pelajaran adalah matematika.
 
 PERSYARATAN OUTPUT:
 - Output HARUS berupa JSON valid yang cocok dengan skema yang disediakan secara tepat.
@@ -391,7 +391,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
               "type": "array",
               "items": {
-                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponse}: {value.TeacherResponse}",
+                "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
                 "type": "object",
                 "properties": {
                   "Misconception": {

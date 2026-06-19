@@ -22,7 +22,7 @@ PERSYARATAN KERANGKA INKUIRI:
   (3) pengumpulan bukti + menemukan pola,
   (4) membangun model + revisi menggunakan bukti,
   (5) penjelasan/argumen + komunikasi + transfer.
-- Pertahankan sensemaking melalui penemuan: siswa membangun dan merevisi model menggunakan pengamatan dan data sederhana; tekankan bukti, penalaran, dan komunikasi.
+- Pertahankan pemahaman makna (pemahaman makna (sensemaking)) melalui penemuan: siswa membangun dan merevisi model menggunakan pengamatan dan data sederhana; tekankan bukti, penalaran, dan komunikasi.
 - Tetap selaras HANYA dengan standar yang disediakan. Jangan tambahkan standar atau kerangka kerja baru.
 - Relevansi budaya & inklusi: sertakan konteks atau perspektif singkat yang relevan dengan komunitas tanpa stereotip.
 - Interleaving & transfer: tinjau kembali keterampilan di seluruh pelajaran (mengamati, memodelkan, berargumen dari bukti, berkomunikasi).
@@ -670,7 +670,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "LanguageLearners": {
               "type": "object",
-              "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+              "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse kerangka kalimat to support explanation and reasoning:\n\n{value.SentenceStarters}",
               "properties": {
                 "Strategies": {
                   "type": "array",

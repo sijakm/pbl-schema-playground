@@ -718,7 +718,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse marcos de oraciones to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1095,7 +1095,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase1_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'These tasks reinforce today's learning about ____ by ______.' donde los espacios en blanco se completan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
+              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'Estas tareas refuerzan el aprendizaje de hoy sobre ____ mediante ______.' donde los espacios en blanco se completan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
             },
             "Phase1_StudentPractice_Tasks": {
               "type": "array",
@@ -1230,7 +1230,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse marcos de oraciones to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -1607,7 +1607,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase2_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'These tasks reinforce today's learning about ____ by ______.' donde los espacios en blanco se completan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
+              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'Estas tareas refuerzan el aprendizaje de hoy sobre ____ mediante ______.' donde los espacios en blanco se completan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
             },
             "Phase2_StudentPractice_Tasks": {
               "type": "array",
@@ -1742,7 +1742,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "LanguageLearners": {
                   "type": "object",
-                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse sentence frames to support explanation and reasoning:\n\n{value.SentenceStarters}",
+                  "x-format": "**{loc.LanguageLearners}:**\n\n{value.Strategies}\n\nUse marcos de oraciones to support explanation and reasoning:\n\n{value.SentenceStarters}",
                   "properties": {
                     "Strategies": {
                       "type": "array",
@@ -2119,7 +2119,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Phase3_StudentPractice_TeacherNotes": {
               "type": "string",
-              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'These tasks reinforce today's learning about ____ by ______.' donde los espacios se llenan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
+              "description": "Un párrafo que explique los conocimientos y habilidades practicados en todas las tareas de esta fase. El párrafo DEBE comenzar con 'Estas tareas refuerzan el aprendizaje de hoy sobre ____ mediante ______.' donde los espacios se llenan con contenido relevante del proyecto, seguido de una explicación de cómo estas tareas fortalecen la retención a largo plazo."
             },
             "Phase3_StudentPractice_Tasks": {
               "type": "array",
