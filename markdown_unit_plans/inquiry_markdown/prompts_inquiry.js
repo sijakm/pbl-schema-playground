@@ -418,10 +418,10 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
             "description": "Generate 2-3 common student misconceptions likely to arise during this lesson. Each item must focus on a specific misunderstanding and a teacher response script.",
             "items": {
               "type": "object",
-              "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+              "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
               "properties": {
                 "Misconception": { "type": "string", "description": "Describe the misconception in 1 sentence, starting with 'Students may think...'. DO NOT use any bolding or strong tags." },
-                "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script (starting with 'Teacher Response: ') that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags." }
+                "TeacherResponse": { "type": "string", "description": "A clear teacher-facing response script that models how to respond in the moment with a specific prompt (do NOT include the 'Say:' prefix). DO NOT use any bolding or strong tags." }
               },
               "required": ["Misconception", "TeacherResponse"],
               "additionalProperties": false

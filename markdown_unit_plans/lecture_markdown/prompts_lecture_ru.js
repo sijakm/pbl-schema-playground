@@ -460,7 +460,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "например, 'Students may think a bigger lever always works better.'"
+                "description": "например, 'Учащиеся могут подумать, что большой рычаг всегда работает лучше.'"
               },
               "TeacherResponse": {
                 "type": "string",

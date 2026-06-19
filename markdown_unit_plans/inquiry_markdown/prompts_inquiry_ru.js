@@ -646,7 +646,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "description": "Сгенерируйте 2–3 распространённых заблуждения учащихся, которые, вероятно, возникнут во время этого урока. Каждый пункт должен быть сосредоточен на конкретном неверном понимании и на сценарии ответа учителя.",
           "items": {
             "type": "object",
-            "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Чёткий сценарий ответа для учителя (начинающийся с «Ответ учителя: »), который моделирует, как реагировать в моменте с конкретной подсказкой (не включайте префикс «Скажите:»). НЕ используйте выделение жирным или сильные теги."
+                "description": "Чёткий сценарий ответа для учителя который моделирует, как реагировать в моменте с конкретной подсказкой (не включайте префикс «Скажите:»). НЕ используйте выделение жирным или сильные теги."
               }
             },
             "required": [

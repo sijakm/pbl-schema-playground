@@ -876,7 +876,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Опишите заблуждение в 1 предложении, начиная с «Students may think...». НЕ используйте жирное выделение или теги strong."
+                    "description": "Опишите заблуждение в 1 предложении, начиная с «Учащиеся могут подумать...». НЕ используйте жирное выделение или теги strong."
                   },
                   "TeacherResponse": {
                     "type": "string",
@@ -1388,7 +1388,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Опишите заблуждение в 1 предложении, начиная с 'Students may think...'. НЕ используйте никакого выделения жирным или strong-тегов."
+                    "description": "Опишите заблуждение в 1 предложении, начиная с 'Учащиеся могут подумать...'. НЕ используйте никакого выделения жирным или strong-тегов."
                   },
                   "TeacherResponse": {
                     "type": "string",
@@ -1900,7 +1900,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Опишите заблуждение в 1 предложении, начиная с 'Students may think...'. НЕ используйте никакого выделения жирным шрифтом или сильных тегов."
+                    "description": "Опишите заблуждение в 1 предложении, начиная с 'Учащиеся могут подумать...'. НЕ используйте никакого выделения жирным шрифтом или сильных тегов."
                   },
                   "TeacherResponse": {
                     "type": "string",

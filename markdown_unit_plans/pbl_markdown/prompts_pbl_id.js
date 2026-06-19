@@ -876,7 +876,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Jelaskan miskonsepsi dalam 1 kalimat, dimulai dengan 'Students may think...'. JANGAN gunakan pemformatan tebal atau tag tebal apa pun."
+                    "description": "Jelaskan miskonsepsi dalam 1 kalimat, dimulai dengan 'Siswa mungkin berpikir...'. JANGAN gunakan pemformatan tebal atau tag tebal apa pun."
                   },
                   "TeacherResponse": {
                     "type": "string",
@@ -1388,7 +1388,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Jelaskan miskonsepsi dalam 1 kalimat, diawali dengan 'Students may think...'. JANGAN gunakan penebalan teks atau tag tebal apa pun."
+                    "description": "Jelaskan miskonsepsi dalam 1 kalimat, diawali dengan 'Siswa mungkin berpikir...'. JANGAN gunakan penebalan teks atau tag tebal apa pun."
                   },
                   "TeacherResponse": {
                     "type": "string",

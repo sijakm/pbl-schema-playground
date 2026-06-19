@@ -646,15 +646,15 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "description": "Generišite 2-3 uobičajene zablude učenika koje će verovatno nastati tokom ove lekcije. Svaka stavka mora da se fokusira na specifično pogrešno shvatanje i skriptu odgovora nastavnika.",
           "items": {
             "type": "object",
-            "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
-                "description": "Opišite zabludu u 1 rečenici, počevši sa 'Students may think...'. NE koristite podebljavanje niti jake oznake."
+                "description": "Opišite zabludu u 1 rečenici, počevši sa 'Učenici bi mogli pomisliti...'. NE koristite podebljavanje niti jake oznake."
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Jasna skripta odgovora za nastavnika (počinje sa 'Odgovor nastavnika: ') koja pokazuje kako odgovoriti u tom trenutku sa konkretnim podsticajem (nemojte uključiti prefiks 'Recite:'). NE koristite podebljavanje niti jake oznake."
+                "description": "Jasna skripta odgovora za nastavnika koja pokazuje kako odgovoriti u tom trenutku sa konkretnim podsticajem (nemojte uključiti prefiks 'Recite:'). NE koristite podebljavanje niti jake oznake."
               }
             },
             "required": [

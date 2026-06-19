@@ -877,7 +877,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describa el concepto erróneo en 1 oración, comenzando con 'Students may think...'. NO use negritas ni etiquetas en negrita."
+                    "description": "Describa el concepto erróneo en 1 oración, comenzando con 'Los estudiantes podrían pensar...'. NO use negritas ni etiquetas en negrita."
                   },
                   "TeacherResponse": {
                     "type": "string",
@@ -1389,7 +1389,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Describe el concepto erróneo en 1 oración, comenzando con 'Students may think...'. NO uses negritas ni etiquetas de énfasis."
+                    "description": "Describe el concepto erróneo en 1 oración, comenzando con 'Los estudiantes podrían pensar...'. NO uses negritas ni etiquetas de énfasis."
                   },
                   "TeacherResponse": {
                     "type": "string",

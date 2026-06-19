@@ -1388,7 +1388,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Opiši zabludu u 1 rečenici, počevši sa 'Students may think...'. NE koristi podebljavanje niti jake oznake."
+                    "description": "Opiši zabludu u 1 rečenici, počevši sa 'Učenici bi mogli pomisliti...'. NE koristi podebljavanje niti jake oznake."
                   },
                   "TeacherResponse": {
                     "type": "string",
@@ -1900,7 +1900,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Misconception": {
                     "type": "string",
-                    "description": "Opišite zabludu u 1 rečenici, počevši sa 'Students may think...'. NE koristite podebljavanje niti strong tagove."
+                    "description": "Opišite zabludu u 1 rečenici, počevši sa 'Učenici bi mogli pomisliti...'. NE koristite podebljavanje niti strong tagove."
                   },
                   "TeacherResponse": {
                     "type": "string",

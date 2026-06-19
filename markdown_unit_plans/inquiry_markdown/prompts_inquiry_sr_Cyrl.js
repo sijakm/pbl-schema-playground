@@ -646,7 +646,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "description": "Генеришите 2–3 уобичајене заблуде ученика које ће вероватно настати током овог часа. Свака ставка мора да се фокусира на одређену погрешну представу и сценарио одговора наставника.",
           "items": {
             "type": "object",
-            "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Јасан сценарио одговора за наставника (почевши са „Одговор наставника: “) који моделира како реаговати у тренутку уз конкретан подстицај (немојте укључивати префикс „Реците:“). НЕ користите подебљавање нити јаке ознаке."
+                "description": "Јасан сценарио одговора за наставника који моделира како реаговати у тренутку уз конкретан подстицај (немојте укључивати префикс „Реците:“). НЕ користите подебљавање нити јаке ознаке."
               }
             },
             "required": [

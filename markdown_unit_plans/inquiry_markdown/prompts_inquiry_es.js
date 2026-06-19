@@ -646,7 +646,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "description": "Genera 2-3 conceptos erróneos comunes de los estudiantes que probablemente surjan durante esta lección. Cada elemento debe centrarse en un malentendido específico y una respuesta del docente.",
           "items": {
             "type": "object",
-            "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Diga:'). NO uses negritas ni etiquetas de énfasis."
+                "description": "Un guion de respuesta claro dirigido al docente que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Diga:'). NO uses negritas ni etiquetas de énfasis."
               }
             },
             "required": [

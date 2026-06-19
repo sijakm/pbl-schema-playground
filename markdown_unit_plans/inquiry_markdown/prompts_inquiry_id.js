@@ -646,7 +646,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "description": "Hasilkan 2-3 miskonsepsi umum siswa yang kemungkinan muncul selama pelajaran ini. Setiap item harus berfokus pada satu kesalahpahaman spesifik dan sebuah skrip respons guru.",
           "items": {
             "type": "object",
-            "x-format": "\n\n{value.Misconception}\n\n- {value.TeacherResponse}",
+            "x-format": "\n\n{value.Misconception}\n- {loc.TeacherResponseLabel}: {value.TeacherResponse}",
             "properties": {
               "Misconception": {
                 "type": "string",
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Skrip respons yang jelas untuk guru (diawali dengan 'Respons Guru: ') yang mencontohkan bagaimana merespons pada saat itu dengan pertanyaan spesifik (jangan sertakan awalan 'Katakan:'). JANGAN gunakan penebalan atau tag tebal apa pun."
+                "description": "Skrip respons yang jelas untuk guru yang mencontohkan bagaimana merespons pada saat itu dengan pertanyaan spesifik (jangan sertakan awalan 'Katakan:'). JANGAN gunakan penebalan atau tag tebal apa pun."
               }
             },
             "required": [
