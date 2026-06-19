@@ -35,7 +35,9 @@ OGRANIČENJA ZA NIZ ČASOVA:
 - Raspored mora da odgovara časovima od {{$ClassDuration}} minuta za nivo {{$GradeLevel}}.
 
 PRAVILO ZA IZLAZ:
-Vratite SAMO JSON koji je validan prema šemi UnitPlanResponse.`,
+Vratite SAMO JSON koji je validan prema šemi UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Kreirajte JEDAN plan časa po istraživačkom pristupu (NE plan jedinice, NE više časova) koristeći informacije ispod. MORATE izlaziti sa važećim JSON-om koji tačno odgovara datoj JSON šemi: InquiryUnitPlanResponse. Nemojte uključivati nikakve dodatne ključeve. Koristite kompaktan JSON format (bez dodatnih praznih redova ili belina između JSON svojstava). Bez HTML-a. Bez emodžija. Bez markdown-a. Običan tekst unutar string polja.
 
 Predmet jedinice: {{$Subject}}
@@ -69,7 +71,9 @@ PRAVILA SPECIFIČNA ZA POLJA (mapirajte na šemu):
   - IndividualSupport: niz mora sadržati tačno navedene učenike i njihove planove (ista imena/planovi; bez dodatnih učenika; bez izostavljenih učenika).
 
 PRAVILO IZLAZA:
-Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.`,
+Vratite SAMO JSON koji validira prema šemi InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

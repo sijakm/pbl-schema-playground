@@ -35,7 +35,9 @@ window.prompts_inquiry_ru = {
 - Темп должен соответствовать {{$ClassDuration}}-минутным урокам в {{$GradeLevel}} классе.
 
 ПРАВИЛО ВЫВОДА:
-Возвращайте ТОЛЬКО JSON, который соответствует схеме UnitPlanResponse.`,
+Возвращайте ТОЛЬКО JSON, который соответствует схеме UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Создайте ОДИН план урока по исследованию (НЕ план раздела, НЕ несколько уроков) на основе информации ниже. ВЫ ДОЛЖНЫ вывести корректный JSON, который точно соответствует предоставленной JSON-схеме: InquiryUnitPlanResponse. Не добавляйте никаких лишних ключей. Используйте компактное форматирование JSON (без пустых строк и без пробелов между свойствами JSON). Без HTML. Без эмодзи. Без markdown. Обычный текст внутри строковых полей.
 
 Предмет раздела: {{$Subject}}
@@ -69,7 +71,9 @@ window.prompts_inquiry_ru = {
   - IndividualSupport: массив должен содержать ровно указанных учащихся и их планы (те же имена/планы; без лишних учащихся; без пропущенных учащихся).
 
 ПРАВИЛО ВЫВОДА:
-Верните ТОЛЬКО JSON, который валиден согласно схеме InquiryUnitPlanResponse.`,
+Верните ТОЛЬКО JSON, который валиден согласно схеме InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

@@ -1,4 +1,4 @@
-window.lecturePromptses = {
+window.prompts_lecture_es = {
   STEP0_PROMPT_TEMPLATE: `Crea el esquema de la unidad y la estructura de las lecciones usando la información de abajo. NO escribas planes de lección completos.
                     
 Basándote en el tema de la unidad, los estándares educativos, la descripción/instrucción de la unidad, el nivel de grado, la duración del periodo de clase (minutos) y el número solicitado de lecciones, genera una respuesta en JSON que incluya una UnitDescription cohesiva y una lista no superpuesta de "contenedores" de lecciones.
@@ -53,7 +53,9 @@ Restricciones:
 - Asegura una secuencia lógica desde ideas fundamentales hasta modelado más complejo.
 - Precisión: Todo el contenido debe ser científicamente exacto y apropiado para la edad.
 
-La salida DEBE ser JSON válido que coincida con el esquema. Usa formato compacto (sin líneas en blanco extra).`,
+La salida DEBE ser JSON válido que coincida con el esquema. Usa formato compacto (sin líneas en blanco extra).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Crea UN plan de lección de UNA CLASE MAGISTRAL (NO un plan de unidad, NO múltiples lecciones) usando la información de abajo.
 DEBES devolver JSON válido que coincida exactamente con el esquema JSON proporcionado. No incluyas claves अतिरिक्त. Usa formato JSON compacto (sin líneas en blanco extra).
 Asignatura de la unidad: 
@@ -102,7 +104,9 @@ REGLAS IMPORTANTES DE CONTENIDO:
 REQUISITOS DE SALIDA:
 - La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
 - La salida DEBE ser un ÚNICO plan de lección solamente.
-- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.`,
+- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

@@ -53,7 +53,9 @@ window.promptsru = {
 - Обеспечьте логическую последовательность от базовых идей к более сложному моделированию.
 - Точность: весь контент должен быть научно корректным и соответствующим возрасту.
 
-Результат ДОЛЖЕН быть корректным JSON, соответствующим схеме. Используйте компактное форматирование (без лишних пустых строк).`,
+Результат ДОЛЖЕН быть корректным JSON, соответствующим схеме. Используйте компактное форматирование (без лишних пустых строк).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Создайте ОДИН план урока (НЕ план раздела, НЕ несколько уроков), используя информацию ниже.
 ВЫ ДОЛЖНЫ вывести корректный JSON, который в точности соответствует предоставленной схеме JSON (LessonPlanResponse с единственным объектом "LessonPlan"). Не включайте никаких дополнительных ключей. Используйте компактное форматирование JSON (без лишних пустых строк).
 Предмет раздела: 
@@ -105,7 +107,9 @@ window.promptsru = {
 ТРЕБОВАНИЯ К ВЫВОДУ:
 - Вывод ДОЛЖЕН быть корректным JSON, точно соответствующим предоставленной схеме.
 - Вывод ДОЛЖЕН быть ТОЛЬКО одним планом урока.
-- Без HTML. Без эмодзи. Без markdown. Обычный текст внутри строковых полей.`,
+- Без HTML. Без эмодзи. Без markdown. Обычный текст внутри строковых полей.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

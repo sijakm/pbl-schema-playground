@@ -35,7 +35,9 @@ KETENTUAN ARRAY PELAJARAN:
 - Pengaturan waktu harus sesuai dengan periode kelas {{$ClassDuration}} menit di kelas {{$GradeLevel}}.
 
 ATURAN KELUARAN:
-Kembalikan HANYA JSON yang valid terhadap skema UnitPlanResponse.`,
+Kembalikan HANYA JSON yang valid terhadap skema UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Buat SATU rencana pembelajaran inkuiri (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan informasi di bawah ini. Anda HARUS menghasilkan JSON valid yang cocok persis dengan skema JSON yang disediakan: InquiryUnitPlanResponse. Jangan sertakan kunci tambahan apa pun. Gunakan format JSON yang ringkas (tanpa baris kosong tambahan atau spasi di antara properti JSON). Tanpa HTML. Tanpa emoji. Tanpa markdown. Teks biasa di dalam bidang string.
 
 Mata Pelajaran Unit: {{$Subject}}
@@ -69,7 +71,9 @@ ATURAN SPESIFIK BIDANG (petakan ke skema):
   - IndividualSupport: array harus mencantumkan tepat siswa dan rencana yang diberikan (nama/rencana sama persis; tidak ada siswa tambahan; tidak ada siswa yang terlewat).
 
 ATURAN OUTPUT:
-Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.`,
+Kembalikan HANYA JSON yang valid sesuai dengan skema InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

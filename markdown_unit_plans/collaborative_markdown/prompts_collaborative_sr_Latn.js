@@ -53,7 +53,9 @@ Ograničenja:
 - Osigurajte logičan redosled od osnovnih ideja ka složenijem modelovanju.
 - Tačnost: Sav sadržaj mora biti naučno tačan i primeren uzrastu.
 
-Izlaz MORA biti validan JSON koji odgovara šemi. Koristite kompaktno formatiranje (bez dodatnih praznih linija).`,
+Izlaz MORA biti validan JSON koji odgovara šemi. Koristite kompaktno formatiranje (bez dodatnih praznih linija).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Kreirajte JEDAN plan časa u kolaborativnom stilu (NE plan jedinice, NE više časova) koristeći informacije ispod.
 
 MORATE dati važeći JSON koji tačno odgovara priloženoj JSON šemi (LessonPlanResponse sa jednim objektom "LessonPlan"). Ne uključujte nikakve dodatne ključeve. Koristite kompaktno JSON formatiranje (bez dodatnih praznih redova).
@@ -141,7 +143,9 @@ CollaborativeActivities:
 ZAHTEVI ZA IZLAZ:
 - Izlaz MORA biti validan JSON koji tačno odgovara priloženoj šemi.
 - Izlaz MORA biti SAMO jedan plan časa.
-- Bez HTML-a. Bez emoji-ja. Bez markdowna. Običan tekst unutar string polja.`,
+- Bez HTML-a. Bez emoji-ja. Bez markdowna. Običan tekst unutar string polja.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

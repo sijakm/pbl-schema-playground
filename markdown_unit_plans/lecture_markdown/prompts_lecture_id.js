@@ -1,4 +1,4 @@
-window.lecturePromptsid = {
+window.prompts_lecture_id = {
   STEP0_PROMPT_TEMPLATE: `Buatlah kerangka unit dan struktur pelajaran menggunakan informasi di bawah ini. JANGAN menulis rencana pelajaran lengkap.
                     
 Berdasarkan Subject Unit, standar pendidikan, Unit Description/Instruction, Grade Level, Durasi periode kelas (menit), dan Number of Lessons yang diminta, buat respons JSON yang mencakup UnitDescription yang kohesif dan daftar "containers" pelajaran yang tidak saling tumpang tindih.
@@ -53,7 +53,9 @@ Batasan:
 - Pastikan urutan logis dari ide dasar menuju pemodelan yang lebih kompleks.
 - Akurasi: Semua konten harus akurat secara ilmiah dan sesuai untuk usia siswa.
 
-Output HARUS berupa JSON valid yang sesuai dengan skema. Gunakan format ringkas (tanpa baris kosong tambahan).`,
+Output HARUS berupa JSON valid yang sesuai dengan skema. Gunakan format ringkas (tanpa baris kosong tambahan).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Buat SATU rencana pembelajaran LECTURE (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan info di bawah ini.
 ANDA HARUS mengeluarkan JSON valid yang sesuai dengan skema JSON yang diberikan secara tepat. Jangan sertakan kunci tambahan apa pun. Gunakan pemformatan JSON kompak (tanpa baris kosong tambahan).
 Mata Pelajaran Unit: 
@@ -101,7 +103,9 @@ ATURAN KONTEN PENTING:
 PERSYARATAN OUTPUT:
 - Output HARUS berupa JSON valid yang sesuai dengan skema yang diberikan secara tepat.
 - Output HARUS hanya SATU rencana pelajaran.
-- Tanpa HTML. Tanpa emoji. Tanpa markdown. Teks biasa di dalam field string.`,
+- Tanpa HTML. Tanpa emoji. Tanpa markdown. Teks biasa di dalam field string.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

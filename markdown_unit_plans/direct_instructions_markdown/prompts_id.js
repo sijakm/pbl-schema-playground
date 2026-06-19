@@ -53,7 +53,9 @@ Batasan:
 - Pastikan urutan logis dari ide dasar menuju pemodelan yang lebih kompleks.
 - Akurasi: Semua konten harus akurat secara ilmiah dan sesuai usia.
 
-Output HARUS berupa JSON valid yang sesuai dengan skema. Gunakan format ringkas (tanpa baris kosong tambahan).`,
+Output HARUS berupa JSON valid yang sesuai dengan skema. Gunakan format ringkas (tanpa baris kosong tambahan).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Buat SATU rencana pembelajaran (BUKAN rencana unit, BUKAN beberapa pelajaran) menggunakan info di bawah ini.
 ANDA HARUS menghasilkan JSON valid yang cocok persis dengan skema JSON yang disediakan (LessonPlanResponse dengan satu objek "LessonPlan"). Jangan sertakan kunci tambahan apa pun. Gunakan format JSON ringkas (tanpa baris kosong tambahan).
 Subject Unit: 
@@ -104,7 +106,9 @@ ATURAN PENTING KONTEN:
 PERSYARATAN OUTPUT:
 - Output HARUS berupa JSON valid yang cocok persis dengan skema yang disediakan.
 - Output HARUS HANYA satu rencana pembelajaran.
-- Tidak ada HTML. Tidak ada emoji. Tidak ada markdown. Teks biasa di dalam field string.`,
+- Tidak ada HTML. Tidak ada emoji. Tidak ada markdown. Teks biasa di dalam field string.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

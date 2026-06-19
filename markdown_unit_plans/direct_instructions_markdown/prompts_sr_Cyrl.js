@@ -53,7 +53,9 @@ window.promptssrCyrl = {
 - Обезбедите логичко редоследно напредовање од основних идеја ка сложенијем моделовању.
 - Тачност: Сав садржај мора бити научно тачан и примерен узрасту.
 
-Излаз МОРА бити важећи JSON који одговара шеми. Користите компактно форматирање (без додатних празних редова).`,
+Излаз МОРА бити важећи JSON који одговара шеми. Користите компактно форматирање (без додатних празних редова).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Направите ЈЕДАН план часа (НЕ план јединице, НЕ више часова) користећи информације испод.
 МОРАМ да избаците важећи JSON који тачно одговара достављеној JSON шеми (LessonPlanResponse са једним објектом "LessonPlan"). Не укључујте никакве додатне кључеве. Користите компактно JSON форматирање (без додатних празних редова).
 Предмет јединице: 
@@ -105,7 +107,9 @@ window.promptssrCyrl = {
 ЗАХТЕВИ ЗА ИЗЛАЗ:
 - Излаз МОРА бити важећи JSON који тачно одговара достављеној шеми.
 - Излаз МОРА бити ЈЕДАН једини план часа.
-- Без HTML-а. Без емоџија. Без markdown-а. Обичан текст унутар стринг поља.`,
+- Без HTML-а. Без емоџија. Без markdown-а. Обичан текст унутар стринг поља.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

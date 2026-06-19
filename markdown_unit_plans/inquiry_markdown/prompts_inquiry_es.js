@@ -35,7 +35,9 @@ RESTRICCIONES DEL ARREGLO DE LECCIONES:
 - La planificación debe encajar en períodos de clase de {{$ClassDuration}} minutos en el grado {{$GradeLevel}}.
 
 REGLA DE SALIDA:
-Devuelve SOLO JSON que valide contra el esquema UnitPlanResponse.`,
+Devuelve SOLO JSON que valide contra el esquema UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Crea UNA lección de indagación (NO un plan de unidad, NO múltiples lecciones) usando la información de abajo. DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado: InquiryUnitPlanResponse. No incluyas claves adicionales. Usa formato JSON compacto (sin líneas en blanco extra ni espacios en blanco entre propiedades JSON). Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
 
 Asignatura de la unidad: {{$Subject}}
@@ -69,7 +71,9 @@ REGLAS ESPECÍFICAS DE CAMPOS (asignar al esquema):
   - IndividualSupport: el arreglo debe incluir exactamente a los estudiantes proporcionados y sus planes (mismos nombres/planes; sin estudiantes extra; sin estudiantes faltantes).
 
 REGLA DE SALIDA:
-Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.`,
+Devuelve SOLO JSON que valide contra el esquema InquiryUnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

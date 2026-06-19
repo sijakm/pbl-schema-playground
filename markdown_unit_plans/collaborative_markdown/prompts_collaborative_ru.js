@@ -53,7 +53,9 @@ window.prompts_collaborative_ru = {
 - Обеспечьте логическую последовательность от базовых идей к более сложному моделированию.
 - Точность: весь контент должен быть научно точным и соответствовать возрасту учащихся.
 
-Вывод ДОЛЖЕН быть валидным JSON, соответствующим схеме. Используйте компактное форматирование (без пустых строк).`,
+Вывод ДОЛЖЕН быть валидным JSON, соответствующим схеме. Используйте компактное форматирование (без пустых строк).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Создайте ОДИН план урока в стиле совместного обучения (НЕ план раздела, НЕ несколько уроков), используя информацию ниже.
 
 Вы ДОЛЖНЫ вывести корректный JSON, который точно соответствует предоставленной JSON-схеме (LessonPlanResponse с единственным объектом "LessonPlan"). Не включайте никаких лишних ключей. Используйте компактное форматирование JSON (без лишних пустых строк).
@@ -141,7 +143,9 @@ CollaborativeActivities:
 ТРЕБОВАНИЯ К ВЫВОДУ:
 - Вывод ДОЛЖЕН быть корректным JSON, точно соответствующим предоставленной схеме.
 - Вывод ДОЛЖЕН содержать ТОЛЬКО один план урока.
-- Без HTML. Без эмодзи. Без markdown. Только обычный текст внутри строковых полей.`,
+- Без HTML. Без эмодзи. Без markdown. Только обычный текст внутри строковых полей.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

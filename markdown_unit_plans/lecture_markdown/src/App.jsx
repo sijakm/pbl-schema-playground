@@ -1,3 +1,4 @@
+import '../../../shared/defaults.js';
 import React, { useState, useEffect } from 'react';
 import { MarkdownEditorView, useMarkdownEditor } from '@gravity-ui/markdown-editor';
 import { Button, TextInput, TextArea, Select } from '@gravity-ui/uikit';
@@ -154,6 +155,12 @@ export default function App() {
         log("Calling .NET API to generate Step 0 Markdown...");
         let currentMarkdown = "";
         try {
+          console.log(`=== .NET API REQUEST: Step 0 ===`);
+          console.log(JSON.stringify({
+              UnitTitle: name,
+              Step0Json: JSON.stringify(step0Obj, null, 2),
+              Language: language
+            }));
           const resStep0 = await fetch("http://localhost:5000/api/lecture/generate/step0", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -165,6 +172,8 @@ export default function App() {
           });
           if (resStep0.ok) {
             const dataStep0 = await resStep0.json();
+            console.log(`=== .NET API RESPONSE: Step 0 ===`);
+            console.log(dataStep0);
             currentMarkdown = dataStep0.markdown;
             setMarkdown(currentMarkdown);
             if (editor) {
@@ -216,17 +225,24 @@ export default function App() {
 
         // .NET API
         log("Calling .NET API to generate Markdown for lessons...");
-        const res = await fetch("http://localhost:5000/api/lecture/generate/lessons", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        console.log(`=== .NET API REQUEST: Lessons ===`);
+          console.log(JSON.stringify({
+            LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2)),
+            Language: language
+          }));
+          const res = await fetch("http://localhost:5000/api/lecture/generate/lessons", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
             LessonJsons: lessonJsons.map(obj => JSON.stringify(obj, null, 2)),
             Language: language
           })
-        });
+          });
         
         if (res.ok) {
           const data = await res.json();
+          console.log(`=== .NET API RESPONSE: Lessons ===`);
+          console.log(data);
           const finalMarkdown = currentMarkdown + "\n" + data.markdown;
           setMarkdown(finalMarkdown);
           if (editor) {

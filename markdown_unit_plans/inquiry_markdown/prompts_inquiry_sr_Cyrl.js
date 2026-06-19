@@ -35,7 +35,9 @@ window.prompts_inquiry_sr_Cyrl = {
 - Темпо мора одговарати часовима од {{$ClassDuration}} минута у разреду {{$GradeLevel}}.
 
 ПРАВИЛО ИЗЛАЗА:
-Врати ИСКЉУЧИВО JSON који важи према шеми UnitPlanResponse.`,
+Врати ИСКЉУЧИВО JSON који важи према шеми UnitPlanResponse.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Направи ЈЕДАН план часа заснованог на истраживању (НЕ план јединице, НЕ више часова) користећи информације испод. МОРАШ да излазиш у важећем JSON формату који тачно одговара достављеној JSON шеми: InquiryUnitPlanResponse. Не укључуј никакве додатне кључеве. Користи компактно JSON форматирање (без празних редова или додатних размака између JSON својстава). Без HTML-а. Без емоџија. Без markdown-а. Обичан текст унутар стринг поља.
 
 Предмет јединице: {{$Subject}}
@@ -69,7 +71,9 @@ window.prompts_inquiry_sr_Cyrl = {
   - IndividualSupport: низ мора да садржи тачно наведене ученике и њихове планове (иста имена/планови; без додатних ученика; без изостављених ученика).
 
 ПРАВИЛО ИЗЛАЗА:
-Врати САМО JSON који валидира у односу на InquiryUnitPlanResponse шему.`,
+Врати САМО JSON који валидира у односу на InquiryUnitPlanResponse шему.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

@@ -1,4 +1,4 @@
-window.lecturePromptsru = {
+window.prompts_lecture_ru = {
   STEP0_PROMPT_TEMPLATE: `Создайте план раздела и структуру уроков, используя информацию ниже. НЕ пишите полные планы уроков.
                     
 На основе учебного предмета раздела, образовательных стандартов, описания/инструкций по разделу, уровня класса, продолжительности урока (в минутах) и запрошенного количества уроков сгенерируйте ответ в формате JSON, который включает связное UnitDescription и непересекающийся список «контейнеров» уроков.
@@ -53,7 +53,9 @@ window.lecturePromptsru = {
 - Обеспечьте логическую последовательность от базовых идей к более сложному моделированию.
 - Точность: весь контент должен быть научно корректным и соответствующим возрасту.
 
-Вывод ДОЛЖЕН быть корректным JSON, соответствующим схеме. Используйте компактное форматирование (без лишних пустых строк).`,
+Вывод ДОЛЖЕН быть корректным JSON, соответствующим схеме. Используйте компактное форматирование (без лишних пустых строк).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Создайте ОДИН план урока-ЛЕКЦИИ (НЕ план модуля, НЕ несколько уроков), используя информацию ниже.
 ВЫ ДОЛЖНЫ вывести корректный JSON, который точно соответствует предоставленной JSON-схеме. Не добавляйте никаких лишних ключей. Используйте компактное форматирование JSON (без лишних пустых строк).
 Предмет модуля: 
@@ -102,7 +104,9 @@ window.lecturePromptsru = {
 ТРЕБОВАНИЯ К ВЫВОДУ:
 - Вывод ДОЛЖЕН быть корректным JSON, точно соответствующим предоставленной схеме.
 - Вывод ДОЛЖЕН быть ТОЛЬКО ОДНИМ планом урока.
-- Без HTML. Без эмодзи. Без markdown. Обычный текст внутри строковых полей.`,
+- Без HTML. Без эмодзи. Без markdown. Обычный текст внутри строковых полей.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

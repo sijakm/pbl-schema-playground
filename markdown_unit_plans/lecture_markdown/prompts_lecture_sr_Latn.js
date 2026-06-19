@@ -1,4 +1,4 @@
-window.lecturePromptssrLatn = {
+window.prompts_lecture_sr_Latn = {
   STEP0_PROMPT_TEMPLATE: `Kreirajte obris nastavne jedinice i strukturu časa koristeći informacije u nastavku. Nemojte pisati kompletne planove časova.
                     
 Na osnovu predmeta jedinice, obrazovnih standarda, opisa/uputstva za jedinicu, razreda, trajanja časa (u minutima) i traženog broja časova, generišite JSON odgovor koji uključuje koherentnu UnitDescription i neusaglašenu listu lekcija kao „kontejnere“.
@@ -53,7 +53,9 @@ Ograničenja:
 - Obezbedite logičan redosled od osnovnih ideja ka složenijem modelovanju.
 - Tačnost: Sav sadržaj mora biti naučno tačan i primeren uzrastu.
 
-Izlaz MORA biti validan JSON koji odgovara šemi. Koristite kompaktan format (bez dodatnih praznih linija).`,
+Izlaz MORA biti validan JSON koji odgovara šemi. Koristite kompaktan format (bez dodatnih praznih linija).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Kreirajte JEDAN NASTAVNI PLAN za LECTURE čas (NE plan jedinice, NE više časova) koristeći informacije ispod.
 MORATE da iznesete validan JSON koji tačno odgovara datoj JSON šemi. Ne uključujte nikakve dodatne ključeve. Koristite kompaktno JSON formatiranje (bez dodatnih praznih linija).
 Predmet jedinice: 
@@ -102,7 +104,9 @@ VAŽNA PRAVILA O SADRŽAJU:
 ZAHTEVI ZA IZLAZ:
 - Izlaz MORA biti validan JSON koji tačno odgovara datoj šemi.
 - Izlaz MORA biti SAMO JEDAN plan lekcije.
-- Bez HTML-a. Bez emodžija. Bez markdown-a. Običan tekst unutar string polja.`,
+- Bez HTML-a. Bez emodžija. Bez markdown-a. Običan tekst unutar string polja.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

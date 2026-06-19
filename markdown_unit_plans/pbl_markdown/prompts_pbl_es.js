@@ -24,7 +24,9 @@ Estándares a alinear:
 Se te asigna diseñar una unidad detallada basada en proyectos utilizando principios de la ciencia cognitiva. Tu respuesta DEBE seguir exactamente el orden de las secciones, los encabezados y las reglas de contenido que se indican a continuación. Si falta alguna sección o está fuera de orden, regenera hasta que se satisfagan todas las restricciones. 
 Reglas globales de salida (aplican a todo) Sigue exactamente el orden de las secciones y los encabezados que se muestran a continuación. No agregues secciones extra ni cambies el nombre de los encabezados. Los problemas del mundo real deben ser relevantes para los estudiantes de este nivel de grado. Evita temas que puedan ser sensibles para la adecuación al desarrollo de los temas, así como temas sensibles como la pobreza, la inseguridad habitacional, la raza, etc., o temas controvertidos como la evolución. Incluye los siguientes componentes en el diseño del proyecto de la unidad.  
 Relevancia cultural e inclusión: Incorpora múltiples perspectivas y reflexiona sobre los impactos para todas las personas involucradas. El contenido debe conectar con estudiantes de diversos orígenes y comunidades para crear lecciones culturalmente relevantes y receptivas culturalmente. Evita los estereotipos. 
-IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}`,
+IMPORTANTE: la respuesta debe estar en {{$ResponseLanguage}}
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "PBLUnitPlanResponse",
   "type": "object",

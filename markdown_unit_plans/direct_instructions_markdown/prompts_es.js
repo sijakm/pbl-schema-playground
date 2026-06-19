@@ -53,7 +53,9 @@ Restricciones:
 - Asegura una secuencia lógica desde ideas fundamentales hasta modelado más complejo.
 - Precisión: Todo el contenido debe ser científicamente exacto y apropiado para la edad.
 
-La salida DEBE ser JSON válido que coincida con el esquema. Usa formato compacto (sin líneas en blanco extra).`,
+La salida DEBE ser JSON válido que coincida con el esquema. Usa formato compacto (sin líneas en blanco extra).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Crea UNA planificación de lección (NO un plan de unidad, NO varias lecciones) usando la información de abajo.
 DEBES generar JSON válido que coincida exactamente con el esquema JSON proporcionado (LessonPlanResponse con un único objeto "LessonPlan"). No incluyas claves adicionales. Usa un formato JSON compacto (sin líneas en blanco extra).
 Asignatura de la unidad: 
@@ -104,7 +106,9 @@ REGLAS IMPORTANTES DE CONTENIDO:
 REQUISITOS DE SALIDA:
 - La salida DEBE ser JSON válido que coincida exactamente con el esquema proporcionado.
 - La salida DEBE ser UNA SOLA planificación de lección.
-- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.`,
+- Sin HTML. Sin emojis. Sin markdown. Texto plano dentro de los campos de cadena.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",

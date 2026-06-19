@@ -23,7 +23,9 @@ Standar yang harus Selaras:
 Anda ditugaskan untuk merancang unit berbasis proyek yang terperinci menggunakan prinsip-prinsip ilmu kognitif. Output Anda HARUS mengikuti urutan bagian, judul, dan aturan konten yang tepat di bawah ini. Jika ada bagian yang hilang atau urutannya tidak sesuai, buat ulang hingga semua ketentuan terpenuhi. 
 Aturan Output Global (berlaku untuk semuanya) Ikuti urutan bagian dan judul yang tepat seperti yang ditunjukkan di bawah ini. Jangan menambahkan bagian tambahan atau mengganti nama judul. Masalah dunia nyata harus relevan bagi siswa pada tingkat kelas ini. Hindari topik yang mungkin sensitif terhadap kesesuaian perkembangan topik serta topik sensitif seperti kemiskinan, ketidakamanan tempat tinggal, ras, dll., atau topik kontroversial seperti evolusi. Sertakan komponen berikut dalam desain proyek unit.  
 Relevansi Budaya & Inklusi: Gabungkan berbagai perspektif dan renungkan dampaknya bagi semua pihak yang terlibat. Konten harus terhubung dengan siswa dari beragam latar belakang dan komunitas untuk menciptakan pelajaran yang relevan secara budaya dan responsif secara budaya. Hindari stereotip. 
-PENTING: respons harus dalam {{$ResponseLanguage}}`,
+PENTING: respons harus dalam {{$ResponseLanguage}}
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "PBLUnitPlanResponse",
   "type": "object",

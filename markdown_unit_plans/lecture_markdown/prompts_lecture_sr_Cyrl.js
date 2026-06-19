@@ -1,4 +1,4 @@
-window.lecturePromptssrCyrl = {
+window.prompts_lecture_sr_Cyrl = {
   STEP0_PROMPT_TEMPLATE: `Направи преглед јединице и структуру часа користећи информације испод. НЕ пиши пуне планове часа.
                     
 На основу Предмета јединице, образовних стандарда, Описа/упутства за јединицу, Нивоа разреда, Трајања школског часа (у минутима) и траженог Броја часова, генериши JSON одговор који укључује кохерентан UnitDescription и непоклапајућу листу „контејнера“ за часове.
@@ -53,7 +53,9 @@ window.lecturePromptssrCyrl = {
 - Обезбеди логичан редослед од темељних идеја ка сложенијем моделовању.
 - Тачност: сав садржај мора бити научно тачан и примерен узрасту.
 
-Излаз МОРА бити валидан JSON који одговара шеми. Користи компактно форматирање (без додатних празних редова).`,
+Излаз МОРА бити валидан JSON који одговара шеми. Користи компактно форматирање (без додатних празних редова).
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   PER_LESSON_PROMPT_TEMPLATE: `Направите ЈЕДАН НАСТАВНИ час (НЕ план јединице, НЕ више часова) користећи информације испод.
 МОРАМЕТЕ да изађете у ваљаном JSON формату који тачно одговара достављеној JSON шеми. Немојте укључивати никакве додатне кључеве. Користите компактно JSON форматирање (без додатних празних линија).
 Предмет јединице: 
@@ -102,7 +104,9 @@ window.lecturePromptssrCyrl = {
 ЗАХТЕВИ ЗА ИЗЛАЗ:
 - Излаз МОРА бити ваљан JSON који тачно одговара достављеној шеми.
 - Излаз МОРА бити ЈЕДАН једини план часа.
-- Без HTML-а. Без емоџија. Без markdown-а. Обичан текст унутар стринг поља.`,
+- Без HTML-а. Без емоџија. Без markdown-а. Обичан текст унутар стринг поља.
+
+CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strictly written in the language of this prompt's instructions. You MUST translate any English input content (like MediaContext or Standards) into this target language. Do not output English unless specifically requested.`,
   STEP0_SCHEMA: {
   "title": "UnitPlanResponse",
   "type": "object",
