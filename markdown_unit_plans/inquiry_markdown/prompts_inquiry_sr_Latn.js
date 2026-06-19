@@ -283,7 +283,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generišite 2-3 konkretna pedagoška poteza koji usmeravaju tiho posmatranje i deljenje u paru. Uključite skripte (nemojte uključivati prefiks „Say:“, npr. „Take 30 seconds to look silently...“). Fokusirajte se na hvatanje i organizovanje zapažanja učenika u smislenе kategorije i podsticanje više perspektiva.",
+                  "description": "Generišite 2-3 konkretna pedagoška poteza koji usmeravaju tiho posmatranje i deljenje u paru. Uključite skripte (nemojte uključivati prefiks „Recite:“, npr. „Take 30 seconds to look silently...“). Fokusirajte se na hvatanje i organizovanje zapažanja učenika u smislenе kategorije i podsticanje više perspektiva.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -307,7 +307,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Kreirajte konkretnu nastavničku skriptu (nemojte uključivati prefiks „Say:“) koja pomaže učenicima da svoje opservacije fenomena pretvore u istraživačka pitanja ili probleme, dok grupišu ideje u ključne teme."
+                  "description": "Kreirajte konkretnu nastavničku skriptu (nemojte uključivati prefiks „Recite:“) koja pomaže učenicima da svoje opservacije fenomena pretvore u istraživačka pitanja ili probleme, dok grupišu ideje u ključne teme."
                 },
                 "PromptingOptions": {
                   "type": "string",
@@ -335,7 +335,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Razvijte instrukciju koju vodi nastavnik (nemojte uključivati prefiks „Say:“) kako biste olakšali diskusiju u paru ili grupi koja generiše konkretne ideje, objašnjenja ili rešenja koristeći dostupne informacije i ograničenja. Podstaknite poređenje i obrazlaganje."
+                  "description": "Razvijte instrukciju koju vodi nastavnik (nemojte uključivati prefiks „Recite:“) kako biste olakšali diskusiju u paru ili grupi koja generiše konkretne ideje, objašnjenja ili rešenja koristeći dostupne informacije i ograničenja. Podstaknite poređenje i obrazlaganje."
                 },
                 "PromptingOptions": {
                   "type": "string",
@@ -429,7 +429,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Kreirajte nastavničku skriptu (nemojte uključivati prefiks „Say:“) za uvođenje sesije generisanja pitanja. Fokusirajte se na prelazak od individualnog razmišljanja ka deljenju u paru kako bi se ideje proširile."
+                  "description": "Kreirajte nastavničku skriptu (nemojte uključivati prefiks „Recite:“) za uvođenje sesije generisanja pitanja. Fokusirajte se na prelazak od individualnog razmišljanja ka deljenju u paru kako bi se ideje proširile."
                 },
                 "FacilitationMoves": {
                   "type": "array",
@@ -457,7 +457,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Kreirajte skriptu (nemojte uključivati prefiks „Say:“) koja vodi učenike u odabiru pitanja koje bi im najviše pomoglo da uče iz testabilnog modela."
+                  "description": "Kreirajte skriptu (nemojte uključivati prefiks „Recite:“) koja vodi učenike u odabiru pitanja koje bi im najviše pomoglo da uče iz testabilnog modela."
                 },
                 "FacilitationMoves": {
                   "type": "array",
@@ -485,7 +485,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Kreirajte scenario (nemojte uključiti prefiks 'Say:') da podstaknete učenike da definišu šta će posmatrati, šta će menjati i šta će prikupljati kao dokaz."
+                  "description": "Kreirajte scenario (nemojte uključiti prefiks 'Recite:') da podstaknete učenike da definišu šta će posmatrati, šta će menjati i šta će prikupljati kao dokaz."
                 },
                 "FacilitationMoves": {
                   "type": "array",
@@ -545,11 +545,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Kreirajte nastavnikova uputstva za uvođenje zbunjujuće situacije ili modela. Prvo navedite radnju u zagradama kao [Prikažite model, situaciju, demonstraciju ili kratku priču koja uključuje manu, neefikasnost ili neočekivan rezultat kako biste podstakli radoznalost], a zatim navedite razgovorni scenario (nemojte uključiti prefiks 'Say:')."
+                  "description": "Kreirajte nastavnikova uputstva za uvođenje zbunjujuće situacije ili modela. Prvo navedite radnju u zagradama kao [Prikažite model, situaciju, demonstraciju ili kratku priču koja uključuje manu, neefikasnost ili neočekivan rezultat kako biste podstakli radoznalost], a zatim navedite razgovorni scenario (nemojte uključiti prefiks 'Recite:')."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Generišite 2-3 koraka za vođenje uvoda. Jasno navedite nastavne radnje bez prefiksiranja sa 'Say:'. Uključite davanje učenicima vremena da posmatraju pre delovanja, podsticanje višestrukih tumačenja i naglašavanje da može postojati više validnih ideja.",
+                  "description": "Generišite 2-3 koraka za vođenje uvoda. Jasno navedite nastavne radnje bez prefiksiranja sa 'Recite:'. Uključite davanje učenicima vremena da posmatraju pre delovanja, podsticanje višestrukih tumačenja i naglašavanje da može postojati više validnih ideja.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -573,11 +573,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Kreirajte izgovoreni scenario (nemojte uključiti prefiks 'Say:') da zadatak postavite kao međuzavisan i naglasite zajedničku odgovornost. Uključite uputstva za učenike da koriste početke rečenica (npr. 'Mislim... zato što...') i strukture učešća kao što su žetoni za govor."
+                  "description": "Kreirajte izgovoreni scenario (nemojte uključiti prefiks 'Recite:') da zadatak postavite kao međuzavisan i naglasite zajedničku odgovornost. Uključite uputstva za učenike da koriste početke rečenica (npr. 'Mislim... zato što...') i strukture učešća kao što su žetoni za govor."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Navedite 3-5 konkretnih koraka ili ponašanja učenika koja treba pratiti tokom rada u grupi (npr. prepoznavanje obrazaca, beleženje u zajedničkim tabelama podataka, upoređivanje tumačenja). Nemojte prefiksirati ove radnje sa 'Say:'. Pobrinite se da budu usmerene na to da svi učenici doprinose posmatranju i dorađivanju ideja.",
+                  "description": "Navedite 3-5 konkretnih koraka ili ponašanja učenika koja treba pratiti tokom rada u grupi (npr. prepoznavanje obrazaca, beleženje u zajedničkim tabelama podataka, upoređivanje tumačenja). Nemojte prefiksirati ove radnje sa 'Recite:'. Pobrinite se da budu usmerene na to da svi učenici doprinose posmatranju i dorađivanju ideja.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Jasna skripta odgovora za nastavnika (počinje sa 'Teacher Response: ') koja pokazuje kako odgovoriti u tom trenutku sa konkretnim podsticajem (nemojte uključiti prefiks 'Say:'). NE koristite podebljavanje niti jake oznake."
+                "description": "Jasna skripta odgovora za nastavnika (počinje sa 'Odgovor nastavnika: ') koja pokazuje kako odgovoriti u tom trenutku sa konkretnim podsticajem (nemojte uključiti prefiks 'Recite:'). NE koristite podebljavanje niti jake oznake."
               }
             },
             "required": [
@@ -736,7 +736,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Generišite jedan složen podsticaj (ne uključujte prefiks 'Say:')/pitanje koje će podstaći dublje konceptualno razumevanje."
+                  "description": "Generišite jedan složen podsticaj (ne uključujte prefiks 'Recite:')/pitanje koje će podstaći dublje konceptualno razumevanje."
                 },
                 "ExpectedResponses": {
                   "type": "array",
@@ -825,7 +825,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Generišite jedno konkretno pitanje (ne uključujte prefiks 'Say:') za proveru razumevanja učenika tokom ili na kraju istraživanja."
+              "description": "Generišite jedno konkretno pitanje (ne uključujte prefiks 'Recite:') za proveru razumevanja učenika tokom ili na kraju istraživanja."
             },
             "ExpectedResponses": {
               "type": "array",
@@ -873,7 +873,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "Izjava (ne uključujte prefiks 'Say:') koja će učenike vratiti na istraživačko pitanje i izneti na videlo nove ideje o tome kako dizajn funkcioniše."
+              "description": "Izjava (ne uključujte prefiks 'Recite:') koja će učenike vratiti na istraživačko pitanje i izneti na videlo nove ideje o tome kako dizajn funkcioniše."
             },
             "FacilitationMoves": {
               "type": "array",
@@ -893,7 +893,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "Izjava (ne uključujte prefiks 'Say:') koja navodi šta njihov pisani odgovor mora da sadrži (sadržinski specifične komponente) i podsetnik da koriste podatke kao dokaz."
+              "description": "Izjava (ne uključujte prefiks 'Recite:') koja navodi šta njihov pisani odgovor mora da sadrži (sadržinski specifične komponente) i podsetnik da koriste podatke kao dokaz."
             },
             "CollaborationInstruction": {
               "type": "string",
@@ -949,7 +949,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "Izjava (ne uključujte prefiks „Say:”) koja podstiče učenike da razmisle o širim implikacijama svojih dokaza van učionice."
+              "description": "Izjava (ne uključujte prefiks „Recite:”) koja podstiče učenike da razmisle o širim implikacijama svojih dokaza van učionice."
             },
             "FacilitationMoves": {
               "type": "array",
@@ -1009,7 +1009,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Potpuna sekcija „Review & Spaced Retrieval“. Ova aktivnost od 5 minuta mora da uključuje: 1. Uputstva za nastavnike koja sadrže: - prompt za aktivno prisećanje uz deljenje sa partnerom/grupom - očekivane odgovore učenika (2-3 primera u bullet listi) 2. Povezivanje sa suštinskim pitanjem 3. Deo o transcendentalnom mišljenju 4. Komponentu razmaknutog prisećanja koja sadrži: - jasno upućivanje na konkretan prethodni čas - pitanje koje povezuje prošle + sadašnje koncepte - detaljne kriterijume uspeha / očekivane odgovore Sve sekcije moraju sadržati direktne nastavničke upute bez prefiksa „Say:” i jasno označene „Expected Student Responses” sa 2-3 primera odgovora.",
+      "description": "Potpuna sekcija „Review & Spaced Retrieval“. Ova aktivnost od 5 minuta mora da uključuje: 1. Uputstva za nastavnike koja sadrže: - prompt za aktivno prisećanje uz deljenje sa partnerom/grupom - očekivane odgovore učenika (2-3 primera u bullet listi) 2. Povezivanje sa suštinskim pitanjem 3. Deo o transcendentalnom mišljenju 4. Komponentu razmaknutog prisećanja koja sadrži: - jasno upućivanje na konkretan prethodni čas - pitanje koje povezuje prošle + sadašnje koncepte - detaljne kriterijume uspeha / očekivane odgovore Sve sekcije moraju sadržati direktne nastavničke upute bez prefiksa „Recite:” i jasno označene „Očekivani odgovori učenika” sa 2-3 primera odgovora.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
@@ -1027,7 +1027,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Specifičan nastavnički tekst (ne uključujte prefiks „Say:”) koji podstiče učenike da razmisle o današnjem istraživanju i o tome šta je ono otkrilo o sistemu."
+                  "description": "Specifičan nastavnički tekst (ne uključujte prefiks „Recite:”) koji podstiče učenike da razmisle o današnjem istraživanju i o tome šta je ono otkrilo o sistemu."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -1051,7 +1051,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Nastavnički tekst (ne uključujte prefiks „Say:”) koji povezuje današnje nalaze sa jednim od suštinskih pitanja jedinice."
+                  "description": "Nastavnički tekst (ne uključujte prefiks „Recite:”) koji povezuje današnje nalaze sa jednim od suštinskih pitanja jedinice."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -1075,7 +1075,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "TeacherSay": {
                   "type": "string",
-                  "description": "Nastavnički tekst (ne uključujte prefiks „Say:”) koji eksplicitno povezuje koncept iz prethodnog časa sa današnjim radom. Mora da sadrži meta-referencu (npr. „(Preuzeto iz Jedinice 1, Časa 2.)”) direktno u tekstu."
+                  "description": "Nastavnički tekst (ne uključujte prefiks „Recite:”) koji eksplicitno povezuje koncept iz prethodnog časa sa današnjim radom. Mora da sadrži meta-referencu (npr. „(Preuzeto iz Jedinice 1, Časa 2.)”) direktno u tekstu."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",

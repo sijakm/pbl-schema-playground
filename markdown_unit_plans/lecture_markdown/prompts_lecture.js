@@ -244,7 +244,7 @@ OUTPUT REQUIREMENTS:
         }
       },
       "AssessPriorKnowledge": {
-        "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**Say:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**Say:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**Say:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
+        "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**{loc.Say}:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**{loc.Say}:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**{loc.Say}:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
         "type": "object",
         "description": "Full 'Assess Prior Knowledge' section. CRITICAL: Look at the 'lessonNumber' in the Attached Lesson Content. IF this is Lesson 1, populate this object fully. IF this is Lesson 2, 3, or any other lesson, YOU MUST RETURN AN EMPTY OBJECT {} with NO properties. Do not populate this for any lesson other than Lesson 1.",
         "properties": {
@@ -260,7 +260,7 @@ OUTPUT REQUIREMENTS:
             "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
             "type": "array",
             "items": { "x-format": "- {value}", "type": "string" },
-            "description": "Expected student responses/markings for each statement."
+            "description": "Expected Student Responses/markings for each statement."
           },
           "SayConclusion": { "type": "string", "description": "What the teacher says to wrap up." },
           "ActionConclusion": { "type": "string", "description": "Teacher action to conclude (e.g., drawing a diagram)." },
@@ -360,7 +360,7 @@ OUTPUT REQUIREMENTS:
             }
           },
           "Connect": {
-            "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. Say: \"{value.Step1Say}\"\n\n2. Say: \"{value.Step2Say}\"\n\n3. Prompt:\n\n{value.Step3Prompts}\n\n4. Whole-group share: Say: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
+            "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. {loc.Say}: \"{value.Step1Say}\"\n\n2. {loc.Say}: \"{value.Step2Say}\"\n\n3. {loc.Prompt}:\n\n{value.Step3Prompts}\n\n4. Whole-group share: {loc.Say}: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
             "type": "object",
             "description": "Relate to a purpose. Connect to one of the essential questions.",
             "properties": {
@@ -374,7 +374,7 @@ OUTPUT REQUIREMENTS:
                 "description": "Specific questions for the prompt (e.g., 'Why was the shaduf important...', 'What evidence shows...')."
               },
               "Step4Say": { "type": "string", "description": "Teacher script for whole-group share (e.g., 'Let's hear a few ideas...')." },
-              "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Deep expected student responses that use reasoning or evidence." }
+              "ExpectedStudentResponses": { "x-format": "{items}", "type": "array", "items": { "x-format": "- {value}", "type": "string" }, "description": "Deep Expected Student Responses that use reasoning or evidence." }
             },
             "required": ["Duration", "Step1Say", "Step2Say", "Step3Prompts", "Step4Say", "ExpectedStudentResponses"],
             "additionalProperties": false
@@ -570,7 +570,7 @@ OUTPUT REQUIREMENTS:
         "additionalProperties": false
       },
       "QAndAAndDiscussion": {
-        "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. Say: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. Ask:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. Say: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" Record: {value.InstructionsForTeachers.Step3_CaptureRecord} Say:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. Say: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} Say: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
+        "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. {loc.Say}: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. {loc.AskLabel}:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. {loc.Say}: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" {loc.RecordLabel}: {value.InstructionsForTeachers.Step3_CaptureRecord} {loc.Say}:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. {loc.Say}: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} {loc.Say}: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
         "type": "object",
         "description": "Block for Q&A and Discussion.",
         "properties": {

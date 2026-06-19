@@ -485,7 +485,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Crear un guion (no incluyas el prefijo 'Say:') para pedir a los estudiantes que definan qué observarán, qué cambiarán y qué recopilarán como evidencia."
+                  "description": "Crear un guion (no incluyas el prefijo 'Diga:') para pedir a los estudiantes que definan qué observarán, qué cambiarán y qué recopilarán como evidencia."
                 },
                 "FacilitationMoves": {
                   "type": "array",
@@ -545,11 +545,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Crea instrucciones para el docente para presentar una situación o modelo desconcertante. Primero proporciona una acción entre corchetes como [Muestra un modelo, una situación, una demostración o una historia corta que incluya un defecto, una ineficiencia o un resultado inesperado para despertar la curiosidad], luego proporciona el guion conversacional (no incluyas el prefijo 'Say:')."
+                  "description": "Crea instrucciones para el docente para presentar una situación o modelo desconcertante. Primero proporciona una acción entre corchetes como [Muestra un modelo, una situación, una demostración o una historia corta que incluya un defecto, una ineficiencia o un resultado inesperado para despertar la curiosidad], luego proporciona el guion conversacional (no incluyas el prefijo 'Diga:')."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Genera 2-3 acciones para guiar el inicio. Expresa claramente las acciones instruccionales sin anteponerlas con 'Say:'. Incluye darles a los estudiantes tiempo para observar antes de actuar, fomentar múltiples interpretaciones y reforzar que puede haber varias ideas válidas.",
+                  "description": "Genera 2-3 acciones para guiar el inicio. Expresa claramente las acciones instruccionales sin anteponerlas con 'Diga:'. Incluye darles a los estudiantes tiempo para observar antes de actuar, fomentar múltiples interpretaciones y reforzar que puede haber varias ideas válidas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -573,11 +573,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Crea un guion oral (no incluyas el prefijo 'Say:') para enmarcar la tarea como interdependiente y enfatizar la responsabilidad compartida. Incluye instrucciones para que los estudiantes usen iniciadores de oraciones (p. ej., 'Creo... porque...') y estructuras de participación como fichas de conversación."
+                  "description": "Crea un guion oral (no incluyas el prefijo 'Diga:') para enmarcar la tarea como interdependiente y enfatizar la responsabilidad compartida. Incluye instrucciones para que los estudiantes usen iniciadores de oraciones (p. ej., 'Creo... porque...') y estructuras de participación como fichas de conversación."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Enumera 3-5 acciones específicas o comportamientos de los estudiantes que se deben monitorear durante el trabajo en grupo (p. ej., identificar patrones, registrar en tablas de datos compartidas, comparar interpretaciones). No antepongas estas acciones con 'Say:'. Asegúrate de que se centren en que todos los estudiantes contribuyan a observar y refinar ideas.",
+                  "description": "Enumera 3-5 acciones específicas o comportamientos de los estudiantes que se deben monitorear durante el trabajo en grupo (p. ej., identificar patrones, registrar en tablas de datos compartidas, comparar interpretaciones). No antepongas estas acciones con 'Diga:'. Asegúrate de que se centren en que todos los estudiantes contribuyan a observar y refinar ideas.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Say:'). NO uses negritas ni etiquetas de énfasis."
+                "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Diga:'). NO uses negritas ni etiquetas de énfasis."
               }
             },
             "required": [
@@ -736,7 +736,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Genera una pregunta compleja (no incluyas el prefijo 'Say:') para exigir una comprensión conceptual más profunda."
+                  "description": "Genera una pregunta compleja (no incluyas el prefijo 'Diga:') para exigir una comprensión conceptual más profunda."
                 },
                 "ExpectedResponses": {
                   "type": "array",
@@ -825,7 +825,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Genera una pregunta específica (no incluyas el prefijo 'Say:') para comprobar la comprensión de los estudiantes durante o al final de la investigación."
+              "description": "Genera una pregunta específica (no incluyas el prefijo 'Diga:') para comprobar la comprensión de los estudiantes durante o al final de la investigación."
             },
             "ExpectedResponses": {
               "type": "array",
@@ -873,7 +873,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "Una declaración (no incluyas el prefijo 'Say:') para devolver a los estudiantes a la pregunta de investigación y hacer aflorar ideas emergentes sobre cómo funciona el diseño."
+              "description": "Una declaración (no incluyas el prefijo 'Diga:') para devolver a los estudiantes a la pregunta de investigación y hacer aflorar ideas emergentes sobre cómo funciona el diseño."
             },
             "FacilitationMoves": {
               "type": "array",
@@ -893,7 +893,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "Una declaración (no incluyas el prefijo 'Say:') que describa lo que debe incluir su explicación escrita (componentes específicos del contenido) y un recordatorio para usar los datos como evidencia."
+              "description": "Una declaración (no incluyas el prefijo 'Diga:') que describa lo que debe incluir su explicación escrita (componentes específicos del contenido) y un recordatorio para usar los datos como evidencia."
             },
             "CollaborationInstruction": {
               "type": "string",
@@ -949,7 +949,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "Una declaración (NO incluyas el prefijo 'Say:') para invitar a los estudiantes a pensar en las implicaciones más amplias de su evidencia más allá del aula."
+              "description": "Una declaración (NO incluyas el prefijo 'Diga:') para invitar a los estudiantes a pensar en las implicaciones más amplias de su evidencia más allá del aula."
             },
             "FacilitationMoves": {
               "type": "array",
@@ -1009,7 +1009,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
     "ReviewAndSpacedRetrieval": {
       "x-format": "### 🧠 {loc.ReviewAndSpacedRetrieval}\n\n**{loc.TeacherNotes}:** {value.TeacherNotes}\n\n{value.InstructionsForTeachers}",
       "type": "object",
-      "description": "Sección completa de 'Repaso y Recuperación Espaciada'. Esta actividad de 5 minutos debe incluir: 1. Instrucciones para el docente que contengan: - Indicador de Recuperación Activa usando intercambio con parejas/grupos - Respuestas esperadas de los estudiantes (2-3 ejemplos con viñetas) 2. Conexión con la Pregunta Esencial 3. Sección de Pensamiento Trascendente 4. Componente de Recuperación Espaciada que contenga: - Referencia clara a una lección previa específica - Pregunta que conecte conceptos pasados + actuales - Criterios de éxito / respuestas esperadas detalladas Todas las secciones deben proporcionar indicaciones directas para el docente sin el prefijo 'Say:' y tener claramente etiquetadas 'Respuestas Esperadas de los Estudiantes' mostrando 2-3 respuestas de ejemplo.",
+      "description": "Sección completa de 'Repaso y Recuperación Espaciada'. Esta actividad de 5 minutos debe incluir: 1. Instrucciones para el docente que contengan: - Indicador de Recuperación Activa usando intercambio con parejas/grupos - Respuestas esperadas de los estudiantes (2-3 ejemplos con viñetas) 2. Conexión con la Pregunta Esencial 3. Sección de Pensamiento Trascendente 4. Componente de Recuperación Espaciada que contenga: - Referencia clara a una lección previa específica - Pregunta que conecte conceptos pasados + actuales - Criterios de éxito / respuestas esperadas detalladas Todas las secciones deben proporcionar indicaciones directas para el docente sin el prefijo 'Diga:' y tener claramente etiquetadas 'Respuestas Esperadas de los Estudiantes' mostrando 2-3 respuestas de ejemplo.",
       "properties": {
         "TeacherNotes": {
           "type": "string",
@@ -1027,7 +1027,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Un guion específico para el docente (NO incluyas el prefijo 'Say:') que invite a los estudiantes a reflexionar sobre la investigación de hoy y lo que reveló sobre el sistema."
+                  "description": "Un guion específico para el docente (NO incluyas el prefijo 'Diga:') que invite a los estudiantes a reflexionar sobre la investigación de hoy y lo que reveló sobre el sistema."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -1051,7 +1051,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Un guion para el docente (NO incluyas el prefijo 'Say:') que conecte los hallazgos de hoy con una de las preguntas esenciales de la unidad."
+                  "description": "Un guion para el docente (NO incluyas el prefijo 'Diga:') que conecte los hallazgos de hoy con una de las preguntas esenciales de la unidad."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -1075,7 +1075,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "TeacherSay": {
                   "type": "string",
-                  "description": "Un guion para el docente (NO incluyas el prefijo 'Say:') que conecte explícitamente un concepto de una lección previa con el trabajo de hoy. Debe incluir la metarreferencia (p. ej., '(Proviene de la Unidad 1, Lección 2.)') directamente en el texto."
+                  "description": "Un guion para el docente (NO incluyas el prefijo 'Diga:') que conecte explícitamente un concepto de una lección previa con el trabajo de hoy. Debe incluir la metarreferencia (p. ej., '(Proviene de la Unidad 1, Lección 2.)') directamente en el texto."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",

@@ -55,11 +55,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         "AssessPriorKnowledge": {
           "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n**{loc.Purpose}:** {loc.PBLAssessPriorKnowledgePurposeText}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
           "type": "object",
-          "description": "Sección de Evaluación de Conocimientos Previos. 1. Asegúrate de usar preguntas de DOK 1-3. 2. Incluye las habilidades prerrequisito necesarias para los objetivos de aprendizaje del estudiante. 3. Elige una modalidad de esta lista y desarróllala por completo: cuestionamiento, K-W-L, elementos visuales, mapas conceptuales, escritura reflexiva, guías de anticipación, valoraciones de vocabulario. 4. Indicación inicial del docente con la frase 'Say:'. 5. Instrucciones claras y plantilla/estructura para la modalidad elegida. 6. Sección de 'Expected Student Responses'. 7. Frase de cierre del docente con 'Say:'. 8. Después de desarrollar por completo una modalidad, proporciona 2 opciones breves alternativas.",
+          "description": "Sección de Evaluación de Conocimientos Previos. 1. Asegúrate de usar preguntas de DOK 1-3. 2. Incluye las habilidades prerrequisito necesarias para los objetivos de aprendizaje del estudiante. 3. Elige una modalidad de esta lista y desarróllala por completo: cuestionamiento, K-W-L, elementos visuales, mapas conceptuales, escritura reflexiva, guías de anticipación, valoraciones de vocabulario. 4. Indicación inicial del docente con la frase 'Diga:'. 5. Instrucciones claras y plantilla/estructura para la modalidad elegida. 6. Sección de 'Respuestas esperadas de los estudiantes'. 7. Frase de cierre del docente con 'Diga:'. 8. Después de desarrollar por completo una modalidad, proporciona 2 opciones breves alternativas.",
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Instrucciones claras y plantilla/estructura para la modalidad elegida. Por ejemplo: 'Say: \"Before we begin...\"'"
+              "description": "Instrucciones claras y plantilla/estructura para la modalidad elegida. Por ejemplo: 'Diga: \"Before we begin...\"'"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -72,7 +72,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Frase de cierre del docente con 'Say:' que valida el pensamiento de los estudiantes y adelanta la investigación de la unidad."
+              "description": "Frase de cierre del docente con 'Diga:' que valida el pensamiento de los estudiantes y adelanta la investigación de la unidad."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -784,7 +784,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Genera un prompt complejo (NO incluyas el prefijo 'Say:')/pregunta para exigir una comprensión conceptual más profunda."
+                      "description": "Genera un prompt complejo (NO incluyas el prefijo 'Diga:')/pregunta para exigir una comprensión conceptual más profunda."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -881,7 +881,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Un guion de respuesta claro para el docente (que comience con 'Teacher Response: ') que modele cómo responder en el momento con un aviso específico (NO incluya el prefijo 'Say:'). NO use negritas ni etiquetas en negrita."
+                    "description": "Un guion de respuesta claro para el docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con un aviso específico (NO incluya el prefijo 'Diga:'). NO use negritas ni etiquetas en negrita."
                   }
                 },
                 "required": [
@@ -987,7 +987,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior específica sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas o pasos específicos de la tarea. El guion del docente debe comenzar con Say: y solo puede hacer referencia al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el docente dé pistas ni explicaciones parciales. La salida debe terminar con Expected Student Responses mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que son los estudiantes—no el prompt—quienes proporcionan las ideas recordadas.",
+              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior específica sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas o pasos específicos de la tarea. El guion del docente debe comenzar con Diga: y solo puede hacer referencia al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el docente dé pistas ni explicaciones parciales. La salida debe terminar con Respuestas esperadas de los estudiantes mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que son los estudiantes—no el prompt—quienes proporcionan las ideas recordadas.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1296,7 +1296,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Genera una pregunta compleja (NO incluyas el prefijo 'Say:')/pregunta para impulsar una comprensión conceptual más profunda."
+                      "description": "Genera una pregunta compleja (NO incluyas el prefijo 'Diga:')/pregunta para impulsar una comprensión conceptual más profunda."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1393,7 +1393,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Un guion claro de respuesta para el docente (que comience con 'Teacher Response: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Say:'). NO uses negritas ni etiquetas de énfasis."
+                    "description": "Un guion claro de respuesta para el docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con una indicación específica (no incluyas el prefijo 'Diga:'). NO uses negritas ni etiquetas de énfasis."
                   }
                 },
                 "required": [
@@ -1499,7 +1499,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior específica sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas ni pasos específicos de la tarea. El guion del maestro debe comenzar con Say: y solo puede referirse al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el maestro dé pistas o explicaciones parciales. El producto debe terminar con Expected Student Responses mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que los estudiantes, no la consigna, aportaron las ideas recordadas.",
+              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior específica sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas ni pasos específicos de la tarea. El guion del maestro debe comenzar con Diga: y solo puede referirse al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el maestro dé pistas o explicaciones parciales. El producto debe terminar con Respuestas esperadas de los estudiantes mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que los estudiantes, no la consigna, aportaron las ideas recordadas.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1808,7 +1808,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Genere una consigna compleja (NO incluya el prefijo 'Say:')/pregunta para profundizar la comprensión conceptual."
+                      "description": "Genere una consigna compleja (NO incluya el prefijo 'Diga:')/pregunta para profundizar la comprensión conceptual."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1905,7 +1905,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con un indicio específico (NO incluyas el prefijo 'Say:'). NO utilices texto en negrita ni etiquetas de énfasis."
+                    "description": "Un guion de respuesta claro dirigido al docente (que comience con 'Respuesta del docente: ') que modele cómo responder en el momento con un indicio específico (NO incluyas el prefijo 'Diga:'). NO utilices texto en negrita ni etiquetas de énfasis."
                   }
                 },
                 "required": [
@@ -2011,7 +2011,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas ni pasos específicos de la tarea. El guion del docente debe comenzar con Say: y puede hacer referencia únicamente al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el docente dé pistas ni explicaciones parciales. La salida debe terminar con Respuestas esperadas de los estudiantes mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que los estudiantes y no la consigna aportaron las ideas recordadas.",
+              "description": "El modelo debe crear un componente de Recuperación Espaciada que requiera que los estudiantes recuerden un concepto clave de una unidad o lección anterior sin hacer referencia a actividades pasadas, hojas de trabajo, modelos, etiquetas ni pasos específicos de la tarea. El guion del docente debe comenzar con Diga: y puede hacer referencia únicamente al tema del aprendizaje previo, no a lo que los estudiantes aprendieron sobre él. La pregunta de recuperación debe pedir a los estudiantes que reformulen o apliquen una comprensión conceptual aprendida previamente (como cómo funciona un sistema, cómo se relacionan las variables o cómo se desarrolla un proceso) completamente de memoria, sin que el docente dé pistas ni explicaciones parciales. La salida debe terminar con Respuestas esperadas de los estudiantes mostrando 2-3 ejemplos que reflejen con precisión el recuerdo conceptual, demostrando que los estudiantes y no la consigna aportaron las ideas recordadas.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",

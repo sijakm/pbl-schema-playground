@@ -311,13 +311,13 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Сценарий учителя, организованный в последовательные шаги по ЭТОЙ ТОЧНОЙ последовательности: (1) ЗАЦЕПКА (1–2 мин), (2) ВВЕДЕНИЕ (1–2 мин), (3) ПРЯМОЕ ОБУЧЕНИЕ (4–5 мин) и (4) РУКОВОДИМОЕ ВОВЛЕЧЕНИЕ (2–3 мин). Не включайте заголовки в строки. Каждый шаг должен включать речь учителя (Say:/Ask:), действия учителя (Do:/Write:/Draw/Show:) и, если применимо, ожидаемые ответы учащихся.",
+              "description": "Сценарий учителя, организованный в последовательные шаги по ЭТОЙ ТОЧНОЙ последовательности: (1) ЗАЦЕПКА (1–2 мин), (2) ВВЕДЕНИЕ (1–2 мин), (3) ПРЯМОЕ ОБУЧЕНИЕ (4–5 мин) и (4) РУКОВОДИМОЕ ВОВЛЕЧЕНИЕ (2–3 мин). Не включайте заголовки в строки. Каждый шаг должен включать речь учителя (Скажите:/Спросите:), действия учителя (Do:/Write:/Draw/Show:) и, если применимо, ожидаемые ответы учащихся.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Конкретное действие учителя, начиная с «Say: », «Do: » и т. д."
+                    "description": "Конкретное действие учителя, начиная с «Скажите: », «Do: » и т. д."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -350,7 +350,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "Формулировка исправления, начинающаяся с «Say: »."
+                    "description": "Формулировка исправления, начинающаяся с «Скажите: »."
                   }
                 },
                 "required": [
@@ -443,7 +443,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Конкретное действие учителя, начиная с «Say: », «Do: » и т. д."
+                    "description": "Конкретное действие учителя, начиная с «Скажите: », «Do: » и т. д."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",

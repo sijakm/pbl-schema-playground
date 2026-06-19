@@ -849,7 +849,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                 "Phase1_QuickChecks": {
                                     "type": "object",
                                     "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-                                    "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+                                    "description": "Final comprehension check question with 2-3 Expected Student Responses showing mastery",
                                     "properties": {
                                       "BeginningOfPhase": {
                                         "type": "object",
@@ -1206,7 +1206,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                 "Phase2_QuickChecks": {
                                     "type": "object",
                                     "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-                                    "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+                                    "description": "Final comprehension check question with 2-3 Expected Student Responses showing mastery",
                                     "properties": {
                                       "BeginningOfPhase": {
                                         "type": "object",
@@ -1563,7 +1563,7 @@ IMPORTANT: the response must be in {{$ResponseLanguage}}
                                 "Phase3_QuickChecks": {
                                     "type": "object",
                                     "x-format": "**{loc.BeginningOfPhase}**\n{value.BeginningOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.BeginningOfPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.MidPhase}**\n{value.MidPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.MidPhase.SuccessCriteriaOrExpectedResponses}\n\n**{loc.EndOfPhase}**\n{value.EndOfPhase.Prompt}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.EndOfPhase.SuccessCriteriaOrExpectedResponses}",
-                                    "description": "Final comprehension check question with 2-3 expected student responses showing mastery",
+                                    "description": "Final comprehension check question with 2-3 Expected Student Responses showing mastery",
                                     "properties": {
                                       "BeginningOfPhase": {
                                         "type": "object",

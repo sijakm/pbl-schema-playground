@@ -528,7 +528,7 @@ Return ONLY JSON that validates against the InquiryUnitPlanResponse schema.`,
             "x-format": "### ✔ {loc.QuickCheck}\n\n{value.Question}\n\n✅ {loc.ExpectedStudentResponses}\n\n{value.ExpectedResponses}",
             "properties": {
               "Question": { "type": "string", "description": "Generate one specific question (do NOT include the 'Say:' prefix) to check for student understanding during or at the end of the investigation." },
-              "ExpectedResponses": { "type": "array", "description": "Generate 3-4 expected student responses that show mastery of the lesson concept.", "items": { "x-format": "- {value}", "type": "string" } }
+              "ExpectedResponses": { "type": "array", "description": "Generate 3-4 Expected Student Responses that show mastery of the lesson concept.", "items": { "x-format": "- {value}", "type": "string" } }
             },
             "required": ["Question", "ExpectedResponses"],
             "additionalProperties": false

@@ -324,7 +324,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Say:' para presentar un fenómeno e invitar preguntas."
+              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Diga:' para presentar un fenómeno e invitar preguntas."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -337,7 +337,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "FinalInvestigationQuestion": {
               "type": "string",
-              "description": "El paso final en las instrucciones del docente. Comience esta cadena con el siguiente número secuencial que siga a las instrucciones anteriores (p. ej., '8. Paso final: Say: ...') y exprese la gran pregunta que se investigará hoy."
+              "description": "El paso final en las instrucciones del docente. Comience esta cadena con el siguiente número secuencial que siga a las instrucciones anteriores (p. ej., '8. Paso final: Diga: ...') y exprese la gran pregunta que se investigará hoy."
             }
           },
           "required": [
@@ -385,7 +385,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Say:' para explicar conocimientos de fondo, vocabulario y modelar el fenómeno."
+              "description": "Instrucciones paso a paso para el docente, acciones y indicaciones de 'Diga:' para explicar conocimientos de fondo, vocabulario y modelar el fenómeno."
             },
             "AnticipatedMisconceptions": {
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
@@ -454,7 +454,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Instrucciones para el docente. Incluya indicaciones de 'Say:'. Proporcione una instrucción específica como 'Write on the board:' seguida de una lista con viñetas en formato markdown de 4-5 marcos de oraciones para la hipótesis."
+              "description": "Instrucciones para el docente. Incluya indicaciones de 'Diga:'. Proporcione una instrucción específica como 'Escriba en la pizarra:' seguida de una lista con viñetas en formato markdown de 4-5 marcos de oraciones para la hipótesis."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -849,7 +849,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "El indicador del docente que comienza con 'Say: '."
+              "description": "El indicador del docente que comienza con 'Diga: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -873,7 +873,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "El indicador del docente que comienza con 'Say: '."
+              "description": "El indicador del docente que comienza con 'Diga: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -901,7 +901,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Say": {
               "type": "string",
-              "description": "El indicador del docente que comienza con 'Say: '."
+              "description": "El indicador del docente que comienza con 'Diga: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",

@@ -54,11 +54,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         "AssessPriorKnowledge": {
           "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n**{loc.Purpose}:** {loc.PBLAssessPriorKnowledgePurposeText}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
           "type": "object",
-          "description": "Nilai bagian Pengetahuan Awal. 1. Pastikan prompt DOK 1-3 digunakan. 2. Sertakan keterampilan prasyarat yang diperlukan untuk tujuan pembelajaran siswa. 3. Pilih satu modalitas dari daftar ini dan kembangkan sepenuhnya: pertanyaan, K-W-L, visual, peta konsep, tulisan reflektif, panduan antisipasi, penilaian kosakata. 4. Prompt awal guru dengan pernyataan 'Say:'. 5. Instruksi yang jelas dan template/struktur untuk modalitas yang dipilih. 6. Bagian 'Expected Student Responses'. 7. Prompt penutup guru 'Say:'. 8. Setelah mengembangkan sepenuhnya satu modalitas, berikan 2 opsi alternatif singkat.",
+          "description": "Nilai bagian Pengetahuan Awal. 1. Pastikan prompt DOK 1-3 digunakan. 2. Sertakan keterampilan prasyarat yang diperlukan untuk tujuan pembelajaran siswa. 3. Pilih satu modalitas dari daftar ini dan kembangkan sepenuhnya: pertanyaan, K-W-L, visual, peta konsep, tulisan reflektif, panduan antisipasi, penilaian kosakata. 4. Prompt awal guru dengan pernyataan 'Katakan:'. 5. Instruksi yang jelas dan template/struktur untuk modalitas yang dipilih. 6. Bagian 'Respons Siswa yang Diharapkan'. 7. Prompt penutup guru 'Katakan:'. 8. Setelah mengembangkan sepenuhnya satu modalitas, berikan 2 opsi alternatif singkat.",
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Instruksi yang jelas dan template/struktur untuk modalitas yang dipilih. Contoh: 'Say: \"Sebelum kita mulai...\"'"
+              "description": "Instruksi yang jelas dan template/struktur untuk modalitas yang dipilih. Contoh: 'Katakan: \"Sebelum kita mulai...\"'"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -71,7 +71,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Prompt penutup guru 'Say:' yang memvalidasi pemikiran siswa dan mempratinjau investigasi unit."
+              "description": "Prompt penutup guru 'Katakan:' yang memvalidasi pemikiran siswa dan mempratinjau investigasi unit."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -783,7 +783,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Hasilkan satu pertanyaan kompleks (jangan menyertakan awalan 'Say:') untuk mendorong pemahaman konseptual yang lebih mendalam."
+                      "description": "Hasilkan satu pertanyaan kompleks (jangan menyertakan awalan 'Katakan:') untuk mendorong pemahaman konseptual yang lebih mendalam."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -880,7 +880,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Skrip respons yang jelas untuk guru (dimulai dengan 'Teacher Response: ') yang mencontohkan cara merespons saat itu juga dengan sebuah prompt spesifik (jangan sertakan awalan 'Say:'). JANGAN gunakan pemformatan tebal atau tag tebal apa pun."
+                    "description": "Skrip respons yang jelas untuk guru (dimulai dengan 'Respons Guru: ') yang mencontohkan cara merespons saat itu juga dengan sebuah prompt spesifik (jangan sertakan awalan 'Katakan:'). JANGAN gunakan pemformatan tebal atau tag tebal apa pun."
                   }
                 },
                 "required": [
@@ -986,7 +986,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Model harus membuat komponen Spaced Retrieval yang mengharuskan siswa mengingat kembali konsep kunci dari unit atau pelajaran sebelumnya yang spesifik tanpa merujuk pada aktivitas, lembar kerja, model, label, atau langkah tugas sebelumnya apa pun. Skrip guru harus dimulai dengan Say: dan hanya boleh merujuk pada topik pembelajaran sebelumnya, bukan apa yang siswa pelajari tentang topik itu. Pertanyaan retrieval harus mendorong siswa untuk menyatakan ulang atau menerapkan pemahaman konseptual yang telah dipelajari sebelumnya (seperti cara kerja suatu sistem, bagaimana variabel saling berhubungan, atau bagaimana suatu proses berlangsung) sepenuhnya dari ingatan, tanpa guru memberikan petunjuk atau penjelasan parsial. Keluaran harus diakhiri dengan Expected Student Responses yang menampilkan 2-3 contoh yang secara akurat mencerminkan ingatan konseptual, menunjukkan bahwa siswa-bukan prompt-yang menyediakan ide yang diingat.",
+              "description": "Model harus membuat komponen Spaced Retrieval yang mengharuskan siswa mengingat kembali konsep kunci dari unit atau pelajaran sebelumnya yang spesifik tanpa merujuk pada aktivitas, lembar kerja, model, label, atau langkah tugas sebelumnya apa pun. Skrip guru harus dimulai dengan Katakan: dan hanya boleh merujuk pada topik pembelajaran sebelumnya, bukan apa yang siswa pelajari tentang topik itu. Pertanyaan retrieval harus mendorong siswa untuk menyatakan ulang atau menerapkan pemahaman konseptual yang telah dipelajari sebelumnya (seperti cara kerja suatu sistem, bagaimana variabel saling berhubungan, atau bagaimana suatu proses berlangsung) sepenuhnya dari ingatan, tanpa guru memberikan petunjuk atau penjelasan parsial. Keluaran harus diakhiri dengan Respons Siswa yang Diharapkan yang menampilkan 2-3 contoh yang secara akurat mencerminkan ingatan konseptual, menunjukkan bahwa siswa-bukan prompt-yang menyediakan ide yang diingat.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1295,7 +1295,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Hasilkan satu pertanyaan kompleks (jangan sertakan awalan 'Say:')/pertanyaan untuk mendorong pemahaman konseptual yang lebih mendalam."
+                      "description": "Hasilkan satu pertanyaan kompleks (jangan sertakan awalan 'Katakan:')/pertanyaan untuk mendorong pemahaman konseptual yang lebih mendalam."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1392,7 +1392,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Skrip respons guru yang jelas untuk guru (diawali dengan 'Teacher Response: ') yang mencontohkan cara merespons saat itu juga dengan prompt yang spesifik (jangan sertakan awalan 'Say:'). JANGAN gunakan penebalan teks atau tag tebal apa pun."
+                    "description": "Skrip respons guru yang jelas untuk guru (diawali dengan 'Respons Guru: ') yang mencontohkan cara merespons saat itu juga dengan prompt yang spesifik (jangan sertakan awalan 'Katakan:'). JANGAN gunakan penebalan teks atau tag tebal apa pun."
                   }
                 },
                 "required": [
@@ -1498,7 +1498,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Model harus membuat komponen Spaced Retrieval yang mengharuskan siswa mengingat kembali konsep kunci dari unit atau pelajaran sebelumnya yang spesifik tanpa merujuk pada aktivitas masa lalu, lembar kerja, model, label, atau langkah-langkah tugas yang spesifik. Naskah guru harus diawali dengan Say: dan hanya boleh merujuk pada topik pembelajaran sebelumnya, bukan pada apa yang dipelajari siswa tentang topik itu. Pertanyaan retrieval harus meminta siswa untuk menyatakan ulang atau menerapkan pemahaman konseptual yang telah dipelajari sebelumnya (seperti bagaimana suatu sistem bekerja, bagaimana variabel saling berhubungan, atau bagaimana suatu proses berlangsung) sepenuhnya dari ingatan, tanpa guru memberi petunjuk atau penjelasan sebagian. Keluaran harus diakhiri dengan Expected Student Responses yang menampilkan 2-3 contoh yang secara akurat mencerminkan ingatan konseptual, menunjukkan bahwa siswa-bukan prompt-yang menyediakan ide-ide yang diingat.",
+              "description": "Model harus membuat komponen Spaced Retrieval yang mengharuskan siswa mengingat kembali konsep kunci dari unit atau pelajaran sebelumnya yang spesifik tanpa merujuk pada aktivitas masa lalu, lembar kerja, model, label, atau langkah-langkah tugas yang spesifik. Naskah guru harus diawali dengan Katakan: dan hanya boleh merujuk pada topik pembelajaran sebelumnya, bukan pada apa yang dipelajari siswa tentang topik itu. Pertanyaan retrieval harus meminta siswa untuk menyatakan ulang atau menerapkan pemahaman konseptual yang telah dipelajari sebelumnya (seperti bagaimana suatu sistem bekerja, bagaimana variabel saling berhubungan, atau bagaimana suatu proses berlangsung) sepenuhnya dari ingatan, tanpa guru memberi petunjuk atau penjelasan sebagian. Keluaran harus diakhiri dengan Respons Siswa yang Diharapkan yang menampilkan 2-3 contoh yang secara akurat mencerminkan ingatan konseptual, menunjukkan bahwa siswa-bukan prompt-yang menyediakan ide-ide yang diingat.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1807,7 +1807,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Hasilkan satu prompt/pertanyaan kompleks (jangan sertakan awalan 'Say:') untuk mendorong pemahaman konseptual yang lebih mendalam."
+                      "description": "Hasilkan satu prompt/pertanyaan kompleks (jangan sertakan awalan 'Katakan:') untuk mendorong pemahaman konseptual yang lebih mendalam."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1904,7 +1904,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Skrip respons guru yang jelas untuk guru (diawali dengan 'Tanggapan Guru: ') yang mencontohkan cara merespons pada saat itu juga dengan prompt yang spesifik (jangan sertakan awalan 'Say:'). JANGAN gunakan penebalan atau tag tebal apa pun."
+                    "description": "Skrip respons guru yang jelas untuk guru (diawali dengan 'Tanggapan Guru: ') yang mencontohkan cara merespons pada saat itu juga dengan prompt yang spesifik (jangan sertakan awalan 'Katakan:'). JANGAN gunakan penebalan atau tag tebal apa pun."
                   }
                 },
                 "required": [
@@ -2010,7 +2010,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Model harus membuat komponen Spaced Retrieval yang mengharuskan siswa mengingat konsep kunci dari unit atau pelajaran sebelumnya yang spesifik tanpa merujuk pada aktivitas, lembar kerja, model, label, atau langkah-langkah tugas apa pun sebelumnya. Skrip guru harus diawali dengan Say: dan hanya boleh merujuk pada topik pembelajaran sebelumnya, bukan pada apa yang dipelajari siswa tentang topik itu. Pertanyaan retrieval harus mendorong siswa untuk menyatakan kembali atau menerapkan pemahaman konseptual yang telah dipelajari sebelumnya (seperti cara kerja suatu sistem, bagaimana variabel berhubungan, atau bagaimana suatu proses berlangsung) sepenuhnya dari ingatan, tanpa guru memberi petunjuk atau penjelasan sebagian. Output harus diakhiri dengan Expected Student Responses yang menampilkan 2-3 contoh yang secara akurat mencerminkan ingatan konseptual, menunjukkan bahwa siswa—bukan prompt—yang menghasilkan ide-ide yang diingat itu.",
+              "description": "Model harus membuat komponen Spaced Retrieval yang mengharuskan siswa mengingat konsep kunci dari unit atau pelajaran sebelumnya yang spesifik tanpa merujuk pada aktivitas, lembar kerja, model, label, atau langkah-langkah tugas apa pun sebelumnya. Skrip guru harus diawali dengan Katakan: dan hanya boleh merujuk pada topik pembelajaran sebelumnya, bukan pada apa yang dipelajari siswa tentang topik itu. Pertanyaan retrieval harus mendorong siswa untuk menyatakan kembali atau menerapkan pemahaman konseptual yang telah dipelajari sebelumnya (seperti cara kerja suatu sistem, bagaimana variabel berhubungan, atau bagaimana suatu proses berlangsung) sepenuhnya dari ingatan, tanpa guru memberi petunjuk atau penjelasan sebagian. Output harus diakhiri dengan Respons Siswa yang Diharapkan yang menampilkan 2-3 contoh yang secara akurat mencerminkan ingatan konseptual, menunjukkan bahwa siswa—bukan prompt—yang menghasilkan ide-ide yang diingat itu.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",

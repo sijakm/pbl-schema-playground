@@ -54,11 +54,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         "AssessPriorKnowledge": {
           "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n**{loc.Purpose}:** {loc.PBLAssessPriorKnowledgePurposeText}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
           "type": "object",
-          "description": "Раздел «Оценка предыдущих знаний». 1. Убедитесь, что используются запросы DOK 1-3. 2. Включите навыки-предпосылки, необходимые для целей обучения учащегося. 3. Выберите один формат из этого списка и полностью его разработайте: опрос, K-W-L, визуальные материалы, концептуальные карты, рефлексивное письмо, антиципационные таблицы, оценки словарного запаса. 4. Начальный инструктаж учителя со строкой 'Say:'. 5. Чёткие инструкции и шаблон/структура для выбранного формата. 6. Раздел 'Ожидаемые ответы учащихся'. 7. Завершающий инструктаж учителя с пометкой 'Say:'. 8. После полного развития одного формата предложите 2 кратких альтернативных варианта.",
+          "description": "Раздел «Оценка предыдущих знаний». 1. Убедитесь, что используются запросы DOK 1-3. 2. Включите навыки-предпосылки, необходимые для целей обучения учащегося. 3. Выберите один формат из этого списка и полностью его разработайте: опрос, K-W-L, визуальные материалы, концептуальные карты, рефлексивное письмо, антиципационные таблицы, оценки словарного запаса. 4. Начальный инструктаж учителя со строкой 'Скажите:'. 5. Чёткие инструкции и шаблон/структура для выбранного формата. 6. Раздел 'Ожидаемые ответы учащихся'. 7. Завершающий инструктаж учителя с пометкой 'Скажите:'. 8. После полного развития одного формата предложите 2 кратких альтернативных варианта.",
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Чёткие инструкции и шаблон/структура для выбранного формата. Например: 'Say: \"Before we begin...\"'"
+              "description": "Чёткие инструкции и шаблон/структура для выбранного формата. Например: 'Скажите: \"Before we begin...\"'"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -71,7 +71,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Завершающая реплика учителя с пометкой 'Say:', которая подтверждает ход мыслей учащихся и предваряет исследование модуля."
+              "description": "Завершающая реплика учителя с пометкой 'Скажите:', которая подтверждает ход мыслей учащихся и предваряет исследование модуля."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -783,7 +783,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Сформулируйте один сложный запрос/вопрос (НЕ включайте префикс 'Say:') для более глубокого концептуального понимания."
+                      "description": "Сформулируйте один сложный запрос/вопрос (НЕ включайте префикс 'Скажите:') для более глубокого концептуального понимания."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -880,7 +880,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Чёткий сценарий ответа учителя, ориентированный на преподавателя (начиная с «Teacher Response: »), который показывает, как реагировать в моменте с конкретной подсказкой (не включайте префикс «Say:»). НЕ используйте жирное выделение или теги strong."
+                    "description": "Чёткий сценарий ответа учителя, ориентированный на преподавателя (начиная с «Ответ учителя: »), который показывает, как реагировать в моменте с конкретной подсказкой (не включайте префикс «Скажите:»). НЕ используйте жирное выделение или теги strong."
                   }
                 },
                 "required": [
@@ -986,7 +986,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Модель должна создать компонент пространственного извлечения, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего блока или урока без ссылки на какие-либо прошлые активности, рабочие листы, модели, подписи или шаги, связанные с заданием. Сценарий учителя должен начинаться с Say: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о ней научились. Вопрос на извлечение должен побуждать учащихся переформулировать или применить ранее изученное концептуальное понимание (например, как работает система, как связаны переменные или как разворачивается процесс) полностью по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Expected Student Responses, показывая 2–3 примера, которые точно отражают концептуальное воспроизведение, демонстрируя, что именно учащиеся, а не подсказка, предоставили вспомненные идеи.",
+              "description": "Модель должна создать компонент пространственного извлечения, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего блока или урока без ссылки на какие-либо прошлые активности, рабочие листы, модели, подписи или шаги, связанные с заданием. Сценарий учителя должен начинаться с Скажите: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о ней научились. Вопрос на извлечение должен побуждать учащихся переформулировать или применить ранее изученное концептуальное понимание (например, как работает система, как связаны переменные или как разворачивается процесс) полностью по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Ожидаемые ответы учащихся, показывая 2–3 примера, которые точно отражают концептуальное воспроизведение, демонстрируя, что именно учащиеся, а не подсказка, предоставили вспомненные идеи.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1295,7 +1295,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Сгенерируйте один сложный вопрос (не включайте префикс 'Say:')/вопрос, чтобы подтолкнуть к более глубокому концептуальному пониманию."
+                      "description": "Сгенерируйте один сложный вопрос (не включайте префикс 'Скажите:')/вопрос, чтобы подтолкнуть к более глубокому концептуальному пониманию."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1392,7 +1392,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Чёткий скрипт ответа учителя (начинающийся с 'Teacher Response: '), который показывает, как реагировать в данный момент с конкретной подсказкой (не включайте префикс 'Say:'). НЕ используйте никакого выделения жирным или strong-тегов."
+                    "description": "Чёткий скрипт ответа учителя (начинающийся с 'Ответ учителя: '), который показывает, как реагировать в данный момент с конкретной подсказкой (не включайте префикс 'Скажите:'). НЕ используйте никакого выделения жирным или strong-тегов."
                   }
                 },
                 "required": [
@@ -1498,7 +1498,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Модель должна создать компонент Spaced Retrieval, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего модуля или урока, не ссылаясь ни на какие прошлые активности, рабочие листы, модели, ярлыки или шаги, специфичные для задания. Сценарий учителя должен начинаться с Say: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о нём узнали. Вопрос на извлечение должен побуждать учащихся пересказать или применить ранее изученное концептуальное понимание (например, как работает система, как связаны переменные или как протекает процесс) исключительно по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Expected Student Responses с 2-3 примерами, которые точно отражают концептуальное воспроизведение, показывая, что именно учащиеся, а не подсказка, выдали вспомненные идеи.",
+              "description": "Модель должна создать компонент Spaced Retrieval, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего модуля или урока, не ссылаясь ни на какие прошлые активности, рабочие листы, модели, ярлыки или шаги, специфичные для задания. Сценарий учителя должен начинаться с Скажите: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о нём узнали. Вопрос на извлечение должен побуждать учащихся пересказать или применить ранее изученное концептуальное понимание (например, как работает система, как связаны переменные или как протекает процесс) исключительно по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Ожидаемые ответы учащихся с 2-3 примерами, которые точно отражают концептуальное воспроизведение, показывая, что именно учащиеся, а не подсказка, выдали вспомненные идеи.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1807,7 +1807,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Создайте один сложный вопрос (не включайте префикс 'Say:')/вопрос, чтобы углубить концептуальное понимание."
+                      "description": "Создайте один сложный вопрос (не включайте префикс 'Скажите:')/вопрос, чтобы углубить концептуальное понимание."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1904,7 +1904,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Чёткий сценарий ответа учителя (начинающийся с 'Teacher Response: '), который моделирует, как отреагировать в моменте с конкретным запросом (НЕ включайте префикс 'Say:'). НЕ используйте никакого выделения жирным шрифтом или сильных тегов."
+                    "description": "Чёткий сценарий ответа учителя (начинающийся с 'Ответ учителя: '), который моделирует, как отреагировать в моменте с конкретным запросом (НЕ включайте префикс 'Скажите:'). НЕ используйте никакого выделения жирным шрифтом или сильных тегов."
                   }
                 },
                 "required": [
@@ -2010,7 +2010,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Модель должна создать компонент Spaced Retrieval, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего модуля или урока, не ссылаясь на какие-либо прошлые занятия, рабочие листы, модели, подписи или шаги, специфичные для задания. Сценарий учителя должен начинаться с Say: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о ней научились. Вопрос на извлечение должен побуждать учащихся воспроизвести или применить ранее изученное концептуальное понимание (например, как работает система, как соотносятся переменные или как разворачивается процесс) полностью по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Expected Student Responses с 2–3 примерами, которые точно отражают концептуальное воспроизведение, демонстрируя, что именно учащиеся, а не запрос, предоставили вспоминаемые идеи.",
+              "description": "Модель должна создать компонент Spaced Retrieval, который требует от учащихся вспомнить ключевое понятие из конкретного предыдущего модуля или урока, не ссылаясь на какие-либо прошлые занятия, рабочие листы, модели, подписи или шаги, специфичные для задания. Сценарий учителя должен начинаться с Скажите: и может ссылаться только на тему предыдущего обучения, а не на то, чему учащиеся о ней научились. Вопрос на извлечение должен побуждать учащихся воспроизвести или применить ранее изученное концептуальное понимание (например, как работает система, как соотносятся переменные или как разворачивается процесс) полностью по памяти, без подсказок или частичных объяснений со стороны учителя. Вывод должен заканчиваться Ожидаемые ответы учащихся с 2–3 примерами, которые точно отражают концептуальное воспроизведение, демонстрируя, что именно учащиеся, а не запрос, предоставили вспоминаемые идеи.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",

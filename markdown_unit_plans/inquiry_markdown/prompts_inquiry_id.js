@@ -485,7 +485,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Buatlah sebuah skrip (jangan sertakan awalan 'Say:') untuk meminta siswa mendefinisikan apa yang akan mereka amati, ubah, dan kumpulkan sebagai bukti."
+                  "description": "Buatlah sebuah skrip (jangan sertakan awalan 'Katakan:') untuk meminta siswa mendefinisikan apa yang akan mereka amati, ubah, dan kumpulkan sebagai bukti."
                 },
                 "FacilitationMoves": {
                   "type": "array",
@@ -545,11 +545,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Buat instruksi guru untuk memperkenalkan situasi atau model yang membingungkan. Pertama berikan tindakan dalam tanda kurung seperti [Tampilkan model, situasi, demonstrasi, atau cerita pendek yang berisi kekeliruan, ketidakefisienan, atau hasil yang tidak terduga untuk memicu rasa ingin tahu], lalu berikan skrip percakapan (jangan sertakan awalan 'Say:')."
+                  "description": "Buat instruksi guru untuk memperkenalkan situasi atau model yang membingungkan. Pertama berikan tindakan dalam tanda kurung seperti [Tampilkan model, situasi, demonstrasi, atau cerita pendek yang berisi kekeliruan, ketidakefisienan, atau hasil yang tidak terduga untuk memicu rasa ingin tahu], lalu berikan skrip percakapan (jangan sertakan awalan 'Katakan:')."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Hasilkan 2-3 langkah untuk memandu peluncuran. Nyatakan tindakan pembelajaran dengan jelas tanpa memberi awalan 'Say:'. Sertakan memberi siswa waktu untuk mengamati sebelum bertindak, mendorong berbagai penafsiran, dan menegaskan bahwa mungkin ada banyak ide yang benar.",
+                  "description": "Hasilkan 2-3 langkah untuk memandu peluncuran. Nyatakan tindakan pembelajaran dengan jelas tanpa memberi awalan 'Katakan:'. Sertakan memberi siswa waktu untuk mengamati sebelum bertindak, mendorong berbagai penafsiran, dan menegaskan bahwa mungkin ada banyak ide yang benar.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -573,11 +573,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Prompt": {
                   "type": "string",
-                  "description": "Buat skrip lisan (jangan sertakan awalan 'Say:') untuk membingkai tugas sebagai saling bergantung dan menekankan tanggung jawab bersama. Sertakan instruksi agar siswa menggunakan kalimat pembuka (mis., 'Saya berpikir... karena...') dan struktur partisipasi seperti talking chips."
+                  "description": "Buat skrip lisan (jangan sertakan awalan 'Katakan:') untuk membingkai tugas sebagai saling bergantung dan menekankan tanggung jawab bersama. Sertakan instruksi agar siswa menggunakan kalimat pembuka (mis., 'Saya berpikir... karena...') dan struktur partisipasi seperti talking chips."
                 },
                 "FacilitationMoves": {
                   "type": "array",
-                  "description": "Cantumkan 3-5 langkah spesifik atau perilaku siswa yang perlu dipantau selama kerja kelompok (mis., mengidentifikasi pola, mencatat dalam tabel data bersama, membandingkan penafsiran). Jangan beri awalan 'Say:' pada tindakan-tindakan ini. Pastikan fokusnya adalah agar semua siswa berkontribusi dalam mengamati dan menyempurnakan ide.",
+                  "description": "Cantumkan 3-5 langkah spesifik atau perilaku siswa yang perlu dipantau selama kerja kelompok (mis., mengidentifikasi pola, mencatat dalam tabel data bersama, membandingkan penafsiran). Jangan beri awalan 'Katakan:' pada tindakan-tindakan ini. Pastikan fokusnya adalah agar semua siswa berkontribusi dalam mengamati dan menyempurnakan ide.",
                   "items": {
                     "x-format": "- {value}",
                     "type": "string"
@@ -654,7 +654,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               },
               "TeacherResponse": {
                 "type": "string",
-                "description": "Skrip respons yang jelas untuk guru (diawali dengan 'Teacher Response: ') yang mencontohkan bagaimana merespons pada saat itu dengan pertanyaan spesifik (jangan sertakan awalan 'Say:'). JANGAN gunakan penebalan atau tag tebal apa pun."
+                "description": "Skrip respons yang jelas untuk guru (diawali dengan 'Respons Guru: ') yang mencontohkan bagaimana merespons pada saat itu dengan pertanyaan spesifik (jangan sertakan awalan 'Katakan:'). JANGAN gunakan penebalan atau tag tebal apa pun."
               }
             },
             "required": [
@@ -736,7 +736,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 },
                 "AdvancedQuestion": {
                   "type": "string",
-                  "description": "Hasilkan satu pertanyaan/prompt kompleks (jangan sertakan awalan 'Say:') untuk mendorong pemahaman konseptual yang lebih dalam."
+                  "description": "Hasilkan satu pertanyaan/prompt kompleks (jangan sertakan awalan 'Katakan:') untuk mendorong pemahaman konseptual yang lebih dalam."
                 },
                 "ExpectedResponses": {
                   "type": "array",
@@ -825,7 +825,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Question": {
               "type": "string",
-              "description": "Hasilkan satu pertanyaan spesifik (jangan sertakan awalan 'Say:') untuk memeriksa pemahaman siswa selama atau pada akhir investigasi."
+              "description": "Hasilkan satu pertanyaan spesifik (jangan sertakan awalan 'Katakan:') untuk memeriksa pemahaman siswa selama atau pada akhir investigasi."
             },
             "ExpectedResponses": {
               "type": "array",
@@ -873,7 +873,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "OpeningScript": {
               "type": "string",
-              "description": "Pernyataan (jangan sertakan awalan 'Say:') untuk mengembalikan siswa ke pertanyaan penelitian dan memunculkan ide-ide yang mulai muncul tentang bagaimana desain bekerja."
+              "description": "Pernyataan (jangan sertakan awalan 'Katakan:') untuk mengembalikan siswa ke pertanyaan penelitian dan memunculkan ide-ide yang mulai muncul tentang bagaimana desain bekerja."
             },
             "FacilitationMoves": {
               "type": "array",
@@ -893,7 +893,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "WritingPrompt": {
               "type": "string",
-              "description": "Pernyataan (jangan sertakan awalan 'Say:') yang menguraikan apa saja yang harus disertakan dalam penjelasan tertulis mereka (komponen yang spesifik terhadap konten) dan pengingat untuk menggunakan data sebagai bukti."
+              "description": "Pernyataan (jangan sertakan awalan 'Katakan:') yang menguraikan apa saja yang harus disertakan dalam penjelasan tertulis mereka (komponen yang spesifik terhadap konten) dan pengingat untuk menggunakan data sebagai bukti."
             },
             "CollaborationInstruction": {
               "type": "string",

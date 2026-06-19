@@ -257,11 +257,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Раздел «Оценка предварительных знаний». ТОЛЬКО урок 1 должен содержать подробный блок; ВСЕ ОСТАЛЬНЫЕ УРОКИ ДОЛЖНЫ ВЕРНУТЬ NULL или НЕ ВКЛЮЧАТЬ ЭТОТ ПОЛЕ. Для урока 1 структура должна включать: 1. Включайте этот раздел только в первый урок модуля. 2. Убедитесь, что используются подсказки DOK 1–3. 3. Включите навыки, необходимые учащимся для достижения учебных целей. 4. Выберите один модальность из этого списка и полностью его разработайте: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Начальная реплика учителя с «Say:». 6. Четкие инструкции и шаблон/структура для выбранной модальности. 7. Раздел «Expected Student Responses». 8. Закрывающая реплика учителя «Say:». 9. После полного разработки одной модальности, предложите 2 кратких альтернативных варианта.",
+      "description": "Раздел «Оценка предварительных знаний». ТОЛЬКО урок 1 должен содержать подробный блок; ВСЕ ОСТАЛЬНЫЕ УРОКИ ДОЛЖНЫ ВЕРНУТЬ NULL или НЕ ВКЛЮЧАТЬ ЭТОТ ПОЛЕ. Для урока 1 структура должна включать: 1. Включайте этот раздел только в первый урок модуля. 2. Убедитесь, что используются подсказки DOK 1–3. 3. Включите навыки, необходимые учащимся для достижения учебных целей. 4. Выберите один модальность из этого списка и полностью его разработайте: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Начальная реплика учителя с «Скажите:». 6. Четкие инструкции и шаблон/структура для выбранной модальности. 7. Раздел «Ожидаемые ответы учащихся». 8. Закрывающая реплика учителя «Скажите:». 9. После полного разработки одной модальности, предложите 2 кратких альтернативных варианта.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Четкие инструкции и шаблон/структура для выбранной модальности. Например: 'Say: \"Прежде чем мы начнем...\"'"
+          "description": "Четкие инструкции и шаблон/структура для выбранной модальности. Например: 'Скажите: \"Прежде чем мы начнем...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -274,7 +274,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Закрывающая реплика учителя «Say:», которая подтверждает мышление учащихся и предваряет исследование модуля."
+          "description": "Закрывающая реплика учителя «Скажите:», которая подтверждает мышление учащихся и предваряет исследование модуля."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -849,7 +849,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "Подсказка для учителя, начинающаяся с 'Say: '."
+              "description": "Подсказка для учителя, начинающаяся с 'Скажите: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -873,7 +873,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "Подсказка для учителя, начинающаяся с 'Say: '."
+              "description": "Подсказка для учителя, начинающаяся с 'Скажите: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -901,7 +901,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Say": {
               "type": "string",
-              "description": "Подсказка для учителя, начинающаяся с 'Say: '."
+              "description": "Подсказка для учителя, начинающаяся с 'Скажите: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",

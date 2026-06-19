@@ -783,7 +783,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generišite jedan složen podsticaj/pitanje (ne uključujte prefiks 'Say:') za podsticanje dubljeg konceptualnog razumevanja."
+                      "description": "Generišite jedan složen podsticaj/pitanje (ne uključujte prefiks 'Recite:') za podsticanje dubljeg konceptualnog razumevanja."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -880,7 +880,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Jasna skripta odgovora usmerena ka nastavniku (koja počinje sa 'Teacher Response: ') koja modeluje kako odgovoriti u datom trenutku uz konkretan podsticaj (ne uključujte prefiks 'Say:'). NE koristite nikakvo podebljavanje ili strong tagove."
+                    "description": "Jasna skripta odgovora usmerena ka nastavniku (koja počinje sa 'Odgovor nastavnika: ') koja modeluje kako odgovoriti u datom trenutku uz konkretan podsticaj (ne uključujte prefiks 'Recite:'). NE koristite nikakvo podebljavanje ili strong tagove."
                   }
                 },
                 "required": [
@@ -986,7 +986,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase1_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Model mora da kreira komponentu Razmaknutog prisećanja koja od učenika zahteva da se sete ključnog pojma iz određene prethodne jedinice ili časa bez pozivanja na bilo kakve prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Skripta nastavnika mora početi sa Say: i može da se odnosi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora da podstakne učenike da ponovo iznesu ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su varijable povezane ili kako se proces odvija) isključivo iz pamćenja, bez toga da nastavnik daje tragove ili delimična objašnjenja. Izlaz mora da se završi sa Očekivanim odgovorima učenika, prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici — a ne prompt — izneli zapamćene ideje.",
+              "description": "Model mora da kreira komponentu Razmaknutog prisećanja koja od učenika zahteva da se sete ključnog pojma iz određene prethodne jedinice ili časa bez pozivanja na bilo kakve prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Skripta nastavnika mora početi sa Recite: i može da se odnosi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora da podstakne učenike da ponovo iznesu ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su varijable povezane ili kako se proces odvija) isključivo iz pamćenja, bez toga da nastavnik daje tragove ili delimična objašnjenja. Izlaz mora da se završi sa Očekivanim odgovorima učenika, prikazujući 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici — a ne prompt — izneli zapamćene ideje.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1295,7 +1295,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generiši jedno složeno pitanje/prompt (NE uključuj prefiks 'Say:') koje podstiče dublje konceptualno razumevanje."
+                      "description": "Generiši jedno složeno pitanje/prompt (NE uključuj prefiks 'Recite:') koje podstiče dublje konceptualno razumevanje."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1392,7 +1392,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Jasna skripta odgovora za nastavnika (počevši sa 'Teacher Response: ') koja pokazuje kako da se reaguje u trenutku uz konkretan podsticaj (ne uključuj prefiks 'Say:'). NE koristi podebljavanje niti jake oznake."
+                    "description": "Jasna skripta odgovora za nastavnika (počevši sa 'Odgovor nastavnika: ') koja pokazuje kako da se reaguje u trenutku uz konkretan podsticaj (ne uključuj prefiks 'Recite:'). NE koristi podebljavanje niti jake oznake."
                   }
                 },
                 "required": [
@@ -1498,7 +1498,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase2_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Model mora da kreira komponentu za razmaknuto prisećanje koja zahteva od učenika da se prisete ključnog koncepta iz određene prethodne jedinice ili lekcije bez pozivanja na bilo koje prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Nastavnički scenario mora početi sa Say: i može se odnositi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora podstaći učenike da ponovo izraze ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su promenljive povezane ili kako se proces odvija) isključivo iz sećanja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora da se završi sa Expected Student Responses i da sadrži 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici, a ne prompt, izneli zapamćene ideje.",
+              "description": "Model mora da kreira komponentu za razmaknuto prisećanje koja zahteva od učenika da se prisete ključnog koncepta iz određene prethodne jedinice ili lekcije bez pozivanja na bilo koje prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Nastavnički scenario mora početi sa Recite: i može se odnositi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora podstaći učenike da ponovo izraze ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su promenljive povezane ili kako se proces odvija) isključivo iz sećanja, bez davanja nagoveštaja ili delimičnih objašnjenja od strane nastavnika. Izlaz mora da se završi sa Očekivani odgovori učenika i da sadrži 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici, a ne prompt, izneli zapamćene ideje.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",
@@ -1807,7 +1807,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                     },
                     "AdvancedQuestion": {
                       "type": "string",
-                      "description": "Generiši jedan složen podsticaj (ne uključuj prefiks 'Say:')/pitanje koje će podstaći dublje konceptualno razumevanje."
+                      "description": "Generiši jedan složen podsticaj (ne uključuj prefiks 'Recite:')/pitanje koje će podstaći dublje konceptualno razumevanje."
                     },
                     "ExpectedResponses": {
                       "type": "array",
@@ -1904,7 +1904,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "TeacherResponse": {
                     "type": "string",
-                    "description": "Jasna skripta za odgovor nastavnika namenjena nastavniku (počinje sa 'Teacher Response: ') koja pokazuje kako odgovoriti u trenutku uz konkretan podsticaj (ne uključujte prefiks 'Say:'). NE koristite podebljavanje niti strong tagove."
+                    "description": "Jasna skripta za odgovor nastavnika namenjena nastavniku (počinje sa 'Odgovor nastavnika: ') koja pokazuje kako odgovoriti u trenutku uz konkretan podsticaj (ne uključujte prefiks 'Recite:'). NE koristite podebljavanje niti strong tagove."
                   }
                 },
                 "required": [
@@ -2010,7 +2010,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "Phase3_SpacedRetrieval": {
               "type": "object",
               "x-format": "**{loc.BeginningOfPhase}**\n{loc.DrawsFrom}: {value.BeginningOfPhase.DrawsFrom}\n{loc.Question}: {value.BeginningOfPhase.Question} ({loc.DOK} {value.BeginningOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.BeginningOfPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.MidPhase}**\n{loc.DrawsFrom}: {value.MidPhase.DrawsFrom}\n{loc.Question}: {value.MidPhase.Question} ({loc.DOK} {value.MidPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.MidPhase.ExpectedResponseOrSuccessCriteria}\n\n**{loc.EndOfPhase}**\n{loc.DrawsFrom}: {value.EndOfPhase.DrawsFrom}\n{loc.Question}: {value.EndOfPhase.Question} ({loc.DOK} {value.EndOfPhase.DOK})\n\n✅ {loc.ExpectedStudentResponses}:\n\n{value.EndOfPhase.ExpectedResponseOrSuccessCriteria}",
-              "description": "Model mora da kreira komponentu Razmaknuto prisećanje koja zahteva od učenika da se prisete ključnog koncepta iz određene prethodne jedinice ili lekcije bez pozivanja na bilo kakve prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Skripta nastavnika mora početi sa Say: i može se odnositi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora da podstakne učenike da ponovo iznesu ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su promenljive povezane ili kako se proces odvija) potpuno iz memorije, bez davanja nagoveštaja ili delimičnih objašnjenja. Izlaz mora da se završi sa Expected Student Responses koji prikazuje 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici — a ne prompt — izneli zapamćene ideje.",
+              "description": "Model mora da kreira komponentu Razmaknuto prisećanje koja zahteva od učenika da se prisete ključnog koncepta iz određene prethodne jedinice ili lekcije bez pozivanja na bilo kakve prethodne aktivnosti, radne listove, modele, oznake ili korake specifične za zadatak. Skripta nastavnika mora početi sa Recite: i može se odnositi samo na temu prethodnog učenja, a ne na ono što su učenici o tome naučili. Pitanje za prisećanje mora da podstakne učenike da ponovo iznesu ili primene prethodno naučeno konceptualno razumevanje (kao što je kako sistem funkcioniše, kako su promenljive povezane ili kako se proces odvija) potpuno iz memorije, bez davanja nagoveštaja ili delimičnih objašnjenja. Izlaz mora da se završi sa Očekivani odgovori učenika koji prikazuje 2-3 primera koji tačno odražavaju konceptualno prisećanje, pokazujući da su učenici — a ne prompt — izneli zapamćene ideje.",
               "properties": {
                 "BeginningOfPhase": {
                   "type": "object",

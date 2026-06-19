@@ -213,7 +213,11 @@
         "LabAnalyzeTitle": "Analyze (5 min)",
         "LabAnalyzePurpose": "Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions.",
         "LabShareTitle": "Share (5 min)",
-        "LabSharePurpose": "Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding."
+        "LabSharePurpose": "Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding.",
+        "TeacherResponseLabel": "Teacher Response",
+        "WriteOnTheBoardLabel": "Write on the board",
+        "AskLabel": "Ask",
+        "RecordLabel": "Record"
     },
     "sr-Latn": {
         "EssentialQuestions": "Suštinska pitanja",
@@ -429,7 +433,11 @@
         "LabAnalyzeTitle": "Analiza (5 min)",
         "LabAnalyzePurpose": "Interpretirajte podatke koje su prikupili, identifikujte obrasce, procenite njihovu hipotezu i konstruišite zaključke zasnovane na dokazima.",
         "LabShareTitle": "Deljenje (5 min)",
-        "LabSharePurpose": "Jasno komunicirajte svoje nalaze drugima, koristeći dokaze da objasnite šta su otkrili, zašto je to važno i kako doprinosi dubljem razumevanju."
+        "LabSharePurpose": "Jasno komunicirajte svoje nalaze drugima, koristeći dokaze da objasnite šta su otkrili, zašto je to važno i kako doprinosi dubljem razumevanju.",
+        "TeacherResponseLabel": "Odgovor nastavnika",
+        "WriteOnTheBoardLabel": "Napišite na tabli",
+        "AskLabel": "Pitajte",
+        "RecordLabel": "Zabeležite"
     },
     "sr-Cyrl": {
         "EssentialQuestions": "Суштинска питања",
@@ -645,7 +653,11 @@
         "LabAnalyzeTitle": "Анализа (5 min)",
         "LabAnalyzePurpose": "Интерпретирајте податке које су прикупили, идентификујте обрасце, процените њихову хипотезу и конструишите закључке засноване на доказима.",
         "LabShareTitle": "Дељење (5 min)",
-        "LabSharePurpose": "Јасно комуницирајте своје налазе другима, користећи доказе да објасните шта су открили, зашто је то важно и како доприноси дубљем разумевању."
+        "LabSharePurpose": "Јасно комуницирајте своје налазе другима, користећи доказе да објасните шта су открили, зашто је то важно и како доприноси дубљем разумевању.",
+        "TeacherResponseLabel": "Одговор наставника",
+        "WriteOnTheBoardLabel": "Напишите на табли",
+        "AskLabel": "Питајте",
+        "RecordLabel": "Забележите"
     },
     "id": {
         "EssentialQuestions": "Pertanyaan Esensial",
@@ -861,7 +873,11 @@
         "LabAnalyzeTitle": "Analisis (5 mnt)",
         "LabAnalyzePurpose": "Tafsirkan data yang mereka kumpulkan, identifikasi pola, evaluasi hipotesis mereka, dan buat kesimpulan berdasarkan bukti.",
         "LabShareTitle": "Berbagi (5 mnt)",
-        "LabSharePurpose": "Komunikasikan temuan mereka dengan jelas kepada orang lain, gunakan bukti untuk menjelaskan apa yang mereka temukan, mengapa itu penting, dan bagaimana hal itu berkontribusi pada pemahaman yang lebih dalam."
+        "LabSharePurpose": "Komunikasikan temuan mereka dengan jelas kepada orang lain, gunakan bukti untuk menjelaskan apa yang mereka temukan, mengapa itu penting, dan bagaimana hal itu berkontribusi pada pemahaman yang lebih dalam.",
+        "TeacherResponseLabel": "Respons Guru",
+        "WriteOnTheBoardLabel": "Tulis di papan tulis",
+        "AskLabel": "Tanyakan",
+        "RecordLabel": "Catat"
     },
     "es": {
         "EssentialQuestions": "Preguntas Esenciales",
@@ -1077,7 +1093,11 @@
         "LabAnalyzeTitle": "Análisis (5 min)",
         "LabAnalyzePurpose": "Interpretar los datos que recopilaron, identificar patrones, evaluar su hipótesis y construir conclusiones basadas en evidencia.",
         "LabShareTitle": "Compartir (5 min)",
-        "LabSharePurpose": "Comunicar claramente sus hallazgos a otros, utilizando evidencia para explicar lo que descubrieron, por qué es importante y cómo contribuye a una comprensión más profunda."
+        "LabSharePurpose": "Comunicar claramente sus hallazgos a otros, utilizando evidencia para explicar lo que descubrieron, por qué es importante y cómo contribuye a una comprensión más profunda.",
+        "TeacherResponseLabel": "Respuesta del docente",
+        "WriteOnTheBoardLabel": "Escriba en la pizarra",
+        "AskLabel": "Pregunte",
+        "RecordLabel": "Anote"
     },
     "ru": {
         "EssentialQuestions": "Ключевые вопросы",
@@ -1293,6 +1313,10 @@
         "LabAnalyzeTitle": "Анализ (5 мин)",
         "LabAnalyzePurpose": "Интерпретируйте собранные ими данные, выявите закономерности, оцените их гипотезу и сделайте выводы на основе доказательств.",
         "LabShareTitle": "Обмен мнениями (5 мин)",
-        "LabSharePurpose": "Четко сообщите свои результаты другим, используя доказательства, чтобы объяснить, что они обнаружили, почему это важно и как это способствует более глубокому пониманию."
+        "LabSharePurpose": "Четко сообщите свои результаты другим, используя доказательства, чтобы объяснить, что они обнаружили, почему это важно и как это способствует более глубокому пониманию.",
+        "TeacherResponseLabel": "Ответ учителя",
+        "WriteOnTheBoardLabel": "Напишите на доске",
+        "AskLabel": "Спросите",
+        "RecordLabel": "Запишите"
     }
 }

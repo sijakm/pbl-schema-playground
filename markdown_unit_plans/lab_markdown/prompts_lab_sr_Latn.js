@@ -257,11 +257,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Sekcija Procena prethodnog znanja. SAMO 1. lekcija treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI NULL ili izostaviti ovo polje. Za 1. lekciju, struktura mora da obuhvati: 1. Uključite ovu sekciju samo u prvu lekciju jedinice. 2. Obezbedite da se koriste DOK 1-3 podsticaji. 3. Uključite predznanja potrebna za ishode učenja učenika. 4. Izaberite jedan modalitet iz ove liste i potpuno ga razvijte: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Početni nastavnički podsticaj sa 'Say:' izjavom. 6. Jasna uputstva i šablon/strukturu za izabrani modalitet. 7. Sekciju 'Expected Student Responses'. 8. Završni nastavnički podsticaj 'Say:'. 9. Nakon potpunog razvoja jednog modaliteta, navedite 2 kratke alternativne opcije.",
+      "description": "Sekcija Procena prethodnog znanja. SAMO 1. lekcija treba da sadrži detaljan blok; SVE OSTALE LEKCIJE MORAJU VRATITI NULL ili izostaviti ovo polje. Za 1. lekciju, struktura mora da obuhvati: 1. Uključite ovu sekciju samo u prvu lekciju jedinice. 2. Obezbedite da se koriste DOK 1-3 podsticaji. 3. Uključite predznanja potrebna za ishode učenja učenika. 4. Izaberite jedan modalitet iz ove liste i potpuno ga razvijte: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Početni nastavnički podsticaj sa 'Recite:' izjavom. 6. Jasna uputstva i šablon/strukturu za izabrani modalitet. 7. Sekciju 'Očekivani odgovori učenika'. 8. Završni nastavnički podsticaj 'Recite:'. 9. Nakon potpunog razvoja jednog modaliteta, navedite 2 kratke alternativne opcije.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Jasna uputstva i šablon/strukturu za izabrani modalitet. Npr. 'Say: \"Pre nego što počnemo...\"'"
+          "description": "Jasna uputstva i šablon/strukturu za izabrani modalitet. Npr. 'Recite: \"Pre nego što počnemo...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -274,7 +274,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Završni nastavnički podsticaj 'Say:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje jedinice."
+          "description": "Završni nastavnički podsticaj 'Recite:' koji potvrđuje razmišljanje učenika i najavljuje istraživanje jedinice."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -324,7 +324,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Instrukcije za nastavnika korak po korak, radnje i 'Say:' podsticaji za predstavljanje fenomena i pozivanje na pitanja."
+              "description": "Instrukcije za nastavnika korak po korak, radnje i 'Recite:' podsticaji za predstavljanje fenomena i pozivanje na pitanja."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -337,7 +337,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "FinalInvestigationQuestion": {
               "type": "string",
-              "description": "Završni korak u instrukcijama za nastavnika. Započnite ovaj niz sledećim rednim brojem nakon prethodnih instrukcija (npr. '8. Final Step: Say: ...') i navedite veliko pitanje koje će se danas istraživati."
+              "description": "Završni korak u instrukcijama za nastavnika. Započnite ovaj niz sledećim rednim brojem nakon prethodnih instrukcija (npr. '8. Final Step: Recite: ...') i navedite veliko pitanje koje će se danas istraživati."
             }
           },
           "required": [
@@ -385,7 +385,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Instrukcije za nastavnika korak po korak, radnje i 'Say:' podsticaji za objašnjavanje osnovnog znanja, vokabulara i modelovanje fenomena."
+              "description": "Instrukcije za nastavnika korak po korak, radnje i 'Recite:' podsticaji za objašnjavanje osnovnog znanja, vokabulara i modelovanje fenomena."
             },
             "AnticipatedMisconceptions": {
               "x-format": "⚠️ {loc.AnticipatedMisconceptions}\n\n{items}",
@@ -454,7 +454,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "\n\n{value}",
                 "type": "string"
               },
-              "description": "Instrukcije za nastavnika. Uključite 'Say:' podsticaje. Dajte konkretnu instrukciju kao što je 'Write on the board:' nakon čega sledi markdown lista sa 4-5 okvirnih rečenica za hipotezu sa nabrajanjima."
+              "description": "Instrukcije za nastavnika. Uključite 'Recite:' podsticaje. Dajte konkretnu instrukciju kao što je 'Napišite na tabli:' nakon čega sledi markdown lista sa 4-5 okvirnih rečenica za hipotezu sa nabrajanjima."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -769,7 +769,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Step": {
                     "type": "string",
-                    "description": "Tekst nastavničkog uputstva (npr. 'Write on board:'). Nemojte uključivati numeraciju; ona se obrađuje automatski."
+                    "description": "Tekst nastavničkog uputstva (npr. 'Napišite na tabli:'). Nemojte uključivati numeraciju; ona se obrađuje automatski."
                   },
                   "Bullets": {
                     "type": "array",
@@ -825,7 +825,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "Nastavnikov podsticaj koji počinje sa 'Say: '."
+              "description": "Nastavnikov podsticaj koji počinje sa 'Recite: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -849,7 +849,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "Učiteljski podsticaj koji počinje sa 'Say: '."
+              "description": "Učiteljski podsticaj koji počinje sa 'Recite: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -873,7 +873,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "Učiteljski podsticaj koji počinje sa 'Say: '."
+              "description": "Učiteljski podsticaj koji počinje sa 'Recite: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",
@@ -901,7 +901,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "Say": {
               "type": "string",
-              "description": "Učiteljski podsticaj koji počinje sa 'Say: '."
+              "description": "Učiteljski podsticaj koji počinje sa 'Recite: '."
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}:**\n\n{items}",

@@ -244,7 +244,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
       }
     },
     "AssessPriorKnowledge": {
-      "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**Say:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**Say:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**Say:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
+      "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.AssessPriorKnowledgeLectureTeacherNote}\n\n**{loc.Say}:** \"{value.SayIntroduction}\"\n\n**{loc.ProjectOrRead}:**\n{value.StatementsToProject}\n\n**{loc.Say}:** \"{value.SayInstructions}\"\n\n{value.ExpectedStudentResponses}\n\n**{loc.Say}:** \"{value.SayConclusion}\"\n\n{value.ActionConclusion}\n\n{value.AlternateOptions}",
       "type": "object",
       "description": "Полный раздел «Оценка предварительных знаний». КРИТИЧНО: Посмотрите на 'lessonNumber' в прикреплённом содержимом урока. ЕСЛИ это Урок 1, заполните этот объект полностью. ЕСЛИ это Урок 2, 3 или любой другой урок, ВЫ ДОЛЖНЫ ВЕРНУТЬ ПУСТОЙ ОБЪЕКТ {} БЕЗ КАКИХ-ЛИБО СВОЙСТВ. Не заполняйте это для любого урока, кроме Урока 1.",
       "properties": {
@@ -347,7 +347,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             ],
             "additionalProperties": false
           },
-          "description": "Должно включать: 1) Объясните учебные цели, используя прямой сценарий для учителя (например, Say: '...'), и поместите фактические цели в массив Bullets. 2) Попросите учащихся записать цели в свои тетради. 3) Кратко объясните учителю, как связать цели с реальным жизненным опытом учащихся."
+          "description": "Должно включать: 1) Объясните учебные цели, используя прямой сценарий для учителя (например, Скажите: '...'), и поместите фактические цели в массив Bullets. 2) Попросите учащихся записать цели в свои тетради. 3) Кратко объясните учителю, как связать цели с реальным жизненным опытом учащихся."
         }
       },
       "required": [
@@ -385,11 +385,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "x-format": "- {value}",
                 "type": "string"
               },
-              "description": "Перечислите основные термины словаря. Для определения каждого термина предоставьте сценарий учителя в строго следующем формате: '[Термин] - Say: \"[Определение/Сценарий]\"'. Пример: 'Lever - Say: \"Рычаг — это простая машина...\"'."
+              "description": "Перечислите основные термины словаря. Для определения каждого термина предоставьте сценарий учителя в строго следующем формате: '[Термин] - Скажите: \"[Определение/Сценарий]\"'. Пример: 'Lever - Скажите: \"Рычаг — это простая машина...\"'."
             },
             "ConclusionSay": {
               "type": "string",
-              "description": "Заключительное утверждение 'Say: ' для перехода."
+              "description": "Заключительное утверждение 'Скажите: ' для перехода."
             }
           },
           "required": [
@@ -405,7 +405,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "x-format": "{value}\n\n",
             "type": "string"
           },
-          "description": "Напишите подробную лекцию учителя со сценариями (Say: “…”). Включите пошагово, что говорит, делает и, возможно, демонстрирует учитель. Разбейте сложные идеи, приведите примеры/аналогии, явно свяжите их с уже имеющимися знаниями."
+          "description": "Напишите подробную лекцию учителя со сценариями (Скажите: “…”). Включите пошагово, что говорит, делает и, возможно, демонстрирует учитель. Разбейте сложные идеи, приведите примеры/аналогии, явно свяжите их с уже имеющимися знаниями."
         },
         "AttentionReset": {
           "type": "object",
@@ -448,7 +448,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "x-format": "{index}. {value}\n\n",
             "type": "string"
           },
-          "description": "Нумерованные шаги для продолжения обучения со сценариями учителя (Say: “…”). Разбейте сложные идеи, приведите примеры/аналогии, чтобы заинтриговать, намекнуть на будущие знания, расширить ключевые идеи."
+          "description": "Нумерованные шаги для продолжения обучения со сценариями учителя (Скажите: “…”). Разбейте сложные идеи, приведите примеры/аналогии, чтобы заинтриговать, намекнуть на будущие знания, расширить ключевые идеи."
         },
         "AnticipatedMisconceptions": {
           "x-format": "{items}",
@@ -475,7 +475,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           }
         },
         "Connect": {
-          "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. Say: \"{value.Step1Say}\"\n\n2. Say: \"{value.Step2Say}\"\n\n3. Prompt:\n\n{value.Step3Prompts}\n\n4. Whole-group share: Say: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
+          "x-format": "### {green}({loc.Connect} {value.Duration})\n\n1. {loc.Say}: \"{value.Step1Say}\"\n\n2. {loc.Say}: \"{value.Step2Say}\"\n\n3. {loc.Prompt}:\n\n{value.Step3Prompts}\n\n4. Whole-group share: {loc.Say}: \"{value.Step4Say}\"\n\n✅ **{loc.ExpectedStudentResponses}**\n\n{value.ExpectedStudentResponses}",
           "type": "object",
           "description": "Свяжите с целью. Свяжите с одним из ключевых вопросов.",
           "properties": {
@@ -743,7 +743,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
       "additionalProperties": false
     },
     "QAndAAndDiscussion": {
-      "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. Say: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. Ask:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. Say: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" Record: {value.InstructionsForTeachers.Step3_CaptureRecord} Say:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. Say: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} Say: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
+      "x-format": "### {green}({loc.QAndAAndDiscussion} {value.Duration})\n\n**📋 {loc.InstructionsForTeachers}**\n\n1. {loc.Say}: \"{value.InstructionsForTeachers.Step1_InviteSay}\"\n2. {loc.AskLabel}:\n{value.InstructionsForTeachers.Step2_AskQuestions}\n3. {loc.Say}: \"{value.InstructionsForTeachers.Step3_CaptureSay1}\" {loc.RecordLabel}: {value.InstructionsForTeachers.Step3_CaptureRecord} {loc.Say}:\n   \"{value.InstructionsForTeachers.Step3_CaptureSay2}\"\n4. {loc.Say}: \"{value.InstructionsForTeachers.Step4_AnswerSay1}\" {value.InstructionsForTeachers.Step4_AnswerAddress} {loc.Say}: \"{value.InstructionsForTeachers.Step4_AnswerSay2}\"\n\n{loc.NoteForTeacherQA}",
       "type": "object",
       "description": "Блок для вопросов и ответов и обсуждения.",
       "properties": {

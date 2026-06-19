@@ -252,7 +252,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "ActivityInstructions": {
               "type": "array",
-              "description": "Sekvencijalni koraci (npr. 'Say: ...', 'Project or read...') za početak aktivnosti.",
+              "description": "Sekvencijalni koraci (npr. 'Recite: ...', 'Project or read...') za početak aktivnosti.",
               "items": {
                 "type": "string",
                 "x-format": "- {value}"
@@ -311,13 +311,13 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "InstructionsForTeachers": {
               "type": "array",
-              "description": "Nastavnički skript organizovan u sledećem TAČNOM redosledu: (1) HOOK (1–2 min), (2) INTRODUCTION (1–2 min), (3) DIRECT TEACHING (4–5 min), i (4) GUIDED ENGAGEMENT (2–3 min). Nemojte uključivati zaglavlja u stringovima. Svaki korak mora da uključi nastavnički govor (Say:/Ask:), nastavničke radnje (Do:/Write:/Draw/Show:), i ako je primenljivo, očekivane odgovore učenika.",
+              "description": "Nastavnički skript organizovan u sledećem TAČNOM redosledu: (1) HOOK (1–2 min), (2) INTRODUCTION (1–2 min), (3) DIRECT TEACHING (4–5 min), i (4) GUIDED ENGAGEMENT (2–3 min). Nemojte uključivati zaglavlja u stringovima. Svaki korak mora da uključi nastavnički govor (Recite:/Pitajte:), nastavničke radnje (Do:/Write:/Draw/Show:), i ako je primenljivo, očekivane odgovore učenika.",
               "items": {
                 "type": "object",
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Specifična akcija nastavnika, koja počinje sa „Say: “, „Do: “, itd."
+                    "description": "Specifična akcija nastavnika, koja počinje sa „Recite: “, „Do: “, itd."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -350,7 +350,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "Jezik za ispravljanje koji počinje sa „Say: “."
+                    "description": "Jezik za ispravljanje koji počinje sa „Recite: “."
                   }
                 },
                 "required": [
@@ -443,7 +443,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Specifična akcija nastavnika, koja počinje sa „Say: “, „Do: “, itd."
+                    "description": "Specifična akcija nastavnika, koja počinje sa „Recite: “, „Do: “, itd."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",

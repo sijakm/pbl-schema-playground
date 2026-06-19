@@ -257,11 +257,11 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
     "AssessPriorKnowledge": {
       "x-format": "## 💡 {loc.AssessPriorKnowledge}\n\n{loc.TeacherNote}\n\n{value.ActivityInstructions}\n\n{value.ExpectedStudentResponses}\n\n{value.ClosingTeacherPrompt}\n\n{value.AlternateOptions}",
       "type": "object",
-      "description": "Bagian Menilai Pengetahuan Awal. HANYA Pelajaran 1 yang boleh berisi blok terperinci; SEMUA PELAJARAN LAIN HARUS MENGEMBALIKAN NULL atau menghilangkan bidang ini. Untuk Pelajaran 1, struktur harus mencakup: 1. Sertakan bagian ini hanya pada pelajaran pertama unit. 2. Pastikan prompt DOK 1-3 digunakan. 3. Sertakan keterampilan prasyarat yang dibutuhkan untuk tujuan pembelajaran siswa. 4. Pilih satu moda dari daftar ini dan kembangkan sepenuhnya: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Prompt guru awal dengan pernyataan 'Say:'. 6. Instruksi yang jelas dan template/struktur untuk moda yang dipilih. 7. Bagian 'Expected Student Responses'. 8. Prompt guru penutup 'Say:'. 9. Setelah mengembangkan sepenuhnya satu moda, berikan 2 opsi alternatif singkat.",
+      "description": "Bagian Menilai Pengetahuan Awal. HANYA Pelajaran 1 yang boleh berisi blok terperinci; SEMUA PELAJARAN LAIN HARUS MENGEMBALIKAN NULL atau menghilangkan bidang ini. Untuk Pelajaran 1, struktur harus mencakup: 1. Sertakan bagian ini hanya pada pelajaran pertama unit. 2. Pastikan prompt DOK 1-3 digunakan. 3. Sertakan keterampilan prasyarat yang dibutuhkan untuk tujuan pembelajaran siswa. 4. Pilih satu moda dari daftar ini dan kembangkan sepenuhnya: questioning, K-W-L, visuals, concept maps, reflective writing, anticipation guides, vocabulary ratings. 5. Prompt guru awal dengan pernyataan 'Katakan:'. 6. Instruksi yang jelas dan template/struktur untuk moda yang dipilih. 7. Bagian 'Respons Siswa yang Diharapkan'. 8. Prompt guru penutup 'Katakan:'. 9. Setelah mengembangkan sepenuhnya satu moda, berikan 2 opsi alternatif singkat.",
       "properties": {
         "ActivityInstructions": {
           "type": "string",
-          "description": "Instruksi yang jelas dan template/struktur untuk moda yang dipilih. Misalnya 'Say: \"Sebelum kita mulai...\"'"
+          "description": "Instruksi yang jelas dan template/struktur untuk moda yang dipilih. Misalnya 'Katakan: \"Sebelum kita mulai...\"'"
         },
         "ExpectedStudentResponses": {
           "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -274,7 +274,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         },
         "ClosingTeacherPrompt": {
           "type": "string",
-          "description": "Prompt guru penutup 'Say:' yang memvalidasi pemikiran siswa dan mempratinjau penyelidikan unit."
+          "description": "Prompt guru penutup 'Katakan:' yang memvalidasi pemikiran siswa dan mempratinjau penyelidikan unit."
         },
         "AlternateOptions": {
           "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -825,7 +825,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "Say": {
               "type": "string",
-              "description": "Prompt guru yang dimulai dengan 'Say: '"
+              "description": "Prompt guru yang dimulai dengan 'Katakan: '"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ **{loc.ExpectedStudentResponses}**\n\n{items}",

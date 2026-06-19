@@ -317,7 +317,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Aksi guru yang spesifik, dimulai dengan 'Say: ', 'Do: ', dll."
+                    "description": "Aksi guru yang spesifik, dimulai dengan 'Katakan: ', 'Do: ', dll."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -350,7 +350,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "Bahasa koreksi yang dimulai dengan 'Say: '."
+                    "description": "Bahasa koreksi yang dimulai dengan 'Katakan: '."
                   }
                 },
                 "required": [
@@ -443,7 +443,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Aksi guru yang spesifik, dimulai dengan 'Say: ', 'Do: ', dll."
+                    "description": "Aksi guru yang spesifik, dimulai dengan 'Katakan: ', 'Do: ', dll."
                   },
                   "ExpectedStudentResponses": {
                     "type": "array",
@@ -795,7 +795,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Instruction": {
                   "type": "string",
-                  "description": "Prompt Active Recall menggunakan berbagi dengan pasangan/kelompok. Harus menggunakan pernyataan 'Say:'."
+                  "description": "Prompt Active Recall menggunakan berbagi dengan pasangan/kelompok. Harus menggunakan pernyataan 'Katakan:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -830,7 +830,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Prompt guru yang menghubungkan dengan pertanyaan unit. Harus menggunakan pernyataan 'Say:'."
+                  "description": "Prompt guru yang menghubungkan dengan pertanyaan unit. Harus menggunakan pernyataan 'Katakan:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -855,7 +855,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Question": {
                   "type": "string",
-                  "description": "Prompt penerapan di dunia nyata. Harus menyertakan instruksi waktu berpikir (misalnya, 'Luangkan 30 detik untuk berpikir dalam diam, lalu bagikan:') dan menggunakan pernyataan 'Say:'."
+                  "description": "Prompt penerapan di dunia nyata. Harus menyertakan instruksi waktu berpikir (misalnya, 'Luangkan 30 detik untuk berpikir dalam diam, lalu bagikan:') dan menggunakan pernyataan 'Katakan:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",
@@ -884,7 +884,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 },
                 "Instruction": {
                   "type": "string",
-                  "description": "Pertanyaan yang menghubungkan konsep masa lalu dan saat ini. Harus menggunakan pernyataan 'Say:'."
+                  "description": "Pertanyaan yang menghubungkan konsep masa lalu dan saat ini. Harus menggunakan pernyataan 'Katakan:'."
                 },
                 "ExpectedStudentResponses": {
                   "type": "array",

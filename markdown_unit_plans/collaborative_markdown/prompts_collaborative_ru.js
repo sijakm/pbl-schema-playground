@@ -294,7 +294,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
           "properties": {
             "ActivityInstructions": {
               "type": "string",
-              "description": "Четкие инструкции и шаблон/структура для выбранной модальности. Например: «Say: \"Before we build...\"»"
+              "description": "Четкие инструкции и шаблон/структура для выбранной модальности. Например: «Скажите: \"Before we build...\"»"
             },
             "ExpectedStudentResponses": {
               "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -307,7 +307,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             },
             "ClosingTeacherPrompt": {
               "type": "string",
-              "description": "Заключительный запрос учителя в формате «Say:», который подтверждает мышление учеников и предваряет исследование юнита."
+              "description": "Заключительный запрос учителя в формате «Скажите:», который подтверждает мышление учеников и предваряет исследование юнита."
             },
             "AlternateOptions": {
               "x-format": "**{loc.AlternateOptions}**\n\n{items}",
@@ -351,7 +351,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Действие учителя, например: Say: '...', Do: '...', Ask: '...'"
+                    "description": "Действие учителя, например: Скажите: '...', Do: '...', Спросите: '...'"
                   },
                   "ExpectedStudentResponses": {
                     "x-format": "- ✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -384,7 +384,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                   },
                   "Correction": {
                     "type": "string",
-                    "description": "Язык корректировки, начинающийся с 'Say: '."
+                    "description": "Язык корректировки, начинающийся с 'Скажите: '."
                   }
                 },
                 "required": [
@@ -526,7 +526,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
         "CollaborativeActivities": {
           "x-format": "### {green}({loc.CollaborativeActivities})\n\n{value.Materials}\n\n{value.InstructionsForTeachers}\n\n{value.Differentiation}\n\n{value.AccommodationsAndModifications}",
           "type": "object",
-          "description": "Взаимозависимая групповая работа (совместная замена для Guided Practice). Ориентировано на учителя, строго структурировано и разработано так, чтобы учащиеся не могли выполнить задание в одиночку. Должно включать: (a) явную взаимозависимость (jigsaw, выработка консенсуса, gallery walk, структурированный проблемно-решающий вызов или аналогичное), (b) явное время для каждой фазы (например, '8 минут обсуждение, 2 минуты подготовка ответа'), (c) сценарий фасилитации учителя с использованием высказываний 'Say:' на протяжении всего задания, (d) общий групповой продукт (утверждение, модель, схема, набор решений, артефакт gallery walk и т. д.), (e) подсказки для обхода групп с ожидаемыми ответами учащихся, (f) как минимум один контроль ответа ВСЕХ учащихся (мини-доски, быстрый письменный ответ, голосование, поднятые пальцы и т. п.) с ожидаемыми ответами, (g) вопрос для быстрого контроля + ожидаемые ответы, (h) дифференциацию в трёх уровнях, ориентированную на обучение (а не на accommodations), и (i) AccommodationsAndModifications, разделённые на General supports и IndividualSupport, точно соответствующие предоставленным учащимся/планам. Обеспечьте культурную релевантность и инклюзивность, приглашая разные точки зрения и обеспечивая равноправное участие.",
+          "description": "Взаимозависимая групповая работа (совместная замена для Guided Practice). Ориентировано на учителя, строго структурировано и разработано так, чтобы учащиеся не могли выполнить задание в одиночку. Должно включать: (a) явную взаимозависимость (jigsaw, выработка консенсуса, gallery walk, структурированный проблемно-решающий вызов или аналогичное), (b) явное время для каждой фазы (например, '8 минут обсуждение, 2 минуты подготовка ответа'), (c) сценарий фасилитации учителя с использованием высказываний 'Скажите:' на протяжении всего задания, (d) общий групповой продукт (утверждение, модель, схема, набор решений, артефакт gallery walk и т. д.), (e) подсказки для обхода групп с ожидаемыми ответами учащихся, (f) как минимум один контроль ответа ВСЕХ учащихся (мини-доски, быстрый письменный ответ, голосование, поднятые пальцы и т. п.) с ожидаемыми ответами, (g) вопрос для быстрого контроля + ожидаемые ответы, (h) дифференциацию в трёх уровнях, ориентированную на обучение (а не на accommodations), и (i) AccommodationsAndModifications, разделённые на General supports и IndividualSupport, точно соответствующие предоставленным учащимся/планам. Обеспечьте культурную релевантность и инклюзивность, приглашая разные точки зрения и обеспечивая равноправное участие.",
           "properties": {
             "Materials": {
               "x-format": "**📚 {loc.Materials}**\n\n{items}",
@@ -547,7 +547,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
                 "properties": {
                   "Instruction": {
                     "type": "string",
-                    "description": "Конкретное действие учителя, начинающееся с 'Say: ', 'Do: ' или ровно 'Circulation Prompts:'."
+                    "description": "Конкретное действие учителя, начинающееся с 'Скажите: ', 'Do: ' или ровно 'Circulation Prompts:'."
                   },
                   "CirculationPrompts": {
                     "x-format": "\n{items}",
@@ -741,7 +741,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
               "properties": {
                 "Say": {
                   "type": "string",
-                  "description": "Точная формулировка, которую произносит учитель, например: 'Say: \"Take two minutes to reflect: What did our group do well today?\"'"
+                  "description": "Точная формулировка, которую произносит учитель, например: 'Скажите: \"Take two minutes to reflect: What did our group do well today?\"'"
                 },
                 "ExpectedStudentResponses": {
                   "x-format": "✅ {loc.ExpectedStudentResponses}\n\n{items}",
@@ -771,7 +771,7 @@ CRITICAL LANGUAGE INSTRUCTION: ALL generated text and JSON values MUST be strict
             "ClosingPrompt": {
               "x-format": "**3.** {value}",
               "type": "string",
-              "description": "Завершающий вопрос учителя, связывающий рефлексию с рекомендациями по совместной работе. например: 'Say: \"Which of your norms helped the most today?\"'"
+              "description": "Завершающий вопрос учителя, связывающий рефлексию с рекомендациями по совместной работе. например: 'Скажите: \"Which of your norms helped the most today?\"'"
             }
           },
           "required": [
