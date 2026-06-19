@@ -32,7 +32,8 @@ Unit Content:
 
 Persyaratan Essential Questions:
 - Setiap pertanyaan WAJIB berupa kalimat lengkap dan gramatikal yang berakhir dengan tanda tanya.
-- Setiap pertanyaan WAJIB diawali dengan "How" atau "Why".
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
 - Pertanyaan WAJIB bersifat konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
 - Pertanyaan WAJIB berfokus pada ide-ide luas dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
 - Pertanyaan WAJIB dapat ditransfer lintas disiplin dan berlaku di luar unit ini.
@@ -82,11 +83,11 @@ Pertanyaan Esensial Unit (GUNAKAN INI SECARA VERBATIM):
 
 Jika Pertanyaan Esensial Unit di atas kosong, buat tepat 3 pertanyaan konseptual dengan mengikuti aturan berikut:
 - Setiap pertanyaan HARUS berupa kalimat lengkap dan benar secara gramatikal yang diakhiri dengan tanda tanya.
-- Setiap pertanyaan HARUS dimulai dengan kata "How" atau "Why".
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
 - Pertanyaan HARUS bersifat konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
 - Pertanyaan HARUS berfokus pada gagasan luas dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
 - Pertanyaan HARUS dapat ditransfer lintas disiplin dan dapat diterapkan di luar unit ini.
-
 
 SISWA DENGAN DUKUNGAN INDIVIDUAL (HARUS digunakan HANYA di dalam Experiment.AccommodationsAndModifications; gunakan nama/rencana siswa persis seperti yang ditulis):
 {{$LearningPlans}}

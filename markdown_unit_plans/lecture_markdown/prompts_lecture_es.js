@@ -32,7 +32,8 @@ Contenido de la unidad:
 
 Requisitos de las Preguntas Esenciales:
 - Cada pregunta DEBE ser una oración completa, gramaticalmente correcta, que termine con un signo de interrogación.
-- Cada pregunta DEBE comenzar con "How" o "Why".
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
 - Las preguntas DEBEN ser conceptuales y exploratorias, no fácticas, procedimentales ni definicionales.
 - Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una materia.
 - Las preguntas DEBEN poder transferirse entre disciplinas y ser aplicables más allá de esta unidad.
@@ -82,11 +83,11 @@ Preguntas esenciales de la unidad (USA ESTAS TAL CUAL):
 
 Si las Preguntas esenciales de la unidad anteriores están vacías, genera exactamente 3 preguntas conceptuales siguiendo estas reglas:
 - Cada pregunta DEBE ser una oración completa y gramaticalmente correcta que termine con un signo de interrogación.
-- Cada pregunta DEBE comenzar con “How” o “Why”.
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
 - Las preguntas DEBEN ser conceptuales y exploratorias, no fácticas, procedimentales ni definitorias.
 - Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una materia.
 - Las preguntas DEBEN ser transferibles entre disciplinas y aplicables más allá de esta unidad.
-
 
 ESTUDIANTES CON APOYO INDIVIDUALIZADO (DEBE usarse SOLO dentro de ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications; usa los nombres/planes de los estudiantes exactamente como están escritos):
 {{$LearningPlans}}

@@ -34,6 +34,7 @@ Unit Content:
 Essential Questions requirements:
 - Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
 - Each question MUST begin with either "How" or "Why".
+
 - Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
 - Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
 - Questions MUST be transferable across disciplines and applicable beyond this unit.
@@ -86,10 +87,10 @@ Unit Essential Questions (USE THESE VERBATIM):
 If Unit Essential Questions above is empty, generate exactly 3 conceptual questions following these rules:
 - Each question MUST be a complete, grammatically correct sentence that ends with a question mark.
 - Each question MUST begin with either "How" or "Why".
+
 - Questions MUST be conceptual and exploratory, not factual, procedural, or definitional.
 - Questions MUST focus on broad, universal ideas (such as change, evidence, patterns, relationships, systems, or reasoning), not on subject-specific content.
 - Questions MUST be transferable across disciplines and applicable beyond this unit.
-
 
 STUDENTS WITH INDIVIDUALIZED SUPPORT (MUST be used ONLY inside Experiment.AccommodationsAndModifications; use the student names/plans exactly as written):
 {{$LearningPlans}}

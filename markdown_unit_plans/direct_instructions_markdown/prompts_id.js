@@ -32,7 +32,8 @@ Unit Content:
 
 Persyaratan Essential Questions:
 - Setiap pertanyaan WAJIB berupa kalimat lengkap dan tata bahasa yang benar, serta diakhiri dengan tanda tanya.
-- Setiap pertanyaan WAJIB diawali dengan “How” atau “Why”.
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
 - Pertanyaan HARUS konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
 - Pertanyaan HARUS berfokus pada ide-ide luas dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten spesifik mata pelajaran.
 - Pertanyaan HARUS dapat dipindahkan antar disiplin ilmu dan berlaku di luar unit ini.
@@ -82,7 +83,8 @@ Pertanyaan Esensial Unit (GUNAKAN INI SECARA APA ADANYA):
 
 Jika Pertanyaan Esensial Unit di atas kosong, hasilkan tepat 3 pertanyaan konseptual dengan mengikuti aturan berikut:
 - Setiap pertanyaan HARUS berupa kalimat lengkap, tata bahasa benar, dan diakhiri tanda tanya.
-- Setiap pertanyaan HARUS diawali dengan "How" atau "Why".
+- Setiap pertanyaan WAJIB diawali dengan "Bagaimana" atau "Mengapa".
+
 - Pertanyaan HARUS bersifat konseptual dan eksploratif, bukan faktual, prosedural, atau definisional.
 - Pertanyaan HARUS berfokus pada gagasan umum dan universal (seperti perubahan, bukti, pola, hubungan, sistem, atau penalaran), bukan pada konten khusus mata pelajaran.
 - Pertanyaan HARUS dapat dipindahkan lintas disiplin dan berlaku di luar unit ini.

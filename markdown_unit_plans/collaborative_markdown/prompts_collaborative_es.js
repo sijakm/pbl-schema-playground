@@ -32,7 +32,8 @@ Contenido de la unidad:
 
 Requisitos de las Preguntas Esenciales:
 - Cada pregunta DEBE ser una oración completa y gramaticalmente correcta que termine con un signo de interrogación.
-- Cada pregunta DEBE comenzar con “How” o “Why”.
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
 - Las preguntas DEBEN ser conceptuales y exploratorias, no factuales, procedimentales ni definicionales.
 - Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una materia.
 - Las preguntas DEBEN ser transferibles entre disciplinas y aplicables más allá de esta unidad.
@@ -90,7 +91,8 @@ Preguntas esenciales de la unidad (USA ESTAS TEXTUALMENTE):
 
 Si las Preguntas esenciales de la unidad arriba están vacías, genera exactamente 3 preguntas conceptuales siguiendo estas reglas:
 - Cada pregunta DEBE ser una oración completa y gramaticalmente correcta que termine con un signo de interrogación.
-- Cada pregunta DEBE comenzar con "How" o "Why".
+- Cada pregunta DEBE comenzar con "Cómo" o "Por qué".
+
 - Las preguntas DEBEN ser conceptuales y exploratorias, no factuales, procedimentales ni definicionales.
 - Las preguntas DEBEN centrarse en ideas amplias y universales (como cambio, evidencia, patrones, relaciones, sistemas o razonamiento), no en contenido específico de una materia.
 - Deben poder transferirse entre disciplinas y aplicarse más allá de esta unidad.

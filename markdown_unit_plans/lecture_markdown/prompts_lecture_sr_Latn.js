@@ -32,7 +32,8 @@ Sadržaj jedinice:
 
 Zahtevi za suštinska pitanja:
 - Svako pitanje MORA biti potpuna, gramatički ispravna rečenica koja se završava znakom pitanja.
-- Svako pitanje MORA počinjati sa „How” ili „Why”.
+- Svako pitanje MORA počinjati sa „Kako” ili „Zašto”.
+
 - Pitanja MORAJU biti konceptualna i istraživačka, a ne činjenična, proceduralna ili definiciona.
 - Pitanja MORAJU biti usmerena na široke, univerzalne ideje (kao što su promena, dokazi, obrasci, odnosi, sistemi ili rezonovanje), a ne na sadržaj specifičan za predmet.
 - Pitanja MORAJU biti prenosiva kroz discipline i primenljiva van ove jedinice.
@@ -82,11 +83,11 @@ Ključna pitanja jedinice (KORISTITE OVA REČ PO REČ):
 
 Ako su ključna pitanja jedinice iznad prazna, generišite tačno 3 konceptualna pitanja prema sledećim pravilima:
 - Svako pitanje MORA biti potpuna, gramatički ispravna rečenica koja se završava znakom pitanja.
-- Svako pitanje MORA počinjati sa ili "How" ili "Why".
+- Svako pitanje MORA počinjati sa „Kako” ili „Zašto”.
+
 - Pitanja MORAJU biti konceptualna i istraživačka, a ne činjenična, proceduralna ili definiciona.
 - Pitanja MORAJU biti usmerena na široke, univerzalne ideje (kao što su promena, dokazi, obrasci, odnosi, sistemi ili zaključivanje), a ne na sadržaj specifičan za predmet.
 - Pitanja MORAJU biti prenosiva između disciplina i primenljiva izvan ove jedinice.
-
 
 UČENICI SA INDIVIDUALIZOVANOM PODRŠKOM (MORA da se koristi ISKLJUČIVO unutar ContentDeliveryAndInteractiveActivities.AccommodationsAndModifications; koristite imena učenika/planove tačno onako kako su napisani):
 {{$LearningPlans}}
