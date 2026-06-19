@@ -23,12 +23,17 @@ async function callResponsesApiStream(params) {
       }
     };
   }
-  return await window.apiClient.stream({
+  console.log(`=== OPENAI REQUEST: ${schemaName || "Response"} ===`);
+  console.log(JSON.stringify(body, null, 2));
+  const responseText = await window.apiClient.stream({
     endpoint, apiKey, body, signal,
     onDelta: params.onDelta,
     onUsage: (usage) => { if (window.TokenManager) new window.TokenManager().add(usage); },
     onError: (err) => { throw new Error(err.message || "Unknown error"); }
   });
+  console.log(`=== OPENAI RESPONSE: ${schemaName || "Response"} ===`);
+  console.log(responseText);
+  return responseText;
 }
 
 function createLimiter(maxConcurrent = 4) {
@@ -193,6 +198,8 @@ export default function App() {
           });
           if (resStep0.ok) {
             const dataStep0 = await resStep0.json();
+            console.log(`=== .NET API RESPONSE: Step 0 ===`);
+            console.log(dataStep0);
             currentMarkdown = dataStep0.markdown;
             setMarkdown(currentMarkdown);
             if (editor) {
