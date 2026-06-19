@@ -289,7 +289,7 @@ ZAHTEVI ZA IZLAZ:
       "additionalProperties": false
     },
     "Question": {
-      "x-format": "### {green}(Question (5 min))\n\n**{loc.Purpose}:** Observe a phenomenon, identify something puzzling, and generate a meaningful question that will guide the investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "x-format": "### {green}({loc.LabQuestionTitle})\n\n**{loc.Purpose}:** {loc.LabQuestionPurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
       "description": "Vodite nastavnika tako da učenici posmatraju fenomen, identifikuju nešto što zbunjuje i formulišu smisleno pitanje koje će voditi istraživanje.",
       "properties": {
@@ -350,7 +350,7 @@ ZAHTEVI ZA IZLAZ:
       "additionalProperties": false
     },
     "Research": {
-      "x-format": "### {green}(Research (5 min))\n\n**{loc.Purpose}:** Gather background information, vocabulary, and prior knowledge needed to understand the topic and prepare for informed investigation.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "x-format": "### {green}({loc.LabResearchTitle})\n\n**{loc.Purpose}:** {loc.LabResearchPurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
       "description": "Vodite nastavnika da učenici nauče osnovne informacije, vokabular i prethodno znanje potrebno za razumevanje teme.",
       "properties": {
@@ -420,7 +420,7 @@ ZAHTEVI ZA IZLAZ:
       "additionalProperties": false
     },
     "Hypothesize": {
-      "x-format": "### {green}(Hypothesize (5 min))\n\n**{loc.Purpose}:** Develop a testable prediction or claim based on their research and reasoning, setting a clear expectation for what they believe will happen.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "x-format": "### {green}({loc.LabHypothesizeTitle})\n\n**{loc.Purpose}:** {loc.LabHypothesizePurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
       "description": "Vodite nastavnika da učenici razviju proverljivu predikciju.",
       "properties": {
@@ -475,7 +475,7 @@ ZAHTEVI ZA IZLAZ:
       "additionalProperties": false
     },
     "Experiment": {
-      "x-format": "### {green}(Experiment (20 min))\n\n**{loc.Purpose}:** Carry out a structured investigation- hands-on, simulated, or analytical- to test their hypothesis and gather evidence through observation or measurement.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "x-format": "### {green}({loc.LabExperimentTitle})\n\n**{loc.Purpose}:** {loc.LabExperimentPurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
       "description": "Vodite nastavnika da učenici sprovedu strukturisano istraživanje.",
       "properties": {
@@ -657,7 +657,7 @@ ZAHTEVI ZA IZLAZ:
       "additionalProperties": false
     },
     "Analyze": {
-      "x-format": "### {green}(Analyze (5 min))\n\n**{loc.Purpose}:** Interpret the data they collected, identify patterns, evaluate their hypothesis, and construct evidence-based conclusions.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "x-format": "### {green}({loc.LabAnalyzeTitle})\n\n**{loc.Purpose}:** {loc.LabAnalyzePurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
       "description": "Usmerite nastavnike tako da učenici tumače podatke koje su prikupili.",
       "properties": {
@@ -733,7 +733,7 @@ ZAHTEVI ZA IZLAZ:
       "additionalProperties": false
     },
     "Share": {
-      "x-format": "### {green}(Share (5 min))\n\n**{loc.Purpose}:** Communicate their findings clearly to others, using evidence to explain what they discovered, why it matters, and how it contributes to deeper understanding.\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
+      "x-format": "### {green}({loc.LabShareTitle})\n\n**{loc.Purpose}:** {loc.LabSharePurpose}\n\n{value.Materials}\n\n{value.InstructionsForTeachers}",
       "type": "object",
       "description": "Usmerite nastavnike tako da učenici jasno saopšte svoja otkrića.",
       "properties": {
